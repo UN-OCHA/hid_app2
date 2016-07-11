@@ -1,0 +1,142 @@
+<div class="row col-sm-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Your contact details</h3>
+    </div>
+    <div class="panel-body">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2">Status</label>
+          <div class="col-sm-10">
+            <p>{{currentUser.status}}</p>
+          </div>
+        </div>
+        <div class="form-group" ng-if="user.status != 'base' && user.status != 'mission'">
+          <label class="col-sm-2">To</label>
+          <div class="col-sm-10">
+            <p>{{currentUser.disaster.name}}</p>
+          </div>
+        </div>
+        <div class="form-group" ng-if="user.status != 'base'">
+          <label class="col-sm-2">Until</label>
+          <div class="col-sm-10">
+            <p>{{currentUser.departure.toDateString()}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2">Location</label>
+          <div class="col-sm-10">
+            <p>Chad</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2">Your phone number</label>
+          <div class="col-sm-10">
+            <p>{{currentUser.phone_number}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2">Your email</label>
+          <div class="col-sm-10">
+            <p>{{currentUser.email}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2">Your organization</label>
+          <div class="col-sm-10">
+            <p>{{currentUser.organization.name}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2">Your job title</label>
+          <div class="col-sm-10">
+            <p>{{currentUser.job_title}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-info text-center">Is any of the information above incorrect ? If so, please <a ng-href="/account" class="alert-link">edit your profile</a></div>
+    </div>
+  </div>
+</div>
+<div class="row col-sm-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Find...</div>
+    <div class="panel-body">
+      <h4>Someone in particular</h4>
+      <form action="/users">
+        <div class="input-group">
+          <input type="search" name="q" class="form-control" placeholder="Who ? John Smith">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </form>
+      <h4>A list of people</h4>
+      <form>
+        <div class="col-sm-4">
+          <p>I'm looking for:</p>
+          <select name="role" class="form-control" ng-model="search.role">
+            <option value="anyone">Anyone</option>
+            <option value="hao">A Humanitarian Affairs officer</option>
+            <option value="imo">An Information Management Officer</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <p>Checked into:</p>
+          <input type="text" class="form-control" placeholder="Which list ? Syria" ng-model="search.operation">
+        </div>
+        <div class="col-sm-4">
+          <p>Physically In:</p>
+          <input type="search" name="where" class="form-control" placeholder="Where ? Brazil" ng-model="search.location">
+        </div>
+      </form>
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">Your latest searches</div>
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h5 class="list-group-item-heading">An Information Management Officer in Chad</h5>
+            </a>
+            <a href="#" class="list-group-item">
+              <h5 class="list-group-item-heading">Anyone checked in Syria</h5>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">Your saved searches</div>
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h5 class="list-group-item-heading">Anyone Physically In Chad</h5>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">Latest Individuals Viewed</div>
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h5 class="list-group-item-heading">Yaelle Link</h5>
+            </a>
+            <a href="#" class="list-group-item">
+              <h5 class="list-group-item-heading">Andrej Verity</h5>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center"><a href="#" class="btn btn-primary">View and manage your search history</a></div>
+    </div>
+  </div>
+</div>
+<div class="row col-sm-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Lists <a href="/lists/new" class="pull-right"><i class="fa fa-plus-square"></i></a></div>
+    <div class="panel-body">
+      <ul class="list-group" ng-repeat="list in user.lists">
+        <a ng-href="lists/{{list.id}}" class="list-group-item">{{list.name}}</a>
+      </ul>
+    </div>
+  </div>
+</div>

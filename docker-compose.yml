@@ -1,0 +1,8 @@
+app:
+  image: unocha/alpine-base-nginx
+  environment:
+    DNSDOCK_NAME: app
+    DNSDOCK_IMAGE: hid
+  volumes:
+    - ./src:/srv/www/html
+  hostname: app.hid.vm

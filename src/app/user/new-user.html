@@ -1,0 +1,21 @@
+<h1>Create a new user</h1>
+<form ng-submit="userCreate()">
+  <div class="form-group">
+    <label for="given_name">First Name</label>
+    <input type="text" class="form-control" id="given_name" placeholder="" ng-model="user.given_name" required>
+  </div>
+  <div class="form-group">
+    <label for="middle_name">Middle Name</label>
+    <input type="text" class="form-control" id="middle_name" placeholder="" ng-model="user.middle_name">
+  </div>
+  <div class="form-group">
+    <label for="family_name">Last Name</label>
+    <input type="text" class="form-control" id="family_name" placeholder="" ng-model="user.family_name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" ng-model="user.email">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

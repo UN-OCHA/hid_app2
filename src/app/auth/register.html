@@ -1,0 +1,30 @@
+<h1>Register</h1>
+<p>Sign up for a Humanitarian ID account. Doing so will give you access to Humanitarian ID as well as a growing number of related humanitarian community sites.</p>
+<form ng-submit="userCreate()">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" ng-model="user.email">
+  </div>
+  <div class="form-group">
+    <label for="given_name">First Name</label>
+    <input type="text" class="form-control" id="given_name" placeholder="" ng-model="user.given_name" required>
+  </div>
+  <div class="form-group">
+    <label for="middle_name">Middle Name</label>
+    <input type="text" class="form-control" id="middle_name" placeholder="" ng-model="user.middle_name">
+  </div>
+  <div class="form-group">
+    <label for="family_name">Last Name</label>
+    <input type="text" class="form-control" id="family_name" placeholder="" ng-model="user.family_name" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="" ng-model="user.password" required>
+  </div>
+  <div class="form-group">
+    <label for="password_confirm">Password (confirm)</label>
+    <input type="password" class="form-control" id="password_confirm" placeholder="" ng-model="password_confirm" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Sign up</button>
+</form>
+

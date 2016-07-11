@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-sm-3">
+      <a href back-button>&lt; Back</a>
+    </div>
+    <div class="col-sm-6 hidden-xs text-center">
+      <a href="/"><img src="/assets/img/logo.png" alt="Humanitarian ID logo" /></a>
+    </div>
+    <div class="col-xs-6 col-sm-3 text-right">
+      <form class="form-inline" role="search" action="/users">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="search" name="q" class="form-control" placeholder="Search for someone" ng-value="request.q" ng-show="showSearch">
+            <span class="input-group-btn">
+              <a href class="btn btn-default" ng-click="showSearch = !showSearch"><i class="fa fa-search"></i></a>
+            </span>
+          </div>
+        </div>
+         <div class="form-group">
+           <div class="dropdown pull-right" uib-dropdown>
+             <a href class="dropdown-toggle btn btn-default" role="button" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle><i class="fa fa-user"></i></a>
+             <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+               <li><a href="/dashboard">Dashboard</a></li>
+               <li><a href="/users/{{currentUser.id}}">Profile</a></li>
+               <li><a href="/settings">Preferences</a></li>
+               <li role="separator" class="divider"></li>
+               <li><a href="/logout">Log out</a></li>
+             </ul>
+           </div>
+         </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div>
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()">{{ alert.msg }}</uib-alert>
+</div>
