@@ -1,9 +1,9 @@
 var authServices = angular.module('authServices', []);
 
-authServices.factory('AuthService', ['$http', '$window', function ($http, $window) {
+authServices.factory('AuthService', ['$http', '$window', 'config', function ($http, $window, config) {
   var jwt = {
     login: function(email, password) {
-      var promise = $http.post('http://auth.hid.vm/api/v2/jsonwebtoken', { 'email': email, 'password': password }).then(function (response) {
+      var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password }).then(function (response) {
         if (response.data && response.data.token) {
           $window.localStorage.setItem('jwtToken', response.data.token);
           $window.localStorage.setItem('currentUser', JSON.stringify(response.data.user));

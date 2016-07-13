@@ -1,8 +1,8 @@
 var userServices = angular.module('userServices', ['ngResource']);
 
-userServices.factory('User', ['$resource',
-  function($resource){
-    return $resource('http://auth.hid.vm/api/v2/users/:userId', {userId: '@id'});
+userServices.factory('User', ['$resource', 'config',
+  function($resource, config){
+    return $resource(config.apiUrl + 'users/:userId', {userId: '@id'});
   }
 ]);
 
@@ -119,7 +119,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', 'aler
   };
 
   $scope.getLists = function (val) {
-    return $http.get('http://auth.hid.vm/api/v2/lists', { params: { where: { name: { contains: val } } } })
+    return $http.get(config.apiUrl + 'lists', { params: { where: { name: { contains: val } } } })
       .then(function (response) {
         return response.data;
       });

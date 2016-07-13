@@ -1,8 +1,8 @@
 var listServices = angular.module('listServices', ['ngResource']);
 
-listServices.factory('List', ['$resource',
-  function ($resource) {
-    return $resource('http://auth.hid.vm/api/v2/lists/:listId', {listId: '@id'});
+listServices.factory('List', ['$resource', 'config',
+  function ($resource, config) {
+    return $resource(config.apiUrl + 'lists/:listId', {listId: '@id'});
   }
 ]);
 
