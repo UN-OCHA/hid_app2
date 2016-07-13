@@ -149,7 +149,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', 'aler
   $scope.saveUser = function() {
     $scope.user.$save(function (user, response) {
       //  Update the currentUser item in localStorage if the current user is the one being saved
-      if (response.data.id == $scope.currentUser.id) {
+      if (user.id == $scope.currentUser.id) {
         $window.localStorage.setItem('currentUser', JSON.stringify(response.data));
       }
     });
