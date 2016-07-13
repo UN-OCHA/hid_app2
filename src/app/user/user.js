@@ -26,15 +26,9 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', 'aler
 
   $scope.gravatarUrl = '';
 
-  $scope.user = User.get({userId: $scope.currentUser.id}, function(user) {
+  $scope.user = User.get({userId: $routeParams.userId}, function(user) {
     var userEmail = md5.createHash(user.email.trim().toLowerCase());
     $scope.gravatarUrl = 'https://secure.gravatar.com/avatar/' + userEmail + '?s=200';
-    /*if (!$scope.user.websites || !$scope.user.websites.length) {
-      $scope.addItem("websites");
-    }
-    if (!$scope.user.voips || !$scope.user.voips.length) {
-      $scope.addItem("voips");
-    }*/
   });
 
   $scope.countries = [];
@@ -152,6 +146,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', 'aler
 
   $scope.saveUser = function() {
     $scope.user.$save(function (user, response) {
+      // TODO: update the currentUser item in localStorage if the current user is the one being saved
     });
   };
 
