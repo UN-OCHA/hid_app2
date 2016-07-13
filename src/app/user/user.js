@@ -26,6 +26,8 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', 'aler
 
   $scope.gravatarUrl = '';
 
+  $scope.canEditUser = $routeParams.userId == $scope.currentUser.id;
+
   $scope.user = User.get({userId: $routeParams.userId}, function(user) {
     var userEmail = md5.createHash(user.email.trim().toLowerCase());
     $scope.gravatarUrl = 'https://secure.gravatar.com/avatar/' + userEmail + '?s=200';

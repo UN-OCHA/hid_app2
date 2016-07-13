@@ -10,7 +10,7 @@
       <p>{{user.location.country.name}}</p>
       <p editable-textarea="user.status" e-rows="7" e-cols="40">{{user.status}}</p>
     </div>
-    <div class="col-xs-2 text-right">
+    <div class="col-xs-2 text-right" ng-show="canEditUser">
       <button type="button" class="btn btn-default" ng-click="profileForm.$show()" ng-show="!profileForm.$visible"><i class="fa fa-pencil"></i></button>
       <div ng-show="profileForm.$visible">
         <button type="submit" class="btn btn-success" ng-disabled="profileForm.$waiting"><i class="fa fa-check"></i></button>
@@ -27,7 +27,7 @@
         <div class="col-xs-8">
           <h3>Contact Information</h3>
         </div>
-        <div class="col-xs-4 text-right">
+        <div class="col-xs-4 text-right" ng-show="canEditUser">
           <button type="button" class="btn btn-default" ng-click="contactForm.$show()" ng-show="!contactForm.$visible"><i class="fa fa-pencil"></i></button>
           <div ng-show="contactForm.$visible">
             <button type="submit" class="btn btn-success" ng-disabled="contactForm.$waiting"><i class="fa fa-check"></i></button>
@@ -70,7 +70,7 @@
         <div class="col-xs-8">
           <h3>Role Details</h3>
       </div>
-      <div class="col-xs-4 text-right">
+      <div class="col-xs-4 text-right" ng-show="canEditUser">
         <button type="button" class="btn btn-default" ng-click="roleForm.$show()" ng-show="!roleForm.$visible"><i class="fa fa-pencil"></i></button>
         <div ng-show="roleForm.$visible">
           <button type="submit" class="btn btn-success" ng-disabled="roleForm.$waiting"><i class="fa fa-check"></i></button>
@@ -106,7 +106,7 @@
         <div class="col-xs-8">
           <h3>Locations</h3>
         </div>
-        <div class="col-xs-4 text-right">
+        <div class="col-xs-4 text-right" ng-show="canEditUser">
           <button type="button" class="btn btn-default" ng-click="locationForm.$show()" ng-show="!locationForm.$visible"><i class="fa fa-pencil"></i></button>
           <div ng-show="locationForm.$visible">
             <button type="submit" class="btn btn-success" ng-disabled="locationForm.$waiting"><i class="fa fa-check"></i></button>
@@ -168,7 +168,7 @@
         <div class="col-xs-8">
           <h3>Additional Information</h3>
         </div>
-        <div class="col-xs-4 text-right">
+        <div class="col-xs-4 text-right" ng-show="canEditUser">
           <button type="button" class="btn btn-default" ng-click="additionalForm.$show()" ng-show="!additionalForm.$visible"><i class="fa fa-pencil"></i></button>
           <div ng-show="additionalForm.$visible">
             <button type="submit" class="btn btn-success" ng-disabled="additionalForm.$waiting"><i class="fa fa-check"></i></button>
