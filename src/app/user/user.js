@@ -8,7 +8,7 @@ userServices.factory('User', ['$resource', 'config',
 
 var userControllers = angular.module('userControllers', []);
 
-userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', 'alertService', 'md5', 'config', 'User', 'List', function($scope, $routeParams, $http, alertService, md5, config, User, List) {
+userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'alertService', 'md5', 'config', 'User', 'List', function($scope, $routeParams, $http, $window, alertService, md5, config, User, List) {
   $scope.newEmail = {
     type: '',
     email: ''
