@@ -5,19 +5,36 @@
         <h3 class="panel-title">Change password</h3>
       </div>
       <div class="panel-body">
-        <div class="form-group">
-          <label for="old_password">Old password</label>
-          <input type="password" class="form-control" placeholder="" ng-model="oldPassword">
-        </div>
-        <div class="form-group">
-          <label for="new_password">New password</label>
-          <input type="password" class="form-control" placeholder="" ng-model="newPassword">
-        </div>
-        <div class="form-group">
-          <label for="confirm_password">Confirm new password</label>
-          <input type="password" class="form-control" placeholder="" ng-model="confirmPassword">
-        </div>
-        <button type="submit" class="btn btn-primary">Update password</button>
+        <form name="changePassword" ng-submit="changePassword.$valid && savePassword()" autocomplete="off" novalidate>
+          <div class="form-group" ng-class="{'has-error': changePassword.oldPassword.$touched && changePassword.oldPassword.$invalid}">
+            <label for="old_password">Old password</label>
+            <input name="oldPassword" type="password" class="form-control" placeholder="" ng-model="oldPassword" required>
+            <div class="clearfix">
+              <div ng-messages="changePassword.oldPassword.$error" ng-show="changePassword.oldPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+                <div ng-messages-include="app/common/messages.html"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{'has-error': changePassword.newPassword.$touched && changePassword.newPassword.$invalid}">
+            <label for="newPassword">New password</label>
+            <input type="password" name="newPassword" class="form-control" placeholder="" ng-model="newPassword" required>
+            <div class="clearfix">
+              <div ng-messages="changePassword.newPassword.$error" ng-show="changePassword.newPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+                <div ng-messages-include="app/common/messages.html"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{'has-error': changePassword.confirmPassword.$touched && changePassword.confirmPassword.$invalid}">
+            <label for="confirm_password">Confirm new password</label>
+            <input type="password" name="confirmPassword" class="form-control" match-password="newPassword" placeholder="" ng-model="confirmPassword" required>
+            <div class="clearfix">
+              <div ng-messages="changePassword.confirmPassword.$error" ng-show="changePassword.confirmPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+                <div ng-messages-include="app/common/messages.html"></div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" ng-disabled="changePassword.$invalid">Update password</button>
+        </form>
       </div>
     </div>
     <div class="panel panel-danger">
