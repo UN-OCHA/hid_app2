@@ -164,12 +164,18 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
 
 userControllers.controller('UserPrefsCtrl', ['$scope', 'alertService', 'User', function ($scope, alertService, User) {
 
+  $scope.password = {
+    old: '',
+    new: ''
+  };
+
+
   $scope.user = User.get({userId: $scope.currentUser.id}, function(user) {
   });
 
   $scope.savePassword = function() {
-    $scope.user.old_password = $scope.oldPassword;
-    $scope.user.new_password = $scope.newPassword;
+    $scope.user.old_password = $scope.password.old;
+    $scope.user.new_password = $scope.password.new;
     $scope.user.$save(function (user) {
      alertService.add('success', 'Your password was successfully changed.');
     }, function (resp) {
