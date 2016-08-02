@@ -7,6 +7,7 @@ app.constant('config', {
 
 // Check if user is authenticated for paths which require it
 app.run(function ($rootScope, $location, AuthService, alertService) {
+  $rootScope.isAuthenticated = false;
   $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
     if (nextRoute) {
       alertService.nextRoute();
@@ -16,6 +17,7 @@ app.run(function ($rootScope, $location, AuthService, alertService) {
       $location.path('/');
       event.preventDefault(); 
     }
+    $rootScope.isAuthenticated = AuthService.isAuthenticated();
   });
 });
 
