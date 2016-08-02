@@ -197,6 +197,7 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
   };
 }]);
 
+
 userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
   $scope.request = $routeParams;
   $scope.users = User.query($routeParams);

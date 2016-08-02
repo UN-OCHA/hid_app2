@@ -74,6 +74,10 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/auth/register.html',
         controller: 'UserNewCtrl'
       })
+      .when('/password_reset', {
+        templateUrl: 'app/auth/password_reset.html',
+        controller: 'AuthCtrl'
+      })
       .when('/logout', {
         template: '',
         controller: 'AuthCtrl',

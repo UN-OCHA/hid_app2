@@ -83,6 +83,10 @@ authController.controller('AuthCtrl', ['$scope', '$location', 'alertService', 'A
     alertService.add('success', 'You were successfully logged out.');
   };
 
+  $scope.passwordReset = function() {
+    alertService.add('success', 'You will soon receive an email which will allow you to reset your password.');
+  };
+
   if ($location.path() == '/logout') {
     $scope.logout();
   }
