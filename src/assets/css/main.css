@@ -4,19 +4,20 @@
    Author's custom styles
    ========================================================================== */
 
+body {
+  padding-top: 60px;
+}
 
+.alert {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-radius: 0;
+  text-align: center;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.alert .close {
+  display: none;
+}
 

@@ -1,3 +1,5 @@
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }}</uib-alert>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-3">
@@ -33,6 +35,3 @@
   </div>
 </div>
 
-<div>
-  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()">{{ alert.msg }}</uib-alert>
-</div>
