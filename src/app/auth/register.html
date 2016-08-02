@@ -1,30 +1,55 @@
 <h1>Register</h1>
 <p>Sign up for a Humanitarian ID account. Doing so will give you access to Humanitarian ID as well as a growing number of related humanitarian community sites.</p>
-<form ng-submit="userCreate()">
-  <div class="form-group">
+<form name="register" ng-submit="register.$valid && userCreate()" novalidate>
+  <div class="form-group" ng-class="{'has-error': register.email.$touched && register.email.$invalid}">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" ng-model="user.email">
+    <input type="email" name="email" class="form-control" id="email" placeholder="Your email address" ng-model="user.email" required>
+    <div class="clearfix">
+      <div ng-messages="register.email.$error" ng-show="register.email.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': register.given_name.$touched && register.given_name.$invalid}">
     <label for="given_name">First Name</label>
-    <input type="text" class="form-control" id="given_name" placeholder="" ng-model="user.given_name" required>
+    <input type="text" name="given_name" class="form-control" id="given_name" placeholder="Your first name" ng-model="user.given_name" required>
+    <div class="clearfix">
+      <div ng-messages="register.given_name.$error" ng-show="register.given_name.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
   </div>
   <div class="form-group">
     <label for="middle_name">Middle Name</label>
-    <input type="text" class="form-control" id="middle_name" placeholder="" ng-model="user.middle_name">
+    <input type="text" class="form-control" id="middle_name" placeholder="Your middle name" ng-model="user.middle_name">
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': register.family_name.$touched && register.family_name.$invalid}">
     <label for="family_name">Last Name</label>
-    <input type="text" class="form-control" id="family_name" placeholder="" ng-model="user.family_name" required>
+    <input type="text" name="family_name" class="form-control" id="family_name" placeholder="Your last name" ng-model="user.family_name" required>
+    <div class="clearfix">
+      <div ng-messages="register.family_name.$error" ng-show="register.family_name.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': register.password.$touched && register.password.$invalid}">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="" ng-model="user.password" required>
+    <input type="password" name="password" class="form-control" id="password" placeholder="" ng-model="user.password" required>
+    <div class="clearfix">
+      <div ng-messages="register.password.$error" ng-show="register.password.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'has-error': register.password_confirm.$touched && register.password_confirm.$invalid}">
     <label for="password_confirm">Password (confirm)</label>
-    <input type="password" class="form-control" id="password_confirm" placeholder="" ng-model="password_confirm" required>
+    <input type="password" name="password_confirm" class="form-control" match-password="password" id="password_confirm" placeholder="" ng-model="password_confirm" required>
+    <div class="clearfix">
+      <div ng-messages="register.password_confirm.$error" ng-show="register.password_confirm.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Sign up</button>
+  <button type="submit" class="btn btn-primary" ng-disabled="register.$invalid">Sign up</button>
 </form>
 
