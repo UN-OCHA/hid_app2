@@ -1,15 +1,25 @@
-<ul class="list-group" ng-repeat="user in users">
-  <li class="list-group-item">
-    <div class="row">
-      <div class="col-sm-3"><a ng-href="/users/{{user.id}}">{{user.name}}</a></div>
-      <div class="col-sm-3">{{user.job_title}}</div>
-      <div class="col-sm-4">{{user.organization.name}}</div>
-      <div class="col-sm-2">
-        <button type="button" class="btn btn-default" data-animation="am-flip-x" bs-dropdown aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href>Check into...</a></li>
-        </ul>
-      </div>
-    </div>
-  </li>
-</ul>
+<h1>Users</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Organization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users">
+      <td><a ng-href="/users/{{user.id}}">{{user.name}}</a></td>
+      <td>{{user.job_title}}</td>
+      <td>{{user.organization.name}}</td>
+      <td>
+        <div uib-dropdown>
+          <button type="button" class="btn btn-default" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
+          <ul class="dropdown-menu" uib-dropdown-menu>
+            <li><a href>Check into...</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

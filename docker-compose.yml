@@ -5,4 +5,5 @@ app:
     DNSDOCK_IMAGE: hid
   volumes:
     - ./src:/srv/www/html
+    - ./conf/nginx/default.conf:/etc/nginx/conf.d/default.conf
   hostname: app.hid.vm
