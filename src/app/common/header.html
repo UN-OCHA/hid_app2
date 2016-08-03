@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-3">
-      <a href back-button>&lt; Back</a>
+      <a href back-button translate>&lt; Back</a>
     </div>
     <div class="col-sm-6 hidden-xs text-center">
       <a href="/"><img src="/assets/img/logo.png" alt="Humanitarian ID logo" /></a>
@@ -12,7 +12,7 @@
       <form class="form-inline" role="search" action="/users">
         <div class="form-group">
           <div class="input-group">
-            <input type="search" name="q" class="form-control" placeholder="Search for someone" ng-value="request.q" ng-show="showSearch">
+            <input type="search" name="q" class="form-control" placeholder="{{'Search for someone'|translate}}" ng-value="request.q" ng-show="showSearch">
             <span class="input-group-btn">
               <a href class="btn btn-default" ng-click="showSearch = !showSearch"><i class="fa fa-search"></i></a>
             </span>
@@ -22,11 +22,11 @@
            <div class="dropdown pull-right" uib-dropdown>
              <a href class="dropdown-toggle btn btn-default" role="button" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle><i class="fa fa-user"></i></a>
              <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-               <li><a href="/dashboard">Dashboard</a></li>
-               <li><a href="/users/{{currentUser.id}}">Profile</a></li>
-               <li><a href="/settings">Preferences</a></li>
+               <li><a href="/dashboard" translate>Dashboard</a></li>
+               <li><a href="/users/{{currentUser.id}}" translate>Profile</a></li>
+               <li><a href="/settings" translate>Preferences</a></li>
                <li role="separator" class="divider"></li>
-               <li><a href="/logout">Log out</a></li>
+               <li><a href="/logout" translate>Log out</a></li>
              </ul>
            </div>
          </div>

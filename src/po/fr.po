@@ -36,3 +36,9 @@ msgstr "Besoin de s'inscrire ?"
 #: src/app/auth/login.html:9
 msgid "Password"
 msgstr "Mot de passe"
+
+#: src/app/auth/password_reset.html:6
+#: src/app/auth/register.html:6
+msgid "Your email address"
+msgstr "Votre adresse de courriel"
+

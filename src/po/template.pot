@@ -4,16 +4,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: src/app/common/header.html:6
+msgid "&lt; Back"
+msgstr ""
+
+#: src/app/common/header.html:25
+msgid "Dashboard"
+msgstr ""
+
 #: src/app/auth/login.html:5
+#: src/app/auth/password_reset.html:5
+#: src/app/auth/register.html:5
 msgid "Email"
+msgstr ""
+
+#: src/app/auth/register.html:14
+msgid "First Name"
 msgstr ""
 
 #: src/app/auth/login.html:9
 msgid "Forgot your password ?"
 msgstr ""
 
+#: src/app/auth/password_reset.html:2
+msgid "If you forget the password for your Humanitarian ID account, you can request a new password by entering your email address here and clicking on 'Reset Password'."
+msgstr ""
+
+#: src/app/auth/register.html:27
+msgid "Last Name"
+msgstr ""
+
 #: src/app/auth/login.html:2
 msgid "Log in to Humanitarian ID."
+msgstr ""
+
+#: src/app/common/header.html:29
+msgid "Log out"
 msgstr ""
 
 #: src/app/auth/login.html:1
@@ -21,10 +47,62 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
+#: src/app/auth/register.html:23
+msgid "Middle Name"
+msgstr ""
+
 #: src/app/auth/login.html:14
 msgid "Need to register ?"
 msgstr ""
 
 #: src/app/auth/login.html:9
+#: src/app/auth/register.html:36
 msgid "Password"
+msgstr ""
+
+#: src/app/auth/register.html:45
+msgid "Password (confirm)"
+msgstr ""
+
+#: src/app/common/header.html:27
+msgid "Preferences"
+msgstr ""
+
+#: src/app/common/header.html:26
+msgid "Profile"
+msgstr ""
+
+#: src/app/auth/register.html:1
+#: src/app/auth/register.html:53
+msgid "Register"
+msgstr ""
+
+#: src/app/auth/password_reset.html:1
+#: src/app/auth/password_reset.html:13
+msgid "Reset Password"
+msgstr ""
+
+#: src/app/common/header.html:15
+msgid "Search for someone"
+msgstr ""
+
+#: src/app/auth/register.html:2
+msgid "Sign up for a Humanitarian ID account. Doing so will give you access to Humanitarian ID as well as a growing number of related humanitarian community sites."
+msgstr ""
+
+#: src/app/auth/password_reset.html:6
+#: src/app/auth/register.html:6
+msgid "Your email address"
+msgstr ""
+
+#: src/app/auth/register.html:15
+msgid "Your first name"
+msgstr ""
+
+#: src/app/auth/register.html:28
+msgid "Your last name"
+msgstr ""
+
+#: src/app/auth/register.html:24
+msgid "Your middle name"
 msgstr ""

@@ -1,13 +1,13 @@
 <uib-tabset justified="true">
-  <uib-tab heading="Account Settings">
+  <uib-tab heading="{{'Account Settings'|translate}}">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Change password</h3>
+        <h3 class="panel-title" translate>Change password</h3>
       </div>
       <div class="panel-body">
         <form name="changePassword" ng-submit="changePassword.$valid && savePassword()" autocomplete="off" novalidate>
           <div class="form-group" ng-class="{'has-error': changePassword.oldPassword.$touched && changePassword.oldPassword.$invalid}">
-            <label for="old_password">Old password</label>
+            <label for="old_password" translate>Old password</label>
             <input name="oldPassword" type="password" class="form-control" placeholder="" ng-model="password.old" required>
             <div class="clearfix">
               <div ng-messages="changePassword.oldPassword.$error" ng-show="changePassword.oldPassword.$touched" ng-messages-multiple="ng-messages-multiple">
@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="form-group" ng-class="{'has-error': changePassword.newPassword.$touched && changePassword.newPassword.$invalid}">
-            <label for="newPassword">New password</label>
+            <label for="newPassword" translate>New password</label>
             <input type="password" name="newPassword" class="form-control" placeholder="" ng-model="password.new" required>
             <div class="clearfix">
               <div ng-messages="changePassword.newPassword.$error" ng-show="changePassword.newPassword.$touched" ng-messages-multiple="ng-messages-multiple">
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="form-group" ng-class="{'has-error': changePassword.confirmPassword.$touched && changePassword.confirmPassword.$invalid}">
-            <label for="confirm_password">Confirm new password</label>
+            <label for="confirm_password" translate>Confirm new password</label>
             <input type="password" name="confirmPassword" class="form-control" match-password="newPassword" placeholder="" ng-model="confirmPassword" required>
             <div class="clearfix">
               <div ng-messages="changePassword.confirmPassword.$error" ng-show="changePassword.confirmPassword.$touched" ng-messages-multiple="ng-messages-multiple">
@@ -33,27 +33,27 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" ng-disabled="changePassword.$invalid">Update password</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="changePassword.$invalid" translate>Update password</button>
         </form>
       </div>
     </div>
     <div class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title">Delete account</h3>
+        <h3 class="panel-title" translate>Delete account</h3>
       </div>
       <div class="panel-body">
-        <p>Deleting your account means that you will lose your access to Humanitarian ID.</p>
-        <button type="button" class="btn btn-danger">Delete account</button>
+        <p translate>Deleting your account means that you will lose your access to Humanitarian ID.</p>
+        <button type="button" class="btn btn-danger" translate>Delete account</button>
       </div>
     </div>
   </uib-tab>
-  <uib-tab heading="Applications">
+  <uib-tab heading="{{'Applications'|translate}}">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Authorized Applications</h3>
+        <h3 class="panel-title" translate>Authorized Applications</h3>
       </div>
       <div class="panel-body">
-        <p>You have granted the following applications access to your Humanitarian ID account.</p>
+        <p translate>You have granted the following applications access to your Humanitarian ID account.</p>
         <ul>
           <li>Humanitarian Response <a href="#" class="btn btn-default">Revoke</a></li>
           <li>HDX <a href="#" class="btn btn-default">Revoke</a></li>
