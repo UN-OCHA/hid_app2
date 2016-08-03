@@ -1,0 +1,23 @@
+{
+  "name": "hid_app2",
+  "version": "0.1.0",
+  "description": "HID Client application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/un-ocha/hid_app2.git"
+  },
+  "author": "Guillaume Viguier-Just <guillaume@viguierjust.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/un-ocha/hid_app2/issues"
+  },
+  "homepage": "https://github.com/un-ocha/hid_app2#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-angular-gettext": "^2.2.3"
+  }
+}

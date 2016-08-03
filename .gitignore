@@ -1,0 +1,5 @@
+
+node_modules/
+src/bower_components
+src/app/common/translations.js
+

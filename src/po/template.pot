@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: src/app/auth/login.html:5
+msgid "Email"
+msgstr ""
+
+#: src/app/auth/login.html:9
+msgid "Forgot your password ?"
+msgstr ""
+
+#: src/app/auth/login.html:2
+msgid "Log in to Humanitarian ID."
+msgstr ""
+
+#: src/app/auth/login.html:1
+#: src/app/auth/login.html:12
+msgid "Login"
+msgstr ""
+
+#: src/app/auth/login.html:14
+msgid "Need to register ?"
+msgstr ""
+
+#: src/app/auth/login.html:9
+msgid "Password"
+msgstr ""

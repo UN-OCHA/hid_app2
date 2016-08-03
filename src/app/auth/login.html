@@ -1,15 +1,15 @@
-<h1>Login</h1>
-<p>Log in to Humanitarian ID.</p>
+<h1 translate>Login</h1>
+<p translate>Log in to Humanitarian ID.</p>
 <form ng-submit="login()">
   <div class="form-group">
-    <label for="email">Email</label>
+    <label for="email" translate>Email</label>
     <input type="email" class="form-control" id="email" ng-model="email">
   </div>
   <div class="form-group">
-    <label for="password">Password <a href="/password_reset">Forgot your password ?</a></label>
+    <label for="password"><span translate>Password</span> <a href="/password_reset" translate>Forgot your password ?</a></label>
     <input type="password" class="form-control" id="password" placeholder="" ng-model="password" required>
   </div>
-  <button type="submit" class="btn btn-primary">Log in</button>
+  <button type="submit" class="btn btn-primary" translate>Login</button>
 </form>
-<a href="/register" class="btn btn-default">Need to register ?</a>
+<a href="/register" class="btn btn-default" translate>Need to register ?</a>
 
