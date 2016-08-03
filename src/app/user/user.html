@@ -1,10 +1,11 @@
 <div class="row">
   <form editable-form name="profileForm" onaftersave="saveUser()">
     <div class="col-xs-3">
-      <img ng-src="{{gravatarUrl}}" class="img-responsive img-rounded" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
+      <img ng-src="{{gravatarUrl}}" class="img-responsive img-rounded center-block" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
     </div>
     <div class="col-xs-7">
-      <h2><span editable-text="user.given_name">{{user.given_name}}</span> <span editable-text="user.family_name">{{user.family_name}}</span></h2>
+      <h2><span ng-show="user.verified && !profileForm.$visible"><i class="fa fa-check-circle"></i></span> <span editable-text="user.given_name">{{user.given_name}}</span> <span editable-text="user.family_name">{{user.family_name}}</span></h2>
+      <div ng-show="profileForm.$visible"><div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}"></div></div>
       <p editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</p>
       <p>User cluster</p>
       <p>{{user.location.country.name}}</p>
