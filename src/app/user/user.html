@@ -88,6 +88,16 @@
       <div ng-repeat="organization in user.organizations">
         <span editable-text="organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)" onbeforesave="setOrganization($data, $index)">{{organization.name}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('organizations', $index)"><i class="fa fa-times"></i></button>
       </div>
+      <h4 translate>Roles</h4>
+      <div editable-ui-select="user.roles" e-multiple onshow="getRoles()" data-e-form="roleForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
+        <span ng-repeat="role in user.roles">{{role.label}} &nbsp;</span>
+        <editable-ui-select-match placeholder="Roles">
+          {{$item.label}}
+        </editable-ui-select-match>
+        <editable-ui-select-choices repeat="role in roles">
+          {{role.label}}
+        </editable-ui-select-choices>
+      </div>
       <h4><span translate>Job title</span> <i class="fa fa-star"></i></h4>
       <span editable-text="user.job_title">{{user.job_title}}</span>
       <h4 ng-show="(user.job_titles && user.job_titles.length) || roleForm.$visible" translate>Other job titles</h4>

@@ -105,12 +105,12 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
   };
 
   $scope.getOrganization = function(val) {
-    return $http.get('https://www.humanitarianresponse.info/en/api/v1/organizations?autocomplete[string]=' + val + '&autocomplete[operator]=STARTS_WITH')
+    return $http.get(config.hrinfoUrl + '/organizations?autocomplete[string]=' + val + '&autocomplete[operator]=STARTS_WITH')
       .then(hrinfoResponse);
   };
 
   $scope.getDisasters = function(val) {
-    return $http.get('https://www.humanitarianresponse.info/en/api/v1.0/disasters?autocomplete[string]=' + val + '&autocomplete[operator]=STARTS_WITH')
+    return $http.get(config.hrinfoUrl + '/disasters?autocomplete[string]=' + val + '&autocomplete[operator]=STARTS_WITH')
       .then(hrinfoResponse);
   };
 
@@ -122,8 +122,16 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
   };
 
   $scope.getLocations = function (val) {
-    return $http.get('https://www.humanitarianresponse.info/en/api/v1.0/locations?autocomplete[string]=' + val + '&autocomplete[operator]=STARTS_WITH')
+    return $http.get(config.hrinfoUrl + '/locations?autocomplete[string]=' + val + '&autocomplete[operator]=STARTS_WITH')
       .then(hrinfoResponse);
+  };
+
+  $scope.roles = [];
+  $scope.getRoles = function () {
+    return $http.get(config.hrinfoUrl + '/functional_roles')
+      .success(function (resp) {
+        $scope.roles = resp.data;
+      });
   };
 
   $scope.getCountries = function () {
