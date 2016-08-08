@@ -8,13 +8,97 @@ msgstr ""
 msgid "&lt; Back"
 msgstr ""
 
+#: src/app/user/account.html:2
+msgid "Account Settings"
+msgstr ""
+
+#: src/app/user/user.html:104
+msgid "Add a new Job Title"
+msgstr ""
+
+#: src/app/user/user.html:152
+msgid "Add a new Location"
+msgstr ""
+
+#: src/app/user/user.html:87
+msgid "Add a new Organization"
+msgstr ""
+
+#: src/app/user/user.html:56
+msgid "Add a new Social Network"
+msgstr ""
+
+#: src/app/user/user.html:195
+msgid "Add a new Website"
+msgstr ""
+
+#: src/app/user/user.html:51
+msgid "Add a new email"
+msgstr ""
+
+#: src/app/user/user.html:44
+msgid "Add a new phone number"
+msgstr ""
+
+#: src/app/user/user.html:183
+msgid "Additional Information"
+msgstr ""
+
+#: src/app/user/user.html:109
+#: src/app/user/user.html:110
+msgid "Administrator"
+msgstr ""
+
+#: src/app/user/account.html:50
+msgid "Applications"
+msgstr ""
+
+#: src/app/user/account.html:53
+msgid "Authorized Applications"
+msgstr ""
+
+#: src/app/user/account.html:5
+msgid "Change password"
+msgstr ""
+
+#: src/app/user/account.html:28
+msgid "Confirm new password"
+msgstr ""
+
+#: src/app/user/user.html:29
+msgid "Contact Information"
+msgstr ""
+
+#: src/app/user/user.html:135
+#: src/app/user/user.html:156
+msgid "Country"
+msgstr ""
+
+#: src/app/user/user.html:201
+msgid "Created"
+msgstr ""
+
+#: src/app/user/user.html:132
+msgid "Current Location"
+msgstr ""
+
 #: src/app/common/header.html:25
 msgid "Dashboard"
+msgstr ""
+
+#: src/app/user/account.html:42
+#: src/app/user/account.html:46
+msgid "Delete account"
+msgstr ""
+
+#: src/app/user/account.html:45
+msgid "Deleting your account means that you will lose your access to Humanitarian ID."
 msgstr ""
 
 #: src/app/auth/login.html:5
 #: src/app/auth/password_reset.html:5
 #: src/app/auth/register.html:5
+#: src/app/user/user.html:48
 msgid "Email"
 msgstr ""
 
@@ -30,8 +114,20 @@ msgstr ""
 msgid "If you forget the password for your Humanitarian ID account, you can request a new password by entering your email address here and clicking on 'Reset Password'."
 msgstr ""
 
+#: src/app/user/user.html:101
+msgid "Job title"
+msgstr ""
+
 #: src/app/auth/register.html:27
 msgid "Last Name"
+msgstr ""
+
+#: src/app/user/user.html:199
+msgid "Last Updated"
+msgstr ""
+
+#: src/app/user/user.html:121
+msgid "Locations"
 msgstr ""
 
 #: src/app/auth/login.html:2
@@ -51,8 +147,45 @@ msgstr ""
 msgid "Middle Name"
 msgstr ""
 
+#: src/app/user/users.html:5
+msgid "Name"
+msgstr ""
+
 #: src/app/auth/login.html:14
 msgid "Need to register ?"
+msgstr ""
+
+#: src/app/user/account.html:19
+msgid "New password"
+msgstr ""
+
+#: src/app/user/account.html:10
+msgid "Old password"
+msgstr ""
+
+#: src/app/user/user.html:84
+#: src/app/user/users.html:7
+msgid "Organization"
+msgstr ""
+
+#: src/app/user/user.html:50
+msgid "Other Emails"
+msgstr ""
+
+#: src/app/user/user.html:103
+msgid "Other job titles"
+msgstr ""
+
+#: src/app/user/user.html:151
+msgid "Other locations"
+msgstr ""
+
+#: src/app/user/user.html:86
+msgid "Other organizations"
+msgstr ""
+
+#: src/app/user/user.html:43
+msgid "Other phone numbers"
 msgstr ""
 
 #: src/app/auth/login.html:9
@@ -64,12 +197,25 @@ msgstr ""
 msgid "Password (confirm)"
 msgstr ""
 
+#: src/app/user/user.html:108
+msgid "Permissions"
+msgstr ""
+
+#: src/app/user/user.html:41
+msgid "Phone"
+msgstr ""
+
 #: src/app/common/header.html:27
 msgid "Preferences"
 msgstr ""
 
 #: src/app/common/header.html:26
 msgid "Profile"
+msgstr ""
+
+#: src/app/user/user.html:144
+#: src/app/user/user.html:165
+msgid "Region"
 msgstr ""
 
 #: src/app/auth/register.html:1
@@ -82,12 +228,68 @@ msgstr ""
 msgid "Reset Password"
 msgstr ""
 
+#: src/app/user/users.html:6
+msgid "Role"
+msgstr ""
+
+#: src/app/user/user.html:72
+msgid "Role Details"
+msgstr ""
+
+#: src/app/user/user.html:91
+msgid "Roles"
+msgstr ""
+
 #: src/app/common/header.html:15
 msgid "Search for someone"
 msgstr ""
 
 #: src/app/auth/register.html:2
 msgid "Sign up for a Humanitarian ID account. Doing so will give you access to Humanitarian ID as well as a growing number of related humanitarian community sites."
+msgstr ""
+
+#: src/app/user/user.html:55
+msgid "Social Networks"
+msgstr ""
+
+#: src/app/common/messages.html:1
+msgid "This field is required"
+msgstr ""
+
+#: src/app/common/messages.html:3
+msgid "This field must be a valid email address"
+msgstr ""
+
+#: src/app/user/account.html:36
+msgid "Update password"
+msgstr ""
+
+#: src/app/user/users.html:1
+msgid "Users"
+msgstr ""
+
+#: src/app/user/user.html:8
+msgid "Verified user"
+msgstr ""
+
+#: src/app/auth/auth.js:75
+msgid "We could not log you in. Please verify your email and password."
+msgstr ""
+
+#: src/app/user/user.html:194
+msgid "Websites"
+msgstr ""
+
+#: src/app/user/account.html:56
+msgid "You have granted the following applications access to your Humanitarian ID account."
+msgstr ""
+
+#: src/app/auth/auth.js:83
+msgid "You were successfully logged out."
+msgstr ""
+
+#: src/app/auth/auth.js:87
+msgid "You will soon receive an email which will allow you to reset your password."
 msgstr ""
 
 #: src/app/auth/password_reset.html:6
@@ -105,4 +307,8 @@ msgstr ""
 
 #: src/app/auth/register.html:24
 msgid "Your middle name"
+msgstr ""
+
+#: src/app/common/messages.html:2
+msgid "Your passwords do not match"
 msgstr ""

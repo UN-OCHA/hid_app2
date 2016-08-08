@@ -66,13 +66,13 @@ authServices.factory('APIInterceptor', ['$window', 'config', function ($window, 
 
 var authController = angular.module('authController', []);
 
-authController.controller('AuthCtrl', ['$scope', '$location', 'alertService', 'AuthService', 'User', function ($scope, $location, alertService, AuthService, User) {
+authController.controller('AuthCtrl', ['$scope', '$location', 'gettextCatalog', 'alertService', 'AuthService', 'User', function ($scope, $location, gettextCatalog, alertService, AuthService, User) {
   $scope.login = function() {
     AuthService.login($scope.email, $scope.password).then(function () {
       $scope.initCurrentUser();
       $location.path('/dashboard');
     }, function (data) {
-      alertService.add('danger', 'We could not log you in. Please verify your email and password.');
+      alertService.add('danger', gettextCatalog.getString('We could not log you in. Please verify your email and password.'));
     });
   };
 
@@ -80,11 +80,11 @@ authController.controller('AuthCtrl', ['$scope', '$location', 'alertService', 'A
     AuthService.logout();
     $scope.removeCurrentUser();
     $location.path('/');
-    alertService.add('success', 'You were successfully logged out.');
+    alertService.add('success', gettextCatalog.getString('You were successfully logged out.'));
   };
 
   $scope.passwordReset = function() {
-    alertService.add('success', 'You will soon receive an email which will allow you to reset your password.');
+    alertService.add('success', gettextCatalog.getString('You will soon receive an email which will allow you to reset your password.'));
   };
 
   if ($location.path() == '/logout') {

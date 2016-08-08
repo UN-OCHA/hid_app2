@@ -42,3 +42,23 @@ msgstr "Mot de passe"
 msgid "Your email address"
 msgstr "Votre adresse de courriel"
 
+#: src/app/auth/auth.js:75
+msgid "We could not log you in. Please verify your email and password."
+msgstr "Nous n'avons pas pu vous connecter. Veuillez vérifier votre email et votre mot de passe."
+
+#: src/app/user/user.html:194
+msgid "Websites"
+msgstr "Sites web"
+
+#: src/app/user/account.html:56
+msgid "You have granted the following applications access to your Humanitarian ID account."
+msgstr "Vous avez donné accès à votre compte Humanitarian ID aux applications suivantes:"
+
+#: src/app/auth/auth.js:83
+msgid "You were successfully logged out."
+msgstr "Vous avez bien été déconnecté"
+
+#: src/app/auth/auth.js:87
+msgid "You will soon receive an email which will allow you to reset your password."
+msgstr "Vous allez recevoir un email qui vous permettra de réinitialiser votre mot de passe."
+
