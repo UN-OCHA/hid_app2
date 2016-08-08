@@ -5,7 +5,7 @@
     </div>
     <div class="col-xs-7">
       <h2><span ng-show="user.verified && !profileForm.$visible"><i class="fa fa-check-circle"></i></span> <span editable-text="user.given_name">{{user.given_name}}</span> <span editable-text="user.family_name">{{user.family_name}}</span></h2>
-      <div ng-show="profileForm.$visible"><div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}"></div></div>
+      <div ng-show="profileForm.$visible"><div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div></div>
       <p editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</p>
       <p>User cluster</p>
       <p>{{user.location.country.name}}</p>
@@ -89,7 +89,7 @@
         <span editable-text="organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)" onbeforesave="setOrganization($data, $index)">{{organization.name}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('organizations', $index)"><i class="fa fa-times"></i></button>
       </div>
       <h4 translate>Roles</h4>
-      <div editable-ui-select="user.roles" e-multiple onshow="getRoles()" data-e-form="roleForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
+      <div editable-ui-select="user.roles" edit-disabled="!currentUser.is_admin" e-multiple onshow="getRoles()" data-e-form="roleForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
         <span ng-repeat="role in user.roles">{{role.label}} &nbsp;</span>
         <editable-ui-select-match placeholder="Roles">
           {{$item.label}}
@@ -105,6 +105,9 @@
       <div ng-repeat="job_title in user.job_titles">
         <span editable-text="job_title">{{job_title}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('job_titles', $index)"><i class="fa fa-times"></i></button>
       </div>
+      <h4 translate>Permissions</h4>
+      <div ng-show="roleForm.$visible"><div edit-disabled="!currentUser.is_admin" editable-checkbox="user.is_admin" e-title="{{'Administrator'|translate}}"></div></div>
+      <span ng-if="user.is_admin && !roleForm.$visible" translate>Administrator</span>
     </div>
   </div>
   </form>

@@ -26,7 +26,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
 
   $scope.gravatarUrl = '';
 
-  $scope.canEditUser = $routeParams.userId == $scope.currentUser.id;
+  $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin);
 
   $scope.user = User.get({userId: $routeParams.userId}, function(user) {
     var userEmail = md5.createHash(user.email.trim().toLowerCase());
