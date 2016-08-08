@@ -9,6 +9,7 @@
       <p editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</p>
       <p>User cluster</p>
       <p>{{user.location.country.name}}</p>
+      <p ng-if="user.verified_by"><span translate>Verified by</span>: <a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
       <p editable-textarea="user.status" e-rows="7" e-cols="40">{{user.status}}</p>
     </div>
     <div class="col-xs-2 text-right" ng-show="canEditUser">
