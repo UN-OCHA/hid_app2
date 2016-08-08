@@ -12,6 +12,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/app/common/header.html:6
+msgid "&lt; Back"
+msgstr "&lt; Retour"
+
 #: src/app/auth/login.html:5
 msgid "Email"
 msgstr "Courriel"
