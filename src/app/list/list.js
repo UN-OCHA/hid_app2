@@ -13,10 +13,15 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', 'List', functi
   $scope.list = List.get($routeParams);
 }]);
 
-listControllers.controller('ListNewCtrl', ['$scope', '$location', 'List', function ($scope, $location, List) {
+listControllers.controller('ListNewCtrl', ['$scope', '$location', 'List', 'User', function ($scope, $location, List, User) {
   $scope.list = new List();
-  $scope.list.owner = '226dc843-28eb-4bb6-a30c-cbf351addde1';
   $scope.list.type = 'list';
+  $scope.users = [];
+  $scope.getUsers = function(search) {
+    var users = User.query({'q': search}, function() {
+      $scope.users = users;
+    });
+  };
 
   $scope.listCreate = function() {
     $scope.list.$save(function() {
@@ -24,3 +29,9 @@ listControllers.controller('ListNewCtrl', ['$scope', '$location', 'List', functi
     });
   };
 }]);
+
+listControllers.controller('ListsCtrl', ['$scope', '$routeParams', 'List', function($scope, $routeParams, List) {
+  $scope.request = $routeParams;
+  $scope.lists = List.query($routeParams);
+}]);
+

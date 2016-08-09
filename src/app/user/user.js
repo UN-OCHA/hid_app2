@@ -1,3 +1,17 @@
+var userDirectives = angular.module('userDirectives', []);
+
+userDirectives.directive('hidUsers', ['$window', function($window) {
+  return {
+    restrict: 'E',
+    templateUrl: 'app/user/users.html',
+    link: function (scope, elem, attrs) {
+      console.log(attrs);
+      scope.users = attrs.users;
+    }
+  };
+}]);
+
+
 var userServices = angular.module('userServices', ['ngResource']);
 
 userServices.factory('User', ['$resource', 'config',
@@ -206,7 +220,7 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
 }]);
 
 
-userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
+userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', 'userDirectives', function($scope, $routeParams, User, userDirectives) {
   $scope.request = $routeParams;
   $scope.users = User.query($routeParams);
 }]);

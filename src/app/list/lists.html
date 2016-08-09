@@ -1,17 +1,14 @@
-<h2>{{list.name}}</h2>
+<h1 translate>Lists</h1>
 <table class="table table-striped">
   <thead>
     <tr>
       <th translate>Name</th>
-      <th translate>Role</th>
-      <th translate>Organization</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="user in list.users">
-      <td><a ng-href="/users/{{user.id}}">{{user.name}}</a></td>
-      <td>{{user.job_title}}</td>
-      <td>{{user.organization.name}}</td>
+    <tr ng-repeat="list in lists">
+      <td><a ng-href="/lists/{{list.id}}">{{list.name}}</a></td>
       <td>
         <div uib-dropdown>
           <button type="button" class="btn btn-default" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>

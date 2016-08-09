@@ -21,3 +21,15 @@ body {
   display: none;
 }
 
+.admin-icon {
+  color: #fff;
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  cursor: pointer;
+}
+
+.admin-background {
+  color: #2b5e82;
+}
+

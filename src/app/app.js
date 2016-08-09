@@ -83,6 +83,11 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'ListCtrl',
         authenticate: true
       }).
+      when('/lists', {
+        templateUrl: 'app/list/lists.html',
+        controller: 'ListsCtrl',
+        authenticate: true
+      }).
       when('/register', {
         templateUrl: 'app/auth/register.html',
         controller: 'UserNewCtrl'
