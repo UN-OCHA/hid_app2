@@ -6,15 +6,22 @@ appServices.factory('alertService', function($rootScope) {
   // create an array of alerts available globally
   $rootScope.alerts = [];
 
-  alertService.add = function(type, msg) {
-    $rootScope.alerts.push({
+  alertService.add = function(type, msg, confirm = false, cb = false) {
+    var alert = {
       'type': type,
       'msg': msg, 
       'close': function() {
         alertService.closeAlert(this);
       },
-      'routes': 1
-    });
+      'routes': 1,
+      'confirm': confirm,
+      'callback': cb,
+    };
+    if (confirm) {
+      alert.closeConfirm = alert.close;
+      alert.close = undefined;
+    }
+    $rootScope.alerts.push(alert);
   };
 
   alertService.closeAlert = function(alert) {
@@ -40,6 +47,11 @@ var appControllers = angular.module('appControllers', []);
 
 appControllers.controller('AppCtrl', ['$scope', '$window', function ($scope, $window) {
   $scope.currentUser = null;
+  $scope.isAdminCollapsed = true;
+
+  $scope.switchAdmin = function() {
+    $scope.isAdminCollapsed = !$scope.isAdminCollapsed;
+  };
 
   $scope.removeCurrentUser = function() {
     $scope.currentUser = null;

@@ -6,11 +6,21 @@ listServices.factory('List', ['$resource', 'config',
   }
 ]);
 
+listServices.factory('ListUser', ['$resource', 'config',
+  function ($resource, config) {
+    return $resource(config.apiUrl + 'lists/:listId/users/:userId', {}, {
+      'get': {method: 'GET', isArray: true}
+    });
+  }
+]); 
+
 
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', 'List', function ($scope, $routeParams, List) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', 'List', 'ListUser', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, List, ListUser, alertService, gettextCatalog) {
   $scope.list = List.get($routeParams);
+  $scope.users = ListUser.get($routeParams);
+
 }]);
 
 listControllers.controller('ListNewCtrl', ['$scope', '$location', 'List', 'User', function ($scope, $location, List, User) {
