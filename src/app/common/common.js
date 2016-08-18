@@ -50,6 +50,7 @@ var appControllers = angular.module('appControllers', []);
 appControllers.controller('AppCtrl', ['$scope', '$window', function ($scope, $window) {
   $scope.currentUser = null;
   $scope.isAdminCollapsed = true;
+  $scope.isAdminAvailable = false;
 
   $scope.switchAdmin = function() {
     $scope.isAdminCollapsed = !$scope.isAdminCollapsed;
@@ -77,6 +78,16 @@ appControllers.controller('AppCtrl', ['$scope', '$window', function ($scope, $wi
     angular.element(document).find('body').removeClass('toggled');
   };
 
+  var initAdminAvailable = function () {
+    $scope.isAdminAvailable = false;
+  }
+
+  $scope.setAdminAvailable = function (val) {
+    $scope.isAdminAvailable = val;
+  };
+
   $scope.initCurrentUser();
+
+  $scope.$on('$routeChangeSuccess', initAdminAvailable);
 }]);
 

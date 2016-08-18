@@ -18,7 +18,11 @@ listServices.factory('ListUser', ['$resource', 'config',
 var listControllers = angular.module('listControllers', []);
 
 listControllers.controller('ListCtrl', ['$scope', '$routeParams', 'List', 'ListUser', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, List, ListUser, User, alertService, gettextCatalog) {
-  $scope.list = List.get($routeParams);
+  $scope.list = List.get($routeParams, function () {
+    if (angular.equals($scope.list.owner.id, $scope.currentUser.id)) {
+      $scope.setAdminAvailable(true);
+    }
+  });
   $scope.users = ListUser.get($routeParams);
   $scope.usersAdded = {};
 
