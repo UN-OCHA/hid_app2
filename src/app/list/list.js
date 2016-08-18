@@ -8,7 +8,7 @@ listServices.factory('List', ['$resource', 'config',
 
 listServices.factory('ListUser', ['$resource', 'config',
   function ($resource, config) {
-    return $resource(config.apiUrl + 'lists/:listId/users/:userId', {}, {
+    return $resource(config.apiUrl + 'lists/:listId/users/:userId', {listId: '@listId', userId: '@userId'}, {
       'get': {method: 'GET', isArray: true}
     });
   }
@@ -17,9 +17,29 @@ listServices.factory('ListUser', ['$resource', 'config',
 
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', 'List', 'ListUser', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, List, ListUser, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', 'List', 'ListUser', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, List, ListUser, User, alertService, gettextCatalog) {
   $scope.list = List.get($routeParams);
   $scope.users = ListUser.get($routeParams);
+  $scope.usersAdded = {};
+
+  $scope.getUsers = function(search) {
+    var users = User.query({'q': search}, function() {
+      $scope.newMembers = users;
+    });
+  };
+
+  $scope.addMemberToList = function() {
+    var promises = [];
+    angular.forEach($scope.usersAdded.users, function (value, key) {
+      var listUser = new ListUser({
+        listId: $scope.list.id,
+        userId: value
+      });
+      listUser.$save(function(out) {
+        $scope.users = out.users;
+      });
+    });
+  };
 
 }]);
 

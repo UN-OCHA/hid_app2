@@ -1,5 +1,19 @@
-<h2>{{list.name}}</h2>
-<hid-users users="users" list="list"></hid-users>
-<!-- <div uib-collapse="isAdminCollapsed" horizontal id="admin">
-  Hello
-</div>-->
+<div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
+  <form ng-submit="addMemberToList()">
+    <div class="form-group">
+      <label for="user" translate>New Member</label>
+      <ui-select ng-model="usersAdded.users" multiple name="member" theme="bootstrap" style="min-width: 300px;">
+        <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
+        <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers">
+          {{person.name}}
+        </ui-select-choices>
+      </ui-select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Member</button>
+  </form>
+</div>
+
+<div id="page-content-wrapper">
+  <h2>{{list.name}}</h2>
+  <hid-users users="users" list="list"></hid-users>
+</div>

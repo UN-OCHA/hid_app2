@@ -10,11 +10,12 @@ userDirectives.directive('hidUsers', ['gettextCatalog', 'alertService', 'ListUse
     },
     link: function (scope, elem, attrs) {
       scope.removeFromList = function (user) {
-        alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-          ListUser.delete({listId: scope.list.id, userId: user.id }, function(alert) {
+        var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+          ListUser.delete({listId: scope.list.id, userId: user.id }, function(out) {
             // Close existing alert
             alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
+            scope.users = out.users;
           });
         });
       };

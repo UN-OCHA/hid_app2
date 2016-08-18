@@ -7,21 +7,23 @@ appServices.factory('alertService', function($rootScope) {
   $rootScope.alerts = [];
 
   alertService.add = function(type, msg, confirm = false, cb = false) {
+    var closeAlert = function () {
+      alertService.closeAlert(this);
+    };
     var alert = {
       'type': type,
       'msg': msg, 
-      'close': function() {
-        alertService.closeAlert(this);
-      },
+      'close': closeAlert,
       'routes': 1,
       'confirm': confirm,
       'callback': cb,
     };
     if (confirm) {
-      alert.closeConfirm = alert.close;
+      alert.closeConfirm = closeAlert;
       alert.close = undefined;
     }
     $rootScope.alerts.push(alert);
+    return alert;
   };
 
   alertService.closeAlert = function(alert) {
@@ -65,6 +67,14 @@ appControllers.controller('AppCtrl', ['$scope', '$window', function ($scope, $wi
     if ($window.localStorage.getItem('currentUser')) {
       $scope.setCurrentUser(JSON.parse($window.localStorage.getItem('currentUser')));
     }
+  };
+
+  $scope.adminExpanding = function () {
+    angular.element(document).find('body').addClass('toggled');
+  };
+
+  $scope.adminCollapsing = function () {
+    angular.element(document).find('body').removeClass('toggled');
   };
 
   $scope.initCurrentUser();

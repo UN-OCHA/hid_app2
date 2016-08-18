@@ -8,6 +8,10 @@ body {
   padding-top: 60px;
 }
 
+body.toggled {
+  padding-left: 350px;
+}
+
 .alert {
   position: absolute;
   top: 0;
@@ -19,6 +23,15 @@ body {
 
 .alert .close {
   display: none;
+}
+
+#admin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-right: 1px solid black;
+  height: 100% !important;
+  width: 350px;
 }
 
 .admin-icon {
