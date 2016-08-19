@@ -11,10 +11,10 @@
       <a href="/"><img src="/assets/img/logo.png" alt="Humanitarian ID logo" /></a>
     </div>
     <div class="col-xs-6 col-sm-3 text-right" ng-if="isAuthenticated">
-      <form class="form-inline" role="search" action="/users">
+      <form class="form-inline" role="search" ng-submit="searchUsers()">
         <div class="form-group">
           <div class="input-group">
-            <input type="search" name="q" class="form-control" placeholder="{{'Search for someone'|translate}}" ng-value="request.q" ng-show="showSearch">
+            <input type="search" name="q" class="form-control" placeholder="{{'Search for someone'|translate}}" ng-model="filters.q" ng-show="showSearch">
             <span class="input-group-btn">
               <a href class="btn btn-default" ng-click="showSearch = !showSearch"><i class="fa fa-search"></i></a>
             </span>

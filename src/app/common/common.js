@@ -47,10 +47,11 @@ appServices.factory('alertService', function($rootScope) {
 
 var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('AppCtrl', ['$scope', '$window', function ($scope, $window) {
+appControllers.controller('AppCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
   $scope.currentUser = null;
   $scope.isAdminCollapsed = true;
   $scope.isAdminAvailable = false;
+  $scope.filters = {};
 
   $scope.switchAdmin = function() {
     $scope.isAdminCollapsed = !$scope.isAdminCollapsed;
@@ -80,10 +81,15 @@ appControllers.controller('AppCtrl', ['$scope', '$window', function ($scope, $wi
 
   var initAdminAvailable = function () {
     $scope.isAdminAvailable = false;
+    $scope.adminCollapsing();
   }
 
   $scope.setAdminAvailable = function (val) {
     $scope.isAdminAvailable = val;
+  };
+
+  $scope.searchUsers = function () {
+    $location.path('/users').search({q: $scope.filters.q});
   };
 
   $scope.initCurrentUser();

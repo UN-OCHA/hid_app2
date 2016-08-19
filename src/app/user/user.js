@@ -1,6 +1,6 @@
 var userDirectives = angular.module('userDirectives', []);
 
-userDirectives.directive('hidUsers', ['gettextCatalog', 'alertService', 'ListUser', function(gettextCatalog, alertService, ListUser) {
+userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCatalog', 'alertService', 'User', 'ListUser', function($http, $location, config, gettextCatalog, alertService, User, ListUser) {
   return {
     restrict: 'E',
     templateUrl: 'app/user/users.html',
@@ -9,6 +9,23 @@ userDirectives.directive('hidUsers', ['gettextCatalog', 'alertService', 'ListUse
       list: '='
     },
     link: function (scope, elem, attrs) {
+      scope.filters = $location.search();
+      scope.filter = function() {
+        if (scope.filters.verified === false) {
+          delete scope.filters.verified;
+        }
+        //scope.users = User.query(scope.filters);
+        $location.search(scope.filters);
+      };
+
+      scope.roles = [];
+      scope.getRoles = function () {
+        return $http.get(config.hrinfoUrl + '/functional_roles')
+          .success(function (resp) {
+            scope.roles = resp.data;
+          });
+      };
+
       scope.removeFromList = function (user) {
         var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
           ListUser.delete({listId: scope.list.id, userId: user.id }, function(out) {
@@ -220,6 +237,7 @@ userControllers.controller('UserPrefsCtrl', ['$scope', 'alertService', 'User', f
 
 userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService', 'User', function ($scope, $location, alertService, User) {
   $scope.user = new User();
+  $scope.currentPath = $location.path();
 
   $scope.userCreate = function() {
     $scope.user.$save(function(user) {
@@ -235,6 +253,11 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
 userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
   $scope.request = $routeParams;
   $scope.users = User.query($routeParams);
+  $scope.filters = {};
+
+  $scope.filter = function() {
+    $scope.users = User.query($scope.filters);
+  };
 }]);
 
 userControllers.controller('CheckInCtrl', ['$scope', 'User', function ($scope, User) {

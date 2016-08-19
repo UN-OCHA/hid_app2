@@ -60,7 +60,7 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true
       }).
       when('/users/new', {
-        templateUrl: 'app/user/new-user.html',
+        templateUrl: 'app/user/new-user-page.html',
         controller: 'UserNewCtrl',
         authenticate: true
       }).
