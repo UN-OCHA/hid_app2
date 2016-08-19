@@ -3,20 +3,13 @@
   <thead>
     <tr>
       <th translate>Name</th>
-      <th></th>
+      <th translate>Created by</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="list in lists">
       <td><a ng-href="/lists/{{list.id}}">{{list.name}}</a></td>
-      <td>
-        <div uib-dropdown>
-          <button type="button" class="btn btn-default" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
-          <ul class="dropdown-menu" uib-dropdown-menu>
-            <li><a href>Check into...</a></li>
-          </ul>
-        </div>
-      </td>
+      <td><a ng-href="/users/{{list.owner.id}}">{{list.owner.name}}</a></td>
     </tr>
   </tbody>
 </table>
