@@ -1,7 +1,5 @@
 <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }} <span ng-if="alert.confirm"><button class="btn btn-primary" ng-click="alert.callback();" translate>Yes</button> <button class="btn btn-default" ng-click="alert.closeConfirm();" translate>No</button></span></uib-alert>
 
-<button class="btn btn-primary" type="button" ng-click="switchAdmin()" ng-show="isAdminAvailable">Admin</button>
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-3">
@@ -20,6 +18,11 @@
             </span>
           </div>
         </div>
+
+         <div class="form-group">
+           <button class="btn btn-default" type="button" ng-click="switchAdmin()" ng-show="isAdminAvailable"><i class="fa fa-cog"></i></button>
+         </div>
+
          <div class="form-group">
            <div class="dropdown pull-right" uib-dropdown>
              <a href class="dropdown-toggle btn btn-default" role="button" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle><i class="fa fa-user"></i></a>

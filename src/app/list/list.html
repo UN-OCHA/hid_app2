@@ -1,4 +1,5 @@
 <div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
+  <h2 translate>Add new member</h2>
   <form ng-submit="addMemberToList()">
     <div class="form-group">
       <label for="user" translate>New Member</label>
@@ -9,8 +10,28 @@
         </ui-select-choices>
       </ui-select>
     </div>
-    <button type="submit" class="btn btn-primary">Add Member</button>
+    <button type="submit" class="btn btn-primary" translate>Add Member</button>
   </form>
+
+  <h2 translate>List Settings</h2>
+  <a class="btn btn-primary" href="lists/{{list.id}}/edit" translate>Edit List Settings</a>
+
+  <div ng-if="(list.joinability == 'public' || list.joinability == 'moderated') && !isMember">
+    <h2 translate>Check in</h2>
+    <form ng-submit="checkIn()">
+      <div class="form-group">
+        <label for="checkoutDate" translate>Checkout date</label>
+        <input type="date" name="checkoutDate" ng-model="checkinUser.checkoutDate" class="form-control">
+        <p class="help-block" translate>Select a checkout date if you would like to be checked out automatically (you will receive emails from the system beforehand)</p>
+      </div>
+      <button type="submit" class="btn btn-primary" translate>Check in</button>
+    </form>
+  </div>
+
+  <div ng-if="isMember"> 
+    <h2 translate>Check out</h2>
+    <button type="submit" class="btn btn-primary" ng-click="checkOut();" translate>Check out</button>
+  </div>
 </div>
 
 <div id="page-content-wrapper">

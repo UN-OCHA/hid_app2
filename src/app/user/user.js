@@ -1,6 +1,6 @@
 var userDirectives = angular.module('userDirectives', []);
 
-userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCatalog', 'alertService', 'User', 'ListUser', function($http, $location, config, gettextCatalog, alertService, User, ListUser) {
+userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCatalog', 'alertService', 'User', 'ListUser', 'ListUsers', function($http, $location, config, gettextCatalog, alertService, User, ListUser, ListUsers) {
   return {
     restrict: 'E',
     templateUrl: 'app/user/users.html',
@@ -28,11 +28,11 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
 
       scope.removeFromList = function (user) {
         var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-          ListUser.delete({listId: scope.list.id, userId: user.id }, function(out) {
+          ListUsers.delete({listId: scope.list.id, userId: user.id }, function(out) {
             // Close existing alert
             alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
-            scope.users = out.users;
+            scope.users = ListUsers.get({listId: scope.list.id});
           });
         });
       };

@@ -1,10 +1,11 @@
-<h1 translate>Create a new list</h1>
-<form ng-submit="listCreate()">
+<h1 ng-if="!list.id" translate>Create a new list</h1>
+<h1 ng-if="list.id" translate>{{list.name}}</h1>
+<form ng-submit="listSave()">
   <div class="form-group">
     <label for="name" translate>Name</label>
     <input type="text" class="form-control" id="name" placeholder="" ng-model="list.name" required>
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-if="!list.id">
     <label for="users" translate>Members</label>
     <ui-select ng-model="list.users" multiple name="members" theme="bootstrap" style="min-width: 300px;">
       <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
@@ -13,6 +14,23 @@
       </ui-select-choices>
     </ui-select>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="form-group">
+    <label for="visibility" translate>Who can view this list ?</label>
+    <select class="form-control" ng-model="list.visibility" name="visibility" required>
+      <option value="me" translate>List owner and editors only</option>
+      <option value="inlist" translate>People on the list only</option>
+      <option value="all" translate>Anyone within Humanitarian ID</option>
+      <option value="verified" translate>Verified users only</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="joinability" translate>Who can join this list ?</label>
+    <select class="form-control" ng-model="list.joinability" name="joinability" required>
+      <option value="public" translate>Anyone within Humanitarian ID</option>
+      <option value="moderated" translate>Anyone within Humanitarian ID can ask to join</option>
+      <option value="private" translate>Only the owner and managers can add users</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary" translate>Save</button>
 </form>
 
