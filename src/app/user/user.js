@@ -1,6 +1,6 @@
 var userDirectives = angular.module('userDirectives', []);
 
-userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCatalog', 'alertService', 'User', 'ListUser', 'ListUsers', function($http, $location, config, gettextCatalog, alertService, User, ListUser, ListUsers) {
+userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCatalog', 'alertService', 'User', 'ListUser', function($http, $location, config, gettextCatalog, alertService, User, ListUser) {
   return {
     restrict: 'E',
     templateUrl: 'app/user/users.html',
@@ -26,13 +26,43 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
           });
       };
 
-      scope.removeFromList = function (user) {
+      scope.removeFromList = function (lu) {
         var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-          ListUsers.delete({listId: scope.list.id, userId: user.id }, function(out) {
+          ListUser.delete({listUserId: lu.id }, function(out) {
             // Close existing alert
             alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
-            scope.users = ListUsers.get({listId: scope.list.id});
+            scope.users = ListUser.query({'list': scope.list.id});
+          });
+        });
+      };
+
+      scope.approveUser = function (lu) {
+        var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+          lu.pending = false;
+          lu.$save(function (listuser, response) {
+            alert.closeConfirm();
+            alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
+          });
+        });
+      };
+
+      scope.promoteManager = function (lu) {
+        var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+          lu.role = 'manager';
+          lu.$save(function (listuser, response) {
+            alert.closeConfirm();
+            alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
+          });
+        });
+      };
+
+      scope.demoteManager = function (lu) {
+        var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+          lu.role = 'member';
+          lu.$save(function (listuser, response) {
+            alert.closeConfirm();
+            alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
           });
         });
       };
@@ -252,7 +282,13 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
 
 userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
   $scope.request = $routeParams;
-  $scope.users = User.query($routeParams);
+  $scope.listusers = [];
+  $scope.users = User.query($routeParams, function () {
+    angular.forEach($scope.users, function (val, key) {
+      this.push({user: val});
+    }, $scope.listusers);
+    $scope.users = $scope.listusers;
+  });
   $scope.filters = {};
 
   $scope.filter = function() {

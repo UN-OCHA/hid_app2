@@ -1,20 +1,22 @@
 <div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
-  <h2 translate>Add new member</h2>
-  <form ng-submit="addMemberToList()">
-    <div class="form-group">
-      <label for="user" translate>New Member</label>
-      <ui-select ng-model="usersAdded.users" multiple name="member" theme="bootstrap" style="min-width: 300px;">
-        <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
-        <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers">
-          {{person.name}}
-        </ui-select-choices>
-      </ui-select>
-    </div>
-    <button type="submit" class="btn btn-primary" translate>Add Member</button>
-  </form>
+  <div ng-if="isManager || isOwner || currentUser.is_admin">
+    <h2 translate>Add new member</h2>
+    <form ng-submit="addMemberToList()">
+      <div class="form-group">
+        <label for="user" translate>New Member</label>
+        <ui-select ng-model="usersAdded.users" multiple name="member" theme="bootstrap" style="min-width: 300px;">
+          <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
+          <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers">
+            {{person.name}}
+          </ui-select-choices>
+        </ui-select>
+      </div>
+      <button type="submit" class="btn btn-primary" translate>Add Member</button>
+    </form>
 
-  <h2 translate>List Settings</h2>
-  <a class="btn btn-primary" href="lists/{{list.id}}/edit" translate>Edit List Settings</a>
+    <h2 translate>List Settings</h2>
+    <a class="btn btn-primary" href="lists/{{list.id}}/edit" translate>Edit List Settings</a>
+  </div>
 
   <div ng-if="(list.joinability == 'public' || list.joinability == 'moderated') && !isMember">
     <h2 translate>Check in</h2>

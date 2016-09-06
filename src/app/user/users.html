@@ -21,16 +21,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="user in users">
-        <td><a ng-href="/users/{{user.id}}">{{user.name}}</a></td>
-        <td>{{user.job_title}}</td>
-        <td>{{user.organization.name}}</td>
+      <tr ng-repeat="lu in users">
+        <td><a ng-href="/users/{{lu.user.id}}">{{lu.user.name}}</a> <span class="label label-default" ng-if="list.owner.id == lu.user.id" translate>Owner</span> <span class="label label-warning" ng-if="lu.pending" translate>Pending</span><span class="label label-primary" ng-if="lu.role == 'manager'" translate>Manager</span></td>
+        <td>{{lu.user.job_title}}</td>
+        <td>{{lu.user.organization.name}}</td>
         <td>
           <div uib-dropdown>
             <button type="button" class="btn btn-default" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
             <ul class="dropdown-menu" uib-dropdown-menu>
               <li><a href>Just to test...</a></li>
-              <li ng-if="list"><a href ng-click="removeFromList(user);">Remove from list</a></li>
+              <li ng-if="list && lu.role == 'manager'"><a href ng-click="demoteManager(lu);">Demote from Manager</a></li>
+              <li ng-if="list && lu.role != 'manager'"><a href ng-click="promoteManager(lu);">Promote to Manager</a></li>
+              <li ng-if="list && lu.pending"><a href ng-click="approveUser(lu);">Approve user</a></li>
+              <li ng-if="list"><a href ng-click="removeFromList(lu);">Remove from list</a></li>
             </ul>
           </div>
         </td>

@@ -16,14 +16,6 @@ listServices.factory('List', ['$resource', 'config',
   }
 ]);
 
-listServices.factory('ListUsers', ['$resource', 'config',
-  function ($resource, config) {
-    return $resource(config.apiUrl + 'lists/:listId/users/:userId', {listId: '@listId', userId: '@userId'}, {
-      'get': {method: 'GET', isArray: true}
-    });
-  }
-]); 
-
 listServices.factory('ListUser', ['$resource', 'config',
   function ($resource, config) {
     return $resource(config.apiUrl + 'listusers/:listUserId', {listUserId: '@id'});
@@ -32,20 +24,25 @@ listServices.factory('ListUser', ['$resource', 'config',
 
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', 'List', 'ListUser', 'ListUsers', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, List, ListUser, ListUsers, User, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', 'List', 'ListUser', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, List, ListUser, User, alertService, gettextCatalog) {
   $scope.isMember = false;
+  $scope.isManager = false;
   if ($routeParams.listId) {
     $scope.list = List.get($routeParams, function () {
-      if (angular.equals($scope.list.owner.id, $scope.currentUser.id)) {
-        $scope.setAdminAvailable(true);
-      }
+      $scope.setAdminAvailable(true);
       $scope.isMember = $scope.list.isMember($scope.currentUser);
       $scope.checkinUser = new ListUser({
         list: $scope.list.id,
         user: $scope.currentUser.id
       });
     });
-    $scope.users = ListUsers.get($routeParams);
+    $scope.users = ListUser.query({'list': $routeParams.listId}, function () {
+      angular.forEach($scope.users, function (val, key) {
+        if (val.user.id == $scope.currentUser.id && val.role == 'manager') {
+          $scope.isManager = true;
+        }
+      });
+    });
   }
   else {
     $scope.list = new List();
@@ -74,11 +71,10 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     angular.forEach($scope.usersAdded.users, function (value, key) {
       var listUser = new ListUser({
         list: $scope.list.id,
-        user: value,
-        test: 'hello'
+        user: value
       });
       listUser.$save(function(out) {
-        $scope.users = ListUsers.get($routeParams);
+        $scope.users = ListUser.query({'list': $routeParams.listId});
       });
     });
   };
@@ -86,7 +82,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.checkIn = function () {
     $scope.checkinUser.$save(function (out) {
       alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
-      $scope.users = ListUsers.get($routeParams);
+      $scope.users = ListUser.query({'list': $routeParams.listId});
     });
   };
 
@@ -96,7 +92,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         // Close existing alert
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
-        $scope.users = ListUsers.get($routeParams);
+        $scope.users = ListUser.query({'list': $routeParams.listId});
       });
     });
   };
