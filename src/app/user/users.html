@@ -29,11 +29,12 @@
           <div uib-dropdown>
             <button type="button" class="btn btn-default" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
             <ul class="dropdown-menu" uib-dropdown-menu>
-              <li><a href>Just to test...</a></li>
-              <li ng-if="list && lu.role == 'manager'"><a href ng-click="demoteManager(lu);">Demote from Manager</a></li>
-              <li ng-if="list && lu.role != 'manager'"><a href ng-click="promoteManager(lu);">Promote to Manager</a></li>
-              <li ng-if="list && lu.pending"><a href ng-click="approveUser(lu);">Approve user</a></li>
-              <li ng-if="list"><a href ng-click="removeFromList(lu);">Remove from list</a></li>
+              <li><a href>Check into List</a></li>
+              <li ng-if="list && lu.role == 'manager' && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="demoteManager(lu);">Demote from Manager</a></li>
+              <li ng-if="list && lu.role != 'manager' && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="promoteManager(lu);">Promote to Manager</a></li>
+              <li ng-if="list && lu.pending && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="approveUser(lu);">Approve user</a></li>
+              <li ng-if="list && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="removeFromList(lu);">Remove from list</a></li>
+              <li ng-if="currentUser.is_admin"><a href>Delete Account</a></li>
             </ul>
           </div>
         </td>

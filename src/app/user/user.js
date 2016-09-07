@@ -6,9 +6,18 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
     templateUrl: 'app/user/users.html',
     scope: {
       users: '=',
-      list: '='
+      list: '=',
+      currentUser: '='
     },
     link: function (scope, elem, attrs) {
+      scope.isManager = false;
+      if (scope.list) {
+        angular.forEach(scope.users, function (val, key) {
+          if (val.user.id == scope.currentUser.id && val.role == 'manager') {
+            scope.isManager = true;
+          }
+        });
+      }
       scope.filters = $location.search();
       scope.filter = function() {
         if (scope.filters.verified === false) {
@@ -82,6 +91,7 @@ userServices.factory('User', ['$resource', 'config',
 var userControllers = angular.module('userControllers', []);
 
 userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'alertService', 'md5', 'config', 'User', 'List', function($scope, $routeParams, $http, $window, alertService, md5, config, User, List) {
+  $scope.setAdminAvailable(true);
   $scope.newEmail = {
     type: '',
     email: ''

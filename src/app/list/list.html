@@ -15,7 +15,12 @@
     </form>
 
     <h2 translate>List Settings</h2>
-    <a class="btn btn-primary" href="lists/{{list.id}}/edit" translate>Edit List Settings</a>
+    <div>
+      <a class="btn btn-primary" href="lists/{{list.id}}/edit" translate>Edit List Settings</a>
+    </div>
+    <div>
+      <a class="btn btn-danger" ng-click="deleteList();" translate>Delete List</a>
+    </div>
   </div>
 
   <div ng-if="(list.joinability == 'public' || list.joinability == 'moderated') && !isMember">
@@ -34,9 +39,24 @@
     <h2 translate>Check out</h2>
     <button type="submit" class="btn btn-primary" ng-click="checkOut();" translate>Check out</button>
   </div>
+  
+  <h2 translate>Export</h2>
+  <div>
+    <a class="btn btn-primary">Copy Email Addresses</a>
+  </div>
+  <div>
+    <a class="btn btn-primary">View PDF</a>
+  </div>
+  <div>
+    <a class="btn btn-primary">Meeting Attendance</a>
+  </div>
+  <div>
+    <a class="btn btn-primary">Export Results</a>
+  </div>
+  
 </div>
 
 <div id="page-content-wrapper">
   <h2>{{list.name}}</h2>
-  <hid-users users="users" list="list"></hid-users>
+  <hid-users users="users" list="list" current-user="currentUser"></hid-users>
 </div>

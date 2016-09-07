@@ -97,6 +97,16 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     });
   };
 
+  $scope.deleteList = function() {
+    var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      $scope.list.$delete(function (out) {
+        alert.closeConfirm();
+        alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'));
+        $location.path('/lists');
+      });
+    });
+  };
+
 
 }]);
 

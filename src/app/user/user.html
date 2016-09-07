@@ -1,159 +1,154 @@
-<div class="row">
-  <form editable-form name="profileForm" onaftersave="saveUser()">
-    <div class="col-xs-3">
-      <img ng-src="{{gravatarUrl}}" class="img-responsive img-rounded center-block" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
-    </div>
-    <div class="col-xs-7">
-      <h2><span ng-show="user.verified && !profileForm.$visible"><i class="fa fa-check-circle"></i></span> <span editable-text="user.given_name">{{user.given_name}}</span> <span editable-text="user.family_name">{{user.family_name}}</span></h2>
-      <div ng-show="profileForm.$visible"><div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div></div>
-      <p editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</p>
-      <p>User cluster</p>
-      <p>{{user.location.country.name}}</p>
-      <p ng-if="user.verified_by"><span translate>Verified by</span>: <a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
-      <p editable-textarea="user.status" e-rows="7" e-cols="40">{{user.status}}</p>
-    </div>
-    <div class="col-xs-2 text-right" ng-show="canEditUser">
-      <button type="button" class="btn btn-default" ng-click="profileForm.$show()" ng-show="!profileForm.$visible"><i class="fa fa-pencil"></i></button>
-      <div ng-show="profileForm.$visible">
-        <button type="submit" class="btn btn-success" ng-disabled="profileForm.$waiting"><i class="fa fa-check"></i></button>
-        <button type="button" class="btn btn-danger" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()"><i class="fa fa-times"></i></button>
-      </div>
-    </div>
-  </form>
-</div>
-
-<div class="row">
-  <form editable-form name="contactForm" onaftersave="saveUser()">
-    <div class="panel panel-default">
-      <div class="clearfix">
-        <div class="col-xs-8">
-          <h3 translate>Contact Information</h3>
-        </div>
-        <div class="col-xs-4 text-right" ng-show="canEditUser">
-          <button type="button" class="btn btn-default" ng-click="contactForm.$show()" ng-show="!contactForm.$visible"><i class="fa fa-pencil"></i></button>
-          <div ng-show="contactForm.$visible">
-            <button type="submit" class="btn btn-success" ng-disabled="contactForm.$waiting"><i class="fa fa-check"></i></button>
-            <button type="button" class="btn btn-danger" ng-disabled="contactForm.$waiting" ng-click="contactForm.$cancel()"><i class="fa fa-times"></i></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel-body">
-        <h4><span translate>Phone</span> <i class="fa fa-star"></i></h4>
-        <span editable-select="user.phone_number_type" e-ng-options="t.value as t.name for t in phoneNumberTypes">{{user.phone_number_type}}</span>: <a editable-tel="user.phone_number" ng-href="tel:{{user.phone_number}}">{{user.phone_number}}</a>
-        <h4 ng-show="(user.phone_numbers && user.phone_numbers.length) || contactForm.$visible" translate>Other phone numbers</h4>
-        <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('phone_numbers')"><i class="fa fa-plus"></i></button> <span translate>Add a new phone number</span></span>
-        <div ng-repeat="phone in user.phone_numbers">
-          <span editable-select="phone.type" e-ng-options="t.value as t.name for t in phoneNumberTypes">{{phone.type}}</span>: <a editable-tel="phone.number" ng-href="tel:{{phone.number}}">{{phone.number}}</a><button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('phone_numbers', $index)"><i class="fa fa-times"></i></button>
-        </div>
-        <h4><span translate>Email</span> <i class="fa fa-star"></i></h4>
-        <span><a editable-email="user.email" ng-href="mailto:{{user.email}}">{{user.email}}</a></span>
-        <h4 ng-show="(user.emails && user.emails.length) || contactForm.$visible" translate>Other Emails</h4>
-        <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('emails')"><i class="fa fa-plus"></i></button> <span translate>Add a new email</span></span>
-        <div ng-repeat="email in user.emails">
-          <span editable-select="email.type" e-ng-options="t.value as t.name for t in emailTypes">{{email.type}}</span>: <a editable-email="email.email" ng-href="mailto:{{email.email}}">{{email.email}}</a><button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('emails', $index)"><i class="fa fa-times"></i></button>
-        </div>
-        <h4 ng-show="contactForm.$visible" translate>Social Networks</h4>
-        <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('voips')"><i class="fa fa-plus"></i></button> <span translate>Add a new Social Network</span></span>
-        <div ng-repeat="voip in user.voips">
-          <h4 editable-select="voip.type" e-ng-options="t.value as t.name for t in voipTypes">{{voip.type}}</h4>
-          <span editable-text="voip.username">{{voip.username}}</span>
-          <button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('voips', $index)"><i class="fa fa-times"></i></button>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
-
-<div class="row">
-  <form editable-form name="roleForm" onaftersave="saveUser()">
-    <div class="panel panel-default">
-      <div class="clearfix">
-        <div class="col-xs-8">
-          <h3 translate>Role Details</h3>
-      </div>
-      <div class="col-xs-4 text-right" ng-show="canEditUser">
-        <button type="button" class="btn btn-default" ng-click="roleForm.$show()" ng-show="!roleForm.$visible"><i class="fa fa-pencil"></i></button>
-        <div ng-show="roleForm.$visible">
-          <button type="submit" class="btn btn-success" ng-disabled="roleForm.$waiting"><i class="fa fa-check"></i></button>
-          <button type="button" class="btn btn-danger" ng-disabled="roleForm.$waiting" ng-click="roleForm.$cancel()"><i class="fa fa-times"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel-body">
-      <h4><span translate>Organization</span> <i class="fa fa-star"></i></h4>
-      <span editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</span>
-      <h4 ng-show="(user.organizations && user.organizations.length) || roleForm.$visible" translate>Other organizations</h4>
-      <span ng-show="roleForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('organizations')"><i class="fa fa-plus"></i></button> <span translate>Add a new Organization</span></span>
-      <div ng-repeat="organization in user.organizations">
-        <span editable-text="organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)" onbeforesave="setOrganization($data, $index)">{{organization.name}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('organizations', $index)"><i class="fa fa-times"></i></button>
-      </div>
-      <h4 translate>Roles</h4>
-      <div editable-ui-select="user.roles" edit-disabled="!currentUser.is_admin" e-multiple onshow="getRoles()" data-e-form="roleForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
-        <span ng-repeat="role in user.roles">{{role.label}} &nbsp;</span>
-        <editable-ui-select-match placeholder="Roles">
-          {{$item.label}}
-        </editable-ui-select-match>
-        <editable-ui-select-choices repeat="role in roles">
-          {{role.label}}
-        </editable-ui-select-choices>
-      </div>
-      <h4><span translate>Job title</span> <i class="fa fa-star"></i></h4>
-      <span editable-text="user.job_title">{{user.job_title}}</span>
-      <h4 ng-show="(user.job_titles && user.job_titles.length) || roleForm.$visible" translate>Other job titles</h4>
-      <span ng-show="roleForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('job_titles')"><i class="fa fa-plus"></i></button> <span translate>Add a new Job Title</span></span>
-      <div ng-repeat="job_title in user.job_titles">
-        <span editable-text="job_title">{{job_title}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('job_titles', $index)"><i class="fa fa-times"></i></button>
-      </div>
-      <h4 translate>Permissions</h4>
-      <div ng-show="roleForm.$visible"><div edit-disabled="!currentUser.is_admin" editable-checkbox="user.is_admin" e-title="{{'Administrator'|translate}}"></div></div>
-      <span ng-if="user.is_admin && !roleForm.$visible" translate>Administrator</span>
-    </div>
+<div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
+  <div>
+    <a class="btn btn-primary">Check into List</a>
   </div>
-  </form>
+  <div>
+    <a class="btn btn-primary">Export Contact Info</a>
+  </div>
+  <div>
+    <a class="btn btn-primary">Send Claim Email</a>
+  </div>
+  <div>
+    <a class="btn btn-primary">Report a Problem</a>
+  </div>
 </div>
 
-<div class="row">
-  <form editable-form name="locationForm" onaftersave="saveUser()">
-    <div class="panel panel-default">
-      <div class="clearfix">
-        <div class="col-xs-8">
-          <h3 translate>Locations</h3>
+<div id="page-content-wrapper">
+  <div class="row">
+    <form editable-form name="profileForm" onaftersave="saveUser()">
+      <div class="col-xs-3">
+        <img ng-src="{{gravatarUrl}}" class="img-responsive img-rounded center-block" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
+      </div>
+      <div class="col-xs-7">
+        <h2><span ng-show="user.verified && !profileForm.$visible"><i class="fa fa-check-circle"></i></span> <span editable-text="user.given_name">{{user.given_name}}</span> <span editable-text="user.family_name">{{user.family_name}}</span></h2>
+        <div ng-show="profileForm.$visible"><div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div></div>
+        <p editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</p>
+        <p>User cluster</p>
+        <p>{{user.location.country.name}}</p>
+        <p ng-if="user.verified_by"><span translate>Verified by</span>: <a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
+        <p editable-textarea="user.status" e-rows="7" e-cols="40">{{user.status}}</p>
+      </div>
+      <div class="col-xs-2 text-right" ng-show="canEditUser">
+        <button type="button" class="btn btn-default" ng-click="profileForm.$show()" ng-show="!profileForm.$visible"><i class="fa fa-pencil"></i></button>
+        <div ng-show="profileForm.$visible">
+          <button type="submit" class="btn btn-success" ng-disabled="profileForm.$waiting"><i class="fa fa-check"></i></button>
+          <button type="button" class="btn btn-danger" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()"><i class="fa fa-times"></i></button>
         </div>
-        <div class="col-xs-4 text-right" ng-show="canEditUser">
-          <button type="button" class="btn btn-default" ng-click="locationForm.$show()" ng-show="!locationForm.$visible"><i class="fa fa-pencil"></i></button>
-          <div ng-show="locationForm.$visible">
-            <button type="submit" class="btn btn-success" ng-disabled="locationForm.$waiting"><i class="fa fa-check"></i></button>
-            <button type="button" class="btn btn-danger" ng-disabled="locationForm.$waiting" ng-click="locationForm.$cancel()"><i class="fa fa-times"></i></button>
+      </div>
+    </form>
+  </div>
+
+  <div class="row">
+    <form editable-form name="contactForm" onaftersave="saveUser()">
+      <div class="panel panel-default">
+        <div class="clearfix">
+          <div class="col-xs-8">
+            <h3 translate>Contact Information</h3>
+          </div>
+          <div class="col-xs-4 text-right" ng-show="canEditUser">
+            <button type="button" class="btn btn-default" ng-click="contactForm.$show()" ng-show="!contactForm.$visible"><i class="fa fa-pencil"></i></button>
+            <div ng-show="contactForm.$visible">
+              <button type="submit" class="btn btn-success" ng-disabled="contactForm.$waiting"><i class="fa fa-check"></i></button>
+              <button type="button" class="btn btn-danger" ng-disabled="contactForm.$waiting" ng-click="contactForm.$cancel()"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <h4><span translate>Phone</span> <i class="fa fa-star"></i></h4>
+          <span editable-select="user.phone_number_type" e-ng-options="t.value as t.name for t in phoneNumberTypes">{{user.phone_number_type}}</span>: <a editable-tel="user.phone_number" ng-href="tel:{{user.phone_number}}">{{user.phone_number}}</a>
+          <h4 ng-show="(user.phone_numbers && user.phone_numbers.length) || contactForm.$visible" translate>Other phone numbers</h4>
+          <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('phone_numbers')"><i class="fa fa-plus"></i></button> <span translate>Add a new phone number</span></span>
+          <div ng-repeat="phone in user.phone_numbers">
+            <span editable-select="phone.type" e-ng-options="t.value as t.name for t in phoneNumberTypes">{{phone.type}}</span>: <a editable-tel="phone.number" ng-href="tel:{{phone.number}}">{{phone.number}}</a><button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('phone_numbers', $index)"><i class="fa fa-times"></i></button>
+          </div>
+          <h4><span translate>Email</span> <i class="fa fa-star"></i></h4>
+          <span><a editable-email="user.email" ng-href="mailto:{{user.email}}">{{user.email}}</a></span>
+          <h4 ng-show="(user.emails && user.emails.length) || contactForm.$visible" translate>Other Emails</h4>
+          <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('emails')"><i class="fa fa-plus"></i></button> <span translate>Add a new email</span></span>
+          <div ng-repeat="email in user.emails">
+            <span editable-select="email.type" e-ng-options="t.value as t.name for t in emailTypes">{{email.type}}</span>: <a editable-email="email.email" ng-href="mailto:{{email.email}}">{{email.email}}</a><button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('emails', $index)"><i class="fa fa-times"></i></button>
+          </div>
+          <h4 ng-show="contactForm.$visible" translate>Social Networks</h4>
+          <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('voips')"><i class="fa fa-plus"></i></button> <span translate>Add a new Social Network</span></span>
+          <div ng-repeat="voip in user.voips">
+            <h4 editable-select="voip.type" e-ng-options="t.value as t.name for t in voipTypes">{{voip.type}}</h4>
+            <span editable-text="voip.username">{{voip.username}}</span>
+            <button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('voips', $index)"><i class="fa fa-times"></i></button>
           </div>
         </div>
       </div>
+    </form>
+  </div>
+
+  <div class="row">
+    <form editable-form name="roleForm" onaftersave="saveUser()">
+      <div class="panel panel-default">
+        <div class="clearfix">
+          <div class="col-xs-8">
+            <h3 translate>Role Details</h3>
+        </div>
+        <div class="col-xs-4 text-right" ng-show="canEditUser">
+          <button type="button" class="btn btn-default" ng-click="roleForm.$show()" ng-show="!roleForm.$visible"><i class="fa fa-pencil"></i></button>
+          <div ng-show="roleForm.$visible">
+            <button type="submit" class="btn btn-success" ng-disabled="roleForm.$waiting"><i class="fa fa-check"></i></button>
+            <button type="button" class="btn btn-danger" ng-disabled="roleForm.$waiting" ng-click="roleForm.$cancel()"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+
       <div class="panel-body">
-        <h4><span translate>Current Location</span> <i class="fa fa-star"></i></h4>
-        <div editable-ui-select="user.location.country" data-e-form="locationForm" data-e-name="country" name="country" theme="bootstrap" e-on-select="setRegions($item, $model)" data-e-ng-model="user.location.country" data-e-style="min-width:300px;">
-          {{user.location.country.name}}
-          <editable-ui-select-match placeholder="{{'Country'|translate}}">
-              {{$select.selected.name}}
+        <h4><span translate>Organization</span> <i class="fa fa-star"></i></h4>
+        <span editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</span>
+        <h4 ng-show="(user.organizations && user.organizations.length) || roleForm.$visible" translate>Other organizations</h4>
+        <span ng-show="roleForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('organizations')"><i class="fa fa-plus"></i></button> <span translate>Add a new Organization</span></span>
+        <div ng-repeat="organization in user.organizations">
+          <span editable-text="organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)" onbeforesave="setOrganization($data, $index)">{{organization.name}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('organizations', $index)"><i class="fa fa-times"></i></button>
+        </div>
+        <h4 translate>Roles</h4>
+        <div editable-ui-select="user.roles" edit-disabled="!currentUser.is_admin" e-multiple onshow="getRoles()" data-e-form="roleForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
+          <span ng-repeat="role in user.roles">{{role.label}} &nbsp;</span>
+          <editable-ui-select-match placeholder="Roles">
+            {{$item.label}}
           </editable-ui-select-match>
-          <editable-ui-select-choices repeat="country in countries | filter: $select.search track by $index">
-            {{country.name}}
+          <editable-ui-select-choices repeat="role in roles">
+            {{role.label}}
           </editable-ui-select-choices>
         </div>
-        <div editable-ui-select="user.location.region" data-e-form="locationForm" data-e-name="region" name="region" theme="bootstrap" data-e-ng-model="user.location.region" data-e-style="min-width: 300px;">
-          {{user.location.region.name}}
-          <editable-ui-select-match placeholder="{{'Region'|translate}}">
-            {{$select.selected.name}}
-          </editable-ui-select-match>
-          <editable-ui-select-choices repeat="region in regions | filter: $select.search track by $index">
-            {{region.name}}
-          </editable-ui-select-choices>
+        <h4><span translate>Job title</span> <i class="fa fa-star"></i></h4>
+        <span editable-text="user.job_title">{{user.job_title}}</span>
+        <h4 ng-show="(user.job_titles && user.job_titles.length) || roleForm.$visible" translate>Other job titles</h4>
+        <span ng-show="roleForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('job_titles')"><i class="fa fa-plus"></i></button> <span translate>Add a new Job Title</span></span>
+        <div ng-repeat="job_title in user.job_titles">
+          <span editable-text="job_title">{{job_title}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('job_titles', $index)"><i class="fa fa-times"></i></button>
         </div>
-        <h4 translate>Other locations</h4>
-        <span ng-show="locationForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('locations')"><i class="fa fa-plus"></i></button> <span translate>Add a new Location</span></span>
-        <div ng-repeat="location in user.locations">
-          <div editable-ui-select="location.country" data-e-form="locationForm" data-e-name="country[$index]" name="country[$index]" theme="bootstrap" e-on-select="setRegions($item, $model)" data-e-ng-model="location.country" data-e-style="min-width:300px;">
-            {{location.country.name}}
+        <h4 translate>Permissions</h4>
+        <div ng-show="roleForm.$visible"><div edit-disabled="!currentUser.is_admin" editable-checkbox="user.is_admin" e-title="{{'Administrator'|translate}}"></div></div>
+        <span ng-if="user.is_admin && !roleForm.$visible" translate>Administrator</span>
+      </div>
+    </div>
+    </form>
+  </div>
+
+  <div class="row">
+    <form editable-form name="locationForm" onaftersave="saveUser()">
+      <div class="panel panel-default">
+        <div class="clearfix">
+          <div class="col-xs-8">
+            <h3 translate>Locations</h3>
+          </div>
+          <div class="col-xs-4 text-right" ng-show="canEditUser">
+            <button type="button" class="btn btn-default" ng-click="locationForm.$show()" ng-show="!locationForm.$visible"><i class="fa fa-pencil"></i></button>
+            <div ng-show="locationForm.$visible">
+              <button type="submit" class="btn btn-success" ng-disabled="locationForm.$waiting"><i class="fa fa-check"></i></button>
+              <button type="button" class="btn btn-danger" ng-disabled="locationForm.$waiting" ng-click="locationForm.$cancel()"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <h4><span translate>Current Location</span> <i class="fa fa-star"></i></h4>
+          <div editable-ui-select="user.location.country" data-e-form="locationForm" data-e-name="country" name="country" theme="bootstrap" e-on-select="setRegions($item, $model)" data-e-ng-model="user.location.country" data-e-style="min-width:300px;">
+            {{user.location.country.name}}
             <editable-ui-select-match placeholder="{{'Country'|translate}}">
               {{$select.selected.name}}
             </editable-ui-select-match>
@@ -161,8 +156,8 @@
               {{country.name}}
             </editable-ui-select-choices>
           </div>
-          <div editable-ui-select="location.region" data-e-form="locationForm" data-e-name="region[$index]" name="region[$index]" theme="bootstrap" data-e-ng-model="location.region" data-e-style="min-width: 300px;">
-            {{location.region.name}}
+          <div editable-ui-select="user.location.region" data-e-form="locationForm" data-e-name="region" name="region" theme="bootstrap" data-e-ng-model="user.location.region" data-e-style="min-width: 300px;">
+            {{user.location.region.name}}
             <editable-ui-select-match placeholder="{{'Region'|translate}}">
               {{$select.selected.name}}
             </editable-ui-select-match>
@@ -170,48 +165,70 @@
               {{region.name}}
             </editable-ui-select-choices>
           </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
-
-<div class="row">
-  <form editable-form name="additionalForm" onaftersave="saveUser()">
-    <div class="panel panel-default">
-      <div class="clearfix">
-        <div class="col-xs-8">
-          <h3 translate>Additional Information</h3>
-        </div>
-        <div class="col-xs-4 text-right" ng-show="canEditUser">
-          <button type="button" class="btn btn-default" ng-click="additionalForm.$show()" ng-show="!additionalForm.$visible"><i class="fa fa-pencil"></i></button>
-          <div ng-show="additionalForm.$visible">
-            <button type="submit" class="btn btn-success" ng-disabled="additionalForm.$waiting"><i class="fa fa-check"></i></button>
-            <button type="button" class="btn btn-danger" ng-disabled="additionalForm.$waiting" ng-click="additionalForm.$cancel()"><i class="fa fa-times"></i></button>
+          <h4 translate>Other locations</h4>
+          <span ng-show="locationForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('locations')"><i class="fa fa-plus"></i></button> <span translate>Add a new Location</span></span>
+          <div ng-repeat="location in user.locations">
+            <div editable-ui-select="location.country" data-e-form="locationForm" data-e-name="country[$index]" name="country[$index]" theme="bootstrap" e-on-select="setRegions($item, $model)" data-e-ng-model="location.country" data-e-style="min-width:300px;">
+              {{location.country.name}}
+              <editable-ui-select-match placeholder="{{'Country'|translate}}">
+                {{$select.selected.name}}
+              </editable-ui-select-match>
+              <editable-ui-select-choices repeat="country in countries | filter: $select.search track by $index">
+                {{country.name}}
+              </editable-ui-select-choices>
+            </div>
+            <div editable-ui-select="location.region" data-e-form="locationForm" data-e-name="region[$index]" name="region[$index]" theme="bootstrap" data-e-ng-model="location.region" data-e-style="min-width: 300px;">
+              {{location.region.name}}
+              <editable-ui-select-match placeholder="{{'Region'|translate}}">
+                {{$select.selected.name}}
+              </editable-ui-select-match>
+              <editable-ui-select-choices repeat="region in regions | filter: $select.search track by $index">
+                {{region.name}}
+              </editable-ui-select-choices>
+            </div>
           </div>
         </div>
       </div>
-      <div class="panel-body">
-        <h4 ng-show="(user.websites && user.websites.length) || additionalForm.$visible" translate>Websites</h4>
-        <span ng-show="additionalForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('websites')"><i class="fa fa-plus"></i></button> <span translate>Add a new Website</span></span>
-        <div ng-repeat="website in user.websites">
-          <a ng-href="{{website.url}}" editable-url="website.url" target="_blank">{{website.url}}</a><button type="button" class="btn btn-default" ng-show="additionalForm.$visible" ng-click="dropItem('websites', $index)"><i class="fa fa-times"></i></button>
-        </div>
-        <h4 translate>Last Updated</h4>
-        <span>{{user.updatedAt.toLocaleString()}}</span>
-        <h4 translate>Created</h4>
-        <span>{{user.createdAt.toLocaleString()}}</span>
-      </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 
-<div class="admin-icon dropup" uib-dropdown>
-  <span class="fa-stack fa-3x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false">
-    <i class="fa fa-circle fa-stack-2x admin-background"></i>
-    <i class="fa fa-ellipsis-v fa-stack-1x"></i>
-  </span>
-  <ul class="dropdown-menu" uib-dropdown-menu>
-    <li><a href="#">Add to list</a></li>
-  </ul>
+  <div class="row">
+    <form editable-form name="additionalForm" onaftersave="saveUser()">
+      <div class="panel panel-default">
+        <div class="clearfix">
+          <div class="col-xs-8">
+            <h3 translate>Additional Information</h3>
+          </div>
+          <div class="col-xs-4 text-right" ng-show="canEditUser">
+            <button type="button" class="btn btn-default" ng-click="additionalForm.$show()" ng-show="!additionalForm.$visible"><i class="fa fa-pencil"></i></button>
+            <div ng-show="additionalForm.$visible">
+              <button type="submit" class="btn btn-success" ng-disabled="additionalForm.$waiting"><i class="fa fa-check"></i></button>
+              <button type="button" class="btn btn-danger" ng-disabled="additionalForm.$waiting" ng-click="additionalForm.$cancel()"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <h4 ng-show="(user.websites && user.websites.length) || additionalForm.$visible" translate>Websites</h4>
+          <span ng-show="additionalForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('websites')"><i class="fa fa-plus"></i></button> <span translate>Add a new Website</span></span>
+          <div ng-repeat="website in user.websites">
+            <a ng-href="{{website.url}}" editable-url="website.url" target="_blank">{{website.url}}</a><button type="button" class="btn btn-default" ng-show="additionalForm.$visible" ng-click="dropItem('websites', $index)"><i class="fa fa-times"></i></button>
+          </div>
+          <h4 translate>Last Updated</h4>
+          <span>{{user.updatedAt.toLocaleString()}}</span>
+          <h4 translate>Created</h4>
+          <span>{{user.createdAt.toLocaleString()}}</span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- <div class="admin-icon dropup" uib-dropdown>
+    <span class="fa-stack fa-3x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-circle fa-stack-2x admin-background"></i>
+      <i class="fa fa-ellipsis-v fa-stack-1x"></i>
+    </span>
+    <ul class="dropdown-menu" uib-dropdown-menu>
+      <li><a href="#">Add to list</a></li>
+    </ul>
+  </div> -->
 </div>
