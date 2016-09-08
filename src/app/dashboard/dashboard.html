@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-  <h2>HID Dashboard</h2>
+  <h2 translate>Dashboard</h2>
   <div class="col-sm-9">
     <uib-tabset active="activeJustified" justified="true">
       <uib-tab index="0" heading="My Favorite Lists">Favorite Lists</uib-tab>
@@ -28,7 +28,7 @@
   </div>
   <div class="col-sm-3">
     <p>Welcome back <a href="/users/{{currentUser.id}}">{{currentUser.name}}</a></p>
-    <p>Last Update to your profile: {{currentUser.updatedAt.toLocaleString()}}</p>
+    <p><span translate>Last Update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></p>
     <p ng-if="currentUser.verified" translate>Your profile is verified</p>
     <p ng-if="!currentUser.verified" translate>You're not verified yet</p>
   </div>

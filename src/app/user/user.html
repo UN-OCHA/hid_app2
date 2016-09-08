@@ -1,15 +1,15 @@
 <div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
   <div>
-    <a class="btn btn-primary">Check into List</a>
+    <a class="btn btn-primary" translate>Check into List</a>
   </div>
   <div>
-    <a class="btn btn-primary">Export Contact Info</a>
+    <a class="btn btn-primary" ng-click="exportVcard();" translate>Export Contact Info</a>
   </div>
   <div>
-    <a class="btn btn-primary">Send Claim Email</a>
+    <a class="btn btn-primary" translate>Send Claim Email</a>
   </div>
   <div>
-    <a class="btn btn-primary">Report a Problem</a>
+    <a class="btn btn-primary" translate>Report a Problem</a>
   </div>
 </div>
 
@@ -214,9 +214,9 @@
             <a ng-href="{{website.url}}" editable-url="website.url" target="_blank">{{website.url}}</a><button type="button" class="btn btn-default" ng-show="additionalForm.$visible" ng-click="dropItem('websites', $index)"><i class="fa fa-times"></i></button>
           </div>
           <h4 translate>Last Updated</h4>
-          <span>{{user.updatedAt.toLocaleString()}}</span>
+          <span ng-bind="user.updatedAt | date:'longDate'"></span>
           <h4 translate>Created</h4>
-          <span>{{user.createdAt.toLocaleString()}}</span>
+          <span ng-bind="user.createdAt | date: 'longDate'"></span>
         </div>
       </div>
     </form>

@@ -12,11 +12,15 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
     link: function (scope, elem, attrs) {
       scope.isManager = false;
       if (scope.list) {
-        angular.forEach(scope.users, function (val, key) {
-          if (val.user.id == scope.currentUser.id && val.role == 'manager') {
-            scope.isManager = true;
+        scope.$watch('users', function (newVal) {
+          if (newVal) {
+            for (var i = 0, len = newVal.length; i < len; i++) {
+              if (newVal[i].user.id == scope.currentUser.id && newVal[i].role == 'manager') {
+                scope.isManager = true;
+              }
+            }
           }
-        });
+        }, true);
       }
       scope.filters = $location.search();
       scope.filter = function() {
@@ -40,7 +44,7 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
           ListUser.delete({listUserId: lu.id }, function(out) {
             // Close existing alert
             alert.closeConfirm();
-            alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
+            alertService.add('success', gettextCatalog.getString('The user was successfully removed.'));
             scope.users = ListUser.query({'list': scope.list.id});
           });
         });
@@ -250,6 +254,43 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
   $scope.setOrganization = function (data, index) {
     $scope.user.organizations[index] = data;
   };
+
+  // Export user details to vcard
+  $scope.exportVcard = function () {
+    var vcard = "BEGIN:VCARD\n" +
+      "VERSION:3.0\n" +
+      "N:" + $scope.user.family_name + ";" + $scope.user.given_name + ";;;\n" +
+      "FN:" + $scope.user.name + "\n";
+    if ($scope.user.organization && $scope.user.organization.name) {
+      vcard += "ORG:" + $scope.user.organization.name + "\n";
+    }
+    if ($scope.user.job_title) {
+      vcard += "TITLE:" + $scope.user.job_title + "\n";
+    }
+    if ($scope.user.phone_number) {
+      vcard += "TEL;";
+      if ($scope.user.phone_number_type) {
+        vcard += "TYPE=" + $scope.user.phone_number_type+",";
+      }
+      vcard += "VOICE:" + $scope.user.phone_number + "\n";
+    }
+    angular.forEach($scope.user.phone_numbers, function (item) {
+      if (item.type && item.number) {
+        vcard += "TEL;TYPE=" + item.type + ",VOICE:" + item.number + "\n";
+      }
+    });
+    if ($scope.user.email) {
+      vcard += "EMAIL:" + $scope.user.email + "\n";
+    }
+    angular.forEach($scope.user.emails, function (item) {
+      if (item.email) {
+        vcard += "EMAIL:" + item.email + "\n";
+      }
+    });
+    vcard += "REV:" + new Date().toISOString() + "\n" +
+      "END:VCARD\n";
+    window.location.href = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent(vcard);
+  }
 
 }]);
 

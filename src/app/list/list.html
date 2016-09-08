@@ -37,12 +37,22 @@
 
   <div ng-if="isMember"> 
     <h2 translate>Check out</h2>
+    <p ng-if="currentListUser && currentListUser.checkoutDate">You will be checked out of this list automatically on <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span></p>
     <button type="submit" class="btn btn-primary" ng-click="checkOut();" translate>Check out</button>
   </div>
   
   <h2 translate>Export</h2>
   <div>
-    <a class="btn btn-primary">Copy Email Addresses</a>
+    <a class="btn btn-primary" ng-click="exportEmails()" translate>Copy Email Addresses</a>
+    <script type="text/ng-template" id="exportEmailsModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title" translate>Copy Email Addresses</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <p><span translate>Please email responsibly. Follow our</span> <a href="https://humanitarian.id/code-of-conduct" target="_blank" translate>Code of conduct</a></p>
+          <textarea rows="15" cols="100">{{emailsText}}</textarea>
+        </div>
+    </script>
   </div>
   <div>
     <a class="btn btn-primary">View PDF</a>

@@ -24,9 +24,11 @@ listServices.factory('ListUser', ['$resource', 'config',
 
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', 'List', 'ListUser', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, List, ListUser, User, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'ListUser', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, ListUser, User, alertService, gettextCatalog) {
   $scope.isMember = false;
   $scope.isManager = false;
+  $scope.isOwner = false;
+  $scope.currentListUser = {};
   if ($routeParams.listId) {
     $scope.list = List.get($routeParams, function () {
       $scope.setAdminAvailable(true);
@@ -35,11 +37,15 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         list: $scope.list.id,
         user: $scope.currentUser.id
       });
+      $scope.isOwner = $scope.list.owner.id == $scope.currentUser.id;
     });
     $scope.users = ListUser.query({'list': $routeParams.listId}, function () {
       angular.forEach($scope.users, function (val, key) {
-        if (val.user.id == $scope.currentUser.id && val.role == 'manager') {
-          $scope.isManager = true;
+        if (val.user.id == $scope.currentUser.id) {
+          $scope.currentListUser = val;
+          if (val.role == 'manager') {
+            $scope.isManager = true;
+          }
         }
       });
     });
@@ -51,12 +57,14 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   }
   $scope.usersAdded = {};
 
+  // Retrieve users
   $scope.getUsers = function(search) {
     var users = User.query({'q': search}, function() {
       $scope.newMembers = users;
     });
   };
 
+  // Save list settings
   $scope.listSave = function() {
     if ($routeParams.listId) {
       delete $scope.list.users;
@@ -66,6 +74,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     });
   };
 
+  // Add users to a list
   $scope.addMemberToList = function() {
     var promises = [];
     angular.forEach($scope.usersAdded.users, function (value, key) {
@@ -79,24 +88,29 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     });
   };
 
+  // Check current user in this list
   $scope.checkIn = function () {
     $scope.checkinUser.$save(function (out) {
       alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
+      $scope.isMember = true;
       $scope.users = ListUser.query({'list': $routeParams.listId});
     });
   };
 
+  // Check current user out of this list
   $scope.checkOut = function () {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      ListUsers.delete({listId: $scope.list.id, userId: $scope.currentUser.id }, function(out) {
+      $scope.currentListUser.$delete(function (out) {
         // Close existing alert
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
+        $scope.isMember = false;
         $scope.users = ListUser.query({'list': $routeParams.listId});
       });
     });
   };
 
+  // Delete list
   $scope.deleteList = function() {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
       $scope.list.$delete(function (out) {
@@ -104,6 +118,33 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'));
         $location.path('/lists');
       });
+    });
+  };
+
+  // Export email addresses
+  $scope.exportEmails = function() {
+    $scope.emailsText = '';
+    for (var i = 0, len = $scope.users.length; i < len; i++) {
+      $scope.emailsText += $scope.users[i].user.name + ' <' + $scope.users[i].user.email + '>';
+      if (i != len - 1) {
+        $scope.emailsText += ', ';
+      }
+    }
+    $uibModal.open({
+      animation: true,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'exportEmailsModal.html',
+      /*controller: function() {
+        var $ctrl = this;
+        $ctrl.emailsText = 'dfsd';
+      },
+      controllerAs: '$ctrl',*/
+      size: 'lg',
+      scope: $scope,
+      /*resolve: {
+        emailsText: () => emailsText,
+      }*/
     });
   };
 
