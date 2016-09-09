@@ -39,6 +39,7 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
           });
       };
 
+      // Remove a user from a list
       scope.removeFromList = function (lu) {
         var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
           ListUser.delete({listUserId: lu.id }, function(out) {
@@ -50,6 +51,7 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
         });
       };
 
+      // Approve a user and remove his pending status
       scope.approveUser = function (lu) {
         var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
           lu.pending = false;
@@ -60,6 +62,7 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
         });
       };
 
+      // Promote a user to manager
       scope.promoteManager = function (lu) {
         var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
           lu.role = 'manager';
@@ -70,12 +73,38 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
         });
       };
 
+      // Demote a user from manager role
       scope.demoteManager = function (lu) {
         var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
           lu.role = 'member';
           lu.$save(function (listuser, response) {
             alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
+          });
+        });
+      };
+
+      // Delete user account
+      scope.deleteUser = function (lu) {
+        var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
+          var user = {}, inlist = false;
+          if (lu.user) {
+            user = lu.user;
+            inlist = true;
+          }
+          else {
+            user = lu;
+          }
+          User.delete({id: user.id}, function (out) {
+            alert.closeConfirm();
+            alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
+            if (inlist) {
+              scope.users = ListUser.query({'list': scope.list.id});
+            }
+            else {
+              scope.users.splice(scope.users.indexOf(user), 1);
+              console.log('hello');
+            }
           });
         });
       };
@@ -91,6 +120,15 @@ userServices.factory('User', ['$resource', 'config',
     return $resource(config.apiUrl + 'users/:userId', {userId: '@id'},
     {
       'save': {
+        method: 'POST',
+        transformRequest: function (data, headersGetter) {
+          delete data.checkins;
+          delete data.lists;
+          delete data.favoriteLists;
+          return angular.toJson(data);
+        }
+      },
+      'update': {
         method: 'PUT',
         transformRequest: function (data, headersGetter) {
           delete data.checkins;
@@ -253,7 +291,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
   ];
 
   $scope.saveUser = function() {
-    $scope.user.$save(function (user, response) {
+    $scope.user.$update(function (user, response) {
       //  Update the currentUser item in localStorage if the current user is the one being saved
       if (user.id == $scope.currentUser.id) {
         $scope.setCurrentUser(user);
@@ -318,7 +356,7 @@ userControllers.controller('UserPrefsCtrl', ['$scope', 'alertService', 'User', f
   $scope.savePassword = function() {
     $scope.user.old_password = $scope.password.old;
     $scope.user.new_password = $scope.password.new;
-    $scope.user.$save(function (user) {
+    $scope.user.$update(function (user) {
      alertService.add('success', 'Your password was successfully changed.');
     }, function (resp) {
       alertService.add('danger', 'There was an error saving your password.');
