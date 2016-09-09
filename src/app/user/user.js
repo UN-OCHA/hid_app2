@@ -88,7 +88,18 @@ var userServices = angular.module('userServices', ['ngResource']);
 
 userServices.factory('User', ['$resource', 'config',
   function($resource, config){
-    return $resource(config.apiUrl + 'users/:userId', {userId: '@id'});
+    return $resource(config.apiUrl + 'users/:userId', {userId: '@id'},
+    {
+      'save': {
+        method: 'PUT',
+        transformRequest: function (data, headersGetter) {
+          delete data.checkins;
+          delete data.lists;
+          delete data.favoriteLists;
+          return angular.toJson(data);
+        }
+      }
+    });
   }
 ]);
 
@@ -245,7 +256,6 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     $scope.user.$save(function (user, response) {
       //  Update the currentUser item in localStorage if the current user is the one being saved
       if (user.id == $scope.currentUser.id) {
-        $window.localStorage.setItem('currentUser', JSON.stringify(user));
         $scope.setCurrentUser(user);
       }
     });

@@ -63,6 +63,7 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', function
 
   $scope.setCurrentUser = function (user) {
     $scope.currentUser = user;
+    $window.localStorage.setItem('currentUser', JSON.stringify(user));
   };
 
   $scope.initCurrentUser = function () {

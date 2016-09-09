@@ -63,6 +63,13 @@
   <div>
     <a class="btn btn-primary">Export Results</a>
   </div>
+
+  <h2>Favorite</h2>
+  <div>
+    <a class="btn btn-primary" ng-click="star()" ng-if="!isFavorite" translate>Star</a>
+    <a class="btn btn-primary" ng-click="unstar()" ng-if="isFavorite" translate>Unstar</a>
+  </div>
+
   
 </div>
 

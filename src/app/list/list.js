@@ -22,13 +22,22 @@ listServices.factory('ListUser', ['$resource', 'config',
   }
 ]);
 
+listServices.factory('FavoriteList', ['$resource', 'config',
+  function ($resource, config) {
+    return $resource(config.apiUrl + 'users/:userId/favoriteLists/:listId', {userId: '@userId', listId: '@listId'});
+  }
+]);
+
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'ListUser', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, ListUser, User, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'ListUser', 'FavoriteList', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, ListUser, FavoriteList, User, alertService, gettextCatalog) {
   $scope.isMember = false;
   $scope.isManager = false;
   $scope.isOwner = false;
+  $scope.isFavorite = false;
   $scope.currentListUser = {};
+  $scope.currentUserResource = User.get({userId: $scope.currentUser.id});
+
   if ($routeParams.listId) {
     $scope.list = List.get($routeParams, function () {
       $scope.setAdminAvailable(true);
@@ -38,6 +47,11 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         user: $scope.currentUser.id
       });
       $scope.isOwner = $scope.list.owner.id == $scope.currentUser.id;
+      angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
+        if (val.id == $scope.list.id) {
+          $scope.isFavorite = true;
+        }
+      });
     });
     $scope.users = ListUser.query({'list': $routeParams.listId}, function () {
       angular.forEach($scope.users, function (val, key) {
@@ -135,16 +149,26 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
       templateUrl: 'exportEmailsModal.html',
-      /*controller: function() {
-        var $ctrl = this;
-        $ctrl.emailsText = 'dfsd';
-      },
-      controllerAs: '$ctrl',*/
       size: 'lg',
       scope: $scope,
-      /*resolve: {
-        emailsText: () => emailsText,
-      }*/
+    });
+  };
+
+  // Star a list as favorite
+  $scope.star = function() {
+    FavoriteList.save({userId: $scope.currentUser.id, listId: $scope.list.id}, function (user) {
+      alertService.add('success', gettextCatalog.getString('This list was successfully added to your favorites.'));
+      $scope.isFavorite = true;
+      $scope.setCurrentUser(user);
+    });
+  };
+
+  // Remove a list from favorites
+  $scope.unstar = function() {
+    FavoriteList.delete({userId: $scope.currentUser.id, listId: $scope.list.id}, function (user) {
+      alertService.add('success', gettextCatalog.getString('This list was successfully removed from your favorites.'));
+      $scope.isFavorite = false;
+      $scope.setCurrentUser(user);
     });
   };
 
