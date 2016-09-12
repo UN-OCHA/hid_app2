@@ -87,13 +87,9 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
       // Delete user account
       scope.deleteUser = function (lu) {
         var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
-          var user = {}, inlist = false;
-          if (lu.user) {
-            user = lu.user;
+          var user = lu.user, inlist = false;
+          if (scope.list) {
             inlist = true;
-          }
-          else {
-            user = lu;
           }
           User.delete({id: user.id}, function (out) {
             alert.closeConfirm();
@@ -103,7 +99,6 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
             }
             else {
               scope.users.splice(scope.users.indexOf(user), 1);
-              console.log('hello');
             }
           });
         });
@@ -342,7 +337,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
 
 }]);
 
-userControllers.controller('UserPrefsCtrl', ['$scope', 'alertService', 'User', function ($scope, alertService, User) {
+userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCatalog', 'AuthService', 'alertService', 'User', function ($scope, $location, gettextCatalog, AuthService, alertService, User) {
 
   $scope.password = {
     old: '',
@@ -353,15 +348,30 @@ userControllers.controller('UserPrefsCtrl', ['$scope', 'alertService', 'User', f
   $scope.user = User.get({userId: $scope.currentUser.id}, function(user) {
   });
 
+  // Set a new password for the current user
   $scope.savePassword = function() {
     $scope.user.old_password = $scope.password.old;
     $scope.user.new_password = $scope.password.new;
     $scope.user.$update(function (user) {
-     alertService.add('success', 'Your password was successfully changed.');
+     alertService.add('success', gettextCatalog.getString('Your password was successfully changed.'));
     }, function (resp) {
-      alertService.add('danger', 'There was an error saving your password.');
+      alertService.add('danger', gettextCatalog.getString('There was an error saving your password.'));
     });
   };
+
+  // Delete current user account
+  $scope.deleteAccount = function (lu) {
+    var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore.'), true, function() {
+      User.delete({id: $scope.user.id}, function (out) {
+        alert.closeConfirm();
+        alertService.add('success', gettextCatalog.getString('Your account was successfully removed. You are now logged out. Sorry to have you go.'));
+        AuthService.logout();
+        $scope.removeCurrentUser();
+        $location.path('/');
+      });
+    });
+  };
+
 }]);
 
 userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService', 'User', function ($scope, $location, alertService, User) {
