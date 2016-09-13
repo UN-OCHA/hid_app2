@@ -1,6 +1,6 @@
 var userDirectives = angular.module('userDirectives', []);
 
-userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCatalog', 'alertService', 'User', 'ListUser', function($http, $location, config, gettextCatalog, alertService, User, ListUser) {
+userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'ListUser', function($location, gettextCatalog, alertService, hrinfoService, User, ListUser) {
   return {
     restrict: 'E',
     templateUrl: 'app/user/users.html',
@@ -32,11 +32,10 @@ userDirectives.directive('hidUsers', ['$http', '$location', 'config', 'gettextCa
       };
 
       scope.roles = [];
-      scope.getRoles = function () {
-        return $http.get(config.hrinfoUrl + '/functional_roles')
-          .success(function (resp) {
-            scope.roles = resp.data;
-          });
+      scope.getRoles = function() {
+        return hrinfoService.getRoles().then(function (d) {
+          scope.roles = d;
+        });
       };
 
       // Remove a user from a list
@@ -138,7 +137,7 @@ userServices.factory('User', ['$resource', 'config',
 
 var userControllers = angular.module('userControllers', []);
 
-userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'alertService', 'md5', 'config', 'User', 'List', function($scope, $routeParams, $http, $window, alertService, md5, config, User, List) {
+userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', function($scope, $routeParams, $http, $window, alertService, hrinfoService, md5, config, User, List) {
   $scope.setAdminAvailable(true);
   $scope.newEmail = {
     type: '',
@@ -165,30 +164,16 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
   });
 
   $scope.countries = [];
-  $http.get('https://www.humanitarianresponse.info/hid/locations/countries').then(
-    function (response) {
-      for (var key in response.data) {
-        $scope.countries.push({
-          'id': key,
-          'name': response.data[key]
-        });
-      }
-    }
-  );
+  hrinfoService.getCountries().then(function (countries) {
+    $scope.countries = countries;
+  });
 
   $scope.regions = [];
   $scope.setRegions = function ($item, $model) {
     $scope.regions = [];
-    $http.get('https://www.humanitarianresponse.info/hid/locations/' + $item.id).then(
-      function (response) {
-        for (var key in response.data.regions) {
-          $scope.regions.push({
-            'id': key,
-            'name': response.data.regions[key].name
-          });
-        }
-      }
-    );
+    hrinfoService.getRegions($item.id).then(function (regions) {
+      $scope.regions = regions;
+    });
   };
 
   $scope.addItem = function (key) {
@@ -259,15 +244,9 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
 
   $scope.roles = [];
   $scope.getRoles = function () {
-    return $http.get(config.hrinfoUrl + '/functional_roles')
-      .success(function (resp) {
-        $scope.roles = resp.data;
-      });
-  };
-
-  $scope.getCountries = function () {
-    return $http.get('https://www.humanitarianresponse.info/hid/locations/countries')
-      .then(hrinfoResponse);
+    return hrinfoService.getRoles().then(function (d) {
+      $scope.roles = d;
+    });
   };
 
   $scope.phoneNumberTypes = [

@@ -1,0 +1,76 @@
+<div ng-if="step == 1">
+<h1 translate>Which lists would you like to check into ?</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th translate>Name</th>
+      <th translate>Created by</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="list in lists">
+      <td><input type="checkbox" ng-model="list.checked" /></td>
+      <td><a ng-href="/lists/{{list.id}}">{{list.name}}</a></td>
+      <td><a ng-href="/users/{{list.owner.id}}">{{list.owner.name}}</a></td>
+    </tr>
+  </tbody>
+</table>
+<a class="btn btn-primary pull-right" href="" ng-click="nextStep(2);">Next &gt;</a>
+</div>
+<div ng-if="step == 2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Would you like to be checked out automatically ? If so, when ?</h3>
+    </div>
+    <div class="panel-body">
+      <input type="date" name="departureDate">
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Where are you currently ?</h3>
+    </div>
+    <div class="panel-body">
+      <ui-select ng-model="currentUser.location.country" name="country" theme="bootstrap" style="min-width:300px;" on-select="setRegions($item, $model)">
+        <ui-select-match placeholder="{{'Country'|translate}}">
+          {{$select.selected.name}}
+        </ui-select-match>
+        <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
+          {{country.name}}
+        </ui-select-choices>
+      </ui-select>
+      <ui-select ng-model="currentUser.location.region" name="region" theme="bootstrap" style="min-width: 300px;">
+        <ui-select-match placeholder="{{'Region'|translate}}">
+          {{$select.selected.name}}
+        </ui-select-match>
+        <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
+          {{region.name}}
+        </ui-select-choices>
+      </ui-select>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Please make sure your information is accurate</h3>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="jobTitle">Job Title</label>
+        <input type="text" class="form-control" id="jobTitle" ng-model="currentUser.job_title" placeholder="Job Title">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" class="form-control" id="phone" ng-model="currentUser.phone_number" placeholder="Phone">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" ng-model="currentUser.email" placeholder="Email">
+      </div>
+    </div>
+  </div>
+
+  <input type="submit" class="btn btn-primary pull-right" value="Check In" />
+</div>

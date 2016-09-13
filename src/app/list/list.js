@@ -175,8 +175,27 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
 }]);
 
-listControllers.controller('ListsCtrl', ['$scope', '$routeParams', 'List', function($scope, $routeParams, List) {
+listControllers.controller('ListsCtrl', ['$scope', '$routeParams', 'hrinfoService', 'List', function($scope, $routeParams, hrinfoService, List) {
   $scope.request = $routeParams;
   $scope.lists = List.query($routeParams);
+  $scope.step = 1;
+
+  $scope.nextStep = function (step) {
+    $scope.step = step;
+  };
+
+  $scope.countries = [];
+  hrinfoService.getCountries().then(function (countries) {
+    $scope.countries = countries;
+  });
+
+  $scope.regions = [];
+  $scope.setRegions = function ($item, $model) {
+    $scope.regions = [];
+    hrinfoService.getRegions($item.id).then(function (regions) {
+      $scope.regions = regions;
+    });
+  };
+
 }]);
 
