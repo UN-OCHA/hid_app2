@@ -94,8 +94,9 @@ appServices.factory('hrinfoService', function ($http, config) {
 
 var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('AppCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User',  function ($scope, $location, $window, User) {
   $scope.currentUser = null;
+  $scope.currentUserResource = null;
   $scope.isAdminCollapsed = true;
   $scope.isAdminAvailable = false;
   $scope.filters = {};
@@ -111,6 +112,22 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', function
   $scope.setCurrentUser = function (user) {
     $scope.currentUser = user;
     $window.localStorage.setItem('currentUser', JSON.stringify(user));
+  };
+
+  $scope.saveCurrentUser = function() {
+    var prom = $scope.getCurrentUserResource().$promise;
+    prom.then(function () {
+      angular.copy($scope.currentUser, $scope.currentUserResource);
+      $scope.currentUserResource.$save();
+    });
+    return prom;
+  };
+
+  $scope.getCurrentUserResource = function () {
+    if (!$scope.currentUserResource) {
+      $scope.currentUserResource = User.get({userId: $scope.currentUser.id});
+    }
+    return $scope.currentUserResource;
   };
 
   $scope.initCurrentUser = function () {

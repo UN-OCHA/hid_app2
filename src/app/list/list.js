@@ -211,7 +211,7 @@ listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettex
       });
       prom.push(checkinUser.$save());
     }
-    prom.push($scope.currentUser.$save());
+    prom.push($scope.saveCurrentUser());
     $q.all(prom).then(function() {
       alertService.add('success', gettextCatalog.getString('You were successfully checked in'));
     });
