@@ -24,7 +24,7 @@
       <h3 class="panel-title">Would you like to be checked out automatically ? If so, when ?</h3>
     </div>
     <div class="panel-body">
-      <input type="date" name="departureDate">
+      <input type="date" name="departureDate" ng-model="departureDate">
     </div>
   </div>
 
@@ -72,5 +72,5 @@
     </div>
   </div>
 
-  <input type="submit" class="btn btn-primary pull-right" value="Check In" />
+  <a class="btn btn-primary pull-right" ng-click="checkin();" translate>Check In</a>
 </div>

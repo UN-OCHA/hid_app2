@@ -384,6 +384,3 @@ userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', funct
   };
 }]);
 
-userControllers.controller('CheckInCtrl', ['$scope', 'User', function ($scope, User) {
-  $scope.status = 'responding';
-}]);

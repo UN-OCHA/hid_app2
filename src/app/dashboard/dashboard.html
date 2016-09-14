@@ -1,5 +1,16 @@
 <div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
-  <a class="btn btn-primary" href="/users/new">Add new user</a>
+  <div ng-if="currentUser.is_admin">
+    <a class="btn btn-primary" href="/users/new">Add new user</a>
+  </div>
+  <div>
+    <div class="clearfix">
+      <a class="btn btn-primary" href="/lists/new" translate>Create new List</a>
+    </div>
+    <div class="clearfix">
+      <a class="btn btn-primary" href="/checkin" translate>Check In</a>
+    </div>
+  </div>
+
 </div>
 
 <div class="row">
@@ -25,9 +36,6 @@
     </uib-tabset>
     <div class="clearfix">
       <a class="btn btn-primary pull-right" href="/lists" translate>View all Lists</a>
-    </div>
-    <div class="clearfix">
-      <a class="btn btn-primary pull-right" href="/lists/new" translate>Create new List</a>
     </div>
   </div>
   <div class="col-sm-3">

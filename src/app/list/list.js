@@ -175,7 +175,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
 }]);
 
-listControllers.controller('ListsCtrl', ['$scope', '$routeParams', 'hrinfoService', 'List', function($scope, $routeParams, hrinfoService, List) {
+listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'List', 'ListUser', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, List, ListUser) {
   $scope.request = $routeParams;
   $scope.lists = List.query($routeParams);
   $scope.step = 1;
@@ -196,6 +196,26 @@ listControllers.controller('ListsCtrl', ['$scope', '$routeParams', 'hrinfoServic
       $scope.regions = regions;
     });
   };
+
+  // Check user in in the lists selected
+  $scope.checkin = function () {
+    var checked = $scope.lists.filter(function (list) {
+      return list.checked;
+    });
+    var checkinUser = {}, prom = [];
+    for (var i = 0, len = checked.length; i < len; i++) {
+      checkinUser = new ListUser({
+        list: checked[i].id,
+        user: $scope.currentUser.id,
+        checkoutDate: $scope.departureDate
+      });
+      prom.push(checkinUser.$save());
+    }
+    prom.push($scope.currentUser.$save());
+    $q.all(prom).then(function() {
+      alertService.add('success', gettextCatalog.getString('You were successfully checked in'));
+    });
+  }; 
 
 }]);
 
