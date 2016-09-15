@@ -71,7 +71,12 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/checkin', {
         templateUrl: 'app/list/checkin.html',
-        controller: 'ListsCtrl',
+        controller: 'CheckinCtrl',
+        authenticate: true
+      }).
+      when('/checkin/:userId', {
+        templateUrl: 'app/list/checkin.html',
+        controller: 'CheckinCtrl',
         authenticate: true
       }).
       when('/lists/new', {

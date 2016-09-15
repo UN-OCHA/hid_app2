@@ -29,7 +29,7 @@
           <div uib-dropdown>
             <button type="button" class="btn btn-default" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
             <ul class="dropdown-menu" uib-dropdown-menu>
-              <li><a href>Check into List</a></li>
+              <li ng-if="currentUser.is_admin"><a href="/checkin/{{lu.user.id}}" translate>Check into List</a></li>
               <li ng-if="list && lu.role == 'manager' && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="demoteManager(lu);" translate>Demote from Manager</a></li>
               <li ng-if="list && lu.role != 'manager' && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="promoteManager(lu);" translate>Promote to Manager</a></li>
               <li ng-if="list && lu.pending && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="approveUser(lu);" translate>Approve user</a></li>

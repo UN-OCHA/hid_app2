@@ -384,3 +384,63 @@ userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', funct
   };
 }]);
 
+userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'User', 'List', 'ListUser', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, User, List, ListUser) {
+  $scope.request = $routeParams;
+  $scope.lists = List.query({});
+  $scope.step = 1;
+  if (!$routeParams.userId) {
+    $scope.user = $scope.currentUser;
+  }
+  else {
+    $scope.user = User.get({userId: $routeParams.userId});
+  }
+
+  $scope.nextStep = function (step) {
+    $scope.step = step;
+  };
+
+  $scope.countries = [];
+  hrinfoService.getCountries().then(function (countries) {
+    $scope.countries = countries;
+  });
+
+  $scope.regions = [];
+  $scope.setRegions = function ($item, $model) {
+    $scope.regions = [];
+    hrinfoService.getRegions($item.id).then(function (regions) {
+      $scope.regions = regions;
+    });
+  };
+
+  // Check user in in the lists selected
+  $scope.checkin = function () {
+    var checked = $scope.lists.filter(function (list) {
+      return list.checked;
+    });
+    var checkinUser = {}, prom = [];
+    for (var i = 0, len = checked.length; i < len; i++) {
+      checkinUser = new ListUser({
+        list: checked[i].id,
+        user: $scope.user.id,
+        checkoutDate: $scope.departureDate
+      });
+      prom.push(checkinUser.$save());
+    }
+    if ($scope.currentUser.id == $scope.user.id) {
+      prom.push($scope.saveCurrentUser());
+    }
+    else {
+      prom.push($scope.user.$save());
+    }
+    $q.all(prom).then(function() {
+      if ($scope.currentUser.id == $scope.user.id) {
+        alertService.add('success', gettextCatalog.getString('You were successfully checked in'));
+      }
+      else {
+        alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
+      }
+    });
+  };
+
+}]);
+
