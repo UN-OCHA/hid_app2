@@ -22,51 +22,6 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
         });
       };
 
-      // Remove a user from a list
-      scope.removeFromList = function (lu) {
-        var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-          ListUser.delete({listUserId: lu.id }, function(out) {
-            // Close existing alert
-            alert.closeConfirm();
-            alertService.add('success', gettextCatalog.getString('The user was successfully removed.'));
-            scope.users = ListUser.query({'list': scope.list.id});
-          });
-        });
-      };
-
-      // Approve a user and remove his pending status
-      scope.approveUser = function (lu) {
-        var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-          lu.pending = false;
-          lu.$save(function (listuser, response) {
-            alert.closeConfirm();
-            alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
-          });
-        });
-      };
-
-      // Promote a user to manager
-      scope.promoteManager = function (lu) {
-        var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-          lu.role = 'manager';
-          lu.$save(function (listuser, response) {
-            alert.closeConfirm();
-            alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
-          });
-        });
-      };
-
-      // Demote a user from manager role
-      scope.demoteManager = function (lu) {
-        var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-          lu.role = 'member';
-          lu.$save(function (listuser, response) {
-            alert.closeConfirm();
-            alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
-          });
-        });
-      };
-
       // Delete user account
       scope.deleteUser = function (lu) {
         var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
