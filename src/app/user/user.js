@@ -314,7 +314,7 @@ userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', funct
     delete $scope.request.q;
   }
   $scope.totalItems = 0;
-  $scope.itemsPerPage = 1;
+  $scope.itemsPerPage = 10;
   $scope.currentPage = 1;
   $scope.request.limit = $scope.itemsPerPage;
   $scope.request.skip = 0;

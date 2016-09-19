@@ -84,12 +84,12 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'ListCtrl',
         authenticate: true
       }).
-      when('/lists/:listId', {
+      when('/lists/:list', {
         templateUrl: 'app/list/list.html',
         controller: 'ListCtrl',
         authenticate: true
       }).
-      when('/lists/:listId/edit', {
+      when('/lists/:list/edit', {
         templateUrl: 'app/list/new-list.html',
         controller: 'ListCtrl',
         authenticate: true

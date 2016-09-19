@@ -38,9 +38,9 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.currentListUser = {};
   $scope.currentUserResource = User.get({userId: $scope.currentUser.id});
 
-  $scope.request = {};
+  $scope.request = $routeParams;
   $scope.totalItems = 0;
-  $scope.itemsPerPage = 1;
+  $scope.itemsPerPage = 10;
   $scope.currentPage = 1;
   $scope.request.limit = $scope.itemsPerPage;
   $scope.request.skip = 0;
@@ -65,8 +65,8 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   };
 
 
-  if ($routeParams.listId) {
-    $scope.list = List.get($routeParams, function () {
+  if ($routeParams.list) {
+    $scope.list = List.get({'id': $routeParams.list}, function () {
       $scope.setAdminAvailable(true);
       $scope.isMember = $scope.list.isMember($scope.currentUser);
       $scope.checkinUser = new ListUser({
@@ -80,7 +80,6 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         }
       });
     });
-    $scope.request.list = $routeParams.listId;
     $scope.users = ListUser.query($scope.request, queryCallback);
 
   }
