@@ -4,24 +4,8 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
   return {
     restrict: 'E',
     templateUrl: 'app/user/users.html',
-    scope: {
-      users: '=',
-      list: '=',
-      currentUser: '='
-    },
+    scope: false,
     link: function (scope, elem, attrs) {
-      scope.isManager = false;
-      if (scope.list) {
-        scope.$watch('users', function (newVal) {
-          if (newVal) {
-            for (var i = 0, len = newVal.length; i < len; i++) {
-              if (newVal[i].user.id == scope.currentUser.id && newVal[i].role == 'manager') {
-                scope.isManager = true;
-              }
-            }
-          }
-        }, true);
-      }
       scope.filters = $location.search();
       scope.filter = function() {
         if (scope.filters.verified === false) {
@@ -370,23 +354,39 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
 
 userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
   $scope.request = $routeParams;
+  if ($scope.request.q) {
+    $scope.request.where = { name: { contains: $scope.request.q } };
+    delete $scope.request.q;
+  }
+  $scope.totalItems = 0;
+  $scope.itemsPerPage = 1;
+  $scope.currentPage = 1;
+  $scope.request.limit = $scope.itemsPerPage;
+  $scope.request.skip = 0;
   $scope.listusers = [];
-  $scope.users = User.query($routeParams, function () {
+
+  // Helper function
+  var queryCallback = function (users, headers) {
+    $scope.listusers = [];
+    $scope.totalItems = headers()["x-total-count"];
     angular.forEach($scope.users, function (val, key) {
       this.push({user: val});
     }, $scope.listusers);
     $scope.users = $scope.listusers;
-  });
-  $scope.filters = {};
-
-  $scope.filter = function() {
-    $scope.users = User.query($scope.filters);
   };
+
+  // Pager function
+  $scope.pageChanged = function () {
+    $scope.request.skip = ($scope.currentPage - 1) * $scope.itemsPerPage;
+    $scope.users = User.query($scope.request, queryCallback);
+  };
+
+  $scope.users = User.query($scope.request, queryCallback);
+
 }]);
 
 userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'User', 'List', 'ListUser', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, User, List, ListUser) {
   $scope.request = $routeParams;
-  $scope.lists = List.query({});
   $scope.step = 1;
   if (!$routeParams.userId) {
     $scope.user = $scope.currentUser;
@@ -394,6 +394,21 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
   else {
     $scope.user = User.get({userId: $routeParams.userId});
   }
+  $scope.lists = List.query({where: {joinability: {"!": "private"}}}, function() {
+    $scope.listusers = ListUser.query({user: $scope.user.id}, function() {
+      $scope.lists = $scope.lists.filter(function (list) {
+        var out = true;
+        for (var i = 0, len = $scope.listusers.length; i < len; i++) {
+          var lid = $scope.listusers[i].list.id;
+          if (lid == list.id) {
+            out = false;
+          }
+        }
+        return out;
+      });
+    });
+  });
+  
 
   $scope.nextStep = function (step) {
     $scope.step = step;

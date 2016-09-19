@@ -38,6 +38,28 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.currentListUser = {};
   $scope.currentUserResource = User.get({userId: $scope.currentUser.id});
 
+  $scope.request = {};
+  $scope.totalItems = 0;
+  $scope.itemsPerPage = 1;
+  $scope.currentPage = 1;
+  $scope.request.limit = $scope.itemsPerPage;
+  $scope.request.skip = 0;
+  
+  $scope.pageChanged = function () {
+    $scope.request.skip = ($scope.currentPage - 1) * $scope.itemsPerPage;
+    $scope.users = ListUser.query($scope.request, function() {
+      angular.forEach($scope.users, function (val, key) {
+        if (val.user.id == $scope.currentUser.id) {
+          $scope.currentListUser = val;
+          if (val.role == 'manager') {
+            $scope.isManager = true;
+          }
+        }
+      });
+    });
+  };
+
+
   if ($routeParams.listId) {
     $scope.list = List.get($routeParams, function () {
       $scope.setAdminAvailable(true);
@@ -53,7 +75,9 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         }
       });
     });
-    $scope.users = ListUser.query({'list': $routeParams.listId}, function () {
+    $scope.request.list = $routeParams.listId;
+    $scope.users = ListUser.query($scope.request, function (listusers, headers) {
+      $scope.totalItems = headers()["x-total-count"];
       angular.forEach($scope.users, function (val, key) {
         if (val.user.id == $scope.currentUser.id) {
           $scope.currentListUser = val;
@@ -63,6 +87,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         }
       });
     });
+
   }
   else {
     $scope.list = new List();
@@ -177,45 +202,18 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
 listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'List', 'ListUser', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, List, ListUser) {
   $scope.request = $routeParams;
-  $scope.lists = List.query($routeParams);
-  $scope.step = 1;
-
-  $scope.nextStep = function (step) {
-    $scope.step = step;
-  };
-
-  $scope.countries = [];
-  hrinfoService.getCountries().then(function (countries) {
-    $scope.countries = countries;
+  $scope.totalItems = 0;
+  $scope.itemsPerPage = 1;
+  $scope.currentPage = 1;
+  $scope.request.limit = $scope.itemsPerPage;
+  $scope.request.skip = 0;
+  $scope.lists = List.query($scope.request, function(lists, headers) {
+    $scope.totalItems = headers()["x-total-count"];
   });
-
-  $scope.regions = [];
-  $scope.setRegions = function ($item, $model) {
-    $scope.regions = [];
-    hrinfoService.getRegions($item.id).then(function (regions) {
-      $scope.regions = regions;
-    });
+  $scope.pageChanged = function () {
+    $scope.request.skip = ($scope.currentPage - 1) * $scope.itemsPerPage;
+    $scope.lists = List.query($scope.request);
   };
-
-  // Check user in in the lists selected
-  $scope.checkin = function () {
-    var checked = $scope.lists.filter(function (list) {
-      return list.checked;
-    });
-    var checkinUser = {}, prom = [];
-    for (var i = 0, len = checked.length; i < len; i++) {
-      checkinUser = new ListUser({
-        list: checked[i].id,
-        user: $scope.currentUser.id,
-        checkoutDate: $scope.departureDate
-      });
-      prom.push(checkinUser.$save());
-    }
-    prom.push($scope.saveCurrentUser());
-    $q.all(prom).then(function() {
-      alertService.add('success', gettextCatalog.getString('You were successfully checked in'));
-    });
-  }; 
 
 }]);
 
