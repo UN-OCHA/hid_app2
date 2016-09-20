@@ -2,7 +2,19 @@ var listServices = angular.module('listServices', ['ngResource']);
 
 listServices.factory('List', ['$resource', 'config',
   function ($resource, config) {
-    var List = $resource(config.apiUrl + 'lists/:listId', {listId: '@id'});
+    var List = $resource(config.apiUrl + 'lists/:listId', {listId: '@id'}, 
+    {
+      'update': {
+        method: 'PUT',
+        transformRequest: function (data, headersGetter) {
+          delete data.users;
+          delete data.managers;
+          return angular.toJson(data);
+        }
+      }
+    });
+
+    // Is a user member of a list ?
     List.prototype.isMember = function (user) {
       var out = false;
       angular.forEach(this.users, function (val, key) {
@@ -12,6 +24,18 @@ listServices.factory('List', ['$resource', 'config',
       });
       return out;
     };
+
+    // Is a user manager of a list ?
+    List.prototype.isManager = function (user) {
+      var out = false;
+      angular.forEach(this.managers, function (val, key) {
+        if (angular.equals(user.id, val.id)) {
+          out = true;
+        }
+      });
+      return out;
+    };
+
     return List;
   }
 ]);
@@ -28,15 +52,22 @@ listServices.factory('FavoriteList', ['$resource', 'config',
   }
 ]);
 
+listServices.factory('ListManager', ['$resource', 'config',
+  function ($resource, config) {
+    return $resource(config.apiUrl + 'lists/:listId/managers/:userId', {userId: '@userId', listId: '@listId'});
+  }
+]);
+
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'ListUser', 'FavoriteList', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, ListUser, FavoriteList, User, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'ListUser', 'ListManager', 'FavoriteList', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, ListUser, ListManager, FavoriteList, User, alertService, gettextCatalog) {
   $scope.isMember = false;
   $scope.isManager = false;
   $scope.isOwner = false;
   $scope.isFavorite = false;
   $scope.currentListUser = {};
   $scope.currentUserResource = User.get({userId: $scope.currentUser.id});
+  $scope.managers = [];
 
   $scope.request = $routeParams;
   $scope.totalItems = 0;
@@ -48,14 +79,11 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   // Helper function 
   var queryCallback = function (listusers, headers) {
     $scope.totalItems = headers()["x-total-count"];
-    angular.forEach($scope.users, function (val, key) {
-      if (val.user.id == $scope.currentUser.id) {
-        $scope.currentListUser = val;
-        if (val.role == 'manager') {
-          $scope.isManager = true;
-        }
+    for (var i = 0, len = listusers.length; i < len; i++) {
+      if ($scope.list.isManager(listusers[i].user)) {
+        listusers[i].role = 'manager';
       }
-    });
+    }
   };
 
   // Pager
@@ -69,6 +97,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     $scope.list = List.get({'id': $routeParams.list}, function () {
       $scope.setAdminAvailable(true);
       $scope.isMember = $scope.list.isMember($scope.currentUser);
+      $scope.isManager = $scope.list.isManager($scope.currentUser);
       $scope.checkinUser = new ListUser({
         list: $scope.list.id,
         user: $scope.currentUser.id
@@ -79,9 +108,9 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
           $scope.isFavorite = true;
         }
       });
+      $scope.managers = $scope.list.managers;
     });
     $scope.users = ListUser.query($scope.request, queryCallback);
-
   }
   else {
     $scope.list = new List();
@@ -92,19 +121,45 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
   // Retrieve users
   $scope.getUsers = function(search) {
-    var users = User.query({'where': {'name': {'contains': search}}}, function() {
-      $scope.newMembers = users;
-    });
+    $scope.newMembers = User.query({'where': {'name': {'contains': search}}});
+  };
+
+  // Retrieve managers
+  $scope.getManagers = function(search) {
+    $scope.newManagers = User.query({'where': {'name': {'contains': search}}});
   };
 
   // Save list settings
   $scope.listSave = function() {
-    if ($routeParams.listId) {
-      delete $scope.list.users;
+    if ($scope.list.id) {
+      $scope.managers = $scope.list.managers;
+      $scope.list.$update(function() {
+        console.log($scope.list.managers);
+        for (var i = 0, len = $scope.managers.length; i < len; i++) {
+          var existing = $scope.list.managers.filter(function (elt) {
+            return elt.id == $scope.managers[i];
+          });
+          console.log(existing);
+          if (!existing.length) {
+            ListManager.save({userId: $scope.managers[i], listId: $scope.list.id});
+          }
+        }
+        for (var i = 0, len = $scope.list.managers.length; i < len; i++) {
+          var existing = $scope.managers.filter(function (elt) {
+            return elt == $scope.list.managers[i].id;
+          });
+          if (!existing.length) {
+            ListManager.delete({userId: $scope.list.managers[i].id, listId: $scope.list.id});
+          }
+        }
+        $location.path('/lists/' + $scope.list.id);
+      });
     }
-    $scope.list.$save(function() {
-      $location.path('/lists/' + $scope.list.id);
-    });
+    else {
+      $scope.list.$save(function() {
+        $location.path('/lists/' + $scope.list.id);
+      });
+    }
   };
 
   // Add users to a list

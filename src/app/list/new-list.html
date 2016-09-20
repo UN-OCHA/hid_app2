@@ -9,7 +9,7 @@
     <label for="users" translate>Members</label>
     <ui-select ng-model="list.users" multiple name="members" theme="bootstrap" style="min-width: 300px;">
       <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
-      <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in users">
+      <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers">
         {{person.name}}
       </ui-select-choices>
     </ui-select>
@@ -30,6 +30,15 @@
       <option value="moderated" translate>Anyone within Humanitarian ID can ask to join</option>
       <option value="private" translate>Only the owner and managers can add users</option>
     </select>
+  </div>
+  <div class="form-group">
+    <label for="managers" translate>Managers</label>
+    <ui-select ng-model="list.managers" multiple name="managers" theme="bootstrap" style="min-width: 300px;">
+      <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
+      <ui-select-choices refresh="getManagers($select.search)" repeat="person.id as person in newManagers">
+        {{person.name}}
+      </ui-select-choices>
+    </ui-select>
   </div>
   <button type="submit" class="btn btn-primary" translate>Save</button>
 </form>

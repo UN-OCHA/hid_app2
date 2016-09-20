@@ -1,4 +1,4 @@
-<form name="register" ng-submit="register.$valid && userCreate()" novalidate>
+<form name="register" ng-submit="register.$valid && userCreate(register)" novalidate>
   <div class="form-group" ng-class="{'has-error': register.email.$touched && register.email.$invalid}">
     <label for="email" translate>Email</label>
     <input type="email" name="email" class="form-control" id="email" placeholder="{{'Your email address'|translate}}" ng-model="user.email" ng-required="currentPath === '/register'">

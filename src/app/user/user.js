@@ -296,10 +296,12 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
   $scope.user = new User();
   $scope.currentPath = $location.path();
 
-  $scope.userCreate = function() {
+  $scope.userCreate = function(registerForm) {
     $scope.user.$save(function(user) {
       alertService.add('success', 'Thank you, your registration is now complete. You will soon receive a confirmation email.');
-      //$location.path('/settings' + $scope.user.id);
+      registerForm.$setPristine();
+      registerForm.$setUntouched();
+      $scope.user = new User();
     }, function (resp) {
       alertService.add('danger', 'There was an error processing your registration.');
     });
