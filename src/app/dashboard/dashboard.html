@@ -19,18 +19,18 @@
     <uib-tabset active="activeJustified" justified="true">
       <uib-tab index="0" heading="My Favorite Lists">
         <div class="list-group">
-          <a ng-repeat="(key, val) in currentUser.favoriteLists" href="/lists/{{val.id}}" class="list-group-item">{{val.name}}</a>
+          <a ng-repeat="(key, val) in currentUser.favoriteLists" href="/lists/{{val._id}}" class="list-group-item">{{val.name}}</a>
         </div>
       </uib-tab>
       <uib-tab index="1" heading="Lists I'm part Of">
         <div class="list-group">
-          <a ng-repeat="(key, val) in listsMember" href="/lists/{{val.list.id}}" class="list-group-item">{{val.list.name}}</a>
+          <a ng-repeat="(key, val) in listsMember" href="/lists/{{val.list._id}}" class="list-group-item">{{val.list.name}}</a>
         </div>
       </uib-tab>
       <uib-tab index="2" heading="Lists I Manage">
         <div class="list-group">
-          <a ng-repeat="(key, val) in listsOwner" href="/lists/{{val.id}}" class="list-group-item">{{val.name}}</a>
-          <a ng-repeat="(key, val) in listsManager" href="/lists/{{val.list.id}}" class="list-group-item">{{val.list.name}}</a>
+          <a ng-repeat="(key, val) in listsOwner" href="/lists/{{val._id}}" class="list-group-item">{{val.name}}</a>
+          <a ng-repeat="(key, val) in listsManager" href="/lists/{{val.list._id}}" class="list-group-item">{{val.list.name}}</a>
         </div>
       </uib-tab>
     </uib-tabset>

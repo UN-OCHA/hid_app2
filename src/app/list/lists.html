@@ -8,8 +8,8 @@
   </thead>
   <tbody>
     <tr ng-repeat="list in lists">
-      <td><a ng-href="/lists/{{list.id}}">{{list.name}}</a></td>
-      <td><a ng-href="/users/{{list.owner.id}}">{{list.owner.name}}</a></td>
+      <td><a ng-href="/lists/{{list._id}}">{{list.name}}</a></td>
+      <td><a ng-href="/users/{{list.owner._id}}">{{list.owner.name}}</a></td>
     </tr>
   </tbody>
 </table>

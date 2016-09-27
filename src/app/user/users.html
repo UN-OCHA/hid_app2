@@ -1,7 +1,7 @@
 <div class="col-sm-3">
   <div class="form-group">
     <label for="user" translate>Roles</label>
-    <ui-select ng-model="filters.roles" multiple name="roles" theme="bootstrap" on-select="filter()" on-remove="filter()" style="min-width: 200px;">
+    <ui-select ng-model="filters['roles.id']" multiple name="roles" theme="bootstrap" on-select="filter()" on-remove="filter()" style="min-width: 200px;">
       <ui-select-match placeholder="Filter by role">{{$item.label}}</ui-select-match>
       <ui-select-choices refresh="getRoles($select.search)" repeat="role.id as role in roles">
         {{role.label}}

@@ -29,11 +29,11 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
           if (scope.list) {
             inlist = true;
           }
-          User.delete({id: user.id}, function (out) {
+          User.delete({userId: user._id}, function (out) {
             alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
             if (inlist) {
-              scope.users = ListUser.query({'list': scope.list.id});
+              scope.users = ListUser.query({'list': scope.list._id});
             }
             else {
               scope.users.splice(scope.users.indexOf(user), 1);
@@ -50,7 +50,7 @@ var userServices = angular.module('userServices', ['ngResource']);
 
 userServices.factory('User', ['$resource', 'config',
   function($resource, config){
-    return $resource(config.apiUrl + 'users/:userId', {userId: '@id'},
+    return $resource(config.apiUrl + 'user/:userId', {userId: '@_id'},
     {
       'save': {
         method: 'POST',
@@ -311,15 +311,15 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
 
 userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
   $scope.request = $routeParams;
-  if ($scope.request.q) {
+  /*if ($scope.request.q) {
     $scope.request.where = { name: { contains: $scope.request.q } };
     delete $scope.request.q;
-  }
+  }*/
   $scope.totalItems = 0;
-  $scope.itemsPerPage = 10;
+  $scope.itemsPerPage = 1;
   $scope.currentPage = 1;
   $scope.request.limit = $scope.itemsPerPage;
-  $scope.request.skip = 0;
+  $scope.request.offset = 0;
   $scope.listusers = [];
 
   // Helper function
@@ -334,7 +334,7 @@ userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', funct
 
   // Pager function
   $scope.pageChanged = function () {
-    $scope.request.skip = ($scope.currentPage - 1) * $scope.itemsPerPage;
+    $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
     $scope.users = User.query($scope.request, queryCallback);
   };
 
