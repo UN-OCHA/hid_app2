@@ -52,23 +52,8 @@ userServices.factory('User', ['$resource', 'config',
   function($resource, config){
     return $resource(config.apiUrl + 'user/:userId', {userId: '@_id'},
     {
-      'save': {
-        method: 'POST',
-        transformRequest: function (data, headersGetter) {
-          delete data.checkins;
-          delete data.lists;
-          delete data.favoriteLists;
-          return angular.toJson(data);
-        }
-      },
       'update': {
-        method: 'PUT',
-        transformRequest: function (data, headersGetter) {
-          delete data.checkins;
-          delete data.lists;
-          delete data.favoriteLists;
-          return angular.toJson(data);
-        }
+        method: 'PUT'
       }
     });
   }

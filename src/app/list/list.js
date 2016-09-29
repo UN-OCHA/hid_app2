@@ -5,10 +5,7 @@ listServices.factory('List', ['$resource', 'config',
     var List = $resource(config.apiUrl + 'list/:listId', {listId: '@_id'}, 
     {
       'update': {
-        method: 'PUT',
-        transformRequest: function (data, headersGetter) {
-          return angular.toJson(data);
-        }
+        method: 'PUT'
       }
     });
 
@@ -44,21 +41,9 @@ listServices.factory('ListUser', ['$resource', 'config',
   }
 ]);
 
-listServices.factory('FavoriteList', ['$resource', 'config',
-  function ($resource, config) {
-    return $resource(config.apiUrl + 'user/:userId/favoriteLists/:listId');
-  }
-]);
-
-listServices.factory('ListManager', ['$resource', 'config',
-  function ($resource, config) {
-    return $resource(config.apiUrl + 'lists/:listId/managers/:userId', {userId: '@userId', listId: '@listId'});
-  }
-]);
-
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'ListUser', 'ListManager', 'FavoriteList', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, ListUser, ListManager, FavoriteList, User, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'ListUser', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, ListUser, User, alertService, gettextCatalog) {
   $scope.isMember = false;
   $scope.isManager = false;
   $scope.isOwner = false;
@@ -84,10 +69,14 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     }
   };
 
+  $scope.refreshUsers = function() {
+    $scope.users = ListUser.query($scope.request, queryCallback);
+  };
+
   // Pager
   $scope.pageChanged = function () {
     $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-    $scope.users = ListUser.query($scope.request, queryCallback);
+    $scope.refreshUsers();
   };
 
 
@@ -100,15 +89,14 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         list: $scope.list._id,
         user: $scope.currentUser._id
       });
-      /*$scope.isOwner = $scope.list.owner.id == $scope.currentUser.id;
+      $scope.isOwner = $scope.list.owner._id == $scope.currentUser._id;
       angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
-        if (val.id == $scope.list.id) {
+        if (val._id == $scope.list._id) {
           $scope.isFavorite = true;
         }
-      });*/
-      $scope.managers = $scope.list.managers;
+      });
     });
-    $scope.users = ListUser.query($scope.request, queryCallback);
+    $scope.refreshUsers();
   }
   else {
     $scope.list = new List();
@@ -130,26 +118,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   // Save list settings
   $scope.listSave = function() {
     if ($scope.list._id) {
-      $scope.managers = $scope.list.managers;
       $scope.list.$update(function() {
-        console.log($scope.list.managers);
-        for (var i = 0, len = $scope.managers.length; i < len; i++) {
-          var existing = $scope.list.managers.filter(function (elt) {
-            return elt.id == $scope.managers[i];
-          });
-          console.log(existing);
-          if (!existing.length) {
-            ListManager.save({userId: $scope.managers[i], listId: $scope.list.id});
-          }
-        }
-        for (var i = 0, len = $scope.list.managers.length; i < len; i++) {
-          var existing = $scope.managers.filter(function (elt) {
-            return elt == $scope.list.managers[i].id;
-          });
-          if (!existing.length) {
-            ListManager.delete({userId: $scope.list.managers[i].id, listId: $scope.list.id});
-          }
-        }
         $location.path('/lists/' + $scope.list._id);
       });
     }
@@ -169,7 +138,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         user: value
       });
       listUser.$save(function(out) {
-        $scope.users = ListUser.query($scope.request);
+        $scope.refreshUsers();
       });
     });
   };
@@ -181,7 +150,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         // Close existing alert
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user was successfully removed.'));
-        $scope.users = ListUser.query($scope.request);
+        $scope.refreshUsers();
       });
     });
   };
@@ -192,7 +161,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     $scope.checkinUser.$save(function (out) {
       alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
       $scope.isMember = true;
-      $scope.users = ListUser.query($scope.request);
+      $scope.refreshUsers();
     });
   };
 
@@ -204,7 +173,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
         $scope.isMember = false;
-        $scope.users = ListUser.query($scope.request);
+        $scope.refreshUsers();
       });
     });
   };
@@ -241,19 +210,26 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
   // Star a list as favorite
   $scope.star = function() {
-    FavoriteList.save({userId: $scope.currentUser.id, listId: $scope.list.id}, function (user) {
+    if (!$scope.currentUser.favoriteLists) {
+      $scope.currentUser.favoriteLists = new Array();
+    }
+    $scope.currentUser.favoriteLists.push($scope.list);
+    User.update($scope.currentUser, function (user) {
       alertService.add('success', gettextCatalog.getString('This list was successfully added to your favorites.'));
       $scope.isFavorite = true;
-      $scope.setCurrentUser(user);
+      $scope.setCurrentUser($scope.currentUser);
     });
   };
 
   // Remove a list from favorites
   $scope.unstar = function() {
-    FavoriteList.delete({userId: $scope.currentUser.id, listId: $scope.list.id}, function (user) {
+    $scope.currentUser.favoriteLists = $scope.currentUser.favoriteLists.filter(function (elt) {
+      return elt._id != $scope.list._id;
+    });
+    User.update($scope.currentUser, function (user) {
       alertService.add('success', gettextCatalog.getString('This list was successfully removed from your favorites.'));
       $scope.isFavorite = false;
-      $scope.setCurrentUser(user);
+      $scope.setCurrentUser($scope.currentUser);
     });
   };
 
@@ -273,6 +249,8 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
       $scope.list.managers.push(lu.user._id);
       $scope.list.$update(function (list, response) {
+        $scope.list = list;
+        $scope.refreshUsers();
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
       });
@@ -287,6 +265,8 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       });
       $scope.list.managers = mmanagers;
       $scope.list.$update(function (list, response) {
+        $scope.list = list;
+        $scope.refreshUsers();
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
       });
