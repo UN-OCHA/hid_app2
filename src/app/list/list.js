@@ -9,17 +9,6 @@ listServices.factory('List', ['$resource', 'config',
       }
     });
 
-    // Is a user member of a list ?
-    List.prototype.isMember = function (user) {
-      var out = false;
-      angular.forEach(this.users, function (val, key) {
-        if (angular.equals(user._id, val._id)) {
-          out = true;
-        }
-      });
-      return out;
-    };
-
     // Is a user manager of a list ?
     List.prototype.isManager = function (user) {
       var out = false;
@@ -83,7 +72,12 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   if ($routeParams.list) {
     $scope.list = List.get({'listId': $routeParams.list}, function () {
       $scope.setAdminAvailable(true);
-      $scope.isMember = $scope.list.isMember($scope.currentUser);
+      ListUser.query({list: $routeParams.list, user: $scope.currentUser._id}, function (result) {
+        if (result.length) {
+          $scope.isMember = true;
+          $scope.currentListUser = result[0];
+        }
+      });
       $scope.isManager = $scope.list.isManager($scope.currentUser);
       $scope.checkinUser = new ListUser({
         list: $scope.list._id,
