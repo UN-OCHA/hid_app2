@@ -24,65 +24,27 @@ listServices.factory('List', ['$resource', 'config',
   }
 ]);
 
-listServices.factory('ListUser', ['$resource', 'config',
-  function ($resource, config) {
-    return $resource(config.apiUrl + 'listuser/:listUserId', {listUserId: '@_id'});
-  }
-]);
-
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'ListUser', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, ListUser, User, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, User, alertService, gettextCatalog) {
   $scope.isMember = false;
   $scope.isManager = false;
   $scope.isOwner = false;
   $scope.isFavorite = false;
-  $scope.currentListUser = {};
-  $scope.currentUserResource = User.get({userId: $scope.currentUser.id});
-  $scope.managers = [];
-
-  $scope.request = $routeParams;
-  $scope.totalItems = 0;
-  $scope.itemsPerPage = 10;
-  $scope.currentPage = 1;
-  $scope.request.limit = $scope.itemsPerPage;
-  $scope.request.offset = 0;
- 
-  // Helper function 
-  var queryCallback = function (listusers, headers) {
-    $scope.totalItems = headers()["x-total-count"];
-    for (var i = 0, len = listusers.length; i < len; i++) {
-      if ($scope.list.isManager(listusers[i].user)) {
-        listusers[i].role = 'manager';
-      }
-    }
-  };
-
-  $scope.refreshUsers = function() {
-    $scope.users = ListUser.query($scope.request, queryCallback);
-  };
-
-  // Pager
-  $scope.pageChanged = function () {
-    $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-    $scope.refreshUsers();
-  };
-
 
   if ($routeParams.list) {
     $scope.list = List.get({'listId': $routeParams.list}, function () {
+      $scope.pageChanged();
       $scope.setAdminAvailable(true);
-      ListUser.query({list: $routeParams.list, user: $scope.currentUser._id}, function (result) {
-        if (result.length) {
+      angular.forEach($scope.currentUser.checkins, function (val, key) {
+        if (val.list == $scope.list._id) {
           $scope.isMember = true;
-          $scope.currentListUser = result[0];
         }
       });
       $scope.isManager = $scope.list.isManager($scope.currentUser);
-      $scope.checkinUser = new ListUser({
-        list: $scope.list._id,
-        user: $scope.currentUser._id
-      });
+      $scope.checkinUser = {
+        list: $scope.list._id
+      };
       $scope.isOwner = $scope.list.owner._id == $scope.currentUser._id;
       angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
         if (val._id == $scope.list._id) {
@@ -90,7 +52,6 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         }
       });
     });
-    $scope.refreshUsers();
   }
   else {
     $scope.list = new List();
@@ -118,7 +79,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     }
     else {
       $scope.list.$save(function() {
-        $location.path('/lists/' + $scope.list._id);
+       $location.path('/lists/' + $scope.list._id);
       });
     }
   };
@@ -127,24 +88,29 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.addMemberToList = function() {
     var promises = [];
     angular.forEach($scope.usersAdded.users, function (value, key) {
-      var listUser = new ListUser({
-        list: $scope.list._id,
-        user: value
-      });
-      listUser.$save(function(out) {
-        $scope.refreshUsers();
+      var tmpUser = User.get({userId: value}, function() {
+        if (!tmpUser.checkins) {
+          tmpUser.checkins = new Array();
+        }
+        tmpUser.checkins.push({list: $scope.list._id});
+        tmpUser.$update(function(out) {
+          $scope.pageChanged();
+        });
       });
     });
   };
 
   // Remove a user from a list
-  $scope.removeFromList = function (lu) {
+  $scope.removeFromList = function (user) {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      ListUser.delete({listUserId: lu._id }, function(out) {
+      user.checkins = user.checkins.filter(function (elt) {
+        return elt.list != $scope.list._id;
+      });
+      user.$update(function(out) {
         // Close existing alert
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user was successfully removed.'));
-        $scope.refreshUsers();
+        $scope.pageChanged();
       });
     });
   };
@@ -152,21 +118,30 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
   // Check current user in this list
   $scope.checkIn = function () {
-    $scope.checkinUser.$save(function (out) {
+    if (!$scope.currentUser.checkins) {
+      $scope.currentUser.checkins = new Array();
+    }
+    $scope.currentUser.checkins.push($scope.checkinUser);
+    User.update($scope.currentUser, function (user) {
       alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
       $scope.isMember = true;
+      $scope.setCurrentUser($scope.currentUser);
       $scope.refreshUsers();
     });
   };
 
   // Check current user out of this list
   $scope.checkOut = function () {
+    $scope.currentUser.checkins = $scope.currentUser.checkins.filter(function (elt) {
+      return elt.list != $scope.list._id;
+    });
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      $scope.currentListUser.$delete(function (out) {
+      User.update($scope.currentUser, function (user) {
         // Close existing alert
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
         $scope.isMember = false;
+        $scope.setCurrentUser($scope.currentUser);
         $scope.refreshUsers();
       });
     });
@@ -187,7 +162,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.exportEmails = function() {
     $scope.emailsText = '';
     for (var i = 0, len = $scope.users.length; i < len; i++) {
-      $scope.emailsText += $scope.users[i].user.name + ' <' + $scope.users[i].user.email + '>';
+      $scope.emailsText += $scope.users[i].name + ' <' + $scope.users[i].email + '>';
       if (i != len - 1) {
         $scope.emailsText += ', ';
       }
@@ -228,10 +203,14 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   };
 
   // Approve a user and remove his pending status
-  $scope.approveUser = function (lu) {
+  $scope.approveUser = function (user) {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      lu.pending = false;
-      lu.$save(function (listuser, response) {
+      for (var i = 0, len = user.checkins.length; i < len; i++) {
+        if (user.checkins[i].list == $scope.list._id) {
+          user.checkins[i].pending = false;
+        }
+      }
+      user.$update(function (out) {
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
       });
@@ -239,12 +218,12 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   };
 
   // Promote a user to manager
-  $scope.promoteManager = function (lu) {
+  $scope.promoteManager = function (user) {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      $scope.list.managers.push(lu.user._id);
+      $scope.list.managers.push(user._id);
       $scope.list.$update(function (list, response) {
         $scope.list = list;
-        $scope.refreshUsers();
+        $scope.pageChanged();
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
       });
@@ -252,15 +231,15 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   };
 
   // Demote a user from manager role
-  $scope.demoteManager = function (lu) {
+  $scope.demoteManager = function (user) {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
       var mmanagers = $scope.list.managers.filter(function (elt) {
-        return elt._id != lu.user._id;
+        return elt._id != user._id;
       });
       $scope.list.managers = mmanagers;
       $scope.list.$update(function (list, response) {
         $scope.list = list;
-        $scope.refreshUsers();
+        $scope.pageChanged();
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
       });
@@ -269,7 +248,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
 }]);
 
-listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'List', 'ListUser', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, List, ListUser) {
+listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'List', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, List) {
   $scope.request = $routeParams;
   $scope.totalItems = 0;
   $scope.itemsPerPage = 1;

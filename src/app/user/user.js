@@ -1,18 +1,49 @@
 var userDirectives = angular.module('userDirectives', []);
 
-userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'ListUser', function($location, gettextCatalog, alertService, hrinfoService, User, ListUser) {
+userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', function($location, gettextCatalog, alertService, hrinfoService, User) {
   return {
     restrict: 'E',
     templateUrl: 'app/user/users.html',
     scope: false,
     link: function (scope, elem, attrs) {
-      scope.filters = $location.search();
+      scope.inlist = scope.list ? true : false;
+      scope.request = $location.search();
+      scope.totalItems = 0;
+      scope.itemsPerPage = 10;
+      scope.currentPage = 1;
+      scope.request.limit = scope.itemsPerPage;
+      scope.request.offset = 0;
+      scope.listusers = [];
+
+      // Helper function
+      var queryCallback = function (users, headers) {
+        scope.totalItems = headers()["x-total-count"];
+      };
+
+      // Pager function
+      scope.pageChanged = function () {
+        scope.request.offset = (scope.currentPage - 1) * scope.itemsPerPage;
+        if (scope.inlist) {
+          scope.request['checkins.list'] = scope.list._id;
+        }
+        scope.users = User.query(scope.request, queryCallback);
+      };
+
+      if (!scope.inlist) {
+        scope.pageChanged();
+      }
+
       scope.filter = function() {
         if (scope.filters.verified === false) {
           delete scope.filters.verified;
         }
-        //scope.users = User.query(scope.filters);
-        $location.search(scope.filters);
+        if (scope.filters.is_admin === false) {
+          delete scope.filters.is_admin;
+        }
+        var request = angular.copy(scope.request);
+        scope.users.length = 0;
+        angular.merge(request, scope.filters);
+        scope.users = User.query(request, queryCallback);
       };
 
       scope.roles = [];
@@ -22,22 +53,20 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
         });
       };
 
+      scope.countries = [];
+      scope.getCountries = function() {
+        return hrinfoService.getCountries().then(function (d) {
+          scope.countries = d;
+        });
+      };
+
       // Delete user account
-      scope.deleteUser = function (lu) {
+      scope.deleteUser = function (user) {
         var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
-          var user = lu.user, inlist = false;
-          if (scope.list) {
-            inlist = true;
-          }
-          User.delete({userId: user._id}, function (out) {
+          user.$delete(function (out) {
             alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
-            if (inlist) {
-              scope.users = ListUser.query({'list': scope.list._id});
-            }
-            else {
-              scope.users.splice(scope.users.indexOf(user), 1);
-            }
+            scope.pageChanged();
           });
         });
       };
@@ -50,12 +79,27 @@ var userServices = angular.module('userServices', ['ngResource']);
 
 userServices.factory('User', ['$resource', 'config',
   function($resource, config){
-    return $resource(config.apiUrl + 'user/:userId', {userId: '@_id'},
+
+    var User = $resource(config.apiUrl + 'user/:userId', {userId: '@_id'},
     {
       'update': {
         method: 'PUT'
       }
     });
+
+    // Return current user checkin
+    User.prototype.currentCheckin = function (list) {
+      var out = false;
+      angular.forEach(this.checkins, function (val, key) {
+        if (angular.equals(list._id, val.list)) {
+          out = val;
+        }
+      });
+      return out;
+    };
+
+    return User;
+    
   }
 ]);
 
@@ -295,61 +339,37 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
 
 
 userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
-  $scope.request = $routeParams;
-  /*if ($scope.request.q) {
-    $scope.request.where = { name: { contains: $scope.request.q } };
-    delete $scope.request.q;
-  }*/
-  $scope.totalItems = 0;
-  $scope.itemsPerPage = 1;
-  $scope.currentPage = 1;
-  $scope.request.limit = $scope.itemsPerPage;
-  $scope.request.offset = 0;
-  $scope.listusers = [];
-
-  // Helper function
-  var queryCallback = function (users, headers) {
-    $scope.listusers = [];
-    $scope.totalItems = headers()["x-total-count"];
-    angular.forEach($scope.users, function (val, key) {
-      this.push({user: val});
-    }, $scope.listusers);
-    $scope.users = $scope.listusers;
-  };
-
-  // Pager function
-  $scope.pageChanged = function () {
-    $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-    $scope.users = User.query($scope.request, queryCallback);
-  };
-
-  $scope.users = User.query($scope.request, queryCallback);
-
 }]);
 
-userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'User', 'List', 'ListUser', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, User, List, ListUser) {
+userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'User', 'List', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, User, List) {
   $scope.request = $routeParams;
   $scope.step = 1;
-  if (!$routeParams.userId) {
-    $scope.user = $scope.currentUser;
-  }
-  else {
-    $scope.user = User.get({userId: $routeParams.userId});
-  }
-  $scope.lists = List.query({where: {joinability: {"!": "private"}}}, function() {
-    $scope.listusers = ListUser.query({user: $scope.user.id}, function() {
+
+  var queryCallback = function () {
+    $scope.lists = List.query({}, function() {
       $scope.lists = $scope.lists.filter(function (list) {
         var out = true;
-        for (var i = 0, len = $scope.listusers.length; i < len; i++) {
-          var lid = $scope.listusers[i].list.id;
-          if (lid == list.id) {
+        if (!$scope.user.checkins) {
+          $scope.user.checkins = new Array();
+        }
+        for (var i = 0, len = $scope.user.checkins.length; i < len; i++) {
+          if ($scope.user.checkins[i].list == list._id) {
             out = false;
           }
         }
         return out;
       });
     });
-  });
+  };
+
+  if (!$routeParams.userId) {
+    $scope.user = $scope.currentUser;
+    queryCallback();
+  }
+  else {
+    $scope.user = User.get({userId: $routeParams.userId}, queryCallback);
+  }
+
   
 
   $scope.nextStep = function (step) {
@@ -376,20 +396,16 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
     });
     var checkinUser = {}, prom = [];
     for (var i = 0, len = checked.length; i < len; i++) {
-      checkinUser = new ListUser({
-        list: checked[i].id,
-        user: $scope.user.id,
+      checkinUser = {
+        list: checked[i]._id,
         checkoutDate: $scope.departureDate
-      });
-      prom.push(checkinUser.$save());
+      };
+      if (!$scope.user.checkins) {
+        $scope.user.checkins = new Array();
+      }
+      $scope.user.checkins.push(checkinUser);
     }
-    if ($scope.currentUser.id == $scope.user.id) {
-      prom.push($scope.saveCurrentUser());
-    }
-    else {
-      prom.push($scope.user.$save());
-    }
-    $q.all(prom).then(function() {
+    User.update($scope.user, function(out) {
       if ($scope.currentUser.id == $scope.user.id) {
         alertService.add('success', gettextCatalog.getString('You were successfully checked in'));
       }

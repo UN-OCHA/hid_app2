@@ -1,15 +1,31 @@
 <div class="col-sm-3">
   <div class="form-group">
-    <label for="user" translate>Roles</label>
-    <ui-select ng-model="filters['roles.id']" multiple name="roles" theme="bootstrap" on-select="filter()" on-remove="filter()" style="min-width: 200px;">
-      <ui-select-match placeholder="Filter by role">{{$item.label}}</ui-select-match>
-      <ui-select-choices refresh="getRoles($select.search)" repeat="role.id as role in roles">
+    <label for="roles" translate>Roles</label>
+    <ui-select ng-model="filters['roles.id']" name="roles" allow-clear="true" theme="bootstrap" on-select="filter()" on-remove="filter()" style="min-width: 200px;">
+      <ui-select-match allow-clear="true" placeholder="Filter by role">{{$select.selected.label}}</ui-select-match>
+      <ui-select-choices refresh="getRoles($select.search)" repeat="role.id as role in roles | filter: $select.search">
         {{role.label}}
       </ui-select-choices>
     </ui-select>
   </div>
 
-  <label><input type="checkbox" ng-model="filters.verified" name="verified" ng-change="filter()" /> Verified</label>
+  <div class="form-group">
+    <label for="country" translate>Country</label>
+    <ui-select ng-model="filters['country']" name="country" theme="bootstrap" on-select="filter()" on-remove="filter()" style="min-width:200px;">
+      <ui-select-match allow-clear="true" placeholder="Filter by country">{{$select.selected.name}}</ui-select-match>
+      <ui-select-choices refresh="getCountries($select.search)" repeat="country.id as country in countries | filter: $select.search">
+        {{country.name}}
+      </ui-select-choices>
+    </ui-select>
+  </div>
+
+  <div class="form-group">
+    <label><input type="checkbox" ng-model="filters.verified" name="verified" ng-change="filter()" /> Verified</label>
+  </div>
+
+  <div class="form-group">
+    <label><input type="checkbox" ng-model="filters.is_admin" name="is_admin" ng-change="filter()" /> Administrator</label>
+  </div>
 </div>
 <div class="col-sm-9">
   <table class="table table-striped">
@@ -21,20 +37,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="lu in users">
-        <td><a ng-href="/users/{{lu.user.id}}">{{lu.user.name}}</a> <span class="label label-default" ng-if="list.owner.id == lu.user.id" translate>Owner</span> <span class="label label-warning" ng-if="lu.pending" translate>Pending</span><span class="label label-primary" ng-if="lu.role == 'manager'" translate>Manager</span></td>
-        <td>{{lu.user.job_title}}</td>
-        <td>{{lu.user.organization.name}}</td>
+      <tr ng-repeat="user in users">
+        <td><a ng-href="/users/{{user._id}}">{{user.name}}</a> <span class="label label-default" ng-if="list.owner._id == user._id" translate>Owner</span> <span class="label label-warning" ng-if="user.currentCheckin(list).pending" translate>Pending</span><span class="label label-primary" ng-if="list.isManager(user)" translate>Manager</span></td>
+        <td>{{user.job_title}}</td>
+        <td>{{user.organization.name}}</td>
         <td>
           <div uib-dropdown>
             <button type="button" class="btn btn-default" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
             <ul class="dropdown-menu" uib-dropdown-menu>
-              <li ng-if="currentUser.is_admin"><a href="/checkin/{{lu.user.id}}" translate>Check into List</a></li>
-              <li ng-if="list && lu.role == 'manager' && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="demoteManager(lu);" translate>Demote from Manager</a></li>
-              <li ng-if="list && lu.role != 'manager' && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="promoteManager(lu);" translate>Promote to Manager</a></li>
-              <li ng-if="list && lu.pending && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="approveUser(lu);" translate>Approve user</a></li>
-              <li ng-if="list && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="removeFromList(lu);" translate>Remove from list</a></li>
-              <li ng-if="currentUser.is_admin"><a href ng-click="deleteUser(lu);" translate>Delete Account</a></li>
+              <li ng-if="currentUser.is_admin"><a href="/checkin/{{user._id}}" translate>Check into List</a></li>
+              <li ng-if="list && list.isManager(user) && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="demoteManager(user);" translate>Demote from Manager</a></li>
+              <li ng-if="list && !list.isManager(user) && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="promoteManager(user);" translate>Promote to Manager</a></li>
+              <li ng-if="list && user.currentCheckin(list).pending && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="approveUser(user);" translate>Approve user</a></li>
+              <li ng-if="list && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="removeFromList(user);" translate>Remove from list</a></li>
+              <li ng-if="currentUser.is_admin"><a href ng-click="deleteUser(user);" translate>Delete Account</a></li>
             </ul>
           </div>
         </td>

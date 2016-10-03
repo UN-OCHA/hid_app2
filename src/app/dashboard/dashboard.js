@@ -1,18 +1,18 @@
 var dashboardController = angular.module('dashboardController', []);
 
-dashboardController.controller('DashboardCtrl', ['$scope', '$routeParams', '$http', 'List', 'ListUser', function($scope, $routeParams, $http, List, ListUser) {
+dashboardController.controller('DashboardCtrl', ['$scope', '$routeParams', '$http', 'List', function($scope, $routeParams, $http, List) {
   $scope.setAdminAvailable(true);
 
-  $scope.listsManager = [];
-  $scope.listsMember = ListUser.query({'user': $scope.currentUser.id}, function() {
-    angular.forEach($scope.listsMember, function (val, key) {
-      if (val.role == 'manager') {
-        $scope.listsManager.push(val);
-      }
+  $scope.listsManager = List.query({'managers': $scope.currentUser._id});
+
+  $scope.listsMember = new Array();
+  angular.forEach($scope.currentUser.checkins, function (val, key) {
+    var tmpList = List.get({listId: val.list}, function () {
+      $scope.listsMember.push(tmpList);
     });
   });
 
-  $scope.listsOwner = List.query({'owner': $scope.currentUser.id});
+  $scope.listsOwner = List.query({'owner': $scope.currentUser._id});
 
 }]);
 
