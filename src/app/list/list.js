@@ -45,7 +45,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       $scope.checkinUser = {
         list: $scope.list._id
       };
-      $scope.isOwner = $scope.list.owner._id == $scope.currentUser._id;
+      $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
       angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
         if (val._id == $scope.list._id) {
           $scope.isFavorite = true;
@@ -126,7 +126,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
       $scope.isMember = true;
       $scope.setCurrentUser($scope.currentUser);
-      $scope.refreshUsers();
+      $scope.pageChanged();
     });
   };
 
@@ -142,7 +142,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
         $scope.isMember = false;
         $scope.setCurrentUser($scope.currentUser);
-        $scope.refreshUsers();
+        $scope.pageChanged();
       });
     });
   };
@@ -251,7 +251,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'List', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, List) {
   $scope.request = $routeParams;
   $scope.totalItems = 0;
-  $scope.itemsPerPage = 1;
+  $scope.itemsPerPage = 10;
   $scope.currentPage = 1;
   $scope.request.limit = $scope.itemsPerPage;
   $scope.request.offset = 0;
