@@ -24,6 +24,55 @@ listServices.factory('List', ['$resource', 'config',
   }
 ]);
 
+listServices.factory('listService', ['$rootScope', 'List',
+  function ($rootScope, List) {
+    var filters = {}, lists = {}, request = {};
+
+    return {
+      addFilter: function(key, val, notify) {
+        filters[key] = val;
+        if (notify) this.notify();
+      },
+
+      setFilters: function(filters2, notify) {
+        filters = filters2;
+        if (notify) this.notify();
+      },
+
+      setRequest: function (req, notify) {
+        request = req;
+        if (notify) this.notify();
+      },
+
+      removeFilter: function(key, notify) {
+        delete filters[key];
+        if (notify) this.notify();
+      },
+
+      filter: function(cb) {
+        var trequest = angular.copy(request);
+        lists.length = 0;
+        angular.merge(trequest, filters);
+        lists = List.query(trequest, cb);
+      },
+
+      getLists: function() {
+        return lists;
+      },
+
+      subscribe: function(scope, callback) {
+        var handler = $rootScope.$on('lists-updated-event', callback);
+        scope.$on('$destroy', handler);
+      },
+
+      notify: function () {
+        $rootScope.$emit('lists-updated-event');
+      }
+    };
+  }
+]);
+
+
 var listControllers = angular.module('listControllers', []);
 
 listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, User, alertService, gettextCatalog) {
@@ -32,32 +81,25 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.isOwner = false;
   $scope.isFavorite = false;
 
-  if ($routeParams.list) {
-    $scope.list = List.get({'listId': $routeParams.list}, function () {
-      $scope.pageChanged();
-      $scope.setAdminAvailable(true);
-      angular.forEach($scope.currentUser.checkins, function (val, key) {
-        if (val.list == $scope.list._id) {
-          $scope.isMember = true;
-        }
-      });
-      $scope.isManager = $scope.list.isManager($scope.currentUser);
-      $scope.checkinUser = {
-        list: $scope.list._id
-      };
-      $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
-      angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
-        if (val._id == $scope.list._id) {
-          $scope.isFavorite = true;
-        }
-      });
+  $scope.list = List.get({'listId': $routeParams.list}, function () {
+    $scope.pageChanged();
+    $scope.setAdminAvailable(true);
+    angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
+      if (val.list == $scope.list._id) {
+        $scope.isMember = true;
+      }
     });
-  }
-  else {
-    $scope.list = new List();
-    $scope.list.type = 'list';
-    $scope.users = [];
-  }
+    $scope.isManager = $scope.list.isManager($scope.currentUser);
+    $scope.checkinUser = {
+      list: $scope.list._id
+    };
+    $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
+    angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
+      if (val._id == $scope.list._id) {
+        $scope.isFavorite = true;
+      }
+    });
+  });
   $scope.usersAdded = {};
 
   // Retrieve users
@@ -70,29 +112,15 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     $scope.newManagers = User.query({'name': search});
   };
 
-  // Save list settings
-  $scope.listSave = function() {
-    if ($scope.list._id) {
-      $scope.list.$update(function() {
-        $location.path('/lists/' + $scope.list._id);
-      });
-    }
-    else {
-      $scope.list.$save(function() {
-       $location.path('/lists/' + $scope.list._id);
-      });
-    }
-  };
-
   // Add users to a list
   $scope.addMemberToList = function() {
     var promises = [];
     angular.forEach($scope.usersAdded.users, function (value, key) {
       var tmpUser = User.get({userId: value}, function() {
-        if (!tmpUser.checkins) {
-          tmpUser.checkins = new Array();
+        if (!tmpUser[$scope.list.type + 's']) {
+          tmpUser[$scope.list.type + 's'] = new Array();
         }
-        tmpUser.checkins.push({list: $scope.list._id});
+        tmpUser[$scope.list.type + 's'].push({list: $scope.list._id});
         tmpUser.$update(function(out) {
           $scope.pageChanged();
         });
@@ -103,7 +131,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   // Remove a user from a list
   $scope.removeFromList = function (user) {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      user.checkins = user.checkins.filter(function (elt) {
+      user[$scope.list.type + 's'] = user[$scope.list.type + 's'].filter(function (elt) {
         return elt.list != $scope.list._id;
       });
       user.$update(function(out) {
@@ -118,10 +146,10 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
   // Check current user in this list
   $scope.checkIn = function () {
-    if (!$scope.currentUser.checkins) {
-      $scope.currentUser.checkins = new Array();
+    if (!$scope.currentUser[$scope.list.type + 's']) {
+      $scope.currentUser[$scope.list.type + 's'] = new Array();
     }
-    $scope.currentUser.checkins.push($scope.checkinUser);
+    $scope.currentUser[$scope.list.type + 's'].push($scope.checkinUser);
     User.update($scope.currentUser, function (user) {
       alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
       $scope.isMember = true;
@@ -132,7 +160,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
   // Check current user out of this list
   $scope.checkOut = function () {
-    $scope.currentUser.checkins = $scope.currentUser.checkins.filter(function (elt) {
+    $scope.currentUser[$scope.list.type + 's'] = $scope.currentUser[$scope.list.type + 's'].filter(function (elt) {
       return elt.list != $scope.list._id;
     });
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
@@ -205,9 +233,9 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   // Approve a user and remove his pending status
   $scope.approveUser = function (user) {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      for (var i = 0, len = user.checkins.length; i < len; i++) {
-        if (user.checkins[i].list == $scope.list._id) {
-          user.checkins[i].pending = false;
+      for (var i = 0, len = user[$scope.list.type + 's'].length; i < len; i++) {
+        if (user[$scope.list.type + 's'][i].list == $scope.list._id) {
+          user[$scope.list.type + 's'][i].pending = false;
         }
       }
       user.$update(function (out) {
@@ -248,20 +276,80 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
 }]);
 
-listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'List', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, List) {
+listControllers.controller('ListEditCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, alertService, gettextCatalog) {
+  if ($routeParams.list) {
+    $scope.list = List.get({'listId': $routeParams.list});
+  }
+  else {
+    $scope.list = new List();
+    $scope.list.type = 'list';
+  }
+
+  // Save list settings
+  $scope.listSave = function() {
+    if ($scope.list._id) {
+      $scope.list.$update(function() {
+        $location.path('/lists/' + $scope.list._id);
+      });
+    }
+    else {
+      $scope.list.$save(function() {
+       $location.path('/lists/' + $scope.list._id);
+      });
+    }
+  };
+
+}]);
+
+listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'listService', 'List', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, listService, List) {
   $scope.request = $routeParams;
   $scope.totalItems = 0;
   $scope.itemsPerPage = 10;
   $scope.currentPage = 1;
   $scope.request.limit = $scope.itemsPerPage;
   $scope.request.offset = 0;
+  listService.setRequest($scope.request);
 
-  $scope.lists = List.query($scope.request, function(lists, headers) {
+  $scope.listTypes = [{
+    key: 'operation',
+    val: 'Operation'
+  },
+  {
+    key: 'bundle',
+    val: 'Group'
+  },
+  {
+    key: 'organization',
+    val: 'Organization'
+  },
+  {
+    key: 'disaster',
+    val: 'Disaster'
+  }];
+
+  var queryCallback = function (lists, headers) {
     $scope.totalItems = headers()["x-total-count"];
+  };
+
+  listService.subscribe($scope, function () {
+    $scope.currentPage = 1;
+    $scope.pageChanged();
   });
+
+
+  $scope.lists = List.query($scope.request, queryCallback);
+  
   $scope.pageChanged = function () {
     $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-    $scope.lists = List.query($scope.request);
+    listService.setRequest($scope.request);
+    listService.filter(queryCallback);
+    $scope.lists = listService.getLists();
+  };
+
+  $scope.filter = function() {
+    listService.setFilters($scope.filters);
+    $scope.currentPage = 1;
+    $scope.pageChanged();
   };
 
 }]);

@@ -2,7 +2,8 @@ var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'ang
 
 app.constant('config', {
   apiUrl: 'http://api2.dev.humanitarian.id/api/v2/',
-  hrinfoUrl: 'https://www.humanitarianresponse.info/en/api/v1.0/'
+  hrinfoUrl: 'https://www.humanitarianresponse.info/en/api/v1.0/',
+  listTypes: ['operation', 'bundle', 'disaster', 'organization', 'list']
 });
 
 // Check if user is authenticated for paths which require it
@@ -81,7 +82,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/lists/new', {
         templateUrl: 'app/list/new-list.html',
-        controller: 'ListCtrl',
+        controller: 'ListEditCtrl',
         authenticate: true
       }).
       when('/lists/:list', {
@@ -91,7 +92,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/lists/:list/edit', {
         templateUrl: 'app/list/new-list.html',
-        controller: 'ListCtrl',
+        controller: 'ListEditCtrl',
         authenticate: true
       }).
       when('/lists', {

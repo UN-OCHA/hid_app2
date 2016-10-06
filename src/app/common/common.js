@@ -94,7 +94,7 @@ appServices.factory('hrinfoService', function ($http, config) {
 
 var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User',  function ($scope, $location, $window, User) {
+appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 'userService', 'listService',  function ($scope, $location, $window, User, userService, listService) {
   $scope.currentUser = null;
   $scope.currentUserResource = null;
   $scope.isAdminCollapsed = true;
@@ -154,7 +154,13 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 
   };
 
   $scope.searchUsers = function () {
-    $location.path('/users').search({q: $scope.filters.q});
+    var path = $location.path();
+    if (path == '/users' || path.indexOf('/lists/') != -1) {
+      userService.addFilter('name', $scope.filters.name, true);
+    }
+    if (path == '/lists') {
+      listService.addFilter('name', $scope.filters.name, true);
+    }
   };
 
   $scope.initCurrentUser();

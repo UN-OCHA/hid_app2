@@ -1,6 +1,6 @@
 var userDirectives = angular.module('userDirectives', []);
 
-userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', function($location, gettextCatalog, alertService, hrinfoService, User) {
+userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'userService', 'User', 'List', function($location, gettextCatalog, alertService, hrinfoService, userService, User, List) {
   return {
     restrict: 'E',
     templateUrl: 'app/user/users.html',
@@ -13,20 +13,27 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
       scope.currentPage = 1;
       scope.request.limit = scope.itemsPerPage;
       scope.request.offset = 0;
-      scope.listusers = [];
+      userService.setRequest(scope.request);
 
       // Helper function
       var queryCallback = function (users, headers) {
         scope.totalItems = headers()["x-total-count"];
       };
 
+      userService.subscribe(scope, function () {
+        scope.currentPage = 1;
+        scope.pageChanged();
+      });
+
       // Pager function
       scope.pageChanged = function () {
         scope.request.offset = (scope.currentPage - 1) * scope.itemsPerPage;
         if (scope.inlist) {
-          scope.request['checkins.list'] = scope.list._id;
+          scope.request[scope.list.type + 's.list'] = scope.list._id;
         }
-        scope.users = User.query(scope.request, queryCallback);
+        userService.setRequest(scope.request);
+        userService.filter(queryCallback);
+        scope.users = userService.getUsers();
       };
 
       if (!scope.inlist) {
@@ -34,31 +41,37 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
       }
 
       scope.filter = function() {
-        if (scope.filters.verified === false) {
-          delete scope.filters.verified;
-        }
-        if (scope.filters.is_admin === false) {
-          delete scope.filters.is_admin;
-        }
-        var request = angular.copy(scope.request);
-        scope.users.length = 0;
-        angular.merge(request, scope.filters);
-        scope.users = User.query(request, queryCallback);
+        userService.setFilters(scope.filters);
+        scope.currentPage = 1;
+        scope.pageChanged();
+      };
+
+      scope.operations = List.query({type: 'operation'});
+
+      scope.bundles = [];
+      scope.getBundles = function(search) {
+        scope.bundles = List.query({type: 'bundle', name: search});
+      };
+
+      scope.disasters = [];
+      scope.getDisasters = function(search) {
+        scope.disasters = List.query({type: 'disaster', name: search});
       };
 
       scope.roles = [];
-      scope.getRoles = function() {
-        return hrinfoService.getRoles().then(function (d) {
-          scope.roles = d;
-        });
+      hrinfoService.getRoles().then(function (d) {
+        scope.roles = d;
+      });
+
+      scope.organizations = [];
+      scope.getOrganizations = function(search) {
+        scope.organizations = List.query({type: 'organization', name: search});
       };
 
       scope.countries = [];
-      scope.getCountries = function() {
-        return hrinfoService.getCountries().then(function (d) {
-          scope.countries = d;
-        });
-      };
+      hrinfoService.getCountries().then(function (d) {
+        scope.countries = d;
+      });
 
       // Delete user account
       scope.deleteUser = function (user) {
@@ -90,7 +103,7 @@ userServices.factory('User', ['$resource', 'config',
     // Return current user checkin
     User.prototype.currentCheckin = function (list) {
       var out = false;
-      angular.forEach(this.checkins, function (val, key) {
+      angular.forEach(this[list.type + 's'], function (val, key) {
         if (angular.equals(list._id, val.list)) {
           out = val;
         }
@@ -100,6 +113,60 @@ userServices.factory('User', ['$resource', 'config',
 
     return User;
     
+  }
+]);
+
+userServices.factory('userService', ['$rootScope', 'User',
+  function ($rootScope, User) {
+    var filters = {}, userService = {}, users = {}, request = {};
+
+    userService.addFilter = function(key, val, notify) {
+      filters[key] = val;
+      if (notify) userService.notify();
+    };
+
+    userService.setFilters = function(filters2, notify) {
+      filters = filters2;
+      if (notify) userService.notify();
+    };
+
+    userService.setRequest = function (req, notify) {
+      request = req;
+      if (notify) userService.notify();
+    };
+
+    userService.removeFilter = function(key, notify) {
+      delete filters[key];
+      if (notify) userService.notify();
+    };
+
+    userService.filter = function(cb) {
+      if (filters.verified === false) {
+        delete filters.verified;
+      }
+      if (filters.is_admin === false) {
+        delete filters.is_admin;
+      }
+      var trequest = angular.copy(request);
+      users.length = 0;
+      angular.merge(trequest, filters);
+      users = User.query(trequest, cb);
+    };
+
+    userService.getUsers = function() {
+      return users;
+    };
+
+    userService.subscribe = function(scope, callback) {
+      var handler = $rootScope.$on('users-updated-event', callback);
+      scope.$on('$destroy', handler);
+    };
+
+    userService.notify = function () {
+      $rootScope.$emit('users-updated-event');
+    };
+
+    return userService;
   }
 ]);
 

@@ -1,16 +1,38 @@
-<h1 translate>Lists</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th translate>Name</th>
-      <th translate>Created by</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="list in lists">
-      <td><a ng-href="/lists/{{list._id}}">{{list.name}}</a></td>
-      <td><a ng-href="/users/{{list.owner._id}}">{{list.owner.name}}</a></td>
-    </tr>
-  </tbody>
-</table>
-<ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+<div class="col-sm-3">
+  <div class="form-group">
+    <label for="type" translate>Type</label>
+    <ui-select ng-model="filters['type']" name="type" allow-clear="true" theme="bootstrap" on-select="filter()" on-remove="filter()" style="min-width: 200px;">
+      <ui-select-match allow-clear="true" placeholder="Filter by type">{{$select.selected.val}}</ui-select-match>
+      <ui-select-choices repeat="type.key as type in listTypes">
+        {{type.val}}
+      </ui-select-choices>
+    </ui-select>
+  </div>
+
+  <div class="form-group">
+    <label for="sort" translate>Sort by</label>
+    <select ng-model="request['sort']" name="sort" class="form-control" ng-change="filter()">
+      <option value="name" translate>Name</option>
+      <option value="type" translate>Type</option>
+    </select>
+  </div>
+
+</div>
+<div class="col-sm-9">
+  <h1 translate>Lists</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th translate>Name</th>
+        <th translate>Created by</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="list in lists">
+        <td><a ng-href="/lists/{{list._id}}">{{list.name}}</a></td>
+        <td><a ng-href="/users/{{list.owner._id}}">{{list.owner.name}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+</div>
