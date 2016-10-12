@@ -75,7 +75,7 @@ listServices.factory('listService', ['$rootScope', 'List',
 
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, User, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'User', 'UserCheckIn', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, User, UserCheckIn, alertService, gettextCatalog) {
   $scope.isMember = false;
   $scope.isManager = false;
   $scope.isOwner = false;
@@ -116,14 +116,8 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.addMemberToList = function() {
     var promises = [];
     angular.forEach($scope.usersAdded.users, function (value, key) {
-      var tmpUser = User.get({userId: value}, function() {
-        if (!tmpUser[$scope.list.type + 's']) {
-          tmpUser[$scope.list.type + 's'] = new Array();
-        }
-        tmpUser[$scope.list.type + 's'].push({list: $scope.list._id});
-        tmpUser.$update(function(out) {
-          $scope.pageChanged();
-        });
+      UserCheckIn.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
+        $scope.pageChanged();
       });
     });
   };
@@ -146,14 +140,10 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
   // Check current user in this list
   $scope.checkIn = function () {
-    if (!$scope.currentUser[$scope.list.type + 's']) {
-      $scope.currentUser[$scope.list.type + 's'] = new Array();
-    }
-    $scope.currentUser[$scope.list.type + 's'].push($scope.checkinUser);
-    User.update($scope.currentUser, function (user) {
+    UserCheckIn.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, $scope.checkinUser, function (user) {
       alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
       $scope.isMember = true;
-      $scope.setCurrentUser($scope.currentUser);
+      $scope.setCurrentUser(user);
       $scope.pageChanged();
     });
   };
@@ -164,14 +154,23 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       return elt.list != $scope.list._id;
     });
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      User.update($scope.currentUser, function (user) {
-        // Close existing alert
-        alert.closeConfirm();
-        alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
-        $scope.isMember = false;
-        $scope.setCurrentUser($scope.currentUser);
-        $scope.pageChanged();
-      });
+      var checkInId = 0;
+      console.log($scope.currentUser);
+      for (var i = 0, len = $scope.currentUser[$scope.list.type + 's']; i < len; i++) {
+        if ($scope.list._id == $scope.currentUser[$scope.list.type + 's'][i].list) {
+          checkInId = $scope.currentUser[$scope.list.type + 's']._id;
+        }
+      }
+      if (checkInId != 0) {
+        UserCheckIn.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function (user) {
+          // Close existing alert
+          alert.closeConfirm();
+          alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
+          $scope.isMember = false;
+          $scope.setCurrentUser(user);
+          $scope.pageChanged();
+        });
+      }
     });
   };
 
@@ -308,6 +307,7 @@ listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettex
   $scope.currentPage = 1;
   $scope.request.limit = $scope.itemsPerPage;
   $scope.request.offset = 0;
+  $scope.request.sort = 'name';
   listService.setRequest($scope.request);
 
   $scope.listTypes = [{

@@ -13,6 +13,7 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
       scope.currentPage = 1;
       scope.request.limit = scope.itemsPerPage;
       scope.request.offset = 0;
+      scope.request.sort = 'name';
       userService.setRequest(scope.request);
 
       // Helper function
@@ -113,6 +114,12 @@ userServices.factory('User', ['$resource', 'config',
 
     return User;
     
+  }
+]);
+
+userServices.factory('UserCheckIn', ['$resource', 'config',
+  function ($resource, config) {
+    return $resource(config.apiUrl + 'user/:userId/:listType/:checkInId');
   }
 ]);
 
@@ -388,8 +395,9 @@ userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCata
 
 }]);
 
-userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService', 'User', function ($scope, $location, alertService, User) {
+userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService', 'User', 'gettextCatalog', function ($scope, $location, alertService, User, gettextCatalog) {
   $scope.user = new User();
+  $scope.user.locale = gettextCatalog.getCurrentLanguage();
   $scope.currentPath = $location.path();
 
   $scope.userCreate = function(registerForm) {
