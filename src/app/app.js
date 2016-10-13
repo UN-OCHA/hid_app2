@@ -108,6 +108,10 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/auth/password_reset.html',
         controller: 'AuthCtrl'
       })
+      .when('/verify/:userId/:hash', {
+        template: '',
+        controller: 'VerifyCtrl'
+      })
       .when('/logout', {
         template: '',
         controller: 'AuthCtrl',

@@ -72,7 +72,12 @@ authController.controller('AuthCtrl', ['$scope', '$location', 'gettextCatalog', 
       $scope.initCurrentUser();
       $location.path('/dashboard');
     }, function (data) {
-      alertService.add('danger', gettextCatalog.getString('We could not log you in. Please verify your email and password.'));
+      if (data.message == 'Please verify your email address') {
+        alertService.add('danger', gettextCatalog.getString('We could not log you in because your email address is not verified yet.'));
+      }
+      else {
+        alertService.add('danger', gettextCatalog.getString('We could not log you in. Please verify your email and password.'));
+      }
     });
   };
 
@@ -93,4 +98,15 @@ authController.controller('AuthCtrl', ['$scope', '$location', 'gettextCatalog', 
   else if ($location.path() == '/' && $scope.currentUser) {
     $location.path('/dashboard');
   }
+}]);
+
+authController.controller('VerifyCtrl', ['$scope', '$location', '$routeParams', '$http', 'gettextCatalog', 'config', 'alertService', function ($scope, $location, $routeParams, $http, gettextCatalog, config, alertService) {
+  var userId = $routeParams.userId;
+  var hash = $routeParams.hash;
+  $http.put(config.apiUrl + 'user/' + $routeParams.userId + '/email_verified', { hash: $routeParams.hash }).then(function (response) {
+    alertService.add('success', gettextCatalog.getString('Thank you for verifying your email. You can now login through our application, or through any other application using Humanitarian ID'));
+    $location.path('/');
+  }, function (response) {
+    alertService.add('danger', gettextCatalog.getString('The verification link did not work'));
+  });
 }]);

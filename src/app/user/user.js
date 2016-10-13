@@ -398,6 +398,7 @@ userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCata
 userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService', 'User', 'gettextCatalog', function ($scope, $location, alertService, User, gettextCatalog) {
   $scope.user = new User();
   $scope.user.locale = gettextCatalog.getCurrentLanguage();
+  $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/verify';
   $scope.currentPath = $location.path();
 
   $scope.userCreate = function(registerForm) {

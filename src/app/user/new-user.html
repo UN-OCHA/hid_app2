@@ -41,7 +41,7 @@
   </div>
   <div class="form-group" ng-class="{'has-error': register.password_confirm.$touched && register.password_confirm.$invalid}" ng-if="currentPath === '/register'">
     <label for="password_confirm" translate>Password (confirm)</label>
-    <input type="password" name="password_confirm" class="form-control" match-password="password" id="password_confirm" placeholder="" ng-model="password_confirm" required>
+    <input type="password" name="password_confirm" class="form-control" match-password="password" id="password_confirm" placeholder="" ng-model="user.confirm_password" required>
     <div class="clearfix">
       <div ng-messages="register.password_confirm.$error" ng-show="register.password_confirm.$touched" ng-messages-multiple="ng-messages-multiple">
         <div ng-messages-include="app/common/messages.html"></div>
