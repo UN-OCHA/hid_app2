@@ -66,7 +66,8 @@ authServices.factory('APIInterceptor', ['$window', 'config', function ($window, 
 
 var authController = angular.module('authController', []);
 
-authController.controller('AuthCtrl', ['$scope', '$location', 'gettextCatalog', 'alertService', 'AuthService', 'User', function ($scope, $location, gettextCatalog, alertService, AuthService, User) {
+authController.controller('AuthCtrl', ['$scope', '$location', '$http', 'gettextCatalog', 'alertService', 'AuthService', 'User', 'config', function ($scope, $location, $http, gettextCatalog, alertService, AuthService, User, config) {
+  $scope.email = '';
   $scope.login = function() {
     AuthService.login($scope.email, $scope.password).then(function () {
       $scope.initCurrentUser();
@@ -89,7 +90,10 @@ authController.controller('AuthCtrl', ['$scope', '$location', 'gettextCatalog', 
   };
 
   $scope.passwordReset = function() {
-    alertService.add('success', gettextCatalog.getString('You will soon receive an email which will allow you to reset your password.'));
+    var app_reset_url = $location.protocol() + '://' + $location.host() + '/reset_password';
+    $http.put(config.apiUrl + 'user/password', {email: $scope.email, app_reset_url: app_reset_url}).then(function (response) {
+      alertService.add('success', gettextCatalog.getString('You will soon receive an email which will allow you to reset your password.'));
+    });
   };
 
   if ($location.path() == '/logout') {
