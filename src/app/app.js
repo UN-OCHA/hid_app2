@@ -108,7 +108,11 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/auth/password_reset.html',
         controller: 'AuthCtrl'
       })
-      .when('/verify/:userId/:hash', {
+      .when('/reset_password/:hash', {
+        templateUrl: 'app/auth/reset_password.html',
+        controller: 'AuthCtrl'
+      })
+      .when('/verify/:hash', {
         template: '',
         controller: 'VerifyCtrl'
       })

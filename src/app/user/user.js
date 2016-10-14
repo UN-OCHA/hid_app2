@@ -370,13 +370,15 @@ userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCata
   });
 
   // Set a new password for the current user
-  $scope.savePassword = function() {
+  $scope.savePassword = function(form) {
     $scope.user.old_password = $scope.password.old;
     $scope.user.new_password = $scope.password.new;
     $scope.user.$update(function (user) {
-     alertService.add('success', gettextCatalog.getString('Your password was successfully changed.'));
+      alertService.add('success', gettextCatalog.getString('Your password was successfully changed.'));
+      form.$setPristine();
     }, function (resp) {
       alertService.add('danger', gettextCatalog.getString('There was an error saving your password.'));
+      form.$setPristine();
     });
   };
 
@@ -398,17 +400,19 @@ userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCata
 userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService', 'User', 'gettextCatalog', function ($scope, $location, alertService, User, gettextCatalog) {
   $scope.user = new User();
   $scope.user.locale = gettextCatalog.getCurrentLanguage();
-  $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/verify';
+  $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/reset_password';
   $scope.currentPath = $location.path();
 
   $scope.userCreate = function(registerForm) {
     $scope.user.$save(function(user) {
-      alertService.add('success', 'Thank you, your registration is now complete. You will soon receive a confirmation email.');
+      alertService.add('success', 'The user was successfully created. If you inserted an email address, he/she will receive an email to claim his account. You can now edit the user profile to add more information.');
       registerForm.$setPristine();
       registerForm.$setUntouched();
       $scope.user = new User();
+      $location.path('/users/' + user._id);
     }, function (resp) {
       alertService.add('danger', 'There was an error processing your registration.');
+      registerForm.$setPristine();
     });
   };
 }]);

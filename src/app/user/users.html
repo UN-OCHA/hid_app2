@@ -66,6 +66,14 @@
   </div>
 
   <div class="form-group">
+    <label><input type="checkbox" ng-model="filters.is_orphan" name="is_orphan" ng-change="filter()" /> Orphan</label>
+  </div>
+
+  <div class="form-group">
+    <label><input type="checkbox" ng-model="filters.is_ghost" name="is_ghost" ng-change="filter()" /> Ghost</label>
+  </div>
+
+  <div class="form-group">
     <label><input type="checkbox" ng-model="filters.verified" name="verified" ng-change="filter()" /> Verified</label>
   </div>
 

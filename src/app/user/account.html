@@ -5,7 +5,7 @@
         <h3 class="panel-title" translate>Change password</h3>
       </div>
       <div class="panel-body">
-        <form name="changePassword" ng-submit="changePassword.$valid && savePassword()" autocomplete="off" novalidate>
+        <form name="changePassword" ng-submit="changePassword.$valid && savePassword(changePassword)" autocomplete="off" novalidate>
           <div class="form-group" ng-class="{'has-error': changePassword.oldPassword.$touched && changePassword.oldPassword.$invalid}">
             <label for="old_password" translate>Old password</label>
             <input name="oldPassword" type="password" class="form-control" placeholder="" ng-model="password.old" required>
@@ -33,7 +33,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" ng-disabled="changePassword.$invalid" translate>Update password</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="changePassword.$invalid || changePassword.$submitted" translate>Update password</button>
         </form>
       </div>
     </div>
