@@ -5,8 +5,8 @@
   <div>
     <a class="btn btn-primary" ng-click="exportVcard();" translate>Export Contact Info</a>
   </div>
-  <div>
-    <a class="btn btn-primary" translate>Send Claim Email</a>
+  <div ng-show="user.is_orphan">
+    <a class="btn btn-primary" ng-click="sendClaimEmail();" translate>Send Claim Email</a>
   </div>
   <div>
     <a class="btn btn-primary" translate>Report a Problem</a>

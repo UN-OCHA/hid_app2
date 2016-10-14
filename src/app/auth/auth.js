@@ -66,7 +66,7 @@ authServices.factory('APIInterceptor', ['$window', 'config', function ($window, 
 
 var authController = angular.module('authController', []);
 
-authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$http', 'gettextCatalog', 'alertService', 'AuthService', 'User', 'config', function ($scope, $routeParams, $location, $http, gettextCatalog, alertService, AuthService, User, config) {
+authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$http', 'gettextCatalog', 'alertService', 'AuthService', 'User', function ($scope, $routeParams, $location, $http, gettextCatalog, alertService, AuthService, User) {
   $scope.email = '';
   $scope.login = function() {
     AuthService.login($scope.email, $scope.password).then(function () {
@@ -91,7 +91,7 @@ authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$
 
   $scope.passwordReset = function() {
     var app_reset_url = $location.protocol() + '://' + $location.host() + '/reset_password';
-    $http.put(config.apiUrl + 'user/password', {email: $scope.email, app_reset_url: app_reset_url}).then(function (response) {
+    User.passwordReset($scope.email, function (response) {
       alertService.add('success', gettextCatalog.getString('You will soon receive an email which will allow you to reset your password.'));
       $scope.reset.$setPristine();
     }, function (response) {
@@ -101,7 +101,7 @@ authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$
   };
 
   $scope.resetPasswordFunction = function() {
-    $http.put(config.apiUrl + 'user/password', {hash: $routeParams.hash, password: $scope.newPassword}).then(function (response) {
+    User.resetPassword($routeParams.hash, $scope.newPassword, function (response) {
       alertService.add('success', gettextCatalog.getString('Your password was successfully changed. You can now login.'));
       $location.path('/');
     }, function (response) {
@@ -118,9 +118,9 @@ authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$
   }
 }]);
 
-authController.controller('VerifyCtrl', ['$scope', '$location', '$routeParams', '$http', 'gettextCatalog', 'config', 'alertService', function ($scope, $location, $routeParams, $http, gettextCatalog, config, alertService) {
+authController.controller('VerifyCtrl', ['$scope', '$location', '$routeParams', 'User', 'gettextCatalog', 'alertService', function ($scope, $location, $routeParams, User, gettextCatalog, alertService) {
   var hash = $routeParams.hash;
-  $http.put(config.apiUrl + 'user/email_verified', { hash: $routeParams.hash }).then(function (response) {
+  User.verifyEmail($routeParams.hash, function (response) {
     alertService.add('success', gettextCatalog.getString('Thank you for verifying your email. You can now login through our application, or through any other application using Humanitarian ID'));
     $location.path('/');
   }, function (response) {

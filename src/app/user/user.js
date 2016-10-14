@@ -91,8 +91,8 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
 
 var userServices = angular.module('userServices', ['ngResource']);
 
-userServices.factory('User', ['$resource', 'config',
-  function($resource, config){
+userServices.factory('User', ['$resource', '$http', '$location', 'config',
+  function($resource, $http, $location, config){
 
     var User = $resource(config.apiUrl + 'user/:userId', {userId: '@_id'},
     {
@@ -111,6 +111,29 @@ userServices.factory('User', ['$resource', 'config',
       });
       return out;
     };
+
+    // Send claim email
+    User.prototype.claimEmail = function (success, error) {
+      var app_reset_url = $location.protocol() + '://' + $location.host() + '/reset_password';
+      $http.put(config.apiUrl + 'user/' + this._id + '/orphan', {app_reset_url: app_reset_url}).then(success, error);
+    };
+
+    // Send password reset email
+    User.passwordReset = function(email, success, error) {
+      var app_reset_url = $location.protocol() + '://' + $location.host() + '/reset_password';
+      $http.put(config.apiUrl + 'user/password', {email: email, app_reset_url: app_reset_url}).then(success, error);
+    };
+
+    // Reset user email
+    User.resetPassword = function(hash, password, success, error) {
+      $http.put(config.apiUrl + 'user/password', {hash: hash, password: password}).then(success, error);
+    };
+
+    // Verify user email
+    User.verifyEmail = function (hash, success, error) {
+      $http.put(config.apiUrl + 'user/email_verified', { hash: hash }).then(success, error);
+    };
+
 
     return User;
     
@@ -179,7 +202,7 @@ userServices.factory('userService', ['$rootScope', 'User',
 
 var userControllers = angular.module('userControllers', []);
 
-userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', function($scope, $routeParams, $http, $window, alertService, hrinfoService, md5, config, User, List) {
+userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', function($scope, $routeParams, $http, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List) {
   $scope.setAdminAvailable(true);
   $scope.newEmail = {
     type: '',
@@ -318,6 +341,20 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
   $scope.setOrganization = function (data, index) {
     $scope.user.organizations[index] = data;
   };
+
+  // Send claim email
+  $scope.sendClaimEmail = function () {
+    var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      $scope.user.claimEmail(function (response) {
+        alert.closeConfirm();
+        alertService.add('success', gettextCatalog.getString('Claim email sent successfully'));
+      }, function (response) {
+        alert.closeConfirm();
+        alertService.add('danger', gettextCatalog.getString('There was an error sending the claim email'));
+      });
+    });
+  };
+
 
   // Export user details to vcard
   $scope.exportVcard = function () {
