@@ -102,7 +102,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/register', {
         templateUrl: 'app/auth/register.html',
-        controller: 'UserNewCtrl'
+        controller: 'UserRegisterCtrl'
       })
       .when('/password_reset', {
         templateUrl: 'app/auth/password_reset.html',
