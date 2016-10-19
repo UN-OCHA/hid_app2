@@ -476,20 +476,23 @@ userControllers.controller('UserRegisterCtrl', ['$scope', '$location', 'alertSer
 userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
 }]);
 
-userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'User', 'List', function($scope, $routeParams, $q, gettextCatalog, hrinfoService, alertService, User, List) {
+userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'config', 'hrinfoService', 'alertService', 'User', 'UserCheckIn', 'List', function($scope, $routeParams, $q, gettextCatalog, config, hrinfoService, alertService, User, UserCheckIn, List) {
   $scope.request = $routeParams;
   $scope.step = 1;
 
   var queryCallback = function () {
     $scope.lists = List.query({}, function() {
       $scope.lists = $scope.lists.filter(function (list) {
-        var out = true;
-        if (!$scope.user.checkins) {
-          $scope.user.checkins = new Array();
-        }
-        for (var i = 0, len = $scope.user.checkins.length; i < len; i++) {
-          if ($scope.user.checkins[i].list == list._id) {
-            out = false;
+        var out = true, listType = '';
+        for (var i = 0, len = config.listTypes.length; i < len; i++) {
+          listType = config.listTypes[i] + 's';
+          if (!$scope.user[listType]) {
+            $scope.user[listType] = new Array();
+          }
+          for (var j = 0, tlen = $scope.user[listType].length; j < tlen; j++) {
+            if ($scope.user[listType][j].list == list._id) {
+              out = false;
+            }
           }
         }
         return out;
@@ -535,19 +538,18 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
         list: checked[i]._id,
         checkoutDate: $scope.departureDate
       };
-      if (!$scope.user.checkins) {
-        $scope.user.checkins = new Array();
-      }
-      $scope.user.checkins.push(checkinUser);
+      UserCheckIn.save({userId: $scope.currentUser._id, listType: checked[i].type + 's'}, checkinUser, function (out) {
+        if ($scope.currentUser._id == $scope.user._id) {
+          $scope.user = User.get({userId: $scope.currentUser._id}, function () {
+            $scope.setCurrentUser($scope.user);
+            alertService.add('success', gettextCatalog.getString('You were succesfully checked in'));
+          });
+        }
+        else {
+          alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
+        }
+      });
     }
-    User.update($scope.user, function(out) {
-      if ($scope.currentUser.id == $scope.user.id) {
-        alertService.add('success', gettextCatalog.getString('You were successfully checked in'));
-      }
-      else {
-        alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
-      }
-    });
   };
 
 }]);

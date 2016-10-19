@@ -11,8 +11,8 @@
   <tbody>
     <tr ng-repeat="list in lists">
       <td><input type="checkbox" ng-model="list.checked" /></td>
-      <td><a ng-href="/lists/{{list.id}}">{{list.name}}</a></td>
-      <td><a ng-href="/users/{{list.owner.id}}">{{list.owner.name}}</a></td>
+      <td><a ng-href="/lists/{{list._id}}">{{list.name}}</a></td>
+      <td><a ng-href="/users/{{list.owner._id}}">{{list.owner.name}}</a></td>
     </tr>
   </tbody>
 </table>
