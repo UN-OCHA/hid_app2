@@ -538,7 +538,7 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
         list: checked[i]._id,
         checkoutDate: $scope.departureDate
       };
-      UserCheckIn.save({userId: $scope.currentUser._id, listType: checked[i].type + 's'}, checkinUser, function (out) {
+      UserCheckIn.save({userId: $scope.user._id, listType: checked[i].type + 's'}, checkinUser, function (out) {
         if ($scope.currentUser._id == $scope.user._id) {
           $scope.user = User.get({userId: $scope.currentUser._id}, function () {
             $scope.setCurrentUser($scope.user);

@@ -1,6 +1,6 @@
 <div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
-  <div>
-    <a class="btn btn-primary" translate>Check into List</a>
+  <div ng-show="currentUser.is_admin || (currentUser._id == user._id)">
+    <a class="btn btn-primary" href="/checkin/{{user._id}}" translate>Check into List</a>
   </div>
   <div>
     <a class="btn btn-primary" ng-click="exportVcard();" translate>Export Contact Info</a>
