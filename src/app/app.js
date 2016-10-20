@@ -80,6 +80,11 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'CheckinCtrl',
         authenticate: true
       }).
+      when('/kiosk', {
+        templateUrl: 'app/user/kiosk.html',
+        controller: 'KioskCtrl',
+        authenticate: true
+      }).
       when('/lists/new', {
         templateUrl: 'app/list/new-list.html',
         controller: 'ListEditCtrl',
