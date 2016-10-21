@@ -150,17 +150,18 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
   // Check current user out of this list
   $scope.checkOut = function () {
-    $scope.currentUser[$scope.list.type + 's'] = $scope.currentUser[$scope.list.type + 's'].filter(function (elt) {
-      return elt.list != $scope.list._id;
-    });
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
       var checkInId = 0;
       console.log($scope.currentUser);
-      for (var i = 0, len = $scope.currentUser[$scope.list.type + 's']; i < len; i++) {
-        if ($scope.list._id == $scope.currentUser[$scope.list.type + 's'][i].list) {
-          checkInId = $scope.currentUser[$scope.list.type + 's']._id;
+      for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {
+        console.log($scope.list._id);
+        console.log($scope.currentUser[$scope.list.type + 's'][i].list);
+        if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list)) {
+          console.log('equals');
+          checkInId = $scope.currentUser[$scope.list.type + 's'][i]._id;
         }
       }
+      console.log(checkInId);
       if (checkInId != 0) {
         UserCheckIn.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function (user) {
           // Close existing alert

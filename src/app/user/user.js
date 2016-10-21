@@ -488,6 +488,10 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     $scope.lists = List.query({'name': val});
   };
 
+  $scope.getOrganizations = function(search) {
+    $scope.organizations = List.query({'name': search, 'type': 'organization'});
+  };
+
   $scope.setStep1Clicked = function () {
     $scope.step1clicked = true;
     return true;
@@ -500,11 +504,10 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
 
   $scope.gotoStep = function (step) {
     if (step === 2) {
-      console.log($scope.list);
       $scope.title = "Check into " + $scope.list.list.name;
     }
     if (step === 3) {
-      $scope.users = User.query({email: $scope.email}, function () {
+      $scope.users = User.query({email: $scope.user.email}, function () {
         if ($scope.users.length) {
           $scope.user = $scope.users[0];
         }
@@ -526,6 +529,14 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     });
   };
 
+  $scope.reinitialize = function() {
+    $scope.step = 2;
+    $scope.kioskCreating = false;
+    $scope.departureDate = '';
+    $scope.user = new User();
+    $scope.step2clicked = false;
+  };
+
   $scope.checkIn = function (user) {
     var checkinUser = {}, prom = [];
     checkinUser = {
@@ -535,15 +546,10 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     // Then do the checkin
     UserCheckIn.save({userId: user._id, listType: $scope.list.list.type + 's'}, checkinUser, function (out) {
       alertService.add('success', 'Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap.');
-      $scope.step = 2;
-      $scope.kioskCreating = false;
-      $scope.departureDate = '';
-      $scope.user = new User();
+      $scope.reinitialize();
     }, function (resp) {
       alertService.add('danger', 'There was an error checking you in.');
-      $scope.step = 2;
-      $scope.kioskCreating = false;
-      $scope.departureDate = '';
+      $scope.reinitialize();
     });
   };
 
@@ -558,9 +564,7 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
         $scope.checkIn(user);
       }, function (resp) {
         alertService.add('danger', 'There was an error registering your account.');
-        $scope.step = 2;
-        $scope.kioskCreating = false;
-        $scope.departureDate = '';
+        $scope.reinitialize();
       });
     }
     else {
@@ -568,9 +572,7 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
         $scope.checkIn($scope.user);
       }, function (resp) {
         alertService.add('danger', 'There was an error updating your account.');
-        $scope.step = 2;
-        $scope.kioskCreating = false;
-        $scope.departureDate = '';
+        $scope.reinitialize();
       });
     }
   };

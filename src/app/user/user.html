@@ -22,10 +22,18 @@
       <div class="col-xs-7">
         <h2><span ng-show="user.verified && !profileForm.$visible"><i class="fa fa-check-circle"></i></span> <span editable-text="user.given_name">{{user.given_name}}</span> <span editable-text="user.family_name">{{user.family_name}}</span></h2>
         <div ng-show="profileForm.$visible"><div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div></div>
-        <p editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</p>
-        <p>User cluster</p>
+        <ul class="list-inline list-unstyled">
+          <li ng-repeat="(key, val) in user.organizations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+        </ul>
+        <ul class="list-inline list-unstyled">
+          <li ng-repeat="(key, val) in user.bundles"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+        </ul>
         <p>{{user.location.country.name}}</p>
         <p ng-if="user.verified_by"><span translate>Verified by</span>: <a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
+        <ul class="list-inline list-unstyled">
+          <li ng-repeat="(key, val) in user.operations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          <li ng-repeat="(key, val) in user.disasters"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+        </ul>
         <p editable-textarea="user.status" e-rows="7" e-cols="40">{{user.status}}</p>
       </div>
       <div class="col-xs-2 text-right" ng-show="canEditUser">
@@ -98,9 +106,11 @@
       </div>
 
       <div class="panel-body">
-        <h4><span translate>Organization</span> <i class="fa fa-star"></i></h4>
-        <span editable-text="user.organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)">{{user.organization.name}}</span>
-        <h4 ng-show="(user.organizations && user.organizations.length) || roleForm.$visible" translate>Other organizations</h4>
+        <h4 translate>Organizations</h4>
+        <ul class="list-inline list-unstyled">
+          <li ng-repeat="(key, val) in user.organizations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+        </ul>
+        <p>To add organizations to your profile, please <a href="/lists?type=organization">Check in</a></p>
         <span ng-show="roleForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('organizations')"><i class="fa fa-plus"></i></button> <span translate>Add a new Organization</span></span>
         <div ng-repeat="organization in user.organizations">
           <span editable-text="organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)" onbeforesave="setOrganization($data, $index)">{{organization.name}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('organizations', $index)"><i class="fa fa-times"></i></button>
@@ -208,6 +218,10 @@
           </div>
         </div>
         <div class="panel-body">
+          <h4 ng-show="(user.lists && user.lists.length)" translate>Other Lists</h4>
+          <ul class="list-inline list-unstyled">
+            <li ng-repeat="(key, val) in user.lists"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          </ul>
           <h4 ng-show="(user.websites && user.websites.length) || additionalForm.$visible" translate>Websites</h4>
           <span ng-show="additionalForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('websites')"><i class="fa fa-plus"></i></button> <span translate>Add a new Website</span></span>
           <div ng-repeat="website in user.websites">
