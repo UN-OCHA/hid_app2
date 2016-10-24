@@ -419,6 +419,15 @@ userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCata
     });
   };
 
+  // Set settings for the current user
+  $scope.saveSettings = function (form) {
+    $scope.user.$update(function (user) {
+      alertService.add('success', gettextCatalog.getString('Your settings were successfully changed.'));
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error saving your settings.'));
+    });
+  };
+
   // Delete current user account
   $scope.deleteAccount = function (lu) {
     var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore.'), true, function() {
