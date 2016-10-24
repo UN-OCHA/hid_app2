@@ -442,13 +442,13 @@ userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService'
 
   $scope.userCreate = function(registerForm) {
     $scope.user.$save(function(user) {
-      alertService.add('success', 'The user was successfully created. If you inserted an email address, he/she will receive an email to claim his account. You can now edit the user profile to add more information.');
+      alertService.add('success', gettextCatalog.getString('The user was successfully created. If you inserted an email address, he/she will receive an email to claim his account. You can now edit the user profile to add more information.'));
       registerForm.$setPristine();
       registerForm.$setUntouched();
       $scope.user = new User();
       $location.path('/users/' + user._id);
     }, function (resp) {
-      alertService.add('danger', 'There was an error processing your registration.');
+      alertService.add('danger', gettextCatalog.getString('There was an error processing your registration.'));
       registerForm.$setPristine();
     });
   };
@@ -462,12 +462,12 @@ userControllers.controller('UserRegisterCtrl', ['$scope', '$location', 'alertSer
 
   $scope.userCreate = function(registerForm) {
     $scope.user.$save(function(user) {
-      alertService.add('success', 'Thank you for creating an account. You will soon receive a confirmation email to confirm your account.');
+      alertService.add('success', gettextCatalog.getString('Thank you for creating an account. You will soon receive a confirmation email to confirm your account.'));
       registerForm.$setPristine();
       registerForm.$setUntouched();
       $scope.user = new User();
     }, function (resp) {
-      alertService.add('danger', 'There was an error processing your registration.');
+      alertService.add('danger', gettextCatalog.getString('There was an error processing your registration.'));
       registerForm.$setPristine();
     });
   };
@@ -483,6 +483,8 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
   $scope.lists = new Array();
   $scope.list = {};
   $scope.kioskCreating = false;
+  $scope.newUser = true;
+  $scope.organization = {};
 
   $scope.getLists = function (val) {
     $scope.lists = List.query({'name': val});
@@ -537,6 +539,16 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     $scope.step2clicked = false;
   };
 
+  $scope.checkInSuccess = function() {
+    if ($scope.newUser) {
+      alertService.add('success', gettextCatalog.getString('Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap.'));
+    }
+    else {
+      alertService.add('success', gettextCatalog.getString('Thank you for checking in !'));
+    }
+    $scope.reinitialize();
+  };
+
   $scope.checkIn = function (user) {
     var checkinUser = {}, prom = [];
     checkinUser = {
@@ -545,10 +557,18 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     };
     // Then do the checkin
     UserCheckIn.save({userId: user._id, listType: $scope.list.list.type + 's'}, checkinUser, function (out) {
-      alertService.add('success', 'Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap.');
-      $scope.reinitialize();
+      if ($scope.organization) {
+        delete checkinUser.checkoutDate;
+        checkinUser.list = $scope.organization.organization._id;
+        UserCheckIn.save({userId: user._id, listType: 'organizations'}, checkinUser, function (out) {
+          $scope.checkInSuccess();
+        });
+      }
+      else {
+        $scope.checkInSuccess();
+      }
     }, function (resp) {
-      alertService.add('danger', 'There was an error checking you in.');
+      alertService.add('danger', gettextCatalog.getString('There was an error checking you in.'));
       $scope.reinitialize();
     });
   };
@@ -559,19 +579,21 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     if (!$scope.user._id) {
       $scope.user.locale = gettextCatalog.getCurrentLanguage();
       $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/reset_password';
+      $scope.user.registration_type = 'kiosk';
 
       $scope.user.$save(function(user) {
         $scope.checkIn(user);
       }, function (resp) {
-        alertService.add('danger', 'There was an error registering your account.');
+        alertService.add('danger', gettextCatalog.getString('There was an error registering your account.'));
         $scope.reinitialize();
       });
     }
     else {
+      $scope.newUser = false;
       $scope.user.$update(function (user) {
         $scope.checkIn($scope.user);
       }, function (resp) {
-        alertService.add('danger', 'There was an error updating your account.');
+        alertService.add('danger', gettextCatalog.getString('There was an error updating your account.'));
         $scope.reinitialize();
       });
     }
