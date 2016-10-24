@@ -132,7 +132,7 @@
               </select>
             </div>
             <div class="col-sm-9">
-              <input type="tel" class="form-control" id="phone" ng-model="user.phone_number" placeholder="Phone">
+              <bc-phone-number name="phone_number" ng-model="user.phone_number" is-valid="isValidPhoneNumber" ng-class="{'has-error': user.phone_number && !isValidPhoneNumber, 'has-success': user.phone_number && isValidPhoneNumber}"></bc-phone-number>
             </div>
           </div>
         </div>
