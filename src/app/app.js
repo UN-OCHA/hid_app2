@@ -1,4 +1,4 @@
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
 
 app.constant('config', {
   apiUrl: 'http://api2.dev.humanitarian.id/api/v2/',

@@ -52,8 +52,14 @@
           </div>
           <div class="form-group">
             <label for="zoneinfo" translate>Timezone</label>
-            <select name="zoneinfo" ng-model="user.zoneinfo" class="form-control">
-            </select>
+            <ui-select ng-model="user.zoneinfo" name="zoneinfo" theme="bootstrap" style="min-width:300px;">
+              <ui-select-match placeholder="{{'Timezone'|translate}}">
+                {{$select.selected}}
+              </ui-select-match>
+              <ui-select-choices repeat="timezone in timezones | filter: $select.search track by $index">
+                {{timezone}}
+              </ui-select-choices>
+            </ui-select>
           </div>
           <button type="submit" class="btn btn-primary" translate>Save</button>
         </form>

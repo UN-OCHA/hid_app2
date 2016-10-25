@@ -395,12 +395,14 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
 
 }]);
 
-userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCatalog', 'AuthService', 'alertService', 'User', function ($scope, $location, gettextCatalog, AuthService, alertService, User) {
+userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCatalog', 'moment', 'AuthService', 'alertService', 'User', function ($scope, $location, gettextCatalog, moment, AuthService, alertService, User) {
 
   $scope.password = {
     old: '',
     new: ''
   };
+
+  $scope.timezones = moment.tz.names();
 
 
   $scope.user = User.get({userId: $scope.currentUser.id}, function(user) {

@@ -63,7 +63,17 @@
       </div>
       <div class="form-group">
         <label for="phone">Phone</label>
-        <input type="tel" class="form-control" id="phone" ng-model="user.phone_number" placeholder="Phone">
+        <div class="row">
+          <div class="col-sm-3">
+            <select class="form-control" ng-model="user.phone_number_type">
+              <option value="Landline">Landline</option>
+              <option value="Mobile">Mobile</option>
+            </select>
+          </div>
+          <div class="col-sm-9">
+            <bc-phone-number name="phone_number" ng-model="user.phone_number" is-valid="isValidPhoneNumber" ng-class="{'has-error': user.phone_number && !isValidPhoneNumber, 'has-success': user.phone_number && isValidPhoneNumber}"></bc-phone-number>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
