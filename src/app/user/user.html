@@ -64,11 +64,19 @@
 
         <div class="panel-body">
           <h4><span translate>Phone</span> <i class="fa fa-star"></i></h4>
-          <span editable-select="user.phone_number_type" e-ng-options="t.value as t.name for t in phoneNumberTypes">{{user.phone_number_type}}</span>: <a editable-tel="user.phone_number" ng-href="tel:{{user.phone_number}}">{{user.phone_number}}</a>
+          <div class="col-sm-2"><span editable-select="user.phone_number_type" e-ng-options="t.value as t.name for t in phoneNumberTypes">{{user.phone_number_type}}</span>:</div>
+          <div class="col-sm-10"><span ng-show="!contactForm.$visible"><a ng-href="tel:{{user.phone_number}}">{{user.phone_number}}</a></span><span ng-show="contactForm.$visible"><bc-phone-number name="phone_number" ng-model="user.phone_number" is-valid="isValidPhoneNumber" ng-class="{'has-error': user.phone_number && !isValidPhoneNumber, 'has-success': user.phone_number && isValidPhoneNumber}"></bc-phone-number></span></div>
           <h4 ng-show="(user.phone_numbers && user.phone_numbers.length) || contactForm.$visible" translate>Other phone numbers</h4>
           <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('phone_numbers')"><i class="fa fa-plus"></i></button> <span translate>Add a new phone number</span></span>
           <div ng-repeat="phone in user.phone_numbers">
-            <span editable-select="phone.type" e-ng-options="t.value as t.name for t in phoneNumberTypes">{{phone.type}}</span>: <a editable-tel="phone.number" ng-href="tel:{{phone.number}}">{{phone.number}}</a><button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('phone_numbers', $index)"><i class="fa fa-times"></i></button>
+            <div class="col-sm-2"><span editable-select="phone.type" e-ng-options="t.value as t.name for t in phoneNumberTypes">{{phone.type}}</span>:</div>
+            <div ng-class="{'col-sm-9': contactForm.$visible, 'col-sm-10': !contactForm.$visible}">
+              <span ng-show="!contactForm.$visible"><a ng-href="tel:{{phone.number}}">{{phone.number}}</a></span>
+              <span ng-show="contactForm.$visible"><bc-phone-number name="phone_number" ng-model="phone.number" is-valid="isValidPhoneNumber" ng-class="{'has-error': phone.number && !isValidPhoneNumber, 'has-success': phone.number && isValidPhoneNumber}"></bc-phone-number></span>
+            </div>
+            <div ng-show="contactForm.$visible" class="col-sm-1">
+              <button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('phone_numbers', $index)"><i class="fa fa-times"></i></button>
+            </div>
           </div>
           <h4><span translate>Email</span> <i class="fa fa-star"></i></h4>
           <span><a editable-email="user.email" ng-href="mailto:{{user.email}}">{{user.email}}</a></span>

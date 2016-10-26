@@ -8,7 +8,11 @@ dashboardController.controller('DashboardCtrl', ['$scope', '$routeParams', '$htt
   $scope.listsMember = new Array();
   angular.forEach(config.listTypes, function (listType) {
     angular.forEach($scope.currentUser[listType + 's'], function (val, key) {
-      var tmpList = List.get({listId: val.list}, function () {
+      var listId = val.list;
+      if (typeof val.list === "object") {
+        listId = val.list._id;
+      }
+      var tmpList = List.get({listId: listId}, function () {
         $scope.listsMember.push(tmpList);
       });
     });

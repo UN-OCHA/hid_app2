@@ -335,6 +335,8 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
       if (user.id == $scope.currentUser.id) {
         $scope.setCurrentUser(user);
       }
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error: ') + resp.data.message);
     });
   };
 
