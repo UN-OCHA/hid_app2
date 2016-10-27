@@ -85,7 +85,11 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     $scope.pageChanged();
     $scope.setAdminAvailable(true);
     angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
-      if (val.list == $scope.list._id) {
+      var listId = val.list;
+      if (typeof val.list === 'object') {
+        listId = val.list._id;
+      }
+      if (listId == $scope.list._id) {
         $scope.isMember = true;
       }
     });
@@ -152,16 +156,11 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.checkOut = function () {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
       var checkInId = 0;
-      console.log($scope.currentUser);
       for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {
-        console.log($scope.list._id);
-        console.log($scope.currentUser[$scope.list.type + 's'][i].list);
         if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list)) {
-          console.log('equals');
           checkInId = $scope.currentUser[$scope.list.type + 's'][i]._id;
         }
       }
-      console.log(checkInId);
       if (checkInId != 0) {
         UserCheckIn.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function (user) {
           // Close existing alert

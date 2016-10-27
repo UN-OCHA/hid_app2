@@ -23,7 +23,7 @@
         <h2><span ng-show="user.verified && !profileForm.$visible"><i class="fa fa-check-circle"></i></span> <span editable-text="user.given_name">{{user.given_name}}</span> <span editable-text="user.family_name">{{user.family_name}}</span></h2>
         <div ng-show="profileForm.$visible"><div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div></div>
         <ul class="list-inline list-unstyled">
-          <li ng-repeat="(key, val) in user.organizations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          <li ng-if="user.organization.list"><a class="label label-default" href="/lists/{{user.organization.list._id}}">{{user.organization.list.name}}</a></li>
         </ul>
         <ul class="list-inline list-unstyled">
           <li ng-repeat="(key, val) in user.bundles"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
@@ -114,15 +114,22 @@
       </div>
 
       <div class="panel-body">
-        <h4 translate>Organizations</h4>
+        <h4 ng-if="user.organization.list"><span translate>Main Organization</span> <i class="fa fa-star"></i></h4>
+        <div editable-ui-select="organization.list" data-e-form="roleForm" data-e-name="organization" name="organization" theme="bootstrap" data-e-ng-model="organization.list" data-e-style="min-width:300px;">
+          <a ng-if="organization.list" class="label label-default" href="/lists/{{organization.list._id}}">{{organization.list.name}}</a>
+          <editable-ui-select-match placeholder="{{'Organization'|translate}}">
+            {{$select.selected.name}}
+          </editable-ui-select-match>
+          <editable-ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+            {{organization.name}}
+          </editable-ui-select-choices>
+        </div>
+
+        <h4 translate>Other Organizations</h4>
         <ul class="list-inline list-unstyled">
           <li ng-repeat="(key, val) in user.organizations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
         </ul>
         <p>To add organizations to your profile, please <a href="/lists?type=organization">Check in</a></p>
-        <span ng-show="roleForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('organizations')"><i class="fa fa-plus"></i></button> <span translate>Add a new Organization</span></span>
-        <div ng-repeat="organization in user.organizations">
-          <span editable-text="organization" e-uib-typeahead="org as org.name for org in getOrganization($viewValue)" onbeforesave="setOrganization($data, $index)">{{organization.name}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('organizations', $index)"><i class="fa fa-times"></i></button>
-        </div>
         <h4 translate>Roles</h4>
         <div editable-ui-select="user.roles" edit-disabled="!currentUser.is_admin" e-multiple onshow="getRoles()" data-e-form="roleForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
           <span ng-repeat="role in user.roles">{{role.label}} &nbsp;</span>

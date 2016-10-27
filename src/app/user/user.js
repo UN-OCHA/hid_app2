@@ -202,7 +202,7 @@ userServices.factory('userService', ['$rootScope', 'User',
 
 var userControllers = angular.module('userControllers', []);
 
-userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', function($scope, $routeParams, $http, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List) {
+userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', 'UserCheckIn', function($scope, $routeParams, $http, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List, UserCheckIn) {
   $scope.setAdminAvailable(true);
   $scope.newEmail = {
     type: '',
@@ -218,6 +218,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
       name: ''
     }
   };
+  $scope.organization = {};
 
   $scope.gravatarUrl = '';
 
@@ -226,6 +227,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
   $scope.user = User.get({userId: $routeParams.userId}, function(user) {
     var userEmail = md5.createHash(user.email.trim().toLowerCase());
     $scope.gravatarUrl = 'https://secure.gravatar.com/avatar/' + userEmail + '?s=200';
+    angular.copy(user.organization, $scope.organization);
   });
 
   $scope.countries = [];
@@ -285,9 +287,8 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     return out;
   };
 
-  $scope.getOrganization = function(val) {
-    return $http.get(config.hrinfoUrl + '/organizations?autocomplete[string]=' + val + '&autocomplete[operator]=STARTS_WITH')
-      .then(hrinfoResponse);
+  $scope.getOrganizations = function(search) {
+    $scope.organizations = List.query({'name': search, 'type': 'organization'});
   };
 
   $scope.getDisasters = function(val) {
@@ -329,7 +330,12 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     {value: 'Google', name: 'Google'}
   ];
 
-  $scope.saveUser = function() {
+  $scope._checkinAndSave = function() {
+    UserCheckIn.save({userId: $scope.user._id, listType: 'organization'}, {list: $scope.organization.list._id}, function (user) {
+      $scope._saveUser();
+    });
+  };
+  $scope._saveUser = function () {
     $scope.user.$update(function (user, response) {
       //  Update the currentUser item in localStorage if the current user is the one being saved
       if (user.id == $scope.currentUser.id) {
@@ -338,6 +344,24 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     }, function (resp) {
       alertService.add('danger', gettextCatalog.getString('There was an error: ') + resp.data.message);
     });
+  };
+
+  $scope.saveUser = function() {
+    if ($scope.organization.list && (!$scope.user.organization.list || $scope.organization.list._id != $scope.user.organization.list._id)) {
+      if ($scope.user.organization.list) {
+        // Check out from the old organization
+        UserCheckIn.delete({userId: $scope.user._id, listType: 'organization', checkInId: $scope.user.organization._id}, {}, function (user) {
+          $scope._checkinAndSave();
+        });
+      }
+      else {
+        // Check into the new organization
+        $scope._checkinAndSave();
+      }
+    }
+    else {
+      $scope._saveUser();
+    }
   };
 
   $scope.setOrganization = function (data, index) {
@@ -617,6 +641,7 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
 userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'config', 'hrinfoService', 'alertService', 'User', 'UserCheckIn', 'List', function($scope, $routeParams, $q, gettextCatalog, config, hrinfoService, alertService, User, UserCheckIn, List) {
   $scope.request = $routeParams;
   $scope.step = 1;
+  $scope.organization = {};
 
   var queryCallback = function () {
     $scope.lists = List.query({}, function() {
@@ -646,7 +671,9 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
     $scope.user = User.get({userId: $routeParams.userId}, queryCallback);
   }
 
-  
+  $scope.getOrganizations = function(search) {
+    $scope.organizations = List.query({'name': search, 'type': 'organization'});
+  };
 
   $scope.nextStep = function (step) {
     $scope.step = step;
@@ -665,12 +692,7 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
     });
   };
 
-  // Check user in in the lists selected
-  $scope.checkin = function () {
-    var checked = $scope.lists.filter(function (list) {
-      return list.checked;
-    });
-    var checkinUser = {}, prom = [];
+  $scope._checkinHelper = function () {
     for (var i = 0, len = checked.length; i < len; i++) {
       checkinUser = {
         list: checked[i]._id,
@@ -687,6 +709,25 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
           alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
         }
       });
+    }
+  };
+
+  // Check user in in the lists selected
+  $scope.checkin = function () {
+    var checked = $scope.lists.filter(function (list) {
+      return list.checked;
+    });
+    var checkinUser = {}, prom = [];
+    if ($scope.organization.list) {
+      checkinUser = {
+        list: $scope.organization.list._id,
+      };
+      UserCheckIn.save({userId: $scope.user._id, listType: 'organization'}, checkinUser, function (out) {
+        $scope._checkinHelper();
+      });
+    }
+    else {
+      $scope._checkinHelper();
     }
   };
 

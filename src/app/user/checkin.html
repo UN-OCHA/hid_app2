@@ -58,6 +58,17 @@
     </div>
     <div class="panel-body">
       <div class="form-group">
+        <label for="organizations">Organizations</label>
+        <ui-select ng-model="organization.list" name="organization" theme="bootstrap" style="min-width:300px;">
+          <ui-select-match placeholder="{{'Organization'|translate}}">
+            {{$select.selected.name}}
+          </ui-select-match>
+          <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+            {{organization.name}}
+          </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-group">
         <label for="jobTitle">Job Title</label>
         <input type="text" class="form-control" id="jobTitle" ng-model="user.job_title" placeholder="Job Title">
       </div>
