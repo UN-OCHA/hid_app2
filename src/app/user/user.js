@@ -586,7 +586,34 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     $scope.reinitialize();
   };
 
-  $scope.checkIn = function (user) {
+  // Check user in in the lists selected
+  $scope.checkin = function (user) {
+    if ($scope.organization.list && (!user.organization || !user.organization.list || $scope.organization.list._id != user.organization.list._id)) {
+      checkinUser = {
+        list: $scope.organization.list._id,
+        checkoutDate: $scope.departureDate
+      };
+      if (user.organization && user.organization.list) {
+        // Check out from the old organization
+        UserCheckIn.delete({userId: user._id, listType: 'organization', checkInId: user.organization._id}, {}, function (user) {
+          UserCheckIn.save({userId: user._id, listType: 'organization'}, checkinUser, function (out) {
+            $scope._checkinHelper(user);
+          });
+        });
+      }
+      else {
+        UserCheckIn.save({userId: user._id, listType: 'organization'}, checkinUser, function (out) {
+          $scope._checkinHelper(user);
+        });
+      }
+    }
+    else {
+      $scope._checkinHelper(user);
+    }
+  };
+
+
+  $scope._checkinHelper = function (user) {
     var checkinUser = {}, prom = [];
     checkinUser = {
       list: $scope.list.list._id,
@@ -594,16 +621,7 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     };
     // Then do the checkin
     UserCheckIn.save({userId: user._id, listType: $scope.list.list.type + 's'}, checkinUser, function (out) {
-      if ($scope.organization) {
-        delete checkinUser.checkoutDate;
-        checkinUser.list = $scope.organization.organization._id;
-        UserCheckIn.save({userId: user._id, listType: 'organizations'}, checkinUser, function (out) {
-          $scope.checkInSuccess();
-        });
-      }
-      else {
-        $scope.checkInSuccess();
-      }
+      $scope.checkInSuccess();
     }, function (resp) {
       alertService.add('danger', gettextCatalog.getString('There was an error checking you in.'));
       $scope.reinitialize();
@@ -619,7 +637,7 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
       $scope.user.registration_type = 'kiosk';
 
       $scope.user.$save(function(user) {
-        $scope.checkIn(user);
+        $scope.checkin(user);
       }, function (resp) {
         alertService.add('danger', gettextCatalog.getString('There was an error registering your account.'));
         $scope.reinitialize();
@@ -628,7 +646,7 @@ userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 
     else {
       $scope.newUser = false;
       $scope.user.$update(function (user) {
-        $scope.checkIn($scope.user);
+        $scope.checkin($scope.user);
       }, function (resp) {
         alertService.add('danger', gettextCatalog.getString('There was an error updating your account.'));
         $scope.reinitialize();
@@ -644,6 +662,7 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
   $scope.organization = {};
 
   var queryCallback = function () {
+    angular.copy($scope.user.organization, $scope.organization);
     $scope.lists = List.query({}, function() {
       $scope.lists = $scope.lists.filter(function (list) {
         var out = true, listType = '';
@@ -693,6 +712,10 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
   };
 
   $scope._checkinHelper = function () {
+    var checked = $scope.lists.filter(function (list) {
+      return list.checked;
+    });
+    var checkinUser = {}, prom = [];
     for (var i = 0, len = checked.length; i < len; i++) {
       checkinUser = {
         list: checked[i]._id,
@@ -714,17 +737,23 @@ userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gett
 
   // Check user in in the lists selected
   $scope.checkin = function () {
-    var checked = $scope.lists.filter(function (list) {
-      return list.checked;
-    });
-    var checkinUser = {}, prom = [];
-    if ($scope.organization.list) {
+    if ($scope.organization.list && (!$scope.user.organization.list || $scope.organization.list._id != $scope.user.organization.list._id)) {
       checkinUser = {
         list: $scope.organization.list._id,
       };
-      UserCheckIn.save({userId: $scope.user._id, listType: 'organization'}, checkinUser, function (out) {
-        $scope._checkinHelper();
-      });
+      if ($scope.user.organization.list) {
+        // Check out from the old organization
+        UserCheckIn.delete({userId: $scope.user._id, listType: 'organization', checkInId: $scope.user.organization._id}, {}, function (user) {
+          UserCheckIn.save({userId: $scope.user._id, listType: 'organization'}, checkinUser, function (out) {
+            $scope._checkinHelper();
+          });
+        });
+      }
+      else {
+        UserCheckIn.save({userId: $scope.user._id, listType: 'organization'}, checkinUser, function (out) {
+          $scope._checkinHelper();
+        });
+      }
     }
     else {
       $scope._checkinHelper();

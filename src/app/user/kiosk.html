@@ -105,11 +105,8 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <label for="organizations">Organizations</label>
-          <ul class="list-inline list-unstyled">
-            <li ng-repeat="(key, val) in user.organizations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
-          </ul>
-          <ui-select ng-model="organization.organization" name="organization" theme="bootstrap" style="min-width:300px;">
+          <label for="organization">Organization</label>
+          <ui-select ng-model="organization.list" name="organization" theme="bootstrap" style="min-width:300px;">
             <ui-select-match placeholder="{{'Organization'|translate}}">
               {{$select.selected.name}}
             </ui-select-match>

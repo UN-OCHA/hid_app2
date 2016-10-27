@@ -104,7 +104,7 @@
       <tr ng-repeat="user in users">
         <td><a ng-href="/users/{{user._id}}">{{user.name}}</a> <span class="label label-default" ng-if="list && list.owner._id == user._id" translate>Owner</span> <span class="label label-warning" ng-if="list && user.currentCheckin(list).pending" translate>Pending</span><span class="label label-primary" ng-if="list && list.isManager(user)" translate>Manager</span></td>
         <td>{{user.job_title}}</td>
-        <td>{{user.organization.name}}</td>
+        <td>{{user.organization.list.name}}</td>
         <td>
           <div uib-dropdown>
             <button type="button" class="btn btn-default" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></button>
