@@ -220,13 +220,18 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
   };
   $scope.organization = {};
 
-  $scope.gravatarUrl = '';
+  $scope.pictureUrl = '';
 
   $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin);
 
   $scope.user = User.get({userId: $routeParams.userId}, function(user) {
-    var userEmail = md5.createHash(user.email.trim().toLowerCase());
-    $scope.gravatarUrl = 'https://secure.gravatar.com/avatar/' + userEmail + '?s=200';
+    if (user.picture) {
+      $scope.pictureUrl = user.picture;
+    }
+    else {
+      var userEmail = md5.createHash(user.email.trim().toLowerCase());
+      $scope.pictureUrl = 'https://secure.gravatar.com/avatar/' + userEmail + '?s=200';
+    }
     angular.copy(user.organization, $scope.organization);
   });
 
@@ -362,6 +367,18 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     else {
       $scope._saveUser();
     }
+  };
+
+  $scope.onUploadSuccess = function (resp) {
+    $scope.pictureUrl = resp.data.picture;
+    $scope.user.picture = resp.data.picture;
+    if (resp.data._id == $scope.currentUser._id) {
+      $scope.setCurrentUser($scope.user);
+    }
+  };
+
+  $scope.onUploadError = function (resp) {
+    alertService.add('danger', gettextCatalog.getString('There was an error uploading the picture'));
   };
 
   $scope.setOrganization = function (data, index) {

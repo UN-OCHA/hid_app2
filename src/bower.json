@@ -28,6 +28,7 @@
     "angular-resource": "~1.5.7",
     "angular-route": "~1.5.7",
     "angular-ui-select": "~0.18.1",
+    "angular-upload": "~1.0.12",
     "angular-xeditable": "~0.2.0",
     "bc-phone-number": "~5.0.12"
   },

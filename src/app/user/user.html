@@ -17,7 +17,11 @@
   <div class="row">
     <form editable-form name="profileForm" onaftersave="saveUser()">
       <div class="col-xs-3">
-        <img ng-src="{{gravatarUrl}}" class="img-responsive img-rounded center-block" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
+        <img ng-src="{{pictureUrl}}" style="width: 200px; height: 200px;" class="img-responsive img-rounded center-block" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
+        <div ng-show="profileForm.$visible">
+          <div class="btn btn-default btn-upload center-block" upload-button url="http://api.hid.vm/api/v2/user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</div>
+          <p class="text-center" translate>Upload a squared image in JPEG format, with more than 200px width</p>
+        </div>
       </div>
       <div class="col-xs-7">
         <h2><span ng-show="user.verified && !profileForm.$visible"><i class="fa fa-check-circle"></i></span> <span editable-text="user.given_name">{{user.given_name}}</span> <span editable-text="user.family_name">{{user.family_name}}</span></h2>
