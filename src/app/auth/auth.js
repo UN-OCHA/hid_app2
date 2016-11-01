@@ -120,7 +120,7 @@ authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$
 
 authController.controller('VerifyCtrl', ['$scope', '$location', '$routeParams', 'User', 'gettextCatalog', 'alertService', function ($scope, $location, $routeParams, User, gettextCatalog, alertService) {
   var hash = $routeParams.hash;
-  User.verifyEmail($routeParams.hash, function (response) {
+  User.validateEmail($routeParams.hash, function (response) {
     alertService.add('success', gettextCatalog.getString('Thank you for verifying your email. You can now login through our application, or through any other application using Humanitarian ID'));
     $location.path('/');
   }, function (response) {

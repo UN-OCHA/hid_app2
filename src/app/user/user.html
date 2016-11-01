@@ -82,13 +82,11 @@
               <button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('phone_numbers', $index)"><i class="fa fa-times"></i></button>
             </div>
           </div>
-          <h4><span translate>Emails</span></h4>
-          <span><a ng-href="mailto:{{user.email}}">{{user.email}}</a> <i class="fa fa-star"></i></span>
           <h4 ng-show="(user.emails && user.emails.length) || contactForm.$visible" translate>Emails</h4>
-          <div ng-repeat="email in user.emails">
+          <div ng-repeat="email in user.emails" class="clearfix">
             <div class="col-sm-2"><span editable-select="email.type" e-ng-options="t.value as t.name for t in emailTypes">{{email.type}}</span></div>
-            <div ng-class="{'col-sm-8': contactForm.$visible, 'col-sm-10': !contactForm.$visible}"><a ng-href="mailto:{{email.email}}">{{email.email}}</a>  <span ng-show="!email.verified" class="label label-default" translate>Unverified</span></div>
-            <div class="col-sm-2" ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="dropEmail(email.email)"><i class="fa fa-times"></i></button></div>
+            <div ng-class="{'col-sm-8': contactForm.$visible && email.email != user.email, 'col-sm-10': !contactForm.$visible || email.email == user.email}"><a ng-href="mailto:{{email.email}}">{{email.email}}</a> <i class="fa fa-star" ng-if="email.email == user.email"></i> <span ng-show="!email.validated" class="label label-default" translate>Unverified</span> <a href="" ng-click="resendValidationEmail(email.email)" ng-if="contactForm.$visible && !email.validated" translate>Resend validation email</a> <a href="" ng-click="setPrimaryEmail(email.email)" ng-if="contactForm.$visible && email.email != user.email && email.validated" translate>Set as Primary</a></div>
+            <div class="col-sm-2" ng-if="contactForm.$visible && email.email != user.email"><button type="button" class="btn btn-default" ng-click="dropEmail(email.email)"><i class="fa fa-times"></i></button></div>
           </div>
           <span ng-show="contactForm.$visible">
             <p><strong>Add new email</strong></p>

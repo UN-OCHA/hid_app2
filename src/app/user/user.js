@@ -129,20 +129,31 @@ userServices.factory('User', ['$resource', '$http', '$location', 'config',
       $http.put(config.apiUrl + 'user/password', {hash: hash, password: password}).then(success, error);
     };
 
-    // Verify user email
-    User.verifyEmail = function (hash, success, error) {
-      $http.put(config.apiUrl + 'user/email', { hash: hash }).then(success, error);
+    // Validate user email
+    User.validateEmail = function (hash, success, error) {
+      $http.put(config.apiUrl + 'user/emails', { hash: hash }).then(success, error);
+    };
+
+    // Resend validation email
+    User.prototype.resendValidationEmail = function (email, success, error) {
+      var app_validation_url = $location.protocol() + '://' + $location.host() + '/verify';
+      $http.put(config.apiUrl + 'user/emails/' + email, {app_validation_url: app_validation_url}).then(success, error);
     };
 
     // Add email for validation
-    User.prototype.validateEmail = function (data, success, error) {
+    User.prototype.addEmail = function (data, success, error) {
       data.app_validation_url = $location.protocol() + '://' + $location.host() + '/verify';
-      $http.post(config.apiUrl + 'user/' + this._id + '/email', data).then(success, error);
+      $http.post(config.apiUrl + 'user/' + this._id + '/emails', data).then(success, error);
+    };
+
+    // Set primary email
+    User.prototype.setPrimaryEmail = function (email, success, error) {
+      $http.put(config.apiUrl + 'user/' + this._id + '/email', { email: email }).then(success, error);
     };
 
     // Delete email
     User.prototype.dropEmail = function (email, success, error) {
-      $http.delete(config.apiUrl + 'user/' + this._id + '/email/' + email).then(success, error);
+      $http.delete(config.apiUrl + 'user/' + this._id + '/emails/' + email).then(success, error);
     };
 
 
@@ -259,8 +270,28 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     });
   };
 
+  $scope.resendValidationEmail = function (email) {
+    $scope.user.resendValidationEmail(email, function (resp) {
+      alertService.add('success', gettextCatalog.getString('Validation email sent successfully.'));
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error sending the validation email.'));
+    });
+  };
+
+  $scope.setPrimaryEmail = function (email) {
+    $scope.user.setPrimaryEmail(email, function (resp) {
+      alertService.add('success', gettextCatalog.getString('Primary email successfully changed'));
+      $scope.user.email = resp.data.email;
+      if ($scope.user._id == $scope.currentUser._id) {
+        $scope.setCurrentUser($scope.currentUser);
+      }
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error setting your primary email.'));
+    });
+  };
+
   $scope.addEmail = function () {
-    $scope.user.validateEmail($scope.newEmail, function (resp) {
+    $scope.user.addEmail($scope.newEmail, function (resp) {
       alertService.add('success', gettextCatalog.getString('Email added successfully. You will need to validate it.'));
       $scope.user.emails = resp.data.emails;
       if ($scope.user._id == $scope.currentUser._id) {
@@ -275,7 +306,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
 
   $scope.dropEmail = function (email) {
     $scope.user.dropEmail(email, function (resp) {
-      alertService.add('success', gettextCatalog.getString('Email added successfully. You will need to validate it.'));
+      alertService.add('success', gettextCatalog.getString('Email removed successfully.'));
       $scope.user.emails = resp.data.emails;
       if ($scope.user._id == $scope.currentUser._id) {
         $scope.setCurrentUser($scope.currentUser);
