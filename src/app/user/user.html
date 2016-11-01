@@ -82,13 +82,20 @@
               <button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('phone_numbers', $index)"><i class="fa fa-times"></i></button>
             </div>
           </div>
-          <h4><span translate>Email</span> <i class="fa fa-star"></i></h4>
-          <span><a editable-email="user.email" ng-href="mailto:{{user.email}}">{{user.email}}</a></span>
-          <h4 ng-show="(user.emails && user.emails.length) || contactForm.$visible" translate>Other Emails</h4>
-          <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('emails')"><i class="fa fa-plus"></i></button> <span translate>Add a new email</span></span>
+          <h4><span translate>Emails</span></h4>
+          <span><a ng-href="mailto:{{user.email}}">{{user.email}}</a> <i class="fa fa-star"></i></span>
+          <h4 ng-show="(user.emails && user.emails.length) || contactForm.$visible" translate>Emails</h4>
           <div ng-repeat="email in user.emails">
-            <span editable-select="email.type" e-ng-options="t.value as t.name for t in emailTypes">{{email.type}}</span>: <a editable-email="email.email" ng-href="mailto:{{email.email}}">{{email.email}}</a><button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('emails', $index)"><i class="fa fa-times"></i></button>
+            <div class="col-sm-2"><span editable-select="email.type" e-ng-options="t.value as t.name for t in emailTypes">{{email.type}}</span></div>
+            <div ng-class="{'col-sm-8': contactForm.$visible, 'col-sm-10': !contactForm.$visible}"><a ng-href="mailto:{{email.email}}">{{email.email}}</a>  <span ng-show="!email.verified" class="label label-default" translate>Unverified</span></div>
+            <div class="col-sm-2" ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="dropEmail(email.email)"><i class="fa fa-times"></i></button></div>
           </div>
+          <span ng-show="contactForm.$visible">
+            <p><strong>Add new email</strong></p>
+            <div class="col-sm-2"><select ng-model="newEmail.type" ng-options="t.value as t.name for t in emailTypes" class="form-control"></select></div>
+            <div class="col-sm-8"><input type="email" name="newEmail" ng-model="newEmail.email" class="form-control" /></div>
+            <div class="col-sm-2"><button type="button" class="btn btn-default" ng-click="addEmail()">Add</button></div>
+          </span>
           <h4 ng-show="contactForm.$visible" translate>Social Networks</h4>
           <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('voips')"><i class="fa fa-plus"></i></button> <span translate>Add a new Social Network</span></span>
           <div ng-repeat="voip in user.voips">

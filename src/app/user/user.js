@@ -131,7 +131,18 @@ userServices.factory('User', ['$resource', '$http', '$location', 'config',
 
     // Verify user email
     User.verifyEmail = function (hash, success, error) {
-      $http.put(config.apiUrl + 'user/email_verified', { hash: hash }).then(success, error);
+      $http.put(config.apiUrl + 'user/email', { hash: hash }).then(success, error);
+    };
+
+    // Add email for validation
+    User.prototype.validateEmail = function (data, success, error) {
+      data.app_validation_url = $location.protocol() + '://' + $location.host() + '/verify';
+      $http.post(config.apiUrl + 'user/' + this._id + '/email', data).then(success, error);
+    };
+
+    // Delete email
+    User.prototype.dropEmail = function (email, success, error) {
+      $http.delete(config.apiUrl + 'user/' + this._id + '/email/' + email).then(success, error);
     };
 
 
@@ -245,6 +256,34 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     $scope.regions = [];
     hrinfoService.getRegions($item.id).then(function (regions) {
       $scope.regions = regions;
+    });
+  };
+
+  $scope.addEmail = function () {
+    $scope.user.validateEmail($scope.newEmail, function (resp) {
+      alertService.add('success', gettextCatalog.getString('Email added successfully. You will need to validate it.'));
+      $scope.user.emails = resp.data.emails;
+      if ($scope.user._id == $scope.currentUser._id) {
+        $scope.setCurrentUser($scope.currentUser);
+      }
+      $scope.newEmail = {};
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error adding this email.'));
+      $scope.newEmail = {};
+    });
+  };
+
+  $scope.dropEmail = function (email) {
+    $scope.user.dropEmail(email, function (resp) {
+      alertService.add('success', gettextCatalog.getString('Email added successfully. You will need to validate it.'));
+      $scope.user.emails = resp.data.emails;
+      if ($scope.user._id == $scope.currentUser._id) {
+        $scope.setCurrentUser($scope.currentUser);
+      }
+      $scope.newEmail = {};
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error adding this email.'));
+      $scope.newEmail = {};
     });
   };
 
