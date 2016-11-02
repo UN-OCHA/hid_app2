@@ -156,6 +156,21 @@ userServices.factory('User', ['$resource', '$http', '$location', 'config',
       $http.delete(config.apiUrl + 'user/' + this._id + '/emails/' + email).then(success, error);
     };
 
+    // Add phone number
+    User.prototype.addPhone = function (phone, success, error) {
+      $http.post(config.apiUrl + 'user/' + this._id + '/phone_numbers', phone).then(success, error);
+    };
+
+    // Drop phone number
+    User.prototype.dropPhone = function (id, success, error) {
+      $http.delete(config.apiUrl + 'user/' + this._id + '/phone_numbers/' + id).then(success, error);
+    };
+
+    // Set primary phone number
+    User.prototype.setPrimaryPhone = function (phone, success, error) {
+      $http.put(config.apiUrl + 'user/' + this._id + '/phone_number', { phone: phone }).then(success, error);
+    };
+
 
     return User;
     
@@ -315,6 +330,44 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     }, function (resp) {
       alertService.add('danger', gettextCatalog.getString('There was an error adding this email.'));
       $scope.newEmail = {};
+    });
+  };
+
+  $scope.addPhone = function () {
+    $scope.user.addPhone($scope.newPhoneNumber, function (resp) {
+      alertService.add('success', gettextCatalog.getString('Phone number added successfully.'));
+      $scope.user.phone_numbers = resp.data.phone_numbers;
+      if ($scope.user._id == $scope.currentUser._id) {
+        $scope.setCurrentUser($scope.currentUser);
+      }
+      $scope.newPhoneNumber = {};
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error adding this phone number.'));
+      $scope.newPhoneNumber = {};
+    });
+  };
+
+  $scope.dropPhone = function (id) {
+    $scope.user.dropPhone(id, function (resp) {
+      alertService.add('success', gettextCatalog.getString('Phone number removed successfully.'));
+      $scope.user.phone_numbers = resp.data.phone_numbers;
+      if ($scope.user._id == $scope.currentUser._id) {
+        $scope.setCurrentUser($scope.currentUser);
+      }
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error removing this phone number.'));
+    });
+  };
+
+  $scope.setPrimaryPhone = function (phone) {
+    $scope.user.setPrimaryPhone(phone.number, function (resp) {
+      alertService.add('success', gettextCatalog.getString('Primary phone number set successfully'));
+      $scope.user.phone_number = resp.data.phone_number;
+      if ($scope.user._id == $scope.currentUser._id) {
+        $scope.setCurrentUser($scope.currentUser);
+      }
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error setting the primary phone number.'));
     });
   };
 
