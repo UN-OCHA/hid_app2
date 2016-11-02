@@ -255,6 +255,13 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
       name: ''
     }
   };
+  $scope.newVoip = {
+    type: '',
+    username: ''
+  };
+  $scope.newOrganization = {};
+  $scope.newJobTitle = '';
+
   $scope.organization = {};
 
   $scope.pictureUrl = '';
@@ -368,6 +375,23 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
       }
     }, function (resp) {
       alertService.add('danger', gettextCatalog.getString('There was an error setting the primary phone number.'));
+    });
+  };
+
+  $scope.addVoip = function () {
+    $scope.user.voips.push($scope.newVoip);
+  };
+
+  $scope.addJobTitle = function () {
+    $scope.user.job_titles.push($scope.newJobTitle);
+  };
+
+  $scope.addOrganization = function() {
+    UserCheckIn.save({userId: $scope.user._id, listType: 'organizations'}, {list: $scope.newOrganization.list._id}, function (user) {
+      $scope.user.organizations = user.organizations;
+      if ($scope.user._id == $scope.currentUser._id) {
+        $scope.setCurrentUser($scope.currentUser);
+      }
     });
   };
 

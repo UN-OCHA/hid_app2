@@ -96,12 +96,17 @@
             <div class="col-sm-2"><button type="button" class="btn btn-default" ng-click="addEmail()">Add</button></div>
           </span>
           <h4 ng-show="contactForm.$visible" translate>Social Networks</h4>
-          <span ng-show="contactForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('voips')"><i class="fa fa-plus"></i></button> <span translate>Add a new Social Network</span></span>
           <div ng-repeat="voip in user.voips">
-            <h4 editable-select="voip.type" e-ng-options="t.value as t.name for t in voipTypes">{{voip.type}}</h4>
-            <span editable-text="voip.username">{{voip.username}}</span>
+            <h4>{{voip.type}}</h4>
+            <span>{{voip.username}}</span>
             <button type="button" class="btn btn-default" ng-show="contactForm.$visible" ng-click="dropItem('voips', $index)"><i class="fa fa-times"></i></button>
           </div>
+          <span ng-show="contactForm.$visible">
+            <p><strong>Add new social network</strong></p>
+            <div class="col-sm-2"><select ng-model="newVoip.type" ng-options="t.value as t.name for t in voipTypes" class="form-control"></select></div>
+            <div class="col-sm-8"><input type="text" name="username" ng-model="newVoip.username" class="form-control" /></div>
+            <div class="col-sm-2"><button type="button" class="btn btn-default" ng-click="addVoip()">Add</button></div>
+          </span>
         </div>
       </div>
     </form>
@@ -124,22 +129,27 @@
       </div>
 
       <div class="panel-body">
-        <h4 ng-if="user.organization.list"><span translate>Main Organization</span> <i class="fa fa-star"></i></h4>
-        <div editable-ui-select="organization.list" data-e-form="roleForm" data-e-name="organization" name="organization" theme="bootstrap" data-e-ng-model="organization.list" data-e-style="min-width:300px;">
-          <a ng-if="organization.list" class="label label-default" href="/lists/{{organization.list._id}}">{{organization.list.name}}</a>
-          <editable-ui-select-match placeholder="{{'Organization'|translate}}">
-            {{$select.selected.name}}
-          </editable-ui-select-match>
-          <editable-ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
-            {{organization.name}}
-          </editable-ui-select-choices>
-        </div>
-
-        <h4 translate>Other Organizations</h4>
+        <h4 translate>Organizations</h4>
         <ul class="list-inline list-unstyled">
-          <li ng-repeat="(key, val) in user.organizations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          <li ng-repeat="(key, val) in user.organizations">
+            <a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <button type="button" class="btn btn-default" ng-show="roleForm.$visible"><i class="fa fa-times"></i></button>
+          </li>
         </ul>
-        <p>To add organizations to your profile, please <a href="/lists?type=organization">Check in</a></p>
+        <span ng-show="roleForm.$visible">
+          <p><strong>Add new organization</strong></p>
+          <div class="col-sm-10">
+            <ui-select name="newOrganization" ng-model="newOrganization.list" theme="bootstrap" style="min-width: 300px;">
+              <ui-select-match placeholder="{{'Organization'|translate}}">
+                {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+                {{organization.name}}
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="col-sm-2"><button type="button" class="btn btn-default" ng-click="addOrganization()">Add</button></div>
+        </span>
         <h4 translate>Roles</h4>
         <div editable-ui-select="user.roles" edit-disabled="!currentUser.is_admin" e-multiple onshow="getRoles()" data-e-form="roleForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
           <span ng-repeat="role in user.roles">{{role.label}} &nbsp;</span>
@@ -150,13 +160,15 @@
             {{role.label}}
           </editable-ui-select-choices>
         </div>
-        <h4><span translate>Job title</span> <i class="fa fa-star"></i></h4>
-        <span editable-text="user.job_title">{{user.job_title}}</span>
-        <h4 ng-show="(user.job_titles && user.job_titles.length) || roleForm.$visible" translate>Other job titles</h4>
-        <span ng-show="roleForm.$visible"><button type="button" class="btn btn-default" ng-click="addItem('job_titles')"><i class="fa fa-plus"></i></button> <span translate>Add a new Job Title</span></span>
+        <h4 ng-show="(user.job_titles && user.job_titles.length) || roleForm.$visible" translate>Job titles</h4>
         <div ng-repeat="job_title in user.job_titles">
-          <span editable-text="job_title">{{job_title}}</span><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('job_titles', $index)"><i class="fa fa-times"></i></button>
+          <span>{{job_title}}</span><i class="fa fa-star" ng-show="user.job_title == job_title"></i><button type="button" class="btn btn-default" ng-show="roleForm.$visible" ng-click="dropItem('job_titles', $index)"><i class="fa fa-times"></i></button>
         </div>
+        <span ng-show="roleForm.$visible">
+          <p><strong>Add new job title</strong></p>
+          <div class="col-sm-10"><input type="text" name="job_title" ng-model="newJobTitle" class="form-control" /></div>
+          <div class="col-sm-2"><button type="button" class="btn btn-default" ng-click="addJobTitle()">Add</button></div>
+        </span>
         <h4 translate>Permissions</h4>
         <div ng-show="roleForm.$visible"><div edit-disabled="!currentUser.is_admin" editable-checkbox="user.is_admin" e-title="{{'Administrator'|translate}}"></div></div>
         <span ng-if="user.is_admin && !roleForm.$visible" translate>Administrator</span>
