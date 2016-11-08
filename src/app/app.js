@@ -16,7 +16,7 @@ app.run(function ($rootScope, $location, AuthService, alertService) {
     if (nextRoute && nextRoute.authenticate && !AuthService.isAuthenticated()){
       // User isn’t authenticated
       $location.path('/');
-      event.preventDefault(); 
+      event.preventDefault();
     }
     $rootScope.isAuthenticated = AuthService.isAuthenticated();
   });
@@ -37,84 +37,84 @@ app.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: 'app/auth/login.html',
+        templateUrl: 'app/components/auth/login.html',
         controller: 'AuthCtrl'
       }).
       when('/dashboard', {
-        templateUrl: 'app/dashboard/dashboard.html',
+        templateUrl: 'app/components/dashboard/dashboard.html',
         controller: 'DashboardCtrl',
         authenticate: true
       }).
       when('/settings', {
-        templateUrl: 'app/user/account.html',
+        templateUrl: 'app/components/user/account.html',
         controller: 'UserPrefsCtrl',
         authenticate: true
       }).
       when('/settings/:userId', {
-        templateUrl: 'app/user/account.html',
+        templateUrl: 'app/components/user/account.html',
         controller: 'UserCtrl',
         authenticate: true
       }).
       when('/users', {
-        templateUrl: 'app/user/users-page.html',
+        templateUrl: 'app/components/user/users-page.html',
         controller: 'UsersCtrl',
         authenticate: true
       }).
       when('/users/new', {
-        templateUrl: 'app/user/new-user-page.html',
+        templateUrl: 'app/components/user/new-user-page.html',
         controller: 'UserNewCtrl',
         authenticate: true
       }).
       when('/users/:userId', {
-        templateUrl: 'app/user/user.html',
+        templateUrl: 'app/components/user/user.html',
         controller: 'UserCtrl',
         authenticate: true
       }).
       when('/checkin', {
-        templateUrl: 'app/user/checkin.html',
+        templateUrl: 'app/components/user/checkin.html',
         controller: 'CheckinCtrl',
         authenticate: true
       }).
       when('/checkin/:userId', {
-        templateUrl: 'app/user/checkin.html',
+        templateUrl: 'app/components/user/checkin.html',
         controller: 'CheckinCtrl',
         authenticate: true
       }).
       when('/kiosk', {
-        templateUrl: 'app/user/kiosk.html',
+        templateUrl: 'app/components/user/kiosk.html',
         controller: 'KioskCtrl',
         authenticate: true
       }).
       when('/lists/new', {
-        templateUrl: 'app/list/new-list.html',
+        templateUrl: 'app/components/list/new-list.html',
         controller: 'ListEditCtrl',
         authenticate: true
       }).
       when('/lists/:list', {
-        templateUrl: 'app/list/list.html',
+        templateUrl: 'app/components/list/list.html',
         controller: 'ListCtrl',
         authenticate: true
       }).
       when('/lists/:list/edit', {
-        templateUrl: 'app/list/new-list.html',
+        templateUrl: 'app/components/list/new-list.html',
         controller: 'ListEditCtrl',
         authenticate: true
       }).
       when('/lists', {
-        templateUrl: 'app/list/lists.html',
+        templateUrl: 'app/components/list/lists.html',
         controller: 'ListsCtrl',
         authenticate: true
       }).
       when('/register', {
-        templateUrl: 'app/auth/register.html',
+        templateUrl: 'app/components/auth/register.html',
         controller: 'UserRegisterCtrl'
       })
       .when('/password_reset', {
-        templateUrl: 'app/auth/password_reset.html',
+        templateUrl: 'app/components/auth/password_reset.html',
         controller: 'AuthCtrl'
       })
       .when('/reset_password/:hash', {
-        templateUrl: 'app/auth/reset_password.html',
+        templateUrl: 'app/components/auth/reset_password.html',
         controller: 'AuthCtrl'
       })
       .when('/verify/:hash', {

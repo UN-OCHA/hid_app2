@@ -1,14 +1,14 @@
-/**
- * Variables to go here
- */
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
 body {
-  padding-top: 60px; }
+  padding-top: 60px;
+}
 
 body.toggled {
-  padding-left: 350px; }
+  padding-left: 350px;
+}
 
 .alert {
   position: absolute;
@@ -16,10 +16,12 @@ body.toggled {
   width: 100%;
   z-index: 1000;
   border-radius: 0;
-  text-align: center; }
+  text-align: center;
+}
 
 .alert .close {
-  display: none; }
+  display: none;
+}
 
 #admin {
   position: absolute;
@@ -27,35 +29,17 @@ body.toggled {
   left: 0;
   border-right: 1px solid black;
   height: 100% !important;
-  width: 350px; }
+  width: 350px;
+}
 
 .admin-icon {
   color: #fff;
   position: fixed;
   right: 5px;
   bottom: 5px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .admin-background {
-  color: #2b5e82; }
-
-/**
- * Mixins to go here
- */
-
-/*# sourceMappingURL=common.css.map */
-
-/**
- * Styles for auth component
- */
-/**
- * Styles for dashboard component
- */
-/**
- * Styles for list component
- */
-/**
- * Styles for user component
- */
-
-/*# sourceMappingURL=components.css.map */
+  color: #2b5e82;
+}
