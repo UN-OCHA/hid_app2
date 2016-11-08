@@ -28,22 +28,21 @@ module.exports = function(grunt) {
     sass: {
       dist: {
         files: {
-          'src/assets/css/common.css': 'src/assets/css/common.scss',
-          'src/assets/css/components.css': 'src/assets/css/components.scss'
+          'src/assets/css/main.css': 'src/assets/css/main.scss'
         }
       }
     },
     concat: {
       css: {
         files: {
-          'src/assets/css/main.css': ['src/assets/css/common.css', 'src/assets/css/components.css']
+          'src/assets/css/main.scss': ['src/assets/css/common.scss', 'src/assets/css/components.scss']
         }
       }
     },
     watch: {
       sass: {
         files: ['src/app/common/**/*.scss', 'src/app/components/**/*.scss'],
-        tasks: ['sass_import', 'sass', 'concat']
+        tasks: ['sass_import', 'concat', 'sass']
       }
     }
   });
@@ -57,5 +56,5 @@ module.exports = function(grunt) {
   // Default task
   grunt.registerTask('default', [
     'nggettext_extract',
-    'nggettext_compile', 'sass_import', 'sass', 'concat']);
+    'nggettext_compile', 'sass_import', 'concat', 'sass']);
 };
