@@ -74,7 +74,9 @@ html, input {
 body {
   font-family: $body-font;
   @include font-size($base-font-size);
+  color: $text-dark;
   line-height: 1.5;
+  background: white;
 }
 
 body.toggled {
@@ -100,4 +102,15 @@ h1 {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
 }
