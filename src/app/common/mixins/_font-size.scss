@@ -1,0 +1,20 @@
+/**
+ * Font size mixin
+ *
+ * Converts pixel size to rems with pixel fallback.
+ *
+ * Requires the $base-font-size variable to be set for the project, this should be the body font size.
+ *
+ * Usage:
+ * @include font-size(14);
+ *
+ * Results in (with a $base-font-size of 18):
+ * font-size: 14px;
+ * font-size: 0.77777778rem
+ *
+ */
+
+@mixin font-size($size) {
+  font-size: $size + px;
+  font-size: #{$size / $base-font-size}rem;
+}

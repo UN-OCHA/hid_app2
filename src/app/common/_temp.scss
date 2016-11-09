@@ -1,0 +1,130 @@
+/*
+ * Temporary styles
+ * I will delete you all!
+ */
+
+.pull-right, .pull-left {
+  float: none;
+}
+
+.dropdown-menu {
+  display: none;
+
+  .open > & {
+    display: block;
+  }
+}
+
+
+
+.nav-tabs {
+  width: 100%;
+
+  li {
+    display: table-cell;
+  }
+
+  a {
+    padding: $base-unit*2;
+    display: block;
+  }
+
+  .active a {
+    border: 1px solid #ccc;
+    border-bottom: none;
+  }
+}
+
+.tab-pane {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+
+#admin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-right: 1px solid black;
+    height: 100% !important;
+    width: 350px;
+}
+
+.collapse {
+    display: none;
+    visibility: hidden;
+}
+.collapse.in {
+    display: block;
+    visibility: visible;
+}
+
+.btn {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
+  padding: $base-unit;
+  min-width: $base-unit*5;
+  min-height: $base-unit*5;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-image: linear-gradient(to bottom,#337ab7 0,#265a88 100%);
+  border-color: #245580;
+  color: white;
+}
+
+.form-group {
+  display: inline-table;
+}
+
+.input-group {
+  display: inline-table;
+  vertical-align: middle;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+.table-striped>tbody>tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    margin: $base-unit*2;
+    padding: $base-unit*2;
+    @include clearfix;
+}
+
+.pagination-page, .pagination-prev, .pagination-next, .pagination-first, .pagination-last {
+  display: inline-block;
+  padding: $base-unit;
+}

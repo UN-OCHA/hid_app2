@@ -1,0 +1,26 @@
+/**
+ * Clearfix  mixin
+ *
+ * Usage:
+ * .my-class {
+ *   @include clearfix;
+ * }
+ *
+ * Results in:
+ * .my-class {
+ *    &:after {
+ *     content: " ";
+ *     display: table;
+ *     clear: both;
+ *   }
+ * }
+ *
+ */
+
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

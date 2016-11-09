@@ -20,7 +20,7 @@ module.exports = function(grunt) {
       options: {},
       dist: {
         files: {
-          'src/assets/css/common.scss': [{path: 'src/app/common/*', first: 'src/app/common/_variables.scss'}],
+          'src/assets/css/common.scss': [{path: 'src/app/common/*', first: 'src/app/common/_setup.scss'}],
           'src/assets/css/components.scss': ['src/app/components/**/*']
         }
       }
