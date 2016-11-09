@@ -44,6 +44,20 @@ module.exports = function(grunt) {
         files: ['src/app/common/**/*.scss', 'src/app/components/**/*.scss'],
         tasks: ['sass_import', 'concat', 'sass']
       }
+    },
+    modernizr: {
+      dist: {
+        'crawl': false,
+        'customTests': [],
+        'dest': 'src/assets/js/modernizr-output.js',
+        'tests': [
+          'svg'
+        ],
+        'options': [
+          'setClasses'
+        ],
+        'uglify': true
+      }
     }
   });
 
@@ -52,9 +66,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks("grunt-modernizr");
 
   // Default task
   grunt.registerTask('default', [
     'nggettext_extract',
-    'nggettext_compile', 'sass_import', 'concat', 'sass']);
+    'nggettext_compile', 'sass_import', 'concat', 'sass', 'modernizr']);
 };
