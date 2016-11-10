@@ -13,14 +13,6 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
-        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
         <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
         <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet">
         <link href="bower_components/bc-phone-number/dist/css/bc-phone-number.min.css" rel="stylesheet">
@@ -34,12 +26,15 @@
         <![endif]-->
     </head>
     <body ng-app="hidApp" ng-controller="AppCtrl">
+
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <ng-include src="'/app/common/header.html'"></ng-include>
-        <div class="container" ng-view></div>
+        <ng-include src="'/app/components/header/header.html'"></ng-include>
+        <a href back-button translate>&lt; Back</a>
+        <div class="container" role="main" ng-view></div>
+        <ng-include src="'/app/components/footer/footer.html'"></ng-include>
 
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
@@ -60,6 +55,7 @@
         <script src="bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
         <script src="bower_components/angular-moment/angular-moment.js"></script>
         <script src="bower_components/angular-upload/angular-upload.min.js"></script>
+        <script src="assets/js/modernizr-output.js"></script>
 
         <script src="app/common/common.js"></script>
         <script src="app/common/directives.js"></script>

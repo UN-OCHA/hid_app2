@@ -1,8 +1,11 @@
-@import '../../app/common/_variables';
+@import '../../app/common/_setup';
 @import '../../app/common/_base';
-@import '../../app/common/_mixins';
+@import '../../app/common/_grid';
+@import '../../app/common/_temp';
 
 @import '../../app/components/auth/_auth';
 @import '../../app/components/dashboard/_dashboard';
+@import '../../app/components/footer/_footer';
+@import '../../app/components/header/_header';
 @import '../../app/components/list/_list';
 @import '../../app/components/user/_user';

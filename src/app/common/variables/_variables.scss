@@ -1,0 +1,36 @@
+/**
+ * Variables
+ */
+
+// Base measuremnt unit, used to keep consistent spacing
+$base-unit: 8px;
+
+// Grid
+$grid-gutter: $base-unit*4 !default;
+$grid-columns: 12 !default;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+$enable-flex: false;
+
+// Fonts
+$body-font: sans-serif;
+$heading-font: serif;
+
+// Font sizes
+$base-font-size: 16;
+$large-font-size: 24;
+
+// Colours
+$primary-color: #2D6282;
+// $primary-color: #54b1c8;
+// $secondary-color: #b9e6ee;
+
+$text-dark: #404040;
+$text-light: #FFF;
+
+$border-grey: #CFD1D2;

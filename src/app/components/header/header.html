@@ -1,0 +1,56 @@
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }} <span ng-if="alert.confirm"><button class="btn btn-primary" ng-click="alert.callback();" translate>Yes</button> <button class="btn btn-default" ng-click="alert.closeConfirm();" translate>No</button></span></uib-alert>
+<header role="banner">
+
+  <div class="container global-header">
+    <div class="row">
+      <div class="col-xs-6">Related platforms nav</div>
+      <div class="col-xs-6">
+
+        <button class="btn btn-default" type="button" ng-click="switchAdmin()" ng-show="isAdminAvailable"><i class="fa fa-cog"></i></button>
+
+        <div class="dropdown" uib-dropdown>
+          <a href class="dropdown-toggle btn btn-default" role="button" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle><i class="fa fa-user"></i></a>
+          <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+            <li><a href="/dashboard" translate>Dashboard</a></li>
+            <li><a href="/users/{{currentUser.id}}" translate>Profile</a></li>
+            <li><a href="/settings" translate>Preferences</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/logout" translate>Log out</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container site-header">
+    <div class="row">
+
+      <div class="col-xs-2 col-sm-6 col-md-4">
+        <h1>
+          <a href="/" class="site-header__logo">
+            <span class="sr-only">Humanitarian ID</span>
+          </a>
+        </h1>
+      </div>
+
+      <div class="col-xs-8 col-sm-3 com-md-4" ng-if="isAuthenticated">
+        <form class="form-inline" role="search" ng-submit="searchUsers()">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="search" name="name" class="form-control" placeholder="{{'Search for someone'|translate}}" ng-model="filters.name" >
+              <span class="input-group-btn">
+                <a href class="btn btn-default"><i class="fa fa-search"></i></a>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-xs-2 col-sm-3 col-md-4">
+      Nav
+      </div>
+
+    </div>
+  </div>
+</header>
