@@ -1,0 +1,38 @@
+button, input[type="submit"] {
+  @include font-size($base-font-size);
+  font-family: $body-font;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.btn {
+  border: 2px solid $border-grey;
+  border-radius: 4px;
+  background: $light-grey;
+  padding: $base-unit*1.5;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  color: $text-dark;
+  min-width: $base-unit*5.5;
+
+  &:hover, &:focus {
+    background: white;
+  }
+}
+
+.btn-primary {
+  background: $primary-color;
+  border-color: $primary-color;
+  color: white;
+  transition: background 0.3s ease;
+
+  &:hover, &:focus {
+    background: white;
+    color: $primary-color;
+  }
+}
+
+.btn-secondary {
+  background: white;
+}

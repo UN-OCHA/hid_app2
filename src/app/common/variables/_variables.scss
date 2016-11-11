@@ -29,8 +29,10 @@ $large-font-size: 24;
 $primary-color: #2D6282;
 // $primary-color: #54b1c8;
 // $secondary-color: #b9e6ee;
+$light-grey: #CFD1D2;
 
 $text-dark: #404040;
 $text-light: #FFF;
 
-$border-grey: #CFD1D2;
+
+$border-grey: $light-grey;

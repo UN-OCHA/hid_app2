@@ -1,0 +1,30 @@
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+textarea,
+select {
+  @include font-size($base-font-size);
+  font-family: $body-font;
+  padding: $base-unit*1.5;
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid $border-grey;
+  border-radius: 4px;
+  -webkit-appearance: none;
+}
+
+select {
+  height: 36px;
+  -webkit-appearance: menulist;
+  background: white;
+}
+
+label {
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: $base-unit*2;
+}
