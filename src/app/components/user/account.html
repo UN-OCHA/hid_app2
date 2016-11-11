@@ -83,8 +83,7 @@
       <div class="panel-body">
         <p translate>You have granted the following applications access to your Humanitarian ID account.</p>
         <ul>
-          <li>Humanitarian Response <a href="#" class="btn btn-default">Revoke</a></li>
-          <li>HDX <a href="#" class="btn btn-default">Revoke</a></li>
+          <li ng-repeat="client in user.authorizedClients">{{client.name}} <a href="#" class="btn btn-default">Revoke</a></li>
         </ul>
       </div>
     </div>
