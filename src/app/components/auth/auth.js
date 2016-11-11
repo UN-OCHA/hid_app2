@@ -101,7 +101,7 @@ authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$
   };
 
   $scope.resetPasswordFunction = function() {
-    User.resetPassword($routeParams.hash, $scope.newPassword, function (response) {
+    User.resetPassword($location.search().hash, $scope.newPassword, function (response) {
       alertService.add('success', gettextCatalog.getString('Your password was successfully changed. You can now login.'));
       $location.path('/');
     }, function (response) {
@@ -119,8 +119,8 @@ authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$
 }]);
 
 authController.controller('VerifyCtrl', ['$scope', '$location', '$routeParams', 'User', 'gettextCatalog', 'alertService', function ($scope, $location, $routeParams, User, gettextCatalog, alertService) {
-  var hash = $routeParams.hash;
-  User.validateEmail($routeParams.hash, function (response) {
+  var hash = $location.search().hash;
+  User.validateEmail(hash, function (response) {
     alertService.add('success', gettextCatalog.getString('Thank you for verifying your email. You can now login through our application, or through any other application using Humanitarian ID'));
     $location.path('/');
   }, function (response) {

@@ -113,11 +113,11 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/components/auth/password_reset.html',
         controller: 'AuthCtrl'
       })
-      .when('/reset_password/:hash', {
+      .when('/reset_password', {
         templateUrl: 'app/components/auth/reset_password.html',
         controller: 'AuthCtrl'
       })
-      .when('/verify/:hash', {
+      .when('/verify', {
         template: '',
         controller: 'VerifyCtrl'
       })
