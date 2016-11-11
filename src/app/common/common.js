@@ -6,7 +6,9 @@ appServices.factory('alertService', function($rootScope) {
   // create an array of alerts available globally
   $rootScope.alerts = [];
 
-  alertService.add = function(type, msg, confirm = false, cb = false) {
+  alertService.add = function(type, msg, confirm, cb) {
+    confirm = confirm || false;
+    cb = cb || false;
     var closeAlert = function () {
       alertService.closeAlert(this);
     };
