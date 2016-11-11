@@ -5,6 +5,9 @@
 // Base measuremnt unit, used to keep consistent spacing
 $base-unit: 8px;
 
+//measurements
+$header-height: $base-unit*8;
+
 // Grid
 $grid-gutter: $base-unit*4 !default;
 $grid-columns: 12 !default;
@@ -20,8 +23,10 @@ $enable-flex: false;
 // Fonts
 $body-font: sans-serif;
 $heading-font: 'exo_2semi_bold', sans-serif;
+$heading-font-light: 'exo_2regular', sans-serif;
 
 // Font sizes
+$tiny-font-size: 8;
 $small-font-size: 14;
 $base-font-size: 16;
 $large-font-size: 24;
@@ -42,3 +47,5 @@ $border-grey: $light-grey;
 $zindex: (
   mobileNav: 9
 );
+
+

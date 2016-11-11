@@ -1,0 +1,60 @@
+.global-header {
+  padding-top: $base-unit;
+  padding-bottom: $base-unit;
+  background: $primary-color;
+  color: $text-light;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .dropdown-menu {
+    right: 0;
+    top: $base-unit*3.5;
+    min-width: $base-unit*18;
+  }
+}
+
+.global-header__sites {
+  flex-grow: 1;
+  position: relative;
+
+  .dropdown-menu {
+    left: 0;
+    right: auto;
+    top: $base-unit*4;
+    width: $base-unit*20;
+  }
+}
+
+.global-header__sites-btn {
+  color: $text-light;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0;
+  @include font-size($tiny-font-size);
+}
+
+@include media-query(sm) {
+
+  .global-header__sites-btn {
+    @include font-size($small-font-size);
+  }
+
+}
+
+@include media-query(lg) {
+
+  .global-header {
+    height: $header-height;
+
+    .dropdown-menu {
+      top: $base-unit*5;
+    }
+  }
+
+  .global-header__sites {
+    .dropdown-menu {
+      top: 44px;
+    }
+  }
+}

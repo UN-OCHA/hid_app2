@@ -1,0 +1,31 @@
+.dropdown-menu {
+  display: none;
+
+  .open > & {
+    display: block;
+    position: absolute;
+    background: white;
+    z-index: map-get($zindex, mobileNav);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15)
+
+  }
+
+  li {
+    border-bottom: 1px solid $border-grey;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: $text-dark;
+    padding: $base-unit;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+}

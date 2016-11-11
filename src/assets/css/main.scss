@@ -1,6 +1,7 @@
 @import '../../app/common/_setup';
 @import '../../app/common/_base';
 @import '../../app/common/_buttons';
+@import '../../app/common/_dropdown';
 @import '../../app/common/_forms';
 @import '../../app/common/_grid';
 @import '../../app/common/_temp';
@@ -8,8 +9,9 @@
 @import '../../app/components/auth/_auth';
 @import '../../app/components/dashboard/_dashboard';
 @import '../../app/components/footer/_footer';
-@import '../../app/components/header/_header';
-@import '../../app/components/header/_main-nav';
+@import '../../app/components/header/_global-header';
+@import '../../app/components/header/_nav';
+@import '../../app/components/header/_site-header';
 @import '../../app/components/list/_list';
 @import '../../app/components/search/_search-form';
 @import '../../app/components/user/_user';

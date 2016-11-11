@@ -1,14 +1,3 @@
-.global-header {
-  padding-top: $base-unit;
-  padding-bottom: $base-unit;
-  background: $primary-color;
-  color: $text-light;
-
-  .btn, .dropdown {
-    display: inline-block;
-  }
-}
-
 .site-header {
   padding-top: $base-unit;
   padding-bottom: $base-unit;
@@ -42,18 +31,12 @@
   padding: $base-unit;
   @include font-size($large-font-size);
   position: relative;
-  z-index: map-get($zindex, mobileNav);
   margin-right: -$base-unit;
 }
 
 .site-header__nav {
-  z-index: map-get($zindex, mobileNav);
-  position: absolute;
   top: 60px;
   right: 0;
-  width: 300px;
-  background: white;
-  box-shadow: -1px 1px 2px 0px rgba(0, 0, 0, 0.15)
 }
 
 @include media-query(sm) {
@@ -71,7 +54,7 @@
   .site-header {
     padding-top: 0;
     padding-bottom: 0;
-    height: $base-unit*9;
+    height: $header-height;
   }
 
   .site-header__logo {
@@ -90,6 +73,7 @@
     right: auto;
     width: auto;
     background: none;
+    z-index: auto;
   }
 
 }
