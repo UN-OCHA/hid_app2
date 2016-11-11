@@ -1,0 +1,10 @@
+<div ng-controller="SearchCtrl">
+  <form class="search-form" role="search" ng-submit="searchUsers()">
+    <label for="name" class="sr-only">{{'Search for contacts'|translate}}</label>
+    <input type="search" name="name" id="name" class="input-no-border search-form__input" placeholder="{{'Search for contacts'|translate}}" ng-model="filters.name" >
+    <button type="submit" class="btn btn-transparent search-form__btn">
+      <i class="fa fa-search"></i>
+      <span class="sr-only">Search</span>
+    </button>
+  </form>
+</div>

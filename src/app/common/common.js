@@ -12,7 +12,7 @@ appServices.factory('alertService', function($rootScope) {
     };
     var alert = {
       'type': type,
-      'msg': msg, 
+      'msg': msg,
       'close': closeAlert,
       'routes': 1,
       'confirm': confirm,
@@ -151,16 +151,6 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 
 
   $scope.setAdminAvailable = function (val) {
     $scope.isAdminAvailable = val;
-  };
-
-  $scope.searchUsers = function () {
-    var path = $location.path();
-    if (path == '/users' || path.indexOf('/lists/') != -1) {
-      userService.addFilter('name', $scope.filters.name, true);
-    }
-    if (path == '/lists') {
-      listService.addFilter('name', $scope.filters.name, true);
-    }
   };
 
   $scope.initCurrentUser();

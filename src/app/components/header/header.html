@@ -4,7 +4,7 @@
   <div class="container global-header">
     <div class="row">
       <div class="col-xs-6">Related platforms nav</div>
-      <div class="col-xs-6">
+      <div class="col-xs-6" ng-if="isAuthenticated">
 
         <button class="btn btn-default" type="button" ng-click="switchAdmin()" ng-show="isAdminAvailable"><i class="fa fa-cog"></i></button>
 
@@ -24,33 +24,32 @@
   </div>
 
   <div class="container site-header">
-    <div class="row">
 
-      <div class="col-xs-2 col-sm-6 col-md-4">
-        <h1>
-          <a href="/" class="site-header__logo">
-            <span class="sr-only">Humanitarian ID</span>
-          </a>
-        </h1>
-      </div>
+    <a href="/" class="site-header__logo" ng-class="{'site-header__logo--loggedout': !isAuthenticated}">
+      <span class="sr-only">Humanitarian ID</span>
+    </a>
 
-      <div class="col-xs-8 col-sm-3 com-md-4" ng-if="isAuthenticated">
-        <form class="form-inline" role="search" ng-submit="searchUsers()">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="search" name="name" class="form-control" placeholder="{{'Search for someone'|translate}}" ng-model="filters.name" >
-              <span class="input-group-btn">
-                <a href class="btn btn-default"><i class="fa fa-search"></i></a>
-              </span>
-            </div>
-          </div>
-        </form>
-      </div>
+    <div class="site-header__search" ng-if="isAuthenticated">
+        <ng-include src="'/app/components/search/search-form.html'"></ng-include>
+    </div>
 
-      <div class="col-xs-2 col-sm-3 col-md-4">
-      Nav
-      </div>
+    <div uib-dropdown on-toggle="toggled(open)" ng-if="isAuthenticated">
+
+      <nav role="navigation" id="nav" class="site-header__nav dropdown-menu" uib-dropdown-menu aria-labelledby="navToggle" >
+        <ul class="main-nav">
+          <li class="main-nav__item active"><a href="/dashboard" class="main-nav__link" translate>Dashboard</a></li>
+          <li class="main-nav__item"><a href="/users/{{currentUser.id}}" class="main-nav__link" translate>My profile</a></li>
+          <li class="main-nav__item"><a href="/lists" class="main-nav__link" translate>Humanitarian contact list</a></li>
+          <li class="main-nav__item"><a href="/checkin/{{currentUser.id}}" class="main-nav__link" translate>Check in</a></li>
+        </ul>
+      </nav>
+
+      <button type="button" id="navToggle" class="site-header__nav-toggle btn btn-transparent" uib-dropdown-toggle>
+        <i class="fa fa-bars"></i>
+        <span class="sr-only">Menu</span>
+      </button>
 
     </div>
+
   </div>
 </header>

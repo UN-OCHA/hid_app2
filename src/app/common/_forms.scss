@@ -13,6 +13,10 @@ select {
   border: 1px solid $border-grey;
   border-radius: 4px;
   -webkit-appearance: none;
+
+  &.input-no-border {
+    border: none;
+  }
 }
 
 select {
@@ -27,4 +31,21 @@ label {
 
 .form-group {
   margin-bottom: $base-unit*2;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $primary-color;
+  font-style: italic;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $primary-color;
+  font-style: italic;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $primary-color;
+  font-style: italic;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: $primary-color;
+  font-style: italic;
 }

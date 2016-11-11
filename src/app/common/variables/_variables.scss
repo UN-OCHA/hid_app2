@@ -19,9 +19,10 @@ $enable-flex: false;
 
 // Fonts
 $body-font: sans-serif;
-$heading-font: serif;
+$heading-font: 'exo_2semi_bold', sans-serif;
 
 // Font sizes
+$small-font-size: 14;
 $base-font-size: 16;
 $large-font-size: 24;
 
@@ -36,3 +37,8 @@ $text-light: #FFF;
 
 
 $border-grey: $light-grey;
+
+//z-index
+$zindex: (
+  mobileNav: 9
+);
