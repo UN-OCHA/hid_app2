@@ -65,26 +65,7 @@
     visibility: visible;
 }
 
-.btn {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
-  padding: $base-unit;
-  min-width: $base-unit*5;
-  min-height: $base-unit*5;
-  display: inline-block;
-}
 
-.btn-primary {
-  background-image: linear-gradient(to bottom,#337ab7 0,#265a88 100%);
-  border-color: #245580;
-  color: white;
-}
-
-.form-group {
-  display: inline-table;
-}
 
 .input-group {
   display: inline-table;
