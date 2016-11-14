@@ -1,0 +1,39 @@
+.list-tabs {
+  position: relative;
+  margin-bottom: $base-unit;
+}
+
+.list-tabs__controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  .dropdown-menu {
+    right: 0;
+    min-width: $base-unit*20;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+.list-tabs__toggle {
+  color: $text-light;
+}
+
+.list-tabs__content {
+  margin-bottom: $base-unit;
+}
+
+.list-tabs__empty {
+  padding: $base-unit;
+}
+
+@include media-query(md) {
+
+  .list-tabs {
+    margin-bottom: $base-unit*4;
+  }
+
+}

@@ -143,13 +143,17 @@ img {
   display: inline-block; }
 
 a {
-  text-decoration: underline; }
+  text-decoration: underline;
+  color: #007faa; }
   a:hover, a:focus, a:active {
     text-decoration: none; }
 
 h1 {
   font-size: 24px;
-  font-size: 1.5rem; }
+  font-size: 1.5rem;
+  font-family: "exo_2semi_bold", sans-serif;
+  color: #007faa;
+  margin-bottom: 8px; }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold; }
@@ -163,6 +167,33 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0; }
+
+.block-heading {
+  background: #007faa;
+  color: #FFF;
+  text-transform: uppercase;
+  padding: 8px;
+  font-family: "exo_2semi_bold", sans-serif;
+  display: block; }
+
+.secondary-block {
+  border-bottom: 1px solid #007faa;
+  margin-bottom: 16px;
+  padding-bottom: 16px; }
+
+.secondary-block__heading {
+  text-transform: uppercase;
+  color: #007faa;
+  border-bottom: 1px solid #007faa;
+  padding: 8px;
+  font-family: "exo_2semi_bold", sans-serif; }
+
+.secondary-block__item {
+  padding: 12px 16px; }
+  .secondary-block__item .fa {
+    font-size: 12px;
+    font-size: 0.75rem;
+    margin-right: 4px; }
 
 button, input[type="submit"] {
   font-size: 16px;
@@ -185,13 +216,13 @@ button, input[type="submit"] {
     background: white; }
 
 .btn-primary {
-  background: #2D6282;
-  border-color: #2D6282;
+  background: #007faa;
+  border-color: #007faa;
   color: white;
   transition: background 0.3s ease; }
   .btn-primary:hover, .btn-primary:focus {
     background: white;
-    color: #2D6282; }
+    color: #007faa; }
 
 .btn-secondary {
   background: white; }
@@ -199,7 +230,7 @@ button, input[type="submit"] {
 .btn-transparent {
   background: none;
   border: none;
-  color: #2D6282; }
+  color: #007faa; }
   .btn-transparent:hover, .btn-transparent:focus {
     background: none; }
 
@@ -261,22 +292,22 @@ label {
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #2D6282;
+  color: #007faa;
   font-style: italic; }
 
 ::-moz-placeholder {
   /* Firefox 19+ */
-  color: #2D6282;
+  color: #007faa;
   font-style: italic; }
 
 :-ms-input-placeholder {
   /* IE 10+ */
-  color: #2D6282;
+  color: #007faa;
   font-style: italic; }
 
 :-moz-placeholder {
   /* Firefox 18- */
-  color: #2D6282;
+  color: #007faa;
   font-style: italic; }
 
 .container {
@@ -1110,6 +1141,50 @@ label {
 
   .offset-xl-11 {
     margin-left: 91.66667%; } }
+.list-group__item {
+  list-style: none;
+  position: relative;
+  border-bottom: 1px solid #CFD1D2; }
+  .list-group__item a {
+    display: block;
+    text-decoration: none;
+    padding: 8px 48px 8px 8px;
+    word-break: break-word; }
+    .list-group__item a:hover, .list-group__item a:focus {
+      text-decoration: underline;
+      background: #f9f9f9; }
+
+.list-group__item-actions {
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+.list-tabs {
+  position: relative;
+  margin-bottom: 8px; }
+
+.list-tabs__controls {
+  position: absolute;
+  top: 0;
+  right: 0; }
+  .list-tabs__controls .dropdown-menu {
+    right: 0;
+    min-width: 160px; }
+  .list-tabs__controls button {
+    width: 100%; }
+
+.list-tabs__toggle {
+  color: #FFF; }
+
+.list-tabs__content {
+  margin-bottom: 8px; }
+
+.list-tabs__empty {
+  padding: 8px; }
+
+@media (min-width: 768px) {
+  .list-tabs {
+    margin-bottom: 32px; } }
 /*
  * Temporary styles
  * I will delete you all!
@@ -1167,14 +1242,6 @@ label {
   vertical-align: top;
   border-top: 1px solid #ddd; }
 
-.list-group-item {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
-  margin-bottom: -1px;
-  background-color: #fff;
-  border: 1px solid #ddd; }
-
 .panel {
   margin-bottom: 20px;
   background-color: #fff;
@@ -1200,13 +1267,13 @@ label {
  * Styles for dashboard component
  */
 .footer {
-  background: #2D6282;
+  background: #007faa;
   margin-top: 32px; }
 
 .global-header {
   padding-top: 8px;
   padding-bottom: 8px;
-  background: #2D6282;
+  background: #007faa;
   color: #FFF;
   display: flex;
   align-items: center;
@@ -1289,8 +1356,10 @@ label {
     font-size: 0.875rem;
     margin-left: 8px; }
   .nav--primary .nav__link {
-    color: #2D6282;
-    height: 48px; }
+    color: #007faa;
+    height: 48px;
+    display: flex;
+    align-items: center; }
     .nav--primary .nav__link:before {
       content: none; }
     .nav--primary .nav__link:after {
@@ -1302,9 +1371,9 @@ label {
       border-bottom: 2px solid transparent;
       transition: border-color 0.3s ease; }
     .nav--primary .nav__link:hover:after, .nav--primary .nav__link:focus:after {
-      border-color: #2D6282; }
+      border-color: #007faa; }
   .active .nav__link:after {
-    border-color: #2D6282; }
+    border-color: #007faa; }
   .nav--secondary .nav__link {
     color: #FFF;
     font-size: 14px;
@@ -1346,16 +1415,14 @@ label {
     font-size: 14px;
     font-size: 0.875rem; }
     .nav--primary .nav__link {
-      height: 64px;
-      display: flex;
-      align-items: center; }
+      height: 64px; }
       .nav--primary .nav__link:hover, .nav--primary .nav__link:focus {
         text-decoration: none; }
       .nav--primary .nav__link:before {
         content: "";
         top: 50%;
         margin-top: -6px;
-        background: #2D6282; }
+        background: #007faa; }
       .no-flexbox .nav--primary .nav__link {
         height: auto;
         display: block;

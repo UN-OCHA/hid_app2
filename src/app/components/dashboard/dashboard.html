@@ -1,50 +1,103 @@
 <div class="row">
   <div class="col-xs-12">
     <h1 translate>Dashboard</h1>
-
-    <div ng-if="currentUser.is_admin">
-      <a class="btn btn-primary" href="/users/new">Add new user</a>
-    </div>
-    <div>
-      <div class="clearfix">
-        <a class="btn btn-primary" href="/lists/new" translate>Create new List</a>
-      </div>
-      <div class="clearfix">
-        <a class="btn btn-primary" href="/checkin" translate>Check In</a>
-      </div>
-    </div>
   </div>
 </div>
 
 <div class="row">
 
-  <div class="col-sm-9">
-    <uib-tabset active="activeJustified" justified="true">
-      <uib-tab index="0" heading="My Favorite Lists">
-        <div class="list-group">
-          <a ng-repeat="(key, val) in currentUser.favoriteLists" href="/lists/{{val._id}}" class="list-group-item">{{val.name}}</a>
+  <div class="col-md-8">
+    <div class="list-tabs">
+      <div class="list-tabs__controls" uib-dropdown>
+        <button type="button" class="btn btn-transparent list-tabs__toggle" uib-dropdown-toggle>
+          <span class="sr-only">Change list</span>
+          <i class="fa fa-chevron-down"></i>
+        </button>
+
+        <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+          <li>
+            <button type="button" id="dashTab0" class="btn btn-transparent" ng-click="activeList = 0" aria-selected="{{activeList === 0}}" translate>My favorite lists</button>
+          </li>
+          <li>
+            <button type="button" id="dashTab1" class="btn btn-transparent" ng-click="activeList = 1" aria-selected="{{activeList === 1}}" translate>Lists I'm part of</button>
+          </li>
+          <li>
+            <button type="button" id="dashTab2" class="btn btn-transparent" ng-click="activeList = 2" aria-selected="{{activeList === 2}}" translate>Lists I manage</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="list-tabs__content" ng-show="activeList === 0" aria-hidden="{{activeList !== 0}}" aria-labelledby="dashTab0">
+        <h2 class="block-heading" translate>My favorite lists</h2>
+        <div class="list-group" ng-if="currentUser.favoriteLists.length">
+          <li class="list-group__item" ng-repeat="(key, val) in currentUser.favoriteLists">
+            <a href="/lists/{{val._id}}">{{val.name}}</a>
+          </li>
         </div>
-      </uib-tab>
-      <uib-tab index="1" heading="Lists I'm part Of">
-        <div class="list-group">
-          <a ng-repeat="(key, val) in listsMember" href="/lists/{{val._id}}" class="list-group-item">{{val.name}}</a>
+        <div ng-if="!currentUser.favoriteLists.length">
+          <p class="list-tabs__empty" translate>You don't have any favourite lists</p>
         </div>
-      </uib-tab>
-      <uib-tab index="2" heading="Lists I Manage">
-        <div class="list-group">
-          <a ng-repeat="(key, val) in listsOwner" href="/lists/{{val._id}}" class="list-group-item">{{val.name}}</a>
-          <a ng-repeat="(key, val) in listsManager" href="/lists/{{val._id}}" class="list-group-item">{{val.name}}</a>
+      </div>
+
+      <div class="list-tabs__content" ng-show="activeList === 1" aria-hidden="{{activeList !== 1}}" aria-labelledby="dashTab1">
+        <h2 class="block-heading">Lists I'm part of</h2>
+        <div class="list-group" ng-if="listsMember.length">
+          <li class="list-group__item" ng-repeat="(key, val) in listsMember">
+            <a href="/lists/{{val._id}}">{{val.name}}</a>
+          </li>
         </div>
-      </uib-tab>
-    </uib-tabset>
-    <div class="clearfix">
-      <a class="btn btn-primary pull-right" href="/lists" translate>View all Lists</a>
+        <div ng-if="!listsMember.length">
+          <p class="list-tabs__empty" translate>You are not part of any lists</p>
+        </div>
+      </div>
+
+      <div class="list-tabs__content" ng-show="activeList === 2" aria-hidden="{{activeList !== 2}}" aria-labelledby="dashTab2">
+        <h2 class="block-heading">Lists I manage</h2>
+        <div class="list-group" ng-if="listsOwner.length || listsManager.length">
+          <li class="list-group__item" ng-repeat="(key, val) in listsOwner">
+            <a href="/lists/{{val._id}}">{{val.name}}</a>
+            <div class="list-group__item-actions">
+              <button type="button" class="btn btn-transparent">
+                <span class="sr-only">Edit</span>
+                <i class="fa fa-cog"></i>
+              </button>
+            </div>
+          </li>
+          <li ng-repeat="(key, val) in listsManager">
+            <a href="/lists/{{val._id}}">{{val.name}}</a>
+          </li>
+        </div>
+
+        <div ng-if="!listsOwner.length && !listsManager.length">
+          <p class="list-tabs__empty" translate>You don't manage any lists</p>
+        </div>
+
+      </div>
+
+       <a class="btn btn-primary" href="/lists" translate>View all Lists</a>
+
     </div>
+
   </div>
-  <div class="col-sm-3">
-    <p>Welcome back <a href="/users/{{currentUser.id}}">{{currentUser.name}}</a></p>
-    <p><span translate>Last Update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></p>
-    <p ng-if="currentUser.verified" translate>Your profile is verified</p>
-    <p ng-if="!currentUser.verified" translate>You're not verified yet</p>
+
+  <div class="col-md-4">
+
+  <div class="secondary-block">
+    <h2 class="secondary-block__heading">Notifications</h2>
+    <ul class="secondary-block__list">
+      <li class="secondary-block__item">
+        <i class="fa fa-chevron-right"></i>
+        <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
+      <li class="secondary-block__item" ng-if="currentUser.verified" translate><i class="fa fa-chevron-right"></i>Your profile is verified</li>
+      <li class="secondary-block__item" ng-if="!currentUser.verified" translate><i class="fa fa-chevron-right"></i>You're not verified yet</li>
+    </ul>
+  </div>
+
+    <a class="btn btn-primary" href="/users/new" ng-if="currentUser.is_admin">Add new user</a>
+    <div>
+      <a class="btn btn-primary" href="/lists/new" translate>Create new List</a>
+      <a class="btn btn-primary" href="/checkin" translate>Check In</a>
+    </div>
+
   </div>
 </div>
