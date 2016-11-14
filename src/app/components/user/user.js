@@ -3,7 +3,7 @@ var userDirectives = angular.module('userDirectives', []);
 userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'userService', 'User', 'List', function($location, gettextCatalog, alertService, hrinfoService, userService, User, List) {
   return {
     restrict: 'E',
-    templateUrl: 'app/user/users.html',
+    templateUrl: 'app/components/user/users.html',
     scope: false,
     link: function (scope, elem, attrs) {
       scope.inlist = scope.list ? true : false;
