@@ -36,3 +36,13 @@ button, input[type="submit"] {
 .btn-secondary {
   background: white;
 }
+
+.btn-transparent {
+  background: none;
+  border: none;
+  color: $primary-color;
+
+  &:hover, &:focus {
+    background: none;
+  }
+}

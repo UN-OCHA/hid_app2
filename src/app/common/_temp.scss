@@ -7,16 +7,6 @@
   float: none;
 }
 
-.dropdown-menu {
-  display: none;
-
-  .open > & {
-    display: block;
-    position: absolute;
-    background: white;
-    z-index: 1;
-  }
-}
 
 
 

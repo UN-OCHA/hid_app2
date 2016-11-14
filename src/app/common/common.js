@@ -6,13 +6,15 @@ appServices.factory('alertService', function($rootScope) {
   // create an array of alerts available globally
   $rootScope.alerts = [];
 
-  alertService.add = function(type, msg, confirm = false, cb = false) {
+  alertService.add = function(type, msg, confirm, cb) {
+    confirm = confirm || false;
+    cb = cb || false;
     var closeAlert = function () {
       alertService.closeAlert(this);
     };
     var alert = {
       'type': type,
-      'msg': msg, 
+      'msg': msg,
       'close': closeAlert,
       'routes': 1,
       'confirm': confirm,
@@ -151,16 +153,6 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 
 
   $scope.setAdminAvailable = function (val) {
     $scope.isAdminAvailable = val;
-  };
-
-  $scope.searchUsers = function () {
-    var path = $location.path();
-    if (path == '/users' || path.indexOf('/lists/') != -1) {
-      userService.addFilter('name', $scope.filters.name, true);
-    }
-    if (path == '/lists') {
-      listService.addFilter('name', $scope.filters.name, true);
-    }
   };
 
   $scope.initCurrentUser();

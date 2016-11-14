@@ -1,0 +1,15 @@
+.search-form {
+  position: relative;
+}
+
+input[type="search"].search-form__input {
+  padding-left: $base-unit*4.5;
+}
+
+.search-form__btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 0;
+  padding-right: $base-unit/2;
+}

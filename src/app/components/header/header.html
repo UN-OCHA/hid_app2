@@ -2,55 +2,88 @@
 <header role="banner">
 
   <div class="container global-header">
-    <div class="row">
-      <div class="col-xs-6">Related platforms nav</div>
-      <div class="col-xs-6">
+      <div class="global-header__sites" uib-dropdown>
+        <button type="button" class="global-header__sites-btn btn btn-transparent" uib-dropdown-toggle>
+          Related platforms
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+          <li><a href="#" translate>TO DO</a></li>
+        </ul>
+      </div>
 
-        <button class="btn btn-default" type="button" ng-click="switchAdmin()" ng-show="isAdminAvailable"><i class="fa fa-cog"></i></button>
+      <div class="global-header__nav" ng-if="isAuthenticated">
+        <ul class="nav nav--secondary">
+        <li class="nav__item">
+          <a href="#" class="nav__link">
+            <i class="fa fa-comment"></i>
+            <span class="nav__label">HID Blog</span>
+          </a>
+        </li>
+        <li class="nav__item">
+          <a href="#" class="nav__link">
+            <i class="fa fa-question"></i>
+            <span class="nav__label">About</span>
+          </a>
+        </li>
 
-        <div class="dropdown" uib-dropdown>
-          <a href class="dropdown-toggle btn btn-default" role="button" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle><i class="fa fa-user"></i></a>
+        <li class="nav__item" uib-dropdown>
+          <button type="button" class="nav__link btn btn-transparent" uib-dropdown-toggle>
+            <span class="nav__label nav__label--mobile">Eng</span>
+            <i class="fa fa-caret-down"></i>
+          </button>
+
+          <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+            <li><a href="#" translate>TO DO</a></li>
+          </ul>
+        </li>
+
+        <li class="nav__item" uib-dropdown>
+          <button type="button" class="nav__link btn btn-transparent" uib-dropdown-toggle>
+            <i class="fa fa-user"></i>
+            <span class="nav__label">User name</span>
+            <i class="fa fa-caret-down"></i>
+          </button>
+
           <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
             <li><a href="/dashboard" translate>Dashboard</a></li>
             <li><a href="/users/{{currentUser.id}}" translate>Profile</a></li>
             <li><a href="/settings" translate>Preferences</a></li>
-            <li role="separator" class="divider"></li>
             <li><a href="/logout" translate>Log out</a></li>
           </ul>
-        </div>
+        </li>
+      </ul>
 
       </div>
-    </div>
   </div>
 
   <div class="container site-header">
-    <div class="row">
 
-      <div class="col-xs-2 col-sm-6 col-md-4">
-        <h1>
-          <a href="/" class="site-header__logo">
-            <span class="sr-only">Humanitarian ID</span>
-          </a>
-        </h1>
-      </div>
+    <a href="/" class="site-header__logo" ng-class="{'site-header__logo--loggedout': !isAuthenticated}">
+      <span class="sr-only">Humanitarian ID</span>
+    </a>
 
-      <div class="col-xs-8 col-sm-3 com-md-4" ng-if="isAuthenticated">
-        <form class="form-inline" role="search" ng-submit="searchUsers()">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="search" name="name" class="form-control" placeholder="{{'Search for someone'|translate}}" ng-model="filters.name" >
-              <span class="input-group-btn">
-                <a href class="btn btn-default"><i class="fa fa-search"></i></a>
-              </span>
-            </div>
-          </div>
-        </form>
-      </div>
+    <div class="site-header__search" ng-if="isAuthenticated">
+        <ng-include src="'/app/components/search/search-form.html'"></ng-include>
+    </div>
 
-      <div class="col-xs-2 col-sm-3 col-md-4">
-      Nav
-      </div>
+    <div uib-dropdown on-toggle="toggled(open)" ng-if="isAuthenticated">
+
+      <nav role="navigation" id="nav" class="site-header__nav dropdown-menu" uib-dropdown-menu aria-labelledby="navToggle" >
+        <ul class="nav nav--primary">
+          <li class="nav__item active"><a href="/dashboard" class="nav__link" translate>Dashboard</a></li>
+          <li class="nav__item"><a href="/users/{{currentUser.id}}" class="nav__link" translate>My profile</a></li>
+          <li class="nav__item"><a href="/lists" class="nav__link" translate>Humanitarian contact list</a></li>
+          <li class="nav__item"><a href="/checkin/{{currentUser.id}}" class="nav__link" translate>Check in</a></li>
+        </ul>
+      </nav>
+
+      <button type="button" id="navToggle" class="site-header__nav-toggle btn btn-transparent" uib-dropdown-toggle>
+        <i class="fa fa-bars"></i>
+        <span class="sr-only">Menu</span>
+      </button>
 
     </div>
+
   </div>
 </header>

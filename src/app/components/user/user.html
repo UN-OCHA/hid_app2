@@ -1,4 +1,4 @@
-<div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
+<div>
   <div ng-show="currentUser.is_admin || (currentUser._id == user._id)">
     <a class="btn btn-primary" href="/checkin/{{user._id}}" translate>Check into List</a>
   </div>

@@ -48,6 +48,32 @@ table {
 }
 
 /**
+ * Fonts
+ */
+ @font-face {
+    font-family: 'exo_2regular';
+    src: url('../fonts/exo/Exo2-Regular-webfont.eot');
+    src: url('../fonts/exo/Exo2-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/exo/Exo2-Regular-webfont.woff') format('woff'),
+         url('../fonts/exo/Exo2-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/exo/Exo2-Regular-webfont.svg#exo_2regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'exo_2semi_bold';
+    src: url('../fonts/exo/Exo2-SemiBold-webfont.eot');
+    src: url('../fonts/exo/Exo2-SemiBold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/exo/Exo2-SemiBold-webfont.woff') format('woff'),
+         url('../fonts/exo/Exo2-SemiBold-webfont.ttf') format('truetype'),
+         url('../fonts/exo/Exo2-SemiBold-webfont.svg#exo_2semi_bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/**
  * Base styles
  */
 

@@ -1,20 +1,23 @@
-<div uib-collapse="isAdminCollapsed" horizontal id="admin" expanding="adminExpanding()" collapsing="adminCollapsing()">
-  <div ng-if="currentUser.is_admin">
-    <a class="btn btn-primary" href="/users/new">Add new user</a>
-  </div>
-  <div>
-    <div class="clearfix">
-      <a class="btn btn-primary" href="/lists/new" translate>Create new List</a>
-    </div>
-    <div class="clearfix">
-      <a class="btn btn-primary" href="/checkin" translate>Check In</a>
-    </div>
-  </div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 translate>Dashboard</h1>
 
+    <div ng-if="currentUser.is_admin">
+      <a class="btn btn-primary" href="/users/new">Add new user</a>
+    </div>
+    <div>
+      <div class="clearfix">
+        <a class="btn btn-primary" href="/lists/new" translate>Create new List</a>
+      </div>
+      <div class="clearfix">
+        <a class="btn btn-primary" href="/checkin" translate>Check In</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
-  <h2 translate>Dashboard</h2>
+
   <div class="col-sm-9">
     <uib-tabset active="activeJustified" justified="true">
       <uib-tab index="0" heading="My Favorite Lists">

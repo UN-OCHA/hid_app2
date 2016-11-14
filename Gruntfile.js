@@ -51,12 +51,20 @@ module.exports = function(grunt) {
         'customTests': [],
         'dest': 'src/assets/js/modernizr-output.js',
         'tests': [
-          'svg'
+          'svg',
+          'flexbox'
         ],
         'options': [
           'setClasses'
         ],
         'uglify': true
+      }
+    },
+    autoprefixer: {
+      dist: {
+        files: {
+          'src/assets/css/main.css': 'src/assets/css/main.css'
+        }
       }
     }
   });
@@ -67,9 +75,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-modernizr");
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Default task
   grunt.registerTask('default', [
     'nggettext_extract',
-    'nggettext_compile', 'sass_import', 'concat', 'sass', 'modernizr']);
+    'nggettext_compile', 'sass_import', 'concat', 'sass', 'modernizr', 'autoprefixer']);
 };
