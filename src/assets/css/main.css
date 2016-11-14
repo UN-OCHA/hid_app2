@@ -171,6 +171,16 @@ button, input[type="submit"] {
   -webkit-appearance: none;
   cursor: pointer; }
 
+button[disabled] {
+  background: #CFD1D2;
+  border-color: #CFD1D2;
+  color: #404040;
+  cursor: initial; }
+  button[disabled]:hover, button[disabled]:focus {
+    background: #CFD1D2;
+    border-color: #CFD1D2;
+    color: #404040; }
+
 .btn {
   border: 2px solid #CFD1D2;
   border-radius: 4px;
@@ -247,6 +257,14 @@ select {
   textarea.input-no-border,
   select.input-no-border {
     border: none; }
+  .has-error input[type="text"], .has-error
+  input[type="number"], .has-error
+  input[type="password"], .has-error
+  input[type="email"], .has-error
+  input[type="search"], .has-error
+  textarea, .has-error
+  select {
+    border-color: red; }
 
 select {
   height: 36px;
@@ -255,6 +273,8 @@ select {
 
 label {
   font-weight: bold; }
+  .has-error label {
+    color: red; }
 
 .form-group {
   margin-bottom: 16px; }

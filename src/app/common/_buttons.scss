@@ -5,6 +5,19 @@ button, input[type="submit"] {
   cursor: pointer;
 }
 
+button[disabled] {
+  background: $light-grey;
+  border-color: $light-grey;
+  color: $text-dark;
+  cursor: initial;
+
+  &:hover, &:focus {
+    background: $light-grey;
+    border-color: $light-grey;
+    color: $text-dark;
+  }
+}
+
 .btn {
   border: 2px solid $border-grey;
   border-radius: 4px;

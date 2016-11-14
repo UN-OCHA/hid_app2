@@ -17,6 +17,10 @@ select {
   &.input-no-border {
     border: none;
   }
+
+  .has-error & {
+    border-color: red;
+  }
 }
 
 select {
@@ -27,6 +31,10 @@ select {
 
 label {
   font-weight: bold;
+
+  .has-error & {
+    color: red;
+  }
 }
 
 .form-group {
