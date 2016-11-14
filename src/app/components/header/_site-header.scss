@@ -20,10 +20,18 @@
   &.site-header__logo--loggedout {
     width: $base-unit*32;
   }
+
+  .no-flexbox & {
+    float: left;
+  }
 }
 
 .site-header__search {
   flex-grow: 1;
+
+  .no-flexbox & {
+    float: left;
+  }
 }
 
 .site-header__nav-toggle {
@@ -55,6 +63,11 @@
     padding-top: 0;
     padding-bottom: 0;
     height: $header-height;
+
+    .no-flexbox & {
+      padding-top: $base-unit*1.5;
+      padding-bottom: $base-unit*1.5;
+    }
   }
 
   .site-header__logo {
@@ -74,6 +87,10 @@
     width: auto;
     background: none;
     z-index: auto;
+
+    .no-flexbox & {
+      float: right;
+    }
   }
 
 }

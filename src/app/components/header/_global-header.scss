@@ -24,6 +24,10 @@
     top: $base-unit*4;
     width: $base-unit*20;
   }
+
+  .no-flexbox & {
+    float: left;
+  }
 }
 
 .global-header__sites-btn {
@@ -49,6 +53,12 @@
 
     .dropdown-menu {
       top: $base-unit*5;
+    }
+
+    .no-flexbox & {
+      height: auto;
+      padding-top: $base-unit;
+      padding-bottom: $base-unit;
     }
   }
 

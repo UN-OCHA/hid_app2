@@ -16,7 +16,6 @@
 
   .nav--primary & {
     text-transform: uppercase;
-    border-bottom: 1px solid $border-grey;
   }
 
   .nav--secondary & {
@@ -36,8 +35,7 @@
 }
 
 .nav__link {
-  display: flex;
-  align-items: center;
+  display: block;
 
   line-height: 1;
   padding: 0 $base-unit;
@@ -62,7 +60,6 @@
   .nav--primary & {
     color: $primary-color;
     height: $base-unit*6;
-    display: flex;
 
     &:before {
       content: none;
@@ -93,8 +90,8 @@
 
   .nav--secondary & {
     color: $text-light;
-    // padding: 0 $base-unit*1;
     @include font-size($small-font-size);
+    height: $base-unit*2;
 
     &:before {
       width: 1px;
@@ -117,6 +114,12 @@
 
 @include media-query(md) {
 
+  .nav--secondary {
+    .no-flexbox & {
+      float: right;
+    }
+  }
+
   .nav__label {
     @include font-size($base-font-size);
   }
@@ -127,16 +130,23 @@
     width: auto;
     clip: auto;
     margin: 0 0 0 $base-unit;
-    @inc
   }
 
 }
 
 @include media-query(lg) {
 
+  .nav {
+    display: flex;
+  }
+
   .nav__item {
     display: inline-block;
     border: none;
+
+    .nav--primary & {
+      border-bottom: none;
+    }
   }
 
   .nav__link {
@@ -145,6 +155,8 @@
 
     .nav--primary & {
       height: $header-height;
+      display: flex;
+      align-items: center;
 
       &:hover, &:focus {
         text-decoration: none;
@@ -155,6 +167,13 @@
         top: 50%;
         margin-top: -$base-unit*.75;
         background: $primary-color;
+      }
+
+      .no-flexbox & {
+        height: auto;
+        display: block;
+        padding-top: $base-unit;
+        padding-bottom: $base-unit;
       }
     }
   }
