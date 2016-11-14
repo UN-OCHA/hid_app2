@@ -1,0 +1,27 @@
+<div>
+  <div>
+      <a class="btn btn-primary" href="clients/new" translate>Add Client</a>
+    </div>
+</div>
+<div id="page-content-wrapper">
+  <div class="col-sm-12">
+    <h1 translate>Clients</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th translate>ID</th>
+          <th translate>Name</th>
+          <th translate>URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="client in clients">
+          <td><a ng-href="/clients/{{client._id}}">{{client.id}}</a></td>
+          <td>{{client.name}}</td>
+          <td>{{client.url}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+  </div>
+</div>

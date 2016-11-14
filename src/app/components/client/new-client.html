@@ -1,0 +1,58 @@
+<h1 translate>Create a new client</h1>
+<form name="editClient" ng-submit="editClient.$valid && saveClient()" novalidate>
+  <div class="form-group" ng-class="{'has-error': editClient.clientId.$touched && editClient.clientId.$invalid}">
+    <label for="clientId" translate>ID</label>
+    <input type="text" name="clientId" class="form-control" id="clientId" placeholder="{{'The client ID'|translate}}" ng-model="client.id" required>
+    <div class="clearfix">
+      <div ng-messages="editClient.clientId.$error" ng-show="editClient.clientId.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{'has-error': editClient.name.$touched && editClient.name.$invalid}">
+    <label for="name" translate>Name</label>
+    <input type="text" name="name" class="form-control" id="name" placeholder="{{'The client name'|translate}}" ng-model="client.name" required>
+    <div class="clearfix">
+      <div ng-messages="editClient.name.$error" ng-show="editClient.name.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="url" translate>URL</label>
+    <input type="text" class="form-control" id="url" placeholder="{{'Client URL'|translate}}" ng-model="client.url">
+  </div>
+  <div class="form-group" ng-class="{'has-error': editClient.redirect_url.$touched && editClient.redirect_url.$invalid}">
+    <label for="redirect_url" translate>Redirect URL</label>
+    <input type="text" name="redirect_url" class="form-control" id="redirect_url" placeholder="{{'Client redirect URL'|translate}}" ng-model="client.redirectUri" required>
+    <div class="clearfix">
+      <div ng-messages="editClient.redirect_url.$error" ng-show="editClient.redirect_url.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" ng-class="{'has-error': editClient.login_url.$touched && editClient.login_url.$invalid}">
+    <label for="login_url" translate>Login URL</label>
+    <input type="text" name="login_url" class="form-control" id="login_url" placeholder="{{'Login URL'|translate}}" ng-model="client.loginUri">
+    <div class="clearfix">
+      <div ng-messages="editClient.login_url.$error" ng-show="editClient.login_url.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description" translate>Description</label>
+    <textarea ng-model="client.description" class="form-control" name="description" rows="5" cols="20"></textarea>
+  </div>
+  <div class="form-group" ng-class="{'has-error': editClient.secret.$touched && editClient.secret.$invalid}">
+    <label for="secret" translate>Secret</label>
+    <input type="text" name="secret" class="form-control" id="secret" placeholder="{{'Client secret'|translate}}" ng-model="client.secret" required>
+    <div class="clearfix">
+      <div ng-messages="editClient.secret.$error" ng-show="editClient.secret.$touched" ng-messages-multiple="ng-messages-multiple">
+        <div ng-messages-include="app/common/messages.html"></div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" ng-disabled="editClient.$invalid || editClient.$submitted" translate>Save</button>
+</form>
+

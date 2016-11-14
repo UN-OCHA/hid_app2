@@ -1,0 +1,21 @@
+<div>
+  <div>
+    <a class="btn btn-primary" href="clients/{{client._id}}/edit" translate>Edit Client</a>
+  </div>
+  <div>
+    <a class="btn btn-danger" ng-click="deleteClient();" translate>Delete Client</a>
+  </div>
+</div>
+<div id="page-content-wrapper">
+  <h1>{{client.name}}</h1>
+
+  <ul>
+    <li><span translate>ID</span>: {{client.id}}</li>
+    <li><span translate>URL</span>: {{client.url}}</li>
+    <li><span translate>Redirect URL</span>: {{client.redirectUri}}</li>
+    <li><span translate>Login URL</span>: {{client.loginUri}}</li>
+    <li><span translate>Secret</span>: {{client.secret}}</li>
+    <li><span translate>Description</span>: {{client.description}}</li>
+  </ul>
+</div>
+

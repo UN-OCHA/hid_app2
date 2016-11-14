@@ -1,4 +1,4 @@
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'clientServices', 'clientControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
 
 app.constant('config', {
   apiUrl: 'http://api2.dev.humanitarian.id/api/v2/',
@@ -103,6 +103,26 @@ app.config(['$routeProvider', '$locationProvider',
       when('/lists', {
         templateUrl: 'app/components/list/lists.html',
         controller: 'ListsCtrl',
+        authenticate: true
+      }).
+      when('/clients/new', {
+        templateUrl: 'app/components/client/new-client.html',
+        controller: 'ClientCtrl',
+        authenticate: true
+      }).
+      when('/clients', {
+        templateUrl: 'app/components/client/clients.html',
+        controller: 'ClientsCtrl',
+        authenticate: true
+      }).
+      when('/clients/:clientId', {
+        templateUrl: 'app/components/client/client.html',
+        controller: 'ClientCtrl',
+        authenticate: true
+      }).
+      when('/clients/:clientId/edit', {
+        templateUrl: 'app/components/client/new-client.html',
+        controller: 'ClientCtrl',
         authenticate: true
       }).
       when('/register', {
