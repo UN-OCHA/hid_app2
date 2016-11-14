@@ -1,0 +1,23 @@
+.list-group__item {
+  list-style: none;
+  position: relative;
+  border-bottom: 1px solid $border-grey;
+
+  a {
+    display: block;
+    text-decoration: none;
+    padding: $base-unit $base-unit*6 $base-unit $base-unit;
+    word-break: break-word;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+      background: lighten($light-grey, 16%);
+    }
+  }
+}
+
+.list-group__item-actions {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
