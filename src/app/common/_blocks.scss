@@ -1,0 +1,33 @@
+.block-heading {
+  background: $primary-color;
+  color: $text-light;
+  text-transform: uppercase;
+  padding: $base-unit;
+  font-family: $heading-font;
+  display: block;
+}
+
+.secondary-block {
+  border-bottom: 1px solid $primary-color;
+  margin-bottom: $base-unit*2;
+  padding-bottom: $base-unit*2;
+
+}
+
+.secondary-block__heading {
+  text-transform: uppercase;
+  color: $primary-color;
+  border-bottom: 1px solid $primary-color;
+  padding: $base-unit;
+  font-family: $heading-font;
+}
+
+.secondary-block__item {
+  padding: $base-unit*1.5 $base-unit*2;
+
+  .fa {
+    @include font-size(12);
+    margin-right: $base-unit/2;
+  }
+
+}

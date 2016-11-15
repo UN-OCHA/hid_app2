@@ -36,7 +36,6 @@
 
 .nav__link {
   display: block;
-
   line-height: 1;
   padding: 0 $base-unit;
   text-decoration: none;
@@ -60,6 +59,8 @@
   .nav--primary & {
     color: $primary-color;
     height: $base-unit*6;
+    display: flex;
+    align-items: center;
 
     &:before {
       content: none;
@@ -155,8 +156,6 @@
 
     .nav--primary & {
       height: $header-height;
-      display: flex;
-      align-items: center;
 
       &:hover, &:focus {
         text-decoration: none;

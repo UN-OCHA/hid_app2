@@ -116,6 +116,7 @@ img {
 
 a {
   text-decoration: underline;
+  color: $primary-color;
 
   &:hover, &:focus, &:active {
     text-decoration: none;
@@ -124,10 +125,14 @@ a {
 
 h1 {
   @include font-size($large-font-size);
+  font-family: $heading-font;
+  color: $primary-color;
+  margin-bottom: $base-unit;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
+
 }
 
 .sr-only {
