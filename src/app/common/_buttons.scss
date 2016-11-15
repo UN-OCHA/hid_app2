@@ -59,3 +59,10 @@ button[disabled] {
     background: none;
   }
 }
+
+
+.icon-inline {
+  display: inline-block;
+  min-width: $base-unit*4;
+  text-align: center;
+}

@@ -101,10 +101,25 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 
   $scope.currentUserResource = null;
   $scope.isAdminCollapsed = true;
   $scope.isAdminAvailable = false;
+  $scope.isFilterCollapsed = true;
   $scope.filters = {};
 
   $scope.switchAdmin = function() {
     $scope.isAdminCollapsed = !$scope.isAdminCollapsed;
+    if (!$scope.isFilterCollapsed) {
+      $scope.isFilterCollapsed = true;
+      return;
+    }
+    angular.element(document).find('body').toggleClass('toggled', !$scope.isAdminCollapsed);
+  };
+
+  $scope.switchFilter = function() {
+    $scope.isFilterCollapsed = !$scope.isFilterCollapsed;
+    if (!$scope.isAdminCollapsed) {
+      $scope.isAdminCollapsed = true;
+      return;
+    }
+    angular.element(document).find('body').toggleClass('toggled', !$scope.isFilterCollapsed);
   };
 
   $scope.removeCurrentUser = function() {
@@ -138,16 +153,14 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 
     }
   };
 
-  $scope.adminExpanding = function () {
-    angular.element(document).find('body').addClass('toggled');
-  };
-
   $scope.adminCollapsing = function () {
     angular.element(document).find('body').removeClass('toggled');
   };
 
   var initAdminAvailable = function () {
     $scope.isAdminAvailable = false;
+    $scope.isAdminCollapsed = true;
+    $scope.isFilterCollapsed = true;
     $scope.adminCollapsing();
   }
 

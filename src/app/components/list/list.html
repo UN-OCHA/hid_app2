@@ -1,4 +1,4 @@
-<div>
+<div uib-collapse="isAdminCollapsed" horizontal id="admin">
   <div ng-if="isManager || isOwner || currentUser.is_admin">
     <h2 translate>Add new member</h2>
     <form ng-submit="addMemberToList()">
@@ -73,7 +73,21 @@
 
 </div>
 
-<div id="page-content-wrapper">
-  <h2>{{list.name}}</h2>
-  <hid-users></hid-users>
+<div class="page-header">
+  <h1 class="page-header__heading">{{list.name}}</h1>
+  <p class="page-header__sub-heading">{{users.length}} <span translate>contacts</span></p>
+
+  <div class="page-header__actions">
+    <button class="btn btn-default" type="button" ng-click="switchAdmin()" ng-show="isAdminAvailable">
+      <i class="fa fa-cog"></i>
+      <span class="sr-only">Admin</span>
+    </button>
+    <button class="btn btn-default" type="button" ng-click="switchFilter()">
+      <i class="fa fa-filter"></i>
+      <span class="sr-only">Filter</span>
+    </button>
+  </div>
 </div>
+
+
+<hid-users></hid-users>

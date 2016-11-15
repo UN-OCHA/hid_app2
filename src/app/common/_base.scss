@@ -106,7 +106,8 @@ body {
 }
 
 body.toggled {
-  padding-left: 350px;
+  padding-left: $sidebarWidth;
+  overflow: hidden;
 }
 
 img {
@@ -124,7 +125,7 @@ a {
 }
 
 h1 {
-  @include font-size($large-font-size);
+  @include font-size($medium-font-size);
   font-family: $heading-font;
   color: $primary-color;
   margin-bottom: $base-unit;
@@ -144,4 +145,10 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   clip: rect(0,0,0,0);
   border: 0;
+}
+
+@include media-query(sm) {
+    h1 {
+      @include font-size($large-font-size);
+    }
 }

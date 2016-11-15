@@ -4,6 +4,7 @@
   text-transform: uppercase;
   padding: $base-unit;
   font-family: $heading-font;
+  font-weight: normal;
   display: block;
 }
 
@@ -11,7 +12,6 @@
   border-bottom: 1px solid $primary-color;
   margin-bottom: $base-unit*2;
   padding-bottom: $base-unit*2;
-
 }
 
 .secondary-block__heading {
@@ -20,6 +20,7 @@
   border-bottom: 1px solid $primary-color;
   padding: $base-unit;
   font-family: $heading-font;
+  font-weight: normal;
 }
 
 .secondary-block__item {
@@ -30,4 +31,24 @@
     margin-right: $base-unit/2;
   }
 
+}
+
+.page-header {
+  position: relative;
+  margin: $base-unit*2 0 $base-unit 0;
+  padding-right: $base-unit*14;
+}
+
+.page-header__heading {
+  margin-bottom: 0;
+}
+
+.page-header__sub-heading {
+  font-weight: bold;
+}
+
+.page-header__actions {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
