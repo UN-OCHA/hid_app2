@@ -7,7 +7,7 @@ app.constant('config', {
 });
 
 // Check if user is authenticated for paths which require it
-app.run(function ($rootScope, $location, AuthService, alertService) {
+app.run(function ($rootScope, $window, $location, AuthService, alertService) {
   $rootScope.isAuthenticated = false;
   $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
     if (nextRoute) {
@@ -17,6 +17,14 @@ app.run(function ($rootScope, $location, AuthService, alertService) {
       // User isn’t authenticated
       $location.path('/');
       event.preventDefault();
+    }
+    if (nextRoute && nextRoute.authenticate && nextRoute.adminOnly) {
+      //$rootScope.initCurrentUser();
+      var user = $window.localStorage.getItem('currentUser');
+      if (!user.is_admin) {
+        $location.path('/');
+        event.preventDefault();
+      }
     }
     $rootScope.isAuthenticated = AuthService.isAuthenticated();
   });
@@ -108,22 +116,26 @@ app.config(['$routeProvider', '$locationProvider',
       when('/clients/new', {
         templateUrl: 'app/components/client/new-client.html',
         controller: 'ClientCtrl',
-        authenticate: true
+        authenticate: true,
+        adminOnly: true
       }).
       when('/clients', {
         templateUrl: 'app/components/client/clients.html',
         controller: 'ClientsCtrl',
-        authenticate: true
+        authenticate: true,
+        adminOnly: true
       }).
       when('/clients/:clientId', {
         templateUrl: 'app/components/client/client.html',
         controller: 'ClientCtrl',
-        authenticate: true
+        authenticate: true,
+        adminOnly: true
       }).
       when('/clients/:clientId/edit', {
         templateUrl: 'app/components/client/new-client.html',
         controller: 'ClientCtrl',
-        authenticate: true
+        authenticate: true,
+        adminOnly: true
       }).
       when('/register', {
         templateUrl: 'app/components/auth/register.html',
