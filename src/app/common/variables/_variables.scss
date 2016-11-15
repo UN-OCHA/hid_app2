@@ -6,7 +6,9 @@
 $base-unit: 8px;
 
 //measurements
+$max-width: 1200px;
 $header-height: $base-unit*8;
+$sidebarWidth: $base-unit*35;
 
 // Grid
 $grid-gutter: $base-unit*4 !default;
@@ -29,7 +31,8 @@ $heading-font-light: 'exo_2regular', sans-serif;
 $tiny-font-size: 8;
 $small-font-size: 14;
 $base-font-size: 16;
-$large-font-size: 24;
+$medium-font-size: 24;
+$large-font-size: 32;
 
 // Colours
 $primary-color: #007faa;

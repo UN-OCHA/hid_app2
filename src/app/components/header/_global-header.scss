@@ -1,17 +1,20 @@
 .global-header {
-  padding-top: $base-unit;
-  padding-bottom: $base-unit;
+
   background: $primary-color;
   color: $text-light;
+
+
+  .dropdown-menu {
+    top: $base-unit*3.5;
+  }
+}
+
+.global-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  .dropdown-menu {
-    right: 0;
-    top: $base-unit*3.5;
-    min-width: $base-unit*18;
-  }
+  padding-top: $base-unit;
+  padding-bottom: $base-unit;
 }
 
 .global-header__sites {
@@ -49,11 +52,15 @@
 @include media-query(lg) {
 
   .global-header {
-    height: $header-height;
 
     .dropdown-menu {
       top: $base-unit*5;
     }
+
+  }
+
+  .global-header__inner {
+    height: $header-height;
 
     .no-flexbox & {
       height: auto;
