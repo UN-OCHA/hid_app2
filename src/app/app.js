@@ -20,7 +20,7 @@ app.run(function ($rootScope, $window, $location, AuthService, alertService) {
     }
     if (nextRoute && nextRoute.authenticate && nextRoute.adminOnly) {
       //$rootScope.initCurrentUser();
-      var user = $window.localStorage.getItem('currentUser');
+      var user = JSON.parse($window.localStorage.getItem('currentUser'));
       if (!user.is_admin) {
         $location.path('/');
         event.preventDefault();
