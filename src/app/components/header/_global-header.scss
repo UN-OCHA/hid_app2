@@ -60,7 +60,7 @@
   }
 
   .global-header__inner {
-    height: $header-height;
+    height: $global-header-height;
 
     .no-flexbox & {
       height: auto;

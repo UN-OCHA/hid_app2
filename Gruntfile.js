@@ -55,7 +55,9 @@ module.exports = function(grunt) {
         'dest': 'src/assets/js/modernizr-output.js',
         'tests': [
           'svg',
-          'flexbox'
+          'flexbox',
+          'csscalc',
+          'csstransforms'
         ],
         'options': [
           'setClasses'

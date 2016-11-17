@@ -6,9 +6,25 @@
 $base-unit: 8px;
 
 //measurements
-$max-width: 1200px;
-$header-height: $base-unit*8;
-$sidebarWidth: $base-unit*35;
+$max-width: 1400px;
+
+$global-header-height-xs: $base-unit*5;
+$global-header-height: $base-unit*8;
+
+$site-header-height: $base-unit*8;
+
+$header-height-xs: $global-header-height-xs + $site-header-height;
+$header-height: $global-header-height + $site-header-height;
+
+$footer-height: $base-unit*5;
+
+$breadcrumbs-height: $base-unit*3;
+
+// necessary as can't have sum in calc
+$footer-plus-breadcrumbs: $footer-height + $breadcrumbs-height;
+
+$sidebar-width-xs: $base-unit*35;
+$sidebar-width-md: $base-unit*40;
 
 // Grid
 $grid-gutter: $base-unit*4 !default;
@@ -18,7 +34,8 @@ $grid-breakpoints: (
   sm: 576px,
   md: 768px,
   lg: 992px,
-  xl: 1200px
+  xl: 1200px,
+  xxl: 1400px
 ) !default;
 $enable-flex: false;
 
@@ -40,19 +57,23 @@ $dark-blue: #295A78;
 $medium-blue: #53B1C8;
 $light-blue: #b9e6ee;
 
-$light-grey: #CFD1D2;
+$light-grey: #F6F6F6;
 
 $text-dark: #404040;
 $text-grey: #767676;
 $text-light: #FFF;
 
 
-$border-grey: $light-grey;
+$border-grey: #CFD1D2;
 
 //z-index
 $zindex: (
-  mobileNav: 9
+  sidebar: 1,
+  dropdown: 9
 );
 
 //Border radius
 $base-border-radius: 4px;
+
+// Transitions
+$sidebar-transition: transform 0.3s ease;

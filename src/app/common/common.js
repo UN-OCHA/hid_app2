@@ -99,28 +99,30 @@ var appControllers = angular.module('appControllers', []);
 appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 'userService', 'listService',  function ($scope, $location, $window, User, userService, listService) {
   $scope.currentUser = null;
   $scope.currentUserResource = null;
-  $scope.isAdminCollapsed = true;
-  $scope.isAdminAvailable = false;
-  $scope.isFilterCollapsed = true;
   $scope.filters = {};
 
-  $scope.switchAdmin = function() {
-    $scope.isAdminCollapsed = !$scope.isAdminCollapsed;
-    if (!$scope.isFilterCollapsed) {
-      $scope.isFilterCollapsed = true;
-      return;
+  $scope.sidebar = {
+    open: false,
+    sidebars: {
+      admin: false,
+      userFilters: false
     }
-    angular.element(document).find('body').toggleClass('toggled', !$scope.isAdminCollapsed);
   };
 
-  $scope.switchFilter = function() {
-    $scope.isFilterCollapsed = !$scope.isFilterCollapsed;
-    if (!$scope.isAdminCollapsed) {
-      $scope.isAdminCollapsed = true;
+  $scope.closeSidebar = function () {
+    $scope.sidebar.open = false;
+  }
+
+  $scope.toggleSidebar = function (name) {
+    if ($scope.sidebar.sidebars[name] && $scope.sidebar.open) {
+      $scope.sidebar.open = false;
       return;
     }
-    angular.element(document).find('body').toggleClass('toggled', !$scope.isFilterCollapsed);
-  };
+    $scope.sidebar.open = true;
+    angular.forEach($scope.sidebar.sidebars, function(value, key) {
+      $scope.sidebar.sidebars[key] = name === key ? true : false;
+    });
+  }
 
   $scope.removeCurrentUser = function() {
     $scope.currentUser = null;
@@ -153,23 +155,12 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 
     }
   };
 
-  $scope.adminCollapsing = function () {
-    angular.element(document).find('body').removeClass('toggled');
-  };
-
-  var initAdminAvailable = function () {
-    $scope.isAdminAvailable = false;
-    $scope.isAdminCollapsed = true;
-    $scope.isFilterCollapsed = true;
-    $scope.adminCollapsing();
+  var initView = function () {
+    $scope.closeSidebar();
   }
-
-  $scope.setAdminAvailable = function (val) {
-    $scope.isAdminAvailable = val;
-  };
 
   $scope.initCurrentUser();
 
-  $scope.$on('$routeChangeSuccess', initAdminAvailable);
+  $scope.$on('$routeChangeSuccess', initView);
 }]);
 

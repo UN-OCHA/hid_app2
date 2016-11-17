@@ -2,7 +2,7 @@ var listServices = angular.module('listServices', ['ngResource']);
 
 listServices.factory('List', ['$resource', 'config',
   function ($resource, config) {
-    var List = $resource(config.apiUrl + 'list/:listId', {listId: '@_id'}, 
+    var List = $resource(config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
       'update': {
         method: 'PUT'
@@ -83,7 +83,6 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
   $scope.list = List.get({'listId': $routeParams.list}, function () {
     $scope.pageChanged();
-    $scope.setAdminAvailable(true);
     angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
       var listId = val.list;
       if (typeof val.list === 'object') {
@@ -338,7 +337,7 @@ listControllers.controller('ListsCtrl', ['$scope', '$routeParams', '$q', 'gettex
 
 
   $scope.lists = List.query($scope.request, queryCallback);
-  
+
   $scope.pageChanged = function () {
     $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
     listService.setRequest($scope.request);

@@ -173,7 +173,7 @@ userServices.factory('User', ['$resource', '$http', '$location', 'config',
 
 
     return User;
-    
+
   }
 ]);
 
@@ -240,7 +240,6 @@ userServices.factory('userService', ['$rootScope', 'User',
 var userControllers = angular.module('userControllers', []);
 
 userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', 'UserCheckIn', function($scope, $routeParams, $http, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List, UserCheckIn) {
-  $scope.setAdminAvailable(true);
   $scope.newEmail = {
     type: '',
     email: ''

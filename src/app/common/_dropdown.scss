@@ -9,7 +9,7 @@
     display: block;
     position: absolute;
     background: white;
-    z-index: map-get($zindex, mobileNav);
+    z-index: map-get($zindex, dropdown);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
     right: 0;
     top: 100%;
