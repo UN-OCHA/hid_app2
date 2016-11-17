@@ -633,6 +633,26 @@ userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCata
     });
   };
 
+  // Revoke client
+  $scope.revokeClient = function (client) {
+    var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? You will need to authorize this application again to access it through Humanitarian ID.'), true, function () {
+      var index = -1;
+      for (var i = 0, len = $scope.user.authorizedClients.length; i < len; i++) {
+        if ($scope.user.authorizedClients[i].id == client.id) {
+          index = i;
+        }
+      }
+      if (index != -1) {
+        $scope.user.authorizedClients.splice(index, 1);
+        $scope.user.$update(function (user) {
+          alertService.add('success', gettextCatalog.getString('Application successfully revoked.'));
+        }, function (resp) {
+          alertService.add('danger', gettextCatalog.getString('There was an error revoking this application.'));
+        });
+      }
+    });
+  };
+
 }]);
 
 userControllers.controller('UserNewCtrl', ['$scope', '$location', 'alertService', 'User', 'gettextCatalog', function ($scope, $location, alertService, User, gettextCatalog) {
