@@ -645,10 +645,15 @@ userControllers.controller('UserPrefsCtrl', ['$scope', '$location', 'gettextCata
       if (index != -1) {
         $scope.user.authorizedClients.splice(index, 1);
         $scope.user.$update(function (user) {
+          alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('Application successfully revoked.'));
         }, function (resp) {
+          alert.closeConfirm();
           alertService.add('danger', gettextCatalog.getString('There was an error revoking this application.'));
         });
+      }
+      else {
+        alert.closeConfirm();
       }
     });
   };
