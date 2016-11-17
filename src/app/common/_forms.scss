@@ -3,6 +3,8 @@ input[type="number"],
 input[type="password"],
 input[type="email"],
 input[type="search"],
+input[type="tel"],
+input[type="url"],
 textarea,
 select {
   @include font-size($base-font-size);
@@ -11,7 +13,7 @@ select {
   width: 100%;
   box-shadow: none;
   border: 1px solid $border-grey;
-  border-radius: 4px;
+  border-radius: $base-border-radius;
   -webkit-appearance: none;
 
   &.input-no-border {
@@ -24,14 +26,18 @@ select {
 }
 
 select {
-  height: 36px;
+  height: $base-unit*5.5;
   -webkit-appearance: menulist;
   background: white;
+  padding: $base-unit*1.5;
+
+  &.ng-empty {
+    color: $text-grey;
+    font-style: italic;
+  }
 }
 
 label {
-  font-weight: bold;
-
   .has-error & {
     color: red;
   }
@@ -41,19 +47,165 @@ label {
   margin-bottom: $base-unit*2;
 }
 
+.input-group {
+  position: relative;
+  display: table;
+}
+
+.input-group-btn {
+  display: table-cell;
+}
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: $primary-color;
+  color: $text-grey;
   font-style: italic;
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  color: $primary-color;
+  color: $text-grey;
   font-style: italic;
 }
 :-ms-input-placeholder { /* IE 10+ */
-  color: $primary-color;
+  color: $text-grey;
   font-style: italic;
 }
 :-moz-placeholder { /* Firefox 18- */
-  color: $primary-color;
+  color: $text-grey;
   font-style: italic;
+}
+
+.form {
+  position: relative;
+}
+
+.form__edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: $base-unit*5;
+  height: $base-unit*5;
+  padding: 0;
+}
+
+.form__section {
+  padding: $base-unit;
+  border-bottom: 1px solid $border-grey;
+
+  &:last-child {
+    border: none;
+  }
+}
+
+.form__list-item {
+  display: flex;
+  align-content: stretch;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $base-unit/2;
+
+  button:not(.btn-link) {
+    margin-left: $base-unit;
+  }
+
+  label {
+    margin-right: $base-unit;
+  }
+
+  .no-flexbox & {
+    position: relative;
+    padding-right: $base-unit*6;
+
+    .btn-icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  .editable-wrap {
+    width: 100%;
+  }
+
+  .editable-ui-select {
+    width: 50%;
+
+    &:last-child {
+      margin-left: $base-unit;
+    }
+  }
+}
+
+/* ui-select */
+.ui-select-bootstrap {
+  min-width: 100px!important;
+  width: 100%;
+}
+.ui-select-bootstrap>.ui-select-match>.btn {
+  width: 100%;
+  background: white;
+  border-width: 1px;
+  padding-right: $base-unit*3;
+  margin-left: 0;
+  overflow: hidden;
+}
+
+.ui-select-bootstrap input[type="search"] {
+  width: 100%!important;
+}
+
+/* BC phone number */
+.bc-phone-number-dropdown-menu {
+  overflow-y: scroll;
+  max-height: 10em;
+}
+
+.bc-phone-number-country-anchor {
+  padding-left: 1em;
+}
+
+.bc-phone-number-country-icon {
+  margin-right: 1em;
+}
+
+.bc-phone-number-flag {
+  margin-right: 0.5em;
+}
+
+bc-phone-number {
+  width: 100%;
+  margin-top: $base-unit/2;
+
+  label {
+    @extend .sr-only;
+  }
+
+  .btn {
+    background: none;
+    border-width: 1px;
+    border-radius: $base-border-radius 0 0 $base-border-radius;
+    border-right: 0;
+    height: $base-unit*5.5;
+    width: 100%;
+
+    .form__list-item & {
+      margin-left: 0;
+    }
+  }
+
+  input[type="tel"] {
+    border-radius: 0 $base-border-radius $base-border-radius 0;
+  }
+
+  .open > .dropdown-menu {
+    right: auto;
+  }
+
+  .input-group {
+    width: 100%;
+    display: flex;
+  }
+
+  .input-group-btn {
+    min-width: 82px;
+    width: 82px;
+  }
 }

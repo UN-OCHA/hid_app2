@@ -136,6 +136,14 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+strong {
+  font-weight: bold;
+}
+
+i {
+  font-style: italic;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -147,8 +155,38 @@ h1, h2, h3, h4, h5, h6 {
   border: 0;
 }
 
+.glyphicon {
+  position: relative;
+  display: inline-block;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.img-thumbnail {
+  border-radius: $base-border-radius*2;
+  border: 1px solid $border-grey;
+  padding: $base-unit/2;
+}
+
+.hidden-sm-up {
+  display: none;
+}
+
 @include media-query(sm) {
-    h1 {
-      @include font-size($large-font-size);
-    }
+  h1 {
+    @include font-size($large-font-size);
+  }
+
+  .hidden-sm-up {
+    display: block;
+  }
 }

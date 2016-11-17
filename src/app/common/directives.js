@@ -57,3 +57,20 @@ commonDirectives.directive('backButton', ['$window', function($window) {
   };
 }]);
 
+/**
+ * Icons
+ * Usage: <icon name="cog" text="Actions"></icon>
+ * Name is the icon name, currently using FontAwesome
+ * Text is optional, it should be given if there is no visible text accompanying the icon
+ */
+commonDirectives.directive('icon', ['$window', function($window) {
+  return {
+      restrict: 'AE',
+      replace: 'true',
+      scope: {
+        name: '@',
+        text: '@'
+      },
+      template: '<span class="icon"><i class="fa fa-{{name}}" aria-hidden="true"></i><span ng-if="text" class="sr-only" translate>{{text}}</span></span>'
+  };
+}]);
