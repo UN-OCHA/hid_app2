@@ -1,5 +1,22 @@
 .search-form {
   position: relative;
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $primary-color;
+    font-style: italic;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $primary-color;
+    font-style: italic;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $primary-color;
+    font-style: italic;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $primary-color;
+    font-style: italic;
+  }
 }
 
 input[type="search"].search-form__input {

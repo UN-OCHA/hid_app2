@@ -1,3 +1,102 @@
 /**
  * Styles for user component
  */
+
+.profile-header {
+  display: flex;
+  padding: 0 0 $base-unit 0;
+  margin-bottom: $base-unit*2;
+  border-bottom: 1px solid $border-grey;
+
+  .no-flexbox & {
+    @include clearfix;
+  }
+}
+
+.profile-header__image {
+  min-width: $base-unit*12;
+  max-width: $base-unit*25;
+  width: 20%;
+  position: relative;
+
+  .icon {
+    position: absolute;
+    top: -$base-unit*1.5;
+    right: $base-unit*1.5;
+    @include font-size($large-font-size);
+    color: $primary-color;
+    line-height: 1;
+    background: white;
+    border-radius: 100%;
+    height: $base-unit*3.5;
+  }
+
+  .no-flexbox & {
+    float: left;
+  }
+}
+
+.profile-header__content {
+  flex-direction: column;
+  margin-left: $base-unit;
+  padding-right: $base-unit*5;
+  width: 100%;
+
+  .no-flexbox & {
+    float: left;
+    width: 80%;
+  }
+}
+
+.profile-header__info {
+  margin-top: $base-unit/2;
+  @include font-size($small-font-size);
+}
+
+@include media-query(sm) {
+
+  .profile-header {
+    border-bottom: none;
+  }
+
+  .profile-header__content {
+    margin-left: $base-unit*2;
+    padding-right: $base-unit*12;
+    max-width: $base-unit*100;
+  }
+
+  .profile-header__edit {
+    right: $base-unit*6;
+  }
+
+  .profile-header__info {
+    border-bottom: 1px solid $border-grey;
+    @include font-size($base-font-size);
+    margin: $base-unit 0;
+
+    li {
+      display: inline-block;
+      padding: 0 $base-unit*2 $base-unit 0;
+
+    }
+  }
+
+  .profile-header__status {
+    font-style: italic;
+  }
+
+}
+
+@include media-query(md) {
+
+  .profile-header__content {
+    margin-left: $base-unit*4;
+  }
+
+  .profile-header__info {
+    li {
+      padding-right: $base-unit*3;
+    }
+  }
+
+}

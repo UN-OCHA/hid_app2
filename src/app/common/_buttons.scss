@@ -20,7 +20,7 @@ button[disabled] {
 
 .btn {
   border: 2px solid $border-grey;
-  border-radius: 4px;
+  border-radius: $base-border-radius;
   background: $light-grey;
   padding: $base-unit*1.5;
   line-height: 1;
@@ -48,6 +48,14 @@ button[disabled] {
 
 .btn-secondary {
   background: white;
+  border-color: $primary-color;
+  color: $primary-color;
+  transition: background 0.3s ease;
+
+  &:hover, &:focus {
+    background: $primary-color;
+    color: white;
+  }
 }
 
 .btn-transparent {
@@ -59,6 +67,27 @@ button[disabled] {
     background: none;
   }
 }
+
+.btn-icon {
+  @extend .btn-secondary;
+  border: 1px solid;
+  border-radius: 100%;
+  min-width: $base-unit*5;
+  width: $base-unit*5;
+  height: $base-unit*5;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.btn-link {
+  background: none;
+  padding: 0;
+  text-decoration: underline;
+  border: none;
+  color: $primary-color;
+}
+
+
 
 
 .icon-inline {
