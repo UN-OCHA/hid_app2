@@ -37,6 +37,24 @@ select {
   }
 }
 
+.select-wrap {
+  background: white;
+  position: relative;
+
+  &:before {
+    content: "";
+    @extend .caret;
+    position: absolute;
+    top: $base-unit*2.5;
+    right: 10px;
+  }
+
+  select {
+    -webkit-appearance: none;
+    background: transparent;
+  }
+}
+
 label {
   .has-error & {
     color: red;
@@ -151,6 +169,35 @@ label {
 
 .ui-select-bootstrap input[type="search"] {
   width: 100%!important;
+}
+
+.glyphicon-remove {
+  position: relative;
+  width: $base-unit;
+  height: $base-unit;
+  opacity: 0.3;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:before, &:after {
+    position: absolute;
+    left: $base-unit/2;
+    content: ' ';
+    height: $base-unit;
+    width: 2px;
+    background-color: #000;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
 }
 
 /* BC phone number */

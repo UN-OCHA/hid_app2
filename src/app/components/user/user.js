@@ -34,7 +34,7 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
         }
         userService.setRequest(scope.request);
         userService.filter(queryCallback);
-        scope.users = userService.getUsers();
+        scope.users = userService.getUsers()
       };
 
       if (!scope.inlist) {
@@ -46,6 +46,13 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
         scope.currentPage = 1;
         scope.pageChanged();
       };
+
+      scope.resetFilters = function () {
+        userService.setFilters({});
+        scope.filters = [];
+        scope.currentPage = 1;
+        scope.pageChanged();
+      }
 
       scope.operations = List.query({type: 'operation'});
 
@@ -217,6 +224,7 @@ userServices.factory('userService', ['$rootScope', 'User',
       var trequest = angular.copy(request);
       users.length = 0;
       angular.merge(trequest, filters);
+
       users = User.query(trequest, cb);
     };
 

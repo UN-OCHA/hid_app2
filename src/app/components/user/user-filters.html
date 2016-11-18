@@ -17,7 +17,7 @@
       </h3>
       <div uib-collapse="!isFilter1Collapsed" class="filter__inner">
         <label for="organizations" class="sr-only" translate>Filter by organization</label>
-        <ui-select ng-model="filters['organizations.list']" name="organizations" allow-clear="true" theme="bootstrap" on-select="filter()" on-remove="filter()">
+        <ui-select ng-model="filters['organizations.list']" name="organizations" allow-clear="true">
           <ui-select-match allow-clear="true" placeholder="Filter by organization">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization._id as organization in organizations | filter: $select.search" minimum-input-length="3">
             {{organization.name}}
@@ -35,7 +35,7 @@
       </h3>
       <div uib-collapse="!isFilter2Collapsed" class="filter__inner">
         <label for="operations" class="sr-only" translate>Filter by operation</label>
-        <ui-select ng-model="filters['operations.list']" name="operations" allow-clear="true" theme="bootstrap" on-select="filter()" on-remove="filter()">
+        <ui-select ng-model="filters['operations.list']" name="operations" allow-clear="true">
           <ui-select-match allow-clear="true" placeholder="Filter by operation">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices repeat="operation._id as operation in operations | filter: $select.search">
             {{operation.name}}
@@ -53,7 +53,7 @@
       </h3>
       <div uib-collapse="!isFilter3Collapsed" class="filter__inner">
         <label for="bundles" class="sr-only" translate>Filter by group</label>
-        <ui-select ng-model="filters['bundles.list']" name="bundles" allow-clear="true" theme="bootstrap" on-select="filter()" on-remove="filter()">
+        <ui-select ng-model="filters['bundles.list']" name="bundles" allow-clear="true">
           <ui-select-match allow-clear="true" placeholder="Filter by group">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices refresh="getBundles($select.search)" repeat="bundle._id as bundle in bundles | filter: $select.search" minimum-input-length="3">
             {{bundle.name}}
@@ -71,7 +71,7 @@
       </h3>
       <div uib-collapse="!isFilter4Collapsed" class="filter__inner">
         <label for="roles" class="sr-only" translate>Filter by role</label>
-        <ui-select ng-model="filters['roles.id']" name="roles" allow-clear="true" theme="bootstrap" on-select="filter()" on-remove="filter()">
+        <ui-select ng-model="filters['roles.id']" name="roles" allow-clear="true">
           <ui-select-match allow-clear="true" placeholder="Filter by role">{{$select.selected.label}}</ui-select-match>
           <ui-select-choices repeat="role.id as role in roles | filter: $select.search">
             {{role.label}}
@@ -89,7 +89,7 @@
       </h3>
       <div uib-collapse="!isFilter5Collapsed" class="filter__inner">
         <label for="country" class="sr-only" translate>Filter by country</label>
-        <ui-select ng-model="filters['country']" name="country" theme="bootstrap" on-select="filter()" on-remove="filter()">
+        <ui-select ng-model="filters['country']" name="country">
           <ui-select-match allow-clear="true" placeholder="Filter by country">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices repeat="country.id as country in countries | filter: $select.search">
             {{country.name}}
@@ -107,7 +107,7 @@
       </h3>
       <div uib-collapse="!isFilter6Collapsed" class="filter__inner">
         <label for="disasters" class="sr-only" translate>Filter by disaster</label>
-        <ui-select ng-model="filters['disasters.list']" name="disasters" allow-clear="true" theme="bootstrap" on-select="filter()" on-remove="filter()">
+        <ui-select ng-model="filters['disasters.list']" name="disasters" allow-clear="true">
           <ui-select-match allow-clear="true" placeholder="Filter by disaster">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices refresh="getDisasters($select.search)" repeat="disaster._id as disaster in disasters | filter: $select.search" minimum-input-length="3">
             {{disaster.name}}
@@ -125,19 +125,19 @@
       </h3>
       <div uib-collapse="!isFilter7Collapsed" class="filter__inner">
         <p>
-          <label><input type="checkbox" ng-model="filters.is_orphan" name="is_orphan" ng-change="filter()" /> Orphan</label>
+          <label><input type="checkbox" ng-model="filters.is_orphan" name="is_orphan" /> Orphan</label>
         </p>
 
         <p>
-          <label><input type="checkbox" ng-model="filters.is_ghost" name="is_ghost" ng-change="filter()" /> Ghost</label>
+          <label><input type="checkbox" ng-model="filters.is_ghost" name="is_ghost" /> Ghost</label>
         </p>
 
         <p>
-          <label><input type="checkbox" ng-model="filters.verified" name="verified" ng-change="filter()" /> Verified</label>
+          <label><input type="checkbox" ng-model="filters.verified" name="verified" /> Verified</label>
         </p>
 
         <p>
-          <label><input type="checkbox" ng-model="filters.is_admin" name="is_admin" ng-change="filter()" /> Administrator</label>
+          <label><input type="checkbox" ng-model="filters.is_admin" name="is_admin" /> Administrator</label>
         </p>
       </div>
     </div>
@@ -151,21 +151,23 @@
       </h3>
       <div uib-collapse="!isFilter8Collapsed" class="filter__inner">
         <label for="sort" class="sr-only" translate>Sort by</label>
-        <select ng-model="request['sort']" name="sort" id="sort" class="form-control" ng-change="filter()">
-          <option value="name" translate>Name</option>
-          <option value="job_title" translate>Job title</option>
-          <option value="organization" translate>Organization</option>
-          <option value="verified" translate>Verification</option>
-        </select>
+        <div class="select-wrap">
+          <select ng-model="request['sort']" name="sort" id="sort" class="form-control">
+            <option value="name" translate>Name</option>
+            <option value="job_title" translate>Job title</option>
+            <option value="organization" translate>Organization</option>
+            <option value="verified" translate>Verification</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div class="row filter__buttons">
       <div class="col-xs-6">
-        <button type="button" class="btn btn-secondary">Clear</button>
+        <button type="button" class="btn btn-secondary" ng-click="resetFilters()">Clear</button>
       </div>
       <div class="col-xs-6">
-        <button type="button" class="btn btn-secondary" ng-click="closeSidebar()">Apply</button>
+        <button type="button" class="btn btn-secondary" ng-click="filter()">Apply</button>
       </div>
     </div>
 
