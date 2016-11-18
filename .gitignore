@@ -1,7 +1,7 @@
-
 node_modules/
 src/bower_components
 src/app/common/translations.js
 .sass-cache/
 **/.DS_Store
 **/*.map
+src/assets/css/
