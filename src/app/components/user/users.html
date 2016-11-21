@@ -3,11 +3,11 @@
 <table class="table table-responsive table-responsive--has-actions">
     <thead>
       <tr>
-        <th translate>Name</th>
-        <th translate>Role</th>
-        <th translate>Organization</th>
-        <th translate>Cluster</th>
-        <th translate>Country</th>
+        <th ng-click="sortList('name')" translate>Name</th>
+        <th ng-click="sortList('role')" translate>Role</th>
+        <th ng-click="sortList('organization')" translate>Organization</th>
+        <th ng-click="sortList('cluster')" translate>Cluster</th>
+        <th ng-click="sortList('country')" translate>Country</th>
         <th translate><span class="sr-only">Info / actions</span></th>
       </tr>
     </thead>
@@ -59,4 +59,4 @@
       </tr>
     </tbody>
   </table>
-  <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+  <ul uib-pagination boundary-link-numbers="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination" direction-links="false"></ul>

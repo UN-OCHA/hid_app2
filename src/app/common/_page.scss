@@ -24,8 +24,7 @@
 
 .page-header {
   position: relative;
-  margin: $base-unit*2 0 $base-unit 0;
-  padding-right: $base-unit*14;
+  margin: $base-unit*2.5 0 $base-unit 0;
 }
 
 .page-header__heading {
@@ -41,12 +40,27 @@
 .page-header__actions {
   position: absolute;
   right: 0;
-  top: -$base-unit*4.5;
+  top: -$base-unit*5;
 }
+
 
 @include media-query(sm) {
 
+  .page-header {
+    margin-top: $base-unit*2;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .page-header__secondary {
+    // position: absolute;
+    // top: 0;
+    // right: 0;
+    text-align: right;
+  }
+
   .page-header__actions {
+    position: relative;
     top: 0;
   }
 
@@ -67,8 +81,14 @@
     }
   }
 
+  .page-header__secondary {
+    display: flex;
+  }
+
   .page-header__actions {
     transition: $sidebar-transition;
+    order: 1;
+    margin-left: $base-unit*2;
 
     .toggled & {
       transform: translateX(-$sidebar-width-md);
@@ -79,12 +99,29 @@
 
 @include media-query(xl) {
 
+  .page-header__actions {
+    margin-left: $base-unit*4;
+  }
+
+}
+
+@include media-query(xxl) {
+
   .page {
-    max-width: $max-width;
-    overflow-x: hidden;
-    margin: 0 auto;
     .toggled & {
-      overflow: visible;
+      transform: translateX($sidebar-width-xxl);
+    }
+    .no-csstransforms & {
+      .toggled & {
+        padding-left: $sidebar-width-xxl;
+      }
     }
   }
+
+  .page-header__actions {
+    .toggled & {
+      transform: translateX(-$sidebar-width-xxl);
+    }
+  }
+
 }

@@ -9,7 +9,7 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
       scope.inlist = scope.list ? true : false;
       scope.request = $location.search();
       scope.totalItems = 0;
-      scope.itemsPerPage = 10;
+      scope.itemsPerPage = 50;
       scope.currentPage = 1;
       scope.request.limit = scope.itemsPerPage;
       scope.request.offset = 0;
@@ -51,6 +51,19 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
         userService.setFilters({});
         scope.filters = [];
         scope.currentPage = 1;
+        scope.pageChanged();
+      }
+
+      //TO DO order asc / desc ?
+      scope.sortList = function (sortby) {
+        scope.request.sort = sortby;
+        scope.currentPage = 1;
+        scope.pageChanged();
+      }
+
+      scope.setLimit = function (limit) {
+        scope.itemsPerPage = limit
+        scope.request.limit = limit;
         scope.pageChanged();
       }
 
