@@ -1,93 +1,44 @@
-<div uib-collapse="isAdminCollapsed" horizontal id="admin">
-  <div ng-if="isManager || isOwner || currentUser.is_admin">
-    <h2 translate>Add new member</h2>
-    <form ng-submit="addMemberToList()">
-      <div class="form-group">
-        <label for="user" translate>New Member</label>
-        <ui-select ng-model="usersAdded.users" multiple name="member" theme="bootstrap" style="min-width: 300px;">
-          <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
-          <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers">
-            {{person.name}}
-          </ui-select-choices>
-        </ui-select>
-      </div>
-      <button type="submit" class="btn btn-primary" translate>Add Member</button>
-    </form>
-
-    <h2 translate>List Settings</h2>
-    <div>
-      <a class="btn btn-primary" href="lists/{{list._id}}/edit" translate>Edit List Settings</a>
-    </div>
-    <div>
-      <a class="btn btn-danger" ng-click="deleteList();" translate>Delete List</a>
-    </div>
-  </div>
-
-  <div ng-if="(list.joinability == 'public' || list.joinability == 'moderated') && !isMember">
-    <h2 translate>Check in</h2>
-    <form ng-submit="checkIn()">
-      <div class="form-group">
-        <label for="checkoutDate" translate>Checkout date</label>
-        <input type="date" name="checkoutDate" ng-model="checkinUser.checkoutDate" class="form-control">
-        <p class="help-block" translate>Select a checkout date if you would like to be checked out automatically (you will receive emails from the system beforehand)</p>
-      </div>
-      <button type="submit" class="btn btn-primary" translate>Check in</button>
-    </form>
-  </div>
-
-  <div ng-if="isMember">
-    <h2 translate>Check out</h2>
-    <p ng-if="currentListUser && currentListUser.checkoutDate">You will be checked out of this list automatically on <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span></p>
-    <button type="submit" class="btn btn-primary" ng-click="checkOut();" translate>Check out</button>
-  </div>
-
-  <h2 translate>Export</h2>
-  <div>
-    <a class="btn btn-primary" ng-click="exportEmails()" translate>Copy Email Addresses</a>
-    <script type="text/ng-template" id="exportEmailsModal.html">
-        <div class="modal-header">
-            <h3 class="modal-title" id="modal-title" translate>Copy Email Addresses</h3>
-        </div>
-        <div class="modal-body" id="modal-body">
-          <p><span translate>Please email responsibly. Follow our</span> <a href="https://humanitarian.id/code-of-conduct" target="_blank" translate>Code of conduct</a></p>
-          <textarea rows="15" cols="100">{{emailsText}}</textarea>
-        </div>
-    </script>
-  </div>
-  <div>
-    <a class="btn btn-primary">View PDF</a>
-  </div>
-  <div>
-    <a class="btn btn-primary">Meeting Attendance</a>
-  </div>
-  <div>
-    <a class="btn btn-primary">Export Results</a>
-  </div>
-
-  <h2>Favorite</h2>
-  <div>
-    <a class="btn btn-primary" ng-click="star()" ng-if="!isFavorite" translate>Star</a>
-    <a class="btn btn-primary" ng-click="unstar()" ng-if="isFavorite" translate>Unstar</a>
-  </div>
-
-
-</div>
+<ng-include src="'/app/components/list/list-admin.html'"></ng-include>
 
 <div class="page-header">
-  <h1 class="page-header__heading">{{list.name}}</h1>
-  <p class="page-header__sub-heading">{{users.length}} <span translate>contacts</span></p>
 
-  <div class="page-header__actions">
-    <button class="btn btn-default" type="button" ng-click="switchAdmin()" ng-show="isAdminAvailable">
-      <i class="fa fa-cog"></i>
-      <span class="sr-only">Admin</span>
-    </button>
-    <button class="btn btn-default" type="button" ng-click="switchFilter()">
-      <i class="fa fa-filter"></i>
-      <span class="sr-only">Filter</span>
-    </button>
+  <div class="page-header__primary">
+    <h1 class="page-header__heading">{{list.name}}</h1>
+    <p class="page-header__sub-heading">{{users.length}} <span translate>contacts</span></p>
   </div>
-</div>
 
+  <div class="page-header__secondary">
+
+    <div class="page-header__actions">
+
+      <button class="btn-icon" type="button" ng-click="toggleSidebar('userFilters')">
+        <icon name="filter" text="Filter"></icon>
+      </button>
+
+      <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')">
+        <icon name="cog" text="Actions"></icon>
+      </button>
+
+    </div>
+
+    <ul class="pagination page-header__pagination">
+      <li class="pagination-page"><span>Show</span></li>
+      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 50}">
+        <button type="button" ng-click="setLimit(50)">50</button>
+      </li>
+      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 100}">
+        <button type="button" ng-click="setLimit(100)">100</button>
+      </li>
+      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 150}">
+        <button type="button" ng-click="setLimit(150)">150</button>
+      </li>
+      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 200}">
+        <button type="button" ng-click="setLimit(200)">200</button>
+      </li>
+    </ul>
+
+  </div>
+
+</div>
 
 <hid-users></hid-users>

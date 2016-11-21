@@ -1,4 +1,4 @@
-<div uib-collapse="isAdminCollapsed" horizontal id="admin">
+<div class="sidebar collapse" ng-class="{'in' : sidebar.open}">
   <div ng-show="currentUser.is_admin || (currentUser._id == user._id)">
     <a class="btn btn-primary" href="/checkin/{{user._id}}" translate>Check into List</a>
   </div>
@@ -61,7 +61,7 @@
     </div>
 
     <div class="page-header__actions">
-      <button class="btn-icon" type="button" ng-click="switchAdmin()" ng-show="isAdminAvailable">
+      <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')">
         <icon name="cog" text="Actions"></icon>
       </button>
     </div>

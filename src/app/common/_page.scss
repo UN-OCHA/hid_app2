@@ -1,0 +1,134 @@
+.page {
+  position: relative;
+  height: calc(100% - #{$header-height-xs});
+  transition: $sidebar-transition;
+
+  .toggled & {
+    transform: translateX($sidebar-width-xs);
+  }
+
+  .no-calc & {
+    height: auto;
+  }
+
+  .no-csstransforms & {
+    .toggled & {
+      padding-left: $sidebar-width-xs;
+    }
+  }
+}
+
+.container[role="main"] {
+  min-height: calc(100% - #{$footer-plus-breadcrumbs});
+}
+
+.page-header {
+  position: relative;
+  margin: $base-unit*2.5 0 $base-unit 0;
+}
+
+.page-header__heading {
+  line-height: 1.2;
+  margin-bottom: 0;
+  word-break: break-word;
+}
+
+.page-header__sub-heading {
+  font-weight: bold;
+}
+
+.page-header__actions {
+  position: absolute;
+  right: 0;
+  top: -$base-unit*5;
+}
+
+
+@include media-query(sm) {
+
+  .page-header {
+    margin-top: $base-unit*2;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .page-header__primary {
+    .no-flexbox & {
+      float: left;
+    }
+  }
+
+  .page-header__secondary {
+    text-align: right;
+
+    .no-flexbox & {
+      float: right;
+    }
+  }
+
+  .page-header__actions {
+    position: relative;
+    top: 0;
+  }
+
+}
+
+@include media-query(md) {
+
+  .page {
+    height: calc(100% - #{$header-height});
+
+    .toggled & {
+      transform: translateX($sidebar-width-md);
+    }
+    .no-csstransforms & {
+      .toggled & {
+        padding-left: $sidebar-width-md;
+      }
+    }
+  }
+
+  .page-header__secondary {
+    display: flex;
+  }
+
+  .page-header__actions {
+    transition: $sidebar-transition;
+    order: 1;
+    margin-left: $base-unit*2;
+
+    .toggled & {
+      transform: translateX(-$sidebar-width-md);
+    }
+  }
+
+}
+
+@include media-query(xl) {
+
+  .page-header__actions {
+    margin-left: $base-unit*4;
+  }
+
+}
+
+@include media-query(xxl) {
+
+  .page {
+    .toggled & {
+      transform: translateX($sidebar-width-xxl);
+    }
+    .no-csstransforms & {
+      .toggled & {
+        padding-left: $sidebar-width-xxl;
+      }
+    }
+  }
+
+  .page-header__actions {
+    .toggled & {
+      transform: translateX(-$sidebar-width-xxl);
+    }
+  }
+
+}

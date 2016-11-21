@@ -9,7 +9,7 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
       scope.inlist = scope.list ? true : false;
       scope.request = $location.search();
       scope.totalItems = 0;
-      scope.itemsPerPage = 10;
+      scope.itemsPerPage = 50;
       scope.currentPage = 1;
       scope.request.limit = scope.itemsPerPage;
       scope.request.offset = 0;
@@ -34,7 +34,7 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
         }
         userService.setRequest(scope.request);
         userService.filter(queryCallback);
-        scope.users = userService.getUsers();
+        scope.users = userService.getUsers()
       };
 
       if (!scope.inlist) {
@@ -46,6 +46,26 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
         scope.currentPage = 1;
         scope.pageChanged();
       };
+
+      scope.resetFilters = function () {
+        userService.setFilters({});
+        scope.filters = [];
+        scope.currentPage = 1;
+        scope.pageChanged();
+      }
+
+      //TO DO order asc / desc ?
+      scope.sortList = function (sortby) {
+        scope.request.sort = sortby;
+        scope.currentPage = 1;
+        scope.pageChanged();
+      }
+
+      scope.setLimit = function (limit) {
+        scope.itemsPerPage = limit
+        scope.request.limit = limit;
+        scope.pageChanged();
+      }
 
       scope.operations = List.query({type: 'operation'});
 
@@ -173,7 +193,7 @@ userServices.factory('User', ['$resource', '$http', '$location', 'config',
 
 
     return User;
-    
+
   }
 ]);
 
@@ -217,6 +237,7 @@ userServices.factory('userService', ['$rootScope', 'User',
       var trequest = angular.copy(request);
       users.length = 0;
       angular.merge(trequest, filters);
+
       users = User.query(trequest, cb);
     };
 
@@ -240,7 +261,6 @@ userServices.factory('userService', ['$rootScope', 'User',
 var userControllers = angular.module('userControllers', []);
 
 userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', 'UserCheckIn', function($scope, $routeParams, $http, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List, UserCheckIn) {
-  $scope.setAdminAvailable(true);
   $scope.newEmail = {
     type: '',
     email: ''

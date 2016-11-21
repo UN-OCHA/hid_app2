@@ -1,7 +1,6 @@
 var dashboardController = angular.module('dashboardController', []);
 
 dashboardController.controller('DashboardCtrl', ['$scope', '$routeParams', '$http', 'config', 'List', function($scope, $routeParams, $http, config, List) {
-  $scope.setAdminAvailable(true);
   $scope.activeList = 0;
   $scope.listsManager = List.query({'managers': $scope.currentUser._id});
 

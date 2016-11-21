@@ -106,8 +106,8 @@ body {
 }
 
 body.toggled {
-  padding-left: $sidebarWidth;
-  overflow: hidden;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 img {

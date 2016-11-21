@@ -1,0 +1,58 @@
+.filter {
+  border-bottom: 1px solid $border-grey;
+
+  .ui-select-bootstrap > .ui-select-match > .btn, select {
+    border: none;
+    border-bottom: 1px solid $border-grey;
+    border-radius: 0;
+  }
+
+  .ui-select-placeholder  {
+    font-style: italic;
+  }
+}
+
+.filter__heading {
+  position: relative;
+  font-family: $heading-font-light;
+  font-weight: 100;
+  width: 100%;
+  text-align: left;
+  padding: $base-unit*1.5 $base-unit*3 $base-unit*1.5 0;
+  color: $dark-blue;
+
+  .icon {
+    position: absolute;
+    right: 0;
+    @include font-size(12);
+  }
+
+  &:hover, &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
+}
+
+.filter__inner {
+  padding-bottom: $base-unit;
+}
+
+.filter__buttons {
+  margin-top: $base-unit*2;
+
+  .btn {
+    width: 100%;
+  }
+}
+
+@include media-query(md) {
+
+  .filter__heading {
+    padding: $base-unit*2 $base-unit*3 $base-unit*2 0;
+  }
+
+  .filter__buttons {
+    margin-top: $base-unit*4;
+  }
+
+}

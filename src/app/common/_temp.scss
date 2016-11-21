@@ -36,17 +36,6 @@
   }
 }
 
-
-#admin {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-right: 1px solid black;
-    height: 100%!important;
-    width: $sidebarWidth;
-    overflow: scroll;
-}
-
 .collapse {
     display: none;
     visibility: hidden;
@@ -68,7 +57,4 @@
     @include clearfix;
 }
 
-.pagination-page, .pagination-prev, .pagination-next, .pagination-first, .pagination-last {
-  display: inline-block;
-  padding: $base-unit;
-}
+

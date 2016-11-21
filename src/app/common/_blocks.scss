@@ -32,33 +32,3 @@
   }
 
 }
-
-.page-header {
-  position: relative;
-  margin: $base-unit*2 0 $base-unit 0;
-  padding-right: $base-unit*14;
-}
-
-.page-header__heading {
-  line-height: 1.2;
-  margin-bottom: 0;
-  word-break: break-word;
-}
-
-.page-header__sub-heading {
-  font-weight: bold;
-}
-
-.page-header__actions {
-  position: absolute;
-  right: 0;
-  top: -$base-unit*5;
-}
-
-@include media-query(sm) {
-
-  .page-header__actions {
-    top: 0;
-  }
-
-}
