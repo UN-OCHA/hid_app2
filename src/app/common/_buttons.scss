@@ -3,80 +3,110 @@ button, input[type="submit"] {
   font-family: $body-font;
   -webkit-appearance: none;
   cursor: pointer;
+  border-radius: 0;
+  line-height: 1;
+  display: inline-block;
 }
 
-button[disabled] {
+button[disabled], a.disabled {
   background: $light-grey;
-  border-color: $light-grey;
+  border: 1px solid $border-grey;
   color: $text-dark;
   cursor: initial;
 
   &:hover, &:focus {
     background: $light-grey;
-    border-color: $light-grey;
+    border-color: $border-grey;
     color: $text-dark;
   }
 }
 
-.btn {
-  border: 2px solid $border-grey;
-  border-radius: $base-border-radius;
-  background: $light-grey;
-  padding: $base-unit*1.5;
-  line-height: 1;
-  display: inline-block;
+@mixin btn() {
+  font-family: $heading-font-light;
+  text-transform: uppercase;
+  transition: background 0.3s ease;
+  padding: $base-unit*1.5 $base-unit*2;
   text-decoration: none;
-  color: $text-dark;
-  min-width: $base-unit*5.5;
+  display: inline-block;
+  line-height: 1;
 
-  &:hover, &:focus {
-    background: white;
+  .icon {
+    margin: 0 2px;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px 1px rgba(3,153,173,1);
+  }
+
+  &.active {
+    &:hover, &:focus {
+      opacity: 0.8;
+    }
   }
 }
 
 .btn-primary {
-  background: $primary-color;
-  border-color: $primary-color;
-  color: white;
-  transition: background 0.3s ease;
-
-  &:hover, &:focus {
-    background: white;
-    color: $primary-color;
-  }
-}
-
-.btn-secondary {
+  @include btn();
   background: white;
-  border-color: $primary-color;
+  border: 1px solid $primary-color;
   color: $primary-color;
-  transition: background 0.3s ease;
 
-  &:hover, &:focus {
+  &:hover, &:focus, &.active {
     background: $primary-color;
     color: white;
   }
 }
 
-.btn-transparent {
-  background: none;
-  border: none;
-  color: $primary-color;
+.btn-secondary {
+  @include btn();
+  background: white;
+  border: 1px solid $text-grey;
+  color: $text-grey;
 
-  &:hover, &:focus {
-    background: none;
+  &:hover, &:focus, &.active {
+    background: $text-grey;
+    color: white;
   }
 }
 
 .btn-icon {
-  @extend .btn-secondary;
-  border: 1px solid;
+  @include btn();
+  background: white;
+  border: 1px solid $primary-color;
+  color: $primary-color;
   border-radius: 100%;
   min-width: $base-unit*5;
   width: $base-unit*5;
   height: $base-unit*5;
   padding: 0;
   vertical-align: middle;
+
+  &:hover, &:focus, &.active {
+    background: $primary-color;
+    color: white;
+  }
+
+  .icon {
+    margin: 0;
+  }
+}
+
+.btn-transparent {
+  @include btn();
+  background: none;
+  border: none;
+  color: $primary-color;
+
+  &:hover, &:focus {
+    background: none;
+    text-decoration: underline;
+  }
+
+  &.active {
+    background: $primary-color;
+    color: white;
+  }
 }
 
 .btn-link {
@@ -85,6 +115,10 @@ button[disabled] {
   text-decoration: underline;
   border: none;
   color: $primary-color;
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
 }
 
 
