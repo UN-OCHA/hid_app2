@@ -52,11 +52,18 @@
     justify-content: space-between;
   }
 
+  .page-header__primary {
+    .no-flexbox & {
+      float: left;
+    }
+  }
+
   .page-header__secondary {
-    // position: absolute;
-    // top: 0;
-    // right: 0;
     text-align: right;
+
+    .no-flexbox & {
+      float: right;
+    }
   }
 
   .page-header__actions {
