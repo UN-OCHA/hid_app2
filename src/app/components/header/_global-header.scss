@@ -1,11 +1,9 @@
 .global-header {
-
   background: $primary-color;
   color: $text-light;
 
-
   .dropdown-menu {
-    top: $base-unit*3.5;
+    top: 30px;
   }
 }
 
@@ -15,6 +13,7 @@
   justify-content: space-between;
   padding-top: $base-unit;
   padding-bottom: $base-unit;
+  height: $global-header-height;
 }
 
 .global-header__sites {
@@ -24,7 +23,7 @@
   .dropdown-menu {
     left: 0;
     right: auto;
-    top: $base-unit*4;
+    top: 34px;
     width: $base-unit*20;
   }
 
@@ -51,16 +50,7 @@
 
 @include media-query(lg) {
 
-  .global-header {
-
-    .dropdown-menu {
-      top: $base-unit*5;
-    }
-
-  }
-
   .global-header__inner {
-    height: $global-header-height;
 
     .no-flexbox & {
       height: auto;
@@ -69,9 +59,4 @@
     }
   }
 
-  .global-header__sites {
-    .dropdown-menu {
-      top: 44px;
-    }
-  }
 }
