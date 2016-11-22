@@ -1,10 +1,11 @@
+var env = {};
+if (window) {
+  Object.assign(env, window.__env);
+}
+
 var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'hljs', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'clientServices', 'clientControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
 
-app.constant('config', {
-  apiUrl: 'http://api2.dev.humanitarian.id/api/v2/',
-  hrinfoUrl: 'https://www.humanitarianresponse.info/en/api/v1.0/',
-  listTypes: ['operation', 'bundle', 'disaster', 'organization', 'list']
-});
+app.constant('config', env);
 
 // Check if user is authenticated for paths which require it
 app.run(function ($rootScope, $window, $location, AuthService, alertService) {

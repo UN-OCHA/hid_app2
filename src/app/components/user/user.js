@@ -128,12 +128,12 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
 }]);
 
 
-var userServices = angular.module('userServices', ['ngResource']);
+var userServices = angular.module('userServices', ['ngCachedResource']);
 
-userServices.factory('User', ['$resource', '$http', '$location', 'config',
-  function($resource, $http, $location, config){
+userServices.factory('User', ['$cachedResource', '$http', '$location', 'config',
+  function($cachedResource, $http, $location, config){
 
-    var User = $resource(config.apiUrl + 'user/:userId', {userId: '@_id'},
+    var User = $cachedResource('users', config.apiUrl + 'user/:userId', {userId: '@_id'},
     {
       'update': {
         method: 'PUT'
@@ -216,9 +216,9 @@ userServices.factory('User', ['$resource', '$http', '$location', 'config',
   }
 ]);
 
-userServices.factory('UserCheckIn', ['$resource', 'config',
-  function ($resource, config) {
-    return $resource(config.apiUrl + 'user/:userId/:listType/:checkInId');
+userServices.factory('UserCheckIn', ['$cachedResource', 'config',
+  function ($cachedResource, config) {
+    return $cachedResource('userCheckins', config.apiUrl + 'user/:userId/:listType/:checkInId');
   }
 ]);
 
