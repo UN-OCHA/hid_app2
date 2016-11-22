@@ -1,7 +1,15 @@
 module.exports = function(grunt) {
 
+  var target = grunt.option('target') || 'local';
+
   // Project configuration.
   grunt.initConfig({
+    copy: {
+      config: {
+        src: 'src/app/config/config.' + target + '.js',
+        dest: 'src/app/config/config.js',
+      },
+    },
     nggettext_extract: {
       pot: {
         files: {
@@ -78,12 +86,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass-import');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-modernizr");
   grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Default task
   grunt.registerTask('default', [
+    'copy',
     'nggettext_extract',
     'nggettext_compile', 'sass_import', 'concat', 'sass', 'modernizr', 'autoprefixer']);
 };
