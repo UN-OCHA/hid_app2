@@ -28,6 +28,11 @@
     border-right: 1px solid lighten($primary-color, 50%);
     min-width: $base-unit*4;
     font-family: $heading-font-light;
+
+    &:hover, &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
   }
 
   &:first-child  {

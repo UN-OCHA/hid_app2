@@ -1,15 +1,16 @@
 .filter {
   border-bottom: 1px solid $border-grey;
 
-  .ui-select-bootstrap > .ui-select-match > .btn, select {
-    border: none;
-    border-bottom: 1px solid $border-grey;
-    border-radius: 0;
+  .ui-select-bootstrap {
+    margin: $base-unit/2 0;
   }
 
-  .ui-select-placeholder  {
-    font-style: italic;
+  .ui-select-placeholder {
+    font-family: $heading-font-light;
+    color: $dark-blue;
+    text-transform: uppercase;
   }
+
 }
 
 .filter__heading {
@@ -28,9 +29,8 @@
   }
 
   &:hover, &:focus {
-      outline: none;
-      text-decoration: underline;
-    }
+    text-decoration: none;
+  }
 }
 
 .filter__inner {
