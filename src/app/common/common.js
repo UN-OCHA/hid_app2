@@ -96,7 +96,7 @@ appServices.factory('hrinfoService', function ($http, config) {
 
 var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 'userService', 'listService',  function ($scope, $location, $window, User, userService, listService) {
+appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$window', 'User', 'userService', 'listService',  function ($rootScope, $scope, $location, $window, User, userService, listService) {
   $scope.currentUser = null;
   $scope.currentUserResource = null;
   $scope.filters = {};
@@ -113,11 +113,13 @@ appControllers.controller('AppCtrl', ['$scope', '$location', '$window', 'User', 
 
   $scope.closeSidebar = function () {
     $scope.sidebar.open = false;
+    $rootScope.$emit('sidebar-closed');
   }
 
   $scope.toggleSidebar = function (name) {
     if ($scope.sidebar.sidebars[name] && $scope.sidebar.open) {
       $scope.sidebar.open = false;
+      $rootScope.$emit('sidebar-closed');
       return;
     }
     $scope.sidebar.open = true;
