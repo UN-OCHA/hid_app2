@@ -1,0 +1,46 @@
+.sg-tabs .nav {
+  display: none;
+}
+.styleguide-heading {
+  @include font-size($large-font-size);
+}
+.sg-section, .sg-section__item {
+  padding-top: $base-unit;
+  padding-bottom: $base-unit;
+
+  h3 {
+    border-bottom: 1px solid $border-grey;
+    margin-bottom: $base-unit;
+    color: $primary-color;
+    @include font-size($medium-font-size);
+  }
+}
+
+.sg-body-font {
+  font-family: $body-font;
+}
+.sg-heading-font {
+  font-family: $heading-font;
+}
+.sg-heading-font-light {
+  font-family: $heading-font-light;
+}
+.sg-tiny-font-size {
+  @include font-size($tiny-font-size);
+}
+.sg-small-font-size {
+  @include font-size($small-font-size);
+}
+.sg-base-font-size {
+  @include font-size($base-font-size);
+}
+.sg-medium-font-size {
+  @include font-size($medium-font-size);
+}
+.sg-large-font-size {
+  @include font-size($large-font-size);
+}
+
+.hljs {
+  margin: $base-unit 0;
+}
