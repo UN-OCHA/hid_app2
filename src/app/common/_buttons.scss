@@ -34,11 +34,6 @@ button[disabled], a.disabled {
     margin: 0 2px;
   }
 
-  &:focus {
-    outline: none;
-    box-shadow: 0px 0px 2px 1px rgba(3,153,173,1);
-  }
-
   &.active {
     &:hover, &:focus {
       opacity: 0.8;
@@ -85,6 +80,11 @@ button[disabled], a.disabled {
   &:hover, &:focus, &.active {
     background: $primary-color;
     color: white;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 4px 1px $primary-color;
   }
 
   .icon {

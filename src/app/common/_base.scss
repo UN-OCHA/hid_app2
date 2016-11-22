@@ -162,13 +162,15 @@ i {
 
 .caret {
   display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 2px;
-  vertical-align: middle;
-  border-top: 4px dashed;
-  border-right: 4px solid transparent;
-  border-left: 4px solid transparent;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 12px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  color: $dark-blue;
+
+  &:before {
+    content: "\f078";
+  }
 }
 
 .img-thumbnail {

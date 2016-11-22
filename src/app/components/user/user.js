@@ -94,6 +94,25 @@ userDirectives.directive('hidUsers', ['$location', 'gettextCatalog', 'alertServi
         scope.countries = d;
       });
 
+      scope.sortBy = [
+        {
+          label: 'name',
+          name: 'Name'
+        },
+        {
+          label: 'job_title',
+          name: 'Job title'
+        },
+        {
+          label: 'organization',
+          name: 'Organization'
+        },
+        {
+          label: 'verified',
+          name: 'Verified'
+        }
+      ];
+
       // Delete user account
       scope.deleteUser = function (user) {
         var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
