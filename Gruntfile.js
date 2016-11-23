@@ -9,6 +9,28 @@ module.exports = function(grunt) {
         src: 'src/app/config/config.' + target + '.js',
         dest: 'src/app/config/config.js',
       },
+      fonts_exo: {
+        expand: true,
+        cwd: 'src/assets/fonts/exo',
+        src: '**',
+        dest: 'dist/fonts/exo'
+      },
+      fonts_fontawesome: {
+        expand: true,
+        cwd: 'src/bower_components/components-font-awesome/fonts',
+        src: '**',
+        dest: 'dist/fonts'
+      },
+      img: {
+        expand: true,
+        cwd: 'src/assets/img',
+        src: '**',
+        dest: 'dist/img'
+      },
+      app: {
+        src: 'src/index.html',
+        dest: 'dist/index.html'
+      }
     },
     nggettext_extract: {
       pot: {
@@ -79,6 +101,43 @@ module.exports = function(grunt) {
           'src/assets/css/main.css': 'src/assets/css/main.css'
         }
       }
+    },
+    useminPrepare: {
+      html: 'src/index.html'
+    },
+    ngtemplates: {
+      app: {
+        files: [{
+          cwd: 'src',
+          src: ['app/common/*.html', 'app/components/**/*.html'],
+          dest: '.tmp/concat/js/templates.js'
+        }],
+        options: {
+          module: 'hidApp',
+          usemin: 'dist/js/app.min.js',
+          htmlmin: {
+            collapseBooleanAttributes:      true,
+            collapseWhitespace:             true,
+            removeAttributeQuotes:          true,
+            removeComments:                 true,
+            removeEmptyAttributes:          true,
+            removeRedundantAttributes:      true,
+            removeScriptTypeAttributes:     true,
+            removeStyleLinkTypeAttributes:  true
+          }
+        }
+      }
+    },
+    // Annotates to prevent angularjs errors on minification.
+    ngAnnotate: {
+      js: {
+        files: {
+          '.tmp/concat/js/app.min.js': ['.tmp/concat/js/app.min.js']
+        }
+      }
+    },
+    usemin: {
+      html: 'dist/index.html'
     }
   });
 
@@ -90,10 +149,28 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-modernizr");
   grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks("grunt-usemin");
+  grunt.loadNpmTasks('grunt-ng-annotate');
 
   // Default task
   grunt.registerTask('default', [
     'copy',
     'nggettext_extract',
-    'nggettext_compile', 'sass_import', 'concat', 'sass', 'modernizr', 'autoprefixer']);
+    'nggettext_compile',
+    'sass_import',
+    'concat:css',
+    'sass',
+    'modernizr',
+    'autoprefixer',
+    'useminPrepare',
+    'ngtemplates',
+    'concat:generated',
+    'ngAnnotate',
+    'cssmin:generated',
+    'uglify:generated',
+    'usemin'
+  ]);
 };

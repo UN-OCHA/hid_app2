@@ -12,11 +12,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- build:css /css/app.min.css -->
+        <link href="bower_components/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
         <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet">
         <link href="bower_components/angular-upload/src/directives/btnUpload.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/main.css">
+        <link href="assets/css/main.css" rel="stylesheet">
+        <!-- endbuild -->
         <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
             <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
@@ -28,17 +30,18 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <ng-include src="'/app/components/header/header.html'"></ng-include>
+        <ng-include src="'app/components/header/header.html'"></ng-include>
 
         <div class="page">
             <div ng-if="!hideHeaderFooter" class="container">
                 <a href back-button translate>&lt; Back</a>
             </div>
             <div class="container" role="main" ng-view></div>
-            <ng-include src="'/app/components/footer/footer.html'"></ng-include>
+            <ng-include src="'app/components/footer/footer.html'"></ng-include>
         </div>
 
 
+        <!-- build:js /js/app.min.js -->
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-route/angular-route.min.js"></script>
         <script src="bower_components/angular-resource/angular-resource.min.js"></script>
@@ -59,7 +62,7 @@
         <script src="bower_components/angular-moment/angular-moment.js"></script>
         <script src="bower_components/angular-upload/angular-upload.min.js"></script>
         <script src="assets/js/modernizr-output.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+        <script src="bower_components/highlightjs/highlight.pack.min.js"></script>
         <script src="bower_components/angular-highlightjs/angular-highlightjs.min.js"></script>
         <script src="bower_components/angular-cached-resource/angular-cached-resource.min.js"></script>
 
@@ -74,6 +77,7 @@
         <script src="app/components/dashboard/dashboard.js"></script>
         <script src="app/components/search/search.js"></script>
         <script src="app/app.js"></script>
+        <!-- endbuild -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
