@@ -608,7 +608,12 @@ userControllers.controller('UserRegisterCtrl', ['$scope', '$location', 'alertSer
   };
 }]);
 
-userControllers.controller('UsersCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
+userControllers.controller('UsersCtrl', ['$scope', '$location', function($scope, $location) {
+
+  $scope.clearSearch = function () {
+    $location.url($location.path());
+  }
+
 }]);
 
 userControllers.controller('KioskCtrl', ['$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'UserCheckIn', 'List', function ($scope, $routeParams, $location, gettextCatalog, alertService, hrinfoService, User, UserCheckIn, List) {

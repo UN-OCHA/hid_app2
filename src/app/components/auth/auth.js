@@ -71,7 +71,7 @@ authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$
   $scope.login = function() {
     AuthService.login($scope.email, $scope.password).then(function () {
       $scope.initCurrentUser();
-      $location.path('/dashboard');
+      $location.path('/landing');
     }, function (data) {
       if (data.message == 'Please verify your email address') {
         alertService.add('danger', gettextCatalog.getString('We could not log you in because your email address is not verified yet.'));
@@ -114,7 +114,7 @@ authController.controller('AuthCtrl', ['$scope', '$routeParams', '$location', '$
     $scope.logout();
   }
   else if ($location.path() == '/' && $scope.currentUser) {
-    $location.path('/dashboard');
+    $location.path('/landing');
   }
 }]);
 
