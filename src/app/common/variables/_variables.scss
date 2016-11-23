@@ -8,12 +8,8 @@ $base-unit: 8px;
 //measurements
 $max-width: 1400px;
 
-$global-header-height-xs: $base-unit*5;
-$global-header-height: $base-unit*8;
-
+$global-header-height: $base-unit*5.5;
 $site-header-height: $base-unit*8;
-
-$header-height-xs: $global-header-height-xs + $site-header-height;
 $header-height: $global-header-height + $site-header-height;
 
 $footer-height: $base-unit*5;
@@ -46,7 +42,7 @@ $heading-font: 'exo_2semi_bold', sans-serif;
 $heading-font-light: 'exo_2regular', sans-serif;
 
 // Font sizes
-$tiny-font-size: 8;
+$tiny-font-size: 10;
 $small-font-size: 14;
 $base-font-size: 16;
 $medium-font-size: 24;

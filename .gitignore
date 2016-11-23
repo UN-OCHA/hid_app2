@@ -5,3 +5,4 @@ src/app/common/translations.js
 **/.DS_Store
 **/*.map
 src/assets/css/
+src/app/config/config.js
