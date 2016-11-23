@@ -1,62 +1,44 @@
 <ng-include src="'/app/components/user/user-filters.html'"></ng-include>
 
 <table class="table table-responsive table-responsive--has-actions">
-    <thead>
-      <tr>
-        <th ng-click="sortList('name')" translate>Name</th>
-        <th ng-click="sortList('role')" translate>Role</th>
-        <th ng-click="sortList('organization')" translate>Organization</th>
-        <th ng-click="sortList('cluster')" translate>Cluster</th>
-        <th ng-click="sortList('country')" translate>Country</th>
-        <th translate><span class="sr-only">Info / actions</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="user in users">
-        <td><a ng-href="/users/{{user._id}}">{{user.name}}</a></td>
+  <thead>
+    <tr>
+      <th ng-click="sortList('name')" translate>Name</th>
+      <th ng-click="sortList('role')" translate>Role</th>
+      <th ng-click="sortList('organization')" translate>Organization</th>
+      <th ng-click="sortList('cluster')" translate>Cluster</th>
+      <th ng-click="sortList('country')" translate>Country</th>
+      <th translate><span class="sr-only">Info / actions</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users">
+      <td><a ng-href="/users/{{user._id}}">{{user.name}}</a></td>
+      <td>{{user.job_title}}</td>
+      <td>{{user.organization.list.name}}</td>
+      <td></td>
+      <td>{{user.location.country.name}}</td>
+      <td>
+        <icon name="flag" text="List owner" title="List owner" class="icon-inline" ng-if="list && list.owner._id == user._id"></icon>
+        <icon name="clock-o" text="Pending" title="Pending" class="icon-inline" ng-if="list && user.currentCheckin(list).pending"></icon>
+        <icon name="user" text="List manager" title="List manager" class="icon-inline" ng-if="list && list.isManager(user)" title="Manager"></icon>
+        <icon name="check-circle" text="Verified" title="Verified" class="icon-inline" ng-if="user.verified"></icon>
 
-        <td>{{user.job_title}}</td>
-        <td>{{user.organization.list.name}}</td>
-        <td></td>
-        <td>{{user.location.country.name}}</td>
-        <td>
-
-          <span class="icon-inline" ng-if="list && list.owner._id == user._id" title="Owner" translate>
-            <i class="fa fa-user"></i>
-            <span class="sr-only">Owner</span>
-          </span>
-
-          <span class="icon-inline" ng-if="list && user.currentCheckin(list).pending" title="Pending" translate>
-            <i class="fa fa-clock-o"></i>
-            <span class="sr-only">Pending</span>
-          </span>
-
-          <span class="icon-inline" ng-if="list && list.isManager(user)" title="Manager" translate>
-            <i class="fa fa-user-o"></i>
-            <span class="sr-only">Manager</span>
-          </span>
-
-          <span class="icon-inline" ng-if="user.verified" translate>
-            <i class="fa fa-check-circle"></i>
-            <span class="sr-only">Verified</span>
-          </span>
-
-          <div uib-dropdown class="icon-inline">
-            <button type="button" class="btn btn-transparent" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit">
-              <i class="fa fa-cog"></i>
-              <span class="sr-only">Edit</span>
-            </button>
-            <ul class="dropdown-menu" uib-dropdown-menu>
-              <li ng-if="currentUser.is_admin"><a href="/checkin/{{user._id}}" translate>Check into List</a></li>
-              <li ng-if="list && list.isManager(user) && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="demoteManager(user);" translate>Demote from Manager</a></li>
-              <li ng-if="list && !list.isManager(user) && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="promoteManager(user);" translate>Promote to Manager</a></li>
-              <li ng-if="list && user.currentCheckin(list).pending && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="approveUser(user);" translate>Approve user</a></li>
-              <li ng-if="list && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="removeFromList(user);" translate>Remove from list</a></li>
-              <li ng-if="currentUser.is_admin"><a href ng-click="deleteUser(user);" translate>Delete Account</a></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <ul uib-pagination boundary-link-numbers="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination" direction-links="false"></ul>
+        <div uib-dropdown class="icon-inline">
+          <button type="button" class="btn-transparent" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit">
+            <icon name="ellipsis-v" text="Edit"></icon>
+          </button>
+          <ul class="dropdown-menu" uib-dropdown-menu>
+            <li ng-if="currentUser.is_admin"><a href="/checkin/{{user._id}}" translate>Check into List</a></li>
+            <li ng-if="list && list.isManager(user) && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="demoteManager(user);" translate>Demote from Manager</a></li>
+            <li ng-if="list && !list.isManager(user) && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="promoteManager(user);" translate>Promote to Manager</a></li>
+            <li ng-if="list && user.currentCheckin(list).pending && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="approveUser(user);" translate>Approve user</a></li>
+            <li ng-if="list && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="removeFromList(user);" translate>Remove from list</a></li>
+            <li ng-if="currentUser.is_admin"><a href ng-click="deleteUser(user);" translate>Delete Account</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul uib-pagination boundary-link-numbers="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination" direction-links="false"></ul>
