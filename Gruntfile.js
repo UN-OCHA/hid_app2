@@ -28,8 +28,11 @@ module.exports = function(grunt) {
         dest: 'dist/img'
       },
       app: {
-        src: 'src/index.html',
-        dest: 'dist/index.html'
+        expand: true,
+        cwd: 'src',
+        src: '*',
+        dest: 'dist/',
+        filter: 'isFile'
       }
     },
     nggettext_extract: {
