@@ -1,0 +1,27 @@
+.breadcrumbs {
+  padding-top: $base-unit/2;
+  padding-bottom: $base-unit/2;
+  text-transform: uppercase;
+  @include font-size($small-font-size);
+
+  a {
+    text-decoration: none;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  .icon {
+    margin-right: $base-unit/2;
+  }
+}
+
+@include media-query(md) {
+
+  .breadcrumbs {
+    padding-top: $base-unit;
+    padding-bottom: $base-unit;
+  }
+
+}

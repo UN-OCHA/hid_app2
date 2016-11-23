@@ -168,7 +168,7 @@
     @include font-size($small-font-size);
 
     .nav--primary & {
-      height: $site-header-height;
+      height: $site-header-height-md;
 
       &:hover, &:focus {
         text-decoration: none;

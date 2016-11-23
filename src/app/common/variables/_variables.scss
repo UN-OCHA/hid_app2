@@ -9,8 +9,10 @@ $base-unit: 8px;
 $max-width: 1400px;
 
 $global-header-height: $base-unit*5.5;
-$site-header-height: $base-unit*8;
-$header-height: $global-header-height + $site-header-height;
+$site-header-height-xs: $base-unit*6;
+$site-header-height-md: $base-unit*8;
+$header-height-xs: $global-header-height + $site-header-height-xs;
+$header-height-md: $global-header-height + $site-header-height-md;
 
 $footer-height: $base-unit*5;
 
