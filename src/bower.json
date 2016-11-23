@@ -35,7 +35,8 @@
     "bc-phone-number": "~5.1.0",
     "components-font-awesome": "~4.7.0",
     "highlightjs": "~9.8.0",
-    "moment-timezone": "~0.5.9"
+    "moment-timezone": "~0.5.9",
+    "offline": "~0.7.18"
   },
   "resolutions": {
     "angular": "1.5.8"
