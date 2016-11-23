@@ -53,7 +53,7 @@
 @include media-query(sm) {
 
   .site-header__logo {
-    width: $base-unit*32;
+    width: $base-unit*30;
     margin-right: $base-unit*3;
     background-size: 100%;
   }
@@ -76,10 +76,6 @@
     }
   }
 
-  .site-header__logo {
-    width: $base-unit*30;
-  }
-
   .site-header__nav-toggle {
     display: none;
   }
@@ -97,15 +93,6 @@
     .no-flexbox & {
       float: right;
     }
-  }
-
-}
-
-@include media-query(xl) {
-
-  .site-header__logo {
-    width: $base-unit*32;
-    margin-right: $base-unit*5;
   }
 
 }
