@@ -1,6 +1,6 @@
 .page {
   position: relative;
-  height: calc(100% - #{$header-height});
+  height: calc(100% - #{$header-height-xs});
   transition: $sidebar-transition;
 
   .toggled & {
@@ -72,6 +72,8 @@
 @include media-query(md) {
 
   .page {
+    height: calc(100% - #{$header-height-md});
+
     .toggled & {
       transform: translateX($sidebar-width-md);
     }

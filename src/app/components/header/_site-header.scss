@@ -6,8 +6,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  padding-top: $base-unit;
-  padding-bottom: $base-unit;
+  height: $site-header-height-xs;
 }
 
 .site-header__logo {
@@ -61,13 +60,16 @@
 
 }
 
+@include media-query(md) {
+
+  .site-header__inner {
+    height: $site-header-height-md;
+  }
+}
+
 @include media-query(lg) {
 
   .site-header__inner {
-    padding-top: 0;
-    padding-bottom: 0;
-    height: $site-header-height;
-
     .no-flexbox & {
       padding-top: $base-unit*1.5;
       padding-bottom: $base-unit*1.5;
