@@ -159,6 +159,10 @@ appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$win
     }
   };
 
+  $scope.activeNav = function (path) {
+    return $location.path() === path;
+  };
+
   var initView = function () {
     $scope.closeSidebar();
     $scope.hideHeaderFooter = $location.path() === '/styleguide';
