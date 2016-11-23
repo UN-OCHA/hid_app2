@@ -69,6 +69,8 @@
       top: 0;
       right: 0;
       padding: 0;
+
+
     }
   }
 }
@@ -107,6 +109,7 @@
       &:last-child {
         width: auto;
         position: static;
+        text-align: right;
       }
     }
   }

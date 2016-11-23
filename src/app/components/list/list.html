@@ -11,11 +11,11 @@
 
     <div class="page-header__actions">
 
-      <button class="btn-icon" type="button" ng-click="toggleSidebar('userFilters')">
+      <button class="btn-icon" type="button" ng-click="toggleSidebar('userFilters')" ng-class="{'active' : sidebar.sidebars.userFilters && sidebar.open}">
         <icon name="filter" text="Filter"></icon>
       </button>
 
-      <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')">
+      <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}">
         <icon name="cog" text="Actions"></icon>
       </button>
 

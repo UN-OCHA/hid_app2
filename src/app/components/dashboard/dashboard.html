@@ -12,8 +12,7 @@
     <div class="list-tabs">
       <div class="list-tabs__controls" uib-dropdown>
         <button type="button" class="btn btn-transparent list-tabs__toggle" uib-dropdown-toggle>
-          <span class="sr-only">Change list</span>
-          <i class="fa fa-chevron-down"></i>
+          <icon name="chevron-down" text="Change list"></icon>
         </button>
 
         <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
@@ -60,8 +59,7 @@
             <a href="/lists/{{val._id}}">{{val.name}}</a>
             <div class="list-group__item-actions">
               <button type="button" class="btn btn-transparent">
-                <span class="sr-only">Edit</span>
-                <i class="fa fa-cog"></i>
+                <icon name="ellipsis-v" text="Edit"></icon>
               </button>
             </div>
           </li>
@@ -88,10 +86,10 @@
     <h2 class="secondary-block__heading">Notifications</h2>
     <ul class="secondary-block__list">
       <li class="secondary-block__item">
-        <i class="fa fa-chevron-right"></i>
+        <icon name="chevron-right"></icon>
         <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
-      <li class="secondary-block__item" ng-if="currentUser.verified" translate><i class="fa fa-chevron-right"></i>Your profile is verified</li>
-      <li class="secondary-block__item" ng-if="!currentUser.verified" translate><i class="fa fa-chevron-right"></i>You're not verified yet</li>
+      <li class="secondary-block__item" ng-if="currentUser.verified" translate><icon name="chevron-right"></icon>Your profile is verified</li>
+      <li class="secondary-block__item" ng-if="!currentUser.verified" translate><icon name="chevron-right"></icon>You're not verified yet</li>
     </ul>
   </div>
 
