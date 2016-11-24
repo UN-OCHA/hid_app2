@@ -20,7 +20,8 @@
 }
 
 input[type="search"].search-form__input {
-  padding-left: $base-unit*4.5;
+  padding-left: $base-unit*3.25;
+  @include font-size($small-font-size);
 }
 
 .search-form__btn {
@@ -28,5 +29,19 @@ input[type="search"].search-form__input {
   left: 0;
   top: 0;
   min-width: 0;
-  padding-right: $base-unit/2;
+  padding: $base-unit*1.5 $base-unit/2;
+  @include font-size($small-font-size);
+}
+
+@include media-query(md) {
+
+  input[type="search"].search-form__input {
+    padding-left: $base-unit*3.5;
+    @include font-size($base-font-size);
+  }
+
+  .search-form__btn {
+    @include font-size($base-font-size);
+  }
+
 }
