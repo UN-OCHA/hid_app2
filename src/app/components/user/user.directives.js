@@ -1,6 +1,6 @@
 var userDirectives = angular.module('userDirectives', []);
 
-userDirectives.directive('hidUsers', ['$rootScope', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'userService', 'User', 'List', function($rootScope, $location, gettextCatalog, alertService, hrinfoService, userService, User, List) {
+userDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams', 'gettextCatalog', 'alertService', 'hrinfoService', 'userService', 'User', 'List', function($rootScope, $location, $routeParams, gettextCatalog, alertService, hrinfoService, userService, User, List) {
   return {
     restrict: 'E',
     templateUrl: 'app/components/user/users.html',
@@ -15,6 +15,7 @@ userDirectives.directive('hidUsers', ['$rootScope', '$location', 'gettextCatalog
       scope.request.offset = 0;
       scope.request.sort = 'name';
       scope.selectedFilters = {};
+      scope.searchTerm = $routeParams.name;
       var currentSortOrder = scope.request.name;
 
       userService.setRequest(scope.request);
@@ -32,6 +33,10 @@ userDirectives.directive('hidUsers', ['$rootScope', '$location', 'gettextCatalog
       $rootScope.$on('sidebar-closed', function () {
         scope.selectedFilters = angular.copy(scope.filters);
         scope.request.sort = currentSortOrder;
+      });
+
+      $rootScope.$on('$routeChangeSuccess', function () {
+        scope.resetFilters();
       });
 
       // Pager function

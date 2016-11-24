@@ -1,5 +1,5 @@
 appControllers.controller('SearchCtrl', ['$scope', '$location', 'userService', 'listService',
-  function ($scope, $location,  userService, listService) {
+  function ($scope, $location, userService, listService) {
 
   $scope.filters = {};
 
@@ -12,4 +12,12 @@ appControllers.controller('SearchCtrl', ['$scope', '$location', 'userService', '
       listService.addFilter('name', $scope.filters.name, true);
     }
   };
+
+  $scope.search = function (path, searchTerm) {
+    var params = {
+      name: searchTerm
+    };
+    $location.path(path).search(params);
+  }
+
 }]);

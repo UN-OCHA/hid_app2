@@ -1,9 +1,22 @@
 <div class="page-header">
-  <h1 class="page-header__heading" translate>Users</h1>
-  <div class="page-header__actions">
-    <button class="btn-icon" type="button" ng-click="toggleSidebar('userFilters')">
-      <icon name="filter" text="Filter"></icon>
-    </button>
+  <div class="page-header__primary">
+    <h1 class="page-header__heading" translate>
+      Users<span ng-if="searchTerm">: <em>'{{searchTerm}}'</em></span>
+      <button type="button" ng-if="searchTerm" ng-click="clearSearch()" class="btn-transparent">
+        <icon name="times" text="Clear search"></icon>
+      </button>
+    </h1>
+    <p class="page-header__sub-heading">{{users.length}} <span translate>contacts</span></p>
   </div>
+
+  <div class="page-header__secondary">
+    <div class="page-header__actions">
+      <button class="btn-icon" type="button" ng-click="toggleSidebar('userFilters')">
+        <icon name="filter" text="Filter"></icon>
+      </button>
+    </div>
+  </div>
+
 </div>
+
 <hid-users></hid-users>

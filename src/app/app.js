@@ -49,6 +49,10 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/components/auth/login.html',
         controller: 'AuthCtrl'
       }).
+      when('/landing', {
+        templateUrl: 'app/components/landing/landing.html',
+        authenticate: true
+      }).
       when('/dashboard', {
         templateUrl: 'app/components/dashboard/dashboard.html',
         controller: 'DashboardCtrl',

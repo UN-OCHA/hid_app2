@@ -1,0 +1,42 @@
+<div class="sidebar collapse" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.listsFilters}">
+
+  <div ng-if="sidebar.sidebars.listsFilters" class="sidebar__inner">
+
+    <h2 class="sidebar__heading">Filter</h2>
+
+    <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
+      <icon name="times" text="close"></icon>
+    </button>
+
+    <div class="filter">
+      <label for="type" class="sr-only" translate>Filter by type</label>
+      <ui-select ng-model="selectedFilters['type']" name="type">
+        <ui-select-match allow-clear="true" placeholder="Type">{{$select.selected.val}}</ui-select-match>
+        <ui-select-choices repeat="type.key as type in listTypes">
+          {{type.val}}
+        </ui-select-choices>
+      </ui-select>
+    </div>
+
+    <div class="filter">
+      <label for="sort" class="sr-only" translate>Sort by</label>
+      <ui-select ng-model="request['sort']" name="sort" class="always-show-placeholder">
+        <ui-select-match placeholder="Sort by">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="sort.label as sort in sortBy | filter: $select.search">
+            {{sort.name}}
+        </ui-select-choices>
+      </ui-select>
+    </div>
+
+    <div class="row filter__buttons">
+      <div class="col-xs-6">
+        <button type="button" class="btn btn-secondary" ng-click="resetFilters()">Clear</button>
+      </div>
+      <div class="col-xs-6">
+        <button type="button" class="btn btn-primary" ng-click="filter()">Apply</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
