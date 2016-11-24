@@ -7,6 +7,13 @@ var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'ang
 
 app.constant('config', env);
 
+Offline.options = {
+  checkOnLoad: false,
+  interceptRequests: false,
+  reconnect: false,
+  requests: false //record ajax requests and re-make on connection restore
+}
+
 // Check if user is authenticated for paths which require it
 app.run(function ($rootScope, $window, $location, AuthService, alertService) {
   $rootScope.isAuthenticated = false;
