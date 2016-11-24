@@ -1,7 +1,7 @@
 <div class="page-header">
   <div class="page-header__primary">
     <h1 class="page-header__heading" translate>
-      Users<em ng-if="searchTerm">: '{{searchTerm}}'</em>
+      Users<span ng-if="searchTerm">: <em>'{{searchTerm}}'</em></span>
       <button type="button" ng-if="searchTerm" ng-click="clearSearch()" class="btn-transparent">
         <icon name="times" text="Clear search"></icon>
       </button>

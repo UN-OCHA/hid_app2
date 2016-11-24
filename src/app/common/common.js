@@ -105,6 +105,7 @@ appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$win
     open: false,
     sidebars: {
       admin: false,
+      listsFilters: false,
       userFilters: false
     }
   };

@@ -51,7 +51,6 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/landing', {
         templateUrl: 'app/components/landing/landing.html',
-        // controller: 'DashboardCtrl',
         authenticate: true
       }).
       when('/dashboard', {
