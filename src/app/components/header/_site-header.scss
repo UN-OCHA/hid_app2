@@ -14,6 +14,7 @@
   height: $base-unit*5;
   width: $base-unit*5;
   background: url('../img/logo.svg') left center no-repeat;
+  position: relative;
 
   .no-svg & {
     background-image: url('../img/logo.png');
@@ -25,6 +26,22 @@
 
   .no-flexbox & {
     float: left;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  &:hover, &:focus, &.active {
+    &:after {
+      border-color: $primary-color;
+    }
   }
 }
 
@@ -56,6 +73,10 @@
     width: $base-unit*30;
     margin-right: $base-unit*3;
     background-size: 100%;
+
+    &:after {
+      bottom: -12px;
+    }
   }
 
 }
