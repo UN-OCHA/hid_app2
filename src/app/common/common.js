@@ -96,10 +96,11 @@ appServices.factory('hrinfoService', function ($http, config) {
 
 var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$window', 'User', 'userService', 'listService',  function ($rootScope, $scope, $location, $window, User, userService, listService) {
+appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$window', 'gettextCatalog', 'User', 'userService', 'listService',  function ($rootScope, $scope, $location, $window, gettextCatalog, User, userService, listService) {
   $scope.currentUser = null;
   $scope.currentUserResource = null;
   $scope.filters = {};
+  $scope.language = gettextCatalog.getCurrentLanguage();
 
   $scope.sidebar = {
     open: false,
