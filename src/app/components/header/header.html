@@ -1,5 +1,5 @@
 <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }} <span ng-if="alert.confirm"><button class="btn btn-primary" ng-click="alert.callback();" translate>Yes</button> <button class="btn btn-default" ng-click="alert.closeConfirm();" translate>No</button></span></uib-alert>
-<header role="banner" ng-if="!hideHeaderFooter">
+<header role="banner">
 
   <div class="global-header">
     <div class="container global-header__inner">

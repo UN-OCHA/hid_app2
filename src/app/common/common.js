@@ -111,8 +111,6 @@ appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$win
     }
   };
 
-  $scope.hideHeaderFooter = $location.path() === '/styleguide';
-
   $scope.closeSidebar = function () {
     $scope.sidebar.open = false;
     $rootScope.$emit('sidebar-closed');
@@ -167,7 +165,6 @@ appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$win
 
   var initView = function () {
     $scope.closeSidebar();
-    $scope.hideHeaderFooter = $location.path() === '/styleguide';
   }
 
   $scope.initCurrentUser();

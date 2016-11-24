@@ -3,7 +3,7 @@ if (window) {
   Object.assign(env, window.__env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'hljs', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'clientServices', 'clientControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'clientServices', 'clientControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
 
 app.constant('config', env);
 
@@ -169,13 +169,6 @@ app.config(['$routeProvider', '$locationProvider',
         template: '',
         controller: 'AuthCtrl',
         authenticate: true
-      })
-      .when('/styleguide', {
-        templateUrl: 'app/components/styleguide/styleguide.html',
-        authenticate: true,
-        params: {
-          hideHeader: true
-        }
       })
       .otherwise({
         redirectTo: '/'
