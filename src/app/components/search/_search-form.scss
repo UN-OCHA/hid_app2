@@ -17,6 +17,10 @@
     color: $primary-color;
     font-style: italic;
   }
+
+  .dropdown-menu {
+    width: 100%;
+  }
 }
 
 input[type="search"].search-form__input {
