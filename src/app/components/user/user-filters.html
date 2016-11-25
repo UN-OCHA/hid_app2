@@ -8,6 +8,12 @@
       <icon name="times" text="close"></icon>
     </button>
 
+    <div class="filters-group filter__search">
+      <label for="name" class="sr-only">Search by name</label>
+      <input type="text" class="filter__search__input" ng-model="selectedFilters['name']" name="name" id="name" placeholder="Search by name">
+      <icon name="search"></icon>
+    </div>
+
     <div class="filters-group">
       <h3>
         <button type="button" class="filters-group__heading" ng-click="filterGroup1 = !filterGroup1" ng-class="{'active' : filterGroup1}" translate>

@@ -35,6 +35,10 @@
   .ui-select-bootstrap {
     margin: $base-unit/2 0;
     color: $text-grey;
+
+    .caret {
+      color: $text-grey;
+    }
   }
 
   .ui-select-placeholder {
@@ -68,6 +72,25 @@
 
 .filter__inner {
   padding-bottom: $base-unit;
+}
+
+.filter__search {
+  position: relative;
+
+  .icon {
+    position: absolute;
+    left: $base-unit/2;
+    top: $base-unit;
+    color: $text-grey;
+  }
+}
+
+.filter__search__input[type="text"] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $border-grey;
+  border-radius: 0;
+  padding-left: $base-unit*4;
 }
 
 .filter__buttons {
