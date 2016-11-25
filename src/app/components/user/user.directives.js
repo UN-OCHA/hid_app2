@@ -21,8 +21,8 @@ userDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams',
       userService.setRequest(scope.request);
 
       // Helper function
-      var queryCallback = function (users, headers) {
-        scope.totalItems = headers()["x-total-count"];
+      var queryCallback = function (resp) {
+        scope.totalItems = resp.headers["x-total-count"];
       };
 
       userService.subscribe(scope, function () {

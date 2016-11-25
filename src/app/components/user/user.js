@@ -127,7 +127,9 @@ userServices.factory('userService', ['$rootScope', 'User',
       users.length = 0;
       angular.merge(trequest, filters);
 
-      users = User.query(trequest, cb);
+      users = User.query(trequest);
+      users.$httpPromise.then(cb);
+      users.$promise.then(cb);
     };
 
     userService.getUsers = function() {
