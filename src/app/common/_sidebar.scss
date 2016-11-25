@@ -59,6 +59,10 @@
     padding: $base-unit*3 $base-unit*5;
   }
 
+  .sidebar__heading {
+    margin-bottom: $base-unit*4;
+  }
+
   .sidebar__close {
     top: $base-unit*3;
     right: $base-unit*3;

@@ -2,9 +2,11 @@
   position: relative;
   height: calc(100% - #{$header-height-xs});
   transition: $sidebar-transition;
+  width: 100%;
 
   .toggled & {
     transform: translateX($sidebar-width-xs);
+    position: fixed;
   }
 
   .no-calc & {

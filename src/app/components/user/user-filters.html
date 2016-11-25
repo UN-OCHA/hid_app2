@@ -8,100 +8,143 @@
       <icon name="times" text="close"></icon>
     </button>
 
-    <div class="filter">
-      <label for="organizations" class="sr-only" translate>Filter by organization</label>
-      <ui-select ng-model="selectedFilters['organizations.list']" name="organizations">
-        <ui-select-match allow-clear="true" placeholder="Organization">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization._id as organization in organizations | filter: $select.search" minimum-input-length="3">
-          {{organization.name}}
-        </ui-select-choices>
-      </ui-select>
+    <div class="filters-group filter__search">
+      <label for="name" class="sr-only">Search by name</label>
+      <input type="text" class="filter__search__input" ng-model="selectedFilters['name']" name="name" id="name" placeholder="Search by name">
+      <icon name="search"></icon>
     </div>
 
-    <div class="filter">
-      <label for="operations" class="sr-only" translate>Filter by operation</label>
-      <ui-select ng-model="selectedFilters['operations.list']" name="operations">
-        <ui-select-match allow-clear="true" placeholder="Operation">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices repeat="operation._id as operation in operations | filter: $select.search">
-          {{operation.name}}
-        </ui-select-choices>
-      </ui-select>
-    </div>
-
-    <div class="filter">
-      <label for="bundles" class="sr-only" translate>Filter by group</label>
-      <ui-select ng-model="selectedFilters['bundles.list']" name="bundles">
-        <ui-select-match allow-clear="true" placeholder="Group">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices refresh="getBundles($select.search)" repeat="bundle._id as bundle in bundles | filter: $select.search" minimum-input-length="3">
-          {{bundle.name}}
-        </ui-select-choices>
-      </ui-select>
-    </div>
-
-    <div class="filter">
-      <label for="roles" class="sr-only" translate>Filter by role</label>
-      <ui-select ng-model="selectedFilters['roles.id']" name="roles">
-        <ui-select-match allow-clear="true" placeholder="Role">{{$select.selected.label}}</ui-select-match>
-        <ui-select-choices repeat="role.id as role in roles | filter: $select.search">
-          {{role.label}}
-        </ui-select-choices>
-      </ui-select>
-    </div>
-
-    <div class="filter">
-      <label for="country" class="sr-only" translate>Filter by country</label>
-      <ui-select ng-model="selectedFilters['country']" name="country">
-        <ui-select-match allow-clear="true" placeholder="Country">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices repeat="country.id as country in countries | filter: $select.search">
-          {{country.name}}
-        </ui-select-choices>
-      </ui-select>
-    </div>
-
-    <div class="filter">
-      <label for="disasters" class="sr-only" translate>Filter by disaster</label>
-      <ui-select ng-model="selectedFilters['disasters.list']" name="disasters">
-        <ui-select-match allow-clear="true" placeholder="Disaster">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices refresh="getDisasters($select.search)" repeat="disaster._id as disaster in disasters | filter: $select.search" minimum-input-length="3">
-          {{disaster.name}}
-        </ui-select-choices>
-      </ui-select>
-    </div>
-
-    <div class="filter">
+    <div class="filters-group">
       <h3>
-        <button type="button" class="btn btn-transparent filter__heading" ng-click="isFilter7Collapsed = !isFilter7Collapsed">
-          <span translate>Type of user</span>
-          <icon name="chevron-down"></icon>
+        <button type="button" class="filters-group__heading" ng-click="filterGroup1 = !filterGroup1" ng-class="{'active' : filterGroup1}" translate>
+          Location filters
+          <icon name="plus" text="Toggle location filters"></icon>
         </button>
       </h3>
-      <div uib-collapse="!isFilter7Collapsed" class="filter__inner">
-        <p>
-          <label><input type="checkbox" ng-model="selectedFilters.is_orphan" name="is_orphan" /> Orphan</label>
-        </p>
 
-        <p>
-          <label><input type="checkbox" ng-model="selectedFilters.is_ghost" name="is_ghost" /> Ghost</label>
-        </p>
+      <div uib-collapse="!filterGroup1" class="filters-group__inner">
 
-        <p>
-          <label><input type="checkbox" ng-model="selectedFilters.verified" name="verified" /> Verified</label>
-        </p>
+        <div class="filter">
+          <label for="disasters" class="sr-only" translate>Filter by disaster</label>
+          <ui-select ng-model="selectedFilters['disasters.list']" name="disasters">
+            <ui-select-match allow-clear="true" placeholder="Disaster">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices refresh="getDisasters($select.search)" repeat="disaster._id as disaster in disasters | filter: $select.search" minimum-input-length="3">
+              {{disaster.name}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
 
-        <p>
-          <label><input type="checkbox" ng-model="selectedFilters.is_admin" name="is_admin" /> Administrator</label>
-        </p>
+        <div class="filter">
+          <label for="country" class="sr-only" translate>Filter by country</label>
+          <ui-select ng-model="selectedFilters['country']" name="country">
+            <ui-select-match allow-clear="true" placeholder="Country">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="country.id as country in countries | filter: $select.search">
+              {{country.name}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+
+        <div class="filter">
+          <label for="operations" class="sr-only" translate>Filter by operation</label>
+          <ui-select ng-model="selectedFilters['operations.list']" name="operations">
+            <ui-select-match allow-clear="true" placeholder="Operation">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="operation._id as operation in operations | filter: $select.search">
+              {{operation.name}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+
       </div>
     </div>
 
-    <div class="filter">
-      <label for="sort" class="sr-only" translate>Sort by</label>
-      <ui-select ng-model="request['sort']" name="sort" class="always-show-placeholder">
-        <ui-select-match placeholder="Sort by">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices repeat="sort.label as sort in sortBy | filter: $select.search">
-            {{sort.name}}
-        </ui-select-choices>
-      </ui-select>
+    <div class="filters-group">
+      <h3>
+        <button type="button" class="filters-group__heading" ng-click="filterGroup2 = !filterGroup2" ng-class="{'active' : filterGroup2}" translate>
+          Occupation filters
+          <icon name="plus" text="Toggle occupation filters"></icon>
+        </button>
+      </h3>
+
+      <div uib-collapse="!filterGroup2" class="filters-group__inner">
+
+        <div class="filter">
+          <label for="bundles" class="sr-only" translate>Filter by group</label>
+          <ui-select ng-model="selectedFilters['bundles.list']" name="bundles">
+            <ui-select-match allow-clear="true" placeholder="Group">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices refresh="getBundles($select.search)" repeat="bundle._id as bundle in bundles | filter: $select.search" minimum-input-length="3">
+              {{bundle.name}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+
+        <div class="filter">
+          <label for="organizations" class="sr-only" translate>Filter by organization</label>
+          <ui-select ng-model="selectedFilters['organizations.list']" name="organizations">
+            <ui-select-match allow-clear="true" placeholder="Organization">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization._id as organization in organizations | filter: $select.search" minimum-input-length="3">
+              {{organization.name}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+
+        <div class="filter">
+          <label for="roles" class="sr-only" translate>Filter by role</label>
+          <ui-select ng-model="selectedFilters['roles.id']" name="roles">
+            <ui-select-match allow-clear="true" placeholder="Role">{{$select.selected.label}}</ui-select-match>
+            <ui-select-choices repeat="role.id as role in roles | filter: $select.search">
+              {{role.label}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+
+        <div class="filter">
+          <h4>
+            <button type="button" class="btn btn-transparent filter__heading" ng-click="isFilter7Collapsed = !isFilter7Collapsed">
+              <span translate>Type of user</span>
+              <icon name="chevron-down"></icon>
+            </button>
+          </h4>
+          <div uib-collapse="!isFilter7Collapsed" class="filter__inner">
+            <p>
+              <label><input type="checkbox" ng-model="selectedFilters.is_orphan" name="is_orphan" /> Orphan</label>
+            </p>
+
+            <p>
+              <label><input type="checkbox" ng-model="selectedFilters.is_ghost" name="is_ghost" /> Ghost</label>
+            </p>
+
+            <p>
+              <label><input type="checkbox" ng-model="selectedFilters.verified" name="verified" /> Verified</label>
+            </p>
+
+            <p>
+              <label><input type="checkbox" ng-model="selectedFilters.is_admin" name="is_admin" /> Administrator</label>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="filters-group">
+      <h3>
+        <button type="button" class="filters-group__heading" ng-click="filterGroup3 = !filterGroup3" ng-class="{'active' : filterGroup3}" translate>
+          Sort
+          <icon name="plus" text="Toggle location filters"></icon>
+        </button>
+      </h3>
+
+      <div uib-collapse="!filterGroup3" class="filters-group__inner">
+        <div class="filter">
+          <label for="sort" class="sr-only" translate>Sort by</label>
+          <ui-select ng-model="request['sort']" name="sort" class="always-show-placeholder">
+            <ui-select-match placeholder="Sort by">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="sort.label as sort in sortBy | filter: $select.search">
+                {{sort.name}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+      </div>
     </div>
 
     <div class="row filter__buttons">

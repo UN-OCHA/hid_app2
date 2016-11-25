@@ -1,26 +1,63 @@
+.filters-group {
+  margin: 0 0 $base-unit*3 0;
+}
+
+.filters-group__heading {
+  background: none;
+  color: $text-grey;
+  padding: $base-unit*1.5 $base-unit/2;
+  text-transform: none;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  border: none;
+  border-bottom: 1px solid $border-grey;
+  font-family: $heading-font-light;
+
+  &.active {
+    color: $primary-color;
+    border-color: $primary-color;
+  }
+
+  .icon {
+    position: absolute;
+    right: 0;
+  }
+}
+
 .filter {
   border-bottom: 1px solid $border-grey;
 
+  .filters-group & {
+    padding-left: $base-unit*4;
+  }
+
   .ui-select-bootstrap {
     margin: $base-unit/2 0;
+    color: $text-grey;
+
+    .caret {
+      color: $text-grey;
+    }
   }
 
   .ui-select-placeholder {
-    font-family: $heading-font-light;
-    color: $dark-blue;
-    text-transform: uppercase;
+    color: $text-grey;
+    text-transform: none;
   }
-
 }
 
 .filter__heading {
   position: relative;
-  font-family: $heading-font-light;
-  font-weight: 100;
   width: 100%;
   text-align: left;
+  text-transform: none;
   padding: $base-unit*1.5 $base-unit*3 $base-unit*1.5 0;
   color: $dark-blue;
+
+  &.btn-transparent {
+    color: $text-grey;
+  }
 
   .icon {
     position: absolute;
@@ -35,6 +72,25 @@
 
 .filter__inner {
   padding-bottom: $base-unit;
+}
+
+.filter__search {
+  position: relative;
+
+  .icon {
+    position: absolute;
+    left: $base-unit/2;
+    top: $base-unit;
+    color: $text-grey;
+  }
+}
+
+.filter__search__input[type="text"] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $border-grey;
+  border-radius: 0;
+  padding-left: $base-unit*4;
 }
 
 .filter__buttons {
@@ -52,7 +108,7 @@
   }
 
   .filter__buttons {
-    margin-top: $base-unit*4;
+    margin-top: $base-unit*6;
   }
 
 }
