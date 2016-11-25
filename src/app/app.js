@@ -1,6 +1,6 @@
 var env = {};
 if (window) {
-  Object.assign(env, window.__env);
+  angular.copy(window.__env, env);
 }
 
 var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'clientServices', 'clientControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
