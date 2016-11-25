@@ -1,9 +1,33 @@
-<div ng-controller="SearchCtrl">
-  <form class="search-form" role="search" ng-submit="searchUsers()">
-    <label for="name" class="sr-only">{{'Search for contacts or lists'|translate}}</label>
-    <input type="search" name="name" id="name" class="input-no-border search-form__input" placeholder="{{'Search for contacts or lists'|translate}}" ng-model="filters.name" >
-    <button type="submit" class="btn btn-transparent search-form__btn">
-      <icon name="search" text="Search"></icon>
-    </button>
+<div ng-controller="SearchFormCtrl">
+
+  <form ng-submit="fullSearch()" role="search" >
+    <div class="search-form" uib-dropdown is-open="hasResults">
+      <label for="search" class="sr-only">{{'Search for contacts or lists'|translate}}</label>
+      <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for contacts or lists'|translate}}" name="search" id="search" autocomplete="off" ng-model="searchTerm" ng-model-options="{debounce: 200}" ng-change="searchAutocomplete()">
+      <button type="submit" class="btn btn-transparent search-form__btn">
+        <icon name="search" text="Search"></icon>
+      </button>
+
+      <ul class="dropdown-menu" uib-dropdown-menu>
+        <li ng-if="searchLists.length">
+          <span translate><strong>Lists</strong></span>
+          <ul>
+            <li ng-repeat="result in searchLists">
+              <a href="lists/{{result._id}}">{{result.name}}</a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="searchPeople.length">
+          <span translate><strong>Users</strong></span>
+          <ul>
+            <li ng-repeat="result in searchPeople">
+              <a href="users/{{result._id}}">{{result.name}}</a>
+            </li>
+          </ul>
+        </li>
+        <li><button type="submit" class="btn-transparent">View all</button></li>
+      </ul>
+    </div>
   </form>
+
 </div>

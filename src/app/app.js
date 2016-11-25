@@ -170,6 +170,11 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'AuthCtrl',
         authenticate: true
       })
+      .when('/search', {
+        templateUrl: 'app/components/search/search-results.html',
+        controller: 'SearchCtrl',
+        authenticate: true
+      })
       .otherwise({
         redirectTo: '/'
       });
