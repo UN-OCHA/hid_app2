@@ -2,11 +2,11 @@
   list-style: none;
   position: relative;
   border-bottom: 1px solid $border-grey;
+  padding: $base-unit $base-unit*6 $base-unit $base-unit;
 
   a {
     display: block;
     text-decoration: none;
-    padding: $base-unit $base-unit*6 $base-unit $base-unit;
     word-break: break-word;
 
     &:hover, &:focus {
@@ -20,4 +20,8 @@
   position: absolute;
   right: 0;
   top: 0;
+
+  .btn-transparent {
+    padding: $base-unit*1.5;
+  }
 }

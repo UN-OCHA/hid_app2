@@ -1,3 +1,9 @@
+.block {
+  &+.block {
+    margin-top: $base-unit*4;
+  }
+}
+
 .block-heading {
   background: $primary-color;
   color: $text-light;
@@ -6,6 +12,7 @@
   font-family: $heading-font;
   font-weight: normal;
   display: block;
+  margin-bottom: $base-unit/2;
 }
 
 .secondary-block {

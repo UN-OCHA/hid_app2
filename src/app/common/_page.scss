@@ -22,6 +22,7 @@
 
 .container[role="main"] {
   min-height: calc(100% - #{$footer-plus-breadcrumbs});
+  padding-bottom: $base-unit*4;
 }
 
 .page-header {
