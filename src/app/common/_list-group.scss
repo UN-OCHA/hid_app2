@@ -20,4 +20,8 @@
   position: absolute;
   right: 0;
   top: 0;
+
+  .btn-transparent {
+    padding: $base-unit*1.5;
+  }
 }

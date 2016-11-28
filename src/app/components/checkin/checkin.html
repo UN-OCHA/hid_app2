@@ -9,10 +9,10 @@
 
       <h2 class="block-heading" translate>Select lists</h2>
 
-      <ui-select ng-model="selectedLists" on-select="updateSelectedLists($select.selected)">
+      <ui-select ng-model="selectedLists" on-select="updateSelectedLists($select.selected)" class="ui-select--has-border">
         <ui-select-match placeholder="{{'Type the list you want to check in to' | translate}}"><span translate>Type the list you want to check in to</span></ui-select-match>
         <ui-select-choices ui-disable-choice="isSelected(list)" repeat="list.id as list in lists | filter: $select.search">
-          {{list.name}}
+          <span ng-bind="list.name"></span>
         </ui-select-choices>
       </ui-select>
 
@@ -216,7 +216,7 @@
       </ul>
     </div>
 
-    <button type="button" class="btn-primary btn-block" ng-click="checkin();" ng-disabled="!selectedLists.length" translate>
+    <button type="button" class="btn-primary btn-block" ng-click="checkin()" ng-disabled="!selectedLists.length" translate>
       Check me in
       <icon name="chevron-right"></icon>
     </button>

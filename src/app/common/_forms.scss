@@ -153,55 +153,6 @@ label {
   }
 }
 
-/* ui-select */
-.ui-select-bootstrap {
-  min-width: 100px!important;
-  width: 100%;
-  line-height: 1;
-  font-family: $heading-font-light;
-
-  input[type="search"] {
-    border: none;
-    border-radius: 0;
-    width: 100% !important;
-  }
-}
-
-.ui-select-placeholder {
-  font-family: $heading-font-light;
-  color: $dark-blue;
-  text-transform: uppercase;
-
-  .always-show-placeholder & {
-    display: inline-block!important;
-
-    &:after {
-      content: ":";
-    }
-  }
-}
-.ui-select-toggle {
-  padding: $base-unit*1.5 $base-unit*2 $base-unit*1.5 0;
-  display: block;
-}
-
-.ui-select-bootstrap .ui-select-toggle>.caret {
-  right: 0;
-  height: 12px;
-  margin-top: -6px;
-}
-
-.ui-select-bootstrap .ui-select-choices-row>a {
-  padding: $base-unit/2 $base-unit;
-  white-space: initial;
-  border-bottom: 1px solid $border-grey;
-}
-
-.ui-select-match.btn-default-focus {
-  background: none;
-}
-
-
 .glyphicon-remove {
   position: relative;
   width: $base-unit;
@@ -287,4 +238,8 @@ bc-phone-number {
     min-width: 82px;
     width: 82px;
   }
+}
+
+.editable-ui-select {
+  white-space: normal;
 }

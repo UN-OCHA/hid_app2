@@ -31,20 +31,6 @@
   .filters-group & {
     padding-left: $base-unit*4;
   }
-
-  .ui-select-bootstrap {
-    margin: $base-unit/2 0;
-    color: $text-grey;
-
-    .caret {
-      color: $text-grey;
-    }
-  }
-
-  .ui-select-placeholder {
-    color: $text-grey;
-    text-transform: none;
-  }
 }
 
 .filter__heading {

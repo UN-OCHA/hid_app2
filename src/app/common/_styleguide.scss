@@ -1,21 +1,3 @@
-.sg-tabs .nav {
-  display: none;
-}
-.styleguide-heading {
-  @include font-size($large-font-size);
-}
-.sg-section, .sg-section__item {
-  padding-top: $base-unit;
-  padding-bottom: $base-unit;
-
-  h3 {
-    border-bottom: 1px solid $border-grey;
-    margin-bottom: $base-unit;
-    color: $primary-color;
-    @include font-size($medium-font-size);
-  }
-}
-
 .sg-body-font {
   font-family: $body-font;
 }
@@ -41,6 +23,3 @@
   @include font-size($large-font-size);
 }
 
-.hljs {
-  margin: $base-unit 0;
-}
