@@ -91,12 +91,12 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true
       }).
       when('/checkin', {
-        templateUrl: 'app/components/user/checkin.html',
+        templateUrl: 'app/components/checkin/checkin.html',
         controller: 'CheckinCtrl',
         authenticate: true
       }).
       when('/checkin/:userId', {
-        templateUrl: 'app/components/user/checkin.html',
+        templateUrl: 'app/components/checkin/checkin.html',
         controller: 'CheckinCtrl',
         authenticate: true
       }).

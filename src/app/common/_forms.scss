@@ -5,6 +5,7 @@ input[type="email"],
 input[type="search"],
 input[type="tel"],
 input[type="url"],
+input[type="date"],
 textarea,
 select {
   @include font-size($base-font-size);
@@ -194,6 +195,10 @@ label {
   padding: $base-unit/2 $base-unit;
   white-space: initial;
   border-bottom: 1px solid $border-grey;
+}
+
+.ui-select-match.btn-default-focus {
+  background: none;
 }
 
 
