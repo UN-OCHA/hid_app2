@@ -9,6 +9,8 @@
     border: none;
     border-radius: 0;
     width: 100% !important;
+    box-shadow: none;
+    background: none;
   }
 }
 
@@ -29,6 +31,8 @@
 }
 
 .ui-select-container .ui-select-toggle>.caret {
+  position: absolute;
+  top: 50%;
   right: 0;
   height: 12px;
   margin-top: -6px;
@@ -71,4 +75,9 @@
   :-moz-placeholder {
     font-family: $heading-font-light;
   }
+}
+
+.editable-ui-select {
+  white-space: normal;
+  display: block;
 }

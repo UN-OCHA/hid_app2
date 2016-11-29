@@ -126,6 +126,11 @@ button[disabled], a.disabled {
   width: 100%;
 }
 
+.btn-small {
+  padding: $base-unit/2;
+  @include font-size($small-font-size);
+}
+
 
 
 .icon-inline {

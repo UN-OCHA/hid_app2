@@ -90,7 +90,8 @@ module.exports = function(grunt) {
           'svg',
           'flexbox',
           'csscalc',
-          'csstransforms'
+          'csstransforms',
+          'appearance'
         ],
         'options': [
           'setClasses'

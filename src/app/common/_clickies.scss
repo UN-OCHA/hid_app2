@@ -1,0 +1,85 @@
+/**
+ * Accessible styled checkboxes and radio buttons ('clickies')
+ *
+ * Usage:
+ * Requires the label to come immediately after the input, e.g.
+ * <input type="checkbox" id="clickie-example" />
+ * <label class="clickie-label" for="clickie-example">I am the label</label>
+ *
+ *
+ * Browser support: IE9+
+ *
+ * Notes:
+ * IE8 doesn't support the :checked pseudo-element, if need to support this either use Modernizr to detect this
+ * (https://modernizr.com/download?setclasses&q=checked) and use default browser styles instead, or use javascript
+ * to check if the input is checked and add a class to its label.
+ */
+
+input[type="radio"], input[type="checkbox"] {
+  width: $base-unit*2.5;
+  height: $base-unit*2.5;
+  margin: 5px 0 0 0;
+  float: left;
+  position: relative;
+  z-index: 1;
+  position: absolute;
+  left: -1000em;
+
+  // focus style
+  &:focus {
+    + label {
+      &:before {
+        border: 1px solid $dark-blue;
+      }
+    }
+  }
+}
+
+.clickie-label {
+  display: block;
+  position: relative;
+  padding: $base-unit $base-unit $base-unit $base-unit*3.5;
+  font-weight: normal;
+  color: $text-dark;
+
+  &:before {
+    content: '';
+    background: white;
+    width: $base-unit*2.5;
+    height: $base-unit*2.5;
+    display: block;
+    border: 1px solid $border-grey;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -$base-unit*1.25;
+    text-align: center;
+  }
+
+}
+
+// different style for radio buttons (these should always be visually different from checkboxes as have different behaviour)
+input[type="radio"] + .clickie-label {
+  &:before {
+    border-radius: 50%;
+  }
+}
+
+// checked style
+input:checked + .clickie-label {
+  &:before {
+  font: normal normal normal 14px/1 FontAwesome;
+  // font-size: 12px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  color: $dark-blue;
+  line-height: 18px;
+
+  // &:before {
+    content: "\f00c";
+  // }
+    // background: red; //red used for testing, use an icon as below on a real site
+    //background: white url(asset-path('check.svg')) center no-repeat;
+    // background-size: 90%;
+  }
+}

@@ -1,0 +1,62 @@
+/* BC phone number */
+.bc-phone-number-dropdown-menu {
+  overflow-y: scroll;
+  max-height: 10em;
+}
+
+.bc-phone-number-country-anchor {
+  padding-left: 1em;
+}
+
+.bc-phone-number-country-icon {
+  margin-right: 1em;
+}
+
+.bc-phone-number-flag {
+  margin-right: 0.5em;
+}
+
+bc-phone-number {
+  width: 100%;
+  margin-top: $base-unit/2;
+
+  label {
+    @extend .sr-only;
+  }
+
+  .btn {
+    background: white;
+    border: none;
+    border-bottom: 1px solid $primary-color;
+    height: $base-unit*5.5;
+    width: 100%;
+
+    &:focus {
+      background: $primary-color;
+      outline: none;
+
+      .caret {
+        color: $text-light;
+      }
+    }
+  }
+
+  .input-group-btn.dropdown {
+    width: $base-unit*8;
+    min-width: $base-unit*8;
+  }
+
+  .open > .dropdown-menu {
+    right: auto;
+  }
+
+  .input-group {
+    width: 100%;
+    display: flex;
+  }
+
+  .input-group-btn {
+    min-width: 82px;
+    width: 82px;
+  }
+}

@@ -13,57 +13,68 @@ select {
   padding: $base-unit*1.5;
   width: 100%;
   box-shadow: none;
-  border: 1px solid $border-grey;
-  border-radius: $base-border-radius;
   -webkit-appearance: none;
+  transition: all 0.3s ease;
+  color: $text-dark;
+
+  &:focus {
+    border-color: $dark-blue;
+    box-shadow: 0px 1px 0px 0px $dark-blue;
+    background: lighten($light-grey, 2%);
+    outline: none;
+  }
 
   &.input-no-border {
     border: none;
   }
 
   .has-error & {
-    border-color: red;
+    border-color: $error-color;
+    &:focus {
+      box-shadow: 0px 1px 0px 0px $error-color;
+    }
+  }
+
+  &.small {
+    width: 50%;
   }
 }
 
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
 select {
-  height: $base-unit*5.5;
-  -webkit-appearance: menulist;
-  background: white;
-  padding: $base-unit*1.5;
+  border: none;
+  border-bottom: 1px solid $primary-color;
+  padding: $base-unit*1.5 $base-unit*1.5 $base-unit*1.5 0;
 
-  &.ng-empty {
-    color: $text-grey;
-    font-style: italic;
+  &:focus {
+    padding-left: $base-unit;
   }
 }
 
-.select-wrap {
-  background: white;
-  position: relative;
-
-  &:before {
-    content: "";
-    @extend .caret;
-    position: absolute;
-    top: $base-unit*2.5;
-    right: 10px;
-  }
-
-  select {
-    -webkit-appearance: none;
-    background: transparent;
-  }
+textarea {
+  border: 1px solid $border-grey;
+  border-bottom: 1px solid $primary-color;
+  min-height: $base-unit*10;
+  display: block;
 }
 
-label {
+.text-danger {
+  color: $error-color;
+
   .has-error & {
-    color: red;
+    @include font-size($small-font-size);
   }
 }
 
 .form-group {
-  margin-bottom: $base-unit*2;
+  margin-bottom: $base-unit*3;
 }
 
 .input-group {
@@ -92,6 +103,15 @@ label {
   font-style: italic;
 }
 
+label {
+  color: $dark-blue;
+  font-weight: bold;
+}
+
+legend {
+  font-weight: bold;
+}
+
 .form {
   position: relative;
 }
@@ -105,52 +125,119 @@ label {
   padding: 0;
 }
 
-.form__section {
+.form-editable-section {
   padding: $base-unit;
   border-bottom: 1px solid $border-grey;
 
   &:last-child {
     border: none;
   }
+
+  &.active {
+    background: $light-grey;
+    border: none;
+    margin-bottom: $base-unit/2;
+  }
+
+  .styled-select {
+    margin-bottom: $base-unit;
+
+    select {
+      padding-left: $base-unit;
+    }
+    &:before {
+      right: 18px;
+    }
+  }
+
+  input {
+    padding-left: $base-unit;
+  }
 }
 
-.form__list-item {
-  display: flex;
-  align-content: stretch;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: $base-unit/2;
+.form-list__item {
+  position: relative;
 
-  button:not(.btn-link) {
-    margin-left: $base-unit;
-  }
-
-  label {
-    margin-right: $base-unit;
-  }
-
-  .no-flexbox & {
-    position: relative;
+  input {
     padding-right: $base-unit*6;
 
-    .btn-icon {
-      position: absolute;
-      right: 0;
-      top: 0;
+    &:focus {
+      &+.btn-transparent {
+        background: $primary-color;
+        color: white;
+      }
+    }
+  }
+
+  .btn-transparent {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: $base-unit*6;
+    height: 100%;
+    max-height: $base-unit*5;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+
+    &:hover, &:focus {
+      background: $primary-color;
+      color: white;
+    }
+  }
+
+  input + .btn-transparent {
+    max-height: none;
+
+    &:focus {
+      border: 2px solid $dark-blue;
+      outline: none;
+    }
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover, &:focus {
+      text-decoration: underline;
     }
   }
 
   .editable-wrap {
-    width: 100%;
+    display: block;
+  }
+}
+
+legend + .form-list__item, h3 + .form-list__item {
+  margin-top: $base-unit;
+}
+
+.form-list__text {
+  display: block;
+  padding: $base-unit $base-unit*6 $base-unit 0;
+}
+
+
+.form-list__item {
+  .ui-select-container {
+    background: white;
+    font-family: $body-font;
+  }
+  .ui-select-container:not(.editable-input) {
+    padding-right: $base-unit*6.5;
   }
 
-  .editable-ui-select {
-    width: 50%;
-
-    &:last-child {
-      margin-left: $base-unit;
-    }
+  .ui-select-toggle {
+    padding-left: $base-unit;
   }
+
+  .ui-select-container .ui-select-toggle > .caret {
+    right: 18px;
+  }
+}
+
+.form-hint {
+  @include font-size($small-font-size);
 }
 
 .glyphicon-remove {
@@ -180,66 +267,4 @@ label {
   &:after {
     transform: rotate(-45deg);
   }
-}
-
-/* BC phone number */
-.bc-phone-number-dropdown-menu {
-  overflow-y: scroll;
-  max-height: 10em;
-}
-
-.bc-phone-number-country-anchor {
-  padding-left: 1em;
-}
-
-.bc-phone-number-country-icon {
-  margin-right: 1em;
-}
-
-.bc-phone-number-flag {
-  margin-right: 0.5em;
-}
-
-bc-phone-number {
-  width: 100%;
-  margin-top: $base-unit/2;
-
-  label {
-    @extend .sr-only;
-  }
-
-  .btn {
-    background: none;
-    border-width: 1px;
-    border-radius: $base-border-radius 0 0 $base-border-radius;
-    border-right: 0;
-    height: $base-unit*5.5;
-    width: 100%;
-
-    .form__list-item & {
-      margin-left: 0;
-    }
-  }
-
-  input[type="tel"] {
-    border-radius: 0 $base-border-radius $base-border-radius 0;
-  }
-
-  .open > .dropdown-menu {
-    right: auto;
-  }
-
-  .input-group {
-    width: 100%;
-    display: flex;
-  }
-
-  .input-group-btn {
-    min-width: 82px;
-    width: 82px;
-  }
-}
-
-.editable-ui-select {
-  white-space: normal;
 }

@@ -1,0 +1,59 @@
+/**
+ * Accessible styled selects
+ *
+ * Usage:
+ * Requires the select to be wrapped in a div with class 'styled-select', e.g.
+ * <label for="select-example">I am the label</label>
+ * <div class="styled-select">
+ *   <select id="select-example"></select>
+ * </div>
+ *
+ *
+ * Browser support: IE8+
+ *
+ * Notes:
+ * IE doesn't support the appearance property until Edge. Use Modernizr to detect for appearance support and hide the
+ * down arrow so it doesn't overlap with the detault control.
+ */
+
+
+.styled-select {
+  position: relative;
+  background: white;
+
+  &.small {
+    width: 50%;
+  }
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -6px;
+    @extend .caret;
+  }
+
+  select {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background-color: transparent;
+    background-image: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    padding-right: $base-unit*5;
+  }
+
+  // don't show down arrow if doesn't support appearance as will overlap with default control
+  .no-appearance & {
+    &:before {
+      content: none;
+    }
+
+    select {
+      padding-right: $base-unit*1.5;
+    }
+  }
+
+}
