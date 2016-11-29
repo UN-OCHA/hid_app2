@@ -1,8 +1,8 @@
 var listServices = angular.module('listServices', ['ngResource']);
 
-listServices.factory('List', ['$resource', 'config',
-  function ($resource, config) {
-    var List = $resource(config.apiUrl + 'list/:listId', {listId: '@_id'},
+listServices.factory('List', ['$cachedResource', 'config',
+  function ($cachedResource, config) {
+    var List = $cachedResource(config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
       'update': {
         method: 'PUT'
