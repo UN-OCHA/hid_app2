@@ -139,6 +139,7 @@ userServices.factory('userService', ['$rootScope', 'User',
     userService.subscribe = function(scope, callback) {
       var handler = $rootScope.$on('users-updated-event', callback);
       scope.$on('$destroy', handler);
+      $rootScope.$broadcast('user-service-ready');
     };
 
     userService.notify = function () {

@@ -75,40 +75,41 @@ listServices.factory('listService', ['$rootScope', 'List',
 
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', '$timeout', 'List', 'User', 'UserCheckIn', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, $timeout, List, User, UserCheckIn, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', '$timeout', 'List', 'User', 'UserCheckIn', 'userService', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, $timeout, List, User, UserCheckIn, userService, alertService, gettextCatalog) {
   $scope.isMember = false;
   $scope.isManager = false;
   $scope.isOwner = false;
   $scope.isFavorite = false;
 
-  $scope.list = List.get({'listId': $routeParams.list});
-  var listCallback = function () {
-    $scope.pageChanged();
-    angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
-      var listId = val.list;
-      if (typeof val.list === 'object') {
-        listId = val.list._id;
-      }
-      if (listId == $scope.list._id) {
-        $scope.isMember = true;
-      }
-    });
-    $scope.isManager = $scope.list.isManager($scope.currentUser);
-    $scope.checkinUser = {
-      list: $scope.list._id
+  $scope.$on('user-service-ready', function() { 
+    $scope.list = List.get({'listId': $routeParams.list});
+    var listCallback = function () {
+      userService.notify();
+      angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
+        var listId = val.list;
+        if (typeof val.list === 'object') {
+          listId = val.list._id;
+        }
+        if (listId == $scope.list._id) {
+          $scope.isMember = true;
+        }
+      });
+      $scope.isManager = $scope.list.isManager($scope.currentUser);
+      $scope.checkinUser = {
+        list: $scope.list._id
+      };
+      $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
+      angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
+        if (val._id == $scope.list._id) {
+          $scope.isFavorite = true;
+        }
+      });
     };
-    $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
-    angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
-      if (val._id == $scope.list._id) {
-        $scope.isFavorite = true;
-      }
-    });
-  };
-  $scope.list.$promise.then(function () {
-    $timeout(listCallback);
+    $scope.list.$promise.then(listCallback);
+    $scope.list.$httpPromise.then(listCallback);
+
+    $scope.usersAdded = {};
   });
-  $scope.list.$httpPromise.then(listCallback);
-  $scope.usersAdded = {};
 
   // Retrieve users
   $scope.getUsers = function(search) {
@@ -125,7 +126,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     var promises = [];
     angular.forEach($scope.usersAdded.users, function (value, key) {
       UserCheckIn.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
-        $scope.pageChanged();
+        userService.notify();
       });
     });
   };
@@ -140,7 +141,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         // Close existing alert
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user was successfully removed.'));
-        $scope.pageChanged();
+        userService.notify();
       });
     });
   };
@@ -152,7 +153,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
       $scope.isMember = true;
       $scope.setCurrentUser(user);
-      $scope.pageChanged();
+      userService.notify();
     });
   };
 
@@ -172,7 +173,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
           alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
           $scope.isMember = false;
           $scope.setCurrentUser(user);
-          $scope.pageChanged();
+          userService.notify();
         });
       }
     });
@@ -190,6 +191,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   };
 
   // Export email addresses
+  // TODO: fix issue that only x first emails are exported
   $scope.exportEmails = function() {
     $scope.emailsText = '';
     for (var i = 0, len = $scope.users.length; i < len; i++) {
@@ -254,7 +256,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       $scope.list.managers.push(user._id);
       $scope.list.$update(function (list, response) {
         $scope.list = list;
-        $scope.pageChanged();
+        userService.notify();
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
       });
@@ -270,7 +272,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       $scope.list.managers = mmanagers;
       $scope.list.$update(function (list, response) {
         $scope.list = list;
-        $scope.pageChanged();
+        userService.notify();
         alert.closeConfirm();
         alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
       });

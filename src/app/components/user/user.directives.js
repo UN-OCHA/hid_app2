@@ -6,7 +6,7 @@ userDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams',
     templateUrl: 'app/components/user/users.html',
     scope: false,
     link: function (scope, elem, attrs) {
-      scope.inlist = scope.list ? true : false;
+      scope.inlist = false;
       scope.request = $location.search();
       scope.totalItems = 0;
       scope.itemsPerPage = 50;
@@ -26,6 +26,7 @@ userDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams',
       };
 
       userService.subscribe(scope, function () {
+        scope.inlist = scope.list ? true : false;
         scope.currentPage = 1;
         scope.pageChanged();
       });
