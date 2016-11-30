@@ -345,8 +345,8 @@ listControllers.controller('ListsCtrl', ['$rootScope', '$scope', '$routeParams',
     }
   ];
 
-  var queryCallback = function (lists, headers) {
-    $scope.totalItems = headers()["x-total-count"];
+  var queryCallback = function (resp) {
+    $scope.totalItems = resp.headers["x-total-count"];
   };
 
   listService.subscribe($scope, function () {
