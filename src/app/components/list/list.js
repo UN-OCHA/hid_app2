@@ -84,7 +84,9 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.$on('user-service-ready', function() { 
     $scope.list = List.get({'listId': $routeParams.list});
     var listCallback = function () {
-      userService.notify();
+      var req = [];
+      req[$scope.list.type + 's.list'] = $scope.list._id;
+      userService.notify(req);
       angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
         var listId = val.list;
         if (typeof val.list === 'object') {
@@ -135,7 +137,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.removeFromList = function (user) {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
       user[$scope.list.type + 's'] = user[$scope.list.type + 's'].filter(function (elt) {
-        return elt.list != $scope.list._id;
+        return elt.list._id != $scope.list._id;
       });
       user.$update(function(out) {
         // Close existing alert
@@ -162,7 +164,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
       var checkInId = 0;
       for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {
-        if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list)) {
+        if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list._id)) {
           checkInId = $scope.currentUser[$scope.list.type + 's'][i]._id;
         }
       }

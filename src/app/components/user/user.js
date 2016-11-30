@@ -142,8 +142,8 @@ userServices.factory('userService', ['$rootScope', 'User',
       $rootScope.$broadcast('user-service-ready');
     };
 
-    userService.notify = function () {
-      $rootScope.$emit('users-updated-event');
+    userService.notify = function (request) {
+      $rootScope.$emit('users-updated-event', request);
     };
 
     return userService;
@@ -611,7 +611,11 @@ userControllers.controller('UserRegisterCtrl', ['$scope', '$location', 'alertSer
   };
 }]);
 
-userControllers.controller('UsersCtrl', ['$scope', '$location', function($scope, $location) {
+userControllers.controller('UsersCtrl', ['$scope', '$location', 'userService', function($scope, $location, userService) {
+
+  $scope.$on('user-service-ready', function() {
+    userService.notify({});
+  });
 
   $scope.clearSearch = function () {
     $location.url($location.path());

@@ -25,8 +25,17 @@ userDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams',
         scope.totalItems = resp.headers["x-total-count"];
       };
 
-      userService.subscribe(scope, function () {
-        scope.inlist = scope.list ? true : false;
+      // Pager function
+      scope.pageChanged = function () {
+        currentSortOrder = scope.request.sort;
+        scope.request.offset = (scope.currentPage - 1) * scope.itemsPerPage;
+        userService.setRequest(scope.request);
+        userService.filter(queryCallback);
+        scope.users = userService.getUsers()
+      };
+
+      userService.subscribe(scope, function (evt, request) {
+        angular.merge(scope.request, request);
         scope.currentPage = 1;
         scope.pageChanged();
       });
@@ -39,22 +48,6 @@ userDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams',
       $rootScope.$on('$routeChangeSuccess', function () {
         scope.resetFilters();
       });
-
-      // Pager function
-      scope.pageChanged = function () {
-        currentSortOrder = scope.request.sort;
-        scope.request.offset = (scope.currentPage - 1) * scope.itemsPerPage;
-        if (scope.inlist) {
-          scope.request[scope.list.type + 's.list'] = scope.list._id;
-        }
-        userService.setRequest(scope.request);
-        userService.filter(queryCallback);
-        scope.users = userService.getUsers()
-      };
-
-      if (!scope.inlist) {
-        scope.pageChanged();
-      }
 
       scope.filter = function() {
         scope.filters = angular.copy(scope.selectedFilters);
