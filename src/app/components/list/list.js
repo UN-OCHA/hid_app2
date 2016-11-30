@@ -75,13 +75,14 @@ listServices.factory('listService', ['$rootScope', 'List',
 
 var listControllers = angular.module('listControllers', []);
 
-listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'User', 'UserCheckIn', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, User, UserCheckIn, alertService, gettextCatalog) {
+listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '$uibModal', '$timeout', 'List', 'User', 'UserCheckIn', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, $timeout, List, User, UserCheckIn, alertService, gettextCatalog) {
   $scope.isMember = false;
   $scope.isManager = false;
   $scope.isOwner = false;
   $scope.isFavorite = false;
 
-  $scope.list = List.get({'listId': $routeParams.list}, function () {
+  $scope.list = List.get({'listId': $routeParams.list});
+  var listCallback = function () {
     $scope.pageChanged();
     angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
       var listId = val.list;
@@ -102,7 +103,11 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
         $scope.isFavorite = true;
       }
     });
+  };
+  $scope.list.$promise.then(function () {
+    $timeout(listCallback);
   });
+  $scope.list.$httpPromise.then(listCallback);
   $scope.usersAdded = {};
 
   // Retrieve users
