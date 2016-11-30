@@ -122,6 +122,11 @@ a {
   &:hover, &:focus, &:active {
     text-decoration: none;
   }
+
+  &:focus {
+    outline-style: dotted;
+    outline-width: 1px;
+  }
 }
 
 h1 {

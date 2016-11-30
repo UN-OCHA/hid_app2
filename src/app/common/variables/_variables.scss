@@ -58,6 +58,8 @@ $light-blue: #E5F3F6;
 
 $light-grey: #F6F6F6;
 
+$tertiary-color: #fcf8e3;
+
 $text-dark: #404040;
 $text-grey: #656565;
 $text-light: #FFF;
@@ -77,3 +79,15 @@ $base-border-radius: 4px;
 
 // Transitions
 $sidebar-transition: transform 0.3s ease;
+
+@mixin input-focus-style() {
+  border-color: transparent;
+  background: lighten($tertiary-color, 5%);
+  outline: 2px solid $primary-color;
+}
+
+@mixin filter-input-focus-style() {
+  outline: none;
+  border-bottom: 1px solid $border-grey;
+  background: white;
+}

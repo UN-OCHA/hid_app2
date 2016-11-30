@@ -23,3 +23,61 @@
   @include font-size($large-font-size);
 }
 
+.sg-primary-color-bg {
+  background: $primary-color;
+}
+.sg-dark-blue-bg {
+  background: $dark-blue;
+}
+.sg-medium-blue-bg {
+  background: $medium-blue;
+}
+.sg-light-blue-bg {
+  background: $light-blue;
+}
+.sg-light-grey-bg {
+  background: $light-grey;
+}
+.sg-text-dark-bg {
+  background: $text-dark;
+}
+.sg-text-grey-bg {
+  background: $text-grey;
+}
+.sg-text-light-bg {
+  background: $text-light;
+}
+.sg-border-grey-bg {
+  background: $border-grey;
+}
+.sg-error-color-bg {
+  background: $error-color;
+}
+
+.sg-primary-color-text {
+  color: $primary-color;
+}
+.sg-dark-blue-text {
+  color: $dark-blue;
+}
+.sg-medium-blue-text {
+  color: $medium-blue;
+}
+.sg-light-blue-text {
+  color: $light-blue;
+}
+.sg-light-grey-text {
+  color: $light-grey;
+}
+.sg-text-dark-text {
+  color: $text-dark;
+}
+.sg-text-grey-text {
+  color: $text-grey;
+}
+.sg-text-light-text {
+  color: $text-light;
+}
+.sg-error-color-text {
+  color: $error-color;
+}

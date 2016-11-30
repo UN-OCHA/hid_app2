@@ -304,7 +304,7 @@
       <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
 
         <h3 translate>Current Location (country)</h3>
-        <div class="form-list__item">
+        <div class="">
           <div editable-ui-select="user.location.country" data-e-form="roleForm" data-e-name="country" name="country" e-on-select="setRegions($item, $model)" data-e-ng-model="user.location.country">
             {{user.location.country.name}}
             <editable-ui-select-match placeholder="{{'Country'|translate}}">
@@ -320,7 +320,7 @@
 
 
         <h3 translate>Current Location (region)</h3>
-        <div class="form-list__item">
+        <div class="">
           <div editable-ui-select="user.location.region" data-e-form="roleForm" data-e-name="region" name="region" data-e-ng-model="user.location.region">
             {{user.location.region.name}}
             <editable-ui-select-match placeholder="{{'Region'|translate}}">
@@ -334,13 +334,12 @@
       </div>
       <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
 
-        <h3 translate>Other locations</h2>
+        <h3 translate>Other locations</h3>
 
-          <fieldset ng-repeat="location in user.locations" class="form-list__item">
-            <legend ng-if="roleForm.$visible" translate>Location</legend>
-
-            <div class="form-list__item">
-              <div class="form-list__text">
+        <ul>
+          <li ng-repeat="location in user.locations">
+            <fieldset>
+              <legend ng-if="roleForm.$visible" translate>Location</legend>
                 <div editable-ui-select="location.country" data-e-form="roleForm" data-e-name="country[$index]" name="country[$index]"  e-on-select="setRegions($item, $model)" data-e-ng-model="location.country">
                   Country: {{location.country.name}}
                   <editable-ui-select-match placeholder="{{'Country'|translate}}">
@@ -350,11 +349,7 @@
                     {{country.name}}
                   </editable-ui-select-choices>
                 </div>
-              </div>
-            </div>
 
-            <div class="form-list__item">
-              <div class="form-list__text">
                 <div editable-ui-select="location.region" data-e-form="roleForm" data-e-name="region[$index]" name="region[$index]" data-e-ng-model="location.region">
                   Region: {{location.region.name}}
                   <editable-ui-select-match placeholder="{{'Region'|translate}}">
@@ -364,14 +359,13 @@
                     {{region.name}}
                   </editable-ui-select-choices>
                 </div>
-              </div>
-            </div>
-          </fieldset>
+            </fieldset>
+          </li>
+        </ul>
 
           <button type="button" class="btn btn-secondary" ng-click="addItem('locations')" ng-show="roleForm.$visible">
             <icon name="plus"></icon> <span translate>Add a new Location</span>
           </button>
-          <!-- </div> -->
         </div>
 
       </form>

@@ -23,6 +23,14 @@
     position: absolute;
     right: 0;
   }
+
+  &:focus {
+    border-color: transparent;
+    border-bottom-color: $primary-color;
+    color: $primary-color;
+    font-weight: bold;
+    outline: none;
+  }
 }
 
 .filter {
@@ -30,6 +38,23 @@
 
   .filters-group & {
     padding-left: $base-unit*4;
+  }
+
+  .ui-select-container {
+    font-family: $heading-font-light;
+
+    input[type="search"] {
+      &:focus {
+        @include filter-input-focus-style();
+      }
+    }
+  }
+
+  .ui-select-match {
+    border-bottom: transparent;
+    &.btn-default-focus {
+      @include filter-input-focus-style();
+    }
   }
 }
 
@@ -43,6 +68,13 @@
 
   &.btn-transparent {
     color: $text-grey;
+
+    &:focus {
+      padding-left: $base-unit;
+      background: white;
+      border: none;
+      box-shadow: none;
+    }
   }
 
   .icon {
@@ -77,6 +109,10 @@
   border-bottom: 1px solid $border-grey;
   border-radius: 0;
   padding-left: $base-unit*4;
+
+  &:focus {
+    padding-left: $base-unit*4;
+  }
 }
 
 .filter__buttons {

@@ -30,6 +30,7 @@ input[type="radio"], input[type="checkbox"] {
     + label {
       &:before {
         border: 1px solid $dark-blue;
+        background-color: lighten($tertiary-color, 5%);
       }
     }
   }
@@ -68,18 +69,21 @@ input[type="radio"] + .clickie-label {
 // checked style
 input:checked + .clickie-label {
   &:before {
-  font: normal normal normal 14px/1 FontAwesome;
-  // font-size: 12px;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  color: $dark-blue;
-  line-height: 18px;
-
-  // &:before {
     content: "\f00c";
-  // }
-    // background: red; //red used for testing, use an icon as below on a real site
-    //background: white url(asset-path('check.svg')) center no-repeat;
-    // background-size: 90%;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    color: $dark-blue;
+    line-height: 18px;
   }
+}
+
+// Don't break clickies wrapped in labels, use default styles
+label > input[type="radio"], label > input[type="checkbox"] {
+  position: static;
+  left: auto;
+  float: none;
+  margin: 0;
+  width: auto;
+  height: auto;
 }

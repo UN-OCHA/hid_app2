@@ -2,11 +2,11 @@
   min-width: 100px!important;
   width: 100%;
   line-height: 1;
-  font-family: $heading-font-light;
+
   color: $text-grey;
 
   input[type="search"] {
-    border: none;
+    border: transparent;
     border-radius: 0;
     width: 100% !important;
     box-shadow: none;
@@ -44,8 +44,15 @@
   border-bottom: 1px solid $border-grey;
 }
 
-.ui-select-match.btn-default-focus {
-  background: none;
+.ui-select-match {
+  border-bottom: 1px solid $primary-color;
+  transition: padding 0.3s ease;
+
+  &.btn-default-focus {
+    @include input-focus-style();
+    box-shadow: none;
+    padding-left: $base-unit;
+  }
 }
 
 .ui-select--has-border {

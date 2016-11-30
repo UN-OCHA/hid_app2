@@ -39,6 +39,12 @@ button[disabled], a.disabled {
       opacity: 0.8;
     }
   }
+
+  &:focus {
+    border-color: black;
+    box-shadow: 0px 0px 0px 1px black;
+    outline: none;
+  }
 }
 
 .btn-primary {
@@ -82,11 +88,6 @@ button[disabled], a.disabled {
     color: white;
   }
 
-  &:focus {
-    outline: none;
-    box-shadow: 0px 0px 4px 1px $primary-color;
-  }
-
   .icon {
     margin: 0;
   }
@@ -101,6 +102,11 @@ button[disabled], a.disabled {
   &:hover, &:focus {
     background: none;
     text-decoration: underline;
+  }
+
+  &:focus {
+    background: $primary-color;
+    color: $text-light;
   }
 
   &.active {
@@ -118,6 +124,7 @@ button[disabled], a.disabled {
 
   &:hover, &:focus {
     text-decoration: none;
+    outline: none;
   }
 }
 
@@ -129,6 +136,13 @@ button[disabled], a.disabled {
 .btn-small {
   padding: $base-unit/2;
   @include font-size($small-font-size);
+}
+
+//bootstrap focus style used when not using actual focusable elements
+.btn-default-focus {
+  outline: none;
+  border-color: black;
+  box-shadow: 0px 0px 0px 1px black;
 }
 
 

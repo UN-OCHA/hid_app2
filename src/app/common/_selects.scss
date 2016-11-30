@@ -28,7 +28,7 @@
   &:before {
     position: absolute;
     top: 50%;
-    right: 0;
+    right: $base-unit/2;
     margin-top: -6px;
     @extend .caret;
   }
@@ -43,6 +43,10 @@
     appearance: none;
     border-radius: 0;
     padding-right: $base-unit*5;
+
+    &:focus {
+      background: rgba($tertiary-color, 0.2);
+    }
   }
 
   // don't show down arrow if doesn't support appearance as will overlap with default control

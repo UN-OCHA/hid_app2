@@ -14,14 +14,14 @@ select {
   width: 100%;
   box-shadow: none;
   -webkit-appearance: none;
-  transition: all 0.3s ease;
+  transition: padding 0.3s ease;
   color: $text-dark;
 
   &:focus {
-    border-color: $dark-blue;
-    box-shadow: 0px 1px 0px 0px $dark-blue;
-    background: lighten($light-grey, 2%);
-    outline: none;
+    @include input-focus-style();
+    // border-color: transparent;
+    // background: lighten($tertiary-color, 5%);
+    // outline: 2px solid $primary-color;
   }
 
   &.input-no-border {
@@ -31,7 +31,7 @@ select {
   .has-error & {
     border-color: $error-color;
     &:focus {
-      box-shadow: 0px 1px 0px 0px $error-color;
+      border-color: transparent;
     }
   }
 
@@ -153,6 +153,19 @@ legend {
   input {
     padding-left: $base-unit;
   }
+
+  .ui-select-container {
+    background: white;
+    font-family: $body-font;
+  }
+
+  .ui-select-toggle {
+    padding-left: $base-unit;
+  }
+
+  .ui-select-container .ui-select-toggle > .caret {
+    right: $base-unit;
+  }
 }
 
 .form-list__item {
@@ -167,6 +180,11 @@ legend {
         color: white;
       }
     }
+  }
+
+  .ui-select-container.open + .btn-transparent {
+    background: $primary-color;
+    color: white;
   }
 
   .btn-transparent {
@@ -186,7 +204,7 @@ legend {
     }
   }
 
-  input + .btn-transparent {
+  input + .btn-transparent, .ui-select-container.open + .btn-transparent {
     max-height: none;
 
     &:focus {
@@ -206,6 +224,10 @@ legend {
   .editable-wrap {
     display: block;
   }
+
+  .ui-select-container .ui-select-toggle > .caret {
+    right: $base-unit*6;
+  }
 }
 
 legend + .form-list__item, h3 + .form-list__item {
@@ -217,25 +239,6 @@ legend + .form-list__item, h3 + .form-list__item {
   padding: $base-unit $base-unit*6 $base-unit 0;
 }
 
-
-.form-list__item {
-  .ui-select-container {
-    background: white;
-    font-family: $body-font;
-  }
-  .ui-select-container:not(.editable-input) {
-    padding-right: $base-unit*6.5;
-  }
-
-  .ui-select-toggle {
-    padding-left: $base-unit;
-  }
-
-  .ui-select-container .ui-select-toggle > .caret {
-    right: 18px;
-  }
-}
-
 .form-hint {
   @include font-size($small-font-size);
 }
@@ -244,7 +247,6 @@ legend + .form-list__item, h3 + .form-list__item {
   position: relative;
   width: $base-unit;
   height: $base-unit;
-
   cursor: pointer;
 
   &:hover {
