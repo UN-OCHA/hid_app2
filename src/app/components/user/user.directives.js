@@ -4,9 +4,8 @@ userDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams',
   return {
     restrict: 'E',
     templateUrl: 'app/components/user/users.html',
-    scope: false,
+    scope: true,
     link: function (scope, elem, attrs) {
-      scope.inlist = false;
       scope.request = $location.search();
       scope.totalItems = 0;
       scope.itemsPerPage = 50;
