@@ -16,9 +16,7 @@
     <form class="search-form" role="search" ng-submit="search('/users', searchUser)">
       <label for="name" class="sr-only">{{'Type a name'|translate}}</label>
       <input type="search" name="name" id="name" class="input-no-border search-form__input" placeholder="{{'Type a name'|translate}}" ng-model="searchUser" >
-      <button type="submit" class="btn btn-transparent search-form__btn">
-        <icon name="search" text="Search"></icon>
-      </button>
+      <icon name="search" class="search-form__icon"></icon>
     </form>
 
     <h2 class="block-heading" translate>Search for contact lists</h2>
@@ -26,9 +24,7 @@
     <form class="search-form" role="search" ng-submit="search('lists', searchList)">
       <label for="name" class="sr-only">{{'Type a list name'|translate}}</label>
       <input type="search" name="name" id="name" class="input-no-border search-form__input" placeholder="{{'Type a list name'|translate}}" ng-model="searchList" >
-      <button type="submit" class="btn btn-transparent search-form__btn">
-        <icon name="search" text="Search"></icon>
-      </button>
+      <icon name="search" class="search-form__icon"></icon>
     </form>
   </div>
 

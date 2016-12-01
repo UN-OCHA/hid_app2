@@ -19,9 +19,6 @@ select {
 
   &:focus {
     @include input-focus-style();
-    // border-color: transparent;
-    // background: lighten($tertiary-color, 5%);
-    // outline: 2px solid $primary-color;
   }
 
   &.input-no-border {
@@ -87,19 +84,19 @@ textarea {
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: $text-grey;
+  color: $text-dark;
   font-style: italic;
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  color: $text-grey;
+  color: $text-dark;
   font-style: italic;
 }
 :-ms-input-placeholder { /* IE 10+ */
-  color: $text-grey;
+  color: $text-dark;
   font-style: italic;
 }
 :-moz-placeholder { /* Firefox 18- */
-  color: $text-grey;
+  color: $text-dark;
   font-style: italic;
 }
 
