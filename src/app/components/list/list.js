@@ -23,8 +23,15 @@ listServices.factory('List', ['$cachedResource', 'config', 'User',
     // Cache a list for future offline use
     List.prototype.cache = function () {
       var request = { limit: 50, offset: 0, sort: 'name'};
+      var recursiveFunction = function (users) {
+        if (users.length > 49) {
+          // There is another page of data
+          request.offset = request.offset + 50;
+          User.query(request).$httpPromise.then(recursiveFunction);
+        }
+      }
       request[this.type + 's.list'] = this._id;
-      User.query(request);
+      User.query(request).$httpPromise.then(recursiveFunction);
     };
 
     return List;
