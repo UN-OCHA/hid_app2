@@ -1,5 +1,5 @@
 .nav--primary {
-  font-family: $heading-font;
+  font-family: $heading-font-light;
 }
 
 .nav--secondary {
@@ -84,15 +84,20 @@
     }
 
     &:hover, &:focus {
+      background: $light-grey;
+      outline: none;
+
       &:after {
-        border-color: $primary-color;
+        border-color: $medium-blue;
       }
     }
   }
 
   .active & {
+    font-family: $heading-font;
+
     &:after {
-      border-color: $primary-color;
+      border-color: $medium-blue
     }
   }
 

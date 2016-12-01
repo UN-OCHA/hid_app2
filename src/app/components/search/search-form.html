@@ -4,9 +4,8 @@
     <div class="search-form" uib-dropdown is-open="hasResults">
       <label for="search" class="sr-only">{{'Search for contacts or lists'|translate}}</label>
       <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for contacts or lists'|translate}}" name="search" id="search" autocomplete="off" ng-model="searchTerm" ng-model-options="{debounce: 200}" ng-change="searchAutocomplete()">
-      <button type="submit" class="btn btn-transparent search-form__btn">
-        <icon name="search" text="Search"></icon>
-      </button>
+      <icon name="search" class="search-form__icon"></icon>
+      <span class="search-form__active"></span>
 
       <ul class="dropdown-menu" uib-dropdown-menu>
         <li ng-if="searchLists.length">

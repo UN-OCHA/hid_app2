@@ -60,8 +60,7 @@ $light-grey: #F6F6F6;
 
 $tertiary-color: #fcf8e3;
 
-$text-dark: #404040;
-$text-grey: #656565;
+$text-dark: #656565;
 $text-light: #FFF;
 
 $border-grey: #CFD1D2;
@@ -81,9 +80,11 @@ $base-border-radius: 4px;
 $sidebar-transition: transform 0.3s ease;
 
 @mixin input-focus-style() {
-  border-color: transparent;
-  background: lighten($tertiary-color, 5%);
-  outline: 2px solid $primary-color;
+  // border-color: transparent;
+  background: lighten($light-blue, 5%);
+  outline: none;
+  box-shadow: inset 0px -1px 0px 0px $primary-color;
+  // outline: 2px solid $primary-color;
 }
 
 @mixin filter-input-focus-style() {
