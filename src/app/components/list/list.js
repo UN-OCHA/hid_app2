@@ -1,7 +1,7 @@
 var listServices = angular.module('listServices', ['ngResource']);
 
-listServices.factory('List', ['$cachedResource', 'config',
-  function ($cachedResource, config) {
+listServices.factory('List', ['$cachedResource', 'config', 'User',
+  function ($cachedResource, config, User) {
     var List = $cachedResource('list', config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
       'update': {
@@ -18,6 +18,13 @@ listServices.factory('List', ['$cachedResource', 'config',
         }
       });
       return out;
+    };
+
+    // Cache a list for future offline use
+    List.prototype.cache = function () {
+      var request = { limit: 50, offset: 0, sort: 'name'};
+      request[this.type + 's.list'] = this._id;
+      User.query(request);
     };
 
     return List;

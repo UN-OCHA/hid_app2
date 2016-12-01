@@ -94,6 +94,22 @@ appServices.factory('hrinfoService', function ($http, config) {
   }
 });
 
+appServices.factory('offlineService', function (List) {
+
+  return {
+    // Cache user lists for offline use
+    cacheListsForUser: function (user) {
+      // TODO: make sure we are online to do the caching
+      console.log('Offline caching');
+      for (var i = 0, len = user.favoriteLists.length; i < len; i++) {
+        List.get({listId: user.favoriteLists[i]._id}).$httpPromise.then(function (list) {
+          list.cache();
+        });
+      }
+    }
+  }
+});
+
 var appControllers = angular.module('appControllers', []);
 
 appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$window', 'gettextCatalog', 'User', 'userService', 'listService',  function ($rootScope, $scope, $location, $window, gettextCatalog, User, userService, listService) {

@@ -1,12 +1,16 @@
 var authServices = angular.module('authServices', []);
 
-authServices.factory('AuthService', ['$http', '$window', 'config', function ($http, $window, config) {
+authServices.factory('AuthService', ['$http', '$window', '$rootScope', '$interval', 'config', 'offlineService', function ($http, $window, $rootScope, $interval, config, offlineService) {
   var jwt = {
     login: function(email, password) {
       var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password }).then(function (response) {
         if (response.data && response.data.token) {
           $window.localStorage.setItem('jwtToken', response.data.token);
           $window.localStorage.setItem('currentUser', JSON.stringify(response.data.user));
+          offlineService.cacheListsForUser(response.data.user);
+          $rootScope.offlinePromise = $interval(function () {
+            offlineService.cacheListsForUser(response.data.user)
+          }, 60000);
         }
       });
       return promise;
@@ -15,6 +19,7 @@ authServices.factory('AuthService', ['$http', '$window', 'config', function ($ht
     logout: function() {
       $window.localStorage.removeItem('jwtToken');
       $window.localStorage.removeItem('currentUser');
+      $interval.cancel($rootScope.offlinePromise);
     },
 
     getToken: function() {
