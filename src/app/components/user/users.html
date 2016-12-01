@@ -1,5 +1,23 @@
 <ng-include src="'app/components/user/user-filters.html'"></ng-include>
 
+<p class="page-header__sub-heading">{{totalItems}} <span translate>contacts</span></p>
+
+<ul class="pagination page-header__pagination">
+  <li class="pagination-page"><span>Show</span></li>
+  <li class="pagination-page" ng-class="{'active' : itemsPerPage === 50}">
+    <button type="button" ng-click="setLimit(50)">50</button>
+  </li>
+  <li class="pagination-page" ng-class="{'active' : itemsPerPage === 100}">
+    <button type="button" ng-click="setLimit(100)">100</button>
+  </li>
+  <li class="pagination-page" ng-class="{'active' : itemsPerPage === 150}">
+    <button type="button" ng-click="setLimit(150)">150</button>
+  </li>
+  <li class="pagination-page" ng-class="{'active' : itemsPerPage === 200}">
+    <button type="button" ng-click="setLimit(200)">200</button>
+  </li>
+</ul>
+
 <table class="table table-responsive table-responsive--has-actions">
   <thead>
     <tr>
