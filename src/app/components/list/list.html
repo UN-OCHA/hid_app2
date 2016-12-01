@@ -10,7 +10,7 @@
 
     <div class="page-header__actions">
 
-      <button class="btn-icon" type="button" ng-click="toggleSidebar('userFilters')" ng-class="{'active' : sidebar.sidebars.userFilters && sidebar.open}">
+      <button class="btn-icon" type="button" ng-click="toggleSidebar('userFilters')" ng-class="{'active' : sidebar.sidebars.userFilters && sidebar.open}" ng-disabled="!isOnline">
         <icon name="filter" text="Filter"></icon>
       </button>
 

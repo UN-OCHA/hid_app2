@@ -14,6 +14,19 @@ Offline.options = {
   requests: false //record ajax requests and re-make on connection restore
 }
 
+// Configure Offlinejs
+app.run(function ($rootScope) {
+  $rootScope.isOnline = Offline.state == 'up';
+  Offline.on('up', function() {
+    $rootScope.isOnline = true;
+    $rootScope.$digest();
+  });
+  Offline.on('down', function() {
+    $rootScope.isOnline = false;
+    $rootScope.$digest();
+  });
+});
+
 // Check if user is authenticated for paths which require it
 app.run(function ($rootScope, $window, $location, AuthService, alertService) {
   $rootScope.isAuthenticated = false;
