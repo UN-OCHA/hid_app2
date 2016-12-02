@@ -4,6 +4,6 @@ hidDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams', 
     restrict: 'E',
     templateUrl: 'app/components/user/users.html',
     scope: true,
-    controller: 'hidUsersCtrl'
+    controller: 'UsersCtrl'
   };
 }]);

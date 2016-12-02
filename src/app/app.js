@@ -90,7 +90,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/users', {
         templateUrl: 'app/components/user/users-page.html',
-        controller: 'UsersCtrl',
+        controller: 'UsersPageCtrl',
         authenticate: true
       }).
       when('/users/new', {

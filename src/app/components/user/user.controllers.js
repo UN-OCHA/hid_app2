@@ -459,7 +459,7 @@ userControllers.controller('UserRegisterCtrl', ['$scope', '$location', 'alertSer
   };
 }]);
 
-userControllers.controller('UsersCtrl', ['$scope', '$location', 'userService', function($scope, $location, userService) {
+userControllers.controller('UsersPageCtrl', ['$scope', '$location', 'userService', function($scope, $location, userService) {
 
   $scope.$on('user-service-ready', function() {
     userService.notify({});

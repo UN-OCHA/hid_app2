@@ -1,4 +1,4 @@
-hidControllers.controller('hidUsersCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'gettextCatalog', 'alertService', 'hrinfoService', 'userService', 'User', 'List',
+hidControllers.controller('UsersCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'gettextCatalog', 'alertService', 'hrinfoService', 'userService', 'User', 'List',
   function ($scope, $rootScope, $location, $routeParams, gettextCatalog, alertService, hrinfoService, userService, User, List) {
       $scope.request = {};
       $scope.totalItems = 0;
