@@ -106,6 +106,7 @@ module.exports = function(grunt) {
         }
       }
     },
+    cacheHash: {},
     useminPrepare: {
       html: 'src/index.html'
     },
@@ -142,7 +143,45 @@ module.exports = function(grunt) {
     },
     usemin: {
       html: 'dist/index.html'
+    },
+    // Cache bust
+    cacheBust: {
+      options: {
+        encoding: 'utf8',
+        algorithm: 'md5',
+        length: 16,
+        rename: false,
+        jsonOutput: true,
+        jsonOutputFilename: '.tmp/cachebust.json',
+        assets: ['dist/js/app.min.js', 'dist/css/app.min.css']
+      },
+      src: ['dist/index.html', 'dist/offline.appcache']
+    },
+    // Build cache manifest
+    manifest: {
+      generate: {
+        options: {
+          basePath: 'dist/',
+          cache: ['<%= cacheHash["dist/js/app.min.js"] %>',
+                  '<%= cacheHash["dist/css/app.min.css"] %>',
+                  '/favicon.ico'],
+          // network: ['*'],
+          //fallback: ['/ partials/offline.html'],
+          // exclude: ['']
+          preferOnline: true,
+          hash: true,
+          verbose: false
+        },
+        src: [
+          // 'js/app.min.js',
+          // 'css/app.min.css',
+          // 'index.html',
+          'img/*.png'
+        ],
+        dest: 'dist/offline.appcache'
+      }
     }
+
   });
 
   grunt.loadNpmTasks('grunt-angular-gettext');
@@ -158,6 +197,20 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks("grunt-usemin");
   grunt.loadNpmTasks('grunt-ng-annotate');
+  grunt.loadNpmTasks('grunt-manifest');
+  grunt.loadNpmTasks("grunt-cache-bust");
+
+  //load cache buster json and generate manifest
+  grunt.registerTask('manifest-gen','Generate manifest from cache buster output', function(){
+    var cacheHash = grunt.file.readJSON('.tmp/cachebust.json');
+    var keys = Object.keys(cacheHash);
+    for (var i = 0, len = keys.length; i < len; i++) {
+      cacheHash[keys[i]] = cacheHash[keys[i]].replace('dist', '');
+    }
+    grunt.config.set('cacheHash', cacheHash);
+    grunt.log.write('Read cacheBust output');
+    grunt.task.run(['manifest']);
+  });
 
   // Default task
   grunt.registerTask('default', [
@@ -175,6 +228,8 @@ module.exports = function(grunt) {
     'ngAnnotate',
     'cssmin:generated',
     'uglify:generated',
-    'usemin'
+    'usemin',
+    'cacheBust',
+    'manifest-gen'
   ]);
 };
