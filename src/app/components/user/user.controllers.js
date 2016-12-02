@@ -462,7 +462,7 @@ userControllers.controller('UserRegisterCtrl', ['$scope', '$location', 'alertSer
 userControllers.controller('UsersPageCtrl', ['$scope', '$location', 'userService', function($scope, $location, userService) {
 
   $scope.$on('user-service-ready', function() {
-    userService.notify({});
+    $scope.$broadcast('populate-list');
   });
 
   $scope.clearSearch = function () {
