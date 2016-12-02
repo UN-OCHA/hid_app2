@@ -1,4 +1,4 @@
-userControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'config', 'hrinfoService', 'alertService', 'User', 'UserCheckIn', 'List', function($scope, $routeParams, $q, gettextCatalog, config, hrinfoService, alertService, User, UserCheckIn, List) {
+hidControllers.controller('CheckinCtrl', ['$scope', '$routeParams', '$q', 'gettextCatalog', 'config', 'hrinfoService', 'alertService', 'User', 'UserCheckIn', 'List', function($scope, $routeParams, $q, gettextCatalog, config, hrinfoService, alertService, User, UserCheckIn, List) {
   $scope.request = $routeParams;
   $scope.step = 1;
   $scope.organization = {};

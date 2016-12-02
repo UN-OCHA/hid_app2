@@ -3,7 +3,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userDirectives', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'clientServices', 'clientControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userServices', 'userControllers', 'dashboardController', 'listServices', 'listControllers', 'clientServices', 'clientControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives', 'hidControllers', 'hidServices', 'hidDirectives']);
 
 app.constant('config', env);
 
@@ -230,3 +230,7 @@ app.config(["$httpProvider", function ($httpProvider) {
 app.run(function (editableOptions) {
   editableOptions.theme = 'bs3';
 });
+
+var hidControllers = angular.module('hidControllers', []);
+var hidServices = angular.module('hidServices', []);
+var hidDirectives = angular.module('hidDirectives', []);

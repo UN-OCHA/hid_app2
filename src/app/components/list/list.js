@@ -95,12 +95,11 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.isOwner = false;
   $scope.isFavorite = false;
 
-  $scope.$on('user-service-ready', function() { 
+  $scope.$on('user-service-ready', function() {
     $scope.list = List.get({'listId': $routeParams.list});
     var listCallback = function () {
       var req = [];
       req[$scope.list.type + 's.list'] = $scope.list._id;
-      userService.notify(req);
       angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
         var listId = val.list;
         if (typeof val.list === 'object') {
@@ -122,8 +121,6 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
       });
     };
     $scope.list.$promise.then(listCallback);
-    $scope.list.$httpPromise.then(listCallback);
-
     $scope.usersAdded = {};
   });
 
