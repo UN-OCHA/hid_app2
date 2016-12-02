@@ -62,11 +62,11 @@ button[disabled], a.disabled {
 .btn-secondary {
   @include btn();
   background: white;
-  border: 1px solid $text-grey;
-  color: $text-grey;
+  border: 1px solid $text-dark;
+  color: $text-dark;
 
   &:hover, &:focus, &.active {
-    background: $text-grey;
+    background: $text-dark;
     color: white;
   }
 }

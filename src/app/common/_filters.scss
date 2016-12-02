@@ -4,7 +4,7 @@
 
 .filters-group__heading {
   background: none;
-  color: $text-grey;
+  color: $text-dark;
   padding: $base-unit*1.5 $base-unit/2;
   text-transform: none;
   width: 100%;
@@ -67,7 +67,7 @@
   color: $dark-blue;
 
   &.btn-transparent {
-    color: $text-grey;
+    color: $text-dark;
 
     &:focus {
       padding-left: $base-unit;
@@ -99,7 +99,7 @@
     position: absolute;
     left: $base-unit/2;
     top: $base-unit;
-    color: $text-grey;
+    color: $text-dark;
   }
 }
 
