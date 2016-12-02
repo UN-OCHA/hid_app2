@@ -146,24 +146,24 @@ module.exports = function(grunt) {
     },
     // Cache bust
     cacheBust: {
-      options: {
-        encoding: 'utf8',
-        algorithm: 'md5',
-        length: 16,
-        rename: false,
-        jsonOutput: true,
-        jsonOutputFilename: '.tmp/cachebust.json',
-        assets: ['dist/js/app.min.js', 'dist/css/app.min.css']
-      },
-      src: ['dist/index.html', 'dist/offline.appcache']
+      bust: {
+        options: {
+          jsonOutput: true,
+          jsonOutputFilename: '../.tmp/cachebust.json',
+          baseDir: 'dist/',
+          assets: ['js/*', 'css/*'],
+          queryString: true
+        },
+        src: ['dist/index.html']
+      }
     },
     // Build cache manifest
     manifest: {
       generate: {
         options: {
           basePath: 'dist/',
-          cache: ['<%= cacheHash["dist/js/app.min.js"] %>',
-                  '<%= cacheHash["dist/css/app.min.css"] %>',
+          cache: ['<%= cacheHash["js/app.min.js"] %>',
+                  '<%= cacheHash["css/app.min.css"] %>',
                   '/favicon.ico'],
           // network: ['*'],
           //fallback: ['/ partials/offline.html'],
@@ -179,6 +179,15 @@ module.exports = function(grunt) {
           'img/*.png'
         ],
         dest: 'dist/offline.appcache'
+      }
+    },
+    // Removes tmp dir.
+    clean: {
+      dist: {
+        src: ['dist/**/*']
+      },
+      tmp: {
+        src: ['.tmp']
       }
     }
 
@@ -199,21 +208,18 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-manifest');
   grunt.loadNpmTasks("grunt-cache-bust");
+  grunt.loadNpmTasks("grunt-contrib-clean");
 
   //load cache buster json and generate manifest
   grunt.registerTask('manifest-gen','Generate manifest from cache buster output', function(){
-    var cacheHash = grunt.file.readJSON('.tmp/cachebust.json');
-    var keys = Object.keys(cacheHash);
-    for (var i = 0, len = keys.length; i < len; i++) {
-      cacheHash[keys[i]] = cacheHash[keys[i]].replace('dist', '');
-    }
-    grunt.config.set('cacheHash', cacheHash);
+    grunt.config.set('cacheHash', grunt.file.readJSON('.tmp/cachebust.json'));
     grunt.log.write('Read cacheBust output');
     grunt.task.run(['manifest']);
   });
 
   // Default task
   grunt.registerTask('default', [
+    'clean:dist',
     'copy',
     'nggettext_extract',
     'nggettext_compile',
@@ -230,6 +236,7 @@ module.exports = function(grunt) {
     'uglify:generated',
     'usemin',
     'cacheBust',
-    'manifest-gen'
+    'manifest-gen',
+    'clean:tmp'
   ]);
 };
