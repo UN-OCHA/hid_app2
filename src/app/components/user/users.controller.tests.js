@@ -1,4 +1,4 @@
-describe('Grr', function () {
+describe('Users controller', function () {
 
   'use strict';
 
@@ -104,11 +104,15 @@ describe('Grr', function () {
         var ctrlParams = {
           $scope: scope
         };
+        var listInfo = [];
         if (list) {
           ctrlParams.$routeParams = {list: list};
+          listInfo['lists.list'] = '1234';
         }
 
-        $controller('hidUsersCtrl', ctrlParams);
+        $controller('UsersCtrl', ctrlParams);
+
+        scope.$broadcast('populate-list', listInfo);
 
         scope.$digest();
       });

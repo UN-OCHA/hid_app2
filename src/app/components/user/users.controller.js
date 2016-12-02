@@ -28,10 +28,8 @@ hidControllers.controller('UsersCtrl', ['$scope', '$rootScope', '$location', '$r
       $scope.$on('populate-list', function (event, listType) {
         $scope.request = angular.extend($scope.request, listType)
         listInfo = listType;
-        console.log(listInfo);
         getUsers();
       });
-
 
       $scope.pageChanged = function () {
         currentSortOrder = $scope.request.sort;
