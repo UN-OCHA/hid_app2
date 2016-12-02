@@ -176,7 +176,14 @@ module.exports = function(grunt) {
           // 'js/app.min.js',
           // 'css/app.min.css',
           // 'index.html',
-          'img/*.png'
+          'img/*.png',
+          'fonts/exo/*',
+          'fonts/FontAwesome.otf',
+          'fonts/fontawesome-webfont.eot',
+          'fonts/fontawesome-webfont.svg',
+          'fonts/fontawesome-webfont.ttf',
+          'fonts/fontawesome-webfont.woff',
+          'fonts/fontawesome-webfont.woff2'
         ],
         dest: 'dist/offline.appcache'
       }
