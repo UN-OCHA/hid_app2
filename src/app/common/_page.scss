@@ -30,6 +30,10 @@
   margin: $base-unit*2.5 0 $base-unit 0;
 }
 
+.page-header__primary {
+  display: flex;
+}
+
 .page-header__heading {
   line-height: 1.2;
   margin-bottom: 0;

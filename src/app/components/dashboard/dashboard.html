@@ -82,6 +82,15 @@
 
   <div class="col-md-4">
 
+  <div class="dashboard-ctas">
+    <a class="btn-block btn-primary" href="/lists/new" translate>Create new List</a>
+    <a class="btn-block btn-primary" href="/checkin" translate>Check In</a>
+  </div>
+  <div class="dashboard-ctas">
+    <a class="btn-block btn-primary" href="/users/new" ng-if="currentUser.is_admin">Add new user</a>
+    <a class="btn-block btn-primary" href="/clients" ng-if="currentUser.is_admin">View OAuth Clients</a>
+  </div>
+
   <div class="secondary-block">
     <h2 class="secondary-block__heading">Notifications</h2>
     <ul class="secondary-block__list">
@@ -92,13 +101,6 @@
       <li class="secondary-block__item" ng-if="!currentUser.verified" translate><icon name="chevron-right"></icon>You're not verified yet</li>
     </ul>
   </div>
-
-    <a class="btn btn-primary" href="/users/new" ng-if="currentUser.is_admin">Add new user</a>
-    <a class="btn btn-primary" href="/clients" ng-if="currentUser.is_admin">View OAuth Clients</a>
-    <div>
-      <a class="btn btn-primary" href="/lists/new" translate>Create new List</a>
-      <a class="btn btn-primary" href="/checkin" translate>Check In</a>
-    </div>
 
   </div>
 </div>

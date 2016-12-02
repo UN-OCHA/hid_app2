@@ -4,12 +4,13 @@
 
 .nav--secondary {
   font-family: $heading-font-light;
-
   button {
     text-transform: none;
 
     &:hover, &:focus {
       text-decoration: none;
+      box-shadow: none;
+      background: none;
     }
   }
 }
