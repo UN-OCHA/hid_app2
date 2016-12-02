@@ -12,10 +12,8 @@ hidControllers.controller('UsersCtrl', ['$scope', '$rootScope', '$location', '$r
         offset: 0,
         sort: 'name'
       };
+      var listInfo =[];
 
-      if ($routeParams.list) {
-        defaultRequest['lists.list'] = $routeParams.list;
-      }
       $scope.request = angular.copy(defaultRequest);
 
       function getUsers () {
@@ -26,7 +24,14 @@ hidControllers.controller('UsersCtrl', ['$scope', '$rootScope', '$location', '$r
           $scope.totalItems = users.headers["x-total-count"];
         });
       }
-      getUsers();
+
+      $scope.$on('populate-list', function (event, listType) {
+        $scope.request = angular.extend($scope.request, listType)
+        listInfo = listType;
+        console.log(listInfo);
+        getUsers();
+      });
+
 
       $scope.pageChanged = function () {
         currentSortOrder = $scope.request.sort;
@@ -57,6 +62,9 @@ hidControllers.controller('UsersCtrl', ['$scope', '$rootScope', '$location', '$r
 
       $scope.resetFilters = function () {
         $scope.request = angular.copy(defaultRequest);
+        if (listInfo) {
+          $scope.request = angular.extend($scope.request, listInfo)
+        }
         $scope.filters = {};
         $scope.selectedFilters = {};
         $scope.currentPage = 1;

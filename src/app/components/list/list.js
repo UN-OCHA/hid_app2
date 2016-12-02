@@ -95,11 +95,18 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   $scope.isOwner = false;
   $scope.isFavorite = false;
 
+  function populateList () {
+    var listType = [];
+    listType[$scope.list.type + 's.list'] = $scope.list._id;
+    $scope.$broadcast('populate-list', listType);
+  }
+
   $scope.$on('user-service-ready', function() {
     $scope.list = List.get({'listId': $routeParams.list});
     var listCallback = function () {
-      var req = [];
-      req[$scope.list.type + 's.list'] = $scope.list._id;
+
+      populateList();
+
       angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
         var listId = val.list;
         if (typeof val.list === 'object') {
