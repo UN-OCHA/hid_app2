@@ -10,7 +10,7 @@
 
   .dropdown-menu {
     right: 0;
-    min-width: $base-unit*20;
+    min-width: $base-unit*22;
   }
 
   button {
@@ -19,7 +19,11 @@
 }
 
 .list-tabs__toggle {
-  color: $text-light;
+  max-height: $base-unit*5;
+
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .list-tabs__content {

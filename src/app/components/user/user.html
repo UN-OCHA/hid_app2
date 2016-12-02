@@ -17,53 +17,60 @@
 
   <div class="page-header profile-header">
 
-    <div class="profile-header__image">
+    <div class="page-header__primary">
 
-      <icon name="check-circle" text="Verfied" ng-show="!user.verified && !profileForm.$visible"></icon>
+      <div class="profile-header__image">
 
-      <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
-      <div ng-show="profileForm.$visible">
-        <label class="btn btn-secondary btn-upload center-block" upload-button url="http://api.hid.vm/api/v2/user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
-        <p class="text-center" translate>Upload a squared image in JPEG format, with more than 200px width</p>
+        <icon name="check-circle" text="Verfied" ng-show="!user.verified && !profileForm.$visible"></icon>
+
+        <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
+        <div ng-show="profileForm.$visible">
+          <label class="btn btn-secondary btn-upload center-block" upload-button url="http://api.hid.vm/api/v2/user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
+          <p class="text-center" translate>Upload a squared image in JPEG format, with more than 200px width</p>
+        </div>
+      </div>
+
+      <div class="profile-header__content">
+        <h1 class="page-header__heading">
+          <label ng-if="profileForm.$visible" for="given_name" class="sr-only">Given name</label>
+          <span editable-text="user.given_name" e-id="given_name" e-placeholder="{{'Given name' | translate}}">{{user.given_name}}</span>
+          <label ng-if="profileForm.$visible" for="family_name" class="sr-only">Family name</label>
+          <span editable-text="user.family_name" e-id="family_name" e-placeholder="{{'Family name' | translate}}">{{user.family_name}}</span>
+        </h1>
+
+        <ul class="profile-header__info">
+          <li><icon name="home"></icon> UNOCHA</li>
+          <li><icon name="user"></icon> Cluster</li>
+          <li><icon name="map-marker"></icon></i> {{user.location.country.name}}</li>
+        </ul>
+
+        <label ng-if="profileForm.$visible" for="user_status" class="sr-only" translate="">User status</label>
+        <p editable-textarea="user.status" e-id="user_status" e-rows="7" e-cols="40" e-placeholder="{{'Status' | translate}}" class="hidden-sm-up profile-header__status">{{user.status}}</p>
+
+        <div ng-show="profileForm.$visible">
+          <div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div>
+        </div>
+
+        <button type="button" class="btn-icon form__edit profile-header__edit" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser">
+          <icon name="pencil" text="Edit"></icon>
+        </button>
+
+        <div ng-show="profileForm.$visible">
+          <button type="submit" class="btn btn-primary" ng-disabled="profileForm.$waiting"><icon name="check"></icon> Save changes</button>
+          <button type="button" class="btn btn-secondary" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()"><icon name="times"></icon> Cancel</button>
+        </div>
+
       </div>
     </div>
 
-    <div class="profile-header__content">
-      <h1 class="page-header__heading">
-        <label ng-if="profileForm.$visible" for="given_name" class="sr-only">Given name</label>
-        <span editable-text="user.given_name" e-id="given_name" e-placeholder="{{'Given name' | translate}}">{{user.given_name}}</span>
-        <label ng-if="profileForm.$visible" for="family_name" class="sr-only">Family name</label>
-        <span editable-text="user.family_name" e-id="family_name" e-placeholder="{{'Family name' | translate}}">{{user.family_name}}</span>
-      </h1>
+    <div class="page-header__secondary">
 
-      <ul class="profile-header__info">
-        <li><icon name="home"></icon> UNOCHA</li>
-        <li><icon name="user"></icon> Cluster</li>
-        <li><icon name="map-marker"></icon></i> {{user.location.country.name}}</li>
-      </ul>
-
-      <label ng-if="profileForm.$visible" for="user_status" class="sr-only" translate="">User status</label>
-      <p editable-textarea="user.status" e-id="user_status" e-rows="7" e-cols="40" e-placeholder="{{'Status' | translate}}" class="hidden-sm-up profile-header__status">{{user.status}}</p>
-
-      <div ng-show="profileForm.$visible">
-        <div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div>
+      <div class="page-header__actions">
+        <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')">
+          <icon name="cog" text="Actions"></icon>
+        </button>
       </div>
 
-      <button type="button" class="btn-icon form__edit profile-header__edit" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser">
-        <icon name="pencil" text="Edit"></icon>
-      </button>
-
-      <div ng-show="profileForm.$visible">
-        <button type="submit" class="btn btn-primary" ng-disabled="profileForm.$waiting"><icon name="check"></icon> Save changes</button>
-        <button type="button" class="btn btn-secondary" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()"><icon name="times"></icon> Cancel</button>
-      </div>
-
-    </div>
-
-    <div class="page-header__actions">
-      <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')">
-        <icon name="cog" text="Actions"></icon>
-      </button>
     </div>
 
   </div>

@@ -7,8 +7,6 @@
 .table {
   th {
     @extend .block-heading;
-    background: $light-blue;
-    color: $dark-blue;
     display: table-cell;
     text-align: left;
     border-left: 2px solid white;
@@ -19,7 +17,7 @@
   }
 
   td {
-    padding: $base-unit/2 $base-unit;
+    padding: $base-unit*1.5 $base-unit;
   }
 
   tbody tr {
@@ -85,7 +83,7 @@
 
     td {
       display: table-cell;
-      padding: $base-unit/2 $base-unit;
+      padding: $base-unit*1.5 $base-unit;
 
       &:empty {
         display: table-cell;

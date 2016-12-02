@@ -38,6 +38,10 @@
   text-align: left;
   padding: 0;
   @include font-size($tiny-font-size);
+
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 @include media-query(sm) {
