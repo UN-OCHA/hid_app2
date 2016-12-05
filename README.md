@@ -4,6 +4,24 @@
 
 TO DO
 
+## Unit tests
+
+Unit tests are written using [Jasmine](https://jasmine.github.io/) and run with [Karma](https://karma-runner.github.io/).
+
+### Pre-requisites
+
+Install Karma CLI
+
+```
+npm install -g karma-cli
+```
+
+### Running the tests
+
+In /src `karma start`
+
+To just run the tests once `karma start --single-run`
+
 ## Front end
 
 ### CSS
