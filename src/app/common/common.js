@@ -99,7 +99,7 @@ appServices.factory('offlineService', function (config, List) {
   return {
     // Cache user lists for offline use
     cacheListsForUser: function (user) {
-      // TODO: make sure we are online to do the caching
+      // Make sure we are online to do the caching
       if (Offline.state == 'up') {
         var tmpListType = '';
         console.log('Starting Offline caching');

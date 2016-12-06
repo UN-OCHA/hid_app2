@@ -5,8 +5,22 @@ userServices.factory('User', ['$cachedResource', '$http', '$location', 'config',
 
     var User = $cachedResource('users', config.apiUrl + 'user/:userId', {userId: '@_id'},
     {
+      'save': {
+        method: 'POST',
+        cache: false
+      },
+      'remove': {
+        method: 'DELETE',
+        cache: false
+      },
+      'delete': {
+        method: 'DELETE',
+        cache: false
+      },
       'update': {
-        method: 'PUT'
+        method: 'PUT',
+        // TODO: find a way to cache these requests, and fix https://github.com/goodeggs/angular-cached-resource/issues/72
+        cache: false
       }
     });
 

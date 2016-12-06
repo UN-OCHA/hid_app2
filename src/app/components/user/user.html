@@ -1,15 +1,15 @@
 <div class="sidebar collapse" ng-class="{'in' : sidebar.open}">
-  <div ng-show="currentUser.is_admin || (currentUser._id == user._id)">
+  <div ng-show="(currentUser.is_admin || (currentUser._id == user._id)) && isOnline">
     <a class="btn btn-primary" href="/checkin/{{user._id}}" translate>Check into List</a>
   </div>
   <div>
-    <a class="btn btn-primary" ng-click="exportVcard();" translate>Export Contact Info</a>
+    <button class="btn btn-primary" ng-click="exportVcard();" translate>Export Contact Info</button>
   </div>
   <div ng-show="user.is_orphan">
-    <a class="btn btn-primary" ng-click="sendClaimEmail();" translate>Send Claim Email</a>
+    <button class="btn btn-primary" ng-click="sendClaimEmail();" ng-disabled="!isOnline" translate>Send Claim Email</button>
   </div>
   <div>
-    <a class="btn btn-primary" translate>Report a Problem</a>
+    <button class="btn btn-primary" ng-disabled="!isOnline" translate>Report a Problem</button>
   </div>
 </div>
 
@@ -51,7 +51,7 @@
           <div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div>
         </div>
 
-        <button type="button" class="btn-icon form__edit profile-header__edit" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser">
+        <button type="button" class="btn-icon form__edit profile-header__edit" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
           <icon name="pencil" text="Edit"></icon>
         </button>
 
@@ -83,7 +83,7 @@
     <form editable-form name="contactForm" onaftersave="saveUser()" class="form">
       <h2 class="block-heading" translate>Contact Information</h2>
 
-      <button type="button" class="btn btn-primary form__edit" ng-click="contactForm.$show()" ng-show="!contactForm.$visible && canEditUser"><icon name="pencil" text="Edit"></icon></button>
+      <button type="button" class="btn btn-primary form__edit" ng-click="contactForm.$show()" ng-show="!contactForm.$visible && canEditUser" ng-disabled="!isOnline"><icon name="pencil" text="Edit"></icon></button>
 
       <div class="form-editable-section" ng-show="contactForm.$visible" ng-class="{'active': contactForm.$visible}">
         <button type="submit" class="btn btn-primary" ng-disabled="contactForm.$waiting"><icon name="check"></icon> Save changes</button>
@@ -213,7 +213,7 @@
 
 
 
-      <button type="button" class="btn btn-primary form__edit" ng-click="roleForm.$show()" ng-show="!roleForm.$visible && canEditUser"><icon name="pencil" text="Edit"></icon></button>
+      <button type="button" class="btn btn-primary form__edit" ng-click="roleForm.$show()" ng-show="!roleForm.$visible && canEditUser" ng-disabled="!isOnline"><icon name="pencil" text="Edit"></icon></button>
 
       <div class="form-editable-section" ng-show="roleForm.$visible" ng-class="{'active': roleForm.$visible}">
 
@@ -231,7 +231,7 @@
           <ul class="form-list">
             <li ng-repeat="(key, val) in user.organizations" class="form-list__item">
               <a class="form-list__text" href="/lists/{{val.list._id}}">{{val.list.name}}</a>
-              <button type="button" class="btn-transparent" ng-show="roleForm.$visible"><icon name="times" text="Remove"></icon></button>
+              <button type="button" class="btn-transparent" ng-show="roleForm.$visible" ng-click="removeOrganization(val)"><icon name="times" text="Remove"></icon></button>
             </li>
           </ul>
 
@@ -384,7 +384,7 @@
       <form editable-form name="additionalForm" onaftersave="saveUser()" class="form">
         <h2 class="block-heading" translate>Additional Information</h2>
 
-        <button type="button" class="btn btn-primary form__edit" ng-click="additionalForm.$show()" ng-show="!additionalForm.$visible && canEditUser"><icon name="pencil" text="Edit"></icon></button>
+        <button type="button" class="btn btn-primary form__edit" ng-click="additionalForm.$show()" ng-show="!additionalForm.$visible && canEditUser" ng-disabled="!isOnline"><icon name="pencil" text="Edit"></icon></button>
 
         <div class="form-editable-section" ng-show="additionalForm.$visible" ng-class="{'active': additionalForm.$visible}">
 

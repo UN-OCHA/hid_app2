@@ -76,7 +76,7 @@
             <li class="nav__item" ng-class="{'active' : activeNav('/dashboard')}"><a href="/dashboard" class="nav__link" translate>Dashboard</a></li>
             <li class="nav__item" ng-class="{'active' : activeNav('/users/'+currentUser.id)}"><a href="/users/{{currentUser.id}}" class="nav__link" translate>My profile</a></li>
             <li class="nav__item" ng-class="{'active' : activeNav('/lists')}"><a href="/lists" class="nav__link" translate>Humanitarian contact list</a></li>
-            <li class="nav__item" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}"><a href="/checkin/{{currentUser.id}}" class="nav__link" translate>Check in</a></li>
+            <li class="nav__item" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}" ng-if="isOnline"><a href="/checkin/{{currentUser.id}}" class="nav__link" translate>Check in</a></li>
           </ul>
         </nav>
 

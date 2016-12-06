@@ -7,6 +7,7 @@ var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'ang
 
 app.constant('config', env);
 
+// TODO: do the offline checks on something other than favicon
 Offline.options = {
   checkOnLoad: false,
   interceptRequests: false,

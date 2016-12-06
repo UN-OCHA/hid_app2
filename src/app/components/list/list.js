@@ -4,8 +4,21 @@ listServices.factory('List', ['$cachedResource', 'config', 'User',
   function ($cachedResource, config, User) {
     var List = $cachedResource('list', config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
+      'save': {
+        method: 'POST',
+        cache: false
+      },
+      'remove': {
+        method: 'DELETE',
+        cache: false
+      },
+      'delete': {
+        method: 'DELETE',
+        cache: false
+      },
       'update': {
-        method: 'PUT'
+        method: 'PUT',
+        cache: false
       }
     });
 

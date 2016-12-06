@@ -43,7 +43,7 @@
         <icon name="check-circle" text="Verified" title="Verified" class="icon-inline" ng-if="user.verified"></icon>
 
         <div uib-dropdown class="icon-inline">
-          <button type="button" class="btn-transparent" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit">
+          <button type="button" class="btn-transparent" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit" ng-disabled="!isOnline">
             <icon name="ellipsis-v" text="Edit"></icon>
           </button>
           <ul class="dropdown-menu" uib-dropdown-menu>

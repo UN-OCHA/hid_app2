@@ -155,6 +155,15 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     });
   };
 
+  $scope.removeOrganization = function(org) {
+    UserCheckIn.delete({userId: $scope.user._id, listType: 'organizations', checkInId: org._id}, {}, function (user) {
+      $scope.user.organizations = user.organizations;
+      if ($scope.user._id == $scope.currentUser._id) {
+        $scope.setCurrentUser($scope.currentUser);
+      }
+    });
+  };
+
   $scope.addItem = function (key) {
     if (!$scope.user[key]) {
       $scope.user[key] = [];
@@ -254,7 +263,7 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
         $scope.setCurrentUser(user);
       }
     }, function (resp) {
-      alertService.add('danger', gettextCatalog.getString('There was an error: ') + resp.data.message);
+      alertService.add('danger', gettextCatalog.getString('There was an error: ') + resp.data.error);
     });
   };
 

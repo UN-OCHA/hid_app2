@@ -8,9 +8,10 @@ authServices.factory('AuthService', ['$http', '$window', '$rootScope', '$interva
           $window.localStorage.setItem('jwtToken', response.data.token);
           $window.localStorage.setItem('currentUser', JSON.stringify(response.data.user));
           offlineService.cacheListsForUser(response.data.user);
+          // Cache lists every 10 mins
           $rootScope.offlinePromise = $interval(function () {
             offlineService.cacheListsForUser(response.data.user)
-          }, 60000);
+          }, 600000);
         }
       });
       return promise;

@@ -14,7 +14,7 @@
         <icon name="filter" text="Filter"></icon>
       </button>
 
-      <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}">
+      <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
         <icon name="cog" text="Actions"></icon>
       </button>
 

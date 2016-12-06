@@ -33,7 +33,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" ng-disabled="changePassword.$invalid || changePassword.$submitted" translate>Update password</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="!isOnline || changePassword.$invalid || changePassword.$submitted" translate>Update password</button>
         </form>
       </div>
     </div>
@@ -61,7 +61,7 @@
               </ui-select-choices>
             </ui-select>
           </div>
-          <button type="submit" class="btn btn-primary" translate>Save</button>
+          <button type="submit" class="btn btn-primary" ng-disabled="!isOnline" translate>Save</button>
         </form>
       </div>
     </div>
@@ -71,7 +71,7 @@
       </div>
       <div class="panel-body">
         <p translate>Deleting your account means that you will lose your access to Humanitarian ID.</p>
-        <button type="button" class="btn btn-danger" ng-click="deleteAccount()" translate>Delete account</button>
+        <button type="button" class="btn btn-danger" ng-disabled="!isOnline" ng-click="deleteAccount()" translate>Delete account</button>
       </div>
     </div>
   </uib-tab>
@@ -83,7 +83,7 @@
       <div class="panel-body">
         <p translate>You have granted the following applications access to your Humanitarian ID account.</p>
         <ul>
-          <li ng-repeat="client in user.authorizedClients">{{client.name}} <a href="#" class="btn btn-default" ng-click="revokeClient(client)">Revoke</a></li>
+          <li ng-repeat="client in user.authorizedClients">{{client.name}} <button class="btn btn-default" ng-disabled="!isOnline" ng-click="revokeClient(client)">Revoke</a></li>
         </ul>
       </div>
     </div>
