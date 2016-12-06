@@ -394,9 +394,29 @@
 
         </div>
 
-        <div class="form-editable-section" ng-class="{'active': additionalForm.$visible}">
+        <div class="form-editable-section" ng-show="user.operations && user.operations.length" ng-class="{'active': additionalForm.$visible}">
+          <h3 translate>Operations</h3>
+          <ul class="list-inline list-unstyled">
+            <li ng-repeat="(key, val) in user.operations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          </ul>
+        </div>
 
-          <h3 ng-show="(user.lists && user.lists.length)" translate>Other Lists</h3>
+        <div class="form-editable-section" ng-show="user.bundles && user.bundles.length" ng-class="{'active': additionalForm.$visible}">
+          <h3 translate>Clusters / Working Groups</h3>
+          <ul class="list-inline list-unstyled">
+            <li ng-repeat="(key, val) in user.bundles"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          </ul>
+        </div>
+
+        <div class="form-editable-section" ng-show="user.disasters && user.disasters.length" ng-class="{'active': additionalForm.$visible}">
+          <h3 translate>Disasters</h3>
+          <ul class="list-inline list-unstyled">
+            <li ng-repeat="(key, val) in user.disasters"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          </ul>
+        </div>
+
+        <div class="form-editable-section" ng-show="user.lists && user.lists.length" ng-class="{'active': additionalForm.$visible}">
+          <h3 translate>Other lists</h3>
           <ul class="list-inline list-unstyled">
             <li ng-repeat="(key, val) in user.lists"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
           </ul>
@@ -425,19 +445,8 @@
           </div>
         </div>
 
-        <div class="form-editable-section" ng-if="user.organization.list" ng-class="{'active': additionalForm.$visible}">
-          <ul class="list-inline list-unstyled">
-            <li ng-if="user.organization.list"><a class="label label-default" href="/lists/{{user.organization.list._id}}">{{user.organization.list.name}}</a></li>
-          </ul>
-          <ul class="list-inline list-unstyled">
-            <li ng-repeat="(key, val) in user.bundles"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
-          </ul>
-
-          <p ng-if="user.verified_by"><span translate>Verified by</span>: <a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
-          <ul class="list-inline list-unstyled">
-            <li ng-repeat="(key, val) in user.operations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
-            <li ng-repeat="(key, val) in user.disasters"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
-          </ul>
+        <div class="form-editable-section" ng-show="user.verified_by" ng-class="{'active': additionalForm.$visible}">
+          <p><span translate>Verified by</span>: <a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
         </div>
 
         <div class="form-editable-section">
