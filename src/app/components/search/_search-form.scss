@@ -42,7 +42,7 @@
 .search-form__active {
   display: block;
   position: absolute;
-  bottom: -11px;
+  bottom: -6px;
   left: 0;
   width: 100%;
   border-bottom: 2px solid transparent;
@@ -75,6 +75,10 @@ input[type="search"].search-form__input {
 
   .search-form__btn {
     @include font-size($base-font-size);
+  }
+
+  .search-form__active {
+    bottom: -11px;
   }
 
 }

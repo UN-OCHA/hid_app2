@@ -3,8 +3,8 @@
   @include font-size($small-font-size);
 }
 
-.page-header__pagination {
-  margin: $base-unit 0;
+.list-actions__pagination {
+  margin: $base-unit/2 0 $base-unit 0;
   text-align: left;
 
   span {
@@ -40,10 +40,8 @@
       border-left: 1px solid lighten($primary-color, 50%);
     }
 
-    .page-header & {
-      span {
-        padding-left: 0;
-      }
+    span {
+      padding-left: 0;
     }
   }
 
@@ -60,9 +58,15 @@
 
 }
 
+@include media-query(sm) {
+  .list-actions__pagination {
+    margin: 0
+  }
+}
+
 @include media-query(md) {
 
-  .page-header__pagination {
+  .list-actions__pagination {
     .toggled & {
       display: none;
     }

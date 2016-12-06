@@ -55,10 +55,9 @@
 
 .site-header__nav-toggle {
   width: $base-unit*5;
-  padding: $base-unit;
+  padding: 0;
   @include font-size($large-font-size);
   position: relative;
-  margin-right: -$base-unit;
 }
 
 .dropdown-menu.site-header__nav {
