@@ -142,6 +142,7 @@
               <span ng-show="!email.validated" class="label label-default" translate>Unverified</span>
               <br>
               <button type="button" ng-click="resendValidationEmail(email.email)" ng-if="contactForm.$visible && !email.validated" class="btn-secondary btn-small" translate>Resend validation email</button>
+              <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryEmail(email.email)" ng-if="contactForm.$visible && email.validated && email.email != user.email" translate>Set as Primary</button>
             </span>
 
             <button type="button" class="btn-transparent" ng-click="dropEmail(email.email)" ng-if="contactForm.$visible && email.email != user.email"><icon name="times" text="Remove"></icon></button>
