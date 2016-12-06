@@ -347,7 +347,6 @@ listControllers.controller('ListsCtrl', ['$rootScope', '$scope', '$routeParams',
   $scope.request.limit = $scope.itemsPerPage;
   $scope.request.offset = 0;
   $scope.request.sort = 'name';
-  $scope.searchTerm = $routeParams.name;
   $scope.selectedFilters = {};
   var currentSortOrder = $scope.request.name;
   listService.setRequest($scope.request);
@@ -425,10 +424,6 @@ listControllers.controller('ListsCtrl', ['$rootScope', '$scope', '$routeParams',
     $scope.currentPage = 1;
     $scope.pageChanged();
   };
-
-  $scope.clearSearch = function () {
-    $location.url($location.path());
-  }
 
 }]);
 
