@@ -63,6 +63,24 @@ app.run(function (gettextCatalog) {
   }
 });
 
+//accessibility features - focus h1 on route change
+app.run(function ($rootScope) {
+  var hasPrevious = false;
+
+  $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+    hasPrevious = previous ? true : false;
+  });
+
+  $rootScope.$on('$viewContentLoaded', function () {
+    if (hasPrevious) {
+      var h1 = document.querySelector('h1')
+      h1.setAttribute('tabIndex', -1);
+      h1.focus();
+    }
+  });
+
+});
+
 app.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
