@@ -2,7 +2,11 @@
   padding-top: $base-unit/2;
   padding-bottom: $base-unit/2;
   text-transform: uppercase;
-  @include font-size($small-font-size);
+  @include font-size($tiny-font-size);
+  height: $base-unit*3 - 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   a {
     text-decoration: none;
@@ -17,9 +21,13 @@
   }
 }
 
-@include media-query(md) {
+
+@include media-query(sm) {
 
   .breadcrumbs {
+    @include font-size($small-font-size);
+    height: $base-unit*3 +4;
+    padding-right: $base-unit*14;
     padding-top: $base-unit;
     padding-bottom: $base-unit;
   }

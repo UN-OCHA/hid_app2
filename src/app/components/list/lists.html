@@ -1,59 +1,9 @@
-<ng-include src="'app/components/list/lists-filters.html'"></ng-include>
-
 <div class="page-header">
 
   <div class="page-header__primary">
     <h1 class="page-header__heading" translate="">
       Lists
     </h1>
-    <p class="page-header__sub-heading">{{totalItems}} <span translate>lists</span></p>
   </div>
-
-  <div class="page-header__secondary">
-
-    <div class="page-header__actions">
-
-      <button class="btn-icon" type="button" ng-click="toggleSidebar('listsFilters')" ng-class="{'active' : sidebar.sidebars.listsFilters && sidebar.open}" ng-disabled="!isOnline">
-        <icon name="filter" text="Filter"></icon>
-      </button>
-
-    </div>
-
-    <ul class="pagination page-header__pagination">
-      <li class="pagination-page"><span>Show</span></li>
-      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 50}">
-        <button type="button" ng-click="setLimit(50)">50</button>
-      </li>
-      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 100}">
-        <button type="button" ng-click="setLimit(100)" ng-disabled="!isOnline">100</button>
-      </li>
-      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 150}">
-        <button type="button" ng-click="setLimit(150)" ng-disabled="!isOnline">150</button>
-      </li>
-      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 200}">
-        <button type="button" ng-click="setLimit(200)" ng-disabled="!isOnline">200</button>
-      </li>
-    </ul>
-
-  </div>
-
 </div>
-
-<table class="table table-responsive">
-  <thead>
-    <tr>
-      <th translate>Name</th>
-      <th translate>Type</th>
-      <th translate>Created by</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="list in lists">
-      <td><a ng-href="/lists/{{list._id}}">{{list.name}}</a></td>
-      <td>{{list.type}}</td>
-      <td><a ng-if="list.owner.name" ng-href="/users/{{list.owner._id}}">{{list.owner.name}}</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<ul uib-pagination boundary-link-numbers="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination" direction-links="false"></ul>
+<ng-include ng-if="!showUsers" src="'app/components/list/all-lists.html'"></ng-include>

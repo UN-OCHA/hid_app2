@@ -140,6 +140,31 @@ button[disabled], a.disabled {
   @include font-size($small-font-size);
 }
 
+.btn-toggle {
+  display: flex;
+  z-index: 1;
+
+  .btn-primary {
+    width: 50%;
+    padding: $base-unit*1.5;
+
+    &:focus {
+      position: relative;
+      z-index: 2;
+    }
+
+    &[disabled] {
+      background: $primary-color;
+      border-color: $primary-color;
+      opacity: 1;
+
+      &:hover {
+        color: $text-light;
+      }
+    }
+  }
+}
+
 //bootstrap focus style used when not using actual focusable elements
 .btn-default-focus {
   outline: none;
