@@ -164,6 +164,14 @@ userControllers.controller('UserCtrl', ['$scope', '$routeParams', '$http', '$win
     });
   };
 
+  $scope.notify = function () {
+    $scope.user.notify('Test', function (resp) {
+      alertService.add('success', gettextCatalog.getString('User was successfully notified'));
+    }, function (resp) {
+      alertService.add('danger', gettextCatalog.getString('There was an error notifying this user'));
+    });
+  };
+
   $scope.addItem = function (key) {
     if (!$scope.user[key]) {
       $scope.user[key] = [];

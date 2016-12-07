@@ -167,15 +167,20 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
   // Remove a user from a list
   $scope.removeFromList = function (user) {
     var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-      user[$scope.list.type + 's'] = user[$scope.list.type + 's'].filter(function (elt) {
-        return elt.list._id != $scope.list._id;
-      });
-      user.$update(function(out) {
-        // Close existing alert
-        alert.closeConfirm();
-        alertService.add('success', gettextCatalog.getString('The user was successfully removed.'));
-        userService.notify();
-      });
+      var checkInId = 0;
+      for (var i = 0, len = user[$scope.list.type + 's'].length; i < len; i++) {
+        if (angular.equals($scope.list._id, user[$scope.list.type + 's'][i].list._id)) {
+          checkInId = user[$scope.list.type + 's'][i]._id;
+        }
+      }
+      if (checkInId != 0) {
+        UserCheckIn.delete({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function(user) {
+          // Close existing alert
+          alert.closeConfirm();
+          alertService.add('success', gettextCatalog.getString('The user was successfully checked out.'));
+          userService.notify();
+        });
+      }
     });
   };
 
