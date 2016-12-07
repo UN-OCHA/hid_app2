@@ -126,6 +126,7 @@ a {
   &:focus {
     outline-style: dotted;
     outline-width: 1px;
+    outline-color: $primary-color;
   }
 }
 
@@ -134,6 +135,11 @@ h1 {
   font-family: $heading-font;
   color: $primary-color;
   margin-bottom: $base-unit;
+
+  &:focus {
+    outline: none;
+    background: $light-grey;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -63,117 +63,160 @@ app.run(function (gettextCatalog) {
   }
 });
 
+//accessibility features - focus h1 on route change, page titles
+app.run(function ($rootScope) {
+  var hasPrevious = false;
+  var siteTitle = ' | Humanitarian ID';
+
+  $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+    hasPrevious = previous ? true : false;
+    $rootScope.title = current.$$route.title + siteTitle;
+  });
+
+  $rootScope.$on('$viewContentLoaded', function () {
+    if (hasPrevious) {
+      var h1 = document.querySelector('h1')
+      h1.setAttribute('tabIndex', -1);
+      h1.focus();
+    }
+  });
+
+});
+
 app.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
+
     $routeProvider.
       when('/', {
         templateUrl: 'app/components/auth/login.html',
-        controller: 'AuthCtrl'
+        controller: 'AuthCtrl',
+        title: 'Log in'
       }).
       when('/landing', {
         templateUrl: 'app/components/landing/landing.html',
-        authenticate: true
+        authenticate: true,
+        title: 'Welcome'
       }).
       when('/dashboard', {
         templateUrl: 'app/components/dashboard/dashboard.html',
         controller: 'DashboardCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Dashboard'
       }).
       when('/settings', {
         templateUrl: 'app/components/user/account.html',
         controller: 'UserPrefsCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Settings'
       }).
       when('/settings/:userId', {
         templateUrl: 'app/components/user/account.html',
         controller: 'UserCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Settings'
       }).
       when('/users', {
         templateUrl: 'app/components/user/users-page.html',
         controller: 'UsersPageCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Users'
       }).
       when('/users/new', {
         templateUrl: 'app/components/user/new-user-page.html',
         controller: 'UserNewCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'New user'
       }).
       when('/users/:userId', {
         templateUrl: 'app/components/user/user.html',
         controller: 'UserCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'User profile'
       }).
       when('/checkin', {
         templateUrl: 'app/components/checkin/checkin.html',
         controller: 'CheckinCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Check-in'
       }).
       when('/checkin/:userId', {
         templateUrl: 'app/components/checkin/checkin.html',
         controller: 'CheckinCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Check-in'
       }).
       when('/kiosk', {
         templateUrl: 'app/components/user/kiosk.html',
         controller: 'KioskCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Kiosk'
       }).
       when('/lists/new', {
         templateUrl: 'app/components/list/new-list.html',
         controller: 'ListEditCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'New list'
       }).
       when('/lists/:list', {
         templateUrl: 'app/components/list/list.html',
         controller: 'ListCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'List'
       }).
       when('/lists/:list/edit', {
         templateUrl: 'app/components/list/new-list.html',
         controller: 'ListEditCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Edit list'
       }).
       when('/lists', {
         templateUrl: 'app/components/list/lists.html',
         controller: 'ListsCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Lists'
       }).
       when('/clients/new', {
         templateUrl: 'app/components/client/new-client.html',
         controller: 'ClientCtrl',
         authenticate: true,
-        adminOnly: true
+        adminOnly: true,
+        title: 'New client'
       }).
       when('/clients', {
         templateUrl: 'app/components/client/clients.html',
         controller: 'ClientsCtrl',
         authenticate: true,
-        adminOnly: true
+        adminOnly: true,
+        title: 'Clients'
       }).
       when('/clients/:clientId', {
         templateUrl: 'app/components/client/client.html',
         controller: 'ClientCtrl',
         authenticate: true,
-        adminOnly: true
+        adminOnly: true,
+        title: 'Client'
       }).
       when('/clients/:clientId/edit', {
         templateUrl: 'app/components/client/new-client.html',
         controller: 'ClientCtrl',
         authenticate: true,
-        adminOnly: true
+        adminOnly: true,
+        title: 'Edit client'
       }).
       when('/register', {
         templateUrl: 'app/components/auth/register.html',
-        controller: 'UserRegisterCtrl'
+        controller: 'UserRegisterCtrl',
+        title: 'Register'
       })
       .when('/password_reset', {
         templateUrl: 'app/components/auth/password_reset.html',
-        controller: 'AuthCtrl'
+        controller: 'AuthCtrl',
+        title: 'Reset password'
       })
       .when('/reset_password', {
         templateUrl: 'app/components/auth/reset_password.html',
-        controller: 'AuthCtrl'
+        controller: 'AuthCtrl',
+        title: 'Reset password'
       })
       .when('/verify', {
         template: '',
@@ -187,7 +230,8 @@ app.config(['$routeProvider', '$locationProvider',
       .when('/search', {
         templateUrl: 'app/components/search/search-results.html',
         controller: 'SearchCtrl',
-        authenticate: true
+        authenticate: true,
+        title: 'Search results'
       })
       .otherwise({
         redirectTo: '/'
