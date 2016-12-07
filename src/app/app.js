@@ -233,11 +233,6 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true,
         title: 'Search results'
       })
-      .when('/contact-list', {
-        templateUrl: 'app/components/contact-list/contact-list.html',
-        controller: 'ContactListCtrl',
-        authenticate: true
-      })
       .otherwise({
         redirectTo: '/'
       });
