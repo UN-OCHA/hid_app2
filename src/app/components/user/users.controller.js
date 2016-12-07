@@ -6,6 +6,7 @@ hidControllers.controller('UsersCtrl', ['$scope', '$rootScope', '$location', '$r
       $scope.currentPage = 1;
       $scope.selectedFilters = {};
       $scope.searchTerm = $routeParams.name;
+      $scope.showAdmin = false;
       var currentSortOrder = $scope.request.name;
       var defaultRequest = {
         limit: $scope.itemsPerPage,
@@ -28,6 +29,7 @@ hidControllers.controller('UsersCtrl', ['$scope', '$rootScope', '$location', '$r
       $scope.$on('populate-list', function (event, listType) {
         $scope.request = angular.extend($scope.request, listType)
         listInfo = listType;
+        $scope.showAdmin = listType !== undefined ? true : false;
         getUsers();
       });
 

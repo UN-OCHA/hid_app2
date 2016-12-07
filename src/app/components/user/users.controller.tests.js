@@ -104,8 +104,9 @@ describe('Users controller', function () {
         var ctrlParams = {
           $scope: scope
         };
-        var listInfo = [];
+        var listInfo = undefined;
         if (list) {
+          listInfo = []
           ctrlParams.$routeParams = {list: list};
           listInfo['lists.list'] = '1234';
         }
@@ -212,6 +213,24 @@ describe('Users controller', function () {
       expect(scope.currentPage).toEqual(1);
       expect(scope.totalItems).toEqual(3);
       expect(scope.users).toEqual(initialUsers);
+    });
+
+  });
+
+  describe('Set showAdmin variable for use in a class name', function () {
+
+    describe('When viewing users in a list', function () {
+      controllerSetup('1234')
+      it('should set showAdmin to true', function () {
+        expect(scope.showAdmin).toBe(true)
+      });
+    });
+
+    describe('When viewing users not in a list', function () {
+      controllerSetup()
+      it('should set showAdmin to false', function () {
+        expect(scope.showAdmin).toBe(false)
+      });
     });
 
   });

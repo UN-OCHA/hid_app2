@@ -11,6 +11,19 @@
   .no-flexbox & {
     @include clearfix;
   }
+
+  .page-actions__toggle-admin {
+    top: 0;
+    right: 0;
+  }
+
+  .page-header__heading {
+    padding-right: 0;
+  }
+}
+
+.profile-header__primary {
+  display: flex;
 }
 
 .profile-header__image {
@@ -53,6 +66,10 @@
   @include font-size($small-font-size);
 }
 
+.profile-header__edit {
+  top: $base-unit*6;
+}
+
 @include media-query(sm) {
 
   .profile-header {
@@ -66,6 +83,7 @@
   }
 
   .profile-header__edit {
+    top: 0;
     right: $base-unit*6;
   }
 

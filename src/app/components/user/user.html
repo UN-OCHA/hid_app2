@@ -17,7 +17,7 @@
 
   <div class="page-header profile-header">
 
-    <div class="page-header__primary">
+    <div class="profile-header__primary">
 
       <div class="profile-header__image">
 
@@ -63,15 +63,9 @@
       </div>
     </div>
 
-    <div class="page-header__secondary">
-
-      <div class="page-header__actions">
-        <button class="btn-icon" type="button" ng-click="toggleSidebar('admin')">
-          <icon name="cog" text="Actions"></icon>
-        </button>
-      </div>
-
-    </div>
+    <button class="btn-icon page-actions__toggle-admin" type="button" ng-click="toggleSidebar('admin')">
+      <icon name="cog" text="Actions"></icon>
+    </button>
 
   </div>
 
