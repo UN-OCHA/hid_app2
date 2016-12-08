@@ -78,6 +78,14 @@ input:checked + .clickie-label {
   }
 }
 
+//disabled style
+input:disabled + .clickie-label {
+  opacity: 0.8;
+  &:before {
+    background: $border-grey;
+  }
+}
+
 // Don't break clickies wrapped in labels, use default styles
 label > input[type="radio"], label > input[type="checkbox"] {
   position: static;
