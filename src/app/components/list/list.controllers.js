@@ -47,11 +47,6 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
     $scope.newMembers = User.query({'name': search});
   };
 
-  // Retrieve managers
-  $scope.getManagers = function(search) {
-    $scope.newManagers = User.query({'name': search});
-  };
-
   // Add users to a list
   $scope.addMemberToList = function() {
     var promises = [];
@@ -217,7 +212,7 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
 }]);
 
-listControllers.controller('ListEditCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, alertService, gettextCatalog) {
+listControllers.controller('ListEditCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, User, alertService, gettextCatalog) {
   if ($routeParams.list) {
     $scope.list = List.get({'listId': $routeParams.list});
   }
@@ -225,6 +220,11 @@ listControllers.controller('ListEditCtrl', ['$scope', '$routeParams', '$location
     $scope.list = new List();
     $scope.list.type = 'list';
   }
+
+  // Retrieve managers
+  $scope.getManagers = function(search) {
+    $scope.newManagers = User.query({'name': search});
+  };
 
   // Save list settings
   $scope.listSave = function() {

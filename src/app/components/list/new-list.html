@@ -1,9 +1,9 @@
-<h1 ng-if="!list.id" translate>Create a new list</h1>
-<h1 ng-if="list.id" translate>{{list.name}}</h1>
+<h1 ng-if="!list._id" translate>Create a new list</h1>
+<h1 ng-if="list._id" translate>{{list.name}}</h1>
 <form ng-submit="listSave()">
   <div class="form-group">
     <label for="name" translate>Name</label>
-    <input type="text" class="form-control" id="name" placeholder="" ng-model="list.label" required>
+    <input type="text" class="form-control" id="name" placeholder="" ng-model="list.name" required>
   </div>
   <div class="form-group">
     <label for="visibility" translate>Who can view this list ?</label>

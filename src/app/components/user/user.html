@@ -21,7 +21,7 @@
 
       <div class="profile-header__image">
 
-        <icon name="check-circle" text="Verfied" ng-show="!user.verified && !profileForm.$visible"></icon>
+        <icon name="check-circle" text="Verfied" ng-show="user.verified"></icon>
 
         <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
         <div ng-show="profileForm.$visible">
