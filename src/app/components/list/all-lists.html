@@ -1,0 +1,47 @@
+<div ng-controller="ListsCtrl">
+
+  <div class="list-actions">
+    <p class="list-actions__count">{{totalItems}} <span translate>lists</span></p>
+
+    <ul class="pagination list-actions__pagination">
+      <li class="pagination-page"><span>Show</span></li>
+      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 50}">
+        <button type="button" ng-click="setLimit(50)">50</button>
+      </li>
+      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 100}">
+        <button type="button" ng-click="setLimit(100)" ng-disabled="!isOnline">100</button>
+      </li>
+      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 150}">
+        <button type="button" ng-click="setLimit(150)" ng-disabled="!isOnline">150</button>
+      </li>
+      <li class="pagination-page" ng-class="{'active' : itemsPerPage === 200}">
+        <button type="button" ng-click="setLimit(200)" ng-disabled="!isOnline">200</button>
+      </li>
+    </ul>
+  </div>
+
+  <button class="btn-icon page-actions__toggle-filters" type="button" ng-click="toggleSidebar('listsFilters')" ng-class="{'active' : sidebar.sidebars.listsFilters && sidebar.open}" ng-disabled="!isOnline">
+      <icon name="filter" text="Filter"></icon>
+  </button>
+
+  <ng-include src="'app/components/list/lists-filters.html'"></ng-include>
+
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th translate>Name</th>
+        <th translate>Type</th>
+        <th translate>Created by</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="list in lists">
+        <td><a ng-href="/lists/{{list._id}}">{{list.name}}</a></td>
+        <td>{{list.type}}</td>
+        <td><a ng-if="list.owner.name" ng-href="/users/{{list.owner._id}}">{{list.owner.name}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul uib-pagination boundary-link-numbers="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination" direction-links="false"></ul>
+</div>
