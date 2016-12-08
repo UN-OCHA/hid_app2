@@ -25,7 +25,7 @@
 
         <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
         <div ng-show="profileForm.$visible">
-          <label class="btn btn-secondary btn-upload center-block" upload-button url="http://api.hid.vm/api/v2/user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
+          <label class="btn btn-secondary btn-upload center-block" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
           <p class="text-center" translate>Upload a squared image in JPEG format, with more than 200px width</p>
         </div>
       </div>
