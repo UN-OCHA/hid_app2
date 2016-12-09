@@ -3,7 +3,7 @@
 
   angular
     .module('app.list')
-    .controller('ListsCtrl', ListsCtrl);
+    .factory('ListsCtrl', ListsCtrl);
 
   ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'listService', 'List'];
 
