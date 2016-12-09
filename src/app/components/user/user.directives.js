@@ -1,5 +1,5 @@
-hidDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams', 'gettextCatalog', 'alertService', 'hrinfoService', 'userService', 'User', 'List',
-  function($rootScope, $location, $routeParams, gettextCatalog, alertService, hrinfoService, userService, User, List) {
+hidDirectives.directive('hidUsers', ['$rootScope', '$location', '$routeParams', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List',
+  function($rootScope, $location, $routeParams, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
   return {
     restrict: 'E',
     templateUrl: 'app/components/user/users.html',

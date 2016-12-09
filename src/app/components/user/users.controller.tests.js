@@ -56,8 +56,8 @@ describe('Users controller', function () {
     });
 
     mockUserService = {};
-    module('userServices', function($provide) {
-      $provide.value('userService', mockUserService);
+    module('UserDataServices', function($provide) {
+      $provide.value('UserDataService', mockUserService);
     });
 
     inject(function($rootScope, $q) {

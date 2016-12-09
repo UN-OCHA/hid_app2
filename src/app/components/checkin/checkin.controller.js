@@ -5,9 +5,9 @@
     .module('app.checkin')
     .controller('CheckinCtrl', CheckinCtrl);
 
-  CheckinCtrl.$inject = ['$scope', '$routeParams', '$q', 'gettextCatalog', 'config', 'hrinfoService', 'alertService', 'User', 'UserCheckIn', 'List'];
+  CheckinCtrl.$inject = ['$scope', '$routeParams', '$q', 'gettextCatalog', 'config', 'hrinfoService', 'alertService', 'User', 'UserCheckInService', 'List'];
 
-  function CheckinCtrl ($scope, $routeParams, $q, gettextCatalog, config, hrinfoService, alertService, User, UserCheckIn, List) {
+  function CheckinCtrl ($scope, $routeParams, $q, gettextCatalog, config, hrinfoService, alertService, User, UserCheckInService, List) {
     $scope.request = $routeParams;
     $scope.step = 1;
     $scope.organization = {};

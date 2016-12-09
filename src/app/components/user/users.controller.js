@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$scope', '$rootScope', '$location', '$routeParams', 'gettextCatalog', 'alertService', 'hrinfoService', 'userService', 'User', 'List'];
+  UsersCtrl.$inject = ['$scope', '$rootScope', '$location', '$routeParams', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
 
-  function UsersCtrl($scope, $rootScope, $location, $routeParams, gettextCatalog, alertService, hrinfoService, userService, User, List) {
+  function UsersCtrl($scope, $rootScope, $location, $routeParams, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
 
     $scope.request = {};
     $scope.totalItems = 0;
@@ -29,7 +29,7 @@
     function getUsers () {
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
       var params = angular.extend($scope.request, $scope.filters);
-      userService.getUsers(params).then(function (users) {
+      UserDataService.getUsers(params).then(function (users) {
         $scope.users = users;
         $scope.totalItems = users.headers["x-total-count"];
       });
@@ -48,7 +48,7 @@
       getUsers();
     };
 
-    userService.subscribe($scope, function (evt, request) {
+    UserDataService.subscribe($scope, function (evt, request) {
       angular.merge($scope.request, request);
       $scope.currentPage = 1;
       getUsers();
