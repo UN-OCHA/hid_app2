@@ -62,18 +62,5 @@ clientControllers.controller('ClientsCtrl', ['$scope', '$routeParams', '$q', 'ge
 
   $scope.clients = Client.query($scope.request, queryCallback);
 
-  /*$scope.pageChanged = function () {
-    $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-    listService.setRequest($scope.request);
-    listService.filter(queryCallback);
-    $scope.lists = listService.getLists();
-  };
-
-  $scope.filter = function() {
-    listService.setFilters($scope.filters);
-    $scope.currentPage = 1;
-    $scope.pageChanged();
-  };*/
-
 }]);
 
