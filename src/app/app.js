@@ -3,7 +3,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userServices', 'app.dashboard', 'app.list', 'clientServices', 'clientControllers', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives', 'hidControllers', 'hidServices', 'hidDirectives', 'app.user']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'userServices', 'app.dashboard', 'app.list', 'app.client', 'authServices', 'authController', 'appServices', 'appControllers', 'commonDirectives', 'hidControllers', 'hidServices', 'hidDirectives', 'app.user']);
 
 app.constant('config', env);
 
