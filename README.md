@@ -4,6 +4,11 @@
 
 TO DO
 
+## Code style guide
+
+This project aims to follow the [John Papa Angular 1 style guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1)
+
+
 ## Unit tests
 
 Unit tests are written using [Jasmine](https://jasmine.github.io/) and run with [Karma](https://karma-runner.github.io/).
