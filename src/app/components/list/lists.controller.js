@@ -5,9 +5,9 @@
     .module('app.list')
     .factory('ListsCtrl', ListsCtrl);
 
-  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'listService', 'List'];
+  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'List'];
 
-  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, gettextCatalog, hrinfoService, alertService, listService, List) {
+  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, gettextCatalog, hrinfoService, alertService, ListDataService, List) {
     $scope.request = $routeParams;
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -17,7 +17,7 @@
     $scope.request.sort = 'name';
     $scope.selectedFilters = {};
     var currentSortOrder = $scope.request.name;
-    listService.setRequest($scope.request);
+    ListDataService.setRequest($scope.request);
 
     $scope.listTypes = [{
       key: 'operation',
@@ -51,7 +51,7 @@
       $scope.totalItems = resp.headers["x-total-count"];
     };
 
-    listService.subscribe($scope, function () {
+    ListDataService.subscribe($scope, function () {
       $scope.currentPage = 1;
       $scope.pageChanged();
     });
@@ -71,7 +71,7 @@
     }
 
     $scope.resetFilters = function () {
-      listService.setFilters({});
+      ListDataService.setFilters({});
       $scope.filters = {};
       $scope.selectedFilters = {};
       $scope.currentPage = 1;
@@ -81,14 +81,14 @@
     $scope.pageChanged = function () {
       currentSortOrder = $scope.request.sort;
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-      listService.setRequest($scope.request);
-      listService.filter(queryCallback);
-      $scope.lists = listService.getLists();
+      ListDataService.setRequest($scope.request);
+      ListDataService.filter(queryCallback);
+      $scope.lists = ListDataService.getLists();
     };
 
     $scope.filter = function() {
       $scope.filters = angular.copy($scope.selectedFilters);
-      listService.setFilters($scope.filters);
+      ListDataService.setFilters($scope.filters);
       $scope.currentPage = 1;
       $scope.pageChanged();
     };

@@ -3,7 +3,7 @@
 
   angular
     .module('app.list')
-    .factory('listService', ListDataService);
+    .factory('ListDataService', ListDataService);
 
   ListDataService.$inject = ['$rootScope', 'List'];
 
