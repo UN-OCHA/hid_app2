@@ -212,36 +212,6 @@ listControllers.controller('ListCtrl', ['$scope', '$routeParams', '$location', '
 
 }]);
 
-listControllers.controller('ListEditCtrl', ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'User', 'alertService', 'gettextCatalog',  function ($scope, $routeParams, $location, $uibModal, List, User, alertService, gettextCatalog) {
-  if ($routeParams.list) {
-    $scope.list = List.get({'listId': $routeParams.list});
-  }
-  else {
-    $scope.list = new List();
-    $scope.list.type = 'list';
-  }
-
-  // Retrieve managers
-  $scope.getManagers = function(search) {
-    $scope.newManagers = User.query({'name': search});
-  };
-
-  // Save list settings
-  $scope.listSave = function() {
-    if ($scope.list._id) {
-      $scope.list.$update(function() {
-        $location.path('/lists/' + $scope.list._id);
-      });
-    }
-    else {
-      $scope.list.$save(function() {
-       $location.path('/lists/' + $scope.list._id);
-      });
-    }
-  };
-
-}]);
-
 listControllers.controller('ListsCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'listService', 'List', function($rootScope, $scope, $routeParams, $location, $q, gettextCatalog, hrinfoService, alertService, listService, List) {
   $scope.request = $routeParams;
   $scope.totalItems = 0;
