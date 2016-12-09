@@ -1,5 +1,13 @@
-appServices.factory('Search', ['List', 'User', '$q',
-  function(List, User, $q){
+(function () {
+  'use strict';
+
+  angular
+    .module('app.search')
+    .factory('SearchService', SearchService);
+
+  SearchService.$inject = ['List', 'User', '$q'];
+
+  function SearchService(List, User, $q) {
 
     var Search = {};
 
@@ -16,4 +24,6 @@ appServices.factory('Search', ['List', 'User', '$q',
 
     return Search;
 
-}]);
+  }
+
+})();
