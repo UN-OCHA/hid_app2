@@ -2,7 +2,7 @@ describe('Search Form controller', function () {
 
   'use strict';
 
-  var scope, mockSearch, mockUser, mockList, searchResults, $location;
+  var scope, mockSearchService, mockUser, mockList, searchResults, $location;
 
   var searchResults = [
     [
@@ -22,23 +22,23 @@ describe('Search Form controller', function () {
 
     mockUser = jasmine.createSpyObj('User', ['query']);
 
-    mockSearch = {};
+    mockSearchService = {};
     module('appServices', function($provide) {
-      $provide.value('Search', mockSearch);
+      $provide.value('SearchService', mockSearchService);
     });
 
     inject(function($rootScope, $q, $controller, _$location_) {
       scope = $rootScope.$new();
       $location = _$location_;
 
-      mockSearch.UsersAndLists = function () {
+      mockSearchService.UsersAndLists = function () {
         var defer = $q.defer();
         defer.resolve(searchResults);
         return defer.promise;
       }
 
 
-      spyOn(mockSearch, 'UsersAndLists').and.callThrough();
+      spyOn(mockSearchService, 'UsersAndLists').and.callThrough();
       spyOn($location, 'search').and.callThrough();
 
       $controller('SearchFormCtrl', {
@@ -59,14 +59,14 @@ describe('Search Form controller', function () {
       it('should not search and not show the autocomplete dropdown if there is no search term', function () {
         scope.searchTerm = '';
         scope.searchAutocomplete();
-        expect(mockSearch.UsersAndLists).not.toHaveBeenCalled();
+        expect(mockSearchService.UsersAndLists).not.toHaveBeenCalled();
         expect(scope.showAutocomplete).toBe(false);
       });
 
       it('should not search if the search term is shorter than the minimum length', function () {
         scope.searchTerm = 'ab';
         scope.searchAutocomplete();
-        expect(mockSearch.UsersAndLists).not.toHaveBeenCalled();
+        expect(mockSearchService.UsersAndLists).not.toHaveBeenCalled();
         expect(scope.showAutocomplete).toBe(false);
       });
 
@@ -78,7 +78,7 @@ describe('Search Form controller', function () {
         scope.searchTerm = 'Kathleen';
         scope.searchAutocomplete();
         scope.$digest();
-        expect(mockSearch.UsersAndLists).toHaveBeenCalledWith('Kathleen', 3);
+        expect(mockSearchService.UsersAndLists).toHaveBeenCalledWith('Kathleen', 3);
       });
 
       it('should add the returned users and lists to the scope and show the autocomplete dropdown', function () {
