@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$scope', '$routeParams', '$location', '$uibModal', '$timeout', 'List', 'User', 'UserCheckIn', 'userService', 'alertService', 'gettextCatalog'];
+  ListCtrl.$inject = ['$scope', '$routeParams', '$location', '$uibModal', '$timeout', 'List', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
 
-  function ListCtrl ($scope, $routeParams, $location, $uibModal, $timeout, List, User, UserCheckIn, userService, alertService, gettextCatalog) {
+  function ListCtrl ($scope, $routeParams, $location, $uibModal, $timeout, List, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -58,8 +58,8 @@
     $scope.addMemberToList = function() {
       var promises = [];
       angular.forEach($scope.usersAdded.users, function (value, key) {
-        UserCheckIn.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
-          userService.notify();
+        UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
+          UserDataService.notify();
         });
       });
     };
@@ -74,11 +74,11 @@
           }
         }
         if (checkInId != 0) {
-          UserCheckIn.delete({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function(user) {
+          UserCheckInService.delete({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function(user) {
             // Close existing alert
             alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('The user was successfully checked out.'));
-            userService.notify();
+            UserDataService.notify();
           });
         }
       });
@@ -87,11 +87,11 @@
 
     // Check current user in this list
     $scope.checkIn = function () {
-      UserCheckIn.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, $scope.checkinUser, function (user) {
+      UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, $scope.checkinUser, function (user) {
         alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
         $scope.isMember = true;
         $scope.setCurrentUser(user);
-        userService.notify();
+        UserDataService.notify();
       });
     };
 
@@ -105,13 +105,13 @@
           }
         }
         if (checkInId != 0) {
-          UserCheckIn.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function (user) {
+          UserCheckInService.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function (user) {
             // Close existing alert
             alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
             $scope.isMember = false;
             $scope.setCurrentUser(user);
-            userService.notify();
+            UserDataService.notify();
           });
         }
       });
@@ -194,7 +194,7 @@
         $scope.list.managers.push(user._id);
         $scope.list.$update(function (list, response) {
           $scope.list = list;
-          userService.notify();
+          UserDataService.notify();
           alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
         });
@@ -210,7 +210,7 @@
         $scope.list.managers = mmanagers;
         $scope.list.$update(function (list, response) {
           $scope.list = list;
-          userService.notify();
+          UserDataService.notify();
           alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
         });

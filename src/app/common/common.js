@@ -126,7 +126,7 @@ appServices.factory('offlineService', function (config, List) {
 
 var appControllers = angular.module('appControllers', []);
 
-appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$window', 'gettextCatalog', 'User', 'userService', 'ListDataService',  function ($rootScope, $scope, $location, $window, gettextCatalog, User, userService, ListDataService) {
+appControllers.controller('AppCtrl', ['$rootScope', '$scope', '$location', '$window', 'gettextCatalog', 'User', 'UserDataService', 'ListDataService',  function ($rootScope, $scope, $location, $window, gettextCatalog, User, UserDataService, ListDataService) {
   $scope.currentUser = null;
   $scope.currentUserResource = null;
   $scope.filters = {};

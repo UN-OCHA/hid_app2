@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('KioskCtrl', KioskCtrl);
 
-  KioskCtrl.$inject = ['$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'UserCheckIn', 'List'];
+  KioskCtrl.$inject = ['$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'UserCheckInService', 'List'];
 
-  function KioskCtrl($scope, $routeParams, $location, gettextCatalog, alertService, hrinfoService, User, UserCheckIn, List) {
+  function KioskCtrl($scope, $routeParams, $location, gettextCatalog, alertService, hrinfoService, User, UserCheckInService, List) {
 
     $scope.step = 1;
     $scope.user = new User();
@@ -90,14 +90,14 @@
         };
         if (user.organization && user.organization.list) {
           // Check out from the old organization
-          UserCheckIn.delete({userId: user._id, listType: 'organization', checkInId: user.organization._id}, {}, function (user) {
-            UserCheckIn.save({userId: user._id, listType: 'organization'}, checkinUser, function (out) {
+          UserCheckInService.delete({userId: user._id, listType: 'organization', checkInId: user.organization._id}, {}, function (user) {
+            UserCheckInService.save({userId: user._id, listType: 'organization'}, checkinUser, function (out) {
               $scope._checkinHelper(user);
             });
           });
         }
         else {
-          UserCheckIn.save({userId: user._id, listType: 'organization'}, checkinUser, function (out) {
+          UserCheckInService.save({userId: user._id, listType: 'organization'}, checkinUser, function (out) {
             $scope._checkinHelper(user);
           });
         }
@@ -115,7 +115,7 @@
         checkoutDate: $scope.departureDate
       };
       // Then do the checkin
-      UserCheckIn.save({userId: user._id, listType: $scope.list.list.type + 's'}, checkinUser, function (out) {
+      UserCheckInService.save({userId: user._id, listType: $scope.list.list.type + 's'}, checkinUser, function (out) {
         $scope.checkInSuccess();
       }, function (resp) {
         alertService.add('danger', gettextCatalog.getString('There was an error checking you in.'));

@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', 'UserCheckIn'];
+  UserCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', 'UserCheckInService'];
 
-  function UserCtrl($scope, $routeParams, $http, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List, UserCheckIn) {
+  function UserCtrl($scope, $routeParams, $http, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List, UserCheckInService) {
 
     $scope.newEmail = {
       type: '',
@@ -155,7 +155,7 @@
     };
 
     $scope.addOrganization = function() {
-      UserCheckIn.save({userId: $scope.user._id, listType: 'organizations'}, {list: $scope.newOrganization.list._id}, function (user) {
+      UserCheckInService.save({userId: $scope.user._id, listType: 'organizations'}, {list: $scope.newOrganization.list._id}, function (user) {
         $scope.user.organizations = user.organizations;
         if ($scope.user._id == $scope.currentUser._id) {
           $scope.setCurrentUser($scope.currentUser);
@@ -164,7 +164,7 @@
     };
 
     $scope.removeOrganization = function(org) {
-      UserCheckIn.delete({userId: $scope.user._id, listType: 'organizations', checkInId: org._id}, {}, function (user) {
+      UserCheckInService.delete({userId: $scope.user._id, listType: 'organizations', checkInId: org._id}, {}, function (user) {
         $scope.user.organizations = user.organizations;
         if ($scope.user._id == $scope.currentUser._id) {
           $scope.setCurrentUser($scope.currentUser);
@@ -268,7 +268,7 @@
     ];
 
     $scope._checkinAndSave = function() {
-      UserCheckIn.save({userId: $scope.user._id, listType: 'organization'}, {list: $scope.organization.list._id}, function (user) {
+      UserCheckInService.save({userId: $scope.user._id, listType: 'organization'}, {list: $scope.organization.list._id}, function (user) {
         $scope._saveUser();
       });
     };
@@ -287,7 +287,7 @@
       if ($scope.organization.list && (!$scope.user.organization.list || $scope.organization.list._id != $scope.user.organization.list._id)) {
         if ($scope.user.organization.list) {
           // Check out from the old organization
-          UserCheckIn.delete({userId: $scope.user._id, listType: 'organization', checkInId: $scope.user.organization._id}, {}, function (user) {
+          UserCheckInService.delete({userId: $scope.user._id, listType: 'organization', checkInId: $scope.user.organization._id}, {}, function (user) {
             $scope._checkinAndSave();
           });
         }

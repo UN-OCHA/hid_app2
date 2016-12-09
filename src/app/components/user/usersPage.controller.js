@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UsersPageCtrl', UsersPageCtrl);
 
-  UsersPageCtrl.$inject = ['$scope', '$location', 'userService'];
+  UsersPageCtrl.$inject = ['$scope', '$location', 'UserDataService'];
 
-  function UsersPageCtrl($scope, $location, userService) {
+  function UsersPageCtrl($scope, $location, UserDataService) {
 
     $scope.$on('user-service-ready', function() {
       $scope.$broadcast('populate-list');

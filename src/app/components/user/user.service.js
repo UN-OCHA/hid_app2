@@ -1,24 +1,30 @@
-userServices = angular.module('userServices', ['ngCachedResource']);
+(function () {
+  'use strict';
 
-userServices.factory('User', ['$cachedResource', '$http', '$location', 'config',
-  function($cachedResource, $http, $location, config){
+  angular
+  .module('app.user')
+  .factory('User', User);
 
-    var User = $cachedResource('users', config.apiUrl + 'user/:userId', {userId: '@_id'},
-    {
-      'save': {
-        method: 'POST',
-        cache: false
-      },
-      'remove': {
-        method: 'DELETE',
-        cache: false
-      },
-      'delete': {
-        method: 'DELETE',
-        cache: false
-      },
-      'update': {
-        method: 'PUT',
+  User.$inject = ['$cachedResource', '$http', '$location', 'config'];
+
+  function User($cachedResource, $http, $location, config) {
+
+   var User = $cachedResource('users', config.apiUrl + 'user/:userId', {userId: '@_id'},
+   {
+    'save': {
+      method: 'POST',
+      cache: false
+    },
+    'remove': {
+      method: 'DELETE',
+      cache: false
+    },
+    'delete': {
+      method: 'DELETE',
+      cache: false
+    },
+    'update': {
+      method: 'PUT',
         // TODO: find a way to cache these requests, and fix https://github.com/goodeggs/angular-cached-resource/issues/72
         cache: false
       }
@@ -103,37 +109,5 @@ userServices.factory('User', ['$cachedResource', '$http', '$location', 'config',
     return User;
 
   }
-]);
 
-userServices.factory('UserCheckIn', ['$cachedResource', 'config',
-  function ($cachedResource, config) {
-    return $cachedResource('userCheckins', config.apiUrl + 'user/:userId/:listType/:checkInId');
-  }
-]);
-
-userServices.factory('userService', ['$rootScope', '$log', 'User',
-  function ($rootScope, $log, User) {
-    var userService = {};
-
-    userService.subscribe = function(scope, callback) {
-      var handler = $rootScope.$on('users-updated-event', callback);
-      scope.$on('$destroy', handler);
-      $rootScope.$broadcast('user-service-ready');
-    };
-
-    userService.notify = function (request) {
-      $rootScope.$emit('users-updated-event', request);
-    };
-
-    userService.getUsers = function (params, notify) {
-      return User.query(params).$promise.then(function (response) {
-        return response;
-      }, function (error) {
-        $log.error(error);
-      });
-    }
-
-
-    return userService;
-  }
-]);
+})();
