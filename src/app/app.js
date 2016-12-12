@@ -76,8 +76,10 @@ app.run(function ($rootScope) {
   $rootScope.$on('$viewContentLoaded', function () {
     if (hasPrevious) {
       var h1 = document.querySelector('h1')
-      h1.setAttribute('tabIndex', -1);
-      h1.focus();
+      if (h1) {
+        h1.setAttribute('tabIndex', -1);
+        h1.focus();
+      }
     }
   });
 
