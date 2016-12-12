@@ -33,12 +33,13 @@
 
           <li class="nav__item" uib-dropdown>
             <button type="button" class="nav__link btn btn-transparent" uib-dropdown-toggle>
-              <span class="nav__label nav__label--mobile">Eng</span>
+              <span class="nav__label nav__label--mobile">{{getCurrentLanguage()}}</span>
               <icon name="caret-down" text="Change language"></icon>
             </button>
 
             <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-              <li><a href="#" translate>TO DO</a></li>
+              <li><a href="#" ng-click="changeLanguage('en')" translate>English</a></li>
+              <li><a href="#" ng-click="changeLanguage('fr')" translate>Français</a></li>
             </ul>
           </li>
 

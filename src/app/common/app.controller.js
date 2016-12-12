@@ -69,11 +69,40 @@
       if ($window.localStorage.getItem('currentUser')) {
         $scope.setCurrentUser(JSON.parse($window.localStorage.getItem('currentUser')));
       }
+      $scope.initLanguage();
     };
 
     $scope.activeNav = function (path) {
       return $location.path() === path;
     };
+
+    $scope.initLanguage = function () {
+      if (!$scope.currentUser) {
+        return;
+      }
+
+      var locale = $scope.currentUser.locale;
+      var lang = gettextCatalog.getCurrentLanguage();
+
+      if (lang !== locale) {
+        gettextCatalog.setCurrentLanguage(locale);
+        $scope.language = locale;
+      }
+    }
+
+    $scope.changeLanguage = function (lang) {
+      gettextCatalog.setCurrentLanguage(lang);
+      $scope.currentUser.locale = lang;
+      $scope.language = lang;
+      User.update($scope.currentUser, function (user) {
+        $scope.setCurrentUser(user);
+      });
+    }
+
+    $scope.getCurrentLanguage = function () {
+      var lang = gettextCatalog.getCurrentLanguage();
+      return lang.toUpperCase();
+    }
 
     var initView = function () {
       $scope.closeSidebar();

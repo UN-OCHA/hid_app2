@@ -37,6 +37,8 @@
     $scope.saveSettings = function (form) {
       $scope.user.$update(function (user) {
         alertService.add('success', gettextCatalog.getString('Your settings were successfully changed.'));
+        $scope.setCurrentUser($scope.user);
+        $scope.initLanguage();
       }, function (resp) {
         alertService.add('danger', gettextCatalog.getString('There was an error saving your settings.'));
       });
