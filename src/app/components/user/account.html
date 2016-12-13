@@ -1,91 +1,97 @@
-<uib-tabset justified="true">
-  <uib-tab heading="{{'Account Settings'|translate}}">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title" translate>Change password</h3>
-      </div>
-      <div class="panel-body">
-        <form name="changePassword" ng-submit="changePassword.$valid && savePassword(changePassword)" autocomplete="off" novalidate>
-          <div class="form-group" ng-class="{'has-error': changePassword.oldPassword.$touched && changePassword.oldPassword.$invalid}">
-            <label for="old_password" translate>Old password</label>
-            <input name="oldPassword" type="password" class="form-control" placeholder="" ng-model="password.old" required>
-            <div class="clearfix">
-              <div ng-messages="changePassword.oldPassword.$error" ng-show="changePassword.oldPassword.$touched" ng-messages-multiple="ng-messages-multiple">
-                <div ng-messages-include="app/common/messages.html"></div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group" ng-class="{'has-error': changePassword.newPassword.$touched && changePassword.newPassword.$invalid}">
-            <label for="newPassword" translate>New password</label>
-            <input type="password" name="newPassword" class="form-control" placeholder="" ng-model="password.new" required>
-            <div class="clearfix">
-              <div ng-messages="changePassword.newPassword.$error" ng-show="changePassword.newPassword.$touched" ng-messages-multiple="ng-messages-multiple">
-                <div ng-messages-include="app/common/messages.html"></div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group" ng-class="{'has-error': changePassword.confirmPassword.$touched && changePassword.confirmPassword.$invalid}">
-            <label for="confirm_password" translate>Confirm new password</label>
-            <input type="password" name="confirmPassword" class="form-control" match-password="newPassword" placeholder="" ng-model="confirmPassword" required>
-            <div class="clearfix">
-              <div ng-messages="changePassword.confirmPassword.$error" ng-show="changePassword.confirmPassword.$touched" ng-messages-multiple="ng-messages-multiple">
-                <div ng-messages-include="app/common/messages.html"></div>
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary" ng-disabled="!isOnline || changePassword.$invalid || changePassword.$submitted" translate>Update password</button>
-        </form>
-      </div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1 class="page-header__heading" translate>Account preferences</h1>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title" translate>Change settings</h3>
-      </div>
-      <div class="panel-body">
-        <form name="settings" ng-submit="settings.$valid && saveSettings(settings)" autocomplete="off" novalidate>
-          <div class="form-group">
-            <label for="locale" translate>Locale</label>
-            <select name="locale" ng-model="user.locale" class="form-control">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+
+    <form name="changePassword" ng-submit="changePassword.$valid && savePassword(changePassword)" autocomplete="off" novalidate>
+
+      <fieldset class="form-section">
+        <legend class="form-section__heading" translate>Change password</legend>
+
+        <div class="form-group" ng-class="{'has-error': changePassword.oldPassword.$touched && changePassword.oldPassword.$invalid}">
+
+          <label for="oldPassword" translate>Current password</label>
+          <input name="oldPassword" id="oldPassword" type="password" class="form-control" placeholder="Your current password" ng-model="password.old" required>
+          <div ng-messages="changePassword.oldPassword.$error" ng-show="changePassword.oldPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+            <div ng-messages-include="app/common/messages.html"></div>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': changePassword.newPassword.$touched && changePassword.newPassword.$invalid}">
+          <label for="newPassword" translate>New password</label>
+          <input type="password" name="newPassword" id="newPassword" class="form-control" placeholder="Your new password" ng-model="password.new" required>
+          <div ng-messages="changePassword.newPassword.$error" ng-show="changePassword.newPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+            <div ng-messages-include="app/common/messages.html"></div>
+          </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': changePassword.confirmPassword.$touched && changePassword.confirmPassword.$invalid}">
+          <label for="confirmPassword" translate>Confirm new password</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" match-password="newPassword" placeholder="Your new password" ng-model="confirmPassword" required>
+          <div ng-messages="changePassword.confirmPassword.$error" ng-show="changePassword.confirmPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+            <div ng-messages-include="app/common/messages.html"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" ng-disabled="!isOnline || changePassword.$invalid || changePassword.$submitted" translate>Update password</button>
+      </fieldset>
+    </form>
+
+    <form name="settings" ng-submit="settings.$valid && saveSettings(settings)" autocomplete="off" novalidate>
+      <fieldset class="form-section">
+        <legend class="form-section__heading" translate>Change settings</legend>
+
+        <div class="form-group">
+          <label for="locale" translate>Locale</label>
+          <div class="styled-select">
+            <select name="locale" id="locale" ng-model="user.locale">
               <option value="en">English</option>
               <option value="fr">Français</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="zoneinfo" translate>Timezone</label>
-            <ui-select ng-model="user.zoneinfo" name="zoneinfo" theme="bootstrap" style="min-width:300px;">
-              <ui-select-match placeholder="{{'Timezone'|translate}}">
-                {{$select.selected}}
-              </ui-select-match>
-              <ui-select-choices repeat="timezone in timezones | filter: $select.search track by $index">
-                {{timezone}}
-              </ui-select-choices>
-            </ui-select>
-          </div>
-          <button type="submit" class="btn btn-primary" ng-disabled="!isOnline" translate>Save</button>
-        </form>
-      </div>
-    </div>
-    <div class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title" translate>Delete account</h3>
-      </div>
-      <div class="panel-body">
-        <p translate>Deleting your account means that you will lose your access to Humanitarian ID.</p>
-        <button type="button" class="btn btn-danger" ng-disabled="!isOnline" ng-click="deleteAccount()" translate>Delete account</button>
-      </div>
-    </div>
-  </uib-tab>
-  <uib-tab heading="{{'Applications'|translate}}">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title" translate>Authorized Applications</h3>
-      </div>
-      <div class="panel-body">
-        <p translate>You have granted the following applications access to your Humanitarian ID account.</p>
-        <ul>
-          <li ng-repeat="client in user.authorizedClients">{{client.name}} <button class="btn btn-default" ng-disabled="!isOnline" ng-click="revokeClient(client)">Revoke</a></li>
-        </ul>
-      </div>
-    </div>
-  </uib-tab>
-</uib-tabset>
+        </div>
+        <div class="form-group">
+          <label for="zoneinfo" translate>Timezone</label>
+          <ui-select ng-model="user.zoneinfo" name="zoneinfo" id="zoneinfo">
+            <ui-select-match placeholder="{{'Timezone'|translate}}">
+              {{$select.selected}}
+            </ui-select-match>
+            <ui-select-choices repeat="timezone in timezones | filter: $select.search track by $index">
+              {{timezone}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+        <button type="submit" class="btn-primary" ng-disabled="!isOnline" translate>Save settings</button>
+      </fieldset>
+    </form>
+
+    <fieldset class="form-section">
+      <legend class="form-section__heading" translate>Delete account</legend>
+
+      <p class="form-section__info" translate>Deleting your account means that you will lose your access to Humanitarian ID.</p>
+      <button type="button" class="btn-danger" ng-disabled="!isOnline" ng-click="deleteAccount()" translate>Delete account</button>
+    </fieldset>
+
+  </div>
+
+  <div class="col-md-6">
+   <fieldset class="form-section">
+    <legend class="form-section__heading" translate>Authorized Applications</legend>
+    <p class="form-section__info" ng-if="!user.authorizedClients.length" translate><em>No applications currently have access to your Humanitarian ID account.</em></p>
+    <p class="form-section__info" ng-if="user.authorizedClients.length" translate>You have granted the following applications access to your Humanitarian ID account.</p>
+    <ul class="form-list">
+      <li class="form-list__item" ng-repeat="client in user.authorizedClients">
+        <span class="form-list__text">{{client.name}}</span>
+        <button class="btn-transparent" ng-disabled="!isOnline" ng-click="revokeClient(client)">
+          <icon name="times" text="Revoke access for {{client.name}}"></icon>
+        </button>
+      </li>
+    </ul>
+   </fieldset>
+  </div>
+
+</div>

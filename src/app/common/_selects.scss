@@ -45,7 +45,8 @@
     padding-right: $base-unit*5;
 
     &:focus {
-      background: rgba($tertiary-color, 0.2);
+      @include input-focus-style();
+      // background: rgba($tertiary-color, 0.2);
     }
   }
 

@@ -282,6 +282,22 @@ legend + .form-list__item, h3 + .form-list__item {
   flex-grow: 1;
 }
 
+.form-section {
+  margin-bottom: $base-unit*2;
+  padding-bottom: $base-unit*2;
+}
+
+.form-section__heading {
+  @include font-size($medium-font-size);
+  font-family: $heading-font-light;
+  color: $dark-blue;
+  margin-bottom: $base-unit*2;
+}
+
+.form-section__info {
+  margin-bottom: $base-unit;
+}
+
 @include media-query(sm) {
   .form-inline-list {
     display: flex;
@@ -303,5 +319,10 @@ legend + .form-list__item, h3 + .form-list__item {
   .form-inline-list__item--short {
     flex-grow: 1;
     max-width: 120px;
+  }
+
+  .form-section {
+    margin-bottom: $base-unit*4;
+    padding-bottom: $base-unit*4;
   }
 }

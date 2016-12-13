@@ -72,6 +72,18 @@ button[disabled], a.disabled {
   }
 }
 
+.btn-danger {
+  @include btn();
+  background: white;
+  border: 1px solid $error-color;
+  color: $error-color;
+
+  &:hover, &:focus, &.active {
+    background: $error-color;
+    color: white;
+  }
+}
+
 .btn-icon {
   @include btn();
   background: white;
