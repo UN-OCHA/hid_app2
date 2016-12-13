@@ -1,15 +1,34 @@
 <div class="sidebar collapse" ng-class="{'in' : sidebar.open}">
-  <div ng-show="(currentUser.is_admin || (currentUser._id == user._id)) && isOnline">
-    <a class="btn btn-primary" href="/checkin/{{user._id}}" translate>Check into List</a>
-  </div>
-  <div>
-    <button class="btn btn-primary" ng-click="exportVcard();" translate>Export Contact Info</button>
-  </div>
-  <div ng-show="user.is_orphan">
-    <button class="btn btn-primary" ng-click="sendClaimEmail();" ng-disabled="!isOnline" translate>Send Claim Email</button>
-  </div>
-  <div>
-    <button class="btn btn-primary" ng-disabled="!isOnline" ng-click="notify()" translate>Report a Problem</button>
+  <div class="sidebar__inner">
+    <h2 class="sidebar__heading" translate>User admin</h2>
+
+    <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
+      <icon name="times" text="close"></icon>
+    </button>
+
+    <div class="sidebar-section">
+
+      <a class="btn-primary btn-block" href="/checkin/{{user._id}}" ng-show="(currentUser.is_admin || (currentUser._id == user._id)) && isOnline">
+        <icon name="check"></icon>
+        <span translate>Check into List</span>
+      </a>
+
+      <button class="btn-primary btn-block" ng-click="exportVcard();">
+        <icon name="download"></icon>
+        <span translate>Export Contact Info</span>
+      </button>
+
+      <button class="btn-primary btn-block" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-show="user.is_orphan">
+        <icon name="email"></icon>
+        <span translate>Send Claim Email</span>
+      </button>
+
+      <button class="btn-primary btn-block" ng-disabled="!isOnline" ng-click="notify()">
+        <icon name="flag"></icon>
+        <span translate>Report a Problem</span>
+      </button>
+
+    </div>
   </div>
 </div>
 
