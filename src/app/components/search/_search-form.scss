@@ -66,6 +66,38 @@ input[type="search"].search-form__input {
   }
 }
 
+.search-autocomplete {
+  font-family: $heading-font-light;
+  margin-top: $base-unit;
+}
+
+.search-autocomplete__heading {
+  display: block;
+  color: $text-light;
+  background: $primary-color;
+  padding: $base-unit;
+  @include clearfix;
+
+  .btn-transparent {
+    text-transform: none;
+    font-style: italic;
+    color: $text-light;
+    padding: 0;
+    line-height: 1.5;
+    float: right;
+
+    &:focus {
+     box-shadow: none;
+    }
+  }
+}
+
+.search-autocomplete__item {
+  a {
+    color: $primary-color;
+  }
+}
+
 @include media-query(md) {
 
   input[type="search"].search-form__input {
@@ -79,6 +111,10 @@ input[type="search"].search-form__input {
 
   .search-form__active {
     bottom: -11px;
+  }
+
+  .search-autocomplete {
+    margin-top: $base-unit*2;
   }
 
 }

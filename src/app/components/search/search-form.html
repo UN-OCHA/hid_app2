@@ -9,24 +9,29 @@
       </button>
       <span class="search-form__active"></span>
 
-      <ul class="dropdown-menu" uib-dropdown-menu>
-        <li ng-if="searchLists.length">
-          <span translate><strong>Lists</strong></span>
-          <ul>
-            <li ng-repeat="result in searchLists">
-              <a href="lists/{{result._id}}">{{result.name}}</a>
-            </li>
-          </ul>
-        </li>
+      <ul class="dropdown-menu search-autocomplete" uib-dropdown-menu>
         <li ng-if="searchPeople.length">
-          <span translate><strong>Users</strong></span>
+          <span class="search-autocomplete__heading">
+            <span translate>Contacts</span>
+            <button type="button" ng-click="fullSearch(searchTerm)" class="btn-transparent" translate>See all</button>
+          </span>
           <ul>
-            <li ng-repeat="result in searchPeople">
+            <li class="search-autocomplete__item" ng-repeat="result in searchPeople">
               <a href="users/{{result._id}}">{{result.name}}</a>
             </li>
           </ul>
         </li>
-        <li><button type="button" ng-click="fullSearch(searchTerm)" class="btn-transparent">View all</button></li>
+        <li ng-if="searchLists.length">
+          <span class="search-autocomplete__heading">
+            <span translate>Lists</span>
+            <button type="button" ng-click="fullSearch(searchTerm)" class="btn-transparent" translate>See all</button>
+          </span>
+          <ul>
+            <li class="search-autocomplete__item" ng-repeat="result in searchLists">
+              <a href="lists/{{result._id}}">{{result.name}}</a>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
   </form>
