@@ -5,16 +5,16 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$scope', '$rootScope', '$location', '$routeParams', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
+  UsersCtrl.$inject = ['$scope', '$rootScope', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
 
-  function UsersCtrl($scope, $rootScope, $location, $routeParams, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
+  function UsersCtrl($scope, $rootScope, $location, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
 
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
     $scope.currentPage = 1;
     $scope.selectedFilters = {};
-    $scope.searchTerm = $routeParams.name;
+    // $scope.searchTerm = $routeParams.name;
     $scope.showAdmin = false;
     var currentSortOrder = $scope.request.name;
     var defaultRequest = {

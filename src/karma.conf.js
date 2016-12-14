@@ -38,13 +38,14 @@ module.exports = function(config) {
         'assets/js/modernizr-output.js',
         'bower_components/angular-cached-resource/angular-cached-resource.js',
         'bower_components/offline/offline.min.js',
-        // 'assets/js/unit-test-helpers.js',
+        'app/config/config.js',
         'app/app.js',
-        // 'app/**/*.html',
-        'app/common/**/*.js',
-        'app/components/**/*.js',
-        'app/components/*.tests.js'
-
+        'app/common/*.module.js',
+        'app/components/**/*.module.js',
+        'app/components/**/*.controller.js',
+        'app/components/**/*.service.js',
+        'app/components/**/*.directive.js',
+        'app/components/**/*.tests.js'
     ],
 
 

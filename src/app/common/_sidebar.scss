@@ -44,8 +44,28 @@
 
 .sidebar__close {
   position: absolute;
-  top: $base-unit*2;
-  right: $base-unit;
+  top: 0;
+  right: 0;
+}
+
+.sidebar-section {
+  margin-bottom: $base-unit;
+
+  .btn-block {
+    margin-bottom: $base-unit*2;
+  }
+
+  .ui-select-container {
+    background: white;
+    margin-bottom: $base-unit;
+  }
+}
+
+.sidebar-section__heading {
+  margin-bottom: $base-unit;
+  font-family: $heading-font-light;
+  text-transform: uppercase;
+  color: $dark-blue;
 }
 
 @include media-query(md) {
@@ -61,11 +81,6 @@
 
   .sidebar__heading {
     margin-bottom: $base-unit*4;
-  }
-
-  .sidebar__close {
-    top: $base-unit*3;
-    right: $base-unit*3;
   }
 
 }
