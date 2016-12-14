@@ -24,13 +24,16 @@
     // Save list settings
     $scope.listSave = function() {
       if ($scope.list._id) {
-        $scope.list.$update(function() {
+        $scope.list.$update();
+        $scope.list.$promise.then(function() {
           $location.path('/lists/' + $scope.list._id);
         });
       }
       else {
-        $scope.list.$save(function() {
-        $location.path('/lists/' + $scope.list._id);
+        $scope.list.label = $scope.list.name;
+        $scope.list = List.save($scope.list);
+        $scope.list.$promise.then(function() {
+          $location.path('/lists/' + $scope.list._id);
         });
       }
     };
