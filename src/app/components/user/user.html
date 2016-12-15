@@ -36,17 +36,14 @@
 
   <div class="page-header profile-header">
 
-    <div class="profile-header__primary">
+    <div class="profile-header__primary" ng-class="{'active' : profileForm.$visible}">
 
       <div class="profile-header__image">
 
-        <icon name="check-circle" text="Verfied" ng-show="user.verified"></icon>
+        <icon name="check-circle" text="Verfied" ng-show="!user.verified"></icon>
 
         <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
-        <div ng-show="profileForm.$visible">
-          <label class="btn btn-secondary btn-upload center-block" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
-          <p class="text-center" translate>Upload a squared image in JPEG format, with more than 200px width</p>
-        </div>
+
       </div>
 
       <div class="profile-header__content">
@@ -57,7 +54,7 @@
           <span editable-text="user.family_name" e-id="family_name" e-placeholder="{{'Family name' | translate}}">{{user.family_name}}</span>
         </h1>
 
-        <ul class="profile-header__info">
+        <ul class="profile-header__info"  ng-if="!profileForm.$visible">
           <li><icon name="home"></icon> UNOCHA</li>
           <li><icon name="user"></icon> Cluster</li>
           <li><icon name="map-marker"></icon></i> {{user.location.country.name}}</li>
@@ -67,8 +64,14 @@
         <p editable-textarea="user.status" e-id="user_status" e-rows="7" e-cols="40" e-placeholder="{{'Status' | translate}}" class="hidden-sm-up profile-header__status">{{user.status}}</p>
 
         <div ng-show="profileForm.$visible">
-          <div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div>
+          <label class="btn btn-secondary btn-upload center-block" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
+          <p class="form-hint" translate>Upload a square image in JPEG format, with more than 200px width</p>
         </div>
+
+        <p ng-show="profileForm.$visible && currentUser.is_admin">
+          <input type="checkbox" id="user_verified" ng-model="user.verified" />
+          <label class="clickie-label" for="user_verified" translate>Verified user</label>
+        </p>
 
         <div class="profile-header__controls">
           <button type="button" class="btn-icon" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
