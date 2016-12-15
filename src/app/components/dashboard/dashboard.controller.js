@@ -8,6 +8,7 @@
   DashboardCtrl.$inject = ['$scope', '$routeParams', '$http', 'config', 'List'];
 
   function DashboardCtrl($scope, $routeParams, $http, config, List) {
+    $scope.activeList = 0;
     if ($routeParams.list) {
       $scope.list = List.get({'listId': $routeParams.list});
     }
