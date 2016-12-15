@@ -42,12 +42,20 @@
   &:focus {
     box-shadow: none;
   }
+
+  .icon {
+    @include font-size($tiny-font-size);
+  }
 }
 
 @include media-query(sm) {
 
   .global-header__sites-btn {
     @include font-size($small-font-size);
+
+    .icon {
+      @include font-size($small-font-size);
+    }
   }
 
 }

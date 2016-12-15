@@ -173,14 +173,26 @@ em {
 
 .caret {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: 12px;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  color: $dark-blue;
+  // font: normal normal normal 14px/1 FontAwesome;
+  // font-size: 12px;
+  // text-rendering: auto;
+  // -webkit-font-smoothing: antialiased;
+  // color: $dark-blue;
 
   &:before {
-    content: "\f078";
+    content: "\e90b";
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: text-top;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: $dark-blue;
+    line-height: 18px;
   }
 }
 

@@ -33,6 +33,9 @@ button[disabled], a.disabled {
 
   .icon {
     margin: 0 $base-unit/2;
+    @include font-size(18);
+    display: inline-block;
+    padding-top: 1px; // to make look right with Exo font which has a slightly off line height
   }
 
   &.active {
@@ -103,6 +106,7 @@ button[disabled], a.disabled {
 
   .icon {
     margin: 0;
+    @include font-size(24);
   }
 
   &.btn-secondary {

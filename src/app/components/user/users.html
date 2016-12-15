@@ -45,7 +45,7 @@
       <td>{{user.location.country.name}}</td>
       <td>
         <icon name="flag" text="List owner" title="List owner" class="icon-inline" ng-if="list && list.owner._id == user._id"></icon>
-        <icon name="clock-o" text="Pending" title="Pending" class="icon-inline" ng-if="list && user.currentCheckin(list).pending"></icon>
+        <icon name="clock" text="Pending" title="Pending" class="icon-inline" ng-if="list && user.currentCheckin(list).pending"></icon>
         <icon name="user" text="List manager" title="List manager" class="icon-inline" ng-if="list && list.isManager(user)" title="Manager"></icon>
         <icon name="check-circle" text="Verified" title="Verified" class="icon-inline" ng-if="user.verified"></icon>
 

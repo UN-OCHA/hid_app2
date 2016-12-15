@@ -87,7 +87,7 @@
       <li class="form-list__item" ng-repeat="client in user.authorizedClients">
         <span class="form-list__text">{{client.name}}</span>
         <button class="btn-transparent" ng-disabled="!isOnline" ng-click="revokeClient(client)">
-          <icon name="times" text="Revoke access for {{client.name}}"></icon>
+          <icon name="cancel" text="Revoke access for {{client.name}}"></icon>
         </button>
       </li>
     </ul>

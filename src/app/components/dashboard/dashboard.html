@@ -12,7 +12,7 @@
     <div class="list-tabs">
       <div class="list-tabs__controls" uib-dropdown>
         <button type="button" class="btn btn-transparent list-tabs__toggle" uib-dropdown-toggle>
-          <icon name="chevron-down" text="Change list"></icon>
+          <icon name="arrow-down" text="Change list"></icon>
         </button>
 
         <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
@@ -95,10 +95,10 @@
     <h2 class="secondary-block__heading">Notifications</h2>
     <ul class="secondary-block__list">
       <li class="secondary-block__item">
-        <icon name="chevron-right"></icon>
+        <icon name="arrow-right"></icon>
         <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
-      <li class="secondary-block__item" ng-if="currentUser.verified" translate><icon name="chevron-right"></icon>Your profile is verified</li>
-      <li class="secondary-block__item" ng-if="!currentUser.verified" translate><icon name="chevron-right"></icon>You're not verified yet</li>
+      <li class="secondary-block__item" ng-if="currentUser.verified" translate><icon name="arrow-right"></icon>Your profile is verified</li>
+      <li class="secondary-block__item" ng-if="!currentUser.verified" translate><icon name="arrow-right"></icon>You're not verified yet</li>
     </ul>
   </div>
 

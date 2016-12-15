@@ -57,9 +57,10 @@
 
   .icon {
     margin: 0;
+
   }
 
-  .fa-caret-down {
+  .icon-arrow-down {
     @include font-size($small-font-size);
     margin-left: $base-unit/2;
   }

@@ -3,23 +3,23 @@
     <h2 class="sidebar__heading" translate>User admin</h2>
 
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
-      <icon name="times" text="close"></icon>
+      <icon name="cancel" text="close"></icon>
     </button>
 
     <div class="sidebar-section">
 
       <a class="btn-primary btn-block" href="/checkin/{{user._id}}" ng-show="(currentUser.is_admin || (currentUser._id == user._id)) && isOnline">
-        <icon name="check"></icon>
+        <icon name="check-big"></icon>
         <span translate>Check into List</span>
       </a>
 
       <button class="btn-primary btn-block" ng-click="exportVcard();">
-        <icon name="download"></icon>
+        <icon name="inbox-download"></icon>
         <span translate>Export Contact Info</span>
       </button>
 
       <button class="btn-primary btn-block" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-show="user.is_orphan">
-        <icon name="email"></icon>
+        <icon name="mail-envelope-closed"></icon>
         <span translate>Send Claim Email</span>
       </button>
 
@@ -57,7 +57,7 @@
         <ul class="profile-header__info"  ng-if="!profileForm.$visible">
           <li><icon name="home"></icon> UNOCHA</li>
           <li><icon name="user"></icon> Cluster</li>
-          <li><icon name="map-marker"></icon></i> {{user.location.country.name}}</li>
+          <li><icon name="map-pin"></icon></i> {{user.location.country.name}}</li>
         </ul>
 
         <label ng-if="profileForm.$visible" for="user_status" class="sr-only" translate="">User status</label>
@@ -75,15 +75,15 @@
 
         <div class="profile-header__controls">
           <button type="button" class="btn-icon" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
-            <icon name="pencil" text="Edit"></icon>
+            <icon name="edit" text="Edit"></icon>
           </button>
 
           <div ng-show="profileForm.$visible">
             <button type="submit" class="btn-icon" ng-disabled="profileForm.$waiting">
-              <icon name="check" text="Save changes"></icon>
+              <icon name="check-big" text="Save changes"></icon>
             </button>
             <button type="button" class="btn-icon btn-secondary" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()">
-              <icon name="times" text="Cancel"></icon>
+              <icon name="cancel" text="Cancel"></icon>
               </button>
           </div>
         </div>
@@ -92,7 +92,7 @@
     </div>
 
     <button class="btn-icon page-actions__toggle-admin" type="button" ng-click="toggleSidebar('admin')">
-      <icon name="cog" text="Actions"></icon>
+      <icon name="wheel" text="Actions"></icon>
     </button>
 
   </div>
@@ -115,7 +115,7 @@
               <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryPhone(phone)" ng-show="profileForm.$visible && phone.number != user.phone_number" translate>Set as Primary</button>
             </span>
 
-            <button type="button" class="btn-transparent" ng-show="profileForm.$visible && phone.number !== user.phone_number" ng-click="dropPhone(phone._id)"><icon name="times" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent" ng-show="profileForm.$visible && phone.number !== user.phone_number" ng-click="dropPhone(phone._id)"><icon name="cancel" text="Remove"></icon></button>
 
           </li>
         </ul>
@@ -158,7 +158,7 @@
               <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryEmail(email.email)" ng-if="profileForm.$visible && email.validated && email.email != user.email" translate>Set as Primary</button>
             </span>
 
-            <button type="button" class="btn-transparent" ng-click="dropEmail(email.email)" ng-if="profileForm.$visible && email.email != user.email"><icon name="times" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent" ng-click="dropEmail(email.email)" ng-if="profileForm.$visible && email.email != user.email"><icon name="cancel" text="Remove"></icon></button>
           </li>
         </ul>
 
@@ -192,7 +192,7 @@
             <span class="form-list__text">
               <strong>{{voip.type}}:</strong> {{voip.username}}
             </span>
-            <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="dropItem('voips', $index)"><icon name="times" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="dropItem('voips', $index)"><icon name="cancel" text="Remove"></icon></button>
           </li>
         </ul>
 
@@ -230,7 +230,7 @@
           <ul class="form-list">
             <li ng-repeat="(key, val) in user.organizations" class="form-list__item">
               <a class="form-list__text" href="/lists/{{val.list._id}}">{{val.list.name}}</a>
-              <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="removeOrganization(val)"><icon name="times" text="Remove"></icon></button>
+              <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="removeOrganization(val)"><icon name="cancel" text="Remove"></icon></button>
             </li>
           </ul>
 
@@ -281,7 +281,7 @@
             <li ng-repeat="job_title in user.job_titles" class="form-list__item">
               <span class="form-list__text">{{job_title}}</span>
               <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="dropItem('job_titles', $index)">
-                <icon name="times" text="Remove {{job_title}}"></icon>
+                <icon name="cancel" text="Remove {{job_title}}"></icon>
               </button>
             </li>
           </ul>
@@ -418,7 +418,7 @@
                 <a ng-href="{{website.url}}" editable-url="website.url" e-id="website_url-{{$index}}" target="_blank">{{website.url}}</a>
               </div>
               <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="dropItem('websites', $index)">
-                <icon name="times" text="Remove"></icon>
+                <icon name="cancel" text="Remove"></icon>
               </button>
             </li>
           </ul>

@@ -1,0 +1,117 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icons/icomoon.eot?2k4cdg');
+  src:  url('../fonts/icons/icomoon.eot?2k4cdg#iefix') format('embedded-opentype'),
+    url('../fonts/icons/icomoon.ttf?2k4cdg') format('truetype'),
+    url('../fonts/icons/icomoon.woff?2k4cdg') format('woff'),
+    url('../fonts/icons/icomoon.svg?2k4cdg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: text-top;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/** Add / remove icons here - do not edit above this line */
+
+.icon-group:before {
+  content: "\e907";
+}
+.icon-users:before {
+  content: "\e907";
+}
+.icon-user:before {
+  content: "\e908";
+}
+.icon-plus:before {
+  content: "\e900";
+}
+.icon-ellipsis-v:before {
+  content: "\e901";
+}
+.icon-question:before {
+  content: "\e902";
+}
+.icon-bars:before {
+  content: "\e903";
+}
+.icon-navicon:before {
+  content: "\e903";
+}
+.icon-reorder:before {
+  content: "\e903";
+}
+.icon-home:before {
+  content: "\e904";
+}
+.icon-filter:before {
+  content: "\e905";
+}
+.icon-check-circle:before {
+  content: "\e943";
+}
+.icon-check-big:before {
+  content: "\e944";
+}
+.icon-wheel:before {
+  content: "\e945";
+}
+.icon-arrow-down:before {
+  content: "\e90b";
+}
+.icon-arrow-up:before {
+  content: "\e94b";
+}
+.icon-arrow-left:before {
+  content: "\e946";
+}
+.icon-arrow-right:before {
+  content: "\e947";
+}
+.icon-cancel:before {
+  content: "\e94a";
+}
+.icon-map-pin:before {
+  content: "\e047";
+}
+.icon-chat:before {
+  content: "\e049";
+}
+.icon-clock:before {
+  content: "\e055";
+}
+.icon-flag:before {
+  content: "\e906";
+}
+.icon-star:before {
+  content: "\e91d";
+}
+.icon-trash:before {
+  content: "\e909";
+}
+.icon-copy:before {
+  content: "\e913";
+}
+.icon-inbox-download:before {
+  content: "\e916";
+}
+.icon-search:before {
+  content: "\e919";
+}
+.icon-edit:before {
+  content: "\e91b";
+}
+.icon-document-file-pdf:before {
+  content: "\e925";
+}
+

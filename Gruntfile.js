@@ -15,11 +15,11 @@ module.exports = function(grunt) {
         src: '**',
         dest: 'dist/fonts/exo'
       },
-      fonts_fontawesome: {
+      fonts_icons: {
         expand: true,
-        cwd: 'src/bower_components/components-font-awesome/fonts',
+        cwd: 'src/assets/fonts/icons',
         src: '**',
-        dest: 'dist/fonts'
+        dest: 'dist/fonts/icons'
       },
       img: {
         expand: true,
@@ -177,12 +177,7 @@ module.exports = function(grunt) {
           // 'index.html',
           'img/*.png',
           'fonts/exo/*',
-          'fonts/FontAwesome.otf',
-          'fonts/fontawesome-webfont.eot',
-          'fonts/fontawesome-webfont.svg',
-          'fonts/fontawesome-webfont.ttf',
-          'fonts/fontawesome-webfont.woff',
-          'fonts/fontawesome-webfont.woff2'
+          'fonts/icons/*'
         ],
         dest: 'dist/offline.appcache'
       }

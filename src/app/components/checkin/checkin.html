@@ -20,11 +20,11 @@
 
       <div class="list-group">
         <div ng-repeat="list in selectedLists" class="list-group__item">
-          <icon name="check"></icon>
+          <icon name="check-big"></icon>
           {{list.name}}
           <div class="list-group__item-actions">
             <button type="button" class="btn-transparent" ng-click="removeList(list)">
-              <icon name="times" text="Remove"></icon>
+              <icon name="cancel" text="Remove"></icon>
             </button>
           </div>
         </div>
@@ -53,11 +53,11 @@
             <h3 translate>Current organization:</h3>
             <p>TO DO</p>
             <button type="button" class="btn-icon form__edit" ng-click="editOrganizationForm.$show()" ng-show="!editOrganizationForm.$visible">
-              <icon name="pencil" text="Change organization"></icon>
+              <icon name="edit" text="Change organization"></icon>
             </button>
           </div>
           <button type="button" class="btn-icon form__edit" ng-click="editOrganizationForm.$cancel()" ng-show="editOrganizationForm.$visible">
-            <icon name="times" text="Cancel"></icon>
+            <icon name="cancel" text="Cancel"></icon>
           </button>
 
           <div ng-show="editOrganizationForm.$visible">
@@ -106,11 +106,11 @@
               <span ng-if="!user.phone_number" translate><em>No phone number</em></span>
             </p>
             <button type="button" class="btn-icon form__edit" ng-click="editPhoneForm.$show()" ng-show="!editPhoneForm.$visible">
-              <icon name="pencil" text="Change phone number"></icon>
+              <icon name="edit" text="Change phone number"></icon>
             </button>
           </div>
           <button type="button" class="btn-icon form__edit" ng-click="editPhoneForm.$cancel()" ng-show="editPhoneForm.$visible">
-            <icon name="times" text="Cancel"></icon>
+            <icon name="cancel" text="Cancel"></icon>
           </button>
 
           <div ng-show="editPhoneForm.$visible">
@@ -159,10 +159,10 @@
               <span ng-if="user.email">{{user.email}}</span>
               <span ng-if="!user.email" translate><em>No email</em></span>
             </p>
-            <button type="button" class="btn-icon form__edit" ng-click="editEmailForm.$show()"><icon name="pencil" text="Change email"></icon></button>
+            <button type="button" class="btn-icon form__edit" ng-click="editEmailForm.$show()"><icon name="edit" text="Change email"></icon></button>
           </div>
           <button type="button" class="btn-icon form__edit" ng-click="editEmailForm.$cancel()" ng-show="editEmailForm.$visible">
-            <icon name="times" text="Cancel"></icon>
+            <icon name="cancel" text="Cancel"></icon>
           </button>
 
           <div ng-show="editEmailForm.$visible">
@@ -221,10 +221,10 @@
               <span ng-if="user.location.country"><span ng-if="user.location.region">{{user.location.region.name}}, </span>{{user.location.country.name}}</span>
               <span ng-if="!user.location.countr" translate><em>No location</em></span>
             </p>
-            <button type="button" class="btn-icon form__edit" ng-click="editLocationForm.$show()"><icon name="pencil" text="Change location"></icon></button>
+            <button type="button" class="btn-icon form__edit" ng-click="editLocationForm.$show()"><icon name="edit" text="Change location"></icon></button>
           </div>
           <button type="button" class="btn-icon form__edit" ng-click="editLocationForm.$cancel()" ng-show="editLocationForm.$visible">
-            <icon name="times" text="Cancel"></icon>
+            <icon name="cancel" text="Cancel"></icon>
           </button>
 
           <div ng-show="editLocationForm.$visible">
@@ -293,15 +293,15 @@
         <ul class="secondary-block__list">
           <li class="secondary-block__item" translate ng-if="!modifications.location && !modifications.email && !modifications.phone">No modifications</li>
           <li class="secondary-block__item" ng-if="modifications.location">
-            <icon name="chevron-right"></icon>
+            <icon name="arrow-right"></icon>
             {{modifications.location | translate}}
           </li>
           <li class="secondary-block__item" ng-if="modifications.email">
-            <icon name="chevron-right"></icon>
+            <icon name="arrow-right"></icon>
             {{modifications.email | translate}}
           </li>
           <li class="secondary-block__item" ng-if="modifications.phone">
-            <icon name="chevron-right"></icon>
+            <icon name="arrow-right"></icon>
             {{modifications.phone | translate}}
           </li>
         </ul>
@@ -310,7 +310,7 @@
       <button type="button" class="btn-primary btn-block" ng-click="checkin()" ng-disabled="!selectedLists.length">
         <span ng-if="isCurrentUser" translate="">Check me in</span>
         <span ng-if="!isCurrentUser" translate="">Check in</span>
-        <icon name="chevron-right"></icon>
+        <icon name="arrow-right"></icon>
       </button>
     </div>
   </div>

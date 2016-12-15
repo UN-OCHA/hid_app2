@@ -1,6 +1,6 @@
 /**
  * Icons
- * Usage: <icon name="cog" text="Actions"></icon>
+ * Usage: <icon name="wheel" text="Actions"></icon>
  * Name is the icon name, currently using FontAwesome
  * Text is optional, it should be given if there is no visible text accompanying the icon
  */
@@ -21,7 +21,7 @@
         name: '@',
         text: '@'
       },
-      template: '<span class="icon"><i class="fa fa-{{name}}" aria-hidden="true"></i><span ng-if="text" class="sr-only" translate>{{text}}</span></span>'
+      template: '<span class="icon-holder"><i class="icon icon-{{name}}" aria-hidden="true"></i><span ng-if="text" class="sr-only" translate>{{text}}</span></span>'
     };
 
     return directive;
