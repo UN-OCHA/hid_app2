@@ -70,13 +70,19 @@
           <div editable-checkbox="user.verified" e-title="{{'Verified user'|translate}}" edit-disabled="!currentUser.is_admin"></div>
         </div>
 
-        <button type="button" class="btn-icon form__edit profile-header__edit" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
-          <icon name="pencil" text="Edit"></icon>
-        </button>
+        <div class="profile-header__controls">
+          <button type="button" class="btn-icon" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
+            <icon name="pencil" text="Edit"></icon>
+          </button>
 
-        <div ng-show="profileForm.$visible">
-          <button type="submit" class="btn btn-primary" ng-disabled="profileForm.$waiting"><icon name="check"></icon> Save changes</button>
-          <button type="button" class="btn btn-secondary" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()"><icon name="times"></icon> Cancel</button>
+          <div ng-show="profileForm.$visible">
+            <button type="submit" class="btn-icon" ng-disabled="profileForm.$waiting">
+              <icon name="check" text="Save changes"></icon>
+            </button>
+            <button type="button" class="btn-icon btn-secondary" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()">
+              <icon name="times" text="Cancel"></icon>
+              </button>
+          </div>
         </div>
 
       </div>
@@ -88,41 +94,32 @@
 
   </div>
 
-</form>
 
 <div class="row">
 
   <div class="col-xs-12 col-md-6 col-lg-4">
-    <form editable-form name="contactForm" onaftersave="saveUser()" class="form">
       <h2 class="block-heading" translate>Contact Information</h2>
 
-      <button type="button" class="btn btn-primary form__edit" ng-click="contactForm.$show()" ng-show="!contactForm.$visible && canEditUser" ng-disabled="!isOnline"><icon name="pencil" text="Edit"></icon></button>
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
-      <div class="form-editable-section" ng-show="contactForm.$visible" ng-class="{'active': contactForm.$visible}">
-        <button type="submit" class="btn btn-primary" ng-disabled="contactForm.$waiting"><icon name="check"></icon> Save changes</button>
-        <button type="button" class="btn btn-secondary" ng-disabled="contactForm.$waiting" ng-click="contactForm.$cancel()"><icon name="times"></icon> Cancel</button>
-      </div>
-
-      <div class="form-editable-section" ng-class="{'active': contactForm.$visible}">
-
-        <h3 ng-show="(user.phone_numbers && user.phone_numbers.length) || contactForm.$visible" translate>Phone numbers</h3>
+        <h3 ng-show="(user.phone_numbers && user.phone_numbers.length) || profileForm.$visible" translate>Phone numbers</h3>
 
         <ul class="form-list">
           <li ng-repeat="phone in user.phone_numbers" class="form-list__item">
             <span class="form-list__text">
               <a ng-href="tel:{{phone.number}}">{{phone.number}}</a> ({{phone.type}}) <icon name="star" text="Primary" ng-show="phone.number == user.phone_number"></icon>
               <br>
-              <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryPhone(phone)" ng-show="contactForm.$visible && phone.number != user.phone_number" translate>Set as Primary</button>
+              <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryPhone(phone)" ng-show="profileForm.$visible && phone.number != user.phone_number" translate>Set as Primary</button>
             </span>
 
-            <button type="button" class="btn-transparent" ng-show="contactForm.$visible && phone.number !== user.phone_number" ng-click="dropPhone(phone._id)"><icon name="times" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent" ng-show="profileForm.$visible && phone.number !== user.phone_number" ng-click="dropPhone(phone._id)"><icon name="times" text="Remove"></icon></button>
 
           </li>
         </ul>
 
 
 
-        <fieldset ng-show="contactForm.$visible">
+        <fieldset ng-show="profileForm.$visible">
           <legend><strong>Add new phone</strong></legend>
           <div class="form-list__item">
 
@@ -144,9 +141,9 @@
 
       </div>
 
-      <div class="form-editable-section" ng-class="{'active': contactForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
-        <h3 ng-show="(user.emails && user.emails.length) || contactForm.$visible" translate>Emails</h3>
+        <h3 ng-show="(user.emails && user.emails.length) || profileForm.$visible" translate>Emails</h3>
 
         <ul class="form-list">
           <li ng-repeat="email in user.emails" class="form-list__item">
@@ -154,15 +151,15 @@
               <a ng-href="mailto:{{email.email}}">{{email.email}}</a> ({{email.type}}) <icon name="star" text="Primary" ng-if="email.email == user.email"></icon>
               <span ng-show="!email.validated" class="label label-default" translate>Unverified</span>
               <br>
-              <button type="button" ng-click="resendValidationEmail(email.email)" ng-if="contactForm.$visible && !email.validated" class="btn-secondary btn-small" translate>Resend validation email</button>
-              <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryEmail(email.email)" ng-if="contactForm.$visible && email.validated && email.email != user.email" translate>Set as Primary</button>
+              <button type="button" ng-click="resendValidationEmail(email.email)" ng-if="profileForm.$visible && !email.validated" class="btn-secondary btn-small" translate>Resend validation email</button>
+              <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryEmail(email.email)" ng-if="profileForm.$visible && email.validated && email.email != user.email" translate>Set as Primary</button>
             </span>
 
-            <button type="button" class="btn-transparent" ng-click="dropEmail(email.email)" ng-if="contactForm.$visible && email.email != user.email"><icon name="times" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent" ng-click="dropEmail(email.email)" ng-if="profileForm.$visible && email.email != user.email"><icon name="times" text="Remove"></icon></button>
           </li>
         </ul>
 
-        <fieldset ng-show="contactForm.$visible">
+        <fieldset ng-show="profileForm.$visible">
           <legend>Add new email</legend>
           <div class="form-list__item">
             <label for="new_email_type" class="sr-only">Email type</label>
@@ -183,20 +180,20 @@
 
       </div>
 
-      <div class="form-editable-section" ng-class="{'active': contactForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
-        <h3 ng-show="contactForm.$visible" translate>Social Networks</h3>
+        <h3 ng-show="profileForm.$visible" translate>Social Networks</h3>
 
         <ul class="form-list">
           <li ng-repeat="voip in user.voips" class="form-list__item">
             <span class="form-list__text">
               <strong>{{voip.type}}:</strong> {{voip.username}}
             </span>
-            <button type="button" class="btn-transparent" ng-show="contactForm.$visible" ng-click="dropItem('voips', $index)"><icon name="times" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="dropItem('voips', $index)"><icon name="times" text="Remove"></icon></button>
           </li>
         </ul>
 
-        <fieldset ng-show="contactForm.$visible">
+        <fieldset ng-show="profileForm.$visible">
           <legend>Add new social network</legend>
           <div class="form-list__item">
             <label for="new_voip_type" class="sr-only">Type</label>
@@ -217,27 +214,12 @@
 
       </div>
 
-    </form>
-
   </div>
 
   <div class="col-xs-12 col-md-6 col-lg-4">
-    <form editable-form name="roleForm" onaftersave="saveUser()" class="form">
       <h2 class="block-heading" translate>Role Details</h2>
 
-
-
-      <button type="button" class="btn btn-primary form__edit" ng-click="roleForm.$show()" ng-show="!roleForm.$visible && canEditUser" ng-disabled="!isOnline"><icon name="pencil" text="Edit"></icon></button>
-
-      <div class="form-editable-section" ng-show="roleForm.$visible" ng-class="{'active': roleForm.$visible}">
-
-        <!-- <div ng-show="roleForm.$visible" class="form-group"> -->
-        <button type="submit" class="btn btn-primary" ng-disabled="roleForm.$waiting"><icon name="check"></icon> Save changes</button>
-        <button type="button" class="btn btn-secondary" ng-disabled="roleForm.$waiting" ng-click="roleForm.$cancel()"><icon name="times"></icon> Cancel</button>
-        <!-- </div> -->
-      </div>
-
-      <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
         <fieldset>
           <legend translate>Organizations</legend>
@@ -245,11 +227,11 @@
           <ul class="form-list">
             <li ng-repeat="(key, val) in user.organizations" class="form-list__item">
               <a class="form-list__text" href="/lists/{{val.list._id}}">{{val.list.name}}</a>
-              <button type="button" class="btn-transparent" ng-show="roleForm.$visible" ng-click="removeOrganization(val)"><icon name="times" text="Remove"></icon></button>
+              <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="removeOrganization(val)"><icon name="times" text="Remove"></icon></button>
             </li>
           </ul>
 
-          <div ng-show="roleForm.$visible">
+          <div ng-show="profileForm.$visible">
             <label for="newOrganization" class="sr-only">Add a new organisation</label>
             <div class="form-list__item">
 
@@ -271,11 +253,11 @@
         </fieldset>
       </div>
 
-      <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
         <h3 translate>Roles</h3>
 
-        <div editable-ui-select="user.roles" edit-disabled="!currentUser.is_admin" e-multiple onshow="getRoles()" data-e-form="roleForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
+        <div editable-ui-select="user.roles" edit-disabled="!currentUser.is_admin" e-multiple onshow="getRoles()" data-e-form="profileForm" data-e-name="roles" name="roles" theme="bootstrap" data-e-ng-model="user.roles" data-e-style="min-width: 300px;">
           <span ng-repeat="role in user.roles">{{role.label}} &nbsp;</span>
           <editable-ui-select-match placeholder="Roles">
             {{$item.label}}
@@ -287,21 +269,21 @@
 
       </div>
 
-      <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
         <fieldset>
-          <legend ng-show="(user.job_titles && user.job_titles.length) || roleForm.$visible" translate>Job titles</legend>
+          <legend ng-show="(user.job_titles && user.job_titles.length) || profileForm.$visible" translate>Job titles</legend>
 
-          <ul ng-show="(user.job_titles && user.job_titles.length) || roleForm.$visible" class="form-list">
+          <ul ng-show="(user.job_titles && user.job_titles.length) || profileForm.$visible" class="form-list">
             <li ng-repeat="job_title in user.job_titles" class="form-list__item">
               <span class="form-list__text">{{job_title}}</span>
-              <button type="button" class="btn-transparent" ng-show="roleForm.$visible" ng-click="dropItem('job_titles', $index)">
+              <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="dropItem('job_titles', $index)">
                 <icon name="times" text="Remove {{job_title}}"></icon>
               </button>
             </li>
           </ul>
 
-          <div ng-show="roleForm.$visible">
+          <div ng-show="profileForm.$visible">
             <label for="job_title" class="sr-only">Add a job title</label>
             <div class="form-list__item">
               <input type="text" name="job_title" id="job_title" ng-model="newJobTitle" placeholder="Add a job title">
@@ -314,19 +296,19 @@
         </fieldset>
       </div>
 
-      <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
         <h3 translate>Permissions</h3>
-        <div ng-show="roleForm.$visible"><div edit-disabled="!currentUser.is_admin" editable-checkbox="user.is_admin" e-title="{{'Administrator'|translate}}"></div></div>
-        <span ng-if="user.is_admin && !roleForm.$visible" translate>Administrator</span>
+        <div ng-show="profileForm.$visible"><div edit-disabled="!currentUser.is_admin" editable-checkbox="user.is_admin" e-title="{{'Administrator'|translate}}"></div></div>
+        <span ng-if="user.is_admin && !profileForm.$visible" translate>Administrator</span>
 
       </div>
 
-      <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
         <h3 translate>Current Location (country)</h3>
         <div class="">
-          <div editable-ui-select="user.location.country" data-e-form="roleForm" data-e-name="country" name="country" e-on-select="setRegions($item, $model)" data-e-ng-model="user.location.country">
+          <div editable-ui-select="user.location.country" data-e-form="profileForm" data-e-name="country" name="country" e-on-select="setRegions($item, $model)" data-e-ng-model="user.location.country">
             {{user.location.country.name}}
             <editable-ui-select-match placeholder="{{'Country'|translate}}">
               {{$select.selected.name}}
@@ -337,12 +319,12 @@
           </div>
         </div>
       </div>
-      <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
 
         <h3 translate>Current Location (region)</h3>
         <div class="">
-          <div editable-ui-select="user.location.region" data-e-form="roleForm" data-e-name="region" name="region" data-e-ng-model="user.location.region">
+          <div editable-ui-select="user.location.region" data-e-form="profileForm" data-e-name="region" name="region" data-e-ng-model="user.location.region">
             {{user.location.region.name}}
             <editable-ui-select-match placeholder="{{'Region'|translate}}">
               {{$select.selected.name}}
@@ -353,15 +335,15 @@
           </div>
         </div>
       </div>
-      <div class="form-editable-section" ng-class="{'active': roleForm.$visible}">
+      <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
         <h3 translate>Other locations</h3>
 
         <ul>
           <li ng-repeat="location in user.locations">
             <fieldset>
-              <legend ng-if="roleForm.$visible" translate>Location</legend>
-                <div editable-ui-select="location.country" data-e-form="roleForm" data-e-name="country[$index]" name="country[$index]"  e-on-select="setRegions($item, $model)" data-e-ng-model="location.country">
+              <legend ng-if="profileForm.$visible" translate>Location</legend>
+                <div editable-ui-select="location.country" data-e-form="profileForm" data-e-name="country[$index]" name="country[$index]"  e-on-select="setRegions($item, $model)" data-e-ng-model="location.country">
                   Country: {{location.country.name}}
                   <editable-ui-select-match placeholder="{{'Country'|translate}}">
                     {{$select.selected.name}}
@@ -371,7 +353,7 @@
                   </editable-ui-select-choices>
                 </div>
 
-                <div editable-ui-select="location.region" data-e-form="roleForm" data-e-name="region[$index]" name="region[$index]" data-e-ng-model="location.region">
+                <div editable-ui-select="location.region" data-e-form="profileForm" data-e-name="region[$index]" name="region[$index]" data-e-ng-model="location.region">
                   Region: {{location.region.name}}
                   <editable-ui-select-match placeholder="{{'Region'|translate}}">
                     {{$select.selected.name}}
@@ -384,60 +366,47 @@
           </li>
         </ul>
 
-          <button type="button" class="btn btn-secondary" ng-click="addItem('locations')" ng-show="roleForm.$visible">
+          <button type="button" class="btn btn-secondary" ng-click="addItem('locations')" ng-show="profileForm.$visible">
             <icon name="plus"></icon> <span translate>Add a new Location</span>
           </button>
         </div>
 
-      </form>
-
-
     </div>
 
     <div class="col-xs-12 col-md-6 col-lg-4">
-      <form editable-form name="additionalForm" onaftersave="saveUser()" class="form">
         <h2 class="block-heading" translate>Additional Information</h2>
 
-        <button type="button" class="btn btn-primary form__edit" ng-click="additionalForm.$show()" ng-show="!additionalForm.$visible && canEditUser" ng-disabled="!isOnline"><icon name="pencil" text="Edit"></icon></button>
-
-        <div class="form-editable-section" ng-show="additionalForm.$visible" ng-class="{'active': additionalForm.$visible}">
-
-          <button type="submit" class="btn btn-primary" ng-disabled="additionalForm.$waiting"><icon name="check"></icon> Save changes</button>
-          <button type="button" class="btn btn-secondary" ng-disabled="additionalForm.$waiting" ng-click="additionalForm.$cancel()"><icon name="times"></icon> Cancel</button>
-
-        </div>
-
-        <div class="form-editable-section" ng-show="user.operations && user.operations.length" ng-class="{'active': additionalForm.$visible}">
+        <div class="form-editable-section" ng-show="user.operations && user.operations.length" ng-class="{'active': profileForm.$visible}">
           <h3 translate>Operations</h3>
           <ul class="list-inline list-unstyled">
             <li ng-repeat="(key, val) in user.operations"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
           </ul>
         </div>
 
-        <div class="form-editable-section" ng-show="user.bundles && user.bundles.length" ng-class="{'active': additionalForm.$visible}">
+        <div class="form-editable-section" ng-show="user.bundles && user.bundles.length" ng-class="{'active': profileForm.$visible}">
           <h3 translate>Clusters / Working Groups</h3>
           <ul class="list-inline list-unstyled">
             <li ng-repeat="(key, val) in user.bundles"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
           </ul>
         </div>
 
-        <div class="form-editable-section" ng-show="user.disasters && user.disasters.length" ng-class="{'active': additionalForm.$visible}">
+        <div class="form-editable-section" ng-show="user.disasters && user.disasters.length" ng-class="{'active': profileForm.$visible}">
           <h3 translate>Disasters</h3>
           <ul class="list-inline list-unstyled">
             <li ng-repeat="(key, val) in user.disasters"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
           </ul>
         </div>
 
-        <div class="form-editable-section" ng-show="user.lists && user.lists.length" ng-class="{'active': additionalForm.$visible}">
+        <div class="form-editable-section" ng-show="user.lists && user.lists.length" ng-class="{'active': profileForm.$visible}">
           <h3 translate>Other lists</h3>
           <ul class="list-inline list-unstyled">
             <li ng-repeat="(key, val) in user.lists"><a class="label label-default" href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
           </ul>
         </div>
 
-        <div class="form-editable-section" ng-class="{'active': additionalForm.$visible}">
+        <div class="form-editable-section" ng-class="{'active': profileForm.$visible}">
 
-          <h3 ng-show="(user.websites && user.websites.length) || additionalForm.$visible" translate>Websites</h3>
+          <h3 ng-show="(user.websites && user.websites.length) || profileForm.$visible" translate>Websites</h3>
 
           <ul class="form-list">
             <li ng-repeat="website in user.websites" class="form-list__item">
@@ -445,20 +414,20 @@
                 <label for="website_url-{{$index}}" class="sr-only">Website url</label>
                 <a ng-href="{{website.url}}" editable-url="website.url" e-id="website_url-{{$index}}" target="_blank">{{website.url}}</a>
               </div>
-              <button type="button" class="btn-transparent" ng-show="additionalForm.$visible" ng-click="dropItem('websites', $index)">
+              <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="dropItem('websites', $index)">
                 <icon name="times" text="Remove"></icon>
               </button>
             </li>
           </ul>
 
           <div class="form-list__item">
-            <button type="button" class="btn-secondary" ng-click="addItem('websites')" ng-show="additionalForm.$visible">
+            <button type="button" class="btn-secondary" ng-click="addItem('websites')" ng-show="profileForm.$visible">
               <icon name="plus"></icon><span translate>Add a new Website</span>
             </button>
           </div>
         </div>
 
-        <div class="form-editable-section" ng-show="user.verified_by" ng-class="{'active': additionalForm.$visible}">
+        <div class="form-editable-section" ng-show="user.verified_by" ng-class="{'active': profileForm.$visible}">
           <p><span translate>Verified by</span>: <a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
         </div>
 
@@ -469,8 +438,7 @@
           <span ng-bind="user.createdAt | date: 'longDate'"></span>
         </div>
 
-      </form>
-
     </div>
 
   </div>
+</form>

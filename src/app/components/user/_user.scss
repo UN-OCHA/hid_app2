@@ -66,8 +66,15 @@
   @include font-size($small-font-size);
 }
 
-.profile-header__edit {
+.profile-header__controls {
+  position: absolute;
   top: $base-unit*6;
+  right: 0;
+  width: $base-unit*5;
+
+  .btn-icon {
+    margin-bottom: $base-unit;
+  }
 }
 
 @include media-query(sm) {
@@ -82,9 +89,18 @@
     max-width: $base-unit*100;
   }
 
-  .profile-header__edit {
+  .profile-header__controls {
     top: 0;
     right: $base-unit*6;
+    width: auto;
+
+    .btn-icon {
+      margin-bottom: 0;
+
+      &:first-child {
+        margin-right: $base-unit/2;
+      }
+    }
   }
 
   .profile-header__info {

@@ -104,6 +104,17 @@ button[disabled], a.disabled {
   .icon {
     margin: 0;
   }
+
+  &.btn-secondary {
+    background: white;
+    border: 1px solid $text-dark;
+    color: $text-dark;
+
+    &:hover, &:focus, &.active {
+      background: $text-dark;
+      color: white;
+    }
+  }
 }
 
 .btn-transparent {
