@@ -3,5 +3,5 @@
 @import 'mixins/font-size';
 @import 'mixins/media-queries';
 
-$flagsImagePath: "../../bower_components/bc-css-flags/dist/img/";
+$flagsImagePath: "/assets/img/";
 @import "../../bower_components/bc-css-flags/dist/css/bc-css-flags.scss";
