@@ -55,7 +55,7 @@
         </h1>
 
         <ul class="profile-header__info"  ng-if="!profileForm.$visible">
-          <li><icon name="home"></icon> UNOCHA</li>
+          <li ng-if="user.organization && user.organization.list"><icon name="home"></icon> {{user.organization.list.acronym || user.organization.list.name}}</li>
           <li><icon name="user"></icon> Cluster</li>
           <li><icon name="map-pin"></icon></i> {{user.location.country.name}}</li>
         </ul>
@@ -228,8 +228,11 @@
           <legend translate>Organizations</legend>
 
           <ul class="form-list">
-            <li ng-repeat="(key, val) in user.organizations" class="form-list__item">
-              <a class="form-list__text" href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <li ng-repeat="(key, val) in user.organizations">
+              <span class="form-list__item">
+                <a class="form-list__text" href="/lists/{{val.list._id}}">{{val.list.name}} <icon name="star" text="Primary" ng-if="val._id === user.organization._id"></icon></a>
+              </span>
+              <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryOrganization(val)" ng-if="profileForm.$visible && val._id !== user.organization._id" translate>Set as Primary</button>
               <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="removeOrganization(val)"><icon name="cancel" text="Remove"></icon></button>
             </li>
           </ul>

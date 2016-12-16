@@ -100,6 +100,11 @@
       $http.put(config.apiUrl + 'user/' + this._id + '/phone_number', { phone: phone }).then(success, error);
     };
 
+    // Set primary organization
+    User.prototype.setPrimaryOrganization = function (org, success, error) {
+      $http.put(config.apiUrl + 'user/' + this._id + '/organization', org).then(success, error);
+    };
+
     // Notify user
     User.prototype.notify = function (message, success, error) {
       $http.post(config.apiUrl + 'user/' + this._id + '/notification', {message: message}).then(success, error);

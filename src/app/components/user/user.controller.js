@@ -158,6 +158,17 @@
       $scope.user.job_title = jt;
     };
 
+    $scope.setPrimaryOrganization = function (org) {
+      $scope.user.setPrimaryOrganization(org, function (resp) {
+        $scope.user.organization = resp.data.organization;
+        if ($scope.user._id === $scope.currentUser._id) {
+          $scope.setCurrentUser($scope.currentUser);
+        }
+      }, function (resp) {
+        alertService.add('danger', gettextCatalog.getString('There was an error setting the primary organization.'));
+      });
+    };
+
     $scope.addOrganization = function() {
       UserCheckInService.save({userId: $scope.user._id, listType: 'organizations'}, {list: $scope.newOrganization.list._id}, function (user) {
         $scope.user.organizations = user.organizations;
