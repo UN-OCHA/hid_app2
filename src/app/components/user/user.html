@@ -279,8 +279,12 @@
 
           <ul ng-show="(user.job_titles && user.job_titles.length) || profileForm.$visible" class="form-list">
             <li ng-repeat="job_title in user.job_titles" class="form-list__item">
-              <span class="form-list__text">{{job_title}}</span>
-              <button type="button" class="btn-transparent" ng-show="profileForm.$visible" ng-click="dropItem('job_titles', $index)">
+              <span class="form-list__text">
+                {{job_title}}
+                <icon name="star" text="Primary" ng-if="job_title === user.job_title"></icon>
+              </span>
+              <button type="button" class="btn-secondary btn-small" ng-click="setPrimaryJobTitle(job_title)" ng-if="profileForm.$visible && job_title !== user.job_title" translate>Set as Primary</button>
+              <button type="button" class="btn-transparent" ng-show="profileForm.$visible && job_title !== user.job_title" ng-click="dropItem('job_titles', $index)">
                 <icon name="cancel" text="Remove {{job_title}}"></icon>
               </button>
             </li>

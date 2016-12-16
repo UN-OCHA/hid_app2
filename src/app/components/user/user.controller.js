@@ -154,6 +154,10 @@
       $scope.user.job_titles.push($scope.newJobTitle);
     };
 
+    $scope.setPrimaryJobTitle = function (jt) {
+      $scope.user.job_title = jt;
+    };
+
     $scope.addOrganization = function() {
       UserCheckInService.save({userId: $scope.user._id, listType: 'organizations'}, {list: $scope.newOrganization.list._id}, function (user) {
         $scope.user.organizations = user.organizations;
