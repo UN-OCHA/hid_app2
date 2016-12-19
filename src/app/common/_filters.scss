@@ -42,6 +42,7 @@
 
   .ui-select-container {
     font-family: $heading-font-light;
+    border-bottom: transparent;
 
     input[type="search"] {
       &:focus {
@@ -51,7 +52,7 @@
   }
 
   .ui-select-match {
-    border-bottom: transparent;
+
     &.btn-default-focus {
       @include filter-input-focus-style();
     }

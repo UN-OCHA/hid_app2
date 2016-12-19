@@ -5,9 +5,44 @@
     .module('app.list')
     .controller('ListEditCtrl', ListEditCtrl);
 
-  ListEditCtrl.$inject = ['$scope', '$routeParams', '$location', '$uibModal', 'List', 'User', 'alertService', 'gettextCatalog'];
+  ListEditCtrl.$inject = ['$scope', '$routeParams', '$location', 'List', 'User'];
 
-  function ListEditCtrl($scope, $routeParams, $location, $uibModal, List, User, alertService, gettextCatalog) {
+  function ListEditCtrl($scope, $routeParams, $location, List, User) {
+
+    $scope.visibility = [
+      {
+        value: 'me',
+        label: 'List owner and editors only'
+      },
+      {
+        value: 'inlist',
+        label: 'People on the list only'
+      },
+      {
+        value: 'all',
+        label: 'Anyone within Humanitarian ID'
+      },
+      {
+        value: 'verified',
+        label: 'Verified users only'
+      }
+    ];
+
+    $scope.joinability = [
+      {
+        value: 'public',
+        label: 'Anyone within Humanitarian ID'
+      },
+      {
+        value: 'moderated',
+        label: 'Anyone within Humanitarian ID can ask to join'
+      },
+      {
+        value: 'private',
+        label: 'Only the owner and managers can add users'
+      }
+    ];
+
     if ($routeParams.list) {
       $scope.list = List.get({'listId': $routeParams.list});
     }
