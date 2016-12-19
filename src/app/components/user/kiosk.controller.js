@@ -17,6 +17,15 @@
     $scope.kioskCreating = false;
     $scope.newUser = true;
     $scope.organization = {};
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.dateOptions = {
+      maxDate: moment().add(5, 'year')._d,
+      minDate: new Date(),
+      showWeeks: false,
+      startingDay: 1
+    };
 
     $scope.getLists = function (val) {
       $scope.lists = List.query({'name': val});
@@ -147,6 +156,10 @@
           $scope.reinitialize();
         });
       }
+    };
+
+    $scope.showDatePicker = function() {
+      $scope.datePicker.opened = true;
     };
 
   }

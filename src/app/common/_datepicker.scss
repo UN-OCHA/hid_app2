@@ -1,0 +1,103 @@
+.uib-datepicker-popup {
+  position: absolute;
+  z-index: map-get($zindex, dropdown);
+  width: $base-unit*32;
+  border: 1px solid $primary-color;
+  background: white;
+
+  &.dropdown-menu {
+    li {
+      border-bottom: none;
+    }
+  }
+
+  button {
+    @include btn;
+    padding: $base-unit;
+    border: none;
+    background: none;
+  }
+}
+
+.uib-datepicker {
+
+  table {
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  thead {
+    border-bottom: 2px solid $primary-color;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  small {
+    @include font-size($small-font-size);
+  }
+
+  button:not(:disabled) {
+    &:hover, &:focus {
+      background: $light-blue;
+    }
+  }
+
+  button.active {
+    background: $primary-color;
+    color: $text-light;
+  }
+
+  button.uib-right, button.uib-left {
+    font-family: 'icomoon';
+
+    &:hover, &:focus {
+      background: $primary-color;
+      border: none;
+      box-shadow: none;
+      color: $text-light;
+    }
+  }
+
+  .uib-right {
+    &:before {
+      content: "\e947";
+    }
+  }
+
+  .uib-left {
+    &:before {
+      content: "\e946";
+    }
+  }
+}
+
+.uib-button-bar {
+  text-align: center;
+  border-top: 2px solid $primary-color;
+  @include clearfix;
+  padding: 0;
+
+
+  .pull-left {
+    float: left;
+  }
+
+  .pull-right {
+    float: right;
+  }
+
+  button {
+    color: $primary-color;
+    @include font-size($small-font-size);
+
+    &:hover, &:focus {
+      background: $primary-color;
+      color: $text-light;
+    }
+  }
+}

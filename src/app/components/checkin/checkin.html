@@ -36,7 +36,13 @@
       <h2 class="block-heading" translate>Check out automatically?</h2>
       <div class="form-editable-section">
         <label for="departureDate" translate>Set a date to be automatically checked out</label>
-        <input type="date" name="departureDate" id="departureDate" ng-model="departureDate">
+
+        <div class="form-list__item">
+          <input type="text" id="departureDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="auto bottom-right" ng-model="departureDate" is-open="datePicker.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="dd/mm/yyyy" />
+          <button type="button" class="btn-transparent" ng-click="showDatePicker()">
+            <icon name="calendar" text="Select a date"></icon>
+          </button>
+        </div>
       </div>
     </div>
 

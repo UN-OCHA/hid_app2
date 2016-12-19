@@ -7,48 +7,49 @@
 @mixin make-container() {
   margin-left: auto;
   margin-right: auto;
-  padding-right: $base-unit;
-  padding-left:  $base-unit;
   max-width: $max-width;
-  @if not $enable-flex {
-    @include clearfix();
-  }
-}
-
-@mixin make-gutters() {
-  padding-right: ($grid-gutter / 2);
-  padding-left:  ($grid-gutter / 2);
+  @include clearfix();
 }
 
 @mixin make-row() {
-  margin-right: ($grid-gutter  / -2);
-  margin-left:  ($grid-gutter  / -2);
+  margin-right: -$base-unit;
+  margin-left:  -$base-unit;
 
-  @if $enable-flex {
-    display: flex;
-    flex-wrap: wrap;
-  } @else {
-    @include clearfix();
+  @include media-query(sm) {
+    margin-right: $base-unit* -2;
+    margin-left:  $base-unit* -2;
+  }
+
+  @include media-query(xl) {
+    margin-right: $base-unit* -5;
+    margin-left:  $base-unit* -5;
+  }
+
+}
+
+@mixin make-gutters() {
+  padding-right: $base-unit;
+  padding-left:  $base-unit;
+
+  @include media-query(sm) {
+    padding-left: $base-unit*2;
+    padding-right: $base-unit*2;
+  }
+
+  @include media-query(xl) {
+    padding-left: $base-unit*5;
+    padding-right: $base-unit*5;
   }
 }
 
 @mixin make-col-ready() {
   position: relative;
   min-height: 1px;
-
-  @if $enable-flex {
-    width: 100%;
-  }
 }
 
 @mixin make-col($size, $columns: $grid-columns) {
-  @if $enable-flex {
-    flex: 0 0 percentage($size / $columns);
-    max-width: percentage($size / $columns);
-  } @else {
-    float: left;
-    width: percentage($size / $columns);
-  }
+  float: left;
+  width: percentage($size / $columns);
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {
@@ -77,11 +78,6 @@
   %grid-column {
     position: relative;
     min-height: 1px;
-
-    @if $enable-flex {
-      width: 100%;
-    }
-
     @include make-gutters();
   }
 
@@ -99,17 +95,6 @@
       }
     }
     @include media-query($breakpoint) {
-      @if $enable-flex {
-        .col-#{$breakpoint} {
-          flex-basis: 0;
-          flex-grow: 1;
-          max-width: 100%;
-        }
-       .col-#{$breakpoint}-auto {
-          flex: 0 0 auto;
-          width: auto;
-        }
-      }
 
       @for $i from 1 through $columns {
         .col-#{$breakpoint}-#{$i} {
@@ -139,19 +124,11 @@
 
 .container {
   @include make-container();
-
-  @include media-query(sm) {
-    padding-left: ($grid-gutter / 2);
-    padding-right: ($grid-gutter / 2);
-  }
-
-  @include media-query(xl) {
-    padding-left: $base-unit*5;
-    padding-right: $base-unit*5;
-  }
+  @include make-gutters();
 }
 
 .row {
+  @include clearfix();
   @include make-row();
 }
 

@@ -23,39 +23,17 @@
 }
 
 /** Add / remove icons here - do not edit above this line */
-
-.icon-group:before {
-  content: "\e907";
+.icon-calendar:before {
+  content: "\e90a";
 }
-.icon-users:before {
-  content: "\e907";
+.icon-date:before {
+  content: "\e90a";
 }
-.icon-user:before {
-  content: "\e908";
+.icon-schedule:before {
+  content: "\e90a";
 }
-.icon-plus:before {
-  content: "\e900";
-}
-.icon-ellipsis-v:before {
-  content: "\e901";
-}
-.icon-question:before {
-  content: "\e902";
-}
-.icon-bars:before {
-  content: "\e903";
-}
-.icon-navicon:before {
-  content: "\e903";
-}
-.icon-reorder:before {
-  content: "\e903";
-}
-.icon-home:before {
-  content: "\e904";
-}
-.icon-filter:before {
-  content: "\e905";
+.icon-week:before {
+  content: "\e90a";
 }
 .icon-check-circle:before {
   content: "\e943";
@@ -114,4 +92,36 @@
 .icon-document-file-pdf:before {
   content: "\e925";
 }
-
+.icon-group:before {
+  content: "\e907";
+}
+.icon-users:before {
+  content: "\e907";
+}
+.icon-user:before {
+  content: "\e908";
+}
+.icon-plus:before {
+  content: "\e900";
+}
+.icon-ellipsis-v:before {
+  content: "\e901";
+}
+.icon-question:before {
+  content: "\e902";
+}
+.icon-bars:before {
+  content: "\e903";
+}
+.icon-navicon:before {
+  content: "\e903";
+}
+.icon-reorder:before {
+  content: "\e903";
+}
+.icon-home:before {
+  content: "\e904";
+}
+.icon-filter:before {
+  content: "\e905";
+}

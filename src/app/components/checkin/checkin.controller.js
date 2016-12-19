@@ -30,6 +30,15 @@
       {value: 'Landline', name: 'Landline'},
       {value: 'Mobile', name: 'Mobile'}
     ];
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.dateOptions = {
+      maxDate: moment().add(5, 'year')._d,
+      minDate: new Date(),
+      showWeeks: false,
+      startingDay: 1
+    };
     $scope.isCurrentUser = true;
 
     function getPrimaryEmailType (primaryEmail, emails) {
@@ -110,6 +119,7 @@
     };
 
     $scope._checkinHelper = function () {
+
       var selectedLists = $scope.selectedLists;
       var checkinUser = {};
       for (var i = 0, len = selectedLists.length; i < len; i++) {
@@ -240,6 +250,10 @@
         alertService.add('success', gettextCatalog.getString('Organization successfully updated.'));
         $scope.modifications.location = 'Changed organization to: ' + $scope.newOrganization.list.name;
       });
+    };
+
+    $scope.showDatePicker = function() {
+      $scope.datePicker.opened = true;
     };
 
   }
