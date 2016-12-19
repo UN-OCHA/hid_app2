@@ -12,6 +12,15 @@
     $scope.isManager = false;
     $scope.isOwner = false;
     $scope.isFavorite = false;
+    $scope.datePicker = {
+      opened: false
+    };
+    $scope.dateOptions = {
+      maxDate: moment().add(5, 'year')._d,
+      minDate: new Date(),
+      showWeeks: false,
+      startingDay: 1
+    };
 
     function populateList () {
       var listType = [];
@@ -215,6 +224,10 @@
           alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
         });
       });
+    };
+
+    $scope.showDatePicker = function() {
+      $scope.datePicker.opened = true;
     };
 
   }
