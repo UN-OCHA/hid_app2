@@ -71,7 +71,12 @@
         <h3 class="panel-title" translate>Would you like to be checked out automatically ? If so, when ?</h3>
       </div>
       <div class="panel-body">
-        <input type="date" name="departureDate" ng-model="departureDate">
+      <div class="form-list__item">
+          <input type="text" id="departureDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="auto bottom-right" ng-model="departureDate" is-open="datePicker.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="dd/mm/yyyy" />
+          <button type="button" class="btn-transparent" ng-click="showDatePicker()">
+            <icon name="calendar" text="Select a date"></icon>
+          </button>
+        </div>
       </div>
     </div>
 

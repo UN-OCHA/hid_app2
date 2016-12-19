@@ -39,7 +39,13 @@
       <form ng-submit="checkIn()">
         <div class="form-group">
           <label for="checkoutDate" translate>Checkout date</label>
-          <input type="date" name="checkoutDate" ng-model="checkinUser.checkoutDate">
+          <div class="form-list__item">
+            <input type="text" id="checkoutDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="auto bottom-right" ng-model="checkinUser.checkoutDate" is-open="datePicker.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="dd/mm/yyyy" />
+            <button type="button" class="btn-transparent" ng-click="showDatePicker()">
+              <icon name="calendar" text="Select a date"></icon>
+            </button>
+          </div>
+
           <p translate>Select a checkout date if you would like to be checked out automatically (you will receive emails from the system beforehand)</p>
         </div>
         <button type="submit" class="btn-primary btn-block">
