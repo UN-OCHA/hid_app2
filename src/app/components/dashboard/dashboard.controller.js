@@ -5,35 +5,24 @@
     .module('app.dashboard')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  DashboardCtrl.$inject = ['$scope', '$routeParams', '$http', 'config', 'List'];
+  DashboardCtrl.$inject = ['$scope', 'config', 'List'];
 
-  function DashboardCtrl($scope, $routeParams, $http, config, List) {
-    $scope.activeList = 0;
-    if ($routeParams.list) {
-      $scope.list = List.get({'listId': $routeParams.list});
-    }
-    else {
-      $scope.list = new List();
-      $scope.list.type = 'list';
-    }
+  function DashboardCtrl($scope, config, List) {
+    $scope.listsManager = List.query({'managers': $scope.currentUser._id});
+    $scope.listsOwner = List.query({'owner': $scope.currentUser._id});
 
-    // Retrieve managers
-    $scope.getManagers = function(search) {
-      $scope.newManagers = User.query({'name': search});
-    };
-
-    // Save list settings
-    $scope.listSave = function() {
-      if ($scope.list._id) {
-        $scope.list.$update(function() {
-          $location.path('/lists/' + $scope.list._id);
+    $scope.listsMember = [];
+    angular.forEach(config.listTypes, function (listType) {
+      angular.forEach($scope.currentUser[listType + 's'], function (val, key) {
+        var listId = val.list;
+        if (typeof val.list === "object") {
+          listId = val.list._id;
+        }
+        var tmpList = List.get({listId: listId}, function () {
+          $scope.listsMember.push(tmpList);
         });
-      }
-      else {
-        $scope.list.$save(function() {
-        $location.path('/lists/' + $scope.list._id);
-        });
-      }
-    };
+      });
+    });
+
   }
 })();

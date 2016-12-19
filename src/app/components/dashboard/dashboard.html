@@ -63,8 +63,13 @@
               </button>
             </div>
           </li>
-          <li ng-repeat="(key, val) in listsManager">
+          <li class="list-group__item" ng-repeat="(key, val) in listsManager">
             <a href="/lists/{{val._id}}">{{val.name}}</a>
+            <div class="list-group__item-actions">
+              <button type="button" class="btn btn-transparent">
+                <icon name="ellipsis-v" text="Edit"></icon>
+              </button>
+            </div>
           </li>
         </div>
 
