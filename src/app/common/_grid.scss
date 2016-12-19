@@ -19,12 +19,6 @@
     margin-right: $base-unit* -2;
     margin-left:  $base-unit* -2;
   }
-
-  @include media-query(xl) {
-    margin-right: $base-unit* -5;
-    margin-left:  $base-unit* -5;
-  }
-
 }
 
 @mixin make-gutters() {
@@ -34,11 +28,6 @@
   @include media-query(sm) {
     padding-left: $base-unit*2;
     padding-right: $base-unit*2;
-  }
-
-  @include media-query(xl) {
-    padding-left: $base-unit*5;
-    padding-right: $base-unit*5;
   }
 }
 
@@ -125,6 +114,11 @@
 .container {
   @include make-container();
   @include make-gutters();
+
+  @include media-query(xl) {
+    padding-left: $base-unit*5;
+    padding-right: $base-unit*5;
+  }
 }
 
 .row {
