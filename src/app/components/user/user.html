@@ -8,6 +8,11 @@
 
     <div class="sidebar-section">
 
+      <button type="button" ng-click="verifyUser()" class="btn-primary btn-block" ng-show="currentUser.is_admin">
+        <span ng-if="!user.verified" translate>Verify user</span>
+        <span ng-if="user.verified" translate>Un-verify user</span>
+      </button>
+
       <a class="btn-primary btn-block" href="/checkin/{{user._id}}" ng-show="(currentUser.is_admin || (currentUser._id == user._id)) && isOnline">
         <icon name="check-big"></icon>
         <span translate>Check into List</span>
@@ -67,11 +72,6 @@
           <label class="btn btn-secondary btn-upload center-block" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
           <p class="form-hint" translate>Upload a square image in JPEG format, with more than 200px width</p>
         </div>
-
-        <p ng-show="profileForm.$visible && currentUser.is_admin">
-          <input type="checkbox" id="user_verified" ng-model="user.verified" />
-          <label class="clickie-label" for="user_verified" translate>Verified user</label>
-        </p>
 
         <div class="profile-header__controls">
           <button type="button" class="btn-icon" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
