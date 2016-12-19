@@ -26,9 +26,6 @@
                     setTimeout(function (index, items) {
                       if (items.length) {
                         var notification = new Notification('',{body:items[index].text,icon:'http://app.hid.vm/assets/img/logo.png', dir:'auto'});
-                        setTimeout(function (notification) {
-                          notification.close();
-                        }, 3000, notification);
                       }
                       if (items.length > index + 1) {
                         display(index + 1, items);
