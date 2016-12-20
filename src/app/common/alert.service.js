@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('app.common')
-    .factory('alertService', alertService);
+  .module('app.common')
+  .factory('alertService', alertService);
 
-  alertService.$inject = ['$rootScope'];
+  alertService.$inject = ['$rootScope', 'confirmDialog'];
 
-  function alertService($rootScope) {
+  function alertService($rootScope, confirmDialog) {
 
     var alertService = {};
 
@@ -17,6 +17,16 @@
     alertService.add = function(type, msg, confirm, cb) {
       confirm = confirm || false;
       cb = cb || false;
+
+      // Show confirm dialog instead of alert
+      if (confirm) {
+        return confirmDialog(msg).then(function () {
+          return cb();
+        }, function () {
+          return;
+        });
+      }
+
       var closeAlert = function () {
         alertService.closeAlert(this);
       };
@@ -25,13 +35,9 @@
         'msg': msg,
         'close': closeAlert,
         'routes': 1,
-        'confirm': confirm,
         'callback': cb,
       };
-      if (confirm) {
-        alert.closeConfirm = closeAlert;
-        alert.close = undefined;
-      }
+
       $rootScope.alerts.push(alert);
       return alert;
     };
@@ -54,6 +60,7 @@
 
     return alertService;
 
-    }
+  }
 
 })();
+

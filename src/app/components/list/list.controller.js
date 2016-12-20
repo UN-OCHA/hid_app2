@@ -84,8 +84,6 @@
         }
         if (checkInId != 0) {
           UserCheckInService.delete({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function(user) {
-            // Close existing alert
-            alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('The user was successfully checked out.'));
             UserDataService.notify();
           });
@@ -106,7 +104,7 @@
 
     // Check current user out of this list
     $scope.checkOut = function () {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         var checkInId = 0;
         for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {
           if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list._id)) {
@@ -115,8 +113,6 @@
         }
         if (checkInId != 0) {
           UserCheckInService.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function (user) {
-            // Close existing alert
-            alert.closeConfirm();
             alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
             $scope.isMember = false;
             $scope.setCurrentUser(user);
@@ -130,7 +126,6 @@
     $scope.deleteList = function() {
       var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
         $scope.list.$delete(function (out) {
-          alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'));
           $location.path('/lists');
         });
@@ -191,7 +186,6 @@
           }
         }
         user.$update(function (out) {
-          alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
         });
       });
@@ -204,7 +198,6 @@
         $scope.list.$update(function (list, response) {
           $scope.list = list;
           UserDataService.notify();
-          alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
         });
       });
@@ -220,7 +213,6 @@
         $scope.list.$update(function (list, response) {
           $scope.list = list;
           UserDataService.notify();
-          alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
         });
       });

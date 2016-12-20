@@ -336,10 +336,8 @@
     $scope.sendClaimEmail = function () {
       var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
         $scope.user.claimEmail(function (response) {
-          alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('Claim email sent successfully'));
         }, function (response) {
-          alert.closeConfirm();
           alertService.add('danger', gettextCatalog.getString('There was an error sending the claim email'));
         });
       });
