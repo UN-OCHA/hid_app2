@@ -24,7 +24,7 @@
     }
   }
 
-  a {
+  a, .btn-link {
     display: block;
     text-decoration: none;
     color: $text-dark;
@@ -33,5 +33,11 @@
     &:hover, &:focus {
       text-decoration: underline;
     }
+  }
+
+  .btn-link {
+    width: 100%;
+    text-align: left;
+    line-height: 1.5;
   }
 }
