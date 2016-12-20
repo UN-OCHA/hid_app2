@@ -383,5 +383,10 @@
       window.location.href = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent(vcard);
     }
 
+    $scope.verifyUser = function () {
+      $scope.user.verified = !$scope.user.verified;
+      $scope.saveUser();
+    }
+
   }
 })();

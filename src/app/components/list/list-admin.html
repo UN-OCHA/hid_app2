@@ -58,7 +58,7 @@
     <div ng-if="isMember" class="sidebar-section">
       <h2 class="sidebar-section__heading" translate>Check out</h2>
       <p ng-if="currentListUser && currentListUser.checkoutDate">You will be checked out of this list automatically on <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span></p>
-      <button type="submit" class="btn-primary" ng-click="checkOut();">
+      <button type="submit" class="btn-primary btn-block" ng-click="checkOut();">
         <icon name="cancel"></icon>
         <span translate>Check out</span>
       </button>

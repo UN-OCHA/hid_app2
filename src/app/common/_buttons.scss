@@ -30,6 +30,7 @@ button[disabled], a.disabled {
   text-decoration: none;
   display: inline-block;
   line-height: 1;
+  background: transparent;
 
   .icon {
     margin: 0 $base-unit/2;
@@ -53,7 +54,6 @@ button[disabled], a.disabled {
 
 .btn-primary {
   @include btn();
-  background: white;
   border: 1px solid $primary-color;
   color: $primary-color;
 
@@ -65,7 +65,6 @@ button[disabled], a.disabled {
 
 .btn-secondary {
   @include btn();
-  background: white;
   border: 1px solid $text-dark;
   color: $text-dark;
 
@@ -77,7 +76,6 @@ button[disabled], a.disabled {
 
 .btn-danger {
   @include btn();
-  background: white;
   border: 1px solid $error-color;
   color: $error-color;
 
@@ -89,7 +87,6 @@ button[disabled], a.disabled {
 
 .btn-icon {
   @include btn();
-  background: white;
   border: 1px solid $primary-color;
   color: $primary-color;
   border-radius: 100%;
@@ -123,7 +120,6 @@ button[disabled], a.disabled {
 
 .btn-transparent {
   @include btn();
-  background: none;
   border: none;
   color: $primary-color;
 

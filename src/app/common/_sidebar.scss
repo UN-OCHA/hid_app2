@@ -53,6 +53,17 @@
 
   .btn-block {
     margin-bottom: $base-unit*2;
+    // padding-left: $base-unit;
+    // text-align: left;
+    position: relative;
+    padding-left: $base-unit*5;
+
+
+    .icon-holder {
+      position: absolute;
+      left: $base-unit;
+      margin-top: -2px;
+    }
   }
 
   .ui-select-container {

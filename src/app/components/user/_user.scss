@@ -34,16 +34,28 @@
   position: relative;
   margin-right: $base-unit;
 
-  .icon {
+  .icon-holder {
     position: absolute;
     top: -$base-unit*1.5;
     right: $base-unit*1.5;
     @include font-size($large-font-size);
     color: $primary-color;
-    line-height: 1;
-    background: white;
-    border-radius: 100%;
-    height: $base-unit*3.5;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      background: white;
+      border-radius: 100%;
+      width: ($base-unit*4) - 2;
+      height: ($base-unit*4) - 2;
+    }
+  }
+
+  .icon {
+    position: relative;
+    z-index: 1;
   }
 
   .no-flexbox & {
