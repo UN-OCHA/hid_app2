@@ -20,15 +20,15 @@
                     icon: $location.protocol() + '://' + $location.host() + '/img/logo.png',
                     dir: 'auto'
                   });
+                  items[index].read = true;
+                  items[index].$save();
                 }
                 if (items.length > index + 1) {
                   display(index + 1, items);
                 }
               }, 3000, index, items);
             };
-            var now = new Date();
-            var oneminAgo = new Date(now.valueOf() - 60000);
-            hidNotification.query({user: userId, lastPull: oneminAgo.toISOString()}, function (items) {
+            hidNotification.query({read: false}, function (items) {
               display(0, items);
             });
           }, 60000);
