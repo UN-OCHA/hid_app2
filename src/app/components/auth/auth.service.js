@@ -5,11 +5,38 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', 'config', 'offlineService', 'hidNotification'];
+  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', '$location', 'config', 'offlineService', 'hidNotification'];
 
-  function AuthService ($http, $window, $rootScope, $interval, config, offlineService, hidNotification) {
+  function AuthService ($http, $window, $rootScope, $interval, $location, config, offlineService, hidNotification) {
     var jwt = {
+      _notificationsHelper: function (permission, userId) {
+        if (permission === 'granted') {
+          $rootScope.notificationPromise = $interval(function () {
+            var display = function (index, items) {
+              setTimeout(function (index, items) {
+                if (items.length) {
+                  var notification = new Notification('',{
+                    body: items[index].text,
+                    icon: $location.protocol() + '://' + $location.host() + '/img/logo.png',
+                    dir: 'auto'
+                  });
+                }
+                if (items.length > index + 1) {
+                  display(index + 1, items);
+                }
+              }, 3000, index, items);
+            };
+            var now = new Date();
+            var oneminAgo = new Date(now.valueOf() - 60000);
+            hidNotification.query({user: userId, lastPull: oneminAgo.toISOString()}, function (items) {
+              display(0, items);
+            });
+          }, 60000);
+        }
+      },
+
       login: function(email, password) {
+        var that = this;
         var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password }).then(function (response) {
           if (response.data && response.data.token) {
             $window.localStorage.setItem('jwtToken', response.data.token);
@@ -20,25 +47,7 @@
               offlineService.cacheListsForUser(response.data.user);
             }, 600000);
             Notification.requestPermission(function (permission) {
-              if (permission === 'granted') {
-                $rootScope.notificationPromise = $interval(function () {
-                  var display = function (index, items) {
-                    setTimeout(function (index, items) {
-                      if (items.length) {
-                        var notification = new Notification('',{body:items[index].text,icon:'http://app.hid.vm/assets/img/logo.png', dir:'auto'});
-                      }
-                      if (items.length > index + 1) {
-                        display(index + 1, items);
-                      }
-                    }, 3000, index, items);
-                  };
-                  var now = new Date();
-                  var oneminAgo = new Date(now.valueOf() - 60000);
-                  hidNotification.query({user: response.data.user._id, lastPull: oneminAgo.toISOString()}, function (items) {
-                    display(0, items);
-                  });
-                }, 60000);
-              }
+              that._notificationsHelper(permission, response.data.user._id);
             });
           }
         });
@@ -66,6 +75,20 @@
             return false;
           }
           else {
+            var that = this;
+            if (!$rootScope.notificationPromise) {
+              $rootScope.notificationPromise = true;
+              Notification.requestPermission(function (permission) {
+                that._notificationsHelper(permission, parsed.id);
+              });
+            }
+            if (!$rootScope.offlinePromise) {
+              $rootScope.offlinePromise = true;
+              var user = JSON.parse($window.localStorage.getItem('currentUser'));
+              $rootScope.offlinePromise = $interval(function () {
+                offlineService.cacheListsForUser(user);
+              }, 600000);
+            }
             return true;
           }
         }

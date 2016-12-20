@@ -1,3 +1,5 @@
+'use strict';
+
 var env = {};
 if (window) {
   angular.copy(window.__env, env);
