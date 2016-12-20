@@ -1,6 +1,6 @@
-<a id="skip-to-content" href="#main" class="skip-link">Skip to main content</a>
+<a id="skip-to-content" href="#main" class="skip-link" translate>Skip to main content</a>
 
-<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }} <span ng-if="alert.confirm"><button class="btn-primary" ng-click="alert.callback();" translate>Yes</button> <button class="btn-secondary" ng-click="alert.closeConfirm();" translate>No</button></span></uib-alert>
+<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" dismiss-on-timeout="5000">{{ alert.msg }}</uib-alert>
 
 <header role="banner">
 
