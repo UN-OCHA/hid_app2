@@ -47,7 +47,7 @@
     // Delete current user account
     $scope.deleteAccount = function (lu) {
       var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore.'), true, function() {
-        User.delete({id: $scope.user.id}, function (out) {
+        User.delete({userId: $scope.user.id}, function (out) {
           alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('Your account was successfully removed. You are now logged out. Sorry to have you go.'));
           AuthService.logout();
