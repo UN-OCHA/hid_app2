@@ -5,9 +5,9 @@
   .module('app.user')
   .factory('User', User);
 
-  User.$inject = ['$cachedResource', '$http', '$location', 'config'];
+  User.$inject = ['$cachedResource', '$http', '$location', '$window', 'config'];
 
-  function User($cachedResource, $http, $location, config) {
+  function User($cachedResource, $http, $location, $window, config) {
 
    var User = $cachedResource('users', config.apiUrl + 'user/:userId', {userId: '@_id'},
    {
@@ -108,6 +108,17 @@
     // Notify user
     User.prototype.notify = function (message, success, error) {
       $http.post(config.apiUrl + 'user/' + this._id + '/notification', {message: message}).then(success, error);
+    };
+
+    // Export to csv
+    User.getCSVUrl = function(params) {
+      delete params.limit;
+      delete params.offset;
+      params.token = $window.localStorage.getItem('jwtToken');
+      var urlp = Object.keys(params).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+      }).join('&');
+      return config.apiUrl + 'user.csv?' + urlp;
     };
 
 

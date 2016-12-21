@@ -19,6 +19,6 @@
         }
         return request;
       }
-    }
+    };
   }
 })();

@@ -21,13 +21,13 @@
       $rootScope.$emit('users-updated-event', request);
     };
 
-    UserDataService.getUsers = function (params, notify) {
+    UserDataService.getUsers = function (params) {
       return User.query(params).$promise.then(function (response) {
         return response;
       }, function (error) {
         $log.error(error);
       });
-    }
+    };
 
     return UserDataService;
 

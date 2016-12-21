@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$scope', '$rootScope', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
+  UsersCtrl.$inject = ['$scope', '$rootScope', '$location', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
 
-  function UsersCtrl($scope, $rootScope, $location, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
+  function UsersCtrl($scope, $rootScope, $location, $window, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
 
     $scope.request = {};
     $scope.totalItems = 0;
@@ -35,8 +35,14 @@
       });
     }
 
+    $scope.$on('users-export-csv', function (evt) {
+      var params = angular.extend($scope.request, $scope.filters);
+      var url = User.getCSVUrl(params);
+      $window.open(url);
+    });
+
     $scope.$on('populate-list', function (event, listType) {
-      $scope.request = angular.extend($scope.request, listType)
+      $scope.request = angular.extend($scope.request, listType);
       listInfo = listType;
       $scope.showAdmin = listType !== undefined ? true : false;
       getUsers();
