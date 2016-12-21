@@ -1,4 +1,6 @@
 <div class="list-actions">
+  <p ng-if="userFilters.name">Searching for {{userFilters.name}}</p>
+
   <p class="list-actions__count">{{totalItems}} <span translate>contacts</span></p>
 
   <ul class="pagination list-actions__pagination">

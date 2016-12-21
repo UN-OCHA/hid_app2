@@ -1,5 +1,7 @@
 <div ng-controller="ListsCtrl">
 
+  <p ng-if="listFilters.name">Searching for {{listFilters.name}}</p>
+
   <div class="list-actions">
     <p class="list-actions__count">{{totalItems}} <span translate>lists</span></p>
 

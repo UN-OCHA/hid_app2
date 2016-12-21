@@ -8,13 +8,19 @@
   ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'List'];
 
   function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, gettextCatalog, hrinfoService, alertService, ListDataService, List) {
-    $scope.request = $routeParams;
+    $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
     $scope.currentPage = 1;
     $scope.request.limit = $scope.itemsPerPage;
     $scope.request.offset = 0;
     $scope.request.sort = 'name';
+
+    $scope.listFilters = {};
+    if ($routeParams.q) {
+      $scope.listFilters.name = $routeParams.q;
+      $scope.request.name = $routeParams.q;
+    }
     $scope.selectedFilters = {};
     var currentSortOrder = $scope.request.name;
     ListDataService.setRequest($scope.request);
@@ -60,7 +66,7 @@
     $scope.lists = List.query($scope.request, queryCallback);
 
     $rootScope.$on('sidebar-closed', function () {
-      $scope.selectedFilters = angular.copy($scope.filters);
+      $scope.selectedFilters = angular.copy($scope.listFilters);
       $scope.request.sort = currentSortOrder;
     });
 
@@ -72,7 +78,7 @@
 
     $scope.resetFilters = function () {
       ListDataService.setFilters({});
-      $scope.filters = {};
+      $scope.listFilters = {};
       $scope.selectedFilters = {};
       $scope.currentPage = 1;
       $scope.pageChanged();
@@ -87,8 +93,8 @@
     };
 
     $scope.filter = function() {
-      $scope.filters = angular.copy($scope.selectedFilters);
-      ListDataService.setFilters($scope.filters);
+      $scope.listFilters = angular.copy($scope.selectedFilters);
+      ListDataService.setFilters($scope.listFilters);
       $scope.currentPage = 1;
       $scope.pageChanged();
     };
