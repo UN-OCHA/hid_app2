@@ -81,12 +81,17 @@
 
 .modal-body {
   position: relative;
-  padding: $base-unit 0;
+  padding: 0 0 $base-unit 0;
+  @include font-size($medium-font-size);
+  text-align: center;
+
+  h2 {
+    line-height: 1.2;
+  }
 }
 
 .modal-footer {
   padding-top: $base-unit;
-  text-align: right;
 }
 
 .modal-scrollbar-measure {
@@ -97,20 +102,30 @@
   overflow: scroll;
 }
 
-.modal-confirm {
-  .modal-body, .modal-footer {
-    text-align: center;
-  }
-
-  .modal-body {
-    @include font-size($medium-font-size);
-  }
-
-  .modal-footer {
+.modal-footer {
+  text-align: center;
     button {
       margin: 0 $base-unit;
       width: $base-unit*12;
     }
+  }
+
+.modal-close {
+  position: absolute;
+  top: $base-unit;
+  right: $base-unit;
+}
+
+.modal-icon {
+  display: inline-block;
+  margin-bottom: $base-unit;
+  @include font-size(30);
+
+  .modal-success & {
+    color: green;
+  }
+  .modal-danger & {
+    color: $error-color;
   }
 }
 
@@ -131,10 +146,15 @@
   }
 
   .modal-body {
-    padding: $base-unit*2 0;
+    padding: 0 0 $base-unit*2 0;
   }
 
   .modal-footer {
     padding-top: $base-unit*2;
+  }
+
+  .modal-icon {
+    @include font-size(40);
+    margin-bottom: $base-unit*2;
   }
 }

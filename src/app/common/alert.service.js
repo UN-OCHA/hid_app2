@@ -5,57 +5,66 @@
   .module('app.common')
   .factory('alertService', alertService);
 
-  alertService.$inject = ['$rootScope', 'confirmDialog'];
+  alertService.$inject = ['$rootScope', '$uibModal'];
 
-  function alertService($rootScope, confirmDialog) {
+  function alertService($rootScope, $uibModal) {
 
     var alertService = {};
 
-    // create an array of alerts available globally
-    $rootScope.alerts = [];
+    function buildModalTemplate (type, msg, confirm) {
+      var iconName = '';
+      var icon = '';
+
+      if (type === 'success' || type === 'danger') {
+        iconName = type === 'success' ? 'check-circle' : 'caution';
+        icon = '<icon name="' + iconName + '" class="modal-icon"></icon>';
+      }
+
+      var body = '<div class="modal-body">' + icon + '<h2 translate>{{message}}</h2></div>';
+      var closeButton = '<button class="btn-primary" ng-click="modal.close()" translate>Close</button>';
+
+      var confirmButtons = '<button class="btn-secondary" ng-click="modal.dismiss()" translate>Cancel</button>';
+      confirmButtons += '<button class="btn-primary" ng-click="modal.close()" translate>OK</button>';
+
+      var footer = '<div class="modal-footer">';
+      footer += confirm ? confirmButtons : closeButton;
+      footer += '</div>';
+
+      return body + footer;
+    }
+
+    function showModal (type, msg, confirm) {
+      var modalClass = confirm ? 'modal-confirm' : 'modal-' + type;
+
+      var modal = $uibModal.open({
+        animation: false,
+        size: 'sm',
+        template: buildModalTemplate(type, msg, confirm),
+        windowClass: modalClass,
+        controller: function ($scope, $uibModalInstance) {
+          $scope.modal = $uibModalInstance;
+          $scope.message = msg;
+
+          if (!confirm) {
+            setTimeout(function () {
+              $scope.modal.close();
+            }, 3000);
+          }
+        }
+      });
+      return modal.result;
+    }
 
     alertService.add = function(type, msg, confirm, cb) {
       confirm = confirm || false;
       cb = cb || false;
 
-      // Show confirm dialog instead of alert
-      if (confirm) {
-        return confirmDialog(msg).then(function () {
-          return cb();
-        }, function () {
-          return;
-        });
-      }
+      return showModal(type, msg, confirm).then(function () {
+        return cb ? cb() : true;
+      }, function () {
+        return;
+      });
 
-      var closeAlert = function () {
-        alertService.closeAlert(this);
-      };
-      var alert = {
-        'type': type,
-        'msg': msg,
-        'close': closeAlert,
-        'routes': 1,
-        'callback': cb,
-      };
-
-      $rootScope.alerts.push(alert);
-      return alert;
-    };
-
-    alertService.closeAlert = function(alert) {
-      var i = $rootScope.alerts.indexOf(alert);
-      $rootScope.alerts.splice(i, 1);
-    };
-
-    alertService.nextRoute = function() {
-      for (var i = $rootScope.alerts.length - 1; i >= 0; i--) {
-        if ($rootScope.alerts[i].routes > 1) {
-          $rootScope.alerts.splice(i,1);
-        }
-        else {
-          $rootScope.alerts[i].routes++;
-        }
-      }
     };
 
     return alertService;
