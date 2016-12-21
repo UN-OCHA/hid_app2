@@ -26,14 +26,14 @@
 }
 
 .page-header {
-  margin: $base-unit*2 0 $base-unit 0;
+  margin-top: $base-unit*2;
+  margin-bottom:$base-unit;
 }
 
 .page-header__heading {
   line-height: 1.2;
   margin-bottom: 0;
   word-break: break-word;
-
   padding-right: $base-unit*11;
 }
 
@@ -110,6 +110,7 @@
   .list-actions {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     padding: $base-unit 0;
   }
 

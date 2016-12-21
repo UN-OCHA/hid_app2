@@ -170,7 +170,8 @@ button[disabled], a.disabled {
 
   .btn-primary {
     width: 50%;
-    padding: $base-unit*1.5;
+    padding: $base-unit*1.5 $base-unit;
+    border-radius: 21px 0 0 21px;
 
     &:focus {
       position: relative;
@@ -185,6 +186,11 @@ button[disabled], a.disabled {
       &:hover {
         color: $text-light;
       }
+
+    }
+
+    & + .btn-primary {
+      border-radius: 0 21px 21px 0;
     }
   }
 }
@@ -194,12 +200,4 @@ button[disabled], a.disabled {
   outline: none;
   border-color: black;
   box-shadow: 0px 0px 0px 1px black;
-}
-
-
-
-.icon-inline {
-  display: inline-block;
-  min-width: $base-unit*4;
-  text-align: center;
 }

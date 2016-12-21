@@ -6,7 +6,7 @@
     .controller('UsersCtrl', UsersCtrl);
 
   UsersCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
-  function UsersCtrl($scope, $rootScope, $routeParams, $location, $window', gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
+  function UsersCtrl($scope, $rootScope, $routeParams, $location, $window, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;

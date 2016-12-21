@@ -31,7 +31,6 @@
 
 .table-responsive {
 
-
   th {
     display: none;
   }
@@ -60,22 +59,34 @@
 .table-responsive--has-actions {
   td {
     padding-right: 100px;
-
-    &:last-child {
-      width: 100px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 0;
-
-
-    }
   }
 }
 
-@include media-query(sm) {
+td.table-actions {
+  text-align: right;
+  width: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+
+  .dropdown {
+    display: inline-block;
+    width: $base-unit*6;
+  }
+
+  .icon-holder {
+    margin-left: $base-unit/2;
+  }
+}
+
+@include media-query(md) {
 
   .table-responsive {
+
+    th, td {
+      max-width: 300px;
+    }
 
     th {
       display: table-cell;
@@ -103,12 +114,11 @@
   .table-responsive--has-actions {
     td {
       padding-right: $base-unit;
-
-      &:last-child {
-        width: auto;
-        position: static;
-        text-align: right;
-      }
     }
+  }
+
+  td.table-actions {
+    position: static;
+    padding: 0;
   }
 }

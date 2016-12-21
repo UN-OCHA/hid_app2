@@ -1,9 +1,14 @@
 <div ng-controller="ListsCtrl">
 
-  <p ng-if="listFilters.name">Searching for {{listFilters.name}}</p>
-
   <div class="list-actions">
-    <p class="list-actions__count">{{totalItems}} <span translate>lists</span></p>
+
+    <p class="list-actions__count">
+      <span ng-if="listFilters.name">
+        <strong translate>Searching for</strong> "{{listFilters.name}}"
+        <br>
+      </span>
+      {{totalItems}} <span translate>lists</span>
+    </p>
 
     <ul class="pagination list-actions__pagination">
       <li class="pagination-page"><span>Show</span></li>
