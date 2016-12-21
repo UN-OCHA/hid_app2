@@ -41,6 +41,11 @@
       $window.open(url);
     });
 
+    $scope.$on('users-export-txt', function (evt, success, error) {
+      var params = angular.extend($scope.request, $scope.filters);
+      User.exportTXT(params, success, error);
+    });
+
     $scope.$on('populate-list', function (event, listType) {
       $scope.request = angular.extend($scope.request, listType);
       listInfo = listType;

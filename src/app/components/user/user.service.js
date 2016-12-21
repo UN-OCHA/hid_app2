@@ -121,6 +121,16 @@
       return config.apiUrl + 'user.csv?' + urlp;
     };
 
+    // Export to TXT
+    User.exportTXT = function (params, success, error) {
+      delete params.limit;
+      delete params.offset;
+      var urlp = Object.keys(params).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+      }).join('&');
+      $http.get(config.apiUrl + 'user.txt?' + urlp).then(success, error);
+    };
+
 
     return User;
 

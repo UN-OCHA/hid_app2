@@ -136,19 +136,16 @@
     // TODO: fix issue that only x first emails are exported
     $scope.exportEmails = function() {
       $scope.emailsText = '';
-      for (var i = 0, len = $scope.users.length; i < len; i++) {
-        $scope.emailsText += $scope.users[i].name + ' <' + $scope.users[i].email + '>';
-        if (i != len - 1) {
-          $scope.emailsText += ', ';
-        }
-      }
-      $uibModal.open({
-        animation: true,
-        ariaLabelledBy: 'modal-title',
-        ariaDescribedBy: 'modal-body',
-        templateUrl: 'exportEmailsModal.html',
-        size: 'lg',
-        scope: $scope,
+      $scope.$broadcast('users-export-txt', function (resp) {
+        $scope.emailsText = resp.data;
+        $uibModal.open({
+          animation: true,
+          ariaLabelledBy: 'modal-title',
+          ariaDescribedBy: 'modal-body',
+          templateUrl: 'exportEmailsModal.html',
+          size: 'lg',
+          scope: $scope,
+        });
       });
     };
 
