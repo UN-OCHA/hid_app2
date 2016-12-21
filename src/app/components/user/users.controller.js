@@ -149,7 +149,6 @@
     $scope.deleteUser = function (user) {
       var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
         user.$delete(function (out) {
-          alert.closeConfirm();
           alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
           getUsers();
         });

@@ -34,9 +34,6 @@ app.run(function ($rootScope) {
 app.run(function ($rootScope, $window, $location, AuthService, alertService) {
   $rootScope.isAuthenticated = false;
   $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
-    if (nextRoute) {
-      alertService.nextRoute();
-    }
     if (nextRoute && nextRoute.authenticate && !AuthService.isAuthenticated()){
       // User isn’t authenticated
       $location.path('/');
