@@ -23,6 +23,7 @@
 }
 
 /** Add / remove icons here - do not edit above this line */
+
 .icon-calendar:before {
   content: "\e90a";
 }
@@ -91,6 +92,9 @@
 }
 .icon-document-file-pdf:before {
   content: "\e925";
+}
+.icon-caution:before {
+  content: "\e03d";
 }
 .icon-group:before {
   content: "\e907";
