@@ -131,6 +131,7 @@ button[disabled], a.disabled {
   &:focus {
     background: $primary-color;
     color: $text-light;
+    box-shadow: none;
   }
 
   &.active {

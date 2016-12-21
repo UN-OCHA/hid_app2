@@ -2,7 +2,7 @@
   list-style: none;
   position: relative;
   border-bottom: 1px solid $border-grey;
-  padding: $base-unit $base-unit*6 $base-unit $base-unit;
+  padding: $base-unit*1.5 $base-unit*6 $base-unit*1.5 $base-unit;
 
   a {
     display: block;
@@ -20,8 +20,10 @@
   position: absolute;
   right: 0;
   top: 0;
+  height: 100%;
 
   .btn-transparent {
     padding: $base-unit*1.5;
+    height: 100%;
   }
 }

@@ -2,6 +2,10 @@
  * Styles for dashboard component
  */
 
+.dashboard-tabs {
+    margin-bottom: $base-unit*2;
+  }
+
 .dashboard-ctas {
   margin-bottom: $base-unit*2;
 
@@ -23,6 +27,14 @@
         margin-right: 0;
       }
     }
+  }
+
+}
+
+@include media-query(md) {
+
+  .dashboard-tabs {
+    margin-bottom: 0;
   }
 
 }

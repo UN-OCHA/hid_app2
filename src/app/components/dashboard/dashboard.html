@@ -9,79 +9,95 @@
 <div class="row">
 
   <div class="col-md-8">
-    <div class="list-tabs">
-      <div class="list-tabs__controls" uib-dropdown>
-        <button type="button" class="btn btn-transparent list-tabs__toggle" uib-dropdown-toggle>
-          <icon name="arrow-down" text="Change list"></icon>
+
+    <ul class="tabs tabs-3 dashboard-tabs" ng-class="{'tabs--closed' : !tabsActive}">
+
+      <li class="tabs__control-item">
+        <button type="button" class="tabs__control-button" ng-class="{'active' : activeTab === 'favorites', 'tabs__control-button--mobile-closed': !tabsActive}" ng-click="toggleTabs('favorites')">
+          <span translate>My favorite lists</span>
         </button>
 
-        <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-          <li>
-            <button type="button" id="dashTab0" class="btn btn-transparent" ng-click="activeList = 0" aria-selected="{{activeList === 0}}" translate>My favorite lists</button>
-          </li>
-          <li>
-            <button type="button" id="dashTab1" class="btn btn-transparent" ng-click="activeList = 1" aria-selected="{{activeList === 1}}" translate>Lists I'm part of</button>
-          </li>
-          <li>
-            <button type="button" id="dashTab2" class="btn btn-transparent" ng-click="activeList = 2" aria-selected="{{activeList === 2}}" translate>Lists I manage</button>
-          </li>
-        </ul>
-      </div>
-
-      <div class="list-tabs__content" ng-show="activeList === 0" aria-hidden="{{activeList !== 0}}" aria-labelledby="dashTab0">
-        <h2 class="block-heading" translate>My favorite lists</h2>
-        <div class="list-group" ng-if="currentUser.favoriteLists.length">
-          <li class="list-group__item" ng-repeat="(key, val) in currentUser.favoriteLists">
-            <a href="/lists/{{val._id}}">{{val.name}}</a>
-          </li>
+        <div class="tabs__content" ng-if="activeTab === 'favorites'" ng-class="{'tabs__content--mobile-closed' : !tabsActive}">
+          <ul class="list-group" ng-if="currentUser.favoriteLists.length">
+            <li class="list-group__item" ng-repeat="list in currentUser.favoriteLists track by $index">
+              <a href="/lists/{{list._id}}">{{list.name}}</a>
+              <div class="list-group__item-actions" uib-dropdown>
+                <button type="button" class="btn btn-transparent" uib-dropdown-toggle>
+                  <icon name="ellipsis-v" text="Options"></icon>
+                </button>
+                <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+                  <li><button type="button" ng-click="removeFavorite(list)" class="btn-link" translate>Remove from favorites</button></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <div ng-if="!currentUser.favoriteLists.length">
+            <p class="list-tabs__empty" translate>You don't have any favorite lists</p>
+          </div>
         </div>
-        <div ng-if="!currentUser.favoriteLists.length">
-          <p class="list-tabs__empty" translate>You don't have any favourite lists</p>
+      </li>
+
+      <li class="tabs__control-item">
+        <button type="button" class="tabs__control-button" ng-class="{'active' : activeTab === 'partof'}" ng-click="toggleTabs('partof')">
+          <span translate>Lists I'm part of</span>
+        </button>
+
+        <div class="tabs__content" ng-if="activeTab === 'partof'">
+          <ul class="list-group" ng-if="listsMember.length">
+            <li class="list-group__item" ng-repeat="list in listsMember track by $index">
+              <a href="/lists/{{list._id}}">{{list.name}}</a>
+              <div class="list-group__item-actions" uib-dropdown>
+                <button type="button" class="btn btn-transparent" uib-dropdown-toggle>
+                  <icon name="ellipsis-v" text="Options"></icon>
+                </button>
+                <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+                  <li><button type="button" ng-click="leaveList(list)" class="btn-link" translate>Leave list</button></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <div ng-if="!listsMember.length">
+            <p class="list-tabs__empty" translate>You are not part of any lists</p>
+          </div>
         </div>
-      </div>
+      </li>
 
-      <div class="list-tabs__content" ng-show="activeList === 1" aria-hidden="{{activeList !== 1}}" aria-labelledby="dashTab1">
-        <h2 class="block-heading">Lists I'm part of</h2>
-        <div class="list-group" ng-if="listsMember.length">
-          <li class="list-group__item" ng-repeat="(key, val) in listsMember">
-            <a href="/lists/{{val._id}}">{{val.name}}</a>
-          </li>
+      <li class="tabs__control-item">
+        <button type="button" class="tabs__control-button" ng-class="{'active' : activeTab === 'manage'}" ng-click="toggleTabs('manage')">
+          <span translate>Lists I manage</span>
+        </button>
+
+        <div class="tabs__content" ng-if="activeTab === 'manage'">
+          <ul class="list-group" ng-if="listsOwner.length || listsManager.length">
+            <li class="list-group__item" ng-repeat="list in listsOwner track by $index">
+              <a href="/lists/{{list._id}}">{{list.name}}</a>
+              <div class="list-group__item-actions">
+                <button type="button" class="btn btn-transparent">
+                  <icon name="ellipsis-v" text="Options"></icon>
+                </button>
+              </div>
+            </li>
+            <li class="list-group__item" ng-repeat="list in listsManager track by $index">
+              <a href="/lists/{{list._id}}">{{list.name}}</a>
+              <div class="list-group__item-actions" uib-dropdown>
+                <button type="button" class="btn btn-transparent" uib-dropdown-toggle>
+                  <icon name="ellipsis-v" text="Options"></icon>
+                </button>
+                <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+                  <li><a href="/lists/{{list._id}}/edit" translate>Edit list</a></li>
+                  <li><button type="button" ng-click="deleteList(list)" class="btn-link" translate>Delete list</button></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+
+          <div ng-if="!listsOwner.length && !listsManager.length">
+            <p class="list-tabs__empty" translate>You don't manage any lists</p>
+          </div>
         </div>
-        <div ng-if="!listsMember.length">
-          <p class="list-tabs__empty" translate>You are not part of any lists</p>
-        </div>
-      </div>
+      </li>
 
-      <div class="list-tabs__content" ng-show="activeList === 2" aria-hidden="{{activeList !== 2}}" aria-labelledby="dashTab2">
-        <h2 class="block-heading">Lists I manage</h2>
-        <div class="list-group" ng-if="listsOwner.length || listsManager.length">
-          <li class="list-group__item" ng-repeat="(key, val) in listsOwner">
-            <a href="/lists/{{val._id}}">{{val.name}}</a>
-            <div class="list-group__item-actions">
-              <button type="button" class="btn btn-transparent">
-                <icon name="ellipsis-v" text="Edit"></icon>
-              </button>
-            </div>
-          </li>
-          <li class="list-group__item" ng-repeat="(key, val) in listsManager">
-            <a href="/lists/{{val._id}}">{{val.name}}</a>
-            <div class="list-group__item-actions">
-              <button type="button" class="btn btn-transparent">
-                <icon name="ellipsis-v" text="Edit"></icon>
-              </button>
-            </div>
-          </li>
-        </div>
-
-        <div ng-if="!listsOwner.length && !listsManager.length">
-          <p class="list-tabs__empty" translate>You don't manage any lists</p>
-        </div>
-
-      </div>
-
-       <a class="btn btn-primary" href="/lists" translate>View all Lists</a>
-
-    </div>
+    </ul>
 
   </div>
 
