@@ -9,7 +9,12 @@
 
   function hidNotification($resource, config) {
 
-   return $resource(config.apiUrl + 'notification/:notificationId', {notificationId: '@_id'});
+   return $resource(config.apiUrl + 'notification/:notificationId', {notificationId: '@_id'},
+    {
+      'update': {
+        method: 'PUT'
+      }
+    });
 
   }
 

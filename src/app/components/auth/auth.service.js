@@ -10,7 +10,8 @@
   function AuthService ($http, $window, $rootScope, $interval, $location, config, offlineService, hidNotification) {
     var jwt = {
       _notificationsHelper: function (permission, userId) {
-        if (permission === 'granted') {
+        if (permission === 'granted' && !$rootScope.notificationPromise) {
+          $rootScope.notificationPromise = true;
           $rootScope.notificationPromise = $interval(function () {
             var display = function (index, items) {
               setTimeout(function (index, items) {
@@ -21,7 +22,7 @@
                     dir: 'auto'
                   });
                   items[index].read = true;
-                  items[index].$save();
+                  items[index].$update();
                 }
                 if (items.length > index + 1) {
                   display(index + 1, items);
@@ -77,7 +78,6 @@
           else {
             var that = this;
             if (!$rootScope.notificationPromise) {
-              $rootScope.notificationPromise = true;
               Notification.requestPermission(function (permission) {
                 that._notificationsHelper(permission, parsed.id);
               });
