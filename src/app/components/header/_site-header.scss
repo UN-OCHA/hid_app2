@@ -55,8 +55,8 @@
 
 .site-header__nav-toggle {
   width: $base-unit*5;
+  height: $base-unit*5;
   padding: 0;
-  @include font-size($large-font-size);
   position: relative;
 }
 

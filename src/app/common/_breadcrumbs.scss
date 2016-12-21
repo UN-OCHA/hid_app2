@@ -12,15 +12,17 @@
     text-decoration: none;
 
     &:hover, &:focus {
-      text-decoration: underline;
+
+      span:not(.icon-holder) {
+        text-decoration: underline;
+      }
     }
   }
 
   .icon {
-    margin-right: $base-unit/2;
+    @include font-size(11);
   }
 }
-
 
 @include media-query(sm) {
 
@@ -30,6 +32,9 @@
     padding-right: $base-unit*14;
     padding-top: $base-unit;
     padding-bottom: $base-unit;
-  }
 
+    .icon {
+      @include font-size($base-font-size);
+    }
+  }
 }

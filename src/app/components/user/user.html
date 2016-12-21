@@ -14,7 +14,7 @@
       </button>
 
       <a class="btn-primary btn-block" href="/checkin/{{user._id}}" ng-show="(currentUser.is_admin || (currentUser._id == user._id)) && isOnline">
-        <icon name="check-big"></icon>
+        <icon name="check"></icon>
         <span translate>Check into List</span>
       </a>
 
@@ -80,7 +80,7 @@
 
           <div ng-show="profileForm.$visible">
             <button type="submit" class="btn-icon" ng-disabled="profileForm.$waiting">
-              <icon name="check-big" text="Save changes"></icon>
+              <icon name="check" text="Save changes"></icon>
             </button>
             <button type="button" class="btn-icon btn-secondary" ng-disabled="profileForm.$waiting" ng-click="profileForm.$cancel()">
               <icon name="cancel" text="Cancel"></icon>
