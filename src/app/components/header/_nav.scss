@@ -57,7 +57,10 @@
 
   .icon {
     margin: 0;
+  }
 
+  &.btn-transparent .icon {
+    @include font-size($small-font-size);
   }
 
   .icon-arrow-down {
