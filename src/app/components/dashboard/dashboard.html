@@ -115,11 +115,18 @@
   <div class="secondary-block">
     <h2 class="secondary-block__heading">Notifications</h2>
     <ul class="secondary-block__list">
+      <li class="secondary-block__item" ng-repeat="notification in notifications.unread | limitTo: 5">
+        <icon name="arrow-right"></icon>
+        {{notification.text}}
+      </li>
       <li class="secondary-block__item">
         <icon name="arrow-right"></icon>
         <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
       <li class="secondary-block__item" ng-if="currentUser.verified" translate><icon name="arrow-right"></icon>Your profile is verified</li>
       <li class="secondary-block__item" ng-if="!currentUser.verified" translate><icon name="arrow-right"></icon>You're not verified yet</li>
+      <li class="secondary-block__item">
+        <a href="/notifications" translate>View all notifications</a>
+      </li>
     </ul>
   </div>
 

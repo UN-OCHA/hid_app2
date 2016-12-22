@@ -5,9 +5,9 @@
     .module('app.dashboard')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'List', 'User', 'UserCheckInService', 'UserDataService'];
+  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'notificationsService', 'List', 'User', 'UserCheckInService', 'UserDataService'];
 
-  function DashboardCtrl($scope, alertService, config, gettextCatalog, List, User, UserCheckInService, UserDataService) {
+  function DashboardCtrl($scope, alertService, config, gettextCatalog, notificationsService, List, User, UserCheckInService, UserDataService) {
     $scope.listsManager = List.query({'managers': $scope.currentUser._id});
     $scope.listsOwner = List.query({'owner': $scope.currentUser._id});
 
@@ -68,6 +68,8 @@
       $scope.activeTab = tabName;
       $scope.tabsActive = true;
     };
+
+    $scope.notifications = notificationsService;
 
   }
 })();

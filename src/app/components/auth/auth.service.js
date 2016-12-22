@@ -5,9 +5,9 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', '$location', 'config', 'offlineService', 'hidNotification'];
+  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', '$location', 'config', 'offlineService', 'notificationsService'];
 
-  function AuthService ($http, $window, $rootScope, $interval, $location, config, offlineService, hidNotification) {
+  function AuthService ($http, $window, $rootScope, $interval, $location, config, offlineService, notificationsService) {
     var jwt = {
       _notificationsHelper: function (permission, userId) {
         if (permission === 'granted' && !$rootScope.notificationPromise) {
@@ -29,10 +29,18 @@
                 }
               }, 3000, index, items);
             };
-            hidNotification.query({read: false}, function (items) {
+            notificationsService.getUnread().then(function (items) {
               display(0, items);
             });
           }, 60000);
+
+          //Check notifications when first open app
+          var checkedNotifications = false;
+          if (!checkedNotifications) {
+            notificationsService.getUnread().then(function (items) {
+              checkedNotifications = true;
+            });
+          }
         }
       },
 
