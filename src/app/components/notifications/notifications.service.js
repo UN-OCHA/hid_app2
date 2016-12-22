@@ -19,6 +19,7 @@
     var notifications = {
       all: {},
       unread: {},
+      total: 0,
       totalUnread: 0,
 
       getUnread: function () {
@@ -42,10 +43,8 @@
         });
       },
 
-      markAllAsRead: function () {
-        return resource.update({read: true}).$promise.then(function () {
-          notifications.totalUnread = 0;
-          notifications.unread = {};
+      markAsRead: function (notification) {
+        return resource.update(notification).$promise.then(function () {
           return;
         }, function (error) {
           $log.error(error);
