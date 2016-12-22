@@ -101,10 +101,6 @@
   right: $base-unit*6.5;
 }
 
-.page-actions__toggle-lists {
-  margin: $base-unit 0;
-}
-
 @include media-query(sm) {
 
   .list-actions {
@@ -130,10 +126,6 @@
     right: $base-unit*8;
   }
 
-  .page-actions__toggle-lists {
-    min-width: $base-unit*40;
-  }
-
 }
 
 @include media-query(md) {
@@ -150,13 +142,6 @@
     }
   }
 
-  .page-actions__toggle-lists {
-    margin: -2px $base-unit*7 0 0;
-
-    .toggled & {
-      display: none;
-    }
-  }
 }
 
 @include media-query(xl) {

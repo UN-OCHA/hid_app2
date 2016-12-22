@@ -120,6 +120,7 @@ button[disabled], a.disabled {
 
 .btn-transparent {
   @include btn();
+  padding: $base-unit*1.5 $base-unit;
   border: none;
   color: $primary-color;
 

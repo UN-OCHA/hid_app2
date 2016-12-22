@@ -58,7 +58,7 @@
         <icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon>
         <div uib-dropdown>
           <button type="button" class="btn-transparent" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit" ng-disabled="!isOnline">
-            <icon name="ellipsis-v" text="Edit"></icon>
+            <icon name="dots" text="Edit"></icon>
           </button>
           <ul class="dropdown-menu" uib-dropdown-menu>
             <li ng-if="currentUser.is_admin"><a href="/checkin/{{user._id}}" translate>Check into List</a></li>
