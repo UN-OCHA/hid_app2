@@ -96,10 +96,10 @@
 .filter__search {
   position: relative;
 
-  .icon {
+  .icon-holder {
     position: absolute;
     left: $base-unit/2;
-    top: $base-unit;
+    top: $base-unit*1.5;
     color: $text-dark;
   }
 }
@@ -109,7 +109,7 @@
   border: none;
   border-bottom: 1px solid $border-grey;
   border-radius: 0;
-  padding-left: $base-unit*4;
+  padding-left: $base-unit*3;
 
   &:focus {
     padding-left: $base-unit*4;

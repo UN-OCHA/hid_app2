@@ -1,27 +1,24 @@
-<div class="page-header">
-  <div class="page-header__primary">
-    <h1 class="page-header__heading" translate>Search</h1>
+<div class="page-header row">
+  <div class="col-lg-4">
+  <!-- <div class="page-header__primary"> -->
+    <h1 class="page-header__heading"translate>Search Results</h1>
+  <!-- </div> -->
   </div>
+  <div class="col-lg-4 pull-lg-2">
+    <div class="btn-toggle page-actions__toggle-lists">
+      <button type="button" class="btn-primary" ng-click="showLists = !showLists" ng-disabled="!showLists" ng-class="{'active' : !showLists}">
+        Show contacts
+      </button>
+      <button type="button" class="btn-primary" ng-click="showLists = !showLists" ng-disabled="showLists"  ng-class="{'active' : showLists}">
+        Show lists
+      </button>
+    </div>
+  </div>
+  <!-- <div class="col-md-4"></div> -->
+
 </div>
 
-<div class="row">
-  <div class="col-sm-6">
-    <h2 translate>Lists</h2>
-    <p ng-if="!searchLists.length && searchComplete" translate>No lists found</p>
-    <ul ng-if="searchLists.length">
-      <li ng-repeat="result in searchLists">
-        <a href="lists/{{result._id}}">{{result.name}}</a>
-      </li>
-    </ul>
-  </div>
 
-  <div class="col-sm-6">
-    <h2 translate>Users</h2>
-    <p ng-if="!searchPeople.length && searchComplete" translate>No users found</p>
-    <ul ng-if="searchPeople.length">
-      <li ng-repeat="result in searchPeople">
-        <a href="users/{{result._id}}">{{result.name}}</a>
-      </li>
-    </ul>
-  </div>
-</div>
+<ng-include ng-show="showLists" src="'app/components/list/all-lists.html'"></ng-include>
+
+<users-list ng-show="!showLists"></users-list>

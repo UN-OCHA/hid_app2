@@ -42,6 +42,7 @@
     }
     var defaultParams = { limit: 50, offset: 0, sort: 'name' };
     var listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234' };
+    var searchParams = { limit: 50, offset: 0, sort: 'name', name: 'find' };
 
     beforeEach(function() {
       module('app.user');
@@ -108,18 +109,23 @@
 
     });
 
-    function controllerSetup (list) {
+    function controllerSetup (list, search) {
       beforeEach (function () {
         inject(function($controller) {
 
           var ctrlParams = {
-            $scope: scope
+            $scope: scope,
+            $routeParams: {}
           };
           var listInfo = undefined;
           if (list) {
             listInfo = []
             ctrlParams.$routeParams = {list: list};
             listInfo['lists.list'] = '1234';
+          }
+
+          if (search) {
+            ctrlParams.$routeParams.q = 'find';
           }
 
           $controller('UsersCtrl', ctrlParams);
@@ -151,6 +157,21 @@
         expect(scope.users).toEqual(initialUsers);
       });
 
+    });
+
+    describe('Searching for users', function () {
+      controllerSetup(false, true);
+
+      it('should get the users and add them to the scope', function () {
+        expect(mockUserService.getUsers).toHaveBeenCalledWith(searchParams);
+        expect(scope.totalItems).toEqual(3);
+        expect(scope.users).toEqual(initialUsers);
+      });
+
+      it('should add the search term to the name field in the filters', function () {
+        expect(scope.userFilters.name).toEqual('find');
+        expect(scope.selectedFilters.name).toEqual('find');
+      });
     });
 
     describe('Populating filters', function () {
@@ -214,12 +235,12 @@
       it('should clear the filters', function () {
         scope.users = filteredUsers;
         scope.totalItems = 2;
-        scope.filters = {country: 'hrinfo_loc_416', sort: 'type'};
+        scope.userFilters = {country: 'hrinfo_loc_416', sort: 'type'};
         scope.selectedFilters = {country: 'hrinfo_loc_416', sort: 'type'};
         scope.resetFilters();
         scope.$digest();
 
-        expect(scope.filters).toEqual({});
+        expect(scope.userFilters).toEqual({});
         expect(scope.selectedFilters).toEqual({});
         expect(scope.currentPage).toEqual(1);
         expect(scope.totalItems).toEqual(3);
