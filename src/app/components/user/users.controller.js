@@ -5,16 +5,13 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$scope', '$rootScope', '$location', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
-
-  function UsersCtrl($scope, $rootScope, $location, $window, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
-
+  UsersCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
+  function UsersCtrl($scope, $rootScope, $routeParams, $location, $window, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
     $scope.currentPage = 1;
     $scope.selectedFilters = {};
-    // $scope.searchTerm = $routeParams.name;
     $scope.showAdmin = false;
     var currentSortOrder = $scope.request.name;
     var defaultRequest = {
@@ -28,7 +25,7 @@
 
     function getUsers () {
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-      var params = angular.extend($scope.request, $scope.filters);
+      var params = angular.extend($scope.request, $scope.userFilters);
       UserDataService.getUsers(params).then(function (users) {
         $scope.users = users;
         $scope.totalItems = users.headers["x-total-count"];
@@ -47,7 +44,13 @@
     });
 
     $scope.$on('populate-list', function (event, listType) {
+      $scope.userFilters = {};
       $scope.request = angular.extend($scope.request, listType);
+      if ($routeParams.q) {
+        $scope.request.name = $routeParams.q;
+        $scope.userFilters.name = $routeParams.q;
+        $scope.selectedFilters.name = $routeParams.q;
+      }
       listInfo = listType;
       $scope.showAdmin = listType !== undefined ? true : false;
       getUsers();
@@ -66,7 +69,7 @@
     });
 
     $rootScope.$on('sidebar-closed', function () {
-      $scope.selectedFilters = angular.copy($scope.filters);
+      $scope.selectedFilters = angular.copy($scope.userFilters);
       $scope.request.sort = currentSortOrder;
     });
 
@@ -75,7 +78,11 @@
     });
 
     $scope.filter = function() {
-      $scope.filters = angular.copy($scope.selectedFilters);
+      if ($scope.selectedFilters.name === '') {
+        delete $scope.selectedFilters.name;
+        delete $scope.request.name;
+      }
+      $scope.userFilters = angular.copy($scope.selectedFilters);
       $scope.currentPage = 1;
       getUsers();
     };
@@ -83,26 +90,26 @@
     $scope.resetFilters = function () {
       $scope.request = angular.copy(defaultRequest);
       if (listInfo) {
-        $scope.request = angular.extend($scope.request, listInfo)
+        $scope.request = angular.extend($scope.request, listInfo);
       }
-      $scope.filters = {};
+      $scope.userFilters = {};
       $scope.selectedFilters = {};
       $scope.currentPage = 1;
       getUsers();
-    }
+    };
 
     //TO DO order asc / desc ?
     $scope.sortList = function (sortby) {
       $scope.request.sort = sortby;
       $scope.currentPage = 1;
       getUsers();
-    }
+    };
 
     $scope.setLimit = function (limit) {
-      $scope.itemsPerPage = limit
+      $scope.itemsPerPage = limit;
       $scope.request.limit = limit;
       getUsers();
-    }
+    };
 
     $scope.operations = List.query({type: 'operation'});
 
@@ -152,14 +159,13 @@
 
     // Delete user account
     $scope.deleteUser = function (user) {
-      var alert = alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
-        user.$delete(function (out) {
+      alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
+        user.$delete(function () {
           alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
           getUsers();
         });
       });
-    }
-
+    };
   }
 
 })();

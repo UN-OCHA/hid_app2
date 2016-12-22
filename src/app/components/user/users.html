@@ -1,5 +1,12 @@
 <div class="list-actions">
-  <p class="list-actions__count">{{totalItems}} <span translate>contacts</span></p>
+
+  <p class="list-actions__count">
+    <span ng-if="userFilters.name">
+      <strong translate>Searching for</strong> "{{userFilters.name}}"
+      <br>
+    </span>
+    {{totalItems}} <span translate>contacts</span>
+  </p>
 
   <ul class="pagination list-actions__pagination">
     <li class="pagination-page"><span>Show</span></li>
@@ -39,18 +46,18 @@
   <tbody>
     <tr ng-repeat="user in users">
       <td><a ng-href="/users/{{user._id}}">{{user.name}}</a></td>
-      <td>{{user.job_title}}</td>
-      <td>{{user.organization.list.name}}</td>
+      <td>
+        <span ng-repeat="role in user.roles">
+          {{role.label}}<span ng-if="!$last">, </span>
+        </span>
+      </td>
+      <td><a ng-href="/lists/{{user.organization.list._id}}" ng-if="user.organization.list">{{user.organization.list.name}}</a></td>
       <td></td>
       <td>{{user.location.country.name}}</td>
-      <td>
-        <icon name="flag" text="List owner" title="List owner" class="icon-inline" ng-if="list && list.owner._id == user._id"></icon>
-        <icon name="clock" text="Pending" title="Pending" class="icon-inline" ng-if="list && user.currentCheckin(list).pending"></icon>
-        <icon name="user" text="List manager" title="List manager" class="icon-inline" ng-if="list && list.isManager(user)" title="Manager"></icon>
-        <icon name="check-circle" text="Verified" title="Verified" class="icon-inline" ng-if="user.verified"></icon>
-
-        <div uib-dropdown class="icon-inline">
-          <button type="button" class="btn-transparent" data-animation="am-flip-x" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit" ng-disabled="!isOnline">
+      <td class="table-actions">
+        <icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon>
+        <div uib-dropdown>
+          <button type="button" class="btn-transparent" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit" ng-disabled="!isOnline">
             <icon name="ellipsis-v" text="Edit"></icon>
           </button>
           <ul class="dropdown-menu" uib-dropdown-menu>
