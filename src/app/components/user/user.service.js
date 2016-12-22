@@ -112,25 +112,38 @@
 
     // Export to csv
     User.getCSVUrl = function(params) {
-      delete params.limit;
-      delete params.offset;
-      params.token = $window.localStorage.getItem('jwtToken');
-      var urlp = Object.keys(params).map(function (k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+      var par = angular.copy(params);
+      delete par.limit;
+      delete par.offset;
+      par.token = $window.localStorage.getItem('jwtToken');
+      var urlp = Object.keys(par).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');
       return config.apiUrl + 'user.csv?' + urlp;
     };
 
     // Export to TXT
     User.exportTXT = function (params, success, error) {
-      delete params.limit;
-      delete params.offset;
-      var urlp = Object.keys(params).map(function (k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+      var par = angular.copy(params);
+      delete par.limit;
+      delete par.offset;
+      var urlp = Object.keys(par).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');
       $http.get(config.apiUrl + 'user.txt?' + urlp).then(success, error);
     };
 
+    // Export to pdf
+    User.getPDFUrl = function (params) {
+      var par = angular.copy(params);
+      delete par.limit;
+      delete par.offset;
+      par.token = $window.localStorage.getItem('jwtToken');
+      var urlp = Object.keys(par).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
+      }).join('&');
+      return config.apiUrl + 'user.pdf?' + urlp;
+    };
 
     return User;
 

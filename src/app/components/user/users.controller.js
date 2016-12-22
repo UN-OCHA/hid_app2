@@ -46,6 +46,12 @@
       User.exportTXT(params, success, error);
     });
 
+    $scope.$on('users-export-pdf', function (evt) {
+      var params = angular.extend($scope.request, $scope.filters);
+      var url = User.getPDFUrl(params);
+      $window.open(url);
+    });
+
     $scope.$on('populate-list', function (event, listType) {
       $scope.request = angular.extend($scope.request, listType);
       listInfo = listType;
