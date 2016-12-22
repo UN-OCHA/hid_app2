@@ -73,10 +73,6 @@
       $scope.request.sort = currentSortOrder;
     });
 
-    $rootScope.$on('$routeChangeSuccess', function () {
-      $scope.resetFilters();
-    });
-
     $scope.filter = function() {
       if ($scope.selectedFilters.name === '') {
         delete $scope.selectedFilters.name;
