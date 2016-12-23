@@ -5,9 +5,9 @@
   .module('app.common')
   .factory('notificationsService', notificationsService);
 
-  notificationsService.$inject = ['$log', '$resource', 'config'];
+  notificationsService.$inject = ['$log', '$q', '$resource', 'config'];
 
-  function notificationsService($log, $resource, config) {
+  function notificationsService($log, $q, $resource, config) {
 
    var resource =  $resource(config.apiUrl + 'notification/:notificationId', {notificationId: '@_id'},
     {
@@ -34,13 +34,16 @@
       },
 
       getNotifications: function (params) {
-        return resource.query(params).$promise.then(function (response) {
+        var defer = $q.defer();
+        resource.query(params, function (response, headers) {
           notifications.all = angular.copy(response);
-          return response;
+          notifications.total = headers()['x-total-count'];
+          defer.resolve();
         }, function (error) {
           $log.error(error);
-          return;
+          defer.reject();
         });
+        return defer.promise;
       },
 
       markAsRead: function (notification) {

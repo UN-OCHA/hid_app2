@@ -40,11 +40,13 @@
 
     $scope.getNotifications = function () {
       params.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+
       notificationsService.getNotifications(params).then(function () {
         $scope.notifications = notificationsService;
-        $scope.totalItems = 50; // TO DO - change this to use real value when can access it from the api
+        $scope.totalItems = notificationsService.total;
         markAsRead(notificationsService.all);
       });
+
     };
 
     $scope.getNotifications();
