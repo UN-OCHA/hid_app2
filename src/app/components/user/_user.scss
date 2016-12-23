@@ -93,6 +93,66 @@
   }
 }
 
+.profile-alert {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 9999;
+  height: 0;
+
+transition: height 0.3s ease;
+}
+.profile-alert--show {
+    height: 48px;
+  }
+
+.profile-alert__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // bottom: -48px;
+  width: 100%;
+  // z-index: 9999;
+  padding: 4px;
+  background: white;
+  text-align: center;
+  border: none;
+  border-top: 1px solid $primary-color;
+  height: $base-unit*6;
+  transform: translateY(48px);
+  transition: transform 0.3s ease;
+  @include font-size($medium-font-size);
+  color: $primary-color;
+  text-transform: uppercase;
+  font-family: $heading-font-light;
+
+  .profile-alert--show & {
+  // bottom: 0;
+    transform: translateY(0);
+  }
+
+  &.profile-alert__inner--success {
+    // background: green;
+    .icon {
+      margin-right: $base-unit/2;
+      @include font-size(28);
+    }
+  }
+  &.profile-alert__inner--saving {
+
+  }
+
+
+
+  svg {
+    vertical-align: text-bottom;
+    margin-right: $base-unit/2;
+  }
+}
+
+
+
 @include media-query(sm) {
 
   .profile-header {

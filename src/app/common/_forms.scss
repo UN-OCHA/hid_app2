@@ -236,6 +236,15 @@ legend + .form-list__item, h3 + .form-list__item {
   padding: $base-unit $base-unit*6 $base-unit 0;
 }
 
+.form-list__item-meta {
+  @include font-size($small-font-size);
+  display: block;
+
+  .btn-link {
+    @include font-size($small-font-size);
+  }
+}
+
 .form-hint {
   @include font-size($small-font-size);
   line-height: 1.4;
