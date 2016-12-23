@@ -11,6 +11,9 @@
         <button type="submit" class="btn-transparent search-form__button" ng-disabled="!isOnline">
           <icon name="search" text="Search"></icon>
         </button>
+        <button type="button" ng-click="clearSearch()" class="btn-transparent search-form__clear" ng-if="searchTerm">
+          <icon name="cancel" text="Clear search"></icon>
+        </button>
       </div>
     </form>
 
