@@ -140,12 +140,19 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true,
         title: 'Check-in'
       }).
+      when('/checkin/all', {
+        templateUrl: 'app/components/checkin/all.html',
+        controller: 'CheckinCtrl',
+        authenticate: true,
+        title: 'Check-ins and subscriptions'
+      }).
       when('/checkin/:userId', {
         templateUrl: 'app/components/checkin/checkin.html',
         controller: 'CheckinCtrl',
         authenticate: true,
         title: 'Check-in'
       }).
+
       when('/kiosk', {
         templateUrl: 'app/components/user/kiosk.html',
         controller: 'KioskCtrl',

@@ -10,7 +10,10 @@
           <icon name="arrow-down" text="Change platform"></icon>
         </button>
         <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-          <li><a href="#" translate>TO DO</a></li>
+          <li><a href="https://fts.unocha.org">Financial Tracking Service</a></li>
+          <li><a href="https://humdata.org">Humanitarian Data eXchange</a></li>
+          <li><a href="https://humanitarianresponse.info">HumanitarianResponse.info</a></li>
+          <li><a href="https://reliefweb.int">ReliefWeb</a></li>
         </ul>
       </div>
 
@@ -23,12 +26,6 @@
               <span class="nav__label nav__label--mobile">
                 <notifications-count></notifications-count>
               </span>
-            </a>
-          </li>
-          <li class="nav__item">
-            <a href="#" class="nav__link">
-              <icon name="question">?</icon>
-              <span class="nav__label">About</span>
             </a>
           </li>
 
@@ -79,9 +76,9 @@
         <nav role="navigation" id="nav" class="site-header__nav dropdown-menu" uib-dropdown-menu aria-labelledby="navToggle" >
           <ul class="nav nav--primary">
             <li class="nav__item" ng-class="{'active' : activeNav('/dashboard')}"><a href="/dashboard" class="nav__link" translate>Dashboard</a></li>
-            <li class="nav__item" ng-class="{'active' : activeNav('/users/'+currentUser.id)}"><a href="/users/{{currentUser.id}}" class="nav__link" translate>My profile</a></li>
             <li class="nav__item" ng-class="{'active' : activeNav('/search')}"><a href="/search" class="nav__link" translate>Humanitarian contacts</a></li>
             <li class="nav__item" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}" ng-if="isOnline"><a href="/checkin/{{currentUser.id}}" class="nav__link" translate>Check in</a></li>
+            <li class="nav__item" ng-class="{'active' : activeNav('/checkin/all)}"><a href="/checkin/all" class="nav__link" translate>Check out</a></li>
           </ul>
         </nav>
 
