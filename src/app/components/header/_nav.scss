@@ -38,6 +38,12 @@
   }
 }
 
+.nav-item__notifications {
+  .icon-holder {
+    margin-right: $base-unit/2;
+  }
+}
+
 .nav__link {
   display: block;
   line-height: 1;
