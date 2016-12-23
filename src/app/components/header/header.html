@@ -15,11 +15,14 @@
       </div>
 
       <div class="global-header__nav" ng-if="isAuthenticated">
+
         <ul class="nav nav--secondary">
           <li class="nav__item">
-            <a href="#" class="nav__link">
-              <icon name="chat"></icon>
-              <span class="nav__label">HID Blog</span>
+            <a href="/notifications" class="nav__link">
+              <icon name="chat" text="Notifications"></icon>
+              <span class="nav__label nav__label--mobile">
+                <notifications-count></notifications-count>
+              </span>
             </a>
           </li>
           <li class="nav__item">

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div class="page-header">
+      <h1 class="page-header__heading" translate>Notifications</h1>
+    </div>
+
+    <ul class="list">
+      <li ng-repeat="notification in notifications.all">
+        <a href="{{getLink(notification)}}" class="list__item" ng-class="{'list__item--highlight' : !notification.read}">
+          {{notification.text}}
+          <span class="list__item-meta">
+          {{notification.createdAt | date: 'HH:mm dd/MM/yyyy'}}
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <ul uib-pagination boundary-link-numbers="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="getNotifications()" class="pagination" direction-links="false"></ul>
+
+  </div>
+</div>
