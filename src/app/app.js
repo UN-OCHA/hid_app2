@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'app.dashboard', 'app.list', 'app.client', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'app.dashboard', 'app.list', 'app.client', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
 
 app.constant('config', env);
 
@@ -233,6 +233,12 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'SearchCtrl',
         authenticate: true,
         title: 'Search results'
+      })
+      .when('/notifications', {
+        templateUrl: 'app/components/notifications/notifications.html',
+        controller: 'NotificationsCtrl',
+        authenticate: true,
+        title: 'Notifications'
       })
       .otherwise({
         redirectTo: '/'

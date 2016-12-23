@@ -1,11 +1,20 @@
-<div class="page-header row">
-  <div class="col-lg-4">
-  <!-- <div class="page-header__primary"> -->
-    <h1 class="page-header__heading"translate>Search Results</h1>
-  <!-- </div> -->
+<div class="page-header">
+    <h1 class="page-header__heading" translate>{{heading}}</h1>
   </div>
-  <div class="col-lg-4 pull-lg-2">
-    <div class="btn-toggle page-actions__toggle-lists">
+</div>
+<div class="row">
+<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 search-actions">
+  <form ng-submit="fullSearch(searchTerm)" role="search" class="search-actions__search">
+      <div class="search-form search-form--in-page">
+        <label for="search" class="sr-only">{{'Search for contacts or lists'|translate}}</label>
+        <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for contacts or lists'|translate}}" name="search" id="search" autocomplete="off" ng-model="searchTerm" ng-disabled="!isOnline">
+        <button type="submit" class="btn-transparent search-form__button" ng-disabled="!isOnline">
+          <icon name="search" text="Search"></icon>
+        </button>
+      </div>
+    </form>
+
+    <div class="btn-toggle search-actions__toggle-lists">
       <button type="button" class="btn-primary" ng-click="showLists = !showLists" ng-disabled="!showLists" ng-class="{'active' : !showLists}">
         Show contacts
       </button>
@@ -13,11 +22,8 @@
         Show lists
       </button>
     </div>
-  </div>
-  <!-- <div class="col-md-4"></div> -->
-
 </div>
-
+</div>
 
 <ng-include ng-show="showLists" src="'app/components/list/all-lists.html'"></ng-include>
 

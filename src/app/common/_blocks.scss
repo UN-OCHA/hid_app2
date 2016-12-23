@@ -28,6 +28,8 @@
   padding: $base-unit;
   font-family: $heading-font;
   font-weight: normal;
+  display: flex;
+  justify-content: space-between;
 }
 
 .secondary-block__item {
