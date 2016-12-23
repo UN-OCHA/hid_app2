@@ -85,9 +85,14 @@
         <span translate>View PDF</span>
       </button>
 
-      <button type="button" class="btn-primary btn-block">
+      <button type="button" class="btn-primary btn-block" ng-click="exportPDF('meeting-compact')">
         <icon name="users"></icon>
-        <span translate>Meeting Attendance</span>
+        <span translate>Meeting Attendance (Compact)</span>
+      </button>
+
+      <button type="button" class="btn-primary btn-block" ng-click="exportPDF('meeting-comfortable')">
+        <icon name="users"></icon>
+        <span translate>Meeting Attendance (Comfortable)</span>
       </button>
 
       <button type="button" class="btn-primary btn-block" ng-click="exportCSV()">

@@ -153,8 +153,8 @@
       $scope.$broadcast('users-export-csv');
     };
 
-    $scope.exportPDF = function() {
-      $scope.$broadcast('users-export-pdf');
+    $scope.exportPDF = function(format) {
+      $scope.$broadcast('users-export-pdf', format);
     };
 
     // Star a list as favorite

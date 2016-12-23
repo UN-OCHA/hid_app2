@@ -134,7 +134,7 @@
     };
 
     // Export to pdf
-    User.getPDFUrl = function (params) {
+    User.getPDFUrl = function (params, format) {
       var par = angular.copy(params);
       delete par.limit;
       delete par.offset;
@@ -142,7 +142,11 @@
       var urlp = Object.keys(par).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');
-      return config.apiUrl + 'user.pdf?' + urlp;
+      var url = config.apiUrl + 'user.pdf?';
+      if (format) {
+        url += 'format=' + format + '&';
+      }
+      return url + urlp;
     };
 
     return User;
