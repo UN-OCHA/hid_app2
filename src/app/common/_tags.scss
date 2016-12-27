@@ -1,0 +1,19 @@
+.tag-list__item {
+  display: inline-block;
+  margin: 0 $base-unit/2 $base-unit/2 0;
+
+  a {
+    display: block;
+    background: $primary-color;
+    color: white;
+    border-radius: 4px;
+    padding: $base-unit/4 $base-unit;
+    border: 1px solid $primary-color;
+
+    &:hover, &:focus {
+      background: white;
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+}

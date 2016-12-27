@@ -23,6 +23,10 @@
   }
 }
 
+.profile-header--admin {
+  min-height: $base-unit*12;
+}
+
 .profile-header__primary {
   display: flex;
   padding-right: $base-unit*6;
@@ -36,9 +40,9 @@
 
   .icon-holder {
     position: absolute;
-    top: -$base-unit*1.5;
-    right: $base-unit*1.5;
-    @include font-size($large-font-size);
+    top: -$base-unit + 2;
+    right: $base-unit/2;
+    // @include font-size($large-font-size);
     color: $primary-color;
 
     &:before {
@@ -48,8 +52,8 @@
       left: 1px;
       background: white;
       border-radius: 100%;
-      width: ($base-unit*4) - 2;
-      height: ($base-unit*4) - 2;
+      width: ($base-unit*2) - 2;
+      height: ($base-unit*2) - 2;
     }
   }
 
@@ -74,6 +78,10 @@
   .no-flexbox & {
     float: left;
     width: 80%;
+  }
+
+  textarea {
+    margin: $base-unit 0;
   }
 }
 
@@ -111,9 +119,7 @@ transition: height 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  // bottom: -48px;
   width: 100%;
-  // z-index: 9999;
   padding: 4px;
   background: white;
   text-align: center;
@@ -128,12 +134,10 @@ transition: height 0.3s ease;
   font-family: $heading-font-light;
 
   .profile-alert--show & {
-  // bottom: 0;
     transform: translateY(0);
   }
 
   &.profile-alert__inner--success {
-    // background: green;
     .icon {
       margin-right: $base-unit/2;
       @include font-size(28);
@@ -143,12 +147,15 @@ transition: height 0.3s ease;
 
   }
 
-
-
   svg {
     vertical-align: text-bottom;
     margin-right: $base-unit/2;
   }
+}
+
+.profile-header__status {
+  font-style: italic;
+  @include font-size($small-font-size);
 }
 
 
@@ -193,12 +200,11 @@ transition: height 0.3s ease;
     li {
       display: inline-block;
       padding: 0 $base-unit*2 $base-unit 0;
-
     }
   }
 
   .profile-header__status {
-    font-style: italic;
+    @include font-size($base-font-size);
   }
 
 }
@@ -212,6 +218,17 @@ transition: height 0.3s ease;
     .active & {
       display: block;
     }
+
+    .icon-holder {
+      @include font-size($large-font-size);
+      top: -$base-unit*1.5;
+      right: $base-unit*1.5;
+
+      &:before {
+        width: ($base-unit*4) - 2;
+        height: ($base-unit*4) - 2;
+      }
+    }
   }
 
   .profile-header__info {
@@ -221,3 +238,80 @@ transition: height 0.3s ease;
   }
 
 }
+
+
+///
+.profile-form {
+  padding: $base-unit $base-unit 0 $base-unit;
+  margin-bottom: $base-unit;
+  border-bottom: 1px solid $light-blue;
+
+  a {
+    text-decoration: none;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+.profile-form__heading {
+  font-family: $heading-font-light;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: $base-unit*1.5;
+  color: $dark-blue;
+}
+
+.profile-form__sub-heading {
+  font-weight: normal;
+  // margin-bottom: $base-unit;
+  color: $text-dark;
+  display: block;
+  color: $dark-blue;
+}
+
+.profile-form__item {
+  margin-bottom: $base-unit*2;
+  line-height: 1.3;
+}
+
+.profile-form__item--form {
+  position: relative;
+  padding-right: $base-unit*6;
+  padding-top: $base-unit;
+
+  .clickie-label {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    &:before {
+      top: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+.profile-form__item-button {
+  position: absolute;
+  top: 0;
+  right: $base-unit;
+  padding: $base-unit $base-unit/2;
+
+  &.profile-form__item-button--add {
+    top: auto;
+    bottom: 0;
+  }
+}
+
+.profile-form__item-meta {
+  display: block;
+  @include font-size($small-font-size);
+  line-height: 1;
+
+  .btn-link {
+    @include font-size($small-font-size);
+  }
+}
+
+
