@@ -101,10 +101,7 @@
       if (!$scope.user[key + 's']) {
         return;
       }
-      console.log($scope.temp[key]);
-      console.log(defaultSettings[key])
       if (angular.equals($scope.temp[key], defaultSettings[key])) {
-        console.log('match')
         return;
       }
 
