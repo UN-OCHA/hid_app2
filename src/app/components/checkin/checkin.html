@@ -109,7 +109,7 @@
             <h3 translate>Current phone number:</h3>
             <p>
               <span ng-if="user.phone_number">{{user.phone_number}}</span>
-              <span ng-if="!user.phone_number" translate><em>No phone number</em></span>
+              <span ng-if="!user.phone_number"><em translate>No phone number</em></span>
             </p>
             <button type="button" class="btn-icon form__edit" ng-click="editPhoneForm.$show()" ng-show="!editPhoneForm.$visible">
               <icon name="edit" text="Change phone number"></icon>
@@ -225,7 +225,7 @@
             <h3 translate>Current location:</h3>
             <p>
               <span ng-if="user.location.country"><span ng-if="user.location.region">{{user.location.region.name}}, </span>{{user.location.country.name}}</span>
-              <span ng-if="!user.location.countr" translate><em>No location</em></span>
+              <span ng-if="!user.location.country" translate><em>No location</em></span>
             </p>
             <button type="button" class="btn-icon form__edit" ng-click="editLocationForm.$show()"><icon name="edit" text="Change location"></icon></button>
           </div>

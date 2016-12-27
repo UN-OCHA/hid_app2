@@ -5,33 +5,54 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', 'UserCheckInService'];
+  UserCtrl.$inject = ['$scope', '$routeParams', '$http', '$timeout', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'md5', 'config', 'User', 'List', 'UserCheckInService'];
 
-  function UserCtrl($scope, $routeParams, $http, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List, UserCheckInService) {
+  function UserCtrl($scope, $routeParams, $http, $timeout, $window, gettextCatalog, alertService, hrinfoService, md5, config, User, List, UserCheckInService) {
 
-    $scope.newEmail = {
-      type: '',
-      email: ''
+    var defaultSettings = {
+      email: {
+        type: '',
+        email: ''
+      },
+      phone_number: {
+        type: '',
+        number: ''
+      },
+      voip: {
+        type: '',
+        username: ''
+      },
+      organization: {},
+      job_title: '',
+      location: {},
+      website: {
+        url: ''
+      },
+      role: {}
     };
-    $scope.newPhoneNumber = {
-      type: '',
-      number: ''
+    $scope.temp = angular.copy(defaultSettings);
+    $scope.phoneNumberTypes = [
+      {value: 'Landline', name: 'Landline'},
+      {value: 'Mobile', name: 'Mobile'}
+    ];
+
+    $scope.emailTypes = [
+      {value: 'Work', name: 'Work'},
+      {value: 'Personal', name: 'Personal'}
+    ];
+
+    $scope.voipTypes = [
+      {value: 'Skype', name: 'Skype'},
+      {value: 'Google', name: 'Google'}
+    ];
+    $scope.roles = [];
+    $scope.saving = {
+      status: '',
+      message: '',
+      show: false
     };
-    $scope.newLocation = {
-      location: {
-        id: '',
-        name: ''
-      }
-    };
-    $scope.newVoip = {
-      type: '',
-      username: ''
-    };
-    $scope.newOrganization = {};
-    $scope.newJobTitle = '';
 
     $scope.organization = {};
-
     $scope.pictureUrl = '';
 
     $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin);
@@ -53,7 +74,7 @@
     });
 
     $scope.regions = [];
-    $scope.setRegions = function ($item, $model) {
+    $scope.setRegions = function ($item) {
       $scope.regions = [];
       hrinfoService.getRegions($item.id).then(function (regions) {
         $scope.regions = regions;
@@ -61,172 +82,54 @@
     };
 
     $scope.resendValidationEmail = function (email) {
-      $scope.user.resendValidationEmail(email, function (resp) {
+      $scope.user.resendValidationEmail(email, function () {
         alertService.add('success', gettextCatalog.getString('Validation email sent successfully.'));
-      }, function (resp) {
+      }, function () {
         alertService.add('danger', gettextCatalog.getString('There was an error sending the validation email.'));
       });
     };
 
-    $scope.setPrimaryEmail = function (email) {
-      $scope.user.setPrimaryEmail(email, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Primary email successfully changed'));
-        $scope.user.email = resp.data.email;
-        if ($scope.user._id == $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error setting your primary email.'));
-      });
-    };
-
-    $scope.addEmail = function () {
-      $scope.user.addEmail($scope.newEmail, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Email added successfully. You will need to validate it.'));
-        $scope.user.emails = resp.data.emails;
-        if ($scope.user._id == $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-        $scope.newEmail = {};
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error adding this email.'));
-        $scope.newEmail = {};
-      });
-    };
-
-    $scope.dropEmail = function (email) {
-      $scope.user.dropEmail(email, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Email removed successfully.'));
-        $scope.user.emails = resp.data.emails;
-        if ($scope.user._id == $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-        $scope.newEmail = {};
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error adding this email.'));
-        $scope.newEmail = {};
-      });
-    };
-
-    $scope.addPhone = function () {
-      $scope.user.addPhone($scope.newPhoneNumber, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Phone number added successfully.'));
-        $scope.user.phone_numbers = resp.data.phone_numbers;
-        if ($scope.user._id == $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-        $scope.newPhoneNumber = {};
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error adding this phone number.'));
-        $scope.newPhoneNumber = {};
-      });
-    };
-
-    $scope.dropPhone = function (id) {
-      $scope.user.dropPhone(id, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Phone number removed successfully.'));
-        $scope.user.phone_numbers = resp.data.phone_numbers;
-        if ($scope.user._id == $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error removing this phone number.'));
-      });
-    };
-
-    $scope.setPrimaryPhone = function (phone) {
-      $scope.user.setPrimaryPhone(phone.number, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Primary phone number set successfully'));
-        $scope.user.phone_number = resp.data.phone_number;
-        if ($scope.user._id == $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error setting the primary phone number.'));
-      });
-    };
-
-    $scope.addVoip = function () {
-      $scope.user.voips.push($scope.newVoip);
-    };
-
-    $scope.addJobTitle = function () {
-      $scope.user.job_titles.push($scope.newJobTitle);
-    };
-
-    $scope.setPrimaryJobTitle = function (jt) {
-      $scope.user.job_title = jt;
-    };
-
-    $scope.setPrimaryOrganization = function (org) {
-      $scope.user.setPrimaryOrganization(org, function (resp) {
-        $scope.user.organization = resp.data.organization;
-        if ($scope.user._id === $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error setting the primary organization.'));
-      });
-    };
-
-    $scope.addOrganization = function() {
-      UserCheckInService.save({userId: $scope.user._id, listType: 'organizations'}, {list: $scope.newOrganization.list._id}, function (user) {
-        $scope.user.organizations = user.organizations;
-        if ($scope.user._id == $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-      });
-    };
-
-    $scope.removeOrganization = function(org) {
-      UserCheckInService.delete({userId: $scope.user._id, listType: 'organizations', checkInId: org._id}, {}, function (user) {
-        $scope.user.organizations = user.organizations;
-        if ($scope.user._id == $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
-        }
-      });
-    };
-
     $scope.notify = function () {
-      $scope.user.notify('Test', function (resp) {
+      $scope.user.notify('Test', function () {
         alertService.add('success', gettextCatalog.getString('User was successfully notified'));
-      }, function (resp) {
+      }, function () {
         alertService.add('danger', gettextCatalog.getString('There was an error notifying this user'));
       });
     };
 
     $scope.addItem = function (key) {
-      if (!$scope.user[key]) {
-        $scope.user[key] = [];
+      if (!$scope.user[key + 's']) {
+        return;
       }
-      switch (key) {
-        case 'websites':
-          $scope.user[key].unshift({url: ''});
-          break;
-        case 'voips':
-          $scope.user[key].unshift({ type: 'Skype', username: '' });
-          break;
-        case 'phone_numbers':
-          $scope.user[key].unshift($scope.newPhoneNumber);
-          break;
-        case 'emails':
-          $scope.user[key].unshift($scope.newEmail);
-          break;
-        case 'locations':
-          $scope.user[key].unshift({country: '', region: ''});
-          break;
-        case 'job_titles':
-          $scope.user[key].unshift('');
-          break;
-        case 'organizations':
-          $scope.user[key].unshift({id: '', name: ''});
-          break;
+      if (angular.equals($scope.temp[key], defaultSettings[key])) {
+        return;
       }
+
+      $scope.user[key + 's'].push($scope.temp[key]);
+
+      if (key === 'organization') {
+        addOrganization($scope.temp.organization);
+        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        return;
+      }
+      $scope.temp[key] = angular.copy(defaultSettings[key]);
+      $scope.saveUser();
     };
 
-    $scope.dropItem = function (key, index ){
-      $scope.user[key].splice(index, 1);
+    $scope.dropItem = function (key, value){
+      if (!$scope.user[key + 's']) {
+        return;
+      }
+      $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
+
+      if (key === 'organization') {
+        removeOrganization(value);
+        return;
+      }
+
+      $scope.saveUser();
     };
+
 
     var hrinfoResponse = function (response) {
       var out = [];
@@ -260,49 +163,121 @@
         .then(hrinfoResponse);
     };
 
-    $scope.roles = [];
+
     $scope.getRoles = function () {
-      return hrinfoService.getRoles().then(function (d) {
-        $scope.roles = d;
+      return hrinfoService.getRoles().then(function (data) {
+        $scope.roles = data;
+      });
+    };
+    $scope.getRoles();
+
+    $scope.setPrimaryOrganization = function (org) {
+      $scope.saving.status = 'saving';
+      $scope.saving.show = true;
+      $scope.user.setPrimaryOrganization(org, function (resp) {
+        $scope.user.organization = resp.data.organization;
+        if ($scope.user._id === $scope.currentUser._id) {
+          $scope.setCurrentUser($scope.currentUser);
+        }
+        $scope.saving.status = 'success';
+        showSavedMessage(gettextCatalog.getString('Primary organization updated'));
+      }, function (resp) {
+        alertService.add('danger', gettextCatalog.getString('There was an error setting the primary organization.'));
       });
     };
 
-    $scope.phoneNumberTypes = [
-      {value: 'Landline', name: 'Landline'},
-      {value: 'Mobile', name: 'Mobile'}
-    ];
+    function addOrganization (org) {
+      $scope.saving.status = 'saving';
+      $scope.saving.show = true;
+      UserCheckInService.save({userId: $scope.user._id, listType: 'organizations'}, {list: org.list._id}, function () {
+        if ($scope.user._id == $scope.currentUser._id) {
+          $scope.setCurrentUser($scope.currentUser);
+        }
+        $scope.saving.status = 'success';
+        showSavedMessage(gettextCatalog.getString('Organization added'));
+      });
+    }
 
-    $scope.emailTypes = [
-      {value: 'Work', name: 'Work'},
-      {value: 'Personal', name: 'Personal'}
-    ];
+    function removeOrganization (org) {
+      $scope.saving.status = 'saving';
+      $scope.saving.show = true;
+      UserCheckInService.delete({userId: $scope.user._id, listType: 'organizations', checkInId: org._id}, {}, function () {
+        if ($scope.user._id == $scope.currentUser._id) {
+          $scope.setCurrentUser($scope.currentUser);
+        }
+        $scope.saving.status = 'success';
+        showSavedMessage(gettextCatalog.getString('Organization removed'));
+      });
+    }
 
-    $scope.voipTypes = [
-      {value: 'Skype', name: 'Skype'},
-      {value: 'Google', name: 'Google'}
-    ];
+    //Create an id for each location so can use as radio buttons
+    $scope.getLocationId = function (location) {
+      if (!location) {
+        return;
+      }
+      var id = location.country.id;
+      if (location.region) {
+        id += '-' + location.region.id;
+      }
+      return id;
+    }
+    $scope.primaryLocationId = $scope.getLocationId($scope.user.location);
+
+    $scope.isPrimaryLocation = function (location, primaryLocation) {
+      if (location.country.id !== primaryLocation.country.id) {
+        return false;
+      }
+      if (location.region && primaryLocation.region) {
+        if (location.region.id !== primaryLocation.region.id) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    $scope.setPrimaryLocation = function (location) {
+      $scope.user.location = angular.copy(location);
+      $scope.saveUser();
+    }
+
+    $scope.setPrimaryJobTitle = function (title) {
+      $scope.user.job_title = title;
+      $scope.saveUser()
+    };
+
+    function showSavedMessage (message) {
+      $scope.saving.message = message || 'Profile updated';
+      $timeout(function () {
+        $scope.saving.show = false;
+      }, 5000);
+    }
 
     $scope._checkinAndSave = function() {
-      UserCheckInService.save({userId: $scope.user._id, listType: 'organization'}, {list: $scope.organization.list._id}, function (user) {
+      UserCheckInService.save({userId: $scope.user._id, listType: 'organization'}, {list: $scope.organization.list._id}, function () {
         $scope._saveUser();
       });
     };
     $scope._saveUser = function () {
-      $scope.user.$update(function (user, response) {
+      $scope.user.$update(function (user) {
         //  Update the currentUser item in localStorage if the current user is the one being saved
         if (user.id == $scope.currentUser.id) {
           $scope.setCurrentUser(user);
         }
+        $scope.saving.status = 'success';
+        showSavedMessage();
       }, function (resp) {
         alertService.add('danger', gettextCatalog.getString('There was an error: ') + resp.data.error);
       });
     };
 
     $scope.saveUser = function() {
+      $scope.saving.status = 'saving';
+      $scope.saving.show = true;
+
       if ($scope.organization.list && (!$scope.user.organization.list || $scope.organization.list._id != $scope.user.organization.list._id)) {
         if ($scope.user.organization.list) {
           // Check out from the old organization
-          UserCheckInService.delete({userId: $scope.user._id, listType: 'organization', checkInId: $scope.user.organization._id}, {}, function (user) {
+          UserCheckInService.delete({userId: $scope.user._id, listType: 'organization', checkInId: $scope.user.organization._id}, {}, function () {
             $scope._checkinAndSave();
           });
         }
@@ -317,14 +292,18 @@
     };
 
     $scope.onUploadSuccess = function (resp) {
+      $scope.saving.status = 'saving';
+      $scope.saving.show = true;
       $scope.pictureUrl = resp.data.picture;
       $scope.user.picture = resp.data.picture;
       if (resp.data._id == $scope.currentUser._id) {
         $scope.setCurrentUser($scope.user);
       }
+      $scope.saving.status('success');
+      showSavedMessage('Picture uploaded');
     };
 
-    $scope.onUploadError = function (resp) {
+    $scope.onUploadError = function () {
       alertService.add('danger', gettextCatalog.getString('There was an error uploading the picture'));
     };
 
@@ -334,15 +313,44 @@
 
     // Send claim email
     $scope.sendClaimEmail = function () {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-        $scope.user.claimEmail(function (response) {
+      alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+        $scope.user.claimEmail(function () {
           alertService.add('success', gettextCatalog.getString('Claim email sent successfully'));
-        }, function (response) {
+        }, function () {
           alertService.add('danger', gettextCatalog.getString('There was an error sending the claim email'));
         });
       });
     };
 
+    $scope.setPrimaryEmail = function (email) {
+      $scope.saving.show = true;
+      $scope.saving.status = 'saving';
+      $scope.user.setPrimaryEmail(email, function (resp) {
+        $scope.user.email = resp.data.email;
+        if ($scope.user._id == $scope.currentUser._id) {
+          $scope.setCurrentUser($scope.currentUser);
+        }
+        $scope.saving.status = 'success';
+        showSavedMessage(gettextCatalog.getString('Primary email updated'));
+      }, function (resp) {
+        alertService.add('danger', gettextCatalog.getString('There was an error setting your primary email.'));
+      });
+    };
+
+    $scope.setPrimaryPhone = function (phone) {
+      $scope.saving.show = true;
+      $scope.saving.status = 'saving';
+      $scope.user.setPrimaryPhone(phone.number, function (resp) {
+        $scope.user.phone_number = resp.data.phone_number;
+        if ($scope.user._id == $scope.currentUser._id) {
+          $scope.setCurrentUser($scope.currentUser);
+        }
+        $scope.saving.status = 'success';
+        showSavedMessage(gettextCatalog.getString('Primary phone number updated'));
+      }, function (resp) {
+        alertService.add('danger', gettextCatalog.getString('There was an error setting the primary phone number.'));
+      });
+    };
 
     // Export user details to vcard
     $scope.exportVcard = function () {
@@ -379,10 +387,22 @@
       vcard += "REV:" + new Date().toISOString() + "\n" +
         "END:VCARD\n";
       window.location.href = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent(vcard);
-    }
+    };
 
     $scope.verifyUser = function () {
       $scope.user.verified = !$scope.user.verified;
+      $scope.saveUser();
+    };
+
+    $scope.cancel = function () {
+      $scope.profile.form.$hide();
+      $scope.saving.show = false;
+    }
+
+    $scope.updateUser = function (item) {
+      if (item === '') {
+        return;
+      }
       $scope.saveUser();
     }
 
