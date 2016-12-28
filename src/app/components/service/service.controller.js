@@ -18,7 +18,8 @@
         label: 'Google Group'
       }
     ];
-    
+    $scope.mailchimpLists = [];
+
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId});
     }
@@ -45,6 +46,14 @@
       $scope.service.$delete(function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
       });
+    };
+
+    $scope.getMailchimpLists = function () {
+      Service
+        .getMailchimpLists($scope.service.mailchimp.apiKey)
+        .then(function (result) {
+          $scope.mailchimpLists = result.data.lists;
+        });
     };
   }
 })();

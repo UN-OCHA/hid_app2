@@ -20,5 +20,15 @@
       <label class="clickie-label" for="service-type-{{option.value}}" required translate>{{option.label}}</label>
     </p>
   </fieldset>
+  <div class="form-group" ng-show="service.type === 'mailchimp'">
+    <label for="mailchimp-api-key" translate>Mailchimp API key</label>
+    <input type="text" name="name" class="form-control" id="mailchimp-api-key" placeholder="{{'Mailchimp API Key'|translate}}" ng-model="service.mailchimp.apiKey" ng-required="service.type === 'mailchimp'" ng-blur="getMailchimpLists()">
+  </div>
+  <div class="form-group" ng-if="service.type === 'mailchimp' && service.mailchimp.apiKey" ng-init>
+    <label for="mailchimpList" translate>Mailchimp list</label>
+    <select name="mailchimpList" ng-model="service.mailchimp.list" ng-options="list.name for list in mailchimpLists track by list.id">
+    </select>
+  </div>
+
   <button type="submit" class="btn btn-primary" ng-disabled="editService.$invalid || editService.$submitted" translate>Save</button>
 </form>

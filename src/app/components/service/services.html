@@ -15,8 +15,8 @@
       </thead>
       <tbody>
         <tr ng-repeat="service in services">
-          <td>{{service.name}}</td>
-          <td>{{service.url}}</td>
+          <td><a href="/services/{{service._id}}">{{service.name}}</a></td>
+          <td>{{service.type}}</td>
         </tr>
       </tbody>
     </table>
