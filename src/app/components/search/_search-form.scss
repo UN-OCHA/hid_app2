@@ -170,7 +170,13 @@ input[type="search"].search-form__input {
   }
 
   .search-actions__toggle-lists {
-    margin: 0 0 0 $base-unit*2;
+    margin: 2px $base-unit*6 0 $base-unit*2;
   }
 
+}
+
+@include media-query(xl) {
+  .search-actions__toggle-lists {
+    margin: 2px auto 0 auto;
+  }
 }
