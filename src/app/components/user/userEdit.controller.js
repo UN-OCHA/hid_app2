@@ -82,7 +82,6 @@
         },
         role: {}
       };
-
       $scope.temp = angular.copy(defaultSettings);
       angular.copy($scope.user.organization, $scope.organization);
       $scope.primaryLocationId = getLocationId($scope.user.location);
@@ -130,8 +129,7 @@
         $scope.$emit('editUser', {
           status: 'success',
           type: type,
-          message: gettextCatalog.getString('Profile updated'),
-          data: $scope.user
+          message: gettextCatalog.getString('Profile updated')
         });
       }, function () {
         alertService.add('danger', gettextCatalog.getString('There was an error saving the profile'));
@@ -185,7 +183,7 @@
       saveUser('add' + key);
     }
 
-    function dropItem (key, value){
+    function dropItem (key, value) {
       if (!$scope.user[key + 's']) {
         return;
       }
