@@ -1,0 +1,15 @@
+<div>
+  <div>
+    <a class="btn btn-primary" href="services/{{service._id}}/edit" translate>Edit Service</a>
+  </div>
+  <div>
+    <a class="btn btn-danger" ng-click="deleteService();" translate>Delete Service</a>
+  </div>
+</div>
+<div id="page-content-wrapper">
+  <h1>{{service.name}}</h1>
+
+  <ul>
+    <li><span translate>ID</span>: {{service._id}}</li>
+  </ul>
+</div>

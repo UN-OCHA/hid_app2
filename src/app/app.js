@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'app.dashboard', 'app.list', 'app.client', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'app.dashboard', 'app.list', 'app.client', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
 
 app.constant('config', env);
 
@@ -210,6 +210,34 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true,
         adminOnly: true,
         title: 'Edit client'
+      }).
+      when('/services/new', {
+        templateUrl: 'app/components/service/new-service.html',
+        controller: 'ServiceCtrl',
+        authenticate: true,
+        adminOnly: false,
+        title: 'New service'
+      }).
+      when('/services', {
+        templateUrl: 'app/components/service/services.html',
+        controller: 'ServicesCtrl',
+        authenticate: true,
+        adminOnly: false,
+        title: 'Services'
+      }).
+      when('/services/:serviceId', {
+        templateUrl: 'app/components/service/service.html',
+        controller: 'ServiceCtrl',
+        authenticate: true,
+        adminOnly: false,
+        title: 'Service'
+      }).
+      when('/clients/:serviceId/edit', {
+        templateUrl: 'app/components/service/new-service.html',
+        controller: 'ServiceCtrl',
+        authenticate: true,
+        adminOnly: false,
+        title: 'Edit service'
       }).
       when('/register', {
         templateUrl: 'app/components/auth/register.html',

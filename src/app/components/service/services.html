@@ -1,0 +1,25 @@
+<div>
+  <div>
+      <a class="btn btn-primary" href="services/new" translate>Add Service</a>
+    </div>
+</div>
+<div id="page-content-wrapper">
+  <div class="col-sm-12">
+    <h1 translate>Services</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th translate>Name</th>
+          <th translate>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="service in services">
+          <td>{{service.name}}</td>
+          <td>{{service.url}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+  </div>
+</div>
