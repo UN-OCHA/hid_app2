@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('app.client')
-    .controller('ClientsCtrl', ClientsCtrl);
+    .module('app.service')
+    .controller('ServicesCtrl', ServicesCtrl);
 
-  ClientsCtrl.$inject = ['$scope', '$routeParams', 'Client'];
+  ServicesCtrl.$inject = ['$scope', '$routeParams', 'Service'];
 
-  function ClientsCtrl ($scope, $routeParams, Client) {
+  function ServicesCtrl ($scope, $routeParams, Service) {
     $scope.request = $routeParams;
     $scope.totalItems = 0;
     $scope.itemsPerPage = 10;
@@ -16,10 +16,10 @@
     $scope.request.offset = 0;
     $scope.request.sort = 'name';
 
-    var setTotalClients = function (clients, headers) {
+    var setTotalServices = function (clients, headers) {
       $scope.totalItems = headers()["x-total-count"];
     };
 
-    $scope.clients = Client.query($scope.request, setTotalClients);
+    $scope.services = Service.query($scope.request, setTotalServices);
   }
 })();
