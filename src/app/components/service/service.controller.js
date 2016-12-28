@@ -8,6 +8,17 @@
   ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Service'];
 
   function ServiceCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Service) {
+    $scope.serviceTypes = [
+      {
+        value: 'mailchimp',
+        label: 'Mailchimp'
+      },
+      {
+        value: 'googlegroup',
+        label: 'Google Group'
+      }
+    ];
+    
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId});
     }

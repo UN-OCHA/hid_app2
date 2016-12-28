@@ -5,9 +5,9 @@
     .module('app.service')
     .factory('Service', Service);
 
-  Service.$inject = ['$resource', '$http', '$location', 'config'];
+  Service.$inject = ['$resource', 'config'];
 
-  function Service ($resource, $http, $location, config) {
+  function Service ($resource, config) {
     var Service = $resource(config.apiUrl + 'service/:serviceId', {serviceId: '@_id'},
     {
       'update': {

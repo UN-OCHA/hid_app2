@@ -13,5 +13,12 @@
     <label for="description" translate>Description</label>
     <textarea ng-model="service.description" class="form-control" name="description" rows="5" cols="20"></textarea>
   </div>
+  <fieldset class="form-group">
+    <legend translate>Service Type</legend>
+    <p ng-repeat="option in serviceTypes">
+      <input type="radio" id="service-type-{{option.value}}" name="visibility" ng-model="service.type" value="{{option.value}}" />
+      <label class="clickie-label" for="service-type-{{option.value}}" required translate>{{option.label}}</label>
+    </p>
+  </fieldset>
   <button type="submit" class="btn btn-primary" ng-disabled="editService.$invalid || editService.$submitted" translate>Save</button>
 </form>
