@@ -245,6 +245,7 @@ transition: height 0.3s ease;
   padding: $base-unit $base-unit 0 $base-unit;
   margin-bottom: $base-unit;
   border-bottom: 1px solid $light-blue;
+  position: relative;
 
   a {
     text-decoration: none;
@@ -314,4 +315,8 @@ transition: height 0.3s ease;
   }
 }
 
-
+@include media-query(sm) {
+  .profile-form__item--short {
+    width: 50%;
+  }
+}
