@@ -24,18 +24,6 @@
 
 /** Add / remove icons here - do not edit above this line */
 
-.icon-calendar:before {
-  content: "\e946";
-}
-.icon-date:before {
-  content: "\e90a";
-}
-.icon-schedule:before {
-  content: "\e90a";
-}
-.icon-week:before {
-  content: "\e90a";
-}
 .icon-check-circle:before {
   content: "\e943";
 }
@@ -52,19 +40,16 @@
   content: "\e94b";
 }
 .icon-arrow-left:before {
-  content: "\e946";
+  content: "\e947";
 }
 .icon-arrow-right:before {
-  content: "\e947";
+  content: "\e948";
 }
 .icon-cancel:before {
   content: "\e94a";
 }
 .icon-map-pin:before {
   content: "\e047";
-}
-.icon-chat:before {
-  content: "\e049";
 }
 .icon-clock:before {
   content: "\e055";
@@ -117,6 +102,9 @@
 .icon-users:before {
   content: "\e956";
 }
-.icon-question:before {
-  content: "\e902";
+.icon-chat:before {
+  content: "\e049";
+}
+.icon-calendar:before {
+  content: "\e946";
 }
