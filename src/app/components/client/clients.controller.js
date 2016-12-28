@@ -5,9 +5,9 @@
     .module('app.client')
     .controller('ClientsCtrl', ClientsCtrl);
 
-  ClientsCtrl.$inject = ['$scope', '$routeParams', '$q', 'gettextCatalog', 'alertService', 'Client'];
+  ClientsCtrl.$inject = ['$scope', '$routeParams', 'Client'];
 
-  function ClientsCtrl ($scope, $routeParams, $q, gettextCatalog, alertService, Client) {
+  function ClientsCtrl ($scope, $routeParams, Client) {
     $scope.request = $routeParams;
     $scope.totalItems = 0;
     $scope.itemsPerPage = 10;
@@ -16,10 +16,10 @@
     $scope.request.offset = 0;
     $scope.request.sort = 'name';
 
-    var queryCallback = function (clients, headers) {
+    var setTotalClients = function (clients, headers) {
       $scope.totalItems = headers()["x-total-count"];
     };
 
-    $scope.clients = Client.query($scope.request, queryCallback);
+    $scope.clients = Client.query($scope.request, setTotalClients);
   }
 })();
