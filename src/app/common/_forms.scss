@@ -16,6 +16,7 @@ select {
   -webkit-appearance: none;
   transition: padding 0.3s ease;
   color: $text-dark;
+  border-radius: 0;
 
   &:focus {
     @include input-focus-style();

@@ -21,7 +21,7 @@
         name: '@',
         text: '@'
       },
-      template: '<span class="icon-holder"><i class="icon icon-{{name}}" aria-hidden="true"></i><span ng-if="text" class="sr-only" translate>{{text}}</span></span>'
+      template: '<span class="iconholder"><i class="icon icon-{{name}}" aria-hidden="true"></i><span ng-if="text" class="sr-only" translate>{{text}}</span></span>'
     };
 
     return directive;

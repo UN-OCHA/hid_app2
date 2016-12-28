@@ -3,7 +3,9 @@
 }
 
 .nav--secondary {
+  display: flex;
   font-family: $heading-font-light;
+
   button {
     text-transform: none;
 
@@ -18,8 +20,22 @@
 .nav__item {
   position: relative;
 
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+    min-width: 120px;
+  }
+
+  .dropdown-menu--small {
+    min-width: 100%;
+  }
+
   .nav--primary & {
     text-transform: uppercase;
+
+    .no-mediaqueries & {
+      display: inline-block;
+    }
   }
 
   .nav--secondary & {
@@ -27,10 +43,7 @@
   }
 
   &:last-child {
-
     .nav__link {
-      padding-right: 0;
-
       &:before {
         content: none;
       }
@@ -39,7 +52,7 @@
 }
 
 .nav-item__notifications {
-  .icon-holder {
+  .iconholder {
     margin-right: $base-unit/2;
   }
 }
@@ -54,24 +67,34 @@
   &:before {
     content: "";
     display: inline-block;
-    width: 2px;
+    width: 1px;
     position: absolute;
-    right: -1px;
+    right: 0;
     top: 2px;
     height: $base-unit*1.5;
+    z-index: 1;
   }
 
   .icon {
     margin: 0;
+    padding-top: 1px;
   }
 
-  &.btn-transparent .icon {
-    @include font-size($small-font-size);
+  &.btn-transparent .icon:not(.icon-arrow-down) {
+    @include font-size($base-font-size);
   }
 
   .icon-arrow-down {
     @include font-size($small-font-size);
     margin-left: $base-unit/2;
+    padding-top: 3px;
+  }
+
+  .dropdown-menu & {
+    &:hover, &:focus {
+      text-decoration: none;
+      font-weight: bold;
+    }
   }
 
   .nav--primary & {
@@ -102,10 +125,16 @@
         border-color: $medium-blue;
       }
     }
+
+    .no-mediaqueries & {
+      height: $site-header-height-md;
+      padding-top: $base-unit*2;
+      padding-bottom: $base-unit*2;
+    }
   }
 
   .active & {
-    font-family: $heading-font;
+    font-weight: bold;
 
     &:after {
       border-color: $medium-blue
@@ -114,19 +143,17 @@
 
   .nav--secondary & {
     color: $text-light;
-    @include font-size($small-font-size);
-    height: $base-unit*2;
+    height: $base-unit*5;
+    padding: $base-unit*1.5 $base-unit;
 
     &:before {
-      width: 1px;
       background: $text-light;
+      top: ($base-unit*2) - 1;
     }
 
     &:hover, &:focus {
       outline: none;
-      .nav__label {
-        text-decoration: underline;
-      }
+      background: darken($primary-color, 10%);
     }
   }
 
@@ -155,13 +182,6 @@
     clip: auto;
     margin: 0 0 0 $base-unit;
   }
-
-  .nav__link {
-    .fa:not(.fa-caret-down) {
-      @include font-size($base-font-size);
-    }
-  }
-
 }
 
 @include media-query(lg) {
@@ -216,6 +236,14 @@
 
     .nav--primary & {
       padding: 0 $base-unit*2;
+    }
+
+    .nav--secondary & {
+      padding: ($base-unit*1.5)-1 $base-unit*2 ($base-unit*1.5)+1 $base-unit*2;
+
+      &:before {
+        top: ($base-unit*2)-2;
+      }
     }
   }
 

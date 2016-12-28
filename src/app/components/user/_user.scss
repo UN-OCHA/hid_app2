@@ -38,7 +38,7 @@
   position: relative;
   margin-right: $base-unit;
 
-  .icon-holder {
+  .iconholder {
     position: absolute;
     top: -$base-unit + 2;
     right: $base-unit/2;
@@ -219,7 +219,7 @@ transition: height 0.3s ease;
       display: block;
     }
 
-    .icon-holder {
+    .iconholder {
       @include font-size($large-font-size);
       top: -$base-unit*1.5;
       right: $base-unit*1.5;

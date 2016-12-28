@@ -3,7 +3,14 @@
   color: $text-light;
 
   .dropdown-menu {
-    top: 30px;
+    min-width: 106px;
+
+    a {
+      &:hover, &:focus {
+        text-decoration: none;
+        font-weight: bold;
+      }
+    }
   }
 }
 
@@ -11,23 +18,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: $base-unit;
-  padding-bottom: $base-unit;
   height: $global-header-height;
+
+  &:after {
+    content: none; // remove container clearfix;
+  }
+
+  .no-flexbox & {
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
 }
 
 .global-header__sites {
-  flex-grow: 1;
   position: relative;
+  margin-left: -$base-unit;
+
+  .no-flexbox & {
+    float: left;
+  }
 
   .dropdown-menu {
     left: 0;
     right: auto;
-    top: 34px;
-  }
-
-  .no-flexbox & {
-    float: left;
+    width: 240px;
   }
 }
 
@@ -35,11 +52,14 @@
   color: $text-light;
   text-transform: uppercase;
   text-align: left;
-  padding: 0;
+  padding: 0 $base-unit;
+  height: $global-header-height;
   @include font-size($tiny-font-size);
 
-  &:focus {
-    box-shadow: none;
+  &:hover, &:focus {
+    background: darken($primary-color, 10%);
+    outline: none;
+    text-decoration: none;
   }
 
   .icon {
@@ -47,7 +67,19 @@
   }
 }
 
+.global-header__nav {
+  margin-right: -$base-unit;
+
+  .no-flexbox & {
+    float: right;
+  }
+}
+
 @include media-query(sm) {
+
+  .global-header__sites {
+    margin-left: 0;
+  }
 
   .global-header__sites-btn {
     @include font-size($small-font-size);
@@ -57,17 +89,17 @@
     }
   }
 
+  .global-header__nav {
+    margin-right: 0;
+  }
+
 }
 
 @include media-query(lg) {
 
-  .global-header__inner {
-
-    .no-flexbox & {
-      height: auto;
-      padding-top: $base-unit;
-      padding-bottom: $base-unit;
-    }
+  .global-header__sites-btn {
+    padding-left: $base-unit*1.5;
+    padding-right: $base-unit*1.5;
   }
 
 }

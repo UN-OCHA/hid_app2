@@ -61,6 +61,7 @@
 
 input[type="search"].search-form__input {
   padding-left: $base-unit*3.5;
+  @include font-size($small-font-size);
 
   &:focus {
     box-shadow: none;
@@ -129,8 +130,16 @@ input[type="search"].search-form__input {
 
 @include media-query(sm) {
 
+  input[type="search"].search-form__input {
+    @include font-size($base-font-size);
+  }
+
   .search-actions__toggle-lists {
     min-width: $base-unit*40;
+  }
+
+  .search-form__active {
+    bottom: -5px;
   }
 
 }
