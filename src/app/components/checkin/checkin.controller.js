@@ -5,31 +5,13 @@
     .module('app.checkin')
     .controller('CheckinCtrl', CheckinCtrl);
 
-  CheckinCtrl.$inject = ['$scope', '$routeParams', '$q', '$filter', 'gettextCatalog', 'config', 'hrinfoService', 'alertService', 'User', 'UserCheckInService', 'List'];
+  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List'];
 
-  function CheckinCtrl ($scope, $routeParams, $q, $filter, gettextCatalog, config, hrinfoService, alertService, User, UserCheckInService, List) {
-
+  function CheckinCtrl ($scope, $routeParams, $filter, gettextCatalog, config, alertService, User, UserCheckInService, List) {
     $scope.request = $routeParams;
-    $scope.step = 1;
     $scope.organization = {};
     $scope.selectedLists = [];
-    $scope.primaryPhone = {};
-    $scope.primaryEmail = {};
-    $scope.primaryLocation = {};
-    $scope.primaryOrganization = {};
-    $scope.newPhoneNumber = {};
-    $scope.newEmail = {};
-    $scope.newLocation = {};
-    $scope.newOrganization = {};
     $scope.modifications = {};
-    $scope.emailTypes = [
-      {value: 'Work', name: 'Work'},
-      {value: 'Personal', name: 'Personal'}
-    ];
-    $scope.phoneNumberTypes = [
-      {value: 'Landline', name: 'Landline'},
-      {value: 'Mobile', name: 'Mobile'}
-    ];
     $scope.datePicker = {
       opened: false
     };
@@ -41,17 +23,9 @@
     };
     $scope.isCurrentUser = true;
 
-    function getPrimaryEmailType (primaryEmail, emails) {
-      var email = $filter('filter')(emails, {email: primaryEmail})[0];
-      return email ? email.type : false;
-    }
-
     var queryCallback = function () {
-      angular.copy($scope.user.location, $scope.primaryLocation.location);
-      $scope.primaryPhone.type = $scope.user.phone_number_type;
-      $scope.primaryPhone.number = $scope.user.phone_number;
-      $scope.primaryEmail.type = getPrimaryEmailType($scope.user.email, $scope.user.emails);
-      $scope.primaryEmail.email = $scope.user.email;
+      $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
+      $scope.$broadcast('userLoaded');
 
       $scope.lists = List.query({}, function() {
         $scope.lists = $scope.lists.filter(function (list) {
@@ -59,7 +33,7 @@
           for (var i = 0, len = config.listTypes.length; i < len; i++) {
             listType = config.listTypes[i] + 's';
             if (!$scope.user[listType]) {
-              $scope.user[listType] = new Array();
+              $scope.user[listType] = [];
             }
             for (var j = 0, tlen = $scope.user[listType].length; j < tlen; j++) {
               if ($scope.user[listType][j].list == list._id) {
@@ -74,13 +48,8 @@
 
 
     function getUser () {
-      if (!$routeParams.userId) {
-        $scope.user = $scope.currentUser;
-        queryCallback();
-        return;
-      }
-      $scope.user = User.get({userId: $routeParams.userId}, queryCallback);
-      $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
+      var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
+      $scope.user = User.get({userId: userId}, queryCallback);
     }
     getUser();
 
@@ -96,28 +65,6 @@
       return $scope.selectedLists.indexOf(list) !== -1;
     };
 
-    $scope.getOrganizations = function(search) {
-      $scope.organizations = List.query({'name': search, 'type': 'organization'});
-    };
-
-    $scope.nextStep = function (step) {
-      $scope.step = step;
-    };
-
-    $scope.countries = [];
-    hrinfoService.getCountries().then(function (countries) {
-      $scope.countries = countries;
-    });
-
-
-    $scope.regions = [];
-    $scope.setRegions = function ($item) {
-      $scope.regions = [];
-      hrinfoService.getRegions($item.id).then(function (regions) {
-        $scope.regions = regions;
-      });
-    };
-
     $scope._checkinHelper = function () {
 
       var selectedLists = $scope.selectedLists;
@@ -128,7 +75,7 @@
           checkoutDate: $scope.departureDate
         };
         UserCheckInService.save({userId: $scope.user._id, listType: selectedLists[i].type + 's'}, checkinUser, function () {
-          if ($scope.currentUser._id == $scope.user._id) {
+          if ($scope.currentUser._id === $scope.user._id) {
             $scope.user = User.get({userId: $scope.currentUser._id}, function () {
               $scope.setCurrentUser($scope.user);
               alertService.add('success', gettextCatalog.getString('You were succesfully checked in'));
@@ -167,94 +114,44 @@
       }
     };
 
-    function setPrimaryPhone (newPhoneNumber) {
-      $scope.user.setPrimaryPhone(newPhoneNumber.number, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Primary phone number set successfully.'));
-        $scope.user.phone_number = resp.data.phone_number;
-        $scope.user.phone_number_type = resp.data.phone_number_type;
-        $scope.modifications.phone = 'Changed primary phone number to: ' + resp.data.phone_number;
-        $scope.editPhoneForm.$visible = false;
-
-      }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error setting the primary phone number.'));
-      });
-    }
-
-
-    $scope.setPrimaryPhone = function () {
-      setPrimaryPhone($scope.primaryPhone);
-    };
-
-    $scope.addPhone = function () {
-      $scope.user.addPhone($scope.newPhoneNumber, function () {
-        setPrimaryPhone($scope.newPhoneNumber);
-      }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error adding this phone number.'));
-      });
-    };
-
-    function setPrimaryEmail (newEmail) {
-      $scope.user.setPrimaryEmail(newEmail.email, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Primary email address set successfully.'));
-        $scope.user.email = resp.data.email;
-        $scope.modifications.email = 'Changed primary email address to: ' + resp.data.email;
-        $scope.editEmailForm.$visible = false;
-
-      }, function (error) {
-        alertService.add('danger', gettextCatalog.getString('There was an error adding this email address - ' + error.data.message));
-      });
-    }
-
-    $scope.setPrimaryEmail = function () {
-      setPrimaryEmail($scope.primaryEmail);
-    };
-
-    $scope.addEmail = function () {
-      $scope.user.addEmail($scope.newEmail, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Email added successfully. You will need to validate it.'));
-        $scope.user.emails = angular.copy(resp.data.emails, $scope.user.emails);
-      }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error adding this email address.'));
-      });
-    };
-
-    $scope.resendValidationEmail = function (email) {
-      $scope.user.resendValidationEmail(email, function (resp) {
-        alertService.add('success', gettextCatalog.getString('Validation email sent successfully.'));
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error sending the validation email.'));
-      });
-    };
-
-    $scope.updateLocation = function (location) {
-      angular.copy(location.location, $scope.user.location);
-
-      $scope.user.$update(function () {
-        alertService.add('success', gettextCatalog.getString('Location successfully updated.'));
-        var message = $scope.user.location.country.name;
-        if ($scope.user.location.region) {
-          message = $scope.user.location.region.name + ', ' + $scope.user.location.country.name;
-        }
-
-        $scope.modifications.location = 'Changed location to: ' + message;
-        $scope.editLocationForm.$visible = false;
-
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error: ') + resp.data.error);
-      });
-    };
-
-    $scope.addOrganization = function () {
-      UserCheckInService.save({userId: $scope.user._id, listType: 'organizations'}, {list: $scope.newOrganization.list._id}, function (user) {
-        $scope.user.organizations = user.organizations;
-        alertService.add('success', gettextCatalog.getString('Organization successfully updated.'));
-        $scope.modifications.location = 'Changed organization to: ' + $scope.newOrganization.list.name;
-      });
-    };
-
     $scope.showDatePicker = function() {
       $scope.datePicker.opened = true;
     };
+
+    $scope.$on('editUser', function (event, data) {
+
+      if (data.status === 'fail') {
+        alertService.add('danger', data.message);
+        return;
+      }
+
+      if (data.status === 'success') {
+        alertService.add('success', data.message);
+
+        if (data.type === 'primaryOrganization') {
+          $scope.modifications.organization = 'Changed primary organization to: ' + $scope.user.organization.list.name;
+        }
+
+        if (data.type === 'primaryPhone') {
+          $scope.modifications.phone = 'Changed primary phone number to: ' + $scope.user.phone_number;
+        }
+
+        if (data.type === 'primaryEmail') {
+          $scope.modifications.email = 'Changed primary email to: ' + $scope.user.email;
+        }
+
+        if (data.type === 'primaryLocation') {
+          $scope.modifications.location = 'Changed primary location to: ' + $scope.user.location.country.name;
+        }
+
+        if (data.type === 'primaryJobTitle') {
+          $scope.modifications.job_title = 'Changed primary job title to: ' + $scope.user.job_title;
+        }
+
+        return;
+      }
+
+    });
 
   }
 })();
