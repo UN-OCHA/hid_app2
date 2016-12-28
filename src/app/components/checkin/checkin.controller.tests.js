@@ -49,7 +49,7 @@
           return;
         };
         testUser.get = function () {
-          return testUser;
+          return;
         };
 
         scope.currentUser = {
@@ -69,6 +69,11 @@
           return listQueryResponse;
         };
 
+        spyOn(testUser, 'get').and.callFake(function (params, callback) {
+          scope.user = testUser;
+            callback();
+            // return testUser;
+        });
         spyOn(testUser, 'addPhone').and.callFake(function (params, callback) {
             callback();
         });
@@ -136,6 +141,7 @@
         });
 
         it('should set isCurrentUser to true', function () {
+          scope.$digest();
           expect(scope.isCurrentUser).toBe(true);
         });
       });
@@ -146,6 +152,7 @@
         });
 
         it('should set isCurrentUser to false', function () {
+          scope.$digest();
           expect(scope.isCurrentUser).toBe(false);
         });
       });

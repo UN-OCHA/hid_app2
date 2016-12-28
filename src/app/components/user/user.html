@@ -49,7 +49,7 @@
   </div>
 </div>
 
-<form editable-form name="profileForm" onaftersave="saveUser()" class="form">
+<form editable-form name="profileForm" class="form" ng-controller="UserEditCtrl">
 
   <div class="page-header profile-header" ng-class="{'profile-header--admin' : currentUser.is_admin || user.is_admin}">
 
@@ -89,24 +89,13 @@
           <textarea id="user_status" ng-model="user.status" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.status)"></textarea>
         </div>
 
-
-         <!--  <span editable-text="user.given_name" e-id="given_name" e-placeholder="{{'Given name' | translate}}" >{{user.given_name}}</span>
-          <label ng-if="profileForm.$visible" for="family_name" class="sr-only">Family name</label>
-          <span editable-text="user.family_name" e-id="family_name" e-placeholder="{{'Family name' | translate}}">{{user.family_name}}</span> -->
-
-
-
-
-        <!-- <label ng-if="profileForm.$visible" for="user_status" class="sr-only" translate="">User status</label>
-        <p editable-textarea="user.status" e-id="user_status" e-rows="7" e-cols="40" e-placeholder="{{'Status' | translate}}" class="hidden-sm-up profile-header__status">{{user.status}}</p> -->
-
         <div ng-show="profileForm.$visible">
           <label class="btn btn-secondary btn-upload center-block" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
           <p class="form-hint" translate>Upload a square image in JPEG format, with more than 200px width</p>
         </div>
 
         <div class="profile-header__controls">
-          <button type="button" class="btn-icon" ng-click="profileForm.$show()" ng-show="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
+          <button type="button" class="btn-icon" ng-click="profileForm.$show()" ng-if="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
             <icon name="edit" text="Edit"></icon>
           </button>
 
