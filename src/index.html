@@ -28,7 +28,7 @@
         <ng-include src="'app/components/header/header.html'"></ng-include>
         <div class="page">
             <div class="container breadcrumbs">
-                <a href back-button translate>
+                <a href back-button translate ng-if="isAuthenticated">
                     <icon name="arrow-left"></icon>
                     <span translate>Back</span>
                 </a>
