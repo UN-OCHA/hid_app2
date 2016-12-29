@@ -19,6 +19,10 @@
       return $http.post(config.apiUrl + 'user/' + user._id + '/subscriptions', {service: this._id});
     };
 
+    Service.prototype.unsubscribe = function (user) {
+      return $http.delete(config.apiUrl + 'user/' + user._id + '/subscriptions/' + this._id);
+    };
+
     // Get mailchimp lists
     Service.getMailchimpLists = function (apiKey) {
       return $http.get(config.apiUrl + 'service/mailchimp/lists?apiKey=' + apiKey);

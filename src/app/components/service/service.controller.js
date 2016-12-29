@@ -40,6 +40,17 @@
         });
     };
 
+    $scope.unsubscribe = function () {
+      $scope.service.unsubscribe($scope.currentUser)
+        .then(function (response) {
+          $scope.setCurrentUser(response.data);
+          alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'));
+        })
+        .catch(function (err) {
+          alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
+        });
+    };
+
     $scope.saveService = function() {
       var success = function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Service saved successfully'));
