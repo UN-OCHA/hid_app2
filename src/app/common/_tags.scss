@@ -9,6 +9,7 @@
     border-radius: 4px;
     padding: $base-unit/4 $base-unit;
     border: 1px solid $primary-color;
+    text-decoration: none;
 
     &:hover, &:focus {
       background: white;
