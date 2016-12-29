@@ -1,22 +1,8 @@
-<div class="page-header">
+<div class="page-header row">
+  <div class="col-xl-4">
     <h1 class="page-header__heading" translate>{{heading}}</h1>
   </div>
-</div>
-<div class="row">
-<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 search-actions">
-  <form ng-submit="fullSearch(searchTerm)" role="search" class="search-actions__search">
-      <div class="search-form search-form--in-page">
-        <label for="search" class="sr-only">{{'Search for contacts or lists'|translate}}</label>
-        <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for contacts or lists'|translate}}" name="search" id="search" autocomplete="off" ng-model="searchTerm" ng-disabled="!isOnline">
-        <button type="submit" class="btn-transparent search-form__button" ng-disabled="!isOnline">
-          <icon name="search" text="Search"></icon>
-        </button>
-        <button type="button" ng-click="clearSearch()" class="btn-transparent search-form__clear" ng-if="searchTerm">
-          <icon name="cancel" text="Clear search"></icon>
-        </button>
-      </div>
-    </form>
-
+  <div class="col-xl-4 pull-xl-2">
     <div class="btn-toggle search-actions__toggle-lists">
       <button type="button" class="btn-primary" ng-click="showLists = !showLists" ng-disabled="!showLists" ng-class="{'active' : !showLists}">
         Show contacts
@@ -25,7 +11,8 @@
         Show lists
       </button>
     </div>
-</div>
+  </div>
+
 </div>
 
 <ng-include ng-show="showLists" src="'app/components/list/all-lists.html'"></ng-include>

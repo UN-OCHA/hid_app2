@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
-    <h1 translate>Log in to Humanitarian ID.</h1>
+    <h1 translate>Log in to<br> Humanitarian ID.</h1>
     <form ng-submit="login()">
       <div class="form-group">
         <label for="email" translate>Email</label>
@@ -10,9 +10,15 @@
         <label for="password" translate>Password</label>
         <input type="password" id="password" ng-model="password" required placeholder="{{'Your password' |  translate }}">
       </div>
-      <button type="submit" class="btn btn-primary" translate>Login</button>
+      <div class="row form-group">
+        <div class="col-xs-6">
+          <a href="/register" class="btn-secondary btn-block" translate>Register</a>
+        </div>
+        <div class="col-xs-6">
+          <button type="submit" class="btn-primary btn-block" translate>Login</button>
+        </div>
+      </div>
     </form>
-    <a href="/register" translate>Need to register ?</a>
-    <a href="/password_reset" translate>Forgot your password ?</a>
+    <p><a href="/password_reset" translate>Forgot your password?</a></p>
   </div>
 </div>

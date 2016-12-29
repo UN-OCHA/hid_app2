@@ -14,16 +14,6 @@
     $scope.$on('user-service-ready', function() {
       $scope.$broadcast('populate-list');
     });
-
-    $scope.fullSearch = function (searchTerm) {
-      $location.path('/search').search({q: searchTerm});
-    };
-
-    $scope.clearSearch = function () {
-      $scope.searchTerm = '';
-      $location.path('/search').search({});
-    };
-
   }
 
 })();

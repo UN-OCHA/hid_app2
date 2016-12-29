@@ -70,6 +70,16 @@
   }
 }
 
+@include media-query(xl) {
+
+  .page-header__heading {
+    .col-xl-4 & {
+      padding-right: 0;
+    }
+  }
+
+}
+
 @include media-query(xxl) {
 
   .page {
@@ -88,6 +98,9 @@
 
 .list-actions__count {
   @include font-size($small-font-size);
+  font-family: $heading-font-light;
+  color: $dark-blue;
+  font-style: italic;
 }
 
 .page-actions__toggle-admin, .page-actions__toggle-filters {
@@ -111,7 +124,7 @@
   }
 
     .list-actions__count {
-      @include font-size($base-font-size);
+      @include font-size($medium-font-size);
     }
 
     .page-actions__toggle-admin, .page-actions__toggle-filters {
