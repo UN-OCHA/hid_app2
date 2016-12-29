@@ -1,3 +1,8 @@
+.container[role="main"] {
+  min-height: calc(100% - #{$footer-plus-breadcrumbs});
+  padding-bottom: $base-unit*4;
+}
+
 .page {
   position: relative;
   height: calc(100% - #{$header-height-xs});
@@ -20,11 +25,6 @@
   }
 }
 
-.container[role="main"] {
-  min-height: calc(100% - #{$footer-plus-breadcrumbs});
-  padding-bottom: $base-unit*4;
-}
-
 .page-header {
   margin-top: $base-unit*2;
   margin-bottom:$base-unit;
@@ -35,17 +35,25 @@
   margin-bottom: 0;
   word-break: break-word;
   padding-right: $base-unit*11;
+
+  .col-sm-6 &, .col-sm-8 &, .col-sm-10 & {
+    padding-right: 0;
+  }
+}
+
+.page-header__actions {
+  margin-top: $base-unit;
 }
 
 @include media-query(sm) {
 
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-  }
-
   .page-header__heading {
     padding-right: 0;
+  }
+
+  .page-header__actions {
+    text-align: right;
+    margin-top: 0;
   }
 
 }
@@ -103,14 +111,13 @@
   font-style: italic;
 }
 
-.page-actions__toggle-admin, .page-actions__toggle-filters {
+.btn-toggle-admin, .btn-toggle-filters {
   position: absolute;
   top: $base-unit*2;
   right: $base-unit;
 }
 
-.page-actions__toggle-filters--has-admin {
-
+.btn-toggle-filters--has-admin {
   right: $base-unit*6.5;
 }
 
@@ -127,15 +134,15 @@
       @include font-size($medium-font-size);
     }
 
-    .page-actions__toggle-admin, .page-actions__toggle-filters {
+    .btn-toggle-admin, .btn-toggle-filters {
       top: $base-unit/2;
     }
 
-    .page-actions__toggle-admin, .page-actions__toggle-filters {
+    .btn-toggle-admin, .btn-toggle-filters {
       right: $base-unit*2;
     }
 
-  .page-actions__toggle-filters--has-admin {
+  .btn-toggle-filters--has-admin {
     right: $base-unit*8;
   }
 
@@ -147,7 +154,7 @@
     padding: $base-unit*2 0 $base-unit 0;
   }
 
-  .page-actions__toggle-admin, .page-actions__toggle-filters {
+  .btn-toggle-admin, .btn-toggle-filters {
     top: $base-unit*5 + 3;
     transition: $sidebar-transition;
     .toggled & {
@@ -159,18 +166,18 @@
 
 @include media-query(xl) {
 
-  .page-actions__toggle-admin, .page-actions__toggle-filters {
+  .btn-toggle-admin, .btn-toggle-filters {
     right: $base-unit*5;
   }
 
-  .page-actions__toggle-filters--has-admin {
+  .btn-toggle-filters--has-admin {
     right: $base-unit*11;
   }
 
 }
 
 @include media-query(xxl) {
-  .page-actions__toggle-admin, .page-actions__toggle-filters {
+  .btn-toggle-admin, .btn-toggle-filters {
     .toggled & {
       transform: translateX(-$sidebar-width-xxl);
     }

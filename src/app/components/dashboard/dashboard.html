@@ -9,8 +9,7 @@
 <div class="row">
 
   <div class="col-md-8">
-
-    <ul class="tabs tabs-3 dashboard-tabs" ng-class="{'tabs--closed' : !tabsActive}">
+  <ul class="block tabs tabs-3 dashboard-tabs" ng-class="{'tabs--closed' : !tabsActive}">
 
       <li class="tabs__control-item">
         <button type="button" class="tabs__control-button" ng-class="{'active' : activeTab === 'favorites', 'tabs__control-button--mobile-closed': !tabsActive}" ng-click="toggleTabs('favorites')">
@@ -18,11 +17,14 @@
         </button>
 
         <div class="tabs__content" ng-if="activeTab === 'favorites'" ng-class="{'tabs__content--mobile-closed' : !tabsActive}">
-          <ul class="list-group" ng-if="currentUser.favoriteLists.length">
-            <li class="list-group__item" ng-repeat="list in currentUser.favoriteLists track by $index">
+          <ul class="list list--has-buttons list--has-dividers">
+            <li class="list__item" ng-if="!currentUser.favoriteLists.length" translate>
+              You don't have any favorite lists
+            </li>
+            <li class="list__item" ng-repeat="list in currentUser.favoriteLists track by $index">
               <a href="/lists/{{list._id}}">{{list.name}}</a>
-              <div class="list-group__item-actions" uib-dropdown>
-                <button type="button" class="btn btn-transparent" uib-dropdown-toggle>
+              <div uib-dropdown class="list__button">
+                <button type="button" class="btn-transparent" uib-dropdown-toggle>
                   <icon name="dots" text="Options"></icon>
                 </button>
                 <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
@@ -31,9 +33,6 @@
               </div>
             </li>
           </ul>
-          <div ng-if="!currentUser.favoriteLists.length">
-            <p class="list-tabs__empty" translate>You don't have any favorite lists</p>
-          </div>
         </div>
       </li>
 
@@ -43,11 +42,14 @@
         </button>
 
         <div class="tabs__content" ng-if="activeTab === 'partof'">
-          <ul class="list-group" ng-if="listsMember.length">
-            <li class="list-group__item" ng-repeat="list in listsMember track by $index">
+          <ul class="list list--has-buttons list--has-dividers">
+            <li class="list__item" ng-if="!listsMember.length" translate>
+              You are not part of any lists
+            </li>
+            <li class="list__item" ng-repeat="list in listsMember track by $index">
               <a href="/lists/{{list._id}}">{{list.name}}</a>
-              <div class="list-group__item-actions" uib-dropdown>
-                <button type="button" class="btn btn-transparent" uib-dropdown-toggle>
+              <div uib-dropdown class="list__button">
+                <button type="button" class="btn-transparent" uib-dropdown-toggle>
                   <icon name="dots" text="Options"></icon>
                 </button>
                 <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
@@ -56,9 +58,6 @@
               </div>
             </li>
           </ul>
-          <div ng-if="!listsMember.length">
-            <p class="list-tabs__empty" translate>You are not part of any lists</p>
-          </div>
         </div>
       </li>
 
@@ -68,19 +67,20 @@
         </button>
 
         <div class="tabs__content" ng-if="activeTab === 'manage'">
-          <ul class="list-group" ng-if="listsOwner.length || listsManager.length">
-            <li class="list-group__item" ng-repeat="list in listsOwner track by $index">
-              <a href="/lists/{{list._id}}">{{list.name}}</a>
-              <div class="list-group__item-actions">
-                <button type="button" class="btn btn-transparent">
-                  <icon name="dots" text="Options"></icon>
-                </button>
-              </div>
+          <ul class="list list--has-buttons list--has-dividers">
+            <li class="list__item" ng-if="!listsOwner.length && !listsManager.length" translate>
+              You don't manage any lists
             </li>
-            <li class="list-group__item" ng-repeat="list in listsManager track by $index">
+            <li class="list__item" ng-repeat="list in listsOwner track by $index">
               <a href="/lists/{{list._id}}">{{list.name}}</a>
-              <div class="list-group__item-actions" uib-dropdown>
-                <button type="button" class="btn btn-transparent" uib-dropdown-toggle>
+              <button type="button" class="btn-transparent">
+                <icon name="dots" text="Options"></icon>
+              </button>
+            </li>
+            <li class="list__item" ng-repeat="list in listsManager track by $index">
+              <a href="/lists/{{list._id}}">{{list.name}}</a>
+              <div uib-dropdown class="list__button">
+                <button type="button" class="btn-transparent" uib-dropdown-toggle>
                   <icon name="dots" text="Options"></icon>
                 </button>
                 <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
@@ -90,49 +90,63 @@
               </div>
             </li>
           </ul>
-
-          <div ng-if="!listsOwner.length && !listsManager.length">
-            <p class="list-tabs__empty" translate>You don't manage any lists</p>
-          </div>
         </div>
       </li>
-
     </ul>
+
+    <div class="block">
+      <h2 class="block-heading" translate>Subscriptions</h2>
+
+      <ul class="list list--has-buttons list--has-dividers">
+        <li class="list__item">
+          <a href="">Subscription name will go here</a>
+          <div uib-dropdown class="list__button">
+            <button type="button" class="btn-transparent" uib-dropdown-toggle>
+              <icon name="dots" text="Options"></icon>
+            </button>
+            <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+              <li><a href="#" translate>action?</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+    </div>
 
   </div>
 
   <div class="col-md-4">
 
-  <div class="dashboard-ctas">
-    <a class="btn-block btn-primary" href="/lists/new" translate>Create new List</a>
-    <a class="btn-block btn-primary" href="/checkin" translate>Check In</a>
-  </div>
-  <div class="dashboard-ctas">
-    <a class="btn-block btn-primary" href="/users/new" ng-if="currentUser.is_admin">Add new user</a>
-    <a class="btn-block btn-primary" href="/clients" ng-if="currentUser.is_admin">View OAuth Clients</a>
-  </div>
+    <div class="dashboard-ctas">
+      <a class="btn-block btn-primary" href="/lists/new" translate>Create new List</a>
+      <a class="btn-block btn-primary" href="/checkin" translate>Check In</a>
+    </div>
+    <div class="dashboard-ctas">
+      <a class="btn-block btn-primary" href="/users/new" ng-if="currentUser.is_admin">Add new user</a>
+      <a class="btn-block btn-primary" href="/clients" ng-if="currentUser.is_admin">View OAuth Clients</a>
+    </div>
 
-  <div class="secondary-block">
-    <h2 class="secondary-block__heading">
-      <span translate>Notifications</span>
-      <a href="/notifications" class="btn-primary btn-small" translate>View all</a>
-    </h2>
-    <ul class="secondary-block__list">
-      <li class="secondary-block__item" ng-repeat="notification in notifications.unread | limitTo: 5">
-        <icon name="arrow-right"></icon>
-        {{notification.text}}
-      </li>
-      <li class="secondary-block__item">
-        <icon name="arrow-right"></icon>
-        <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
-      <li class="secondary-block__item">
-        <icon name="arrow-right"></icon>
-        <span ng-if="currentUser.verified" translate>Your profile is verified</span>
-        <span ng-if="!currentUser.verified" translate>You're not verified yet</span>
-      </li>
-    </ul>
+    <div class="secondary-block">
+      <h2 class="secondary-block__heading">
+        <span translate>Notifications</span>
+        <a href="/notifications" class="btn-primary btn-small" translate>View all</a>
+      </h2>
+      <ul class="secondary-block__list">
+        <li class="secondary-block__item" ng-repeat="notification in notifications.unread | limitTo: 5">
+          <icon name="arrow-right"></icon>
+          {{notification.text}}
+        </li>
+        <li class="secondary-block__item">
+          <icon name="arrow-right"></icon>
+          <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
+          <li class="secondary-block__item">
+            <icon name="arrow-right"></icon>
+            <span ng-if="currentUser.verified" translate>Your profile is verified</span>
+            <span ng-if="!currentUser.verified" translate>You're not verified yet</span>
+          </li>
+        </ul>
 
-  </div>
+      </div>
 
+    </div>
   </div>
-</div>

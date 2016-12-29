@@ -1,7 +1,7 @@
 .block {
-  &+.block {
-    margin-top: $base-unit*4;
-  }
+  // &+.block {
+    margin-bottom: $base-unit*2;
+  // }
 }
 
 .block-heading {
@@ -34,10 +34,14 @@
 
 .secondary-block__item {
   padding: $base-unit*1.5 $base-unit*2;
+}
 
-  .fa {
-    @include font-size(12);
-    margin-right: $base-unit/2;
+@include media-query(md) {
+
+  .block {
+    // &+.block {
+      margin-bottom: $base-unit*4;
+    // }
   }
 
 }

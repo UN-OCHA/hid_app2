@@ -24,6 +24,11 @@
     left: auto;
     right: 0;
     min-width: 120px;
+    width: 100%;
+
+    &.dropdown-menu--lang {
+      min-width: 0;
+    }
   }
 
   .dropdown-menu--small {

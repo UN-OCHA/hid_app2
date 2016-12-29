@@ -122,7 +122,7 @@
   @include font-size(30);
 
   .modal-success & {
-    color: green;
+    color: $primary-color;
   }
   .modal-danger & {
     color: $error-color;

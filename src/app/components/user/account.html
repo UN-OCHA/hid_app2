@@ -83,9 +83,9 @@
     <legend class="form-section__heading" translate>Authorized Applications</legend>
     <p class="form-section__info" ng-if="!user.authorizedClients.length" translate><em>No applications currently have access to your Humanitarian ID account.</em></p>
     <p class="form-section__info" ng-if="user.authorizedClients.length" translate>You have granted the following applications access to your Humanitarian ID account.</p>
-    <ul class="form-list">
-      <li class="form-list__item" ng-repeat="client in user.authorizedClients">
-        <span class="form-list__text">{{client.name}}</span>
+    <ul class="list list--has-buttons">
+      <li class="list__item" ng-repeat="client in user.authorizedClients">
+        {{client.name}}
         <button class="btn-transparent" ng-disabled="!isOnline" ng-click="revokeClient(client)">
           <icon name="cancel" text="Revoke access for {{client.name}}"></icon>
         </button>
