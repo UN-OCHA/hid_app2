@@ -15,6 +15,10 @@
       }
     });
 
+    Service.prototype.subscribe = function (user) {
+      return $http.post(config.apiUrl + 'user/' + user._id + '/subscriptions', {service: this._id});
+    };
+
     // Get mailchimp lists
     Service.getMailchimpLists = function (apiKey) {
       return $http.get(config.apiUrl + 'service/mailchimp/lists?apiKey=' + apiKey);

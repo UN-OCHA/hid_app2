@@ -29,6 +29,17 @@
       $scope.service = new Service();
     }
 
+    $scope.subscribe = function () {
+      $scope.service.subscribe($scope.currentUser)
+        .then(function(response) {
+          $scope.setCurrentUser(response.data);
+          alertService.add('success', gettextCatalog.getString('You were successfully subscribed to this service'));
+        })
+        .catch(function (err) {
+          alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
+        });
+    };
+
     $scope.saveService = function() {
       var success = function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Service saved successfully'));

@@ -1,9 +1,12 @@
 <div>
-  <div>
+  <div ng-if="currentUser.is_admin || service.owner === currentUser._id">
     <a class="btn btn-primary" href="services/{{service._id}}/edit" translate>Edit Service</a>
   </div>
-  <div>
+  <div ng-if="currentUser.is_admin || service.owner === currentUser._id">
     <a class="btn btn-danger" ng-click="deleteService();" translate>Delete Service</a>
+  </div>
+  <div>
+    <a class="btn btn-primary" ng-click="subscribe();" translate>Subscribe</a>
   </div>
 </div>
 <div id="page-content-wrapper">
