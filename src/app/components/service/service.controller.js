@@ -21,7 +21,9 @@
     $scope.mailchimpLists = [];
 
     if ($routeParams.serviceId) {
-      $scope.service = Service.get({'serviceId': $routeParams.serviceId});
+      $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
+        $scope.getMailchimpLists();
+      });
     }
     else {
       $scope.service = new Service();

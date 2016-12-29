@@ -232,7 +232,7 @@ app.config(['$routeProvider', '$locationProvider',
         adminOnly: false,
         title: 'Service'
       }).
-      when('/clients/:serviceId/edit', {
+      when('/services/:serviceId/edit', {
         templateUrl: 'app/components/service/new-service.html',
         controller: 'ServiceCtrl',
         authenticate: true,
