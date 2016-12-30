@@ -28,6 +28,11 @@
       return $http.get(config.apiUrl + 'service/mailchimp/lists?apiKey=' + apiKey);
     };
 
+    // Get google groups
+    Service.getGoogleGroups = function (domain) {
+      return $http.get(config.apiUrl + 'service/google/groups?domain=' + domain);
+    };
+
     return Service;
   }
 })();

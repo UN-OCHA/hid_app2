@@ -5,9 +5,9 @@
     .module('app.service')
     .controller('ServiceCtrl', ServiceCtrl);
 
-  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Service'];
+  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials'];
 
-  function ServiceCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Service) {
+  function ServiceCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Service, ServiceCredentials) {
     $scope.serviceTypes = [
       {
         value: 'mailchimp',
@@ -19,14 +19,17 @@
       }
     ];
     $scope.mailchimpLists = [];
+    $scope.credentials = [];
 
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
         $scope.getMailchimpLists();
+        $scope.credentials = ServiceCredentials.query();
       });
     }
     else {
       $scope.service = new Service();
+      $scope.credentials = ServiceCredentials.query();
     }
 
     $scope.subscribe = function () {
@@ -79,5 +82,15 @@
           $scope.mailchimpLists = result.data.lists;
         });
     };
+
+    $scope.getGoogleGroups = function () {
+      Service
+        .getGoogleGroups($scope.service.googlegroup.domain)
+        .then(function (result) {
+          console.log(result);
+          $scope.googleGroups = result.data;
+        });
+    };
+
   }
 })();

@@ -29,6 +29,17 @@
     <select name="mailchimpList" ng-model="service.mailchimp.list" ng-options="list.name for list in mailchimpLists track by list.id">
     </select>
   </div>
+  <div class="form-group" ng-if="service.type === 'googlegroup'" ng-init>
+    <label for="ggDomain" translate>Domain</label>
+    <select name="ggDomain" ng-model="service.googlegroup.domain" ng-blur="getGoogleGroups()">
+      <option ng-repeat="cred in credentials" ng-value="cred.googlegroup.domain">{{cred.googlegroup.domain}}</option>
+    </select>
+  </div>
+  <div class="form-group" ng-if="service.type === 'googlegroup' && service.googlegroup.domain" ng-init>
+    <label for="googleGroup" translate>Group</label>
+    <select name="googleGroup" ng-model="service.googlegroup.group" ng-options="group.name for group in googleGroups track by group.id">
+    </select>
+  </div>
   <div class="form-group">
     <label><input type="checkbox" ng-model="service.hidden" name="hidden" /> Hidden</label>
   </div>
