@@ -39,8 +39,8 @@
       <form ng-submit="checkIn()">
         <div class="form-group">
           <label for="checkoutDate" translate>Checkout date</label>
-          <div class="form-list__item">
-            <input type="text" id="checkoutDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="auto bottom-right" ng-model="checkinUser.checkoutDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
+          <div class="form-field form-inline-fields">
+            <input type="text" class="form-inline-fields__item" id="checkoutDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="bottom-left" ng-model="checkinUser.checkoutDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
             <button type="button" class="btn-transparent" ng-click="showDatePicker()">
               <icon name="calendar" text="Select a date"></icon>
             </button>

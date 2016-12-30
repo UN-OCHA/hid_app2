@@ -71,10 +71,6 @@ textarea {
   }
 }
 
-.form-group {
-  margin-bottom: $base-unit*3;
-}
-
 .input-group {
   position: relative;
   display: table;
@@ -110,106 +106,28 @@ legend {
   font-weight: bold;
 }
 
-.form {
+.form-group {
+  margin-bottom: $base-unit*3;
+}
+
+.form-group--compact {
+  margin-bottom: $base-unit*1.5;
+}
+
+.form-field {
   position: relative;
+  margin-bottom: $base-unit*3;
 }
 
-.form__edit {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: $base-unit*5;
-  height: $base-unit*5;
-  padding: 0;
+.form-field--compact {
+  margin-bottom: $base-unit*1.5;
 }
 
-.form-editable-section {
-  padding: $base-unit;
-  border-bottom: 1px solid $border-grey;
-
-  &:last-child {
-    border: none;
-  }
-
-  &.active {
-    background: $light-grey;
-    border: none;
-    margin-bottom: $base-unit/2;
-  }
-
-  .styled-select {
-    margin-bottom: $base-unit;
-
-    select {
-      padding-left: $base-unit;
-    }
-    &:before {
-      right: 18px;
-    }
-  }
-
-  input {
-    padding-left: $base-unit;
-  }
-
-  .ui-select-container {
-    background: white;
-    font-family: $body-font;
-  }
-
-  .ui-select-toggle {
-    padding-left: $base-unit;
-  }
-
-  .ui-select-container .ui-select-toggle > .caret {
-    right: $base-unit;
-  }
-}
-
-.form-list__item {
+.form-section {
+  padding: $base-unit 0;
+  margin-bottom: $base-unit;
+  border-bottom: 1px solid $light-blue;
   position: relative;
-
-  input {
-    padding-right: $base-unit*6;
-
-    &:focus {
-      &+.btn-transparent {
-        background: $primary-color;
-        color: white;
-      }
-    }
-  }
-
-  .ui-select-container.open + .btn-transparent {
-    background: $primary-color;
-    color: white;
-  }
-
-  .btn-transparent {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: $base-unit*6;
-    height: 100%;
-    max-height: $base-unit*5;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-
-    &:hover, &:focus {
-      background: $primary-color;
-      color: white;
-    }
-  }
-
-  input + .btn-transparent, .ui-select-container.open + .btn-transparent {
-    max-height: none;
-
-    &:focus {
-      border: 2px solid $dark-blue;
-      outline: none;
-    }
-  }
 
   a {
     text-decoration: none;
@@ -218,37 +136,71 @@ legend {
       text-decoration: underline;
     }
   }
-
-  .editable-wrap {
-    display: block;
-  }
-
-  .ui-select-container .ui-select-toggle > .caret {
-    right: $base-unit*6;
-  }
 }
 
-legend + .form-list__item, h3 + .form-list__item {
-  margin-top: $base-unit;
+.form-section__heading {
+  font-family: $heading-font-light;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: $base-unit*1.5;
+  color: $dark-blue;
 }
 
-.form-list__text {
+.form-section__sub-heading {
+  font-weight: normal;
+  color: $text-dark;
   display: block;
-  padding: $base-unit $base-unit*6 $base-unit 0;
+  color: $dark-blue;
+  margin-bottom: $base-unit;
 }
 
-.form-list__item-meta {
-  @include font-size($small-font-size);
-  display: block;
+.form-section__info {
+  margin-bottom: $base-unit;
+}
 
-  .btn-link {
-    @include font-size($small-font-size);
-  }
+.form-section__edit-btn {
+  position: absolute;
+  top: $base-unit;
+  right: 0;
+  min-width: $base-unit*5;
+  height: $base-unit*5;
+  padding: 0;
 }
 
 .form-hint {
   @include font-size($small-font-size);
   line-height: 1.4;
+}
+
+.form-inline-fields {
+  display: flex;
+
+  .no-flexbox & {
+    overflow: auto;
+  }
+
+  .btn-transparent {
+    width: $base-unit*4;
+    height: $base-unit*4;
+    line-height: $base-unit*4;
+    padding: 0;
+    margin-top: $base-unit;
+  }
+}
+
+.form-inline-fields__item {
+  margin-right: $base-unit;
+  margin-bottom: 0;
+  flex-grow: 2;
+
+  .no-flexbox & {
+    float: left;
+  }
+}
+
+.form-inline-fields__item--short {
+  flex-grow: 1;
+  max-width: 120px;
 }
 
 .glyphicon-remove {
@@ -279,61 +231,15 @@ legend + .form-list__item, h3 + .form-list__item {
   }
 }
 
-.form-inline-list {
-  margin-top: $base-unit;
-}
-
-.form-inline-list__item {
-  margin-bottom: $base-unit;
-  flex-grow: 2;
-}
-
-.form-inline-list__item--controls {
-  min-width: 100px;
-  flex-grow: 1;
-}
-
-.form-section {
-  margin-bottom: $base-unit*2;
-  padding-bottom: $base-unit*2;
-}
-
-.form-section__heading {
-  @include font-size($medium-font-size);
-  font-family: $heading-font-light;
-  color: $dark-blue;
-  margin-bottom: $base-unit*2;
-}
-
-.form-section__info {
-  margin-bottom: $base-unit;
-}
-
 @include media-query(sm) {
-  .form-inline-list {
-    display: flex;
-
-    .no-flexbox & {
-      overflow: auto;
-    }
+  .form-field--short {
+    width: 50%;
   }
+}
 
-  .form-inline-list__item {
-    margin-right: $base-unit;
-    margin-bottom: 0;
-
-    .no-flexbox & {
-      float: left;
-    }
-  }
-
-  .form-inline-list__item--short {
-    flex-grow: 1;
-    max-width: 120px;
-  }
-
-  .form-section {
-    margin-bottom: $base-unit*4;
-    padding-bottom: $base-unit*4;
+@include media-query(md) {
+  .form-section:not(.form-section--compact) {
+    padding-bottom: $base-unit*3;
+    margin-bottom: $base-unit*3;
   }
 }

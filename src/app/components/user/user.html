@@ -49,7 +49,7 @@
   </div>
 </div>
 
-<form editable-form name="profileForm" class="form" ng-controller="UserEditCtrl">
+<form editable-form name="profileForm" ng-controller="UserEditCtrl">
 
   <div class="page-header profile-header" ng-class="{'profile-header--admin' : currentUser.is_admin || user.is_admin}">
 
@@ -109,36 +109,35 @@
       </div>
     </div>
 
-    <button class="btn-icon page-actions__toggle-admin" type="button" ng-click="toggleSidebar('admin')">
+    <button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')">
       <icon name="wheel" text="Actions"></icon>
     </button>
 
   </div>
-
 
   <div class="row">
 
     <div class="col-xs-12 col-md-6 col-lg-4">
       <h2 class="block-heading" translate>Contact Information</h2>
 
-      <div class="profile-form">
+      <div class="form-section form-section--compact">
 
-        <h3 class="profile-form__heading" translate>Phone numbers</h3>
+        <h3 class="form-section__heading" translate>Phone numbers</h3>
 
-        <ul class="profile-form__list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
-          <li class="profile-form__item" ng-repeat="phone in user.phone_numbers">
+        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+          <li class="list__item" ng-repeat="phone in user.phone_numbers">
             <a ng-href="tel:{{phone.number}}">{{phone.number}}</a>
             <icon name="star" text="Primary" title="Primary" ng-if="user.phone_number === phone.number"></icon>
-            <span class="profile-form__item-meta">{{phone.type}}</span>
+            <span class="list__meta">{{phone.type}}</span>
           </li>
-          <li class="profile-form__item" ng-if="!user.phone_numbers.length"><em translate>No phone numbers</em></li>
+          <li class="list__item" ng-if="!user.phone_numbers.length"><em translate>No phone numbers</em></li>
         </ul>
 
-        <div class="profile-form__edit" ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
-          <fieldset class="profile-form__fieldset" ng-if="user.phone_numbers.length">
-            <legend class="profile-form__sub-heading" translate>Set primary phone number:</legend>
-            <ul class="profile-form__list">
-              <li class="profile-form__item profile-form__item--form" ng-repeat="phone in user.phone_numbers">
+        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+          <fieldset ng-if="user.phone_numbers.length">
+            <legend class="form-section__sub-heading" translate>Set primary phone number:</legend>
+            <ul class="list list--has-buttons">
+              <li class="list__item" ng-repeat="phone in user.phone_numbers">
                 <input type="radio"
                 id="phone-{{phone._id}}"
                 name="phoneNumbers"
@@ -148,53 +147,53 @@
                 />
                 <label class="clickie-label" for="phone-{{phone._id}}">
                   {{phone.number}}
-                  <span class="form-list__item-meta">{{phone.type}}</span>
+                  <span class="list__meta">{{phone.type}}</span>
                 </label>
 
-                <button type="button" class="btn-transparent profile-form__item-button" ng-show="phone.number !== user.phone_number" ng-click="dropItem('phone_number', phone)"><icon name="cancel" text="Remove phone number"></icon></button>
+                <button type="button" class="btn-transparent list__button" ng-show="phone.number !== user.phone_number" ng-click="dropItem('phone_number', phone)"><icon name="cancel" text="Remove phone number"></icon></button>
               </li>
             </ul>
           </fieldset>
 
           <fieldset>
-            <legend class="profile-form__sub-heading" translate>Add phone number:</legend>
-            <div class="profile-form__item profile-form__item--form">
+            <legend class="form-section__sub-heading" translate>Add phone number:</legend>
+            <div class="form-field form-field--compact">
               <label for="new_phone_number" class="sr-only" translate>Phone type:</label>
               <div class="styled-select">
                 <select ng-model="temp.phone_number.type" ng-options="t.value as t.name for t in phoneNumberTypes" id="new_phone_number"><option value="" disabled selected>Type</option></select>
               </div>
             </div>
-            <div class="profile-form__item profile-form__item--form">
-              <bc-phone-number name="phone_number" label="Phone number" ng-model="temp.phone_number.number" is-valid="isValidPhoneNumber" ng-class="{'has-error': temp.phone_number.number && !isValidPhoneNumber, 'has-success': temp.phone_number.number && isValidPhoneNumber}"></bc-phone-number>
-              <button type="button" class="btn-transparent profile-form__item-button profile-form__item-button--add" ng-click="addItem('phone_number')">
+            <div class="form-field form-field--compact form-inline-fields">
+              <div class="form-inline-fields__item">
+                <bc-phone-number name="phone_number" label="Phone number" ng-model="temp.phone_number.number" is-valid="isValidPhoneNumber" ng-class="{'has-error': temp.phone_number.number && !isValidPhoneNumber, 'has-success': temp.phone_number.number && isValidPhoneNumber}"></bc-phone-number>
+              </div>
+              <button type="button" class="btn-transparent" ng-click="addItem('phone_number')">
                 <icon name="plus" text="Add"></icon>
               </button>
             </div>
           </fieldset>
-
-
         </div>
 
       </div>
 
-      <div class="profile-form">
+      <div class="form-section form-section--compact">
 
-        <h3 class="profile-form__heading" translate>Email</h3>
+        <h3 class="form-section__heading" translate>Email</h3>
 
-        <ul class="profile-form__list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
-          <li class="profile-form__item" ng-repeat="email in user.emails">
+        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+          <li class="list__item" ng-repeat="email in user.emails">
             <a ng-href="mailto:{{email.email}}">{{email.email}}</a>
             <icon name="star" text="Primary" title="Primary" ng-if="user.email === email.email"></icon>
-            <span class="profile-form__item-meta">{{email.type}} <span ng-if="!email.validated" translate> / Unverified</span></span>
+            <span class="list__meta">{{email.type}} <span ng-if="!email.validated" translate> / Unverified</span></span>
           </li>
-          <li class="profile-form__item" ng-if="!user.emails.length"><em translate>No emails</em></li>
+          <li class="list__item" ng-if="!user.emails.length"><em translate>No emails</em></li>
         </ul>
 
-        <div class="profile-form__edit" ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
-          <fieldset class="profile-form__fieldset" ng-if="user.emails.length">
-            <legend class="profile-form__sub-heading" translate>Set primary email:</legend>
-            <ul class="profile-form__list">
-              <li class="profile-form__item profile-form__item--form" ng-repeat="email in user.emails">
+        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+          <fieldset ng-if="user.emails.length">
+            <legend class="form-section__sub-heading" translate>Set primary email:</legend>
+            <ul class="list list--has-buttons">
+              <li class="list__item" ng-repeat="email in user.emails">
                 <input
                 type="radio"
                 id="email-{{email._id}}"
@@ -205,32 +204,32 @@
                 ng-change="setPrimaryEmail(email.email)" />
                 <label class="clickie-label" for="email-{{email._id}}">
                   {{email.email}}
-                  <span class="profile-form__item-meta">{{email.type}}
+                  <span class="list__meta">{{email.type}}
                     <span ng-if="!email.validated">
                     <span translate> / Unverified</span> -
                       <button type="button" class="btn-link" ng-click="resendValidationEmail(email.email)" translate>resend validation email</button>
                     </span>
                   </span>
                 </label>
-                <button type="button" class="btn-transparent profile-form__item-button" ng-click="dropItem('email', email)" ng-if="email.email != user.email"><icon name="cancel" text="Remove"></icon></button>
+                <button type="button" class="btn-transparent list__button" ng-click="dropItem('email', email)" ng-if="email.email != user.email"><icon name="cancel" text="Remove"></icon></button>
               </li>
             </ul>
           </fieldset>
 
           <fieldset>
-            <legend class="profile-form__sub-heading" translate>Add email:</legend>
-            <div class="profile-form__item profile-form__item--form">
+            <legend class="form-section__sub-heading" translate>Add email:</legend>
+            <div class="form-field form-field--compact">
               <label for="new_email_type" class="sr-only" translate>Email type</label>
               <div class="styled-select">
-                <select id="new_email_type" ng-model="temp.email.type" ng-options="t.value as t.name for t in emailTypes" class="form-control">
+                <select id="new_email_type" ng-model="temp.email.type" ng-options="t.value as t.name for t in emailTypes">
                   <option value="" disabled selected>Type</option>
                 </select>
               </div>
             </div>
-            <div class="profile-form__item profile-form__item--form">
+            <div class="form-field form-field--compact form-inline-fields">
               <label for="new_email" class="sr-only" translate>Email address</label>
-              <input type="email" id="new_email" ng-model="temp.email.email" class="form-control" placeholder="{{'Email address' | translate}}" />
-              <button type="button" class="btn-transparent profile-form__item-button profile-form__item-button--add" ng-click="addItem('email')">
+              <input type="email" id="new_email" ng-model="temp.email.email" class="form-inline-fields__item" placeholder="{{'Email address' | translate}}" />
+              <button type="button" class="btn-transparent" ng-click="addItem('email')">
                 <icon name="plus" text="Add"></icon>
               </button>
             </div>
@@ -239,31 +238,31 @@
 
       </div>
 
-      <div class="profile-form">
-        <h3 class="profile-form__heading" translate>Social Networks</h3>
-        <ul class="profile-form__list">
-          <li class="profile-form__item profile-form__item--form" ng-repeat="voip in user.voips">
+      <div class="form-section form-section--compact">
+        <h3 class="form-section__heading" translate>Social Networks</h3>
+        <ul class="list list--has-buttons">
+          <li class="list__item" ng-repeat="voip in user.voips">
             {{voip.type}}: {{voip.username}}
-            <button type="button" class="btn-transparent profile-form__item-button" ng-show="profileForm.$visible" ng-click="dropItem('voip', voip)"><icon name="cancel" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent list__button" ng-show="profileForm.$visible" ng-click="dropItem('voip', voip)"><icon name="cancel" text="Remove"></icon></button>
           </li>
-          <li class="profile-form__item" ng-if="!user.voips.length && !profileForm.$visible"><em translate>No social networks</em></li>
+          <li class="list__item" ng-if="!user.voips.length && !profileForm.$visible"><em translate>No social networks</em></li>
         </ul>
 
 
         <fieldset ng-show="profileForm.$visible">
-          <legend class="profile-form__sub-heading" translate>Add social network:</legend>
-          <div class="profile-form__item profile-form__item--form">
+          <legend class="form-section__sub-heading" translate>Add social network:</legend>
+          <div class="form-field form-field--compact">
             <label for="new_voip_type" class="sr-only">Type</label>
             <div class="styled-select">
-              <select id="new_voip_type" ng-model="temp.voip.type" ng-options="t.value as t.name for t in voipTypes" class="form-control">
+              <select id="new_voip_type" ng-model="temp.voip.type" ng-options="t.value as t.name for t in voipTypes">
                 <option value="" disabled selected>Type</option>
               </select>
             </div>
           </div>
-          <div class="profile-form__item profile-form__item--form">
+          <div class="form-field form-field--compact form-inline-fields">
             <label for="new_voip_username" class="sr-only">Username</label>
-            <input type="text" name="username" id="new_voip_username" ng-model="temp.voip.username" class="form-control" placeholder="{{'Username' | translate}}" />
-            <button type="button" class="btn-transparent profile-form__item-button profile-form__item-button--add" ng-click="addItem('voip')">
+            <input type="text" class="form-inline-fields__item" name="username" id="new_voip_username" ng-model="temp.voip.username" placeholder="{{'Username' | translate}}" />
+            <button type="button" class="btn-transparent" ng-click="addItem('voip')">
               <icon name="plus" text="Add"></icon>
             </button>
           </div>
@@ -276,24 +275,24 @@
     <div class="col-xs-12 col-md-6 col-lg-4">
       <h2 class="block-heading" translate>Role Details</h2>
 
-      <div class="profile-form">
+      <div class="form-section form-section--compact">
 
-        <h3 class="profile-form__heading" translate>Organizations</h3>
-        <ul class="profile-form__list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
-          <li class="profile-form__item" ng-repeat="org in user.organizations">
+        <h3 class="form-section__heading" translate>Organizations</h3>
+        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+          <li class="list__item" ng-repeat="org in user.organizations">
             <a href="/lists/{{org.list._id}}">{{org.list.name}}</a>
             <icon name="star" text="Primary" title="Primary" ng-if="user.organization._id === org._id"></icon>
           </li>
-          <li class="profile-form__item" ng-if="!user.organizations.length">
+          <li class="list__item" ng-if="!user.organizations.length">
             <em translate>No organizations</em>
           </li>
         </ul>
 
-        <div class="profile-form__edit" ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
           <fieldset ng-if="user.organizations.length">
-            <legend class="profile-form__sub-heading" translate>Set primary organization:</legend>
-            <ul class="profile-form__list">
-              <li class="profile-form__item profile-form__item--form" ng-repeat="org in user.organizations">
+            <legend class="form-section__sub-heading" translate>Set primary organization:</legend>
+            <ul class="list list--has-buttons">
+              <li class="list__item" ng-repeat="org in user.organizations">
                 <input type="radio"
                 id="org-{{org._id}}"
                 name="organizations"
@@ -301,25 +300,25 @@
                 ng-value="org._id"
                 ng-change="setPrimaryOrganization(org)" />
                 <label class="clickie-label" for="org-{{org._id}}">{{org.list.name}}</label>
-                <button type="button" class="btn-transparent profile-form__item-button" ng-show="org._id !== user.organization._id" ng-click="dropItem('organization', org)"><icon name="cancel" text="Remove organization"></icon></button>
+                <button type="button" class="btn-transparent list__button" ng-show="org._id !== user.organization._id" ng-click="dropItem('organization', org)"><icon name="cancel" text="Remove organization"></icon></button>
               </li>
             </ul>
 
           </fieldset>
 
-          <label class="profile-form__sub-heading" for="newOrganization">Add an organization:</label>
-          <div class="profile-form__item profile-form__item--form">
-
-            <ui-select name="newOrganization" ng-model="temp.organization.list">
-              <ui-select-match placeholder="{{'Select an organisation'|translate}}">
-                {{$select.selected.name}}
-              </ui-select-match>
-              <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
-                {{organization.name}}
-              </ui-select-choices>
-            </ui-select>
-
-            <button type="button" class="btn-transparent profile-form__item-button profile-form__item-button--add" ng-click="addItem('organization')">
+          <label class="form-section__sub-heading" for="newOrganization">Add an organization:</label>
+          <div class="form-field form-field--compact form-inline-fields">
+            <div class="form-inline-fields__item">
+              <ui-select name="newOrganization" ng-model="temp.organization.list">
+                <ui-select-match placeholder="{{'Select an organisation'|translate}}">
+                  {{$select.selected.name}}
+                </ui-select-match>
+                <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+                  {{organization.name}}
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <button type="button" class="btn-transparent" ng-click="addItem('organization')">
               <icon name="plus" text="Add"></icon>
             </button>
           </div>
@@ -327,24 +326,24 @@
         </div>
       </div>
 
-      <div class="profile-form">
-        <h3 class="profile-form__heading" translate>Job titles</h3>
-        <ul class="profile-form__list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
-          <li class="profile-form__item" ng-repeat="title in user.job_titles">
+      <div class="form-section form-section--compact">
+        <h3 class="form-section__heading" translate>Job titles</h3>
+        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+          <li class="list__item" ng-repeat="title in user.job_titles">
             {{title}} <icon name="star" title="primary" ng-if="title === user.job_title"></icon>
           </li>
-          <li class="profile-form__item" ng-if="!user.job_titles.length">
+          <li class="list__item" ng-if="!user.job_titles.length">
             <em translate>No job titles</em>
           </li>
         </ul>
 
-        <div class="profile-form__edit" ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
 
           <fieldset ng-if="user.job_titles.length">
-            <legend class="profile-form__sub-heading" translate>Set primary job title:</legend>
+            <legend class="form-section__sub-heading" translate>Set primary job title:</legend>
 
-            <ul class="profile-form__list">
-              <li class="profile-form__item profile-form__item--form" ng-repeat="title in user.job_titles">
+            <ul class="list list--has-buttons">
+              <li class="list__item" ng-repeat="title in user.job_titles">
                 <input
                 type="radio"
                 id="title-{{$index}}"
@@ -356,15 +355,15 @@
                 <label class="clickie-label" for="title-{{$index}}">
                   {{title}}
                 </label>
-                <button type="button" class="btn-transparent profile-form__item-button" ng-click="dropItem('job_title', title)" ng-if="title != user.job_title"><icon name="cancel" text="Remove"></icon></button>
+                <button type="button" class="btn-transparent list__button" ng-click="dropItem('job_title', title)" ng-if="title != user.job_title"><icon name="cancel" text="Remove"></icon></button>
               </li>
             </ul>
           </fieldset>
 
-          <label class="profile-form__sub-heading" for="job_title">Add a job title:</label>
-          <div class="profile-form__item profile-form__item--form">
-            <input type="text" name="job_title" id="job_title" ng-model="temp.job_title" placeholder="Add a job title" />
-            <button type="button" class="btn-transparent profile-form__item-button profile-form__item-button--add" ng-click="addItem('job_title')">
+          <label class="form-section__sub-heading" for="job_title">Add a job title:</label>
+          <div class="form-field form-field--compact form-inline-fields">
+            <input type="text" class="form-inline-fields__item" name="job_title" id="job_title" ng-model="temp.job_title" placeholder="Add a job title" />
+            <button type="button" class="btn-transparent" ng-click="addItem('job_title')">
               <icon name="plus" text="Add job title"></icon>
             </button>
           </div>
@@ -373,24 +372,24 @@
 
       </div>
 
-      <div class="profile-form">
-        <h3 class="profile-form__heading" translate>Locations</h3>
-        <ul class="profile-form__list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
-          <li class="profile-form__item" ng-repeat="location in user.locations">
+      <div class="form-section form-section--compact">
+        <h3 class="form-section__heading" translate>Locations</h3>
+        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+          <li class="list__item" ng-repeat="location in user.locations">
             <span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
             <icon name="star" text="Primary" title="Primary" ng-if="isPrimaryLocation(location, user.location)"></icon>
           </li>
-          <li class="profile-form__item" ng-if="!user.locations.length">
+          <li class="list__item" ng-if="!user.locations.length">
             <em translate>No locations</em>
           </li>
         </ul>
 
-        <div class="profile-form__edit" ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
           <fieldset ng-if="user.locations.length">
-            <legend class="profile-form__sub-heading" translate>Set primary location:</legend>
+            <legend class="form-section__sub-heading" translate>Set primary location:</legend>
 
-            <ul class="profile-form__list">
-              <li class="profile-form__item profile-form__item--form" ng-repeat="location in user.locations">
+            <ul class="list list--has-buttons">
+              <li class="list__item" ng-repeat="location in user.locations">
                 <input
                 type="radio"
                 id="location-{{$index}}"
@@ -402,15 +401,15 @@
                 <label class="clickie-label" for="location-{{$index}}">
                   <span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
                 </label>
-                <button type="button" class="btn-transparent profile-form__item-button" ng-click="dropItem('location', location)" ng-if="!isPrimaryLocation(location, user.location)">
+                <button type="button" class="btn-transparent list__button" ng-click="dropItem('location', location)" ng-if="!isPrimaryLocation(location, user.location)">
                   <icon name="cancel" text="Remove location"></icon>
                 </button>
               </li>
             </ul>
           </fieldset>
 
-          <label class="profile-form__sub-heading" for="location">Add a location:</label>
-          <div class="profile-form__item profile-form__item--form">
+          <label class="form-section__sub-heading" for="location">Add a location:</label>
+          <div class="form-field form-field--compact">
             <ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
               <ui-select-match placeholder="{{'Select a country' | translate}}">
                 {{$select.selected.name}}
@@ -420,17 +419,18 @@
               </ui-select-choices>
             </ui-select>
           </div>
-          <div class="profile-form__item profile-form__item--form">
-            <ui-select ng-model="temp.location.region">
-              <ui-select-match placeholder="{{'Select a region' | translate}}">
-                {{$select.selected.name}}
-              </ui-select-match>
-              <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
-                {{region.name}}
-              </ui-select-choices>
-            </ui-select>
-
-            <button type="button" class="btn-transparent profile-form__item-button profile-form__item-button--add" ng-click="addItem('location')">
+          <div class="form-field form-field--compact form-inline-fields">
+            <div class="form-inline-fields__item">
+              <ui-select ng-model="temp.location.region">
+                <ui-select-match placeholder="{{'Select a region' | translate}}">
+                  {{$select.selected.name}}
+                </ui-select-match>
+                <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
+                  {{region.name}}
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <button type="button" class="btn-transparent" ng-click="addItem('location')">
               <icon name="plus" text="Add location"></icon>
             </button>
           </div>
@@ -442,34 +442,35 @@
     <div class="col-xs-12 col-md-6 col-lg-4">
       <h2 class="block-heading" translate>Additional Information</h2>
 
-      <div class="profile-form" ng-if="currentUser.is_admin || user.roles.length">
-        <h3 class="profile-form__heading" translate>Roles</h3>
-        <ul class="profile-form__list" aria-hidden="{{profileForm.$visible}}">
-          <li class="profile-form__item profile-form__item--form" ng-repeat="role in user.roles">
+      <div class="form-section form-section--compact" ng-if="currentUser.is_admin || user.roles.length">
+        <h3 class="form-section__heading" translate>Roles</h3>
+        <ul class="list list--has-buttons" aria-hidden="{{profileForm.$visible}}">
+          <li class="list__item" ng-repeat="role in user.roles">
             {{role.label}}
-            <button type="button" class="btn-transparent profile-form__item-button" ng-click="dropItem('role', role)" ng-show="profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+            <button type="button" class="btn-transparent list__button" ng-click="dropItem('role', role)" ng-show="profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
               <icon name="cancel" text="Remove"></icon>
             </button>
           </li>
-          <li class="profile-form__item" ng-if="!user.roles.length">
+          <li class="list__item" ng-if="!user.roles.length">
             <em translate>No roles</em>
           </li>
         </ul>
 
-        <div class="profile-form__edit" ng-show="profileForm.$visible && currentUser.is_admin" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="profileForm.$visible && currentUser.is_admin" aria-hidden="{{!profileForm.$visible}}">
 
-          <label class="profile-form__sub-heading" for="roles">Add a role:</label>
-          <div class="profile-form__item profile-form__item--form">
-            <ui-select name="roles" ng-model="temp.role">
-              <ui-select-match placeholder="{{'Select a role' | translate}}">
-                {{$select.selected.label}}
-              </ui-select-match>
-              <ui-select-choices repeat="role in roles | filter: $select.search track by $index">
-                {{role.label}}
-              </ui-select-choices>
-            </ui-select>
-
-            <button type="button" class="btn-transparent profile-form__item-button profile-form__item-button--add" ng-click="addItem('role')">
+          <label class="form-section__sub-heading" for="roles">Add a role:</label>
+          <div class="form field form-field--compact form-inline-fields">
+            <div class="form-inline-fields__item">
+              <ui-select name="roles" ng-model="temp.role">
+                <ui-select-match placeholder="{{'Select a role' | translate}}">
+                  {{$select.selected.label}}
+                </ui-select-match>
+                <ui-select-choices repeat="role in roles | filter: $select.search track by $index">
+                  {{role.label}}
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <button type="button" class="btn-transparent" ng-click="addItem('role')">
               <icon name="plus" text="Add"></icon>
             </button>
           </div>
@@ -477,53 +478,53 @@
         </div>
       </div>
 
-      <div class="profile-form" ng-show="user.operations && user.operations.length">
-        <h3 class="profile-form__heading" translate>Operations</h3>
+      <div class="form-section form-section--compact" ng-show="user.operations && user.operations.length">
+        <h3 class="form-section__heading" translate>Operations</h3>
         <ul class="tag-list">
           <li class="tag-list__item" ng-repeat="(key, val) in user.operations"><a href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
         </ul>
       </div>
 
-      <div class="profile-form" ng-show="user.bundles && user.bundles.length">
-        <h3 class="profile-form__heading" translate>Clusters / Working Groups</h3>
+      <div class="form-section form-section--compact" ng-show="user.bundles && user.bundles.length">
+        <h3 class="form-section__heading" translate>Clusters / Working Groups</h3>
         <ul class="tag-list">
           <li class="tag-list__item" ng-repeat="(key, val) in user.bundles"><a href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
         </ul>
       </div>
 
-      <div class="profile-form" ng-show="user.disasters && user.disasters.length">
-        <h3 class="profile-form__heading" translate>Disasters</h3>
+      <div class="form-section form-section--compact" ng-show="user.disasters && user.disasters.length">
+        <h3 class="form-section__heading" translate>Disasters</h3>
         <ul class="tag-list">
           <li class="tag-list__item" ng-repeat="(key, val) in user.disasters"><a href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
         </ul>
       </div>
 
-      <div class="profile-form" ng-show="user.lists && user.lists.length">
-        <h3 class="profile-form__heading" translate>Other lists</h3>
+      <div class="form-section form-section--compact" ng-show="user.lists && user.lists.length">
+        <h3 class="form-section__heading" translate>Other lists</h3>
         <ul class="tag-list">
           <li class="tag-list__item" ng-repeat="(key, val) in user.lists"><a href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
         </ul>
       </div>
 
-      <div class="profile-form">
+      <div class="form-section form-section--compact">
 
-        <h3 class="profile-form__heading" translate>Websites</h3>
+        <h3 class="form-section__heading" translate>Websites</h3>
 
-        <ul class="profile-form__list">
-          <li class="profile-form__item profile-form__item--form" ng-repeat="website in user.websites">
+        <ul class="list list--has-buttons">
+          <li class="list__item" ng-repeat="website in user.websites">
             <a ng-href="{{website.url}}">{{website.url}}</a>
-            <button type="button" class="btn-transparent profile-form__item-button" ng-if="profileForm.$visible" ng-click="dropItem('website', website)">
+            <button type="button" class="btn-transparent list__button" ng-if="profileForm.$visible" ng-click="dropItem('website', website)">
               <icon name="cancel" text="Remove"></icon>
             </button>
           </li>
-          <li class="profile-form__item" ng-if="!user.websites.length"><em translate>No websites</em></li>
+          <li class="list__item" ng-if="!user.websites.length"><em translate>No websites</em></li>
         </ul>
 
-        <div class="profile-form__edit" ng-if="profileForm.$visible">
-          <label class="profile-form__sub-heading" for="newWebsite" translate="">Add website:</label>
-          <div class="profile-form__item profile-form__item--form">
-            <input type="url" ng-model="temp.website.url" id="newWebsite" placeholder="URL" />
-            <button type="button" class="btn-transparent profile-form__item-button profile-form__item-button--add" ng-click="addItem('website')">
+        <div ng-if="profileForm.$visible">
+          <label class="form-section__sub-heading" for="newWebsite" translate="">Add website:</label>
+          <div class="form-field form-field--compact form-inline-fields">
+            <input type="url" class="form-inline-fields__item" ng-model="temp.website.url" id="newWebsite" placeholder="URL" />
+            <button type="button" class="btn-transparent" ng-click="addItem('website')">
               <icon name="plus" text="Add"></icon>
             </button>
           </div>
@@ -531,33 +532,33 @@
 
       </div>
 
-      <div class="profile-form" ng-show="currentUser.is_admin && user.verified_by">
-        <h3 class="profile-form__heading" translate>Verified by</h3>
-        <p class="profile-form__item"><a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
+      <div class="form-section form-section--compact" ng-show="currentUser.is_admin && user.verified_by">
+        <h3 class="form-section__heading" translate>Verified by</h3>
+        <p><a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
       </div>
 
-      <div class="profile-form" ng-if="user.is_admin || currentUser.is_admin">
+      <div class="form-section form-section--compact" ng-if="user.is_admin || currentUser.is_admin">
 
-        <h3 class="profile-form__heading" translate>Permissions</h3>
+        <h3 class="form-section__heading" translate>Permissions</h3>
 
-        <p class="profile-form__item" ng-if="user.is_admin && !profileForm.$visible" translate>Administrator</p>
-        <p class="profile-form__item" ng-if="!user.is_admin && !profileForm.$visible"><em translate>No permissions set</em></p>
+        <p ng-if="user.is_admin && !profileForm.$visible" translate>Administrator</p>
+        <p ng-if="!user.is_admin && !profileForm.$visible"><em translate>No permissions set</em></p>
 
-        <div class="profile-form__item profile-form__item--form" ng-show="profileForm.$visible && currentUser.is_admin">
+        <p ng-show="profileForm.$visible && currentUser.is_admin">
           <input type="checkbox"
           id="isAdmin"
           ng-model="user.is_admin"
           ng-value="user.is_admin"
           ng-change="saveUser()" />
           <label for="isAdmin" class="clickie-label" translate>Administrator</label>
-        </div>
+        </p>
       </div>
 
-      <div class="profile-form">
-        <h3 class="profile-form__heading" translate>Last Updated</h3>
-        <p class="profile-form__item" ng-bind="user.updatedAt | date:'longDate'"></p>
-        <h3 class="profile-form__heading" translate>Created</h3>
-        <p class="profile-form__item" ng-bind="user.createdAt | date: 'longDate'"></p>
+      <div class="form-section form-section--compact">
+        <ul class="list">
+          <li class="list__item"><span translate>Last Updated</span>: <span ng-bind="user.updatedAt | date:'longDate'"></span></li>
+          <li class="list__item"><span translate>Created</span>: <span ng-bind="user.createdAt | date:'longDate'"></span></li>
+        </ul>
       </div>
 
     </div>

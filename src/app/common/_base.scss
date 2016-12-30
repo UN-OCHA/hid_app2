@@ -174,14 +174,9 @@ em {
 
 .caret {
   display: inline-block;
-  // font: normal normal normal 14px/1 FontAwesome;
-  // font-size: 12px;
-  // text-rendering: auto;
-  // -webkit-font-smoothing: antialiased;
-  // color: $dark-blue;
 
   &:before {
-    content: "\e90b";
+    content: "\e958";
     font-family: 'icomoon';
     speak: none;
     font-style: normal;

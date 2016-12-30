@@ -4,11 +4,11 @@
       <h1 class="page-header__heading" translate>Notifications</h1>
     </div>
 
-    <ul class="list">
+    <ul class="block-list">
       <li ng-repeat="notification in notifications.all">
-        <a href="{{getLink(notification)}}" class="list__item" ng-class="{'list__item--highlight' : !notification.read}">
+        <a href="{{getLink(notification)}}" class="block-list__item" ng-class="{'block-list__item--highlight' : !notification.read}">
           {{notification.text}}
-          <span class="list__item-meta">
+          <span class="block-list__item-meta">
           {{notification.createdAt | date: 'HH:mm dd/MM/yyyy'}}
           </span>
         </a>
