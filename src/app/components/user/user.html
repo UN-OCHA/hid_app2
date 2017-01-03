@@ -273,7 +273,7 @@
     </div>
 
     <div class="col-xs-12 col-md-6 col-lg-4">
-      <h2 class="block-heading" translate>Role Details</h2>
+      <h2 class="block-heading" translate>Humanitarian details</h2>
 
       <div class="form-section form-section--compact">
 
@@ -443,7 +443,7 @@
       <h2 class="block-heading" translate>Additional Information</h2>
 
       <div class="form-section form-section--compact" ng-if="currentUser.is_admin || user.roles.length">
-        <h3 class="form-section__heading" translate>Roles</h3>
+        <h3 class="form-section__heading" translate>Functional roles</h3>
         <ul class="list list--has-buttons" aria-hidden="{{profileForm.$visible}}">
           <li class="list__item" ng-repeat="role in user.roles">
             {{role.label}}
