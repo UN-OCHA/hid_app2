@@ -73,25 +73,6 @@
       });
     };
 
-    // Remove a user from a list
-    $scope.removeFromList = function (user) {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-        var checkInId = 0;
-        for (var i = 0, len = user[$scope.list.type + 's'].length; i < len; i++) {
-          if (angular.equals($scope.list._id, user[$scope.list.type + 's'][i].list._id)) {
-            checkInId = user[$scope.list.type + 's'][i]._id;
-          }
-        }
-        if (checkInId != 0) {
-          UserCheckInService.delete({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function(user) {
-            alertService.add('success', gettextCatalog.getString('The user was successfully checked out.'));
-            UserDataService.notify();
-          });
-        }
-      });
-    };
-
-
     // Check current user in this list
     $scope.checkIn = function () {
       UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, $scope.checkinUser, function (user) {

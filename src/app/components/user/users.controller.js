@@ -5,8 +5,8 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'UserDataService', 'User', 'List'];
-  function UsersCtrl($scope, $rootScope, $routeParams, $location, $window, gettextCatalog, alertService, hrinfoService, UserDataService, User, List) {
+  UsersCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'UserDataService', 'User', 'List'];
+  function UsersCtrl($scope, $rootScope, $routeParams, $window, hrinfoService, UserDataService, User, List) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -141,33 +141,24 @@
     });
 
     $scope.sortBy = [
-    {
-      label: 'name',
-      name: 'Name'
-    },
-    {
-      label: 'job_title',
-      name: 'Job title'
-    },
-    {
-      label: 'organization',
-      name: 'Organization'
-    },
-    {
-      label: 'verified',
-      name: 'Verified'
-    }
+      {
+        label: 'name',
+        name: 'Name'
+      },
+      {
+        label: 'job_title',
+        name: 'Job title'
+      },
+      {
+        label: 'organization',
+        name: 'Organization'
+      },
+      {
+        label: 'verified',
+        name: 'Verified'
+      }
     ];
 
-    // Delete user account
-    $scope.deleteUser = function (user) {
-      alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? This user will not be able to access Humanitarian ID anymore.'), true, function() {
-        user.$delete(function () {
-          alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
-          getUsers();
-        });
-      });
-    };
   }
 
 })();
