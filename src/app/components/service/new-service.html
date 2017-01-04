@@ -1,4 +1,4 @@
-<h1 translate>Create a new service</h1>
+<h1>{{service.name ? service.name : 'Create a new service'}}</h1>
 <form name="editService" ng-submit="editService.$valid && saveService()" novalidate>
   <div class="form-group" ng-class="{'has-error': editService.name.$touched && editService.name.$invalid}">
     <label for="name" translate>Name</label>
@@ -44,6 +44,7 @@
     <label><input type="checkbox" ng-model="service.hidden" name="hidden" /> Hidden</label>
   </div>
   <div class="form-group">
+    <label for="lists">Associated lists</label>
     <ui-select ng-model="selectedList" on-select="service.lists.push(selectedList)" name="lists" class="ui-select--has-border">
       <ui-select-match placeholder="{{'Select some lists'|translate}}"><span translate>Select some lists</span></ui-select-match>
       <ui-select-choices ui-disable-choice="isSelected(list)" refresh="getLists($select.search)" repeat="list in newLists">
@@ -55,6 +56,24 @@
         <icon name="check"></icon>
         {{list.name}}
         <button type="button" class="btn-transparent list__button" ng-click="removeList(list)">
+          <icon name="cancel" text="Remove"></icon>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="form-group">
+    <label for="owners">Service owners</label>
+    <ui-select ng-model="selectedOwner" on-select="service.owners.push(selectedOwner)" name="owners" class="ui-select--has-border">
+      <ui-select-match placeholder="{{'Select owners'|translate}}"><span translate>Select owners</span></ui-select-match>
+      <ui-select-choices ui-disable-choice="isSelectedOwner(user)" refresh="getOwners($select.search)" repeat="user in newUsers">
+        {{user.name}}
+      </ui-select-choices>
+    </ui-select>
+    <ul class="list list--has-buttons list--has-dividers">
+      <li ng-repeat="user in service.owners" class="list__item">
+        <icon name="check"></icon>
+        {{user.name}}
+        <button type="button" class="btn-transparent list__button" ng-click="removeOwner(user)">
           <icon name="cancel" text="Remove"></icon>
         </button>
       </li>

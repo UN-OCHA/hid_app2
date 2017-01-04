@@ -5,9 +5,9 @@
     .module('app.service')
     .controller('ServiceCtrl', ServiceCtrl);
 
-  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List'];
+  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List', 'User'];
 
-  function ServiceCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Service, ServiceCredentials, List) {
+  function ServiceCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Service, ServiceCredentials, List, User) {
     $scope.serviceTypes = [
       {
         value: 'mailchimp',
@@ -21,6 +21,7 @@
     $scope.mailchimpLists = [];
     $scope.credentials = [];
     $scope.newLists = [];
+    $scope.newUsers = [];
     $scope.selectList = {};
 
     if ($routeParams.serviceId) {
@@ -105,6 +106,18 @@
 
     $scope.isSelected = function (list) {
       return $scope.service.lists.indexOf(list) !== -1;
+    };
+
+    $scope.getOwners = function(search) {
+      $scope.newUsers = User.query({'name': search});
+    };
+
+    $scope.removeOwner = function (list) {
+      $scope.service.owners.splice($scope.service.owners.indexOf(list), 1);
+    };
+
+    $scope.isSelectedOwner = function (list) {
+      return $scope.service.owners.indexOf(list) !== -1;
     };
 
   }
