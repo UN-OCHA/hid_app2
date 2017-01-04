@@ -34,7 +34,7 @@
     }
 
     function showModal (type, msg, confirm) {
-      var modalClass = confirm ? 'modal-confirm' : 'modal-' + type;
+      var modalClass = confirm ? 'alert-modal modal-confirm' : 'alert-modal modal-' + type;
 
       var modal = $uibModal.open({
         animation: false,

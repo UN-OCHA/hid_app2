@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title" translate>
+    Check into a list {{user.name}}
+  </h3>
+  <button type="button" class="btn-icon modal-close" ng-click="closeCheckInModal()">
+    <icon name="cancel" text="Close"></icon>
+  </button>
+</div>
+<div class="modal-body" id="modal-body">
+
+  <ui-select ng-if="availableLists.length" ng-model="selectedLists" on-select="updateSelectedLists($select.selected)" class="ui-select--has-border">
+    <ui-select-match placeholder="{{'Select a list' | translate}}"><span translate>Select a list</span></ui-select-match>
+    <ui-select-choices ui-disable-choice="isSelected(list, user)" repeat="list.id as list in availableLists | filter: $select.search">
+      <span ng-bind="list.name"></span>
+    </ui-select-choices>
+  </ui-select>
+
+  <ul class="list list--has-buttons list--has-dividers">
+    <li ng-if="!availableLists.length" class="list__item" translate>No lists available</li>
+    <li ng-repeat="list in selectedLists" class="list__item">
+      {{list.name}}
+      <button type="button" class="btn-transparent list__button" ng-click="removeSelectedList(list)">
+        <icon name="cancel" text="Remove"></icon>
+      </button>
+    </li>
+  </ul>
+
+  <button type="button" ng-disabled="!selectedLists.length" ng-click="checkInToLists(user)" class="btn-primary btn-block" translate>Check-in</button>
+
+</div>

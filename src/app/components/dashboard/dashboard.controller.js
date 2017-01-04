@@ -5,16 +5,18 @@
     .module('app.dashboard')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'notificationsService', 'List', 'User', 'UserCheckInService', 'UserDataService'];
+  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'notificationsService', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService'];
 
-  function DashboardCtrl($scope, alertService, config, gettextCatalog, notificationsService, List, User, UserCheckInService, UserDataService) {
-    $scope.listsManager = List.query({'managers': $scope.currentUser._id});
-    $scope.listsOwner = List.query({'owner': $scope.currentUser._id});
-
+  function DashboardCtrl($scope, alertService, config, gettextCatalog, notificationsService, List, ListDataService, User, UserCheckInService, UserDataService) {
     $scope.tabsActive = false;
     $scope.activeTab = 'favorites';
-
     $scope.listsMember = [];
+    $scope.listsOwnedOrManaged = [];
+
+    ListDataService.getManagedAndOwnedLists($scope.currentUser, function (lists) {
+      $scope.listsOwnedOrManaged = lists;
+    });
+
     angular.forEach(config.listTypes, function (listType) {
       angular.forEach($scope.currentUser[listType + 's'], function (val) {
         var listId = val.list;
