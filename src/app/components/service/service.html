@@ -1,21 +1,31 @@
-<div>
-  <div ng-if="currentUser.is_admin || service.owner === currentUser._id">
-    <a class="btn btn-primary" href="services/{{service._id}}/edit" translate>Edit Service</a>
-  </div>
-  <div ng-if="currentUser.is_admin || service.owner === currentUser._id">
-    <a class="btn btn-danger" ng-click="deleteService();" translate>Delete Service</a>
-  </div>
-  <div>
-    <a class="btn btn-primary" ng-click="subscribe();" translate>Subscribe</a>
-  </div>
-  <div>
-    <a class="btn btn-primary" ng-click="unsubscribe();" translate>Unubscribe</a>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1 class="page-header__heading">{{service.name}}</h1>
+    </div>
   </div>
 </div>
-<div id="page-content-wrapper">
-  <h1>{{service.name}}</h1>
-  <p>{{service.description}}</p>
-  <ul>
-    <li><span translate>Type</span>: {{service.type}}</li>
-  </ul>
+<div class="row">
+  <div class="col-xs-12">
+    <div>
+      <div ng-if="currentUser.is_admin || service.owner === currentUser._id">
+        <a class="btn btn-primary" href="services/{{service._id}}/edit" translate>Edit Service</a>
+      </div>
+      <div ng-if="currentUser.is_admin || service.owner === currentUser._id">
+        <a class="btn btn-danger" ng-click="deleteService();" translate>Delete Service</a>
+      </div>
+      <div>
+        <a class="btn btn-primary" ng-click="subscribe();" translate>Subscribe</a>
+      </div>
+      <div>
+        <a class="btn btn-primary" ng-click="unsubscribe();" translate>Unubscribe</a>
+      </div>
+    </div>
+    <div id="page-content-wrapper">
+      <p>{{service.description}}</p>
+      <ul>
+        <li><span translate>Type</span>: {{service.type}}</li>
+      </ul>
+    </div>
+  </div>
 </div>

@@ -5,9 +5,9 @@
     .module('app.service')
     .controller('ServiceCtrl', ServiceCtrl);
 
-  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials'];
+  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List'];
 
-  function ServiceCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Service, ServiceCredentials) {
+  function ServiceCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Service, ServiceCredentials, List) {
     $scope.serviceTypes = [
       {
         value: 'mailchimp',
@@ -20,6 +20,8 @@
     ];
     $scope.mailchimpLists = [];
     $scope.credentials = [];
+    $scope.newLists = [];
+    $scope.selectList = {};
 
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
@@ -90,6 +92,19 @@
           console.log(result);
           $scope.googleGroups = result.data;
         });
+    };
+
+    // Retrieve lists
+    $scope.getLists = function(search) {
+      $scope.newLists = List.query({'name': search});
+    };
+
+    $scope.removeList = function (list) {
+      $scope.service.lists.splice($scope.service.lists.indexOf(list), 1);
+    };
+
+    $scope.isSelected = function (list) {
+      return $scope.service.lists.indexOf(list) !== -1;
     };
 
   }

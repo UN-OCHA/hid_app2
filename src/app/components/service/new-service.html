@@ -43,6 +43,23 @@
   <div class="form-group">
     <label><input type="checkbox" ng-model="service.hidden" name="hidden" /> Hidden</label>
   </div>
+  <div class="form-group">
+    <ui-select ng-model="selectedList" on-select="service.lists.push(selectedList)" name="lists" class="ui-select--has-border">
+      <ui-select-match placeholder="{{'Select some lists'|translate}}"><span translate>Select some lists</span></ui-select-match>
+      <ui-select-choices ui-disable-choice="isSelected(list)" refresh="getLists($select.search)" repeat="list in newLists">
+        {{list.name}}
+      </ui-select-choices>
+    </ui-select>
+    <ul class="list list--has-buttons list--has-dividers">
+      <li ng-repeat="list in service.lists" class="list__item">
+        <icon name="check"></icon>
+        {{list.name}}
+        <button type="button" class="btn-transparent list__button" ng-click="removeList(list)">
+          <icon name="cancel" text="Remove"></icon>
+        </button>
+      </li>
+    </ul>
+  </div>
 
   <button type="submit" class="btn btn-primary" ng-disabled="editService.$invalid || editService.$submitted" translate>Save</button>
 </form>
