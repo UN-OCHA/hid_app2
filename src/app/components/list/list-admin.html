@@ -73,9 +73,13 @@
       <script type="text/ng-template" id="exportEmailsModal.html">
         <div class="modal-header">
           <h3 class="modal-title" id="modal-title" translate>Copy Email Addresses</h3>
+          <p><span translate>Please email responsibly. Follow our</span> <a href="https://humanitarian.id/code-of-conduct" target="_blank" translate>Code of conduct</a></p>
+          <button type="button" class="btn-icon modal-close" ng-click="closeExportEmailslModal()">
+            <icon name="cancel" text="Close"></icon>
+          </button>
         </div>
         <div class="modal-body" id="modal-body">
-          <p><span translate>Please email responsibly. Follow our</span> <a href="https://humanitarian.id/code-of-conduct" target="_blank" translate>Code of conduct</a></p>
+          
           <textarea rows="15" cols="100">{{emailsText}}</textarea>
         </div>
       </script>
@@ -97,7 +101,7 @@
 
       <button type="button" class="btn-primary btn-block" ng-click="exportCSV()">
         <icon name="inbox-download"></icon>
-        <span translate>Export Results</span>
+        <span translate>Export into CSV</span>
       </button>
     </div>
 

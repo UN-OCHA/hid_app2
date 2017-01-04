@@ -21,7 +21,8 @@
       showWeeks: false,
       startingDay: 1
     };
-
+    var exportEmailModal;
+    
     function populateList () {
       var listType = [];
       listType[$scope.list.type + 's.list'] = $scope.list._id;
@@ -138,7 +139,7 @@
       $scope.emailsText = '';
       $scope.$broadcast('users-export-txt', function (resp) {
         $scope.emailsText = resp.data;
-        $uibModal.open({
+        exportEmailModal = $uibModal.open({
           animation: true,
           ariaLabelledBy: 'modal-title',
           ariaDescribedBy: 'modal-body',
@@ -148,6 +149,10 @@
         });
       });
     };
+
+    $scope.closeExportEmailslModal = function () {
+      exportEmailModal.close();
+    }
 
     $scope.exportCSV = function() {
       $scope.$broadcast('users-export-csv');
