@@ -66,7 +66,7 @@
 
     <div class="sidebar-section">
       <h2 class="sidebar-section__heading" translate>Export</h2>
-      <button type="button" class="btn-primary btn-block" ng-click="exportEmails()">
+      <button type="button" class="btn-primary btn-block" ng-if="currentUser.verified" ng-click="exportEmails()">
         <icon name="copy"></icon>
         <span translate>Copy Email Addresses</span>
       </button>
@@ -99,7 +99,7 @@
         <span translate>Meeting Attendance (Comfortable)</span>
       </button>
 
-      <button type="button" class="btn-primary btn-block" ng-click="exportCSV()">
+      <button type="button" class="btn-primary btn-block" ng-if="currentUser.verified" ng-click="exportCSV()">
         <icon name="inbox-download"></icon>
         <span translate>Export into CSV</span>
       </button>
