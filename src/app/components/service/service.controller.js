@@ -25,6 +25,7 @@
     $scope.selectList = {};
     $scope.isSubscribed = false;
     $scope.userSubscribed = {};
+    $scope.userUnsubscribed = {};
 
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
@@ -59,12 +60,17 @@
         });
     };
 
-    $scope.unsubscribe = function () {
-      $scope.service.unsubscribe($scope.currentUser)
+    $scope.unsubscribe = function (user) {
+      $scope.service.unsubscribe(user)
         .then(function (response) {
-          $scope.setCurrentUser(response.data);
-          $scope.isSubscribed = false;
-          alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'));
+          if (user.id == $scope.currentUser.id) {
+            $scope.setCurrentUser(response.data);
+            $scope.isSubscribed = false;
+            alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'));
+          }
+          else {
+            alertService.add('success', gettextCatalog.getString('The user was successfully unsubscribed from this service'));
+          }
         })
         .catch(function (err) {
           alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));

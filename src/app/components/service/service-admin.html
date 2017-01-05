@@ -18,6 +18,18 @@
           </ui-select>
         <button type="submit" class="btn-primary btn-block" translate>Subscribe</button>
       </form>
+
+      <form class="sidebar-section"  ng-submit="unsubscribe(userUnsubscribed.user)">
+          <label for="unsubscribed" class="sidebar-section__heading" translate>Unsubscribe user</label>
+          <ui-select ng-model="userUnsubscribed.user" name="unsubscribed">
+            <ui-select-match placeholder="Select someone">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices refresh="getUsers($select.search)" repeat="person in newUsers">
+              {{person.name}}
+            </ui-select-choices>
+          </ui-select>
+        <button type="submit" class="btn-primary btn-block" translate>Unsubscribe</button>
+      </form>
+
     </div>
 
     <div class="sidebar-section" ng-if="currentUser.is_admin || service.isOwner(currentUser)">
@@ -35,7 +47,7 @@
       <a class="btn btn-primary" ng-click="subscribe(currentUser);" translate>Subscribe</a>
     </div>
     <div ng-if="isSubscribed">
-      <a class="btn btn-primary" ng-click="unsubscribe();" translate>Unubscribe</a>
+      <a class="btn btn-primary" ng-click="unsubscribe(currentUser);" translate>Unubscribe</a>
     </div>
 
   </div>
