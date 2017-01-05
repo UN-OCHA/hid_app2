@@ -1,3 +1,9 @@
+<ng-include src="'app/components/service/service-admin.html'"></ng-include>
+
+<button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
+  <icon name="wheel" text="Actions"></icon>
+</button>
+
 <div class="row">
   <div class="col-xs-12">
     <div class="page-header">
@@ -7,20 +13,6 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <div>
-      <div ng-if="currentUser.is_admin || service.isOwner(currentUser)">
-        <a class="btn btn-primary" href="services/{{service._id}}/edit" translate>Edit Service</a>
-      </div>
-      <div ng-if="currentUser.is_admin || service.isOwner(currentUser)">
-        <a class="btn btn-danger" ng-click="deleteService();" translate>Delete Service</a>
-      </div>
-      <div>
-        <a class="btn btn-primary" ng-click="subscribe();" translate>Subscribe</a>
-      </div>
-      <div>
-        <a class="btn btn-primary" ng-click="unsubscribe();" translate>Unubscribe</a>
-      </div>
-    </div>
     <div id="page-content-wrapper">
       <p>{{service.description}}</p>
       <ul>

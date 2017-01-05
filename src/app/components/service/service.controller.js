@@ -23,11 +23,18 @@
     $scope.newLists = [];
     $scope.newUsers = [];
     $scope.selectList = {};
+    $scope.isSubscribed = false;
+    $scope.userSubscribed = {};
 
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
         $scope.getMailchimpLists();
         $scope.credentials = ServiceCredentials.query();
+        for (var i = 0; i < $scope.currentUser.subscriptions.length; i++) {
+          if ($scope.currentUser.subscriptions[i]._id === $scope.service._id) {
+            $scope.isSubscribed = true;
+          }
+        }
       });
     }
     else {
@@ -35,11 +42,17 @@
       $scope.credentials = ServiceCredentials.query();
     }
 
-    $scope.subscribe = function () {
-      $scope.service.subscribe($scope.currentUser)
+    $scope.subscribe = function (user) {
+      $scope.service.subscribe(user)
         .then(function(response) {
-          $scope.setCurrentUser(response.data);
-          alertService.add('success', gettextCatalog.getString('You were successfully subscribed to this service'));
+          if (user.id === $scope.currentUser.id) {
+            $scope.setCurrentUser(response.data);
+            $scope.isSubscribed = true;
+            alertService.add('success', gettextCatalog.getString('You were successfully subscribed to this service'));
+          }
+          else {
+            alertService.add('success', gettextCatalog.getString('The user was successfully subscribed to this service'));
+          }
         })
         .catch(function (err) {
           alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
@@ -50,6 +63,7 @@
       $scope.service.unsubscribe($scope.currentUser)
         .then(function (response) {
           $scope.setCurrentUser(response.data);
+          $scope.isSubscribed = false;
           alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'));
         })
         .catch(function (err) {
@@ -108,7 +122,7 @@
       return $scope.service.lists.indexOf(list) !== -1;
     };
 
-    $scope.getOwners = function(search) {
+    $scope.getUsers = function(search) {
       $scope.newUsers = User.query({'name': search});
     };
 

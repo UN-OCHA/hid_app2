@@ -65,7 +65,7 @@
     <label for="owners">Service owners</label>
     <ui-select ng-model="selectedOwner" on-select="service.owners.push(selectedOwner)" name="owners" class="ui-select--has-border">
       <ui-select-match placeholder="{{'Select owners'|translate}}"><span translate>Select owners</span></ui-select-match>
-      <ui-select-choices ui-disable-choice="isSelectedOwner(user)" refresh="getOwners($select.search)" repeat="user in newUsers">
+      <ui-select-choices ui-disable-choice="isSelectedOwner(user)" refresh="getUsers($select.search)" repeat="user in newUsers">
         {{user.name}}
       </ui-select-choices>
     </ui-select>
