@@ -82,8 +82,11 @@
 .modal-body {
   position: relative;
   padding: 0 0 $base-unit 0;
-  @include font-size($medium-font-size);
-  text-align: center;
+  
+  .alert-modal & {
+    @include font-size($medium-font-size);
+    text-align: center;
+  }
 
   h2 {
     line-height: 1.2;

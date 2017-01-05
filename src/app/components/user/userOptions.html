@@ -1,0 +1,18 @@
+<div ng-controller="UserOptionsCtrl" uib-dropdown>
+  <button type="button" class="btn-transparent" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit" ng-disabled="!isOnline">
+    <icon name="dots" text="User options"></icon>
+  </button>
+  <ul class="dropdown-menu dropdown-menu--small" uib-dropdown-menu>
+    <li ng-if="currentUser.is_admin"><a href="/users/{{user._id}}" translate>Edit</a></li>
+    <!-- <li ng-if="currentUser.is_admin"><button type="button" class="btn-link" translate>Edit subscriptions (to do)</button></li> -->
+    <li ng-if="list && currentUser.is_admin"><button type="button" class="btn-link" ng-click="removeFromList(user, list);" translate>Remove from list</button></li>
+    <li><button type="button" class="btn-link" ng-click="openCheckInModal(user, currentUser.is_admin)" translate>Check into a list</button></li>
+    <li ng-if="currentUser.is_admin">
+      <button type="button" class="btn-link" ng-click="verifyUser(user)" translate>
+        <span ng-if="!user.verified" translate>Verify account</span>
+        <span ng-if="user.verified" translate>Un-verify account</span>
+      </button>
+    </li>
+    <li ng-if="currentUser.is_admin"><button type="button" class="btn-link" ng-click="deleteUser(user);" translate>Delete Account</button></li>
+  </ul>
+</div>

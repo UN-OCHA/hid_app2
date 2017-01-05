@@ -56,18 +56,7 @@
       <td>{{user.location.country.name}}</td>
       <td class="table-actions">
         <icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon>
-        <div uib-dropdown>
-          <button type="button" class="btn-transparent" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit" ng-disabled="!isOnline">
-            <icon name="dots" text="Edit"></icon>
-          </button>
-          <ul class="dropdown-menu" uib-dropdown-menu>
-            <li ng-if="currentUser.is_admin"><a href="/checkin/{{user._id}}" translate>Check into List</a></li>
-            <li ng-if="list && list.isManager(user) && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="demoteManager(user);" translate>Demote from Manager</a></li>
-            <li ng-if="list && !list.isManager(user) && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="promoteManager(user);" translate>Promote to Manager</a></li>
-            <li ng-if="list && user.currentCheckin(list).pending && (currentUser.is_admin || list.owner.id == currentUser.id || isManager)"><a href ng-click="approveUser(user);" translate>Approve user</a></li>
-            <li ng-if="list && (currentUser.is_admin || list.owner._id == currentUser._id || isManager)"><a href ng-click="removeFromList(user);" translate>Remove from list</a></li>
-            <li ng-if="currentUser.is_admin"><a href ng-click="deleteUser(user);" translate>Delete Account</a></li>
-          </ul>
+        <ng-include src="'app/components/user/userOptions.html'"></ng-include>
         </div>
       </td>
     </tr>

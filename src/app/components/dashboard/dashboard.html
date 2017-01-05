@@ -27,7 +27,7 @@
                 <button type="button" class="btn-transparent" uib-dropdown-toggle>
                   <icon name="dots" text="Options"></icon>
                 </button>
-                <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+                <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
                   <li><button type="button" ng-click="removeFavorite(list)" class="btn-link" translate>Remove from favorites</button></li>
                 </ul>
               </div>
@@ -52,8 +52,8 @@
                 <button type="button" class="btn-transparent" uib-dropdown-toggle>
                   <icon name="dots" text="Options"></icon>
                 </button>
-                <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-                  <li><button type="button" ng-click="leaveList(list)" class="btn-link" translate>Leave list</button></li>
+                <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+                  <li><button type="button" ng-click="leaveList(list)" class="btn-link" translate>Check out of list</button></li>
                 </ul>
               </div>
             </li>
@@ -68,23 +68,17 @@
 
         <div class="tabs__content" ng-if="activeTab === 'manage'">
           <ul class="list list--has-buttons list--has-dividers">
-            <li class="list__item" ng-if="!listsOwner.length && !listsManager.length" translate>
+            <li class="list__item" ng-if="!listsOwnedOrManaged.length" translate>
               You don't manage any lists
             </li>
-            <li class="list__item" ng-repeat="list in listsOwner track by $index">
-              <a href="/lists/{{list._id}}">{{list.name}}</a>
-              <button type="button" class="btn-transparent">
-                <icon name="dots" text="Options"></icon>
-              </button>
-            </li>
-            <li class="list__item" ng-repeat="list in listsManager track by $index">
+            <li class="list__item" ng-repeat="list in listsOwnedOrManaged track by $index">
               <a href="/lists/{{list._id}}">{{list.name}}</a>
               <div uib-dropdown class="list__button">
                 <button type="button" class="btn-transparent" uib-dropdown-toggle>
                   <icon name="dots" text="Options"></icon>
                 </button>
-                <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-                  <li><a href="/lists/{{list._id}}/edit" translate>Edit list</a></li>
+                <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+                  <li><a href="/lists/{{list._id}}/edit" translate>Access settings</a></li>
                   <li><button type="button" ng-click="deleteList(list)" class="btn-link" translate>Delete list</button></li>
                 </ul>
               </div>
@@ -104,7 +98,7 @@
             <button type="button" class="btn-transparent" uib-dropdown-toggle>
               <icon name="dots" text="Options"></icon>
             </button>
-            <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+            <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
               <li><a href="#" translate>action?</a></li>
             </ul>
           </div>

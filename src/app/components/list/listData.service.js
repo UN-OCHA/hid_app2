@@ -42,6 +42,12 @@
         return lists;
       },
 
+      getManagedAndOwnedLists: function (user, callback) {
+        List.query({'owner': user._id}, function (data) {
+          addManagedLists(user, data, List, callback);
+        });
+      },
+
       subscribe: function(scope, callback) {
         var handler = $rootScope.$on('lists-updated-event', callback);
         scope.$on('$destroy', handler);
@@ -52,4 +58,24 @@
       }
     };
   }
+
+  function addManagedLists (user, ownedLists, List, callback) {
+    List.query({'managers': user._id}, function (managedLists) {
+      //remove lists that are also owned before merging with owned lists
+      var filteredManagedLists = managedLists.filter(function (list) {
+        var isOwned = false;
+        for(var i = 0; i < ownedLists.length; i++) {
+          if (ownedLists[i]._id === list._id) {
+            isOwned = true;
+          }
+        }
+        return !isOwned;
+      });
+      
+      var lists = ownedLists.concat(filteredManagedLists);
+      return callback(lists);       
+    });
+  }
 })();
+
+
