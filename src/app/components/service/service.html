@@ -8,10 +8,10 @@
 <div class="row">
   <div class="col-xs-12">
     <div>
-      <div ng-if="currentUser.is_admin || service.owner === currentUser._id">
+      <div ng-if="currentUser.is_admin || service.isOwner(currentUser)">
         <a class="btn btn-primary" href="services/{{service._id}}/edit" translate>Edit Service</a>
       </div>
-      <div ng-if="currentUser.is_admin || service.owner === currentUser._id">
+      <div ng-if="currentUser.is_admin || service.isOwner(currentUser)">
         <a class="btn btn-danger" ng-click="deleteService();" translate>Delete Service</a>
       </div>
       <div>
