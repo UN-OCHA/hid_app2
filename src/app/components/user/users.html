@@ -36,7 +36,7 @@
   <thead>
     <tr>
       <th ng-click="sortList('name')" translate>Name</th>
-      <th ng-click="sortList('role')" translate>Role</th>
+      <th ng-click="sortList('role')" translate>Job title</th>
       <th ng-click="sortList('organization')" translate>Organization</th>
       <th ng-click="sortList('cluster')" translate>Cluster</th>
       <th ng-click="sortList('country')" translate>Country</th>
@@ -47,9 +47,7 @@
     <tr ng-repeat="user in users">
       <td><a ng-href="/users/{{user._id}}">{{user.name}}</a></td>
       <td>
-        <span ng-repeat="role in user.roles">
-          {{role.label}}<span ng-if="!$last">, </span>
-        </span>
+        {{user.job_title}}
       </td>
       <td><a ng-href="/lists/{{user.organization.list._id}}" ng-if="user.organization.list">{{user.organization.list.name}}</a></td>
       <td></td>
