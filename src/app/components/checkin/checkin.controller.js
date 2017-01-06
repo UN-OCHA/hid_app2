@@ -5,9 +5,9 @@
     .module('app.checkin')
     .controller('CheckinCtrl', CheckinCtrl);
 
-  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List'];
+  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', '$q', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List'];
 
-  function CheckinCtrl ($scope, $routeParams, $filter, gettextCatalog, config, alertService, User, UserCheckInService, List) {
+  function CheckinCtrl ($scope, $routeParams, $filter, $q, gettextCatalog, config, alertService, User, UserCheckInService, List) {
     $scope.request = $routeParams;
     $scope.organization = {};
     $scope.selectedLists = [];
@@ -71,26 +71,36 @@
     };
 
     $scope._checkinHelper = function () {
+      var defer = $q.defer();
+      var promises = [];
 
-      var selectedLists = $scope.selectedLists;
-      var checkinUser = {};
-      for (var i = 0, len = selectedLists.length; i < len; i++) {
-        checkinUser = {
-          list: selectedLists[i]._id,
+      function lastTask(){
+        if ($scope.currentUser._id === $scope.user._id) {
+          $scope.user = User.get({userId: $scope.currentUser._id}, function () {
+            $scope.setCurrentUser($scope.user);
+            alertService.add('success', gettextCatalog.getString('You were succesfully checked in'));
+            defer.resolve();
+          });
+        }
+        else {
+          alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
+          defer.resolve();
+        }
+      }
+
+      function checkinOneList (list) {
+        var checkinUser = {
+          list: list._id,
           checkoutDate: $scope.departureDate
         };
-        UserCheckInService.save({userId: $scope.user._id, listType: selectedLists[i].type + 's'}, checkinUser, function () {
-          if ($scope.currentUser._id === $scope.user._id) {
-            $scope.user = User.get({userId: $scope.currentUser._id}, function () {
-              $scope.setCurrentUser($scope.user);
-              alertService.add('success', gettextCatalog.getString('You were succesfully checked in'));
-            });
-          }
-          else {
-            alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
-          }
-        });
+        return UserCheckInService.save({userId: $scope.user._id, listType: list.type + 's'}, checkinUser).$promise;
       }
+
+      angular.forEach($scope.selectedLists, function(value){
+          promises.push(checkinOneList(value));
+      });
+
+      $q.all(promises).then(lastTask);
     };
 
     // Check user in in the lists selected

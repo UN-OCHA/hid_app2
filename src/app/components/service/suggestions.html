@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1 class="page-header__heading">Suggestions</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th translate>Name</th>
+          <th translate>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="service in services">
+          <td><a href="/services/{{service._id}}">{{service.name}}</a></td>
+          <td>{{service.type}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+  </div>
+</div>
