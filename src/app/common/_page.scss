@@ -75,6 +75,10 @@
 
   .page-header__heading {
     padding-right: $base-unit*11;
+
+    .toggled & {
+      padding-right: $sidebar-width-md + ($base-unit*11)
+    }
   }
 }
 
@@ -98,6 +102,12 @@
       .toggled & {
         padding-left: $sidebar-width-xxl;
       }
+    }
+  }
+
+  .page-header__heading {
+    .toggled & {
+      padding-right: $sidebar-width-xxl + ($base-unit*11)
     }
   }
 }
