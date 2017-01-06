@@ -140,7 +140,7 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true,
         title: 'Check-in'
       }).
-      when('/checkin/checkout', {
+      when('/checkout', {
         templateUrl: 'app/components/checkin/checkout-page.html',
         authenticate: true,
         title: 'Check out'
