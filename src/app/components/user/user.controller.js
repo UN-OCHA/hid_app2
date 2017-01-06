@@ -119,8 +119,8 @@
     $scope.verifyUser = function () {
       $scope.user.verified = !$scope.user.verified;
       $scope.user.$update(function () {
-        if ($scope.user._id === $scope.currentUser._id) {
-          $scope.setCurrentUser($scope.currentUser);
+        if ($scope.user.id === $scope.currentUser.id) {
+          $scope.setCurrentUser($scope.user);
         }
         alertService.add('success', gettextCatalog.getString('User updated'));
       }, function () {
