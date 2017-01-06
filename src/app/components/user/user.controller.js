@@ -10,11 +10,16 @@
   function UserCtrl($scope, $routeParams, $timeout, gettextCatalog, alertService, md5, User) {
     $scope.pictureUrl = '';
     $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin);
+    $scope.showProfileForm  = $routeParams.edit && $scope.canEditUser ? true : false;
     $scope.saving = {
       status: '',
       message: '',
       show: false
     };
+
+    $scope.toggleForm = function () {
+      $scope.showProfileForm = !$scope.showProfileForm;
+    }
 
     function userPicture (picture, email) {
       var emailHash = '';

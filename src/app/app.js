@@ -134,6 +134,12 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true,
         title: 'User profile'
       }).
+      when('/users/:userId/:edit', {
+        templateUrl: 'app/components/user/user.html',
+        controller: 'UserCtrl',
+        authenticate: true,
+        title: 'User profile'
+      }).
       when('/checkin', {
         templateUrl: 'app/components/checkin/checkin.html',
         controller: 'CheckinCtrl',
