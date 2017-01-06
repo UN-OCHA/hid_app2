@@ -93,8 +93,10 @@
     };
 
     $scope.deleteService = function () {
-      $scope.service.$delete(function (resp, headers) {
-        alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
+      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+        $scope.service.$delete(function (resp, headers) {
+          alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
+        });
       });
     };
 

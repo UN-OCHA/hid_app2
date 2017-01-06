@@ -5,21 +5,9 @@
     .module('app.service')
     .controller('SuggestionsCtrl', SuggestionsCtrl);
 
-  SuggestionsCtrl.$inject = ['$scope', '$routeParams', 'Service'];
+  SuggestionsCtrl.$inject = [];
 
-  function SuggestionsCtrl ($scope, $routeParams, Service) {
-    $scope.request = $routeParams;
-    $scope.totalItems = 0;
-    $scope.itemsPerPage = 10;
-    $scope.currentPage = 1;
-    $scope.request.limit = $scope.itemsPerPage;
-    $scope.request.offset = 0;
-    $scope.request.sort = 'name';
+  function SuggestionsCtrl () {
 
-    var setTotalServices = function (clients, headers) {
-      $scope.totalItems = headers()["x-total-count"];
-    };
-
-    $scope.services = Service.query($scope.request, setTotalServices);
   }
 })();

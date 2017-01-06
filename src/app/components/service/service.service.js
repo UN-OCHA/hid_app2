@@ -39,6 +39,17 @@
       return (this.owner && this.owner.id === user.id) || (this.ownersIndex(user) !== -1);
     };
 
+    // Check if a user is subscribed to this service
+    Service.prototype.isSubscribed = function (user) {
+      var index = -1;
+      for (var i = 0; i < user.subscriptions.length; i++) {
+        if (user.subscriptions[i]._id.toString() === this._id.toString()) {
+          index = i;
+        }
+      }
+      return index !== -1;
+    };
+
     // Get mailchimp lists
     Service.getMailchimpLists = function (apiKey) {
       return $http.get(config.apiUrl + 'service/mailchimp/lists?apiKey=' + apiKey);

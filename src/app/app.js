@@ -219,8 +219,8 @@ app.config(['$routeProvider', '$locationProvider',
         title: 'New service'
       }).
       when('/services', {
-        templateUrl: 'app/components/service/services.html',
-        controller: 'ServicesCtrl',
+        templateUrl: 'app/components/service/services-page.html',
+        controller: 'ServicesPageCtrl',
         authenticate: true,
         adminOnly: false,
         title: 'Services'

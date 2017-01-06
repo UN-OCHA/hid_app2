@@ -5,9 +5,9 @@
     .module('app.checkin')
     .controller('CheckinCtrl', CheckinCtrl);
 
-  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', '$q', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List'];
+  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', '$q', '$location', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List'];
 
-  function CheckinCtrl ($scope, $routeParams, $filter, $q, gettextCatalog, config, alertService, User, UserCheckInService, List) {
+  function CheckinCtrl ($scope, $routeParams, $filter, $q, $location, gettextCatalog, config, alertService, User, UserCheckInService, List) {
     $scope.request = $routeParams;
     $scope.organization = {};
     $scope.selectedLists = [];
@@ -78,8 +78,11 @@
         if ($scope.currentUser._id === $scope.user._id) {
           $scope.user = User.get({userId: $scope.currentUser._id}, function () {
             $scope.setCurrentUser($scope.user);
-            alertService.add('success', gettextCatalog.getString('You were succesfully checked in'));
             defer.resolve();
+            var listIds = $scope.selectedLists.map(function (li) {
+              return li._id.toString();
+            });
+            $location.path('services/suggestions?lists=' + listIds.join(','));
           });
         }
         else {
