@@ -1,0 +1,28 @@
+<div ng-controller="AllCheckInsCtrl">
+  <h2 class="form-section__heading" translate>All lists you are checked in to</h2>
+
+  <div class="form-field" ng-if="listsMember.length">
+    <label for="searchLists" class="sr-only" translate>Search</label>
+    <input type="search" id="searchLists" placeholder="{{'Search for a list' | translate}}" ng-model="listSearchTerm.list.name" />
+  </div>
+
+  <ul class="list list--has-buttons list--has-dividers">
+    <li class="list__item" ng-repeat="list in filterData = (listsMember | filter : listSearchTerm) | limitTo:itemsPerPage:itemsPerPage*(page-1) | orderBy: 'createdAt' : true">
+      <a href="/lists/{{list.list._id}}">{{list.list.name}}</a>
+      <span class="list__meta"><span translate>Checked in</span>: {{list.createdAt | date:"dd/MM/yyyy"}}</span>
+      <button type="button" class="btn-transparent list__button" ng-click="leaveList(list)">
+        <icon name="cancel" text="Check out"></icon>
+      </button>
+    </li>
+    <li class="list__item" ng-if="!listsMember.length"><em translate>No lists</em></li>
+  </ul>
+
+  <uib-pagination 
+    total-items="filterData.length" 
+    ng-model="page"
+    ng-change="pageChanged()" 
+    direction-links="false" 
+    items-per-page=itemsPerPage
+    class="pagination" >    
+  </uib-pagination>
+</div>

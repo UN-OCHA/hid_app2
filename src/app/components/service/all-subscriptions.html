@@ -1,0 +1,16 @@
+<div ng-controller="AllSubscriptionsCtrl">
+  <h2 class="form-section__heading" translate>All subscriptions</h2>
+  <div class="form-field" ng-if="currentUser.subscriptions.length">
+    <label for="searchLists" class="sr-only" translate>Search</label>
+    <input type="search" id="searchLists" placeholder="{{'Search for a subscription' | translate}}" ng-model="subscriptionSearchTerm.name" />
+  </div>
+  <ul class="list list--has-buttons list--has-dividers">
+    <li class="list__item" ng-repeat="subscription in filterData = (currentUser.subscriptions | filter : subscriptionSearchTerm) | limitTo:itemsPerPage:itemsPerPage*(page-1) | orderBy: 'createdAt' : true">
+      {{subscription.name}}
+      <button type="button" class="btn-transparent list__button" ng-click="unsubscribe(subscription)">
+        <icon name="cancel" text="Remove subscription"></icon>
+      </button>
+    </li>
+    <li class="list__item" ng-if="!currentUser.subscriptions.length"><em translate>No subscriptions</em></li>
+  </ul>
+</div>
