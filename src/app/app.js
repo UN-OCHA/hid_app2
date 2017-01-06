@@ -140,10 +140,10 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true,
         title: 'Check-in'
       }).
-      when('/checkin/all', {
-        templateUrl: 'app/components/checkin/all.html',
+      when('/checkin/checkout', {
+        templateUrl: 'app/components/checkin/checkout-page.html',
         authenticate: true,
-        title: 'Check-ins and subscriptions'
+        title: 'Check out'
       }).
       when('/checkin/:userId', {
         templateUrl: 'app/components/checkin/checkin.html',

@@ -19,7 +19,7 @@
     };
 
     function leaveList (checkin) {
-      alertService.add('warning', 'Are you sure ?', true, function() {
+      alertService.add('warning', 'Are you sure?', true, function() {
         UserCheckInService.delete({userId: $scope.currentUser._id, listType: checkin.list.type + 's', checkInId: checkin._id}, {}, function () {
           alertService.add('success', 'Successfully removed from list');
           $scope.listsMember.splice($scope.listsMember.indexOf(checkin), 1);
