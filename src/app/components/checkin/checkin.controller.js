@@ -82,7 +82,7 @@
             var listIds = $scope.selectedLists.map(function (li) {
               return li._id.toString();
             });
-            $location.path('services/suggestions?lists=' + listIds.join(','));
+            $location.path('services/suggestions').search({lists: listIds.join(',') });
           });
         }
         else {
