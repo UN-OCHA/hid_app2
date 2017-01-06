@@ -68,7 +68,7 @@
         },
         phone_number: {
           type: '',
-          number: ''
+          number: '1'
         },
         voip: {
           type: '',
