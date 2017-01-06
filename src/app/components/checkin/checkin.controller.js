@@ -22,6 +22,7 @@
       startingDay: 1
     };
     $scope.isCurrentUser = true;
+    $scope.lists = [];
 
     var queryCallback = function () {
       $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
@@ -52,6 +53,10 @@
       $scope.user = User.get({userId: userId}, queryCallback);
     }
     getUser();
+
+    $scope.getLists = function(search) {
+      $scope.lists = List.query({'name': search});
+    };
 
     $scope.updateSelectedLists = function (list) {
       $scope.selectedLists.push(list);

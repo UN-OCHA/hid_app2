@@ -11,13 +11,12 @@
 
       <h2 class="block-heading" translate>Select lists</h2>
 
-      <ui-select ng-model="selectedLists" on-select="updateSelectedLists($select.selected)" class="ui-select--has-border">
-        <ui-select-match placeholder="{{'Select a list' | translate}}"><span translate>Select a list</span></ui-select-match>
-        <ui-select-choices ui-disable-choice="isSelected(list)" repeat="list.id as list in lists | filter: $select.search">
-          <span ng-bind="list.name"></span>
+      <ui-select ng-model="selectedList" on-select="updateSelectedLists(selectedList)" class="ui-select--has-border">
+        <ui-select-match placeholder="{{'Select a list'|translate}}"><span translate>Select a list</span></ui-select-match>
+        <ui-select-choices ui-disable-choice="isSelected(list)" refresh="getLists($select.search)" repeat="list in lists">
+          {{list.name}}
         </ui-select-choices>
       </ui-select>
-
       <ul class="list list--has-buttons list--has-dividers">
         <li ng-repeat="list in selectedLists" class="list__item">
           <icon name="check"></icon>
@@ -27,7 +26,6 @@
           </button>
         </li>
       </ul>
-
     </div>
 
     <div class="block">
