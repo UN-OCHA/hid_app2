@@ -5,9 +5,9 @@
     .module('app.service')
     .controller('ServiceCtrl', ServiceCtrl);
 
-  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List', 'User'];
+  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List', 'User'];
 
-  function ServiceCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Service, ServiceCredentials, List, User) {
+  function ServiceCtrl ($scope, $routeParams, $http, $window, $location, gettextCatalog, alertService, Service, ServiceCredentials, List, User) {
     $scope.serviceTypes = [
       {
         value: 'mailchimp',
@@ -80,6 +80,7 @@
     $scope.saveService = function() {
       var success = function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Service saved successfully'));
+        $location.path('/services');
       };
       var error = function (err) {
         alertService.add('danger', gettextCatalog.getString('There was an error saving this service'));
