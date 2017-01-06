@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserOptionsCtrl', UserOptionsCtrl);
 
-  UserOptionsCtrl.$inject = ['$scope', '$uibModal', 'alertService', 'List', 'ListDataService', 'UserCheckInService', 'UserDataService'];
+  UserOptionsCtrl.$inject = ['$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'UserCheckInService', 'UserDataService'];
 
-  function UserOptionsCtrl($scope, $uibModal, alertService, List, ListDataService, UserCheckInService, UserDataService, User) {
+  function UserOptionsCtrl($scope, $uibModal, alertService, config, List, ListDataService, UserCheckInService, UserDataService, User) {
     var checkInModal;
     $scope.selectedLists = [];
     $scope.availableLists = [];
@@ -75,11 +75,13 @@
         return true;
       }
 
-      angular.forEach(user.lists, function (value) {
-        if (list._id === value.list._id) {
-          isInList = true;
-          return;
-        }
+      angular.forEach(config.listTypes, function (listType) {
+        angular.forEach(user[listType + 's'], function (value) {
+          if (list._id === value.list._id) {
+            isInList = true;
+            return;
+          }
+        });
       });
 
       if (isInList) {
