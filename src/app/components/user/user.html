@@ -49,11 +49,11 @@
   </div>
 </div>
 
-<form editable-form name="profileForm" ng-controller="UserEditCtrl">
+<form name="profileForm" ng-controller="UserEditCtrl">
 
   <div class="page-header profile-header" ng-class="{'profile-header--admin' : currentUser.is_admin || user.is_admin}">
 
-    <div class="profile-header__primary" ng-class="{'active' : profileForm.$visible}">
+    <div class="profile-header__primary" ng-class="{'active' : showProfileForm}">
 
       <div class="profile-header__image">
 
@@ -64,12 +64,12 @@
       </div>
 
       <div class="profile-header__content">
-        <div ng-if="!profileForm.$visible">
+        <div ng-if="!showProfileForm">
           <h1 class="page-header__heading">
             {{user.given_name}} {{user.family_name}}
           </h1>
 
-          <ul class="profile-header__info"  ng-if="!profileForm.$visible">
+          <ul class="profile-header__info"  ng-if="!showProfileForm">
             <li ng-if="user.organization && user.organization.list"><icon name="home"></icon> {{user.organization.list.acronym || user.organization.list.name}}</li>
             <!-- <li><icon name="user"></icon> Cluster</li> -->
             <li ng-if="user.location"><icon name="map-pin"></icon></i> {{user.location.country.name}}</li>
@@ -78,7 +78,7 @@
           <p class="profile-header__status">{{user.status}}</p>
         </div>
 
-        <div ng-if="profileForm.$visible">
+        <div ng-if="showProfileForm">
           <label for="given_name" class="sr-only" translate>Given name</label>
           <input type="text" id="given_name" ng-model="user.given_name" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.given_name)" />
 
@@ -89,18 +89,18 @@
           <textarea id="user_status" ng-model="user.status" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.status)"></textarea>
         </div>
 
-        <div ng-show="profileForm.$visible">
+        <div ng-show="showProfileForm">
           <label class="btn btn-secondary btn-upload center-block" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
           <p class="form-hint" translate>Upload a square image in JPEG format, with more than 200px width</p>
         </div>
 
         <div class="profile-header__controls">
-          <button type="button" class="btn-icon" ng-click="profileForm.$show()" ng-if="!profileForm.$visible && canEditUser" ng-disabled="!isOnline">
+          <button type="button" class="btn-icon" ng-click="toggleForm()" ng-if="!showProfileForm && canEditUser" ng-disabled="!isOnline">
             <icon name="edit" text="Edit"></icon>
           </button>
 
-          <div ng-show="profileForm.$visible">
-            <button type="button" class="btn-icon btn-secondary" ng-disabled="profileForm.$waiting" ng-click="profileForm.$hide()">
+          <div ng-show="showProfileForm">
+            <button type="button" class="btn-icon btn-secondary" ng-click="toggleForm()">
               <icon name="cancel" text="Cancel"></icon>
             </button>
           </div>
@@ -124,7 +124,7 @@
 
         <h3 class="form-section__heading" translate>Phone numbers</h3>
 
-        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="phone in user.phone_numbers">
             <a ng-href="tel:{{phone.number}}">{{phone.number}}</a>
             <icon name="star" text="Primary" title="Primary" ng-if="user.phone_number === phone.number"></icon>
@@ -133,7 +133,7 @@
           <li class="list__item" ng-if="!user.phone_numbers.length"><em translate>No phone numbers</em></li>
         </ul>
 
-        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <fieldset ng-if="user.phone_numbers.length">
             <legend class="form-section__sub-heading" translate>Set primary phone number:</legend>
             <ul class="list list--has-buttons">
@@ -180,7 +180,7 @@
 
         <h3 class="form-section__heading" translate>Email</h3>
 
-        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="email in user.emails">
             <a ng-href="mailto:{{email.email}}">{{email.email}}</a>
             <icon name="star" text="Primary" title="Primary" ng-if="user.email === email.email"></icon>
@@ -189,7 +189,7 @@
           <li class="list__item" ng-if="!user.emails.length"><em translate>No emails</em></li>
         </ul>
 
-        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <fieldset ng-if="user.emails.length">
             <legend class="form-section__sub-heading" translate>Set primary email:</legend>
             <ul class="list list--has-buttons">
@@ -243,13 +243,13 @@
         <ul class="list list--has-buttons">
           <li class="list__item" ng-repeat="voip in user.voips">
             {{voip.type}}: {{voip.username}}
-            <button type="button" class="btn-transparent list__button" ng-show="profileForm.$visible" ng-click="dropItem('voip', voip)"><icon name="cancel" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent list__button" ng-show="showProfileForm" ng-click="dropItem('voip', voip)"><icon name="cancel" text="Remove"></icon></button>
           </li>
-          <li class="list__item" ng-if="!user.voips.length && !profileForm.$visible"><em translate>No social networks</em></li>
+          <li class="list__item" ng-if="!user.voips.length && !showProfileForm"><em translate>No social networks</em></li>
         </ul>
 
 
-        <fieldset ng-show="profileForm.$visible">
+        <fieldset ng-show="showProfileForm">
           <legend class="form-section__sub-heading" translate>Add social network:</legend>
           <div class="form-field form-field--compact">
             <label for="new_voip_type" class="sr-only">Type</label>
@@ -278,7 +278,7 @@
       <div class="form-section form-section--compact">
 
         <h3 class="form-section__heading" translate>Organizations</h3>
-        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="org in user.organizations">
             <a href="/lists/{{org.list._id}}">{{org.list.name}}</a>
             <icon name="star" text="Primary" title="Primary" ng-if="user.organization._id === org._id"></icon>
@@ -288,7 +288,7 @@
           </li>
         </ul>
 
-        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <fieldset ng-if="user.organizations.length">
             <legend class="form-section__sub-heading" translate>Set primary organization:</legend>
             <ul class="list list--has-buttons">
@@ -328,7 +328,7 @@
 
       <div class="form-section form-section--compact">
         <h3 class="form-section__heading" translate>Job titles</h3>
-        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="title in user.job_titles">
             {{title}} <icon name="star" title="primary" ng-if="title === user.job_title"></icon>
           </li>
@@ -337,7 +337,7 @@
           </li>
         </ul>
 
-        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
 
           <fieldset ng-if="user.job_titles.length">
             <legend class="form-section__sub-heading" translate>Set primary job title:</legend>
@@ -374,7 +374,7 @@
 
       <div class="form-section form-section--compact">
         <h3 class="form-section__heading" translate>Locations</h3>
-        <ul class="list" ng-show="!profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="location in user.locations">
             <span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
             <icon name="star" text="Primary" title="Primary" ng-if="isPrimaryLocation(location, user.location)"></icon>
@@ -384,7 +384,7 @@
           </li>
         </ul>
 
-        <div ng-show="profileForm.$visible" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <fieldset ng-if="user.locations.length">
             <legend class="form-section__sub-heading" translate>Set primary location:</legend>
 
@@ -444,10 +444,10 @@
 
       <div class="form-section form-section--compact" ng-if="currentUser.is_admin || user.roles.length">
         <h3 class="form-section__heading" translate>Functional roles</h3>
-        <ul class="list list--has-buttons" aria-hidden="{{profileForm.$visible}}">
+        <ul class="list list--has-buttons" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="role in user.roles">
             {{role.label}}
-            <button type="button" class="btn-transparent list__button" ng-click="dropItem('role', role)" ng-show="profileForm.$visible" aria-hidden="{{profileForm.$visible}}">
+            <button type="button" class="btn-transparent list__button" ng-click="dropItem('role', role)" ng-show="showProfileForm" aria-hidden="{{showProfileForm}}">
               <icon name="cancel" text="Remove"></icon>
             </button>
           </li>
@@ -456,7 +456,7 @@
           </li>
         </ul>
 
-        <div ng-show="profileForm.$visible && currentUser.is_admin" aria-hidden="{{!profileForm.$visible}}">
+        <div ng-show="showProfileForm && currentUser.is_admin" aria-hidden="{{!showProfileForm}}">
 
           <label class="form-section__sub-heading" for="roles">Add a role:</label>
           <div class="form field form-field--compact form-inline-fields">
@@ -513,14 +513,14 @@
         <ul class="list list--has-buttons">
           <li class="list__item" ng-repeat="website in user.websites">
             <a ng-href="{{website.url}}">{{website.url}}</a>
-            <button type="button" class="btn-transparent list__button" ng-if="profileForm.$visible" ng-click="dropItem('website', website)">
+            <button type="button" class="btn-transparent list__button" ng-if="showProfileForm" ng-click="dropItem('website', website)">
               <icon name="cancel" text="Remove"></icon>
             </button>
           </li>
           <li class="list__item" ng-if="!user.websites.length"><em translate>No websites</em></li>
         </ul>
 
-        <div ng-if="profileForm.$visible">
+        <div ng-if="showProfileForm">
           <label class="form-section__sub-heading" for="newWebsite" translate="">Add website:</label>
           <div class="form-field form-field--compact form-inline-fields">
             <input type="url" class="form-inline-fields__item" ng-model="temp.website.url" id="newWebsite" placeholder="URL" />
@@ -541,10 +541,10 @@
 
         <h3 class="form-section__heading" translate>Permissions</h3>
 
-        <p ng-if="user.is_admin && !profileForm.$visible" translate>Administrator</p>
-        <p ng-if="!user.is_admin && !profileForm.$visible"><em translate>No permissions set</em></p>
+        <p ng-if="user.is_admin && !showProfileForm" translate>Administrator</p>
+        <p ng-if="!user.is_admin && !showProfileForm"><em translate>No permissions set</em></p>
 
-        <p ng-show="profileForm.$visible && currentUser.is_admin">
+        <p ng-show="showProfileForm && currentUser.is_admin">
           <input type="checkbox"
           id="isAdmin"
           ng-model="user.is_admin"
