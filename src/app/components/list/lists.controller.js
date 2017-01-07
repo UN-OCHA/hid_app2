@@ -25,22 +25,28 @@
     var currentSortOrder = $scope.request.name;
     ListDataService.setRequest($scope.request);
 
-    $scope.listTypes = [{
-      key: 'operation',
-      val: 'Operation'
-    },
-    {
-      key: 'bundle',
-      val: 'Group'
-    },
-    {
-      key: 'organization',
-      val: 'Organization'
-    },
-    {
-      key: 'disaster',
-      val: 'Disaster'
-    }];
+    $scope.listTypes = [
+      {
+        key: 'operation',
+        val: 'Operation'
+      },
+      {
+        key: 'bundle',
+        val: 'Group'
+      },
+      {
+        key: 'organization',
+        val: 'Organization'
+      },
+      {
+        key: 'disaster',
+        val: 'Disaster'
+      },
+      {
+        key: 'list',
+        val: 'Custom'
+      }
+    ];
 
     $scope.sortBy = [
       {
