@@ -542,7 +542,8 @@
         <h3 class="form-section__heading" translate>Permissions</h3>
 
         <p ng-if="user.is_admin && !showProfileForm" translate>Administrator</p>
-        <p ng-if="!user.is_admin && !showProfileForm"><em translate>No permissions set</em></p>
+        <p ng-if="user.isManager && !showProfileForm" translate>Manager</p>
+        <p ng-if="!user.is_admin && !user.isManager && !showProfileForm"><em translate>No permissions set</em></p>
 
         <p ng-show="showProfileForm && currentUser.is_admin">
           <input type="checkbox"
@@ -551,6 +552,15 @@
           ng-value="user.is_admin"
           ng-change="saveUser()" />
           <label for="isAdmin" class="clickie-label" translate>Administrator</label>
+        </p>
+
+        <p ng-show="showProfileForm && currentUser.is_admin">
+          <input type="checkbox"
+          id="isManager"
+          ng-model="user.isManager"
+          ng-value="user.isManager"
+          ng-change="saveUser()" />
+          <label for="isManager" class="clickie-label" translate>Manager</label>
         </p>
       </div>
 
