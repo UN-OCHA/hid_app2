@@ -40,6 +40,8 @@
           return defer.promise;
         };
 
+        mockNotificationsService.totalUnread = 5;
+
         spyOn(mockNotificationsService, 'getNotifications').and.callThrough();
         spyOn(mockNotificationsService, 'markAsRead').and.callThrough();
 
@@ -55,12 +57,7 @@
     describe('Marking notifications as unread', function () {
 
       it('should mark all unread notifications as read', function () {
-        scope.notifications.all = notifications;
-        scope.$digest();
-
-        expect(mockNotificationsService.markAsRead).toHaveBeenCalledWith(notifications[1]);
-        expect(scope.notifications.all[0].read).toBe(true);
-        expect(scope.notifications.all[1].read).toBe(true);
+        expect(mockNotificationsService.markAsRead).toHaveBeenCalledWith();
       });
 
     });

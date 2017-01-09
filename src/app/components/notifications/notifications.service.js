@@ -46,9 +46,11 @@
         return defer.promise;
       },
 
-      markAsRead: function (notification) {
-        return resource.update(notification).$promise.then(function () {
-          return;
+      markAsRead: function () {
+        return resource.update().$promise.then(function () {
+          notifications.totalUnread = 0;
+          notifications.unread = {};
+          return ;
         }, function (error) {
           $log.error(error);
           return;
