@@ -57,14 +57,17 @@
 }
 
 .table-responsive--has-actions {
-  td {
-    padding-right: 100px;
+  td:first-child {
+    padding-right: $base-unit*12;
   }
 }
 
 td.table-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   text-align: right;
-  width: 100px;
+  width: $base-unit*12;
   position: absolute;
   top: 0;
   right: 0;
@@ -72,11 +75,18 @@ td.table-actions {
 
   .dropdown {
     display: inline-block;
-    width: $base-unit*6;
+  }
+
+  .btn-transparent {
+    width: $base-unit*4;
+    height: $base-unit*4;
+    padding: 0;
   }
 
   .iconholder {
-    margin-left: $base-unit/2;
+    width: $base-unit*4;
+    display: inline-block;
+    text-align: center;
   }
 }
 
@@ -90,6 +100,10 @@ td.table-actions {
 
     th {
       display: table-cell;
+
+      &.table-actions-header {
+        width: $base-unit*12;
+      }
     }
 
     td {
@@ -98,6 +112,14 @@ td.table-actions {
 
       &:empty {
         display: table-cell;
+      }
+
+      &:first-child {
+        padding-right: $base-unit;
+      }
+
+      &.table-actions {
+        display: flex;
       }
     }
 

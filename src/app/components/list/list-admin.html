@@ -55,13 +55,20 @@
       </form>
     </div>
 
-    <div ng-if="isMember" class="sidebar-section">
-      <h2 class="sidebar-section__heading" translate>Check out</h2>
-      <p ng-if="currentListUser && currentListUser.checkoutDate">You will be checked out of this list automatically on <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span></p>
-      <button type="submit" class="btn-primary btn-block" ng-click="checkOut();">
-        <icon name="cancel"></icon>
-        <span translate>Check out</span>
-      </button>
+    <div ng-if="isMember" >
+      <div ng-if="isPending" class="sidebar-section">
+        <h2 class="sidebar-section__heading" translate>Check in</h2>
+        <p>Your request for check-in is pending. We will get back to you soon.</p>
+      </div>
+
+      <div ng-if="!isPending" class="sidebar-section">
+        <h2 class="sidebar-section__heading" translate>Check out</h2>
+        <p ng-if="currentListUser && currentListUser.checkoutDate">You will be checked out of this list automatically on <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span></p>
+        <button type="submit" class="btn-primary btn-block" ng-click="checkOut();">
+          <icon name="cancel"></icon>
+          <span translate>Check out</span>
+        </button>
+      </div>
     </div>
 
     <div class="sidebar-section">
@@ -79,7 +86,7 @@
           </button>
         </div>
         <div class="modal-body" id="modal-body">
-          
+
           <textarea rows="15" cols="100">{{emailsText}}</textarea>
         </div>
       </script>

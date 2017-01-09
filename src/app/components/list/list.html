@@ -8,6 +8,8 @@
   <h1 class="page-header__heading">{{list.name}}</h1>
 </div>
 
+<p ng-if="isPending">Pending!</p>
+
 <users-list ng-show="list.visible"></users-list>
 
 <p ng-if="!list.visible">

@@ -27,12 +27,29 @@
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
       var params = angular.extend($scope.request, $scope.userFilters);
       UserDataService.getUsers(params).then(function (users) {
-        $scope.users = users;
+        $scope.users = checkPending(angular.copy(users));
         $scope.totalItems = users.headers["x-total-count"];
       });
     }
 
-    $scope.$on('users-export-csv', function (evt) {
+    function checkPending (users) {
+      if (!$scope.list) {
+        return users;
+      }
+
+      var listType = $scope.list.type + 's';
+
+      angular.forEach(users, function (user) {
+        angular.forEach(user[listType], function (list) {
+          if ( ($scope.list._id === list.list._id) && list.pending) {
+            user.pending = true;
+          }
+        });
+      });
+      return users;
+    }
+
+    $scope.$on('users-export-csv', function () {
       var params = angular.extend($scope.request, $scope.filters);
       var url = User.getCSVUrl(params);
       $window.open(url);
