@@ -5,13 +5,14 @@
     .module('app.dashboard')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'notificationsService', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService'];
+  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'notificationsService', 'List', 'ListDataService', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
-  function DashboardCtrl($scope, alertService, config, gettextCatalog, notificationsService, List, ListDataService, User, UserCheckInService, UserDataService) {
+  function DashboardCtrl($scope, alertService, config, gettextCatalog, notificationsService, List, ListDataService, Service, User, UserCheckInService, UserDataService) {
     $scope.tabsActive = false;
     $scope.activeTab = 'favorites';
     $scope.listsMember = [];
     $scope.listsOwnedOrManaged = [];
+    $scope.subscriptions = [];
 
     ListDataService.getManagedAndOwnedLists($scope.currentUser, function (lists) {
       $scope.listsOwnedOrManaged = lists;
@@ -28,6 +29,16 @@
         });
       });
     });
+
+    function getSubscriptions () {
+      $scope.subscriptions = angular.copy($scope.currentUser.subscriptions);
+      angular.forEach($scope.subscriptions, function (sub) {
+        if (sub.owner === $scope.currentUser._id) {
+          sub.isOwner = true;
+        }
+      });
+    }
+    getSubscriptions();
 
     $scope.removeFavorite = function (list) {
       $scope.currentUser.favoriteLists.splice($scope.currentUser.favoriteLists.indexOf(list), 1);
@@ -69,6 +80,34 @@
     $scope.toggleTabs = function (tabName) {
       $scope.activeTab = tabName;
       $scope.tabsActive = true;
+    };
+
+    $scope.unsubscribe = function (subscription) {
+      var service = new Service(subscription);
+      alertService.add('warning', 'Are you sure?', true, function() {
+        service.unsubscribe($scope.currentUser)
+          .then(function (response) {
+            $scope.setCurrentUser(response.data);
+            alertService.add('success','You were successfully unsubscribed from this service');
+          })
+          .catch(function () {
+            alertService.add('danger', 'We could not unsubscribe you from this service');
+          });
+      });
+    };
+
+    $scope.deleteService = function (subscription) {
+      var service = new Service(subscription);
+      alertService.add('warning', 'Are you sure?', true, function() {
+        service.$delete($scope.currentUser)
+          .then(function (response) {
+            $scope.setCurrentUser(response.data);
+            alertService.add('success','You were successfully unsubscribed from this service');
+          })
+          .catch(function () {
+            alertService.add('danger', 'We could not unsubscribe you from this service');
+          });
+      });
     };
 
     $scope.notifications = notificationsService;
