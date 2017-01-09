@@ -40,7 +40,7 @@
       <th ng-click="sortList('organization')" translate>Organization</th>
       <th ng-click="sortList('cluster')" translate>Cluster</th>
       <th ng-click="sortList('country')" translate>Country</th>
-      <th translate><span class="sr-only">Info / actions</span></th>
+      <th class="table-actions-header" translate><span class="sr-only">Info / actions</span></th>
     </tr>
   </thead>
   <tbody>
@@ -52,7 +52,9 @@
       <td><a ng-href="/lists/{{user.organization.list._id}}" ng-if="user.organization.list">{{user.organization.list.name}}</a></td>
       <td></td>
       <td>{{user.location.country.name}}</td>
+
       <td class="table-actions">
+        <icon name="caution" text="Pending" title="Pending" ng-if="user.pending"></icon>
         <icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon>
         <ng-include src="'app/components/user/userOptions.html'"></ng-include>
       </td>

@@ -12,6 +12,7 @@
     $scope.isManager = false;
     $scope.isOwner = false;
     $scope.isFavorite = false;
+    $scope.isPending = false;
     $scope.datePicker = {
       opened: false
     };
@@ -29,6 +30,12 @@
       $scope.$broadcast('populate-list', listType);
     }
 
+    function checkInStatus () {
+      $scope.isPending = $scope.currentUser.lists.filter(function(list) {
+        return list.pending && (list.list._id === $scope.list._id);
+      })[0];
+    }
+
     $scope.$on('user-service-ready', function() {
       $scope.list = List.get({'listId': $routeParams.list});
       var listCallback = function () {
@@ -38,6 +45,8 @@
         }
 
         populateList();
+
+        checkInStatus();
 
         angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
           var listId = val.list;
@@ -81,7 +90,9 @@
     // Check current user in this list
     $scope.checkIn = function () {
       UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, $scope.checkinUser, function (user) {
-        alertService.add('success', gettextCatalog.getString('You were successfully checked in.'));
+        var message = $scope.list.joinability === 'moderated' ? 'Your request for check-in is pending. We will get back to you soon.' : 'You were successfully checked in.';
+
+        alertService.add('success', message);
         $scope.isMember = true;
         $scope.setCurrentUser(user);
         UserDataService.notify();
@@ -174,12 +185,15 @@
 
     // Approve a user and remove his pending status
     $scope.approveUser = function (user) {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-        for (var i = 0, len = user[$scope.list.type + 's'].length; i < len; i++) {
-          if (user[$scope.list.type + 's'][i].list == $scope.list._id) {
-            user[$scope.list.type + 's'][i].pending = false;
+      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+        angular.forEach(user[$scope.list.type + 's'], function (list) {
+          if ($scope.list._id === list.list._id) {
+            list.pending = false;
           }
-        }
+        });
+
+        user.pending = false;
+
         user.$update(function (out) {
           alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
         });
