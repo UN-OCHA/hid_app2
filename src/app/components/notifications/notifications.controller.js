@@ -20,17 +20,6 @@
       sort: '-createdAt'
     };
 
-    function markAsRead (notifications) {
-      angular.forEach(notifications, function (notification) {
-        if (!notification.read) {
-          notification.read = true;
-          notificationsService.markAsRead(notification);
-        }
-      });
-      notificationsService.totalUnread = 0;
-      notificationsService.unread = {};
-    }
-
     $scope.getLink = function (notification) {
       if (notification.params && notification.params.list) {
         return '/lists/' + notification.params.list._id;
@@ -44,7 +33,10 @@
       notificationsService.getNotifications(params).then(function () {
         $scope.notifications = notificationsService;
         $scope.totalItems = notificationsService.total;
-        markAsRead(notificationsService.all);
+
+        if (notificationsService.totalUnread > 0 ) {
+          notificationsService.markAsRead();
+        }
       });
 
     };

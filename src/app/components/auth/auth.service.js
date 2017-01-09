@@ -18,7 +18,7 @@
                 if (items.length) {
                   var notification = new Notification('',{
                     body: items[index].text,
-                    icon: $location.protocol() + '://' + $location.host() + '/img/logo.png',
+                    icon: $location.protocol() + '://' + $location.host() + '/img/notification-icon.png',
                     dir: 'auto'
                   });
                   items[index].read = true;
