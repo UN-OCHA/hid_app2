@@ -4,16 +4,27 @@
   <icon name="wheel" text="Actions"></icon>
 </button>
 
-<div class="page-header">
+<div class="page-header" ng-if="list.visible">
   <h1 class="page-header__heading">{{list.name}}</h1>
 </div>
 
-<p ng-if="isPending">Pending!</p>
+<div class="row" ng-if="!list.visible">
+  <div class="page-header page-header--alert col-md-8" >
+
+    <icon name="lock" class="page-header__alert-icon"></icon>
+
+    <div class="page-header__content">
+      <h1 class="page-header__heading">
+        {{list.name}}
+      </h1>
+
+      <p class="page-header__alert-info">
+        <span translate>This contact list can only be viewed by verified users. Please contact us at</span>
+        <a href="mailto:info@humanitarian.id">info@humanitarian.id</a>
+        <span translate>if you wish to access the list.</span>
+      </p>
+    </div>
+  </div>
+</div>
 
 <users-list ng-show="list.visible"></users-list>
-
-<p ng-if="!list.visible">
-  <span translate>This contact list can only be viewed by verified users. Please contact us at </span>
-  <a href="mailto:info@humanitarian.id">info@humanitarian.id</a>
-  <span translate>if you wish to access the list.</span>
-</p>

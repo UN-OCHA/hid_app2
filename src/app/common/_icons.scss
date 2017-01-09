@@ -28,6 +28,9 @@
 
 /** Add / remove icons here - do not edit above this line */
 
+.icon-lock:before {
+  content: "\e932";
+}
 .icon-check-circle:before {
   content: "\e943";
 }
