@@ -22,7 +22,7 @@
       startingDay: 1
     };
     var exportEmailModal;
-    
+
     function populateList () {
       var listType = [];
       listType[$scope.list.type + 's.list'] = $scope.list._id;
@@ -32,6 +32,10 @@
     $scope.$on('user-service-ready', function() {
       $scope.list = List.get({'listId': $routeParams.list});
       var listCallback = function () {
+
+        if (!$scope.list.visible) {
+          return;
+        }
 
         populateList();
 
@@ -93,7 +97,7 @@
             checkInId = $scope.currentUser[$scope.list.type + 's'][i]._id;
           }
         }
-        if (checkInId != 0) {
+        if (checkInId !== 0) {
           UserCheckInService.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function (user) {
             alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
             $scope.isMember = false;

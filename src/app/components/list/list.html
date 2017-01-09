@@ -1,6 +1,6 @@
-<ng-include src="'app/components/list/list-admin.html'"></ng-include>
+<ng-include src="'app/components/list/list-admin.html'" ng-if="list.visible"></ng-include>
 
-<button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
+<button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline" ng-if="list.visible">
   <icon name="wheel" text="Actions"></icon>
 </button>
 
@@ -8,4 +8,10 @@
   <h1 class="page-header__heading">{{list.name}}</h1>
 </div>
 
-<users-list></users-list>
+<users-list ng-show="list.visible"></users-list>
+
+<p ng-if="!list.visible">
+  <span translate>This contact list can only be viewed by verified users. Please contact us at </span>
+  <a href="mailto:info@humanitarian.id">info@humanitarian.id</a>
+  <span translate>if you wish to access the list.</span>
+</p>
