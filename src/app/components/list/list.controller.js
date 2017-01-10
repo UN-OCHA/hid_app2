@@ -183,23 +183,25 @@
       });
     };
 
-    // Approve a user and remove his pending status
+    // Approve a user and remove their pending status
     $scope.approveUser = function (user) {
-      // TO DO - new endpoint required before this can be completed.
+      var checkInId;
 
-      // var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-      //   angular.forEach(user[$scope.list.type + 's'], function (list) {
-      //     if ($scope.list._id === list.list._id) {
-      //       list.pending = false;
-      //     }
-      //   });
+      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+        angular.forEach(user[$scope.list.type + 's'], function (list) {
+          if ($scope.list._id === list.list._id) {
+            checkInId = list._id;
+          }
+        });
+        //update currentUser
+        user.pending = false;
 
-      //   user.pending = false;
-
-      //   user.$update(function (out) {
-      //     alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
-      //   });
-      // });
+        if (checkInId) {
+          UserCheckInService.update({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {pending: false}, function () {
+            alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
+          });
+        }
+      });
     };
 
     // Promote a user to manager
