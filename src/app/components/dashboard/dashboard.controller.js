@@ -36,6 +36,12 @@
         if (sub.owner === $scope.currentUser._id) {
           sub.isOwner = true;
         }
+
+        angular.forEach(sub.managers, function (manager) {
+          if (manager === $scope.currentUser._id) {
+            sub.isManager = true;
+          }
+        });
       });
     }
     getSubscriptions();
@@ -98,15 +104,10 @@
 
     $scope.deleteService = function (subscription) {
       var service = new Service(subscription);
-      alertService.add('warning', 'Are you sure?', true, function() {
-        service.$delete($scope.currentUser)
-          .then(function (response) {
-            $scope.setCurrentUser(response.data);
-            alertService.add('success','You were successfully unsubscribed from this service');
-          })
-          .catch(function () {
-            alertService.add('danger', 'We could not unsubscribe you from this service');
-          });
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+        service.$delete(function () {
+          alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
+        });
       });
     };
 

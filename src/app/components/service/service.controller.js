@@ -135,12 +135,12 @@
       $scope.newUsers = User.query({'name': search});
     };
 
-    $scope.removeOwner = function (list) {
-      $scope.service.owners.splice($scope.service.owners.indexOf(list), 1);
+    $scope.removeManager = function (list) {
+      $scope.service.managers.splice($scope.service.managers.indexOf(list), 1);
     };
 
-    $scope.isSelectedOwner = function (list) {
-      return $scope.service.owners.indexOf(list) !== -1;
+    $scope.isSelectedManager = function (list) {
+      return $scope.service.manager.indexOf(list) !== -1;
     };
 
   }
