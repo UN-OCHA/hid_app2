@@ -136,7 +136,10 @@
 
   .page-header__heading {
     .toggled & {
-      padding-right: $sidebar-width-xxl + ($base-unit*11)
+      padding-right: $sidebar-width-xxl + ($base-unit*11);
+    }
+    .col-xl-4 & {
+      padding-right: 0;
     }
   }
 }
