@@ -25,8 +25,11 @@
     var exportEmailModal;
 
     function populateList () {
-      var listType = [];
-      listType[$scope.list.type + 's.list'] = $scope.list._id;
+      var listType = [], typeName = $scope.list.type;
+      if (typeName == 'functional_role') {
+        typeName = 'role';
+      }
+      listType[typeName + 's.list'] = $scope.list._id;
       $scope.$broadcast('populate-list', listType);
     }
 
