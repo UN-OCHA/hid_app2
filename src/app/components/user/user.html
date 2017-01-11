@@ -550,7 +550,7 @@
           id="isAdmin"
           ng-model="user.is_admin"
           ng-value="user.is_admin"
-          ng-change="saveUser()" />
+          ng-change="updateUser(user.is_admin)" />
           <label for="isAdmin" class="clickie-label" translate>Administrator</label>
         </p>
 
@@ -559,7 +559,7 @@
           id="isManager"
           ng-model="user.isManager"
           ng-value="user.isManager"
-          ng-change="saveUser()" />
+          ng-change="updateUser(user.isManager)" />
           <label for="isManager" class="clickie-label" translate>Manager</label>
         </p>
       </div>
