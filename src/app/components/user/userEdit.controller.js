@@ -34,9 +34,7 @@
     var defaultSettings = {};
 
     function getRoles () {
-      return hrinfoService.getRoles().then(function (data) {
-        $scope.roles = data;
-      });
+      $scope.roles = List.query({'type': 'functional_role'});
     }
 
     function getCountries () {
@@ -96,24 +94,25 @@
       }
     }
 
-    function addOrganization (org) {
+    function addList (list, listType) {
       $scope.$emit('editUser', {status: 'saving'});
-      UserCheckInService.save({userId: $scope.user._id, listType: 'organizations'}, {list: org.list._id}, function (response) {
-        $scope.user.organizations = angular.copy(response.organizations);
+      UserCheckInService.save({userId: $scope.user._id, listType: listType}, {list: list.list._id}, function (response) {
+        $scope.user[listType] = angular.copy(response[listType]);
         updateCurrentUser();
+        var capitalized = listType.charAt(0).toUpperCase() + listType.slice(1);
         $scope.$emit('editUser', {
           status: 'success',
-          type: 'addOrganization',
-          message: gettextCatalog.getString('Organization added')
+          type: 'add' + capitalized,
+          message: capitalized + gettextCatalog.getString(' added')
         });
       });
     }
 
-    function removeOrganization (org) {
+    function removeList (key, lu) {
       $scope.$emit('editUser', {status: 'saving'});
-      UserCheckInService.delete({userId: $scope.user._id, listType: 'organizations', checkInId: org._id}, {}, function () {
+      UserCheckInService.delete({userId: $scope.user._id, listType: key + 's', checkInId: lu._id}, {}, function () {
         updateCurrentUser();
-        $scope.$emit('editUser', {status: 'success', message: gettextCatalog.getString('Organization removed')});
+        $scope.$emit('editUser', {status: 'success', message: key + gettextCatalog.getString(' removed')});
       });
     }
 
@@ -174,8 +173,8 @@
 
       $scope.user[key + 's'].push($scope.temp[key]);
 
-      if (key === 'organization') {
-        addOrganization($scope.temp.organization);
+      if (key === 'organization' || key === 'role') {
+        addList($scope.temp[key], key + 's');
         $scope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
@@ -189,8 +188,8 @@
       }
       $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
 
-      if (key === 'organization') {
-        removeOrganization(value);
+      if (key === 'organization' || key === 'role') {
+        removeList(key, value);
         return;
       }
 
