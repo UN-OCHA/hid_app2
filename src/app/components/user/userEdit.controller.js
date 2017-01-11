@@ -108,11 +108,11 @@
       });
     }
 
-    function removeList (key, lu) {
+    function removeList (listType, listUser) {
       $scope.$emit('editUser', {status: 'saving'});
-      UserCheckInService.delete({userId: $scope.user._id, listType: key + 's', checkInId: lu._id}, {}, function () {
+      UserCheckInService.delete({userId: $scope.user._id, listType: listType + 's', checkInId: listUser._id}, {}, function () {
         updateCurrentUser();
-        $scope.$emit('editUser', {status: 'success', message: key + gettextCatalog.getString(' removed')});
+        $scope.$emit('editUser', {status: 'success', message: listType + gettextCatalog.getString(' removed')});
       });
     }
 
