@@ -446,7 +446,7 @@
         <h3 class="form-section__heading" translate>Functional roles</h3>
         <ul class="list list--has-buttons" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="role in user.functional_roles">
-            {{role.list.label}}
+            <a href="lists/{{role.list._id}}">{{role.list.label}}</a>
             <button type="button" class="btn-transparent list__button" ng-click="dropItem('functional_role', role)" ng-show="showProfileForm" aria-hidden="{{showProfileForm}}">
               <icon name="cancel" text="Remove"></icon>
             </button>

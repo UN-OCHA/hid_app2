@@ -143,8 +143,8 @@
     };
 
     $scope.roles = [];
-    hrinfoService.getRoles().then(function (d) {
-      $scope.roles = d;
+    $scope.roles = List.query({'type': 'functional_role'}, function (roles) {
+      $scope.roles = roles;
     });
 
     $scope.organizations = [];

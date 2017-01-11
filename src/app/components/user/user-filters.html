@@ -90,9 +90,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
         <div class="filter">
           <label for="roles" class="sr-only" translate>Filter by role</label>
-          <ui-select ng-model="selectedFilters['roles.id']" name="roles">
+          <ui-select ng-model="selectedFilters['functional_roles.list']" name="roles">
             <ui-select-match allow-clear="true" placeholder="Role">{{$select.selected.label}}</ui-select-match>
-            <ui-select-choices repeat="role.id as role in roles | filter: $select.search">
+            <ui-select-choices repeat="role._id as role in roles | filter: $select.search">
               {{role.label}}
             </ui-select-choices>
           </ui-select>
