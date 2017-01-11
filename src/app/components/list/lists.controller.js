@@ -43,6 +43,10 @@
         val: 'Disaster'
       },
       {
+        key: 'functional_role',
+        val: 'Role'
+      },
+      {
         key: 'list',
         val: 'Custom'
       }
