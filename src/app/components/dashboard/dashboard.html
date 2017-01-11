@@ -92,14 +92,22 @@
       <h2 class="block-heading" translate>Subscriptions</h2>
 
       <ul class="list list--has-buttons list--has-dividers">
-        <li class="list__item">
-          <a href="">Subscription name will go here</a>
+        <li class="list__item" ng-repeat="subscription in subscriptions">
+          {{subscription.name}}
           <div uib-dropdown class="list__button">
             <button type="button" class="btn-transparent" uib-dropdown-toggle>
               <icon name="dots" text="Options"></icon>
             </button>
             <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
-              <li><a href="#" translate>action?</a></li>
+              <li>
+                <button type="button" class="btn-link" ng-click="unsubscribe(subscription)" translate>Unsubscribe</button>
+              </li>
+              <li ng-if="subscription.isOwner || subscription.isManager">
+                <a href="services/{{subscription._id}}/edit" translate>Edit Service</a>
+              </li>
+              <li ng-if="subscription.isOwner">
+                <button type="button" class="btn-link" ng-click="deleteService(subscription)" translate>Delete service</button>
+              </li>
             </ul>
           </div>
         </li>

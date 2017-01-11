@@ -58,20 +58,17 @@
 
 .table-responsive--has-actions {
   td:first-child {
-    padding-right: $base-unit*12;
+    padding-right: $base-unit*13;
   }
 }
 
 td.table-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
   text-align: right;
-  width: $base-unit*12;
   position: absolute;
-  top: 0;
+  top: $base-unit/2;
   right: 0;
   padding: 0;
+  white-space: nowrap;
 
   .dropdown {
     display: inline-block;
@@ -100,10 +97,6 @@ td.table-actions {
 
     th {
       display: table-cell;
-
-      &.table-actions-header {
-        width: $base-unit*12;
-      }
     }
 
     td {
@@ -116,10 +109,6 @@ td.table-actions {
 
       &:first-child {
         padding-right: $base-unit;
-      }
-
-      &.table-actions {
-        display: flex;
       }
     }
 
