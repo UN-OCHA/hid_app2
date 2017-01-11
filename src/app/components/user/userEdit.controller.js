@@ -173,7 +173,7 @@
 
       $scope.user[key + 's'].push($scope.temp[key]);
 
-      if (key === 'organization' || key === 'role') {
+      if (key === 'organization' || key === 'functional_role') {
         addList($scope.temp[key], key + 's');
         $scope.temp[key] = angular.copy(defaultSettings[key]);
         return;
@@ -188,7 +188,7 @@
       }
       $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
 
-      if (key === 'organization' || key === 'role') {
+      if (key === 'organization' || key === 'functional_role') {
         removeList(key, value);
         return;
       }

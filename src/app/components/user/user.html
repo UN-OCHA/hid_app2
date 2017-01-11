@@ -442,16 +442,16 @@
     <div class="col-xs-12 col-md-6 col-lg-4">
       <h2 class="block-heading" translate>Additional Information</h2>
 
-      <div class="form-section form-section--compact" ng-if="currentUser.is_admin || user.roles.length">
+      <div class="form-section form-section--compact" ng-if="currentUser.is_admin || user.functional_roles.length">
         <h3 class="form-section__heading" translate>Functional roles</h3>
         <ul class="list list--has-buttons" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-repeat="role in user.roles">
+          <li class="list__item" ng-repeat="role in user.functional_roles">
             {{role.list.label}}
-            <button type="button" class="btn-transparent list__button" ng-click="dropItem('role', role)" ng-show="showProfileForm" aria-hidden="{{showProfileForm}}">
+            <button type="button" class="btn-transparent list__button" ng-click="dropItem('functional_role', role)" ng-show="showProfileForm" aria-hidden="{{showProfileForm}}">
               <icon name="cancel" text="Remove"></icon>
             </button>
           </li>
-          <li class="list__item" ng-if="!user.roles.length">
+          <li class="list__item" ng-if="!user.functional_roles.length">
             <em translate>No roles</em>
           </li>
         </ul>
@@ -461,7 +461,7 @@
           <label class="form-section__sub-heading" for="roles">Add a role:</label>
           <div class="form field form-field--compact form-inline-fields">
             <div class="form-inline-fields__item">
-              <ui-select name="roles" ng-model="temp.role.list">
+              <ui-select name="roles" ng-model="temp.functional_role.list">
                 <ui-select-match placeholder="{{'Select a role' | translate}}">
                   {{$select.selected.label}}
                 </ui-select-match>
@@ -470,7 +470,7 @@
                 </ui-select-choices>
               </ui-select>
             </div>
-            <button type="button" class="btn-transparent" ng-click="addItem('role')">
+            <button type="button" class="btn-transparent" ng-click="addItem('functional_role')">
               <icon name="plus" text="Add"></icon>
             </button>
           </div>
