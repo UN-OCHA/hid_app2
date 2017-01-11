@@ -1,84 +1,96 @@
-<h1>{{service.name ? service.name : 'Create a new service'}}</h1>
-<form name="editService" ng-submit="editService.$valid && saveService()" novalidate>
-  <div class="form-group" ng-class="{'has-error': editService.name.$touched && editService.name.$invalid}">
-    <label for="name" translate>Name</label>
-    <input type="text" name="name" class="form-control" id="name" placeholder="{{'The service name'|translate}}" ng-model="service.name" required>
-    <div class="clearfix">
-      <div ng-messages="editService.name.$error" ng-show="editService.name.$touched" ng-messages-multiple="ng-messages-multiple">
-        <div ng-messages-include="app/common/messages.html"></div>
-      </div>
+<div class="row">
+  <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div class="page-header">
+      <h1 class="page-header__heading">{{service.name ? service.name : 'Create a new service'}}</h1>
     </div>
   </div>
-  <div class="form-group">
-    <label for="description" translate>Description</label>
-    <textarea ng-model="service.description" class="form-control" name="description" rows="5" cols="20"></textarea>
-  </div>
-  <fieldset class="form-group">
-    <legend translate>Service Type</legend>
-    <p ng-repeat="option in serviceTypes">
-      <input type="radio" id="service-type-{{option.value}}" name="visibility" ng-model="service.type" value="{{option.value}}" />
-      <label class="clickie-label" for="service-type-{{option.value}}" required translate>{{option.label}}</label>
-    </p>
-  </fieldset>
-  <div class="form-group" ng-show="service.type === 'mailchimp'">
-    <label for="mailchimp-api-key" translate>Mailchimp API key</label>
-    <input type="text" name="name" class="form-control" id="mailchimp-api-key" placeholder="{{'Mailchimp API Key'|translate}}" ng-model="service.mailchimp.apiKey" ng-required="service.type === 'mailchimp'" ng-blur="getMailchimpLists()">
-  </div>
-  <div class="form-group" ng-if="service.type === 'mailchimp' && service.mailchimp.apiKey" ng-init>
-    <label for="mailchimpList" translate>Mailchimp list</label>
-    <select name="mailchimpList" ng-model="service.mailchimp.list" ng-options="list.name for list in mailchimpLists track by list.id">
-    </select>
-  </div>
-  <div class="form-group" ng-if="service.type === 'googlegroup'" ng-init>
-    <label for="ggDomain" translate>Domain</label>
-    <select name="ggDomain" ng-model="service.googlegroup.domain" ng-blur="getGoogleGroups()">
-      <option ng-repeat="cred in credentials" ng-value="cred.googlegroup.domain">{{cred.googlegroup.domain}}</option>
-    </select>
-  </div>
-  <div class="form-group" ng-if="service.type === 'googlegroup' && service.googlegroup.domain" ng-init>
-    <label for="googleGroup" translate>Group</label>
-    <select name="googleGroup" ng-model="service.googlegroup.group" ng-options="group.name for group in googleGroups track by group.id">
-    </select>
-  </div>
-  <div class="form-group">
-    <label><input type="checkbox" ng-model="service.hidden" name="hidden" /> Hidden</label>
-  </div>
-  <div class="form-group">
-    <label for="lists">Associated lists</label>
-    <ui-select ng-model="selectedList" on-select="service.lists.push(selectedList)" name="lists" class="ui-select--has-border">
-      <ui-select-match placeholder="{{'Select some lists'|translate}}"><span translate>Select some lists</span></ui-select-match>
-      <ui-select-choices ui-disable-choice="isSelected(list)" refresh="getLists($select.search)" repeat="list in newLists">
-        {{list.name}}
-      </ui-select-choices>
-    </ui-select>
-    <ul class="list list--has-buttons list--has-dividers">
-      <li ng-repeat="list in service.lists" class="list__item">
-        <icon name="check"></icon>
-        {{list.name}}
-        <button type="button" class="btn-transparent list__button" ng-click="removeList(list)">
-          <icon name="cancel" text="Remove"></icon>
-        </button>
-      </li>
-    </ul>
-  </div>
-  <div class="form-group">
-    <label for="owners">Service owners</label>
-    <ui-select ng-model="selectedOwner" on-select="service.owners.push(selectedOwner)" name="owners" class="ui-select--has-border">
-      <ui-select-match placeholder="{{'Select owners'|translate}}"><span translate>Select owners</span></ui-select-match>
-      <ui-select-choices ui-disable-choice="isSelectedOwner(user)" refresh="getUsers($select.search)" repeat="user in newUsers">
-        {{user.name}}
-      </ui-select-choices>
-    </ui-select>
-    <ul class="list list--has-buttons list--has-dividers">
-      <li ng-repeat="user in service.owners" class="list__item">
-        <icon name="check"></icon>
-        {{user.name}}
-        <button type="button" class="btn-transparent list__button" ng-click="removeOwner(user)">
-          <icon name="cancel" text="Remove"></icon>
-        </button>
-      </li>
-    </ul>
-  </div>
+</div>
+<div class="row">
+  <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
 
-  <button type="submit" class="btn btn-primary" ng-disabled="editService.$invalid || editService.$submitted" translate>Save</button>
-</form>
+    <form name="editService" ng-submit="editService.$valid && saveService()" novalidate>
+      <div class="form-group" ng-class="{'has-error': editService.name.$touched && editService.name.$invalid}">
+        <label for="name" translate>Name</label>
+        <input type="text" name="name" class="form-control" id="name" placeholder="{{'The service name'|translate}}" ng-model="service.name" required>
+        <div class="clearfix">
+          <div ng-messages="editService.name.$error" ng-show="editService.name.$touched" ng-messages-multiple="ng-messages-multiple">
+            <div ng-messages-include="app/common/messages.html"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" translate>Description</label>
+        <textarea ng-model="service.description" class="form-control" name="description" id="description" rows="5" cols="20"></textarea>
+      </div>
+      <fieldset class="form-group">
+        <legend translate>Service Type</legend>
+        <p ng-repeat="option in serviceTypes">
+          <input type="radio" id="service-type-{{option.value}}" name="visibility" ng-model="service.type" value="{{option.value}}" />
+          <label class="clickie-label" for="service-type-{{option.value}}" required translate>{{option.label}}</label>
+        </p>
+      </fieldset>
+      <div class="form-group" ng-show="service.type === 'mailchimp'">
+        <label for="mailchimp-api-key" translate>Mailchimp API key</label>
+        <input type="text" name="name" class="form-control" id="mailchimp-api-key" placeholder="{{'Mailchimp API Key'|translate}}" ng-model="service.mailchimp.apiKey" ng-required="service.type === 'mailchimp'" ng-blur="getMailchimpLists()">
+      </div>
+      <div class="form-group" ng-if="service.type === 'mailchimp' && service.mailchimp.apiKey" ng-init>
+        <label for="mailchimpList" translate>Mailchimp list</label>
+        <select name="mailchimpList" ng-model="service.mailchimp.list" ng-options="list.name for list in mailchimpLists track by list.id">
+        </select>
+      </div>
+      <div class="form-group" ng-if="service.type === 'googlegroup'" ng-init>
+        <label for="ggDomain" translate>Domain</label>
+        <select name="ggDomain" ng-model="service.googlegroup.domain" ng-blur="getGoogleGroups()">
+          <option ng-repeat="cred in credentials" ng-value="cred.googlegroup.domain">{{cred.googlegroup.domain}}</option>
+        </select>
+      </div>
+      <div class="form-group" ng-if="service.type === 'googlegroup' && service.googlegroup.domain" ng-init>
+        <label for="googleGroup" translate>Group</label>
+        <select name="googleGroup" ng-model="service.googlegroup.group" ng-options="group.name for group in googleGroups track by group.id">
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" ng-model="service.hidden" name="hidden" id="hidden" />
+        <label for="hidden" class="clickie-label"> Hidden</label>
+      </div>
+      <fieldset class="form-group">
+        <legend translate="">Associated lists</legend>
+        <ui-select ng-model="selectedList" on-select="service.lists.push(selectedList)" name="lists" class="ui-select--has-border">
+          <ui-select-match placeholder="{{'Select some lists'|translate}}"><span translate>Select some lists</span></ui-select-match>
+          <ui-select-choices ui-disable-choice="isSelected(list)" refresh="getLists($select.search)" repeat="list in newLists">
+            {{list.name}}
+          </ui-select-choices>
+        </ui-select>
+        <ul class="list list--has-buttons list--has-dividers">
+          <li ng-repeat="list in service.lists" class="list__item">
+            <icon name="check"></icon>
+            {{list.name}}
+            <button type="button" class="btn-transparent list__button" ng-click="removeList(list)">
+              <icon name="cancel" text="Remove"></icon>
+            </button>
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset class="form-group">
+        <legend translate>Service manager</legend>
+        <ui-select ng-model="selectedManager" on-select="service.managers.push(selectedManager)" name="managers" class="ui-select--has-border">
+          <ui-select-match placeholder="{{'Select managers'|translate}}"><span translate>Select managers</span></ui-select-match>
+          <ui-select-choices ui-disable-choice="isSelectedManager(user)" refresh="getUsers($select.search)" repeat="user in newUsers">
+            {{user.name}}
+          </ui-select-choices>
+        </ui-select>
+        <ul class="list list--has-buttons list--has-dividers">
+          <li ng-repeat="user in service.managers" class="list__item">
+            <icon name="check"></icon>
+            {{user.name}}
+            <button type="button" class="btn-transparent list__button" ng-click="removeManager(user)">
+              <icon name="cancel" text="Remove"></icon>
+            </button>
+          </li>
+        </ul>
+      </fieldset>
+      <button type="submit" class="btn btn-primary" ng-disabled="editService.$invalid || editService.$submitted" translate>Save</button>
+    </form>
+
+  </div>
+</div>

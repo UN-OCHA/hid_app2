@@ -40,6 +40,8 @@
     }
     else {
       $scope.service = new Service();
+      $scope.service.managers = [];
+      $scope.service.lists = [];
       $scope.credentials = ServiceCredentials.query();
     }
 
@@ -113,7 +115,6 @@
       Service
         .getGoogleGroups($scope.service.googlegroup.domain)
         .then(function (result) {
-          console.log(result);
           $scope.googleGroups = result.data;
         });
     };
@@ -128,19 +129,25 @@
     };
 
     $scope.isSelected = function (list) {
-      return $scope.service.lists.indexOf(list) !== -1;
+      var inLists = $scope.service.lists.find(function (selectedList) {
+        return selectedList._id === list._id;
+      });
+      return inLists ? true : false;
     };
 
     $scope.getUsers = function(search) {
       $scope.newUsers = User.query({'name': search});
     };
 
-    $scope.removeOwner = function (list) {
-      $scope.service.owners.splice($scope.service.owners.indexOf(list), 1);
+    $scope.removeManager = function (list) {
+      $scope.service.managers.splice($scope.service.managers.indexOf(list), 1);
     };
 
-    $scope.isSelectedOwner = function (list) {
-      return $scope.service.owners.indexOf(list) !== -1;
+    $scope.isSelectedManager = function (user) {
+      var inManagers = $scope.service.managers.find(function (manager) {
+        return manager._id === user._id;
+      });
+      return inManagers ? true : false;
     };
 
   }
