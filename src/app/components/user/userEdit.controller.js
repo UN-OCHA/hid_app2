@@ -123,7 +123,8 @@
     }
 
     function saveUpdatedUser (type) {
-      $scope.user.$update(function () {
+      $scope.user.$update(function (user) {
+        $scope.$parent.user = angular.copy(user);
         updateCurrentUser();
         $scope.$emit('editUser', {
           status: 'success',
