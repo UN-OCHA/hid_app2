@@ -409,7 +409,7 @@
           </fieldset>
 
           <label class="form-section__sub-heading" for="location">Add a location:</label>
-          <div class="form-field form-field--compact">
+          <div class="form-field form-field--compact" ng-class="{'form-inline-fields' : !showRegion}">
             <ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
               <ui-select-match placeholder="{{'Select a country' | translate}}">
                 {{$select.selected.name}}
@@ -418,8 +418,12 @@
                 {{country.name}}
               </ui-select-choices>
             </ui-select>
+
+            <button type="button" class="btn-transparent" ng-if="!showRegion" ng-click="addItem('location')">
+              <icon name="plus" text="Add location"></icon>
+            </button>
           </div>
-          <div class="form-field form-field--compact form-inline-fields">
+          <div class="form-field form-field--compact form-inline-fields" ng-if="showRegion">
             <div class="form-inline-fields__item">
               <ui-select ng-model="temp.location.region">
                 <ui-select-match placeholder="{{'Select a region' | translate}}">

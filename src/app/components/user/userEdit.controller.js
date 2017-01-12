@@ -15,6 +15,7 @@
     $scope.countries = [];
     $scope.temp = {};
     $scope.organization = {};
+    $scope.showRegion = false;
     $scope.getOrganizations = getOrganizations;
     $scope.getCountries = getCountries;
     $scope.setRegions = setRegions;
@@ -163,6 +164,8 @@
 
     function setRegions ($item) {
       hrinfoService.getRegions($item.id).then(function (regions) {
+        console.log(regions)
+        $scope.showRegion = regions.length ? true : false
         $scope.regions = regions;
       });
     }
