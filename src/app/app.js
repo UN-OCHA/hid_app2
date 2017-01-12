@@ -258,12 +258,12 @@ app.config(['$routeProvider', '$locationProvider',
       })
       .when('/password_reset', {
         templateUrl: 'app/components/auth/password_reset.html',
-        controller: 'AuthCtrl',
+        controller: 'ResetPasswordCtrl',
         title: 'Reset password'
       })
       .when('/reset_password', {
         templateUrl: 'app/components/auth/reset_password.html',
-        controller: 'AuthCtrl',
+        controller: 'ResetPasswordCtrl',
         title: 'Reset password'
       })
       .when('/verify', {
