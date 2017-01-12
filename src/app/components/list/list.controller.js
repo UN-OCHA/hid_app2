@@ -31,19 +31,21 @@
     }
 
     function checkInStatus () {
-      $scope.isPending = $scope.currentUser.lists.filter(function(list) {
+      var pending = $scope.currentUser.lists.filter(function(list) {
         return list.pending && (list.list._id === $scope.list._id);
       })[0];
+      $scope.isPending = pending ? true : false;
     }
 
     $scope.$on('user-service-ready', function() {
+
+
       $scope.list = List.get({'listId': $routeParams.list});
       var listCallback = function () {
 
         if (!$scope.list.visible) {
           return;
         }
-
         populateList();
 
         checkInStatus();
@@ -95,12 +97,14 @@
         alertService.add('success', message);
         $scope.isMember = true;
         $scope.setCurrentUser(user);
+        checkInStatus();
         UserDataService.notify();
       });
     };
 
     // Check current user out of this list
     $scope.checkOut = function () {
+
       var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         var checkInId = 0;
         for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {

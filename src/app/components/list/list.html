@@ -27,4 +27,8 @@
   </div>
 </div>
 
+<div ng-if="isPending" class="alert alert-warning">
+  <p translate>Your request for check-in is pending. We will get back to you soon.</p>
+</div>
+
 <users-list ng-show="list.visible"></users-list>
