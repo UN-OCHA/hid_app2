@@ -8,7 +8,7 @@
   window.__env.hrinfoUrl = 'https://www.humanitarianresponse.info/en/api/v1.0/';
 
   // List type
-  window.__env.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list'];
+  window.__env.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role'];
 
 }(this));
 
