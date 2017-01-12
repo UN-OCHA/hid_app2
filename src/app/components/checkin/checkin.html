@@ -13,7 +13,7 @@
 
       <ui-select ng-model="selectedList" on-select="updateSelectedLists(selectedList)" class="ui-select--has-border">
         <ui-select-match placeholder="{{'Select a list'|translate}}"><span translate>Select a list</span></ui-select-match>
-        <ui-select-choices ui-disable-choice="isSelected(list)" refresh="getLists($select.search)" repeat="list in lists">
+        <ui-select-choices refresh="getLists($select.search)" repeat="list in lists">
           {{list.name}}
         </ui-select-choices>
       </ui-select>
