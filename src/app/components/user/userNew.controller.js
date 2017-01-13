@@ -11,12 +11,13 @@
 
     $scope.user = new User();
     $scope.user.locale = gettextCatalog.getCurrentLanguage();
-    $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/reset_password';
+    $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/reset_password?orphan=true';
     $scope.currentPath = $location.path();
+    console.log('x', $scope.user.app_verify_url);
 
     $scope.userCreate = function(registerForm) {
       $scope.user.$save(function(user) {
-        alertService.add('success', gettextCatalog.getString('The user was successfully created. If you inserted an email address, he/she will receive an email to claim his account. You can now edit the user profile to add more information.'));
+        alertService.add('success', gettextCatalog.getString('The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information.'));
         registerForm.$setPristine();
         registerForm.$setUntouched();
         $scope.user = new User();
