@@ -38,7 +38,10 @@
         if (listType === 'bundle') {
           label = 'Group';
         }
-        if (listType === 'list' || listType === 'functional_role') {
+        if (listType === 'functional_role') {
+          label = 'Role'
+        }
+        if (listType === 'list') {
           return;
         }
         $scope.listTypes.push(
