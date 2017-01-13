@@ -5,7 +5,7 @@
       <strong translate>Searching for</strong> "{{userFilters.name}}"
       <br>
     </span>
-    {{totalItems}} <span translate>contacts</span>
+    {{totalItems}} <span translate>contacts found</span>
   </p>
 
   <ul class="pagination list-actions__pagination">
@@ -35,6 +35,7 @@
 <table class="table table-responsive table-responsive--has-actions">
   <thead>
     <tr>
+      <th><span class="sr-only" translate>Verified</th>
       <th ng-click="sortList('name')" translate>Name</th>
       <th ng-click="sortList('role')" translate>Job title</th>
       <th ng-click="sortList('organization')" translate>Organization</th>
@@ -45,6 +46,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="user in users">
+      <td class="table-icon"><icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon></td>
       <td><a ng-href="/users/{{user._id}}">{{user.name}}</a></td>
       <td>
         {{user.job_title}}
@@ -55,7 +57,6 @@
 
       <td class="table-actions">
         <icon name="caution" text="Pending" title="Pending" ng-if="user.pending"></icon>
-        <icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon>
         <ng-include src="'app/components/user/userOptions.html'"></ng-include>
       </td>
     </tr>

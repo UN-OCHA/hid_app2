@@ -38,9 +38,32 @@
   td {
     display: block;
     padding: 0;
+    @include font-size($small-font-size);
 
     &:empty {
       display: none;
+    }
+  }
+
+  td:first-child:not(.table-icon) {
+    @include font-size($base-font-size);
+  }
+
+  td:first-child.table-icon {
+    position: absolute;
+    padding-top: 2px;
+
+    &:empty {
+      display: none;
+
+      &+ td {
+        padding-left: 0;
+      }
+    }
+
+    &+ td {
+      padding-left: $base-unit*2.5;
+      @include font-size($base-font-size);
     }
   }
 
@@ -51,21 +74,27 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      padding: $base-unit;
+      padding: $base-unit*1.5 0;
     }
   }
 }
 
 .table-responsive--has-actions {
-  td:first-child {
-    padding-right: $base-unit*13;
+  td:first-child:not(.table-icon) {
+    padding-right: $base-unit*9;
+  }
+
+  td:first-child.table-icon {
+    &+ td {
+      padding-right: $base-unit*9;
+    }
   }
 }
 
 td.table-actions {
   text-align: right;
   position: absolute;
-  top: $base-unit/2;
+  top: $base-unit;
   right: 0;
   padding: 0;
   white-space: nowrap;
@@ -102,13 +131,33 @@ td.table-actions {
     td {
       display: table-cell;
       padding: $base-unit*1.5 $base-unit;
+      @include font-size($base-font-size);
 
       &:empty {
         display: table-cell;
+        
       }
 
       &:first-child {
         padding-right: $base-unit;
+      }
+
+    }
+
+    td:first-child.table-icon {
+      position: relative;
+      padding-top: $base-unit*1.5;
+
+      &:empty {
+        display: table-cell;
+
+        &+ td {
+          padding-left: $base-unit;
+        }
+      }
+
+      &+ td {
+        padding-left: $base-unit;
       }
     }
 
@@ -123,8 +172,14 @@ td.table-actions {
   }
 
   .table-responsive--has-actions {
-    td {
+    td:first-child:not(.table-icon) {
       padding-right: $base-unit;
+    }
+
+    td:first-child.table-icon {
+      &+ td {
+        padding-right: $base-unit;
+      }
     }
   }
 

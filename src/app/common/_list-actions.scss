@@ -1,0 +1,79 @@
+.list-actions {
+  padding: $base-unit 0;
+}
+
+.list-actions__count {
+  @include font-size($small-font-size);
+  font-family: $heading-font-light;
+  color: $dark-blue;
+  font-style: italic;
+}
+
+.btn-toggle-admin, .btn-toggle-filters {
+  position: absolute;
+  top: $base-unit*2;
+  right: $base-unit;
+}
+
+.btn-toggle-filters--has-admin {
+  right: $base-unit*6.5;
+}
+
+@include media-query(sm) {
+
+  .list-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: $base-unit*2 0;
+  }
+
+    .list-actions__count {
+      @include font-size($base-font-size);
+    }
+
+    .btn-toggle-admin, .btn-toggle-filters {
+      top: $base-unit/2;
+    }
+
+    .btn-toggle-admin, .btn-toggle-filters {
+      right: $base-unit*2;
+    }
+
+  .btn-toggle-filters--has-admin {
+    right: $base-unit*8;
+  }
+
+}
+
+@include media-query(md) {
+
+  .btn-toggle-admin, .btn-toggle-filters {
+    top: $base-unit*5 + 3;
+    transition: $sidebar-transition;
+    .toggled & {
+      transform: translateX(-$sidebar-width-md);
+    }
+  }
+
+}
+
+@include media-query(xl) {
+
+  .btn-toggle-admin, .btn-toggle-filters {
+    right: $base-unit*5;
+  }
+
+  .btn-toggle-filters--has-admin {
+    right: $base-unit*11;
+  }
+
+}
+
+@include media-query(xxl) {
+  .btn-toggle-admin, .btn-toggle-filters {
+    .toggled & {
+      transform: translateX(-$sidebar-width-xxl);
+    }
+  }
+}

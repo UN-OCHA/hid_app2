@@ -124,3 +124,66 @@
   }
 
 }
+
+
+// Move this and update styleguide when make daahboard tab changes
+
+.tab-buttons {
+  border-bottom: 2px solid $border-grey;
+  display: flex;
+}
+
+.tab-buttons__button {
+  @include btn;
+  @include font-size($small-font-size);
+  border: none;
+  border-bottom: 2px solid transparent;
+  position: relative;
+  width: auto;
+  padding: $base-unit*1.5 $base-unit $base-unit $base-unit;
+  margin-bottom: -2px;
+  color: $text-dark;
+
+  &:disabled {
+    border: none;
+    color: $primary-color;
+    font-weight: bold;
+    opacity: 1;
+    border-bottom: 2px solid $primary-color;
+  }
+
+  &:hover, &:focus, &:disabled:hover, &:disabled:focus {
+    color: $primary-color;
+    font-weight: bold;
+    box-shadow: none;
+    border: none;
+    border-bottom: 2px solid $primary-color;
+    background: $light-grey;
+  }
+}
+
+@include media-query(sm) {
+
+  .tab-buttons {
+    margin-top: $base-unit;
+  }
+
+  .tab-buttons__button {
+    padding-left: $base-unit*4;
+    padding-right: $base-unit*4;
+  }
+
+}
+
+@include media-query(lg) {
+
+  .tab-buttons {
+    margin-top: $base-unit*3;
+  }
+
+  .tab-buttons__button {
+    @include font-size($base-font-size);
+    padding-left: $base-unit*10;
+    padding-right: $base-unit*10;
+  }
+}
