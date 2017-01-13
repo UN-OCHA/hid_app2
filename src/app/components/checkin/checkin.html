@@ -11,7 +11,18 @@
 
       <h2 class="block-heading" translate>Select lists</h2>
 
-      <ui-select ng-model="selectedList" on-select="updateSelectedLists(selectedList)" class="ui-select--has-border">
+      <div class="form-inline-fields form-inline-fields--clickies">
+        <p><input type="radio" name="listTypes" id="all" ng-model="selectedTypes.name" value="all" checked="checked" />
+        <label for="all" class="clickie-label">All</label>
+        </p>
+
+        <p ng-repeat="type in listTypes">
+          <input type="radio" name="listTypes" id="{{type.name}}" ng-model="selectedTypes.name" value="{{type.name}}" />
+          <label for="{{type.name}}" class="clickie-label">{{type.label}}</label>
+        </p>
+      </div>
+
+      <ui-select ng-model="selectedList" on-select="selectList(selectedList)" class="ui-select--has-border">
         <ui-select-match placeholder="{{'Select a list'|translate}}"><span translate>Select a list</span></ui-select-match>
         <ui-select-choices refresh="getLists($select.search)" repeat="list in lists">
           {{list.name}}
@@ -26,6 +37,26 @@
           </button>
         </li>
       </ul>
+
+      <div class="associated-lists" ng-if="associatedLists.length">
+        <div class="associated-lists__header">
+          <h3 class="associated-lists__heading" translate>Other lists you might be interested in</h3>
+          <button type="button" class="btn-transparent associated-lists__button" ng-click="showAllAssociated = !showAllAssociated">
+            <span ng-if="!showAllAssociated" translate>See all</span>
+            <icon name="arrow-down" ng-if="!showAllAssociated"></icon>
+            <span ng-if="showAllAssociated" translate>Hide</span>
+            <icon name="arrow-up" ng-if="showAllAssociated"></icon>
+          </button>
+        </div>
+        <ul class="list list-2-cols list--small list--has-buttons list--has-buttons-left">
+          <li ng-repeat="list in associatedLists" class="list__item" ng-show="$index < 4 || showAllAssociated">
+            <button type="button" class="btn-transparent list__button list__button" ng-click="addList(list)">
+              <icon name="plus" text="Add list"></icon>
+            </button>
+            {{list.name}}
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="block">
@@ -34,7 +65,7 @@
         <div class="form-field form-field--short">
           <label for="departureDate" class="form-section__sub-heading" translate>Set a date to be automatically checked out:</label>
           <div class="form-inline-fields">
-            <input class="form-inline-fields__item" type="text" id="departureDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="bottom-right" ng-model="departureDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
+            <input type="text" id="departureDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="bottom-right" ng-model="departureDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
             <button type="button" class="btn-transparent" ng-click="showDatePicker()">
               <icon name="calendar" text="Select a date"></icon>
             </button>

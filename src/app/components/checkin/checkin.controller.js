@@ -12,6 +12,10 @@
     $scope.organization = {};
     $scope.selectedLists = [];
     $scope.modifications = {};
+    $scope.listTypes = [];
+    $scope.selectedTypes = {
+      name: 'all'
+    };
     $scope.datePicker = {
       opened: false
     };
@@ -23,6 +27,28 @@
     };
     $scope.isCurrentUser = true;
     $scope.lists = [];
+    $scope.associatedLists = [];
+    $scope.showAllAssociated = false;
+    var searchTerm = '';
+
+    function getListTypes () {
+      angular.forEach(config.listTypes, function (listType) {
+
+        var label = listType.charAt(0).toUpperCase() + listType.slice(1);
+        if (listType === 'bundle') {
+          label = 'Group';
+        }
+        if (listType === 'list' || listType === 'functional_role') {
+          return;
+        }
+        $scope.listTypes.push(
+          {
+            name: listType,
+            label: label
+          }
+        );
+      });
+    }
 
     function isListMember (list, user) {
       var inList = false;
@@ -53,6 +79,42 @@
       return filteredLists;
     }
 
+    function getAssociatedLists (searchTerm, listTypes) {
+      var promises = [];
+       angular.forEach(listTypes, function(type) {
+        promises.push(List.query({name: searchTerm, limit: 10, sort: 'name', type: type}))
+      })
+      return $q.all(promises).then(function(data) {
+        return data;
+      }, function (error) {
+        $log.error(error);
+      });
+    }
+
+    function showAssociatedLists (list, searchTerm) {
+      var listTypes = [];      
+      if (list.type === 'functional_role' || list.type === 'list') {
+        return;
+      }
+      if (list.type === 'operation') {
+        listTypes = ['disaster', 'bundle', 'organization'];
+      }
+      if (list.type === 'disaster') {
+        listTypes = ['operation', 'bundle', 'organization'];
+      }
+      if (list.type === 'bundle') {
+        listTypes = ['operation', 'disaster', 'organization'];
+      }
+      if (list.type === 'organization') {
+        listTypes = ['operation', 'disaster', 'bundle'];
+      }
+      getAssociatedLists(searchTerm, listTypes).then(function (lists) {
+        var mergedLists = [].concat(lists[0], lists[1], lists[2]);
+        $scope.associatedLists = filterLists(mergedLists, $scope.selectedLists, $scope.user);
+      });
+      
+    }
+
     function getUser () {
       var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
       User.get({userId: userId}, function (user) {
@@ -61,17 +123,29 @@
         $scope.$broadcast('userLoaded');
       });
     }
-    getUser();
-
+    
     $scope.getLists = function(search) {
-      List.query({'name': search}, function (lists) {
-        console.log(lists.length)
+      searchTerm = search;
+      var params = {
+        name: search
+      };
+      if ($scope.selectedTypes.name !== 'all') {
+        params.type = $scope.selectedTypes.name;
+      }
+
+      List.query(params, function (lists) {
         $scope.lists = filterLists(lists, $scope.selectedLists, $scope.user);
       });
     };
 
-    $scope.updateSelectedLists = function (list) {
+    $scope.addList = function (list) {
       $scope.selectedLists.push(list);
+      $scope.associatedLists.splice($scope.associatedLists.indexOf(list), 1);
+    }
+
+    $scope.selectList = function (list) {
+      $scope.selectedLists.push(list);
+      showAssociatedLists(list, searchTerm);
     };
 
     $scope.removeList = function (list) {
@@ -178,6 +252,13 @@
       }
 
     });
+
+    function init() {
+      getUser();
+      getListTypes();
+    }
+
+    init();
 
   }
 })();

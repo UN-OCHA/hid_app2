@@ -188,6 +188,14 @@ legend {
   }
 }
 
+.form-inline-fields--clickies {
+  flex-wrap: wrap;
+
+  .clickie-label {
+    margin-right: $base-unit*1.5;
+  }
+}
+
 .form-inline-fields__item {
   margin-right: $base-unit;
   margin-bottom: 0;

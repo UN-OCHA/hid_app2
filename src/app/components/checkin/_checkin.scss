@@ -1,0 +1,28 @@
+.associated-lists {
+  margin-top: $base-unit;
+}
+
+.associated-lists__header {
+  border-bottom: 1px solid $border-grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.associated-lists__heading, .associated-lists__button {
+  font-family: $heading-font-light;
+  
+  font-style: italic;
+  text-transform: none;
+}
+
+.associated-lists__heading {
+  color: $dark-blue;
+  font-weight: normal;
+}
+
+@include media-query(md) {
+  .associated-lists {
+    margin-top: $base-unit*3;
+  }
+}
