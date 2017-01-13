@@ -24,38 +24,50 @@
     $scope.isCurrentUser = true;
     $scope.lists = [];
 
-    var queryCallback = function () {
-      $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
-      $scope.$broadcast('userLoaded');
-
-      $scope.lists = List.query({}, function() {
-        $scope.lists = $scope.lists.filter(function (list) {
-          var out = true, listType = '';
-          for (var i = 0, len = config.listTypes.length; i < len; i++) {
-            listType = config.listTypes[i] + 's';
-            if (!$scope.user[listType]) {
-              $scope.user[listType] = [];
-            }
-            for (var j = 0, tlen = $scope.user[listType].length; j < tlen; j++) {
-              if ($scope.user[listType][j].list == list._id) {
-                out = false;
-              }
-            }
+    function isListMember (list, user) {
+      var inList = false;
+      angular.forEach(config.listTypes, function (listType) {
+        angular.forEach(user[listType + 's'], function (userList) {
+          if (list._id === userList.list._id) {
+            return inList = true;
           }
-          return out;
         });
       });
-    };
+      return inList;
+    }
 
+    function isSelected (selectedLists, list) {
+      var listSelected = false;
+      angular.forEach(selectedLists, function(selectedList) {
+        if (list._id === selectedList._id) {
+          return listSelected = true;
+        }
+      });
+      return listSelected;
+    }
+
+    function filterLists (lists, selectedLists, user) {
+      var filteredLists = lists.filter(function (list) {
+        return !isListMember(list, user) && !isSelected(selectedLists, list);
+      });
+      return filteredLists;
+    }
 
     function getUser () {
       var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
-      $scope.user = User.get({userId: userId}, queryCallback);
+      User.get({userId: userId}, function (user) {
+        $scope.user = angular.copy(user);
+        $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
+        $scope.$broadcast('userLoaded');
+      });
     }
     getUser();
 
     $scope.getLists = function(search) {
-      $scope.lists = List.query({'name': search});
+      List.query({'name': search}, function (lists) {
+        console.log(lists.length)
+        $scope.lists = filterLists(lists, $scope.selectedLists, $scope.user);
+      });
     };
 
     $scope.updateSelectedLists = function (list) {
@@ -64,10 +76,6 @@
 
     $scope.removeList = function (list) {
       $scope.selectedLists.splice($scope.selectedLists.indexOf(list), 1);
-    };
-
-    $scope.isSelected = function (list) {
-      return $scope.selectedLists.indexOf(list) !== -1;
     };
 
     $scope._checkinHelper = function () {
