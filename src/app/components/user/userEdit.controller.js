@@ -127,6 +127,7 @@
       $scope.user.$update(function (user) {
         $scope.$parent.user = angular.copy(user);
         updateCurrentUser();
+        $scope.showRegion = false;
         $scope.$emit('editUser', {
           status: 'success',
           type: type,
@@ -164,7 +165,6 @@
 
     function setRegions ($item) {
       hrinfoService.getRegions($item.id).then(function (regions) {
-        console.log(regions)
         $scope.showRegion = regions.length ? true : false
         $scope.regions = regions;
       });
