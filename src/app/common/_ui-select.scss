@@ -70,7 +70,7 @@
   height: auto;
   max-height: 200px;
   overflow-x: hidden;
-  margin-top: -1px;
+  // margin-top: -1px;
 }
 
 .ui-select-multiple input.ui-select-search {
@@ -180,7 +180,8 @@
 
   > a {
     border-bottom: 1px solid $border-grey;
-
+    padding: $base-unit*1.5 $base-unit;
+    
     &:hover, &:focus {
       text-decoration: none;
       color: $dark-blue;
