@@ -16,6 +16,8 @@
         <span ng-if="user.verified" translate>Un-verify account</span>
       </button>
     </li>
-    <li ng-if="currentUser.is_admin"><button type="button" class="btn-link" ng-click="deleteUser(user);" translate>Delete Account</button></li>
+    <li ng-if="currentUser.is_admin || (currentUser.isManager && !user.email_verified && user.createdBy === currentUser._id)"><button type="button" class="btn-link" ng-click="deleteUser(user);" translate>Delete Account</button></li>
   </ul>
 </div>
+
+

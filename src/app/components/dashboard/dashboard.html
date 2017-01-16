@@ -142,9 +142,9 @@
     <div class="dashboard-ctas">
       <a class="btn-block btn-primary" href="/lists/new" translate>Create new List</a>
     </div>
-    <div class="dashboard-ctas" ng-if="currentUser.is_admin">
-      <a class="btn-block btn-primary" href="/users/new" translate>Add new user</a>
-      <a class="btn-block btn-primary" href="/clients" translate>View OAuth Clients</a>
+    <div class="dashboard-ctas">
+      <a class="btn-block btn-primary" href="/users/new"  ng-if="currentUser.is_admin || currentUser.isManager" translate>Add new user</a>
+      <a class="btn-block btn-primary" href="/clients"  ng-if="currentUser.is_admin" translate>View OAuth Clients</a>
     </div>
 
     <div class="secondary-block">

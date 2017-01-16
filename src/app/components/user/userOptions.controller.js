@@ -26,7 +26,7 @@
       alertService.add('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, function() {
         user.$delete(function () {
           alertService.add('success', 'The user was successfully deleted.');
-          getUsers();
+          UserDataService.notify();
         });
       });
     }
