@@ -47,7 +47,8 @@
     function setUpFields () {
       $scope.phoneNumberTypes = [
         {value: 'Landline', name: 'Landline'},
-        {value: 'Mobile', name: 'Mobile'}
+        {value: 'Mobile', name: 'Mobile'},
+        {value: 'Satellite', name: 'Satellite Phone'}
       ];
 
       $scope.emailTypes = [
