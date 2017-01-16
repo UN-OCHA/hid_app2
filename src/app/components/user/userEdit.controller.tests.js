@@ -77,6 +77,10 @@
           return;
         }
 
+        mockList.query = function () {
+          return;
+        }
+
         spyOn(scope, '$emit').and.callThrough();
 
         spyOn(testUser, 'get').and.callFake(function (params, callback) {

@@ -6,7 +6,6 @@
     var scope, mockhrinfoService, mockList, countries, listQueryResponse, roles, rootScope, mockUserService, mockGetText;
 
     countries = ['france', 'uk'];
-    roles = ['web monkey'];
     listQueryResponse = ['something'];
 
     var initialUsers = [
@@ -81,12 +80,6 @@
           return defer.promise;
         }
 
-        mockhrinfoService.getRoles = function () {
-          var defer = $q.defer();
-          defer.resolve(roles);
-          return defer.promise;
-        }
-
         mockUserService.getUsers = function () {
           var defer = $q.defer();
           defer.resolve(initialUsers);
@@ -102,7 +95,7 @@
         }
 
         spyOn(mockhrinfoService, 'getCountries').and.callThrough();
-        spyOn(mockhrinfoService, 'getRoles').and.callThrough();
+        // spyOn(mockhrinfoService, 'getRoles').and.callThrough();
         spyOn(mockList, 'query').and.callThrough();
         spyOn(mockUserService, 'getUsers').and.callThrough();
       });
@@ -184,8 +177,8 @@
       });
 
       it('should populate the roles dropdown', function () {
-        expect(mockhrinfoService.getRoles).toHaveBeenCalled();
-        expect(scope.roles).toEqual(roles);
+        expect(mockList.query).toHaveBeenCalledWith({'type': 'functional_role'}, jasmine.any(Function));
+        expect(scope.roles).toEqual(listQueryResponse);
       });
 
       it('should populate the operations dropdown', function () {

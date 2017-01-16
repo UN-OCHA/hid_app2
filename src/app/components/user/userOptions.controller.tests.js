@@ -69,7 +69,9 @@
       module('app.user', function($provide) {
         $provide.value('UserCheckInService', mockUserCheckInService);
         $provide.value('UserDataService', mockUserDataService);
+        $provide.constant('config', {});
       });
+
 
       inject(function($rootScope, $q, $injector) {
         scope = $rootScope.$new();

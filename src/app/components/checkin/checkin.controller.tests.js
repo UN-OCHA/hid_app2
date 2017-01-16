@@ -4,16 +4,17 @@
   describe('Check-in controller', function () {
 
     var countries, currentUserId, differentUserId, list1, list2, list3, list4, listQueryResponse, scope, mockhrinfoService,
-    mockList, mockUser, mockGetText, testUser;
+    mockList, mockUser, mockGetText, mockConfig, testUser;
 
     countries = ['france', 'uk'];
-    listQueryResponse = ['something'];
     currentUserId = '1234';
     differentUserId = '4321';
-    list1 = {id: 1, name: 'My list'};
-    list2 = {id: 2, name: 'Another'};
-    list3 = {id: 3, name: 'Words'};
-    list4 = {id: 4, name: 'Guitars'};
+    list1 = {_id: 1, name: 'My list'};
+    list2 = {_id: 2, name: 'Another', type: 'operation'};
+    list3 = {_id: 3, name: 'Words'};
+    list4 = {_id: 4, name: 'Guitars'};
+
+    listQueryResponse = [list1, list2, list3, list4];
 
     function ctrlSetup (isCurrentUser) {
       inject(function($controller, $rootScope, $q, $injector) {
@@ -64,13 +65,15 @@
         };
 
         mockList.query = function () {
-          return listQueryResponse;
+          return;
         };
 
+        spyOn(mockList, 'query').and.callFake(function (params, callback) {
+          callback(listQueryResponse);
+        });
+
         spyOn(testUser, 'get').and.callFake(function (params, callback) {
-          scope.user = testUser;
-            callback();
-            // return testUser;
+            callback(testUser);
         });
         spyOn(testUser, 'addPhone').and.callFake(function (params, callback) {
             callback();
@@ -124,8 +127,11 @@
         $provide.value('gettextCatalog', mockGetText);
       });
 
+      mockConfig = {}
+      mockConfig.listTypes = ['operation', 'list'];
+
       module('app.checkin', function($provide) {
-        $provide.constant('config', {});
+        $provide.constant('config', mockConfig);
       });
 
     });
@@ -157,14 +163,80 @@
 
     });
 
-    describe('Select lists to check in to', function () {
+    describe('Searching lists', function() {
+
+      beforeEach(function () {
+        ctrlSetup(true);
+      });
+      
+      it('should not search lists if there is no search term', function () {
+        scope.getLists('');
+        expect(mockList.query).not.toHaveBeenCalled();
+      });
+
+      it('should search lists of the selected type', function () {
+        scope.selectedTypes.name = 'operation';
+        scope.getLists('findme');
+
+        var params = {
+          name: 'findme',
+          type: 'operation'
+        };
+        expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
+      });
+
+      it('should search lists of all types if not type selected', function () {
+        scope.selectedTypes.name = 'all';
+        scope.getLists('findme');
+
+        var params = {
+          name: 'findme'
+        };
+        expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
+      });
+
+      it('should add the returned lists to scope', function () {
+        scope.getLists('findme');
+        expect(scope.lists).toEqual(listQueryResponse);
+      });
+
+    });
+
+    describe('Filtering returned lists', function () {
+
+      beforeEach(function () {
+        ctrlSetup(true);
+      });
+
+      it('should remove already selected lists from the returned lists', function () {
+        var expectedFilteredList = [list1, list3, list4];
+        scope.selectedLists = [list2]
+        scope.getLists('findme');
+        expect(scope.lists).toEqual(expectedFilteredList);
+      });
+
+      it('should remove lists the user is checked into from the returned lists', function () {
+        var expectedFilteredList2 = [list1, list2, list4];
+        scope.user.operations = [
+          {
+            _id: '222',
+            list: list3
+          }
+        ]
+        scope.getLists('findme');
+        expect(scope.lists).toEqual(expectedFilteredList2);
+      });
+
+    });
+
+    describe('Selecting lists to check in to', function () {
 
       beforeEach(function () {
         ctrlSetup(true);
       });
 
       it('should add the list to select lists', function () {
-        scope.updateSelectedLists(list1);
+        scope.selectList(list1);
         expect(scope.selectedLists).toEqual([list1]);
       });
 
@@ -174,13 +246,12 @@
         expect(scope.selectedLists).toEqual([list1, list3]);
       });
 
-      it('should check if the list is already selected', function () {
-        scope.selectedLists = [list1, list2, list3];
-        expect(scope.isSelected(list3)).toBe(true);
-        expect(scope.isSelected(list4)).toBe(false);
-      });
-
     });
+
+    // TO DO
+    // describe('Associated lists', function () {
+
+    // });
 
   });
 })();
