@@ -85,7 +85,7 @@
     function getAssociatedLists (searchTerm, listTypes) {
       var promises = [];
        angular.forEach(listTypes, function(type) {
-        promises.push(List.query({name: searchTerm, limit: 10, sort: 'name', type: type}))
+        promises.push(List.query({name: searchTerm, limit: 10, sort: 'name', type: type}).$promise)
       })
       return $q.all(promises).then(function(data) {
         return data;
