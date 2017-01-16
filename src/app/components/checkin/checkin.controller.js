@@ -128,6 +128,9 @@
     }
     
     $scope.getLists = function(search) {
+      if (search === '') {
+        return;
+      }
       searchTerm = search;
       var params = {
         name: search
