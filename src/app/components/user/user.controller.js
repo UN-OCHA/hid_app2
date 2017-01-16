@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$scope', '$routeParams', '$timeout', 'gettextCatalog', 'alertService', 'md5', 'User'];
+  UserCtrl.$inject = ['$scope', '$routeParams', '$timeout', '$location', 'gettextCatalog', 'alertService', 'md5', 'User'];
 
-  function UserCtrl($scope, $routeParams, $timeout, gettextCatalog, alertService, md5, User) {
+  function UserCtrl($scope, $routeParams, $timeout, $location, gettextCatalog, alertService, md5, User) {
     $scope.pictureUrl = '';
     $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin);
     $scope.showProfileForm  = $routeParams.edit && $scope.canEditUser ? true : false;
@@ -137,6 +137,15 @@
       $scope.profileForm.$hide();
       $scope.saving.show = false;
     };
+
+    $scope.deleteUser = function (user) {
+      alertService.add('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, function() {
+        user.$delete(function () {
+          alertService.add('success', 'The user was successfully deleted.');
+          $location.path('/landing');
+        });
+      });
+    }
 
   }
 })();

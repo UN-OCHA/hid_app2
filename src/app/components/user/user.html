@@ -45,6 +45,11 @@
         <span translate>Report a Problem</span>
       </button>
 
+      <button class="btn-danger btn-block" ng-if="currentUser.is_admin || (currentUser.isManager && !user.email_verified && user.createdBy === currentUser._id)" ng-disabled="!isOnline" ng-click="deleteUser(user)">
+        <icon name="trash"></icon>
+        <span translate>Delete User</span>
+      </button>
+
     </div>
   </div>
 </div>
