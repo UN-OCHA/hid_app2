@@ -27,7 +27,7 @@
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
       var params = angular.extend($scope.request, $scope.userFilters);
       UserDataService.getUsers(params).then(function (users) {
-        $scope.users = checkPending(angular.copy(users));
+        $scope.users = checkPending(users);
         $scope.totalItems = users.headers["x-total-count"];
       });
     }
