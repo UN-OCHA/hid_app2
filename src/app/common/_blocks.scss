@@ -18,7 +18,6 @@
 .secondary-block {
   border-bottom: 1px solid $primary-color;
   margin-bottom: $base-unit*2;
-  padding-bottom: $base-unit*2;
 }
 
 .secondary-block__heading {
@@ -39,9 +38,7 @@
 @include media-query(md) {
 
   .block {
-    // &+.block {
-      margin-bottom: $base-unit*4;
-    // }
+    margin-bottom: $base-unit*4;
   }
 
 }

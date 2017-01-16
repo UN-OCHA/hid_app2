@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-xs-12 col-md-8">
 
-  <div ng-controller="SearchFormCtrl">
+    <div ng-controller="SearchFormCtrl">
 
       <h2 class="block-heading" translate>Search for contacts</h2>
 
@@ -58,9 +58,34 @@
             <li><button type="button" ng-click="fullSearch(searchListsTerm)" class="btn-transparent">View all</button></li>
           </ul>
         </div>
-    </form>
+      </form>
+
+    </div>
 
   </div>
+  <div class="col-xs-12 col-md-4">
+    <div class="secondary-block">
+      <h2 class="secondary-block__heading">
+        <span translate>Notifications</span>
+        <a href="/notifications" class="btn-primary btn-small" translate>View all</a>
+      </h2>
+      <ul class="secondary-block__list">
+        <li class="secondary-block__item" ng-repeat="notification in notifications.unread | limitTo: 5">
+          <icon name="arrow-right"></icon>
+          {{notification.text}}
+        </li>
+        <li class="secondary-block__item">
+          <icon name="arrow-right"></icon>
+          <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
+          <li class="secondary-block__item">
+            <icon name="arrow-right"></icon>
+            <span ng-if="currentUser.verified" translate>Your profile is verified</span>
+            <span ng-if="!currentUser.verified" translate>You're not verified yet</span>
+          </li>
+        </ul>
 
+      </div>
+
+    </div>
   </div>
 </div>

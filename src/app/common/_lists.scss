@@ -1,3 +1,7 @@
+.list.secondary-block__list {
+  padding-left: $base-unit*2;
+}
+
 .list--small {
   @include font-size($small-font-size);
 }

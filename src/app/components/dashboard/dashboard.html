@@ -9,89 +9,148 @@
 <div class="row">
 
   <div class="col-md-8">
-  <ul class="block tabs tabs-3 dashboard-tabs" ng-class="{'tabs--closed' : !tabsActive}">
 
-      <li class="tabs__control-item">
-        <button type="button" class="tabs__control-button" ng-class="{'active' : activeTab === 'favorites', 'tabs__control-button--mobile-closed': !tabsActive}" ng-click="toggleTabs('favorites')">
+  <h2 class="block-heading" translate>My lists</h2>
+
+    <div class="block tabs tabs--responsive">
+      <nav class="tabs-nav">
+        <button type="button" 
+          class="tabs-nav__button" 
+          ng-class="tabClass('favorites')"
+          ng-click="toggleTabs('favorites')">
           <span translate>My favorite lists</span>
+          <icon name="arrow-down"></icon>
         </button>
 
-        <div class="tabs__content" ng-if="activeTab === 'favorites'" ng-class="{'tabs__content--mobile-closed' : !tabsActive}">
-          <ul class="list list--has-buttons list--has-dividers">
-            <li class="list__item" ng-if="!currentUser.favoriteLists.length" translate>
-              You don't have any favorite lists
-            </li>
-            <li class="list__item" ng-repeat="list in currentUser.favoriteLists track by $index">
-              <a href="/lists/{{list._id}}">{{list.name}}</a>
-              <div uib-dropdown class="list__button">
-                <button type="button" class="btn-transparent" uib-dropdown-toggle>
-                  <icon name="dots" text="Options"></icon>
-                </button>
-                <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
-                  <li><button type="button" ng-click="removeFavorite(list)" class="btn-link" translate>Remove from favorites</button></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="tabs__control-item">
-        <button type="button" class="tabs__control-button" ng-class="{'active' : activeTab === 'partof'}" ng-click="toggleTabs('partof')">
+        <button type="button" 
+          class="tabs-nav__button" 
+          ng-click="toggleTabs('partof')"
+          ng-class="tabClass('partof')">
           <span translate>Lists I'm part of</span>
+          <icon name="arrow-down"></icon>
         </button>
 
-        <div class="tabs__content" ng-if="activeTab === 'partof'">
-          <ul class="list list--has-buttons list--has-dividers">
-            <li class="list__item" ng-if="!listsMember.length" translate>
-              You are not part of any lists
-            </li>
-            <li class="list__item" ng-repeat="list in listsMember track by $index">
-              <a href="/lists/{{list._id}}">{{list.name}}</a>
-              <div uib-dropdown class="list__button">
-                <button type="button" class="btn-transparent" uib-dropdown-toggle>
-                  <icon name="dots" text="Options"></icon>
-                </button>
-                <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
-                  <li><button type="button" ng-click="leaveList(list)" class="btn-link" translate>Check out of list</button></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="tabs__control-item">
-        <button type="button" class="tabs__control-button" ng-class="{'active' : activeTab === 'manage'}" ng-click="toggleTabs('manage')">
+        <button type="button" 
+          class="tabs-nav__button" 
+           ng-click="toggleTabs('manage')"
+           ng-class="tabClass('manage')">
           <span translate>Lists I manage</span>
+          <icon name="arrow-down"></icon>
+        </button>
+      </nav>
+
+      <div class="tabs__section">
+        <button type="button" 
+          class="tabs-nav__button" 
+          ng-class="tabClass('favorites')"
+          ng-click="toggleTabs('favorites')">
+          <span translate>My favorite lists</span>
+          <icon name="arrow-down"></icon>
         </button>
 
-        <div class="tabs__content" ng-if="activeTab === 'manage'">
+        <div class="tabs__content"
+          ng-class="tabClass('favorites')"
+          >
           <ul class="list list--has-buttons list--has-dividers">
-            <li class="list__item" ng-if="!listsOwnedOrManaged.length" translate>
-              You don't manage any lists
-            </li>
-            <li class="list__item" ng-repeat="list in listsOwnedOrManaged track by $index">
-              <a href="/lists/{{list._id}}">{{list.name}}</a>
-              <div uib-dropdown class="list__button">
-                <button type="button" class="btn-transparent" uib-dropdown-toggle>
-                  <icon name="dots" text="Options"></icon>
-                </button>
-                <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
-                  <li><a href="/lists/{{list._id}}/edit" translate>Access settings</a></li>
-                  <li><button type="button" ng-click="deleteList(list)" class="btn-link" translate>Delete list</button></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
+              <li class="list__item" ng-if="!currentUser.favoriteLists.length" translate>
+                You don't have any favorite lists
+              </li>
+              <li class="list__item" ng-repeat="list in currentUser.favoriteLists track by $index">
+                <a href="/lists/{{list._id}}">{{list.name}}</a>
+                <div uib-dropdown class="list__button">
+                  <button type="button" class="btn-transparent" uib-dropdown-toggle>
+                    <icon name="dots" text="Options"></icon>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+                    <li><button type="button" ng-click="removeFavorite(list)" class="btn-link" translate>Remove from favorites</button></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
         </div>
-      </li>
-    </ul>
+      </div>
 
-    <div class="block">
-      <h2 class="block-heading" translate>Subscriptions</h2>
+      <div class="tabs__section">
+        <button type="button" 
+          class="tabs-nav__button" 
+          ng-click="toggleTabs('partof')"
+          ng-class="tabClass('partof')">
+          <span translate>Lists I'm part of</span>
+          <icon name="arrow-down"></icon>
+        </button>
 
-      <ul class="list list--has-buttons list--has-dividers">
+        <div class="tabs__content"
+          ng-class="tabClass('partof')"
+          >
+          <ul class="list list--has-buttons list--has-dividers">
+              <li class="list__item" ng-if="!listsMember.length" translate>
+                You are not part of any lists
+              </li>
+              <li class="list__item" ng-repeat="list in listsMember track by $index">
+                <a href="/lists/{{list._id}}">{{list.name}}</a>
+                <div uib-dropdown class="list__button">
+                  <button type="button" class="btn-transparent" uib-dropdown-toggle>
+                    <icon name="dots" text="Options"></icon>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+                    <li><button type="button" ng-click="leaveList(list)" class="btn-link" translate>Check out of list</button></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+
+      <div class="tabs__section">
+        <button type="button" 
+          class="tabs-nav__button" 
+           ng-click="toggleTabs('manage')"
+           ng-class="tabClass('manage')">
+          <span translate>Lists I manage</span>
+          <icon name="arrow-down"></icon>
+        </button>
+
+        <div class="tabs__content"
+          ng-class="tabClass('manage')"
+          >
+         <ul class="list list--has-buttons list--has-dividers">
+              <li class="list__item" ng-if="!listsOwnedOrManaged.length" translate>
+                You don't manage any lists
+              </li>
+              <li class="list__item" ng-repeat="list in listsOwnedOrManaged track by $index">
+                <a href="/lists/{{list._id}}">{{list.name}}</a>
+                <div uib-dropdown class="list__button">
+                  <button type="button" class="btn-transparent" uib-dropdown-toggle>
+                    <icon name="dots" text="Options"></icon>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+                    <li><a href="/lists/{{list._id}}/edit" translate>Access settings</a></li>
+                    <li><button type="button" ng-click="deleteList(list)" class="btn-link" translate>Delete list</button></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+     
+    </div>
+
+  </div>
+
+  <div class="col-md-4">
+
+    <div class="dashboard-ctas">
+      <a class="btn-block btn-primary" href="/lists/new" translate>Create new List</a>
+    </div>
+    <div class="dashboard-ctas" ng-if="currentUser.is_admin">
+      <a class="btn-block btn-primary" href="/users/new" translate>Add new user</a>
+      <a class="btn-block btn-primary" href="/clients" translate>View OAuth Clients</a>
+    </div>
+
+    <div class="secondary-block">
+      <h2 class="secondary-block__heading" translate>Subscriptions</h2>
+
+      <ul class="secondary-block__list list list--has-buttons">
         <li class="list__item" ng-repeat="subscription in subscriptions">
           {{subscription.name}}
           <div uib-dropdown class="list__button">
@@ -110,45 +169,10 @@
               </li>
             </ul>
           </div>
-        </li>
+        </li>  
       </ul>
 
     </div>
 
   </div>
-
-  <div class="col-md-4">
-
-    <div class="dashboard-ctas">
-      <a class="btn-block btn-primary" href="/lists/new" translate>Create new List</a>
-      <a class="btn-block btn-primary" href="/checkin" translate>Check In</a>
-    </div>
-    <div class="dashboard-ctas">
-      <a class="btn-block btn-primary" href="/users/new" ng-if="currentUser.is_admin">Add new user</a>
-      <a class="btn-block btn-primary" href="/clients" ng-if="currentUser.is_admin">View OAuth Clients</a>
-    </div>
-
-    <div class="secondary-block">
-      <h2 class="secondary-block__heading">
-        <span translate>Notifications</span>
-        <a href="/notifications" class="btn-primary btn-small" translate>View all</a>
-      </h2>
-      <ul class="secondary-block__list">
-        <li class="secondary-block__item" ng-repeat="notification in notifications.unread | limitTo: 5">
-          <icon name="arrow-right"></icon>
-          {{notification.text}}
-        </li>
-        <li class="secondary-block__item">
-          <icon name="arrow-right"></icon>
-          <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
-          <li class="secondary-block__item">
-            <icon name="arrow-right"></icon>
-            <span ng-if="currentUser.verified" translate>Your profile is verified</span>
-            <span ng-if="!currentUser.verified" translate>You're not verified yet</span>
-          </li>
-        </ul>
-
-      </div>
-
-    </div>
-  </div>
+</div>

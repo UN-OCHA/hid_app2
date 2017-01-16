@@ -5,10 +5,10 @@
     .module('app.dashboard')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'notificationsService', 'List', 'ListDataService', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
+  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'List', 'ListDataService', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
-  function DashboardCtrl($scope, alertService, config, gettextCatalog, notificationsService, List, ListDataService, Service, User, UserCheckInService, UserDataService) {
-    $scope.tabsActive = false;
+  function DashboardCtrl($scope, alertService, config, gettextCatalog, List, ListDataService, Service, User, UserCheckInService, UserDataService) {
+    $scope.tabs = {}
     $scope.activeTab = 'favorites';
     $scope.listsMember = [];
     $scope.listsOwnedOrManaged = [];
@@ -83,10 +83,21 @@
       });
     };
 
-    $scope.toggleTabs = function (tabName) {
+    $scope.toggleTabs = function(tabName) {
+      $scope.tabs[tabName] = !$scope.tabs[tabName];
       $scope.activeTab = tabName;
-      $scope.tabsActive = true;
-    };
+    }
+
+    $scope.tabClass = function (tabName) {
+      var classes = [];
+      if ($scope.tabs[tabName]) {
+        classes.push('mobile-active');
+      }
+      if ($scope.activeTab === tabName) {
+        classes.push('desktop-active');
+      }
+      return classes;
+    }
 
     $scope.unsubscribe = function (subscription) {
       var service = new Service(subscription);
@@ -110,8 +121,6 @@
         });
       });
     };
-
-    $scope.notifications = notificationsService;
 
   }
 })();

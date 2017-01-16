@@ -2,15 +2,14 @@
   <h1 class="page-header__heading" translate>{{heading}}</h1>
 </div>
 
-<!-- <div class="btn-toggle search-actions__toggle-lists"> -->
-<div class="tab-buttons">
-    <button type="button" class="tab-buttons__button" ng-click="showLists = !showLists" ng-disabled="!showLists" translate>
-      Showing contacts
-    </button>
+<div class="tabs-nav">
+  <button type="button" class="tabs-nav__button" ng-click="showLists = !showLists" ng-disabled="!showLists" translate>
+    Showing contacts
+  </button>
 
-    <button type="button" class="tab-buttons__button" ng-click="showLists = !showLists" ng-disabled="showLists" translate>
-      Showing lists
-    </button>
+  <button type="button" class="tabs-nav__button" ng-click="showLists = !showLists" ng-disabled="showLists" translate>
+    Showing lists
+  </button>
 </div>
 
 <ng-include ng-show="showLists" src="'app/components/list/all-lists.html'"></ng-include>

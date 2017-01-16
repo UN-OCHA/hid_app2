@@ -3,8 +3,6 @@
  */
 
 .dashboard-ctas {
-  margin-bottom: $base-unit*2;
-
   .btn-block {
     margin-bottom: $base-unit;
   }
@@ -16,11 +14,10 @@
       display: flex;
 
     .btn-block {
-      width: 49%;
-      margin: 0 2% 0 0;
+      margin-bottom: $base-unit*2;
 
       &+.btn-block {
-        margin-right: 0;
+        margin-left: 4%;
       }
     }
   }
