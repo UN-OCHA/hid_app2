@@ -85,6 +85,9 @@
       angular.forEach($scope.usersAdded.users, function (value, key) {
         UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
           UserDataService.notify();
+          alertService.add('success', 'Successfully added to list');
+        }, function (error) {
+          alertService.add('danger', error);
         });
       });
     };

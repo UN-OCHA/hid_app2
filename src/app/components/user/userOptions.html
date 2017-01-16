@@ -8,7 +8,7 @@
     </li>
     <li ng-if="currentUser.is_admin"><a href="/users/{{user._id}}/edit" translate>Edit</a></li>
     <!-- <li ng-if="currentUser.is_admin"><button type="button" class="btn-link" translate>Edit subscriptions (to do)</button></li> -->
-    <li ng-if="list && currentUser.is_admin"><button type="button" class="btn-link" ng-click="removeFromList(user, list);" translate>Remove from list</button></li>
+    <li ng-if="list && (currentUser.is_admin || isManager || isOwner)"><button type="button" class="btn-link" ng-click="removeFromList(user, list);" translate>Remove from list</button></li>
     <li><button type="button" class="btn-link" ng-click="openCheckInModal(user, currentUser.is_admin)" translate>Check into a list</button></li>
     <li ng-if="currentUser.is_admin">
       <button type="button" class="btn-link" ng-click="verifyUser(user)" translate>
