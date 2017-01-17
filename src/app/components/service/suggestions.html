@@ -1,13 +1,39 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <div class="page-header">
-      <h1 class="page-header__heading">Suggestions</h1>
+      <h1 class="page-header__heading" translate>Suggested services</h1>
+      <p translate>You were successfully checked in. Given the lists you checked into, we recommend that you subscribe to the following services:</p>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <p translate>You were successfully checked in. Given the lists you checked into, we recommend that you subscribe to the following services:</p>
-    <services-list></services-list>
+
+    <form ng-submit="subscribe()">
+      <ul class="list list--has-dividers list--has-buttons">
+        <li class="list__item" ng-repeat="service in services">
+
+          <input type="checkbox"
+          id="service-{{service._id}}"
+          value="{{service._id}}"
+          ng-model="service.selected"
+          />
+          <label class="clickie-label" for="service-{{service._id}}">
+            {{service.name}} {{service.userSubscribed}}
+            <span class="list__meta">{{service.description}}</span>
+          </label>
+        </li>
+      </ul>
+
+      <div class="row form-group">
+        <div class="col-xs-6 col-md-4 pull-md-2 offset-md-2">
+          <button type="button" class="btn-secondary btn-block" ng-click="skipSuggestions()" translate>
+            Skip
+          </button>
+        </div>
+        <div class="col-xs-6 col-md-4 offset-md-2">
+          <button type="submit" class="btn-primary btn-block" translate>
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </form>
+
   </div>
 </div>
