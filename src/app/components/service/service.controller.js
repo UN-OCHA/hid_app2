@@ -26,11 +26,20 @@
     $scope.isSubscribed = false;
     $scope.userSubscribed = {};
     $scope.userUnsubscribed = {};
+    $scope.pagination = {
+      currentPage: 1,
+      itemsPerPage: 50,
+      totalItems: 0
+    };
+
+    var offset = 0
 
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
+        $scope.getSubscribers();
         $scope.getMailchimpLists();
         $scope.credentials = ServiceCredentials.query();
+        
         for (var i = 0; i < $scope.currentUser.subscriptions.length; i++) {
           if ($scope.currentUser.subscriptions[i]._id === $scope.service._id) {
             $scope.isSubscribed = true;
@@ -150,5 +159,17 @@
       return inManagers ? true : false;
     };
 
+    $scope.pageChanged = function () {
+      offset = ($scope.pagination.currentPage - 1);
+      $scope.getSubscribers();
+    };
+
+    $scope.getSubscribers = function () {
+      User.query({subscriptions: $scope.service._id, limit: $scope.pagination.itemsPerPage, offset: offset}, function (response) {
+        $scope.subscribers = response;
+        $scope.pagination.totalItems = response.headers['x-total-count'];
+      });
+    };
+    
   }
 })();

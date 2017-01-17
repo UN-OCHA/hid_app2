@@ -6,10 +6,28 @@
 
 <div class="page-header">
   <h1 class="page-header__heading">{{service.name}}</h1>
-</div>
-<div id="page-content-wrapper">
   <p>{{service.description}}</p>
-  <ul>
-    <li><span translate>Type</span>: {{service.type}}</li>
-  </ul>
+  <p><span translate>Type</span>: {{service.type}}</p>
+</div>
+
+<div class="row" ng-if="service.isOwner(currentUser) || service.isManager(currentUser) || currentUser.is_admin">
+  <div class="col-xs-12">
+    <h2 class="block-heading" translate>{{pagination.totalItems}} Subscribers</h2>
+    
+    <ul class="list list--has-dividers list--has-buttons">
+      <li ng-if="!subscribers.length" translate><em>No subscribers</em></li>
+      <li class="list__item" ng-repeat="subscriber in subscribers">
+        <a href="users/{{subscriber._id}}">{{subscriber.name}}</a>
+      </li>  
+    </ul>
+
+    <uib-pagination 
+      total-items="pagination.totalItems" 
+      ng-model="pagination.currentPage"
+      ng-change="pageChanged()" 
+      direction-links="false" 
+      items-per-page=pagination.itemsPerPage
+      class="pagination" >    
+    </uib-pagination>
+  </div>
 </div>

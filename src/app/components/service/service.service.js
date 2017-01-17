@@ -39,6 +39,17 @@
       return (this.owner && this.owner.id === user.id) || (this.ownersIndex(user) !== -1);
     };
 
+    Service.prototype.isManager = function (user) {
+      var isManager = false;
+      angular.forEach(this.managers, function (manager) {
+        if (user._id === manager._id) {
+          isManager = true;
+          return;
+        }
+      });
+      return isManager;
+    };
+
     // Check if a user is subscribed to this service
     Service.prototype.isSubscribed = function (user) {
       var index = -1;
