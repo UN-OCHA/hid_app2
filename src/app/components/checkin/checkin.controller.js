@@ -82,10 +82,10 @@
       return filteredLists;
     }
 
-    function getAssociatedLists (searchTerm, listTypes) {
+    function getAssociatedLists (operations) {
       var promises = [];
-       angular.forEach(listTypes, function(type) {
-        promises.push(List.query({name: searchTerm, limit: 10, sort: 'name', type: type}).$promise)
+       angular.forEach(operations, function(operationId) {
+        promises.push(List.query({limit: 20, 'metadata.operation.id' : operationId}).$promise)
       })
       return $q.all(promises).then(function(data) {
         return data;
@@ -94,28 +94,46 @@
       });
     }
 
-    function showAssociatedLists (list, searchTerm) {
-      var listTypes = [];      
-      if (list.type === 'functional_role' || list.type === 'list') {
+    function getListOperations (list) {
+      var operations = [];
+
+      // If an operation, get its id
+      if (list.type === 'operation') {
+        operations.push(list.remote_id);
+        return operations;
+      }
+
+      // If no associated operations return
+      if (!list.metadata.operation) {
         return;
       }
-      if (list.type === 'operation') {
-        listTypes = ['disaster', 'bundle', 'organization'];
+
+      // Get all the associated operations
+      angular.forEach(list.metadata.operation, function(operation) {
+        operations.push(operation.id);
+      });
+
+      return operations;
+    }
+
+    function showAssociatedLists (list, searchTerm) {
+      if (list.type === 'role' || list.type === 'list') {
+        return;
       }
-      if (list.type === 'disaster') {
-        listTypes = ['operation', 'bundle', 'organization'];
-      }
-      if (list.type === 'bundle') {
-        listTypes = ['operation', 'disaster', 'organization'];
-      }
+
+      //Use the search term to get associated lists if an organisation
       if (list.type === 'organization') {
-        listTypes = ['operation', 'disaster', 'bundle'];
+        List.query({name: searchTerm, limit: 20}, function (lists) {
+          $scope.associatedLists = filterLists(lists, $scope.selectedLists, $scope.user);
+        });
+        return
       }
-      getAssociatedLists(searchTerm, listTypes).then(function (lists) {
-        var mergedLists = [].concat(lists[0], lists[1], lists[2]);
+
+      //Otherwise user the associated operations
+      getAssociatedLists(getListOperations(list)).then(function (listsArray) {          
+        var mergedLists = Array.prototype.concat.apply([], listsArray);
         $scope.associatedLists = filterLists(mergedLists, $scope.selectedLists, $scope.user);
       });
-      
     }
 
     function getUser () {

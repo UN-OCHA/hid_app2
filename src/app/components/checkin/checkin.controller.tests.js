@@ -9,10 +9,27 @@
     countries = ['france', 'uk'];
     currentUserId = '1234';
     differentUserId = '4321';
-    list1 = {_id: 1, name: 'My list'};
-    list2 = {_id: 2, name: 'Another', type: 'operation'};
-    list3 = {_id: 3, name: 'Words'};
-    list4 = {_id: 4, name: 'Guitars'};
+    list1 = {_id: 1, name: 'My list', metadata: {}};
+    list2 = {_id: 2, name: 'Another', type: 'operation', remote_id: 78, metadata: {}};
+    list3 = {_id: 3, name: 'Words', metadata: {}};
+    list4 = {_id: 4, name: 'Guitars', metadata: {}};
+
+    var listDisaster = {
+      _id: 5,
+      name: 'Disasterous',
+      type: 'disaster',
+      remote_id: '214354',
+      metadata: {
+        operation: [
+          {
+            id: 99
+          },
+           {
+            id: 100
+           }
+        ]
+      }
+    };
 
     listQueryResponse = [list1, list2, list3, list4];
 
@@ -250,6 +267,68 @@
 
     // TO DO
     // describe('Associated lists', function () {
+
+    //   var expectedParams;
+
+    //   describe('Associated lists for an operation', function () {
+
+    //     beforeEach(function () {
+    //       ctrlSetup(true);
+
+    //       expectedParams = {
+    //         limit: 20,
+    //         'metadata.operation.id': 78
+    //       }
+    //       scope.selectedLists = [];
+    //       scope.getLists('haiti');
+    //       scope.selectList(list2);
+
+    //     });
+
+    //     afterEach(function(){
+    //       scope.$apply();
+    //     });
+
+    //     it('should get the lists associated with the operation', function () {
+    //       expect(mockList.query).toHaveBeenCalledWith(expectedParams);
+    //     });
+
+    //     it('should filter and show the associated lists', function () {
+    //         expect(scope.associatedLists).toEqual([list1, list3, list4])
+    //     });
+
+    //   });
+
+      // describe('Associated lists for a disaster', function () {
+      //   var expectedParams1;
+      //   var expectedParams2;
+
+      //   beforeEach(function () {
+      //     ctrlSetup(true);
+
+      //     expectedParams1 = {
+      //       limit: 40,
+      //       'metadata.operation.id': 99
+      //     }
+      //     expectedParams2 = {
+      //       limit: 40,
+      //       'metadata.operation.id': 99
+      //     }
+      //     scope.selectedLists = [];
+      //     scope.getLists('haiti');
+      //     scope.selectList(listDisaster);
+      //   });
+
+      //   it('should get the lists associated with the operation', function () {
+      //     expect(mockList.query).toHaveBeenCalledWith(expectedParams1, jasmine.any(Function));
+      //     expect(mockList.query).toHaveBeenCalledWith(expectedParams2, jasmine.any(Function));
+      //   });
+
+      //   it('should filter and show the associated lists', function () {
+      //       expect(scope.associatedLists).toEqual([list1, list3, list4])
+      //   });
+
+      // });
 
     // });
 
