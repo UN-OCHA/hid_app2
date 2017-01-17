@@ -75,9 +75,9 @@
           </h1>
 
           <ul class="profile-header__info"  ng-if="!showProfileForm">
-            <li ng-if="user.organization && user.organization.list"><icon name="home"></icon> {{user.organization.list.acronym || user.organization.list.name}}</li>
+            <li ng-if="user.organization && user.organization.list"><icon name="home"></icon>{{user.organization.list.acronym || user.organization.list.name}}</li>
             <!-- <li><icon name="user"></icon> Cluster</li> -->
-            <li ng-if="user.location"><icon name="map-pin"></icon></i> {{user.location.country.name}}</li>
+            <li ng-if="user.location"><icon name="map-pin"></icon></i>{{user.location.country.name}}</li>
           </ul>
 
           <p class="profile-header__status">{{user.status}}</p>

@@ -88,6 +88,13 @@
 .profile-header__info {
   margin-top: $base-unit/2;
   @include font-size($small-font-size);
+
+  .iconholder {
+    display: inline-block;
+    width: $base-unit*2;
+    margin-right: $base-unit/2;
+    text-align: center;
+  }
 }
 
 .profile-header__controls {
