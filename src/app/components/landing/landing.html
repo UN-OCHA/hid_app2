@@ -13,7 +13,7 @@
 
       <h2 class="block-heading" translate>Search for contacts</h2>
 
-      <form ng-submit="fullSearch(searchUsersTerm)" role="search" class="search-form">
+      <form ng-submit="fullSearch(searchUsersTerm)" role="search" class="block search-form">
 
         <div uib-dropdown is-open="showUsersAutocomplete">
           <label for="searchUsers" class="sr-only">{{'Search for contacts'|translate}}</label>
@@ -40,7 +40,7 @@
 
         <h2 class="block-heading" translate>Search for contact lists</h2>
 
-        <div class="search-form" uib-dropdown is-open="showListsAutocomplete">
+        <div class="block search-form" uib-dropdown is-open="showListsAutocomplete">
           <label for="searchLists" class="sr-only">{{'Search for lists'|translate}}</label>
           <input type="search" class="input-no-border search-form__input" placeholder="{{'Type a list name'|translate}}" name="searchLists" id="searchLists" autocomplete="off" ng-model="searchListsTerm" ng-model-options="{debounce: 200}" ng-change="searchListsAutocomplete()">
           <button type="submit" class="btn-transparent search-form__button">
@@ -67,7 +67,10 @@
     <div class="secondary-block">
       <h2 class="secondary-block__heading">
         <span translate>Notifications</span>
-        <a href="/notifications" class="btn-primary btn-small" translate>View all</a>
+        <a href="/notifications" class="btn-small">
+          <span translate>View all</span>
+          <icon name="arrow-right"></icon>
+        </a>
       </h2>
       <ul class="secondary-block__list">
         <li class="secondary-block__item" ng-repeat="notification in notifications.unread | limitTo: 5">

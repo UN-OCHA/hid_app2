@@ -168,6 +168,22 @@ button[disabled], a.disabled {
 .btn-small {
   padding: $base-unit/2;
   @include font-size($small-font-size);
+  
+}
+
+a.btn-small {
+  text-decoration: none;
+  padding: 0;
+
+  .iconholder {
+    @include font-size(12);
+  }
+
+  &:hover, &:focus {
+    span:not(.iconholder) {
+      text-decoration: underline;
+    }
+  }
 }
 
 .btn-toggle {
