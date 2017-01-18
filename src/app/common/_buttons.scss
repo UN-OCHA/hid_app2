@@ -15,6 +15,11 @@ button[disabled], a.disabled {
   cursor: initial;
   opacity: 0.8;
 
+  &.btn-transparent {
+    border: none;
+    background: none;
+  }
+
   &:hover, &:focus {
     background: $light-grey;
     border-color: $border-grey;
@@ -41,7 +46,7 @@ button[disabled], a.disabled {
 
   &.active {
     &:hover, &:focus {
-      opacity: 0.8;
+      background: $dark-blue;
     }
   }
 
