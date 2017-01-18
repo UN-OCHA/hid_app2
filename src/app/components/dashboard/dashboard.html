@@ -148,6 +148,7 @@
       <h2 class="secondary-block__heading" translate>Subscriptions</h2>
 
       <ul class="secondary-block__list list list--has-buttons">
+        <li class="list__item" ng-if="!subscriptions.length"><em>No subscriptions</em></li>
         <li class="list__item" ng-repeat="subscription in subscriptions">
           {{subscription.name}}
           <div uib-dropdown class="list__button">

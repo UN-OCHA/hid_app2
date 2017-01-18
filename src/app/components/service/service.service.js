@@ -15,6 +15,19 @@
       }
     });
 
+    function filterSuggestedServices (services, user) {
+      if (!user.subscriptions.length) {
+        return services;
+      }
+
+      var filteredServices = services.filter(function (service) {
+        if (!service.isSubscribed(user)) {
+          return true;
+        }
+      });
+      return filteredServices;
+    }
+
     Service.prototype.subscribe = function (user) {
       return $http.post(config.apiUrl + 'user/' + user._id + '/subscriptions', {service: this._id});
     };
@@ -70,6 +83,15 @@
     Service.getGoogleGroups = function (domain) {
       return $http.get(config.apiUrl + 'service/google/groups?domain=' + domain);
     };
+
+    Service.suggestedServices = [];
+
+    Service.getSuggestions = function (lists, user) {
+      return Service.query({lists: lists}, function (services) {
+        Service.suggestedServices = filterSuggestedServices(angular.copy(services), user);
+        return Service.suggestedServices;
+      });
+    }
 
     return Service;
   }

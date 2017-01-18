@@ -5,9 +5,9 @@
     .module('app.checkin')
     .controller('CheckinCtrl', CheckinCtrl);
 
-  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', '$q', '$location', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List'];
+  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', '$q', '$location', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List', 'Service'];
 
-  function CheckinCtrl ($scope, $routeParams, $filter, $q, $location, gettextCatalog, config, alertService, User, UserCheckInService, List) {
+  function CheckinCtrl ($scope, $routeParams, $filter, $q, $location, gettextCatalog, config, alertService, User, UserCheckInService, List, Service) {
     $scope.request = $routeParams;
     $scope.organization = {};
     $scope.selectedLists = [];
@@ -185,10 +185,20 @@
           $scope.user = User.get({userId: $scope.currentUser._id}, function () {
             $scope.setCurrentUser($scope.user);
             defer.resolve();
-            var listIds = $scope.selectedLists.map(function (li) {
-              return li._id.toString();
+
+            var listIds = $scope.selectedLists.map(function (list) {
+              return list._id.toString();
             });
-            $location.path('services/suggestions').search({lists: listIds.join(',') });
+
+            Service.getSuggestions(listIds.join(','), $scope.currentUser).$promise.then(function (services) {
+              if (Service.suggestedServices.length) {
+                $location.path('services/suggestions').search({lists: listIds.join(',') });
+                return;
+              }
+              
+              alertService.add('success', 'You were successfully checked in');
+              $location.path('/dashboard');
+            });
           });
         }
         else {

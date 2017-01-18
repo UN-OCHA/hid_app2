@@ -31,7 +31,7 @@
     });
 
     function getSubscriptions () {
-      $scope.subscriptions = angular.copy($scope.currentUser.subscriptions);
+      $scope.subscriptions = $scope.currentUser.subscriptions;
       angular.forEach($scope.subscriptions, function (sub) {
         if (sub.owner === $scope.currentUser._id) {
           sub.isOwner = true;
