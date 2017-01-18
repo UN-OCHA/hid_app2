@@ -20,7 +20,7 @@
       </form>
     </div>
 
-    <div class="sidebar-section" ng-if="service.isOwner(currentUser) || currentUser.is_admin">
+    <div class="sidebar-section" ng-if="service.isOwner(currentUser) || service.isManager(currentUser) || currentUser.is_admin">
       <h2 class="sidebar-section__heading" translate>Service settings</h2>
 
         <a class="btn-block btn-primary" href="services/{{service._id}}/edit" translate>

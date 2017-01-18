@@ -20,12 +20,12 @@
 
     <div class="sidebar-section">
 
-      <button type="button" ng-click="verifyUser()" class="btn-primary btn-block" ng-show="currentUser.is_admin">
+      <button type="button" ng-click="verifyUser()" class="btn-primary btn-block" ng-if="currentUser.is_admin || currentUser.isManager">
         <span ng-if="!user.verified" translate>Verify user</span>
         <span ng-if="user.verified" translate>Un-verify user</span>
       </button>
 
-      <a class="btn-primary btn-block" href="/checkin/{{user._id}}" ng-show="(currentUser.is_admin || (currentUser._id == user._id)) && isOnline">
+      <a class="btn-primary btn-block" href="/checkin/{{user._id}}" ng-if="(currentUser.is_admin || currentUser.isManager || (currentUser._id == user._id)) && isOnline">
         <icon name="check"></icon>
         <span translate>Check into List</span>
       </a>
@@ -35,7 +35,7 @@
         <span translate>Export Contact Info</span>
       </button>
 
-      <button class="btn-primary btn-block" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-show="user.is_orphan">
+      <button class="btn-primary btn-block" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-if="user.is_orphan">
         <icon name="mail-envelope-closed"></icon>
         <span translate>Send Claim Email</span>
       </button>

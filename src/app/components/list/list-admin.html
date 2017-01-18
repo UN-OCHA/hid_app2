@@ -7,7 +7,7 @@
       <icon name="cancel" text="close"></icon>
     </button>
 
-    <div ng-if="isManager || isOwner || currentUser.is_admin">
+    <div ng-if="isManager || isOwner || currentUser.is_admin || currentUser.isManager">
       <form class="sidebar-section"  ng-submit="addMemberToList()">
           <label for="member" class="sidebar-section__heading" translate>Add new Member</label>
           <ui-select ng-model="usersAdded.users" multiple name="member">
@@ -18,7 +18,8 @@
           </ui-select>
         <button type="submit" class="btn-primary btn-block" translate>Add Member</button>
       </form>
-
+    </div>
+    <div ng-if="isManager || isOwner || currentUser.is_admin">
       <div class="sidebar-section">
         <h2 class="sidebar-section__heading" translate>List Settings</h2>
 

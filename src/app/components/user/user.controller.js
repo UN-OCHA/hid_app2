@@ -9,7 +9,7 @@
 
   function UserCtrl($scope, $routeParams, $timeout, $location, gettextCatalog, alertService, md5, User) {
     $scope.pictureUrl = '';
-    $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin);
+    $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin || $scope.currentUser.isManager);
     $scope.showProfileForm  = $routeParams.edit && $scope.canEditUser ? true : false;
     $scope.saving = {
       status: '',

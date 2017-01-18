@@ -16,7 +16,7 @@
             <icon name="dots" text="User options"></icon>
           </button>
           <ul class="dropdown-menu dropdown-menu--small" uib-dropdown-menu>
-            <li ng-if="currentUser.is_admin || service.isOwner(currentUser)"><a href="/services/{{service._id}}/edit" translate>Edit</a></li>
+            <li ng-if="currentUser.is_admin || service.isOwner(currentUser) || service.isManager(currentUser)"><a href="/services/{{service._id}}/edit" translate>Edit</a></li>
             <li ng-if="currentUser.is_admin || service.isOwner(currentUser)"><a ng-click="deleteService(service)">Delete</a></li>
             <li ng-if="!service.isSubscribed(currentUser)"><a ng-click="subscribe(service, currentUser)">Subscribe</a></li>
             <li ng-if="service.isSubscribed(currentUser)"><a ng-click="unsubscribe(service, currentUser)">Unsubscribe</a></li>
