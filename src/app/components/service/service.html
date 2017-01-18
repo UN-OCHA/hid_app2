@@ -18,6 +18,17 @@
       <li ng-if="!subscribers.length" translate><em>No subscribers</em></li>
       <li class="list__item" ng-repeat="subscriber in subscribers">
         <a href="users/{{subscriber._id}}">{{subscriber.name}}</a>
+
+        <div uib-dropdown class="list__button">
+          <button type="button" class="btn-transparent" uib-dropdown-toggle>
+            <icon name="dots" text="Options"></icon>
+          </button>
+          <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+            <li>
+              <button type="button" class="btn-link" ng-click="unsubscribe(subscriber)" translate>Unsubscribe</button>
+            </li>
+          </ul>
+        </div>
       </li>  
     </ul>
 

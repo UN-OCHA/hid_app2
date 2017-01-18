@@ -65,6 +65,8 @@
           else {
             alertService.add('success', gettextCatalog.getString('The user was successfully subscribed to this service'));
           }
+
+          $scope.subscribers.push(user);
         })
         .catch(function (err) {
           alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
@@ -82,6 +84,8 @@
           else {
             alertService.add('success', gettextCatalog.getString('The user was successfully unsubscribed from this service'));
           }
+
+          $scope.subscribers.splice($scope.subscribers.indexOf(user), 1);
         })
         .catch(function (err) {
           alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
