@@ -28,7 +28,7 @@
           <span translate>Edit service</span>
         </a>
 
-        <button type="button" class="btn-block btn-danger" ng-click="deleteService();" translate>
+        <button type="button" class="btn-block btn-danger" ng-click="deleteService();" ng-if="service.isOwner(currentUser) || currentUser.is_admin" translate>
           <icon name="trash"></icon>
           <span translate>Delete service</span>
         </button>
