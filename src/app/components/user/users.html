@@ -56,7 +56,7 @@
       <td>{{user.location.country.name}}</td>
 
       <td class="table-actions">
-        <icon name="caution" text="Pending" title="Pending" ng-if="user.pending"></icon>
+        <icon name="caution" text="Pending" title="Pending" ng-if="list && isPending(user)"></icon>
         <ng-include src="'app/components/user/userOptions.html'"></ng-include>
       </td>
     </tr>

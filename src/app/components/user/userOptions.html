@@ -3,7 +3,7 @@
     <icon name="dots" text="User options"></icon>
   </button>
   <ul class="dropdown-menu dropdown-menu--small" uib-dropdown-menu>
-    <li ng-if="list && user.pending && (currentUser.is_admin || isManager || isOwner)">
+    <li ng-if="list && isPending(user) && (currentUser.is_admin || isManager || isOwner)">
       <button type="button" class="btn-link" ng-click="approveUser(user)" translate>Approve</button>
     </li>
     <li ng-if="currentUser.is_admin || currentUser.isManager"><a href="/users/{{user._id}}/edit" translate>Edit</a></li>
