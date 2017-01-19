@@ -27,26 +27,23 @@
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
       var params = angular.extend($scope.request, $scope.userFilters);
       UserDataService.getUsers(params).then(function (users) {
-        $scope.users = checkPending(users);
+        $scope.users = users;
         $scope.totalItems = users.headers["x-total-count"];
       });
     }
 
-    function checkPending (users) {
-      if (!$scope.list) {
-        return users;
-      }
 
+    $scope.isPending = function (user) {
       var listType = $scope.list.type + 's';
+      var pending = false;
 
-      angular.forEach(users, function (user) {
-        angular.forEach(user[listType], function (list) {
-          if ( ($scope.list._id === list.list._id) && list.pending) {
-            user.pending = true;
-          }
-        });
+      angular.forEach(user[listType], function (list) {
+        if ( ($scope.list._id === list.list._id) && list.pending) {
+          pending = true;
+          return;
+        }
       });
-      return users;
+      return pending;
     }
 
     $scope.$on('users-export-csv', function () {
