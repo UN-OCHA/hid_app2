@@ -200,12 +200,11 @@
             checkInId = list._id;
           }
         });
-        //update currentUser
-        user.pending = false;
-
+        
         if (checkInId) {
           UserCheckInService.update({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {pending: false}, function () {
             alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
+            user.pending = false;
           });
         }
       });
