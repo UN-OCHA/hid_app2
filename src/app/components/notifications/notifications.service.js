@@ -5,9 +5,9 @@
   .module('app.common')
   .factory('notificationsService', notificationsService);
 
-  notificationsService.$inject = ['$log', '$q', '$resource', 'config'];
+  notificationsService.$inject = ['$log', '$q', '$resource', '$rootScope', 'config'];
 
-  function notificationsService($log, $q, $resource, config) {
+  function notificationsService($log, $q, $resource, $rootScope, config) {
 
    var resource =  $resource(config.apiUrl + 'notification/:notificationId', {notificationId: '@_id'},
     {
@@ -15,6 +15,17 @@
         method: 'PUT'
       }
     });
+
+    function updateUser (notifications) {
+      var update = notifications.find(function (notification) {
+        var notificationTypes = ['approved_checkin', 'admin_edit'];
+        return notificationTypes.indexOf(notification.type) !== -1;
+      });
+
+      if (update) {
+        $rootScope.$broadcast('updateCurrentUser');
+      }
+    }
 
     var notifications = {
       all: {},
@@ -26,6 +37,7 @@
         return resource.query({read: false}).$promise.then(function (response) {
           notifications.unread = angular.copy(response);
           notifications.totalUnread = response.length;
+          updateUser(notifications.unread);
           return response;
         }, function (error) {
           $log.error(error);

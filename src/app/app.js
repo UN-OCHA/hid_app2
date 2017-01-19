@@ -95,6 +95,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/landing', {
         templateUrl: 'app/components/landing/landing.html',
+        controller: 'LandingCtrl',
         authenticate: true,
         title: 'Welcome'
       }).

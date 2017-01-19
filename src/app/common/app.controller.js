@@ -72,6 +72,12 @@
       $scope.initLanguage();
     };
 
+    $rootScope.$on('updateCurrentUser', function () {
+      User.get({userId: $scope.currentUser.id}, function (user) {
+        $scope.setCurrentUser(user);
+      })
+    })
+
     $scope.activeNav = function (path) {
       return $location.path() === path;
     };
