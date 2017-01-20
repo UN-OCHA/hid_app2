@@ -1,8 +1,34 @@
 # Humanitarian ID Web App version 2
 
-## Getting started
+## Running localy
 
-TO DO
+### Prerequisites:
+
+* [Docker for Mac](https://docs.docker.com/docker-for-mac/) / Docker for your OS of choice
+* [Node](https://nodejs.org/en/)
+* [Bower](https://bower.io/#install-bower)
+* [Grunt](http://gruntjs.com/getting-started)
+* [Ruby](https://www.ruby-lang.org/en/)
+* [Sass](http://sass-lang.com/install)
+
+### Building the app
+
+* Clone repo `git clone git@github.com:UN-OCHA/hid_app2.git`
+* In the app directory `cd hid_app2`
+* Switch to the dev branch `git checkout dev`
+* Install node modules `npm install`
+* In the src directory `cd src`
+* Install Bower modules `bower install`
+* Add the local url to your hosts file:
+on Mac: `sudo vi /etc/hosts`
+Add `127.0.0.1   app.hid.vm`
+* Run the Grunt tasks `grunt` 
+(Note to set you local environment to use the staging api use `grunt --target="dev"`)
+
+### Running the app
+
+* `docker-compose up`
+* visit [http://app.hid.vm](http://app.hid.vm)
 
 ## Code style guide
 
