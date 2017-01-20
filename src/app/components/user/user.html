@@ -106,7 +106,7 @@
 
           <div ng-show="showProfileForm">
             <button type="button" class="btn-icon btn-secondary" ng-click="toggleForm()">
-              <icon name="cancel" text="Cancel"></icon>
+              <icon name="check" text="Close"></icon>
             </button>
           </div>
         </div>
@@ -125,7 +125,7 @@
     <div class="col-xs-12 col-md-6 col-lg-4">
       <h2 class="block-heading" translate>Contact Information</h2>
 
-      <div class="form-section form-section--compact">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
 
         <h3 class="form-section__heading" translate>Phone numbers</h3>
 
@@ -139,7 +139,7 @@
         </ul>
 
         <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
-          <form>
+          <form class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Add phone number:</legend>
               <div class="form-field form-field--compact">
@@ -162,7 +162,7 @@
               </div>
             </fieldset>
           </form>
-          <form ng-if="user.phone_numbers.length">
+          <form ng-if="user.phone_numbers.length" class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Set primary phone number:</legend>
               <ul class="list list--has-buttons">
@@ -188,7 +188,7 @@
 
       </div>
 
-      <div class="form-section form-section--compact">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
 
         <h3 class="form-section__heading" translate>Email</h3>
 
@@ -202,7 +202,7 @@
         </ul>
 
         <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
-          <form>
+          <form class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Add email:</legend>
               <div class="form-field form-field--compact">
@@ -226,7 +226,7 @@
               </div>
             </fieldset>
           </form>
-          <form ng-if="user.emails.length">
+          <form ng-if="user.emails.length" class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Set primary email:</legend>
               <ul class="list list--has-buttons">
@@ -257,10 +257,10 @@
 
       </div>
 
-      <div class="form-section form-section--compact">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Social Networks</h3>
 
-        <form ng-show="showProfileForm">
+        <form ng-show="showProfileForm" class="form-section__edit">
           <fieldset>
             <legend class="form-section__sub-heading" translate>Add social network:</legend>
             <div class="form-field form-field--compact">
@@ -285,7 +285,7 @@
           </fieldset>
         </form>
 
-        <ul class="list list--has-buttons">
+        <ul class="list list--has-buttons" ng-class="{'form-section__edit' : showProfileForm && user.voips.length}">
           <li class="list__item" ng-repeat="voip in user.voips">
             {{voip.type}}: {{voip.username}}
             <button type="button" class="btn-transparent list__button" ng-show="showProfileForm" ng-click="dropItem('voip', voip)"><icon name="cancel" text="Remove"></icon></button>
@@ -300,7 +300,7 @@
     <div class="col-xs-12 col-md-6 col-lg-4">
       <h2 class="block-heading" translate>Humanitarian details</h2>
 
-      <div class="form-section form-section--compact">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
 
         <h3 class="form-section__heading" translate>Organizations</h3>
         <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
@@ -315,7 +315,7 @@
 
         <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
 
-          <form>
+          <form class="form-section__edit">
             <label class="form-section__sub-heading" for="newOrganization" translate>Add an organization:</label>
             <div class="form-field form-field--compact form-inline-fields">
               <div class="form-inline-fields__item">
@@ -338,7 +338,7 @@
             </div>
           </form>
           
-          <form ng-if="user.organizations.length">
+          <form ng-if="user.organizations.length" class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Set primary organization:</legend>
               <ul class="list list--has-buttons">
@@ -359,7 +359,7 @@
         </div>
       </div>
 
-      <div class="form-section form-section--compact">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Job titles</h3>
         <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="title in user.job_titles">
@@ -371,7 +371,7 @@
         </ul>
 
         <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
-          <form>
+          <form class="form-section__edit">
             <label class="form-section__sub-heading" for="job_title">Add a job title:</label>
             <div class="form-field form-field--compact form-inline-fields">
               <input type="text" class="form-inline-fields__item" name="job_title" id="job_title" ng-model="temp.job_title" placeholder="Add a job title" />
@@ -385,7 +385,7 @@
             </div>
           </form>
 
-          <form ng-if="user.job_titles.length">
+          <form ng-if="user.job_titles.length" class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Set primary job title:</legend>
 
@@ -412,7 +412,7 @@
 
       </div>
 
-      <div class="form-section form-section--compact">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Locations</h3>
         <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="location in user.locations">
@@ -425,7 +425,7 @@
         </ul>
 
         <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
-          <form>
+          <form class="form-section__edit">
             <label class="form-section__sub-heading" for="location">Add a location:</label>
             <div class="form-field form-field--compact" ng-class="{'form-inline-fields' : !showRegion}">
               <ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
@@ -467,7 +467,7 @@
             </div>
           </form>
 
-          <form ng-if="user.locations.length">
+          <form ng-if="user.locations.length" class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Set primary location:</legend>
               <ul class="list list--has-buttons">
@@ -498,10 +498,10 @@
     <div class="col-xs-12 col-md-6 col-lg-4">
       <h2 class="block-heading" translate>Additional Information</h2>
 
-      <div class="form-section form-section--compact" ng-if="currentUser.is_admin || user.functional_roles.length">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}" ng-if="currentUser.is_admin || user.functional_roles.length">
         <h3 class="form-section__heading" translate>Functional roles</h3>
 
-        <form ng-show="showProfileForm && currentUser.is_admin" aria-hidden="{{!showProfileForm}}">
+        <form ng-show="showProfileForm && currentUser.is_admin" aria-hidden="{{!showProfileForm}}" class="form-section__edit">
           <label class="form-section__sub-heading" for="roles">Add a role:</label>
           <div class="form field form-field--compact form-inline-fields">
             <div class="form-inline-fields__item">
@@ -524,17 +524,20 @@
           </div>
         </form>
 
-        <ul class="list list--has-buttons" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-repeat="role in user.functional_roles">
-            <a href="lists/{{role.list._id}}">{{role.list.label}}</a>
-            <button type="button" class="btn-transparent list__button" ng-click="dropItem('functional_role', role)" ng-show="showProfileForm" aria-hidden="{{showProfileForm}}">
-              <icon name="cancel" text="Remove"></icon>
-            </button>
-          </li>
-          <li class="list__item" ng-if="!user.functional_roles.length">
-            <em translate>No roles</em>
-          </li>
-        </ul>
+        <div ng-class="{'form-section__edit' : showProfileForm && user.functional_roles.length}">
+          <h4 class="form-section__sub-heading" translate>Roles:</h4>
+          <ul class="list list--has-buttons" aria-hidden="{{showProfileForm}}">
+            <li class="list__item" ng-repeat="role in user.functional_roles">
+              <a href="lists/{{role.list._id}}">{{role.list.label}}</a>
+              <button type="button" class="btn-transparent list__button" ng-click="dropItem('functional_role', role)" ng-show="showProfileForm" aria-hidden="{{showProfileForm}}">
+                <icon name="cancel" text="Remove"></icon>
+              </button>
+            </li>
+            <li class="list__item" ng-if="!user.functional_roles.length">
+              <em translate>No roles</em>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="form-section form-section--compact" ng-show="user.operations && user.operations.length">
@@ -565,11 +568,11 @@
         </ul>
       </div>
 
-      <div class="form-section form-section--compact">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
 
         <h3 class="form-section__heading" translate>Websites</h3>
 
-        <form ng-if="showProfileForm">
+        <form ng-if="showProfileForm" class="form-section__edit">
           <label class="form-section__sub-heading" for="newWebsite" translate="">Add website:</label>
           <div class="form-field form-field--compact form-inline-fields">
             <input type="url" class="form-inline-fields__item" ng-model="temp.website.url" id="newWebsite" placeholder="URL" />
@@ -583,15 +586,18 @@
           </div>
         </form>
 
-        <ul class="list list--has-buttons">
-          <li class="list__item" ng-repeat="website in user.websites">
-            <a ng-href="{{website.url}}">{{website.url}}</a>
-            <button type="button" class="btn-transparent list__button" ng-if="showProfileForm" ng-click="dropItem('website', website)">
-              <icon name="cancel" text="Remove"></icon>
-            </button>
-          </li>
-          <li class="list__item" ng-if="!user.websites.length"><em translate>No websites</em></li>
-        </ul>
+        <div ng-class="{'form-section__edit' : showProfileForm && user.websites.length}">
+          <h4 class="form-section__sub-heading" translate>Websites:</h4>
+          <ul class="list list--has-buttons">
+            <li class="list__item" ng-repeat="website in user.websites">
+              <a ng-href="{{website.url}}">{{website.url}}</a>
+              <button type="button" class="btn-transparent list__button" ng-if="showProfileForm" ng-click="dropItem('website', website)">
+                <icon name="cancel" text="Remove"></icon>
+              </button>
+            </li>
+            <li class="list__item" ng-if="!user.websites.length"><em translate>No websites</em></li>
+          </ul>
+        </div>
 
       </div>
 
@@ -600,7 +606,7 @@
         <p><a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
       </div>
 
-      <div class="form-section form-section--compact" ng-if="user.is_admin || currentUser.is_admin">
+      <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}" ng-if="user.is_admin || currentUser.is_admin">
 
         <h3 class="form-section__heading" translate>Permissions</h3>
 
@@ -608,23 +614,25 @@
         <p ng-if="user.isManager && !showProfileForm" translate>Manager</p>
         <p ng-if="!user.is_admin && !user.isManager && !showProfileForm"><em translate>No permissions set</em></p>
 
-        <p ng-show="showProfileForm && currentUser.is_admin">
-          <input type="checkbox"
-          id="isAdmin"
-          ng-model="user.is_admin"
-          ng-value="user.is_admin"
-          ng-change="updateUser(user.is_admin)" />
-          <label for="isAdmin" class="clickie-label" translate>Administrator</label>
-        </p>
+        <ul class="list form-section__edit" ng-if="showProfileForm && currentUser.is_admin">
+          <li class="list__item">
+            <input type="checkbox"
+            id="isAdmin"
+            ng-model="user.is_admin"
+            ng-value="user.is_admin"
+            ng-change="updateUser(user.is_admin)" />
+            <label for="isAdmin" class="clickie-label" translate>Administrator</label>
+          </li>
 
-        <p ng-show="showProfileForm && currentUser.is_admin">
-          <input type="checkbox"
-          id="isManager"
-          ng-model="user.isManager"
-          ng-value="user.isManager"
-          ng-change="updateUser(user.isManager)" />
-          <label for="isManager" class="clickie-label" translate>Manager</label>
-        </p>
+          <li class="list__item">
+            <input type="checkbox"
+            id="isManager"
+            ng-model="user.isManager"
+            ng-value="user.isManager"
+            ng-change="updateUser(user.isManager)" />
+            <label for="isManager" class="clickie-label" translate>Manager</label>
+          </li>
+        </ul>
       </div>
 
       <div class="form-section form-section--compact">

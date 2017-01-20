@@ -29,8 +29,7 @@ input[type="radio"], input[type="checkbox"] {
   &:focus {
     + label {
       &:before {
-        background: $primary-color;
-        color: $text-light;
+        border-color: $dark-blue;
       }
     }
   }
@@ -49,7 +48,7 @@ input[type="radio"], input[type="checkbox"] {
     width: $base-unit*2.5;
     height: $base-unit*2.5;
     display: block;
-    border: 1px solid $primary-color;
+    border: 1px solid $border-grey;
     position: absolute;
     left: 0;
     top: 50%;
@@ -68,21 +67,22 @@ input[type="radio"] + .clickie-label {
 
 // checked style
 input:checked + .clickie-label {
-  &:before {
-    content: "\e944";
-    font-family: 'icomoon';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    vertical-align: text-top;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: $dark-blue;
-    line-height: 18px;
-    font-weight: bold;
+  &:after {
+    content: "";
+    width: $base-unit*1.5;
+    height: $base-unit*1.5;
+    background: $primary-color;
+    border-radius: 100%;
+    position: absolute;
+    top: ($base-unit*1.5) /2;
+    left: $base-unit/2;
+  }
+}
+
+input[type="checkbox"]:checked + .clickie-label {
+  &:after {
+    border-radius: 0;
+    top: $base-unit*1.75;
   }
 }
 

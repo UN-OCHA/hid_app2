@@ -17,6 +17,7 @@ select {
   transition: padding 0.3s ease;
   color: $text-dark;
   border-radius: 0;
+  background: transparent;
 
   &:focus {
     @include input-focus-style();
@@ -136,6 +137,11 @@ legend {
       text-decoration: underline;
     }
   }
+
+  &.form-section--editing {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
 }
 
 .form-section__heading {
@@ -148,10 +154,38 @@ legend {
 
 .form-section__sub-heading {
   font-weight: normal;
+  font-style: italic;
   color: $text-dark;
   display: block;
-  color: $dark-blue;
   margin-bottom: $base-unit;
+}
+
+.form-section__edit {
+  background: $light-grey;
+  padding: $base-unit*2;
+  margin-bottom: $base-unit/2;
+
+  .list__item .clickie-label {
+    font-style: italic;
+    color: $dark-blue;
+
+    &:before {
+      top: 0,
+    }
+    &:after { 
+      top: $base-unit/2;
+    }
+  }
+
+  input[type="checkbox"]:checked + .clickie-label {
+    &:after { 
+      top: $base-unit/2;
+    }
+  }
+
+  .list__item {
+    @include font-size($small-font-size);
+  }
 }
 
 .form-section__info {

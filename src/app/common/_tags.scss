@@ -4,16 +4,16 @@
 
   a {
     display: block;
-    background: $primary-color;
-    color: white;
-    border-radius: 4px;
-    padding: $base-unit/4 $base-unit;
-    border: 1px solid $primary-color;
+    background: $light-grey;
+    color: $dark-blue;
+    padding: $base-unit/4 $base-unit*2;
+    border: 1px solid $light-grey;
     text-decoration: none;
+    font-style: italic; 
 
     &:hover, &:focus {
-      background: white;
-      color: $primary-color;
+      border-color: $primary-color;
+      color: $dark-blue;
       text-decoration: none;
     }
   }
