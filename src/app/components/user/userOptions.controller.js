@@ -11,6 +11,7 @@
     var checkInModal;
     $scope.selectedLists = [];
     $scope.availableLists = [];
+    $scope.hasLists = true;
     $scope.deleteUser = deleteUser;
     $scope.verifyUser = verifyUser;
     $scope.removeFromList = removeFromList;
@@ -69,36 +70,48 @@
       $scope.selectedLists.push(list);
     }
 
-    function isSelected (list, user) {
-      var isInList = false;
-      if ($scope.selectedLists.indexOf(list) !== -1) {
-        return true;
-      }
-
+    function isListMember (list, user) {
+      var inList = false;
       angular.forEach(config.listTypes, function (listType) {
-        angular.forEach(user[listType + 's'], function (value) {
-          if (list._id === value.list._id) {
-            isInList = true;
-            return;
+        angular.forEach(user[listType + 's'], function (userList) {
+          if (list._id === userList.list._id) {
+            return inList = true;
           }
         });
       });
-
-      if (isInList) {
-        return true;
-      }
+      return inList;
     }
 
-    function getAvailableLists (isAdmin) {
-      if (isAdmin) {
-        ListDataService.getManagedAndOwnedLists($scope.currentUser, function (lists) {
-          $scope.availableLists = lists;
+    function isSelected (selectedLists, list) {
+      var listSelected = false;
+      angular.forEach(selectedLists, function(selectedList) {
+        if (list._id === selectedList._id) {
+          return listSelected = true;
+        }
+      });
+      return listSelected;
+    }
+
+    function filterLists (lists, selectedLists, user) {
+      var filteredLists = lists.filter(function (list) {
+        return !isListMember(list, user) && !isSelected(selectedLists, list);
+      });
+      return filteredLists;
+    }
+
+    function getAvailableLists (currentUser, user, searchTerm) {
+      if (currentUser.is_admin || currentUser.isManager) {
+        List.query({name: searchTerm, limit: 50, sort: 'name'}, function (lists) {
+          $scope.availableLists = filterLists(lists, $scope.selectedLists, user);
         });
         return;
       }
 
-      List.query({'owner': $scope.currentUser._id}, function (data) {
-        $scope.availableLists = angular.copy(data);
+      ListDataService.getManagedAndOwnedLists($scope.currentUser, searchTerm, function (lists) {
+        $scope.availableLists = filterLists(lists, $scope.selectedLists, user);
+        if (!lists.length) {
+          $scope.hasLists = false;
+        }
       });
     }
 
@@ -114,14 +127,14 @@
       });
     }
 
-    function openCheckInModal (user, isAdmin) {
+    function openCheckInModal (user, currentUser) {
       checkInModal = $uibModal.open({
         animation: false,
         scope: $scope,
         size: 'sm',
         templateUrl: 'app/components/user/checkInToListModal.html',
         controller: function () {
-          getAvailableLists(isAdmin);
+          // getAvailableLists(user, currentUser);
           return;
         }
       });

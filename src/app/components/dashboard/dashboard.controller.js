@@ -14,7 +14,7 @@
     $scope.listsOwnedOrManaged = [];
     $scope.subscriptions = [];
 
-    ListDataService.getManagedAndOwnedLists($scope.currentUser, function (lists) {
+    ListDataService.getManagedAndOwnedLists($scope.currentUser, '', function (lists) {
       $scope.listsOwnedOrManaged = lists;
     });
 

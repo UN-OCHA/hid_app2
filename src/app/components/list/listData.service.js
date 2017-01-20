@@ -42,9 +42,13 @@
         return lists;
       },
 
-      getManagedAndOwnedLists: function (user, callback) {
-        List.query({'owner': user._id}, function (data) {
-          addManagedLists(user, data, List, callback);
+      getManagedAndOwnedLists: function (user, searchTerm, callback) {
+        var params = {'owner': user._id};
+        if (searchTerm) {
+          params.name = searchTerm;
+        }
+        List.query(params, function (data) {
+          addManagedLists(user, data, List, searchTerm, callback);
         });
       },
 
@@ -59,8 +63,12 @@
     };
   }
 
-  function addManagedLists (user, ownedLists, List, callback) {
-    List.query({'managers': user._id}, function (managedLists) {
+  function addManagedLists (user, ownedLists, List, searchTerm, callback) {
+    var params = {'managers': user._id};
+    if (searchTerm) {
+      params.name = searchTerm;
+    }
+    List.query(params, function (managedLists) {
       //remove lists that are also owned before merging with owned lists
       var filteredManagedLists = managedLists.filter(function (list) {
         var isOwned = false;
