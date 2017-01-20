@@ -185,8 +185,11 @@
           $scope.user = User.get({userId: $scope.currentUser._id}, function () {
             $scope.setCurrentUser($scope.user);
             defer.resolve();
-
+            var moderatedLists = false;
             var listIds = $scope.selectedLists.map(function (list) {
+              if (list.joinability === 'moderated') {
+                moderatedLists = true;
+              }
               return list._id.toString();
             });
 
@@ -196,7 +199,11 @@
                 return;
               }
               
-              alertService.add('success', 'You were successfully checked in');
+              var message = 'You were successfully checked in.';
+              if (moderatedLists) {
+                message += ' Some of you check-ins are pending, we will get back to you soon.';
+              }
+              alertService.add('success', message);
               $location.path('/dashboard');
             });
           });
