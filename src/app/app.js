@@ -32,16 +32,25 @@ app.run(function ($rootScope) {
 
 // Check if user is authenticated for paths which require it
 app.run(function ($rootScope, $window, $location, AuthService, alertService) {
+  
   $rootScope.isAuthenticated = false;
   $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
+    var user = JSON.parse($window.localStorage.getItem('currentUser'));
+
     if (nextRoute && nextRoute.authenticate && !AuthService.isAuthenticated()){
       // User isn’t authenticated
       $location.path('/');
       event.preventDefault();
     }
+
+    if (nextRoute && nextRoute.authenticate && nextRoute.adminOrManagerOnly) {
+      if (!user.is_admin && !user.isManager) {
+        $location.path('/');
+        event.preventDefault();
+      }
+    }
+
     if (nextRoute && nextRoute.authenticate && nextRoute.adminOnly) {
-      //$rootScope.initCurrentUser();
-      var user = JSON.parse($window.localStorage.getItem('currentUser'));
       if (!user.is_admin) {
         $location.path('/');
         event.preventDefault();
@@ -221,14 +230,14 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/components/service/new-service.html',
         controller: 'ServiceCtrl',
         authenticate: true,
-        adminOnly: false,
+        adminOrManagerOnly: true,
         title: 'New service'
       }).
       when('/services', {
         templateUrl: 'app/components/service/services-page.html',
         controller: 'ServicesPageCtrl',
         authenticate: true,
-        adminOnly: false,
+        adminOrManagerOnly: true,
         title: 'Services'
       }).
       when('/services/suggestions', {
