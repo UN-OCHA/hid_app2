@@ -26,9 +26,18 @@
     function getUsers () {
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
       var params = angular.extend($scope.request, $scope.userFilters);
-      UserDataService.getUsers(params).then(function (users) {
+
+      // cached resource is returned immediately
+      User.query(params).$promise.then(function(users) {
         $scope.users = checkPending(users);
         $scope.totalItems = users.headers["x-total-count"];
+
+        // update users again when the http response resolves so don't lose pending
+        // otherwise it overwrites them
+        users.$httpPromise.then(function(users) {
+          $scope.users = checkPending(users);
+          $scope.totalItems = users.headers["x-total-count"];
+        })
       });
     }
 
