@@ -5,9 +5,9 @@
     .module('app.service')
     .controller('ServiceCtrl', ServiceCtrl);
 
-  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List', 'User'];
+  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$log', '$window', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List', 'User'];
 
-  function ServiceCtrl ($scope, $routeParams, $http, $window, $location, gettextCatalog, alertService, Service, ServiceCredentials, List, User) {
+  function ServiceCtrl ($scope, $routeParams, $http, $log, $window, $location, gettextCatalog, alertService, Service, ServiceCredentials, List, User) {
     $scope.serviceTypes = [
       {
         value: 'mailchimp',
@@ -32,7 +32,7 @@
       totalItems: 0
     };
 
-    var offset = 0
+    var offset = 0;
 
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
@@ -54,6 +54,24 @@
       $scope.credentials = ServiceCredentials.query();
     }
 
+    function subscribeManagersAndOwners (service) {
+      var ownerId = service.owner;
+      var userIds = angular.copy(service.managers);
+      userIds.push(ownerId);
+
+      angular.forEach(userIds, function(userId) {
+        var isSubscribed = $scope.subscribers.find(function (subscriber) {
+          return subscriber._id === userId;
+        });
+
+        if (!isSubscribed) {
+          service.subscribe({_id: userId}).then(function() {}).catch(function (err) {
+            $log.error(err);
+          });
+        }
+      });
+    }
+
     $scope.subscribe = function (user) {
       $scope.service.subscribe(user)
         .then(function(response) {
@@ -68,7 +86,7 @@
 
           $scope.subscribers.push(user);
         })
-        .catch(function (err) {
+        .catch(function () {
           alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
         });
     };
@@ -87,17 +105,18 @@
 
           $scope.subscribers.splice($scope.subscribers.indexOf(user), 1);
         })
-        .catch(function (err) {
+        .catch(function () {
           alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
         });
     };
 
     $scope.saveService = function() {
-      var success = function (resp, headers) {
+      var success = function (resp) {
         alertService.add('success', gettextCatalog.getString('Service saved successfully'));
+        subscribeManagersAndOwners(resp);
         $location.path('/services');
       };
-      var error = function (err) {
+      var error = function () {
         alertService.add('danger', gettextCatalog.getString('There was an error saving this service'));
       };
       if ($scope.service._id) {
@@ -109,8 +128,8 @@
     };
 
     $scope.deleteService = function () {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-        $scope.service.$delete(function (resp, headers) {
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+        $scope.service.$delete(function () {
           alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
         });
       });
