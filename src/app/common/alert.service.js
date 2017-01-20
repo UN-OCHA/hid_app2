@@ -1,3 +1,14 @@
+/**
+  * Alert service for showing success, error and confirm modals
+  *
+  * Usage: alertService.add(type, msg, confirm, callback)
+  * type -  string, options: 'success', 'danger'. Sets the style of the modal.
+  * message - string, the message to display
+  * confirm - boolean, if the modal is a confirm
+  * callback - function, callback function that is called with the result of the confirm
+  * displayTime - number, the length of time to display the modal for, if not set defaults to 3000
+  */
+
 (function () {
   'use strict';
 
@@ -10,6 +21,8 @@
   function alertService($rootScope, $uibModal) {
 
     var alertService = {};
+
+    var defaultDisplayTime = 3000;
 
     function buildModalTemplate (type, msg, confirm) {
       var iconName = '';
@@ -33,8 +46,9 @@
       return body + footer;
     }
 
-    function showModal (type, msg, confirm) {
+    function showModal (type, msg, confirm, displayTime) {
       var modalClass = confirm ? 'alert-modal modal-confirm' : 'alert-modal modal-' + type;
+      var time = displayTime || defaultDisplayTime;
 
       var modal = $uibModal.open({
         animation: false,
@@ -48,19 +62,19 @@
           if (!confirm) {
             setTimeout(function () {
               $scope.modal.close();
-            }, 3000);
+            }, time);
           }
         }
       });
       return modal.result;
     }
 
-    alertService.add = function(type, msg, confirm, cb) {
+    alertService.add = function(type, msg, confirm, callback, displayTime) {
       confirm = confirm || false;
-      cb = cb || false;
+      callback = callback || false;
 
-      return showModal(type, msg, confirm).then(function () {
-        return cb ? cb() : true;
+      return showModal(type, msg, confirm, displayTime).then(function () {
+        return callback ? callback() : true;
       }, function () {
         return;
       });
