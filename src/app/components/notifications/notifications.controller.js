@@ -22,7 +22,8 @@
 
     $scope.getLink = function (notification) {
       if (notification.params && notification.params.list) {
-        return '/lists/' + notification.params.list._id;
+        var listId = typeof notification.params.list === 'string' ? notification.params.list : notification.params.list._id
+        return '/lists/' + listId;
       }
       return '/users/' + notification.user;
     };
