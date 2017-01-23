@@ -256,9 +256,13 @@
     text-align: center;
     padding: $base-unit/2 $base-unit $base-unit $base-unit;
     margin-bottom: $base-unit/2;
+
+    .iconholder {
+      display: block;
+    }
   }
 
-  .profile-header__upload--mobile {
+  .profile-header__upload--mobile, .profile-header__upload-info--mobile {
     display: none;
   }
 
