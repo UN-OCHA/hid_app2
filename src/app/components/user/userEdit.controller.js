@@ -134,6 +134,11 @@
           type: type,
           message: gettextCatalog.getString('Profile updated')
         });
+
+        if (type === 'primaryLocation') {
+          $scope.primaryLocationId = getLocationId($scope.user.location);
+        }
+
       }, function () {
         alertService.add('danger', gettextCatalog.getString('There was an error saving the profile'));
         $scope.$emit('editUser', {status: 'fail'});

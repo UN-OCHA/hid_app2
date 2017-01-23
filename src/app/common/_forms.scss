@@ -168,19 +168,6 @@ legend {
   .list__item .clickie-label {
     font-style: italic;
     color: $dark-blue;
-
-    &:before {
-      top: 0,
-    }
-    &:after { 
-      top: $base-unit/2;
-    }
-  }
-
-  input[type="checkbox"]:checked + .clickie-label {
-    &:after { 
-      top: $base-unit/2;
-    }
   }
 
   .list__item {
@@ -192,9 +179,9 @@ legend {
   margin-bottom: $base-unit;
 }
 
-.form-section__edit-btn {
+.form-section__edit-btn, .form-section__close-btn  {
   position: absolute;
-  top: $base-unit;
+  top: 0;
   right: 0;
   min-width: $base-unit*5;
   height: $base-unit*5;

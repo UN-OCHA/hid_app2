@@ -74,7 +74,8 @@ input:checked + .clickie-label {
     background: $primary-color;
     border-radius: 100%;
     position: absolute;
-    top: ($base-unit*1.5) /2;
+    top: 50%;
+    margin-top: -($base-unit*1.5) /2;
     left: $base-unit/2;
   }
 }
@@ -82,7 +83,6 @@ input:checked + .clickie-label {
 input[type="checkbox"]:checked + .clickie-label {
   &:after {
     border-radius: 0;
-    top: $base-unit*1.75;
   }
 }
 

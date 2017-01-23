@@ -130,9 +130,9 @@
         <h3 class="form-section__heading" translate>Phone numbers</h3>
 
         <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-repeat="phone in user.phone_numbers">
+          <li class="list__item" ng-class="{'list__item--primary' : user.phone_number === phone.number}" ng-repeat="phone in orderByPrimary('phone', user.phone_numbers, user.phone_number)">
+            <icon name="star" text="Primary" class="primary-icon" title="Primary" ng-if="user.phone_number === phone.number"></icon>
             <a ng-href="tel:{{phone.number}}">{{phone.number}}</a>
-            <icon name="star" text="Primary" title="Primary" ng-if="user.phone_number === phone.number"></icon>
             <span class="list__meta">{{phone.type}}</span>
           </li>
           <li class="list__item" ng-if="!user.phone_numbers.length"><em translate>No phone numbers</em></li>
@@ -193,9 +193,9 @@
         <h3 class="form-section__heading" translate>Email</h3>
 
         <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-repeat="email in user.emails">
+          <li class="list__item" ng-class="{'list__item--primary' : user.email === email.email}" ng-repeat="email in orderByPrimary('email', user.emails, user.email)">
+            <icon name="star" text="Primary" class="primary-icon" title="Primary" ng-if="user.email === email.email"></icon>
             <a ng-href="mailto:{{email.email}}">{{email.email}}</a>
-            <icon name="star" text="Primary" title="Primary" ng-if="user.email === email.email"></icon>
             <span class="list__meta">{{email.type}} <span ng-if="!email.validated" translate> / Unverified</span></span>
           </li>
           <li class="list__item" ng-if="!user.emails.length"><em translate>No emails</em></li>
@@ -304,9 +304,9 @@
 
         <h3 class="form-section__heading" translate>Organizations</h3>
         <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-repeat="org in user.organizations">
+          <li class="list__item" ng-class="{'list__item--primary' : user.organization._id === org._id}" ng-repeat="org in orderByPrimary('organization', user.organizations, user.organization)">
+            <icon name="star" text="Primary" class="primary-icon" title="Primary" ng-if="user.organization._id === org._id"></icon>
             <a href="/lists/{{org.list._id}}">{{org.list.name}}</a>
-            <icon name="star" text="Primary" title="Primary" ng-if="user.organization._id === org._id"></icon>
           </li>
           <li class="list__item" ng-if="!user.organizations.length">
             <em translate>No organizations</em>
@@ -362,8 +362,9 @@
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Job titles</h3>
         <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-repeat="title in user.job_titles">
-            {{title}} <icon name="star" title="primary" ng-if="title === user.job_title"></icon>
+          <li class="list__item" ng-class="{'list__item--primary' : title === user.job_title}" ng-repeat="title in orderByPrimary('jobTitle', user.job_titles, user.job_title)">
+            <icon name="star" title="primary" class="primary-icon" ng-if="title === user.job_title"></icon>
+            {{title}} 
           </li>
           <li class="list__item" ng-if="!user.job_titles.length">
             <em translate>No job titles</em>
@@ -415,9 +416,9 @@
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Locations</h3>
         <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-repeat="location in user.locations">
+          <li class="list__item" ng-class="{'list__item--primary' : isPrimaryLocation(location, user.location)}" ng-repeat="location in orderByPrimary('location', user.locations, user.location)">
+            <icon name="star" text="Primary" class="primary-icon" title="Primary" ng-if="isPrimaryLocation(location, user.location)"></icon>
             <span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
-            <icon name="star" text="Primary" title="Primary" ng-if="isPrimaryLocation(location, user.location)"></icon>
           </li>
           <li class="list__item" ng-if="!user.locations.length">
             <em translate>No locations</em>
@@ -469,7 +470,7 @@
 
           <form ng-if="user.locations.length" class="form-section__edit">
             <fieldset>
-              <legend class="form-section__sub-heading" translate>Set primary location:</legend>
+              <legend class="form-section__sub-heading" translate>Set primary location: {{primaryLocationId}}</legend>
               <ul class="list list--has-buttons">
                 <li class="list__item" ng-repeat="location in user.locations">
                   <input

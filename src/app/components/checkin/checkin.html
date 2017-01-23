@@ -90,46 +90,48 @@
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editOrganizationForm.$show()" ng-show="!editOrganizationForm.$visible">
           <icon name="edit" text="Change organization"></icon>
         </button>
-        <button type="button" class="btn-icon form-section__edit-btn" ng-click="editOrganizationForm.$cancel()" ng-show="editOrganizationForm.$visible">
-          <icon name="cancel" text="Cancel"></icon>
+        <button type="button" class="btn-icon btn-secondary form-section__edit-btn" ng-click="editOrganizationForm.$cancel()" ng-show="editOrganizationForm.$visible">
+          <icon name="check" text="Close"></icon>
         </button>
 
         <div ng-show="editOrganizationForm.$visible">
+          <div class="form-section__edit" ng-if="user.organizations.length">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Select a primary organization:</legend>
+              <ul class="list">
+                <li class="list__item" ng-repeat="org in user.organizations">
+                  <input type="radio"
+                  id="org-{{org._id}}"
+                  name="organizations"
+                  ng-model="user.organization._id"
+                  ng-value="org._id"
+                  ng-change="setPrimaryOrganization(org)" />
+                  <label class="clickie-label" for="org-{{org._id}}">{{org.list.name}}</label>
+                </li>
+              </ul>
+            </fieldset>
+          </div>
+          <div class="form-section__edit">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Add a new organization:</legend>
 
-          <fieldset ng-if="user.organizations.length">
-            <legend class="form-section__sub-heading" translate>Select a primary organization:</legend>
-            <ul class="list">
-              <li class="list__item" ng-repeat="org in user.organizations">
-                <input type="radio"
-                id="org-{{org._id}}"
-                name="organizations"
-                ng-model="user.organization._id"
-                ng-value="org._id"
-                ng-change="setPrimaryOrganization(org)" />
-                <label class="clickie-label" for="org-{{org._id}}">{{org.list.name}}</label>
-              </li>
-            </ul>
-          </fieldset>
-
-          <fieldset>
-            <legend class="form-section__sub-heading" translate>Add a new organization:</legend>
-
-            <div class="form-field form-field--compact form-inline-fields">
-              <div class="form-inline-fields__item">
-                <ui-select name="newOrganization" ng-model="temp.organization.list">
-                  <ui-select-match placeholder="{{'Add a new organisation'|translate}}">
-                    {{$select.selected.name}}
-                  </ui-select-match>
-                  <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
-                    {{organization.name}}
-                  </ui-select-choices>
-                </ui-select>
+              <div class="form-field form-field--compact form-inline-fields">
+                <div class="form-inline-fields__item">
+                  <ui-select name="newOrganization" ng-model="temp.organization.list">
+                    <ui-select-match placeholder="{{'Add a new organisation'|translate}}">
+                      {{$select.selected.name}}
+                    </ui-select-match>
+                    <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+                      {{organization.name}}
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+                <button type="button" class="btn-primary" ng-click="addItem('organization')">
+                  <icon name="plus" text="Add"></icon>
+                </button>
               </div>
-              <button type="button" class="btn-primary" ng-click="addItem('organization')">
-                Add
-              </button>
-            </div>
-          </fieldset>
+            </fieldset>
+          </div>
 
         </div>
       </form>
@@ -147,46 +149,47 @@
         </button>
 
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editPhoneForm.$cancel()" ng-show="editPhoneForm.$visible">
-          <icon name="cancel" text="Cancel"></icon>
+          <icon name="check" text="Close"></icon>
         </button>
 
         <div ng-show="editPhoneForm.$visible">
-
-          <fieldset ng-if="user.phone_numbers.length">
-            <legend class="form-section__sub-heading" translate>Select a primary phone number:</legend>
-            <ul class="list">
-              <li class="list__item" ng-repeat="phone in user.phone_numbers">
-                <input type="radio"
-                id="phone-{{phone._id}}"
-                name="phoneNumbers"
-                ng-model="user.phone_number"
-                ng-value="phone.number"
-                ng-change="setPrimaryPhone(phone)" />
-                <label class="clickie-label" for="phone-{{phone._id}}">{{phone.number}}</label>
-              </li>
-            </ul>
-          </fieldset>
-
-          <fieldset>
-            <legend class="form-section__sub-heading" translate>Add a new phone number:</legend>
-            <div class="form-field form-field--compact form-inline-fields">
-              <div class="form-inline-fields__item form-inline-fields__item--short">
-                <label for="new_phone_number" class="sr-only" translate="">Phone type:</label>
-                <div class="styled-select">
-                  <select ng-model="temp.phone_number.type" ng-options="t.value as t.name for t in phoneNumberTypes" id="new_phone_number">
-                    <option value="" disabled selected>Type</option></select>
-                  </select>
+          <div class="form-section__edit" ng-if="user.phone_numbers.length">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Select a primary phone number:</legend>
+              <ul class="list">
+                <li class="list__item" ng-repeat="phone in user.phone_numbers">
+                  <input type="radio"
+                  id="phone-{{phone._id}}"
+                  name="phoneNumbers"
+                  ng-model="user.phone_number"
+                  ng-value="phone.number"
+                  ng-change="setPrimaryPhone(phone)" />
+                  <label class="clickie-label" for="phone-{{phone._id}}">{{phone.number}}</label>
+                </li>
+              </ul>
+            </fieldset>
+          </div>
+           <div class="form-section__edit">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Add a new phone number:</legend>
+              <div class="form-field form-field--compact form-inline-fields">
+                <div class="form-inline-fields__item form-inline-fields__item--short">
+                  <label for="new_phone_number" class="sr-only" translate="">Phone type:</label>
+                  <div class="styled-select">
+                    <select ng-model="temp.phone_number.type" ng-options="t.value as t.name for t in phoneNumberTypes" id="new_phone_number">
+                      <option value="" disabled selected>Type</option></select>
+                    </select>
+                  </div>
                 </div>
+                <div class="form-inline-fields__item">
+                  <bc-phone-number name="phone_number" label="Phone number" ng-model="temp.phone_number.number" is-valid="isValidPhoneNumber" ng-class="{'has-error': temp.phone_number.number && !isValidPhoneNumber, 'has-success': temp.phone_number.number && isValidPhoneNumber}"></bc-phone-number>
+                </div>
+                <button type="button" class="btn-primary" ng-click="addItem('phone_number')">
+                  <icon name="plus" text="Add"></icon>
+                </button>
               </div>
-              <div class="form-inline-fields__item">
-                <bc-phone-number name="phone_number" label="Phone number" ng-model="temp.phone_number.number" is-valid="isValidPhoneNumber" ng-class="{'has-error': temp.phone_number.number && !isValidPhoneNumber, 'has-success': temp.phone_number.number && isValidPhoneNumber}"></bc-phone-number>
-              </div>
-              <button type="button" class="btn-primary" ng-click="addItem('phone_number')">
-                Add
-              </button>
-            </div>
-
-          </fieldset>
+            </fieldset>
+          </div>
         </div>
       </form>
 
@@ -200,58 +203,61 @@
 
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editEmailForm.$show()" ng-show="!editEmailForm.$visible"><icon name="edit" text="Change email"></icon></button>
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editEmailForm.$cancel()" ng-show="editEmailForm.$visible">
-          <icon name="cancel" text="Cancel"></icon>
+          <icon name="check" text="Close"></icon>
         </button>
 
         <div ng-show="editEmailForm.$visible">
-          <fieldset ng-if="user.emails.length">
-            <legend class="form-section__sub-heading" translate>Select a primary email address:</legend>
-            <ul class="list">
-              <li class="list__item" ng-repeat="email in user.emails">
-                <input type="radio"
-                id="email-{{email._id}}"
-                name="emails"
-                ng-model="user.email"
-                ng-value="email.email"
-                ng-disabled="!email.validated"
-                ng-change="setPrimaryEmail(email.email)"
-                />
-                <label class="clickie-label" for="email-{{email._id}}">
-                  {{email.email}}
-                  <span class="list__meta" ng-if="!email.validated">
-                    <span translate>Unverified</span> -
-                    <button type="button" class="btn-link" ng-click="resendValidationEmail(email.email)" translate>resend validation email</button>
-                  </span>
-                </label>
-              </li>
-            </ul>
-          </fieldset>
+          <div class="form-section__edit" ng-if="user.emails.length">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Select a primary email address:</legend>
+              <ul class="list">
+                <li class="list__item" ng-repeat="email in user.emails">
+                  <input type="radio"
+                  id="email-{{email._id}}"
+                  name="emails"
+                  ng-model="user.email"
+                  ng-value="email.email"
+                  ng-disabled="!email.validated"
+                  ng-change="setPrimaryEmail(email.email)"
+                  />
+                  <label class="clickie-label" for="email-{{email._id}}">
+                    {{email.email}}
+                    <span class="list__meta" ng-if="!email.validated">
+                      <span translate>Unverified</span> -
+                      <button type="button" class="btn-link" ng-click="resendValidationEmail(email.email)" translate>resend validation email</button>
+                    </span>
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </div>
+          <div class="form-section__edit">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Add a new email address:</legend>
+              <p class="form-section__info" translate>Email addresses must be verified before they can be set as primary.</p>
 
-          <fieldset>
-            <legend class="form-section__sub-heading" translate>Add a new email address:</legend>
-            <p class="form-section__info" translate>Email addresses must be verified before they can be set as primary.</p>
+              <div class="form-field form-field--compact form-inline-fields">
 
-            <div class="form-field form-field--compact form-inline-fields">
-
-              <div class="form-inline-fields__item form-inline-fields__item--short">
-                <label for="new_email_type" class="sr-only">Email type</label>
-                <div class="styled-select">
-                  <select id="new_email_type" ng-model="temp.email.type" ng-options="t.value as t.name for t in emailTypes" class="form-control">
-                    <option value="" disabled selected>Type</option>
-                  </select>
+                <div class="form-inline-fields__item form-inline-fields__item--short">
+                  <label for="new_email_type" class="sr-only">Email type</label>
+                  <div class="styled-select">
+                    <select id="new_email_type" ng-model="temp.email.type" ng-options="t.value as t.name for t in emailTypes" class="form-control">
+                      <option value="" disabled selected>Type</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="form-inline-fields__item">
-                <label for="new_email" class="sr-only">Email address</label>
-                <input type="email" id="new_email" ng-model="temp.email.email" class="form-control" placeholder="{{'Email address' | translate}}" />
+                <div class="form-inline-fields__item">
+                  <label for="new_email" class="sr-only">Email address</label>
+                  <input type="email" id="new_email" ng-model="temp.email.email" class="form-control" placeholder="{{'Email address' | translate}}" />
+                </div>
+
+                <button type="button" class="btn-primary" ng-click="addItem('email')">
+                  <icon name="plus" text="Add"></icon>
+                </button>
               </div>
 
-              <button type="button" class="btn-primary" ng-click="addItem('email')">
-                Add
-              </button>
-            </div>
-
-          </fieldset>
+            </fieldset>
+          </div>
 
         </div>
       </form>
@@ -264,56 +270,58 @@
         </p>
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editLocationForm.$show()" ng-show="!editLocationForm.$visible"><icon name="edit" text="Change location"></icon></button>
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editLocationForm.$cancel()" ng-show="editLocationForm.$visible">
-          <icon name="cancel" text="Cancel"></icon>
+          <icon name="check" text="Close"></icon>
         </button>
 
         <div ng-show="editLocationForm.$visible">
-          <fieldset ng-if="user.locations.length">
-            <legend class="form-section__sub-heading" translate>Select current location</legend>
-            <ul class="list">
-              <li class="list__item" ng-repeat="location in user.locations">
-                <input type="radio"
-                id="location-{{location.country.id}}"
-                name="locations"
-                ng-model="primaryLocationId"
-                ng-value="getLocationId(location)"
-                ng-change="setPrimaryLocation(location)" />
-                <label class="clickie-label" for="location-{{location.country.id}}"><span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}</label>
-              </li>
-            </ul>
-          </fieldset>
-
-
-          <fieldset>
-            <h4 class="form-section__sub-heading" translate>Add a new location</h4>
-
-            <div class="form-field form-field--compact form-inline-fields">
-              <div class="form-inline-fields__item">
-                <ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
-                  <ui-select-match placeholder="{{'Select a country' | translate}}">
-                    {{$select.selected.name}}
-                  </ui-select-match>
-                  <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
-                    {{country.name}}
-                  </ui-select-choices>
-                </ui-select>
-              </div>
-
-              <div class="form-inline-fields__item">
-                <ui-select ng-model="temp.location.region">
-                  <ui-select-match placeholder="{{'Select a region' | translate}}">
-                    {{$select.selected.name}}
-                  </ui-select-match>
-                  <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
-                    {{region.name}}
-                  </ui-select-choices>
-                </ui-select>
-              </div>
-              <button type="button" class="btn-primary" ng-click="addItem('location')" translate>
-                Add
-              </button>
-
+          <div class="form-section__edit" ng-if="user.locations.length">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Select current location</legend>
+              <ul class="list">
+                <li class="list__item" ng-repeat="location in user.locations">
+                  <input type="radio"
+                  id="location-{{location.country.id}}"
+                  name="locations"
+                  ng-model="primaryLocationId"
+                  ng-value="getLocationId(location)"
+                  ng-change="setPrimaryLocation(location)" />
+                  <label class="clickie-label" for="location-{{location.country.id}}"><span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}</label>
+                </li>
+              </ul>
             </fieldset>
+          </div>
+          <div class="form-section__edit">
+            <fieldset>
+              <h4 class="form-section__sub-heading" translate>Add a new location</h4>
+
+              <div class="form-field form-field--compact form-inline-fields">
+                <div class="form-inline-fields__item">
+                  <ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
+                    <ui-select-match placeholder="{{'Select a country' | translate}}">
+                      {{$select.selected.name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
+                      {{country.name}}
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+
+                <div class="form-inline-fields__item">
+                  <ui-select ng-model="temp.location.region">
+                    <ui-select-match placeholder="{{'Select a region' | translate}}">
+                      {{$select.selected.name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
+                      {{region.name}}
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+                <button type="button" class="btn-primary" ng-click="addItem('location')" translate>
+                  <icon name="plus" text="Add"></icon>
+                </button>
+
+              </fieldset>
+            </div>
           </div>
         </form>
 
@@ -325,39 +333,42 @@
           </p>
           <button type="button" class="btn-icon form-section__edit-btn" ng-click="editJobTitleForm.$show()" ng-show="!editJobTitleForm.$visible"><icon name="edit" text="Change job title"></icon></button>
           <button type="button" class="btn-icon form-section__edit-btn" ng-click="editJobTitleForm.$cancel()" ng-show="editJobTitleForm.$visible">
-            <icon name="cancel" text="Cancel"></icon>
+            <icon name="check" text="Close"></icon>
           </button>
 
           <div ng-show="editJobTitleForm.$visible">
-            <fieldset ng-if="user.job_titles.length">
-              <legend class="form-section__sub-heading" translate>Select a primary job title:</legend>
-              <ul class="list">
-                <li class="list__item" ng-repeat="title in user.job_titles track by $index">
-                  <input type="radio"
-                  id="title-{{$index}}"
-                  name="titles"
-                  ng-model="user.job_title"
-                  ng-value="title"
-                  ng-change="setPrimaryJobTitle(title)" />
-                  <label class="clickie-label" for="title-{{$index}}">
-                    {{title}}
-                  </label>
-                </li>
-              </ul>
-            </fieldset>
+            <div class="form-section__edit" ng-if="user.job_titles.length">
+              <fieldset>
+                <legend class="form-section__sub-heading" translate>Select a primary job title:</legend>
+                <ul class="list">
+                  <li class="list__item" ng-repeat="title in user.job_titles track by $index">
+                    <input type="radio"
+                    id="title-{{$index}}"
+                    name="titles"
+                    ng-model="user.job_title"
+                    ng-value="title"
+                    ng-change="setPrimaryJobTitle(title)" />
+                    <label class="clickie-label" for="title-{{$index}}">
+                      {{title}}
+                    </label>
+                  </li>
+                </ul>
+              </fieldset>
+            </div>
+            <div class="form-section__edit">
+              <fieldset>
+                <legend class="form-section__sub-heading" translate>Add a new job title:</legend>
 
-            <fieldset>
-              <legend class="form-section__sub-heading" translate>Add a new job title:</legend>
-
-              <div class="form-field form-field--compact form-inline-fields">
-                <div class="form-inline-fields__item">
-                  <input type="text" ng-model="temp.job_title" placeholder="New job title" />
+                <div class="form-field form-field--compact form-inline-fields">
+                  <div class="form-inline-fields__item">
+                    <input type="text" ng-model="temp.job_title" placeholder="New job title" />
+                  </div>
+                  <button type="button" class="btn-primary" ng-click="addItem('job_title')" translate>
+                    <icon name="plus" text="Add"></icon>
+                  </button>
                 </div>
-                <button type="button" class="btn-primary" ng-click="addItem('job_title')" translate>
-                  Add
-                </button>
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
           </div>
         </form>
         </div>

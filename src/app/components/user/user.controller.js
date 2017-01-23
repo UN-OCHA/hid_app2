@@ -40,9 +40,50 @@
       }, 5000);
     }
 
+    function getPrimaryIndex (type, object, primary) {
+      if (type === 'phone') {
+        return object.map(function (phoneNumber) { 
+          return phoneNumber.number;
+        }).indexOf(primary);
+      }
+
+      if (type === 'email') {
+        return object.map(function (email) { 
+          return email.email;
+        }).indexOf(primary);
+      }
+
+      if (type === 'organization') {
+        return object.map(function (org) { 
+          return org._id;
+        }).indexOf(primary._id);
+      }
+
+      if (type === 'jobTitle') {
+        return object.indexOf(primary);
+      }
+
+      if (type === 'location') {
+        var primaryIndex;
+        angular.forEach(object, function (location, index) {
+          if (angular.equals(location, primary)) {
+            primaryIndex = index;
+          }
+        });
+        return primaryIndex;
+      }
+    }
+
+    $scope.orderByPrimary = function (type, object, primary) {
+      var primaryIndex = getPrimaryIndex(type, object, primary);
+      object.splice(0, 0, object.splice(primaryIndex,1)[0]);
+      return object;
+    }
+
+
     $scope.user = User.get({userId: $routeParams.userId}, function(user) {
       $scope.$broadcast('userLoaded');
-      userPicture(user.picture, user.email);
+      userPicture(user.picture, user.email);      
     });
 
     //Listen for user edited event
