@@ -1,0 +1,171 @@
+.carousel {
+  position: relative;
+  padding-bottom: $base-unit*3;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+   >.item {
+   	position: relative;
+    display: none;
+	  transition: transform .6s ease-in-out;
+	  transition: .6s ease-in-out left;
+	  backface-visibility: hidden;
+	  perspective: 1000px;
+	}
+
+	>.active {
+    left: 0;
+	}
+
+	>.active, >.next, >.prev {
+		display: block;
+	}
+
+	>.item.active, >.item.next.left, >.item.prev.right {
+		left: 0;
+    transform: translate3d(0,0,0);
+	}
+}
+
+.carousel-caption {
+	font-family: $heading-font-light;
+  text-align: center;
+}
+
+.carousel-caption__heading {
+	@include font-size($medium-font-size);
+	line-height: 1.4;
+	color: $dark-blue;
+	border-bottom: 1px solid $border-grey;
+	padding: $base-unit*2 0 $base-unit*1.5 0;
+	width: 70%;
+	margin: 0 auto $base-unit*2 auto; 
+}
+
+
+.carousel-control {
+	position: absolute;
+  top: 50%;
+  left: -$base-unit*2;
+  margin-top: -$base-unit*2;
+  padding: 0;
+  background: transparent;
+  opacity: 0.8;
+  width: $base-unit*4;
+   
+  &.right {
+   	left: auto;
+   	right: -$base-unit*2;
+  }
+
+  .icon {
+  	@include font-size($large-font-size);
+  	margin: 0;
+  }
+
+  &:hover, &:focus {
+  	opacity: 1;
+  	background: transparent;
+  	color: $dark-blue;
+  }
+
+  &.disabled {
+  	display: none;
+  }
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: $base-unit/2;
+  z-index: 15;
+  width: 100%;
+  text-align: center;
+  list-style: none;
+
+  li {
+    display: inline-block;
+    width: $base-unit*1.5;
+    height: $base-unit*1.5;
+    margin: 0 $base-unit;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid $primary-color;
+    border-radius: 100%;
+
+    &.active {
+    	background: $primary-color;
+    }
+	}
+}
+
+.tutorial-carousel {
+	width: 280px;
+	margin: 0 auto;
+
+	.carousel-caption {
+		padding-top: $base-unit*2;
+	}
+
+	.carousel-control {
+		display: none;
+	}
+
+	.carousel-indicators {
+		top: $base-unit*36;
+		bottom: auto;
+	}
+}
+
+.tutorial-carousel__button {
+	width: 60%;
+	margin: $base-unit*3 auto 0 auto;
+}
+
+.tutorial-carousel__more {
+	padding-top: $base-unit*2;
+
+	img {
+		margin-top: $base-unit;
+	}
+}
+
+
+//move this
+.start-form {
+	max-width: 300px;
+	width: 80%;
+	margin: 0 auto;
+
+	.btn-block {
+		width: 60%;
+		margin: $base-unit*3 auto 0 auto;
+	}
+
+	.ui-select-container {
+		max-width: 280px;
+		margin: 0 auto;
+	}
+}
+
+.start-form-header, .start-form__heading, .start-form__intro {
+	text-align: center;
+}
+
+.start-form-header {
+	margin-bottom: $base-unit*2;
+}
+
+.start-form__heading {
+	@include font-size($medium-font-size);
+	color: $dark-blue;
+	margin-top: $base-unit;
+}
+
+.start-form__intro {
+	font-family: $heading-font-light;
+}

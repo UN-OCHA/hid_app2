@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserEditCtrl', UserEditCtrl);
 
-  UserEditCtrl.$inject = ['$scope', 'alertService', 'gettextCatalog', 'hrinfoService', 'List', 'User', 'UserCheckInService'];
+  UserEditCtrl.$inject = ['$location', '$scope', 'alertService', 'gettextCatalog', 'hrinfoService', 'List', 'User', 'UserCheckInService'];
 
-  function UserEditCtrl($scope, alertService, gettextCatalog, hrinfoService, List, User, UserCheckInService) {
+  function UserEditCtrl($location, $scope, alertService, gettextCatalog, hrinfoService, List, User, UserCheckInService) {
     $scope.phoneNumberTypes = [];
     $scope.emailTypes = [];
     $scope.voipTypes = [];
@@ -32,7 +32,12 @@
     $scope.resendValidationEmail = resendValidationEmail;
     $scope.setPrimaryPhone = setPrimaryPhone;
     $scope.updateUser = updateUser;
+    $scope.addPrimaryOrg = addPrimaryOrg;
+    $scope.addPrimaryLocation = addPrimaryLocation;
+    $scope.nextStep = nextStep;
+    $scope.currentStep = 1;
     var defaultSettings = {};
+    var lastStep = 4;
 
     function getRoles () {
       $scope.roles = List.query({'type': 'functional_role'});
@@ -96,7 +101,7 @@
       }
     }
 
-    function addList (list, listType) {
+    function addList (list, listType, callback) {
       $scope.$emit('editUser', {status: 'saving'});
       UserCheckInService.save({userId: $scope.user._id, listType: listType}, {list: list.list._id}, function (response) {
         $scope.user[listType] = angular.copy(response[listType]);
@@ -107,6 +112,10 @@
           type: 'add' + capitalized,
           message: capitalized + gettextCatalog.getString(' added')
         });
+
+        if (callback) {
+          callback();
+        }
       });
     }
 
@@ -124,7 +133,7 @@
       });
     }
 
-    function saveUpdatedUser (type) {
+    function saveUpdatedUser (type, callback) {
       $scope.user.$update(function (user) {
         $scope.$parent.user = angular.copy(user);
         updateCurrentUser();
@@ -134,6 +143,10 @@
           type: type,
           message: gettextCatalog.getString('Profile updated')
         });
+
+        if (callback) {
+          callback();
+        }
 
         if (type === 'primaryLocation') {
           $scope.primaryLocationId = getLocationId($scope.user.location);
@@ -145,7 +158,7 @@
       });
     }
 
-    function saveUser (type) {
+    function saveUser (type, callback) {
       $scope.$emit('editUser', {status: 'saving'});
 
       if ($scope.organization.list && (!$scope.user.organization.list || $scope.organization.list._id != $scope.user.organization.list._id)) {
@@ -161,7 +174,7 @@
         }
       }
       else {
-        saveUpdatedUser(type);
+        saveUpdatedUser(type, callback);
       }
     }
 
@@ -171,12 +184,12 @@
 
     function setRegions ($item) {
       hrinfoService.getRegions($item.id).then(function (regions) {
-        $scope.showRegion = regions.length ? true : false
+        $scope.showRegion = regions.length ? true : false;
         $scope.regions = regions;
       });
     }
 
-    function addItem (key) {
+    function addItem (key, callback) {
       if (!$scope.user[key + 's'] || angular.equals($scope.temp[key], defaultSettings[key])) {
         return;
       }
@@ -184,12 +197,12 @@
       $scope.user[key + 's'].push($scope.temp[key]);
 
       if (key === 'organization' || key === 'functional_role') {
-        addList($scope.temp[key], key + 's');
+        addList($scope.temp[key], key + 's', callback);
         $scope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
       $scope.temp[key] = angular.copy(defaultSettings[key]);
-      saveUser('add' + key);
+      saveUser('add' + key, callback);
     }
 
     function dropItem (key, value) {
@@ -206,7 +219,7 @@
       saveUser();
     }
 
-    function setPrimaryOrganization (org) {
+    function setPrimaryOrganization (org, callback) {
       $scope.$emit('editUser', {status: 'saving'});
       $scope.user.setPrimaryOrganization(org, function (resp) {
         $scope.user.organization = resp.data.organization;
@@ -216,6 +229,9 @@
           type: 'primaryOrganization',
           message: gettextCatalog.getString('Primary organization updated')
         });
+        if (callback) {
+          callback();
+        }
       }, function () {
         alertService.add('danger', gettextCatalog.getString('There was an error setting the primary organization.'));
         $scope.$emit('editUser', {status: 'fail'});
@@ -247,9 +263,9 @@
       return true;
     }
 
-    function setPrimaryLocation (location) {
+    function setPrimaryLocation (location, callback) {
       $scope.user.location = angular.copy(location);
-      saveUser('primaryLocation');
+      saveUser('primaryLocation', callback);
     }
 
     function setPrimaryJobTitle (title) {
@@ -317,6 +333,47 @@
       saveUser();
     }
 
+    
+
+    function addPrimaryOrg () {
+      if (!Object.keys($scope.temp.organization).length) {
+        nextStep();
+        return;
+      }
+      var orgId = $scope.temp.organization.list._id;
+
+      addItem('organization', function () {
+        var primaryOrg = $scope.user.organizations.find(function (org) {
+          return org.list._id === orgId;
+        });
+
+        setPrimaryOrganization(primaryOrg, function () {
+          nextStep();
+        });
+      });
+    }    
+
+    function addPrimaryLocation () {
+      if (!Object.keys($scope.temp.location).length) {
+        nextStep();
+        return;
+      }
+      var primaryLocation = $scope.temp.location;
+      addItem('location', function () {
+        setPrimaryLocation(primaryLocation, function () {
+          nextStep();
+        });
+      });
+    }
+
+    function nextStep () {
+      if ($scope.currentStep === lastStep) {
+        $location.path('/tutorial');
+        return;
+      }
+      $scope.currentStep = $scope.currentStep + 1;
+    }
+   
     //Wait until user is loaded into scope by parent controller
     $scope.$on('userLoaded', function () {
       setUpFields();

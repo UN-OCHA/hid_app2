@@ -17,7 +17,7 @@
         </ul>
       </div>
 
-      <div class="global-header__nav" ng-if="isAuthenticated">
+      <div class="global-header__nav" ng-if="isAuthenticated && !hideHeaderFooter">
 
         <ul class="nav nav--secondary">
           <li class="nav__item nav-item__notifications">
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <div class="site-header">
+  <div class="site-header" ng-show="!hideHeaderFooter">
     <div class="container site-header__inner">
 
       <a href="/" class="site-header__logo" ng-class="{'site-header__logo--loggedout': !isAuthenticated, 'active' : activeNav('/landing')}">

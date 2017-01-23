@@ -82,6 +82,12 @@
       return $location.path() === path;
     };
 
+    function hideHeaderFooter () {
+      return ($location.path() === '/start' || $location.path() === '/tutorial') ? true : false;
+    }
+
+    $scope.hideHeaderFooter = hideHeaderFooter();
+
     $scope.initLanguage = function () {
       if (!$scope.currentUser) {
         return;
@@ -112,6 +118,7 @@
 
     var initView = function () {
       $scope.closeSidebar();
+      $scope.hideHeaderFooter = hideHeaderFooter();
     };
 
     $scope.initCurrentUser();

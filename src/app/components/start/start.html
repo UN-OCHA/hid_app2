@@ -1,0 +1,86 @@
+<div class="row">
+	<div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
+		
+		<div ng-controller="UserEditCtrl">
+			<div class="start-form start-form-header"><img src="assets/img/logo.svg" alt="Humanitarian ID"></div>
+			<form class="start-form" ng-if="currentStep === 1">
+					<img src="assets/img/start-slide.jpg" alt="">
+					<h1 class="start-form__heading" translate>Thanks for registering</h1>
+
+				<p class="start-form__intro" translate>To get started, please give us some information about yourself.</p>
+				<button type="submit" 
+					class="btn-primary btn-block"
+					ng-click="nextStep()"
+					translate>Next
+				</button>
+			</form>
+			<form class="start-form" ng-if="currentStep === 2">
+				<div class="form-field">
+					<h1 class="start-form__heading"><label for="newOrganization" translate>What is your primary organization?</label></h1>
+					<div class="form-field">
+						<ui-select name="newOrganization" ng-model="temp.organization.list">
+							<ui-select-match placeholder="{{'Search for an organisation'|translate}}">
+								{{$select.selected.name}}
+							</ui-select-match>
+							<ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+								{{organization.name}}
+							</ui-select-choices>
+						</ui-select>
+					</div>
+				</div>
+
+				<div class="form-field">
+					<button type="submit" 
+						class="btn-primary btn-block"
+						ng-click="addPrimaryOrg()"
+						translate>Next
+					</button>
+				</div>
+			</form>
+
+			<form class="start-form" ng-if="currentStep === 3">
+				<div class="form-field">
+					<h1 class="start-form__heading"><label for="location" translate>What is your primary location?</label></h1>
+					<ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
+						<ui-select-match placeholder="{{'Search for a country' | translate}}">
+							{{$select.selected.name}}
+						</ui-select-match>
+						<ui-select-choices repeat="country in countries | filter: $select.search track by $index">
+							{{country.name}}
+						</ui-select-choices>
+					</ui-select>
+				</div>
+
+				<div class="form-field" ng-if="showRegion">
+					<ui-select ng-model="temp.location.region">
+						<ui-select-match placeholder="{{'Select a region' | translate}}">
+							{{$select.selected.name}}
+						</ui-select-match>
+						<ui-select-choices repeat="region in regions | filter: $select.search track by $index">
+							{{region.name}}
+						</ui-select-choices>
+					</ui-select>
+				</div>
+
+				<div class="form-field">
+					<button type="submit" 
+						class="btn-primary btn-block"
+						ng-click="addPrimaryLocation()"
+						translate>Next
+					</button>
+				</div>
+
+			</form>
+
+			<form class="start-form" ng-if="currentStep === 4">
+				<h1 class="start-form__heading">Finishing your profile</h1>
+				<p class="start-form__intro" translate>You can add more information to your profile at any time via the 'Profile' link in your account menu on the top right</p>
+				<button type="submit" 
+						class="btn-primary btn-block"
+						ng-click="nextStep()"
+						translate>Next
+					</button>
+			</form>
+		</div>
+	</div>
+</div>

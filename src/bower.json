@@ -35,7 +35,8 @@
     "components-font-awesome": "~4.7.0",
     "moment-timezone": "~0.5.9",
     "offline": "~0.7.18",
-    "angular-mocks": "~1.6.1"
+    "angular-mocks": "~1.6.1",
+    "angular-touch": "^1.6.1"
   },
   "resolutions": {
     "angular": "1.6.1"

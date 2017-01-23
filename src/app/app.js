@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'app.dashboard', 'app.list', 'app.client', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
 
 app.constant('config', env);
 
@@ -296,6 +296,18 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'NotificationsCtrl',
         authenticate: true,
         title: 'Notifications'
+      })
+      .when('/start', {
+        templateUrl: 'app/components/start/start.html',
+        controller: 'StartCtrl',
+        authenticate: true,
+        title: 'Getting started'
+      })
+      .when('/tutorial', {
+        templateUrl: 'app/components/start/tutorial.html',
+        controller: 'StartCtrl',
+        authenticate: true,
+        title: 'Tutorial'
       })
       .otherwise({
         redirectTo: '/'

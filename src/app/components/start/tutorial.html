@@ -1,0 +1,64 @@
+<div class="row">
+	<div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
+		
+		<div uib-carousel template-url="app/components/start/carousel.html" active="activeSlide" no-wrap="true" class="tutorial-carousel">
+      <div uib-slide ng-repeat="slide in slides" index="$index">
+        <img ng-src="{{slide.image}}">
+        <div class="carousel-caption">
+          <h4 class="carousel-caption__heading" translate>{{slide.heading}}</h4>
+          <p class="carousel-caption__text" translate>{{slide.text}}</p>
+          
+          <div ng-if="slide.id === 1">
+	          <button type="button" class="btn-transparent" ng-click="showSlideMore1 = !showSlideMore1" ng-show="!showSlideMore1">
+	          	<span translate>Read more</span>
+	          	<span class="sr-only" translate> about finding others</span>
+	          	<icon name="arrow-down"></icon>
+	          </button>
+
+	          <div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore1">
+		          <p>In the navigation bar you will find a search box. Type in it and you will see contacts and lists showing up.</p> 
+		          <img src="assets/img/tutorial/search.png" alt="Search box">
+		          <p>If you got a lot of results, use the filter to fine-tune your search.
+		          </p>
+		          <img src="assets/img/tutorial/filter-button.png" alt="Filter button">
+	          </div>
+	        </div>
+
+	        <div ng-if="slide.id === 2">
+	          <button type="button" class="btn-transparent" ng-click="showSlideMore2 = !showSlideMore2" ng-show="!showSlideMore2">
+	          	<span translate>Read more</span>
+	          	<span class="sr-only" translate> about checking in</span>
+	          	<icon name="arrow-down"></icon>
+	          </button>
+
+	          <div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore2">
+		          <p>You can find the "Check-In" and "Check-Out" buttons on the right-hand side. Click for example on Check-in and you’ll be able to check into many lists by typing. You’ll be suggested with a number of other related lists you can also check-in.</p> 
+		          <img src="assets/img/tutorial/checkin-suggestions.png" alt="Check in">
+		          <p>If you only want to be temporarily part of a list, add a check-out date. This way we’ll remind you and remove you automatically of your check-out. </p> 		         
+		          <img src="assets/img/tutorial/checkout-date.png" alt="Checkout date">
+	          </div>
+	        </div>
+
+	        <div ng-if="slide.id === 3">
+	          <button type="button" class="btn-transparent" ng-click="showSlideMore3 = !showSlideMore3" ng-show="!showSlideMore3">
+	          	<span translate>Read more</span>
+	          	<span class="sr-only" translate> about managing lists</span>
+	          	<icon name="arrow-down"></icon>
+	          </button>
+
+	          <div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore3">
+		          <p>You can create your own contact lists from your dashboard. Once you’ve given your list a name and decided who can view and join it Display screen for settings, you can start adding and removing contacts from your list. Feel free to also export your contact list into PDF for example.</p>
+		           <img src="assets/img/tutorial/list-settings.png" alt="List settings">
+		          <p>If you only want to be temporarily part of a list, add a check-out date. This way we’ll remind you and remove you automatically of your check-out. </p> 		         
+		          <img src="assets/img/tutorial/list-export.png" alt="Export options">
+	          </div>
+	         </div>
+
+          <button type="button" ng-if="$index + 1 < slides.length" class="btn-primary btn-block tutorial-carousel__button" ng-click="swipeLeft()" translate>Next</button>
+          <button type="button" ng-if="$index + 1 === slides.length" class="btn-primary btn-block tutorial-carousel__button" ng-click="finishTutorial()" translate>Get started</button>
+        </div>
+      </div>
+    </div>
+
+	</div>
+</div>
