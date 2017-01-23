@@ -62,9 +62,17 @@
 
       <div class="profile-header__image">
 
-        <icon name="check-circle" text="Verfied" ng-show="user.verified"></icon>
+        <icon name="check-circle" text="Verfied" class="profile-header__verified" ng-show="user.verified"></icon>
 
         <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
+
+        <div ng-show="showProfileForm">
+          <label class="btn-secondary btn-upload profile-header__upload" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
+            <icon name="cloud-upload"></icon>
+            <span translate>Upload</span>
+          </label>
+          <p class="form-hint"><em translate>JPEG format 200x200px</em></p>
+        </div>
 
       </div>
 
@@ -95,8 +103,11 @@
         </div>
 
         <div ng-show="showProfileForm">
-          <label class="btn btn-secondary btn-upload center-block" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">Upload new Picture</label>
-          <p class="form-hint" translate>Upload a square image in JPEG format, with more than 200px width</p>
+          <label class="btn-secondary btn-upload profile-header__upload--mobile" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
+            <icon name="cloud-upload"></icon>
+            Upload
+          </label>
+          <p class="form-hint"><em translate>JPEG format 200x200px</em></p>
         </div>
 
         <div class="profile-header__controls">
@@ -129,9 +140,9 @@
 
         <h3 class="form-section__heading" translate>Phone numbers</h3>
 
-        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-class="{'list__item--primary' : user.phone_number === phone.number}" ng-repeat="phone in orderByPrimary('phone', user.phone_numbers, user.phone_number)">
-            <icon name="star" text="Primary" class="primary-icon" title="Primary" ng-if="user.phone_number === phone.number"></icon>
+        <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
+          <li class="list__item" ng-repeat="phone in orderByPrimary('phone', user.phone_numbers, user.phone_number)">
+            <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="user.phone_number === phone.number"></icon>
             <a ng-href="tel:{{phone.number}}">{{phone.number}}</a>
             <span class="list__meta">{{phone.type}}</span>
           </li>
@@ -192,9 +203,9 @@
 
         <h3 class="form-section__heading" translate>Email</h3>
 
-        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-class="{'list__item--primary' : user.email === email.email}" ng-repeat="email in orderByPrimary('email', user.emails, user.email)">
-            <icon name="star" text="Primary" class="primary-icon" title="Primary" ng-if="user.email === email.email"></icon>
+        <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
+          <li class="list__item" ng-repeat="email in orderByPrimary('email', user.emails, user.email)">
+            <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="user.email === email.email"></icon>
             <a ng-href="mailto:{{email.email}}">{{email.email}}</a>
             <span class="list__meta">{{email.type}} <span ng-if="!email.validated" translate> / Unverified</span></span>
           </li>
@@ -303,9 +314,9 @@
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
 
         <h3 class="form-section__heading" translate>Organizations</h3>
-        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-class="{'list__item--primary' : user.organization._id === org._id}" ng-repeat="org in orderByPrimary('organization', user.organizations, user.organization)">
-            <icon name="star" text="Primary" class="primary-icon" title="Primary" ng-if="user.organization._id === org._id"></icon>
+        <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
+          <li class="list__item" ng-repeat="org in orderByPrimary('organization', user.organizations, user.organization)">
+            <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="user.organization._id === org._id"></icon>
             <a href="/lists/{{org.list._id}}">{{org.list.name}}</a>
           </li>
           <li class="list__item" ng-if="!user.organizations.length">
@@ -361,9 +372,9 @@
 
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Job titles</h3>
-        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-class="{'list__item--primary' : title === user.job_title}" ng-repeat="title in orderByPrimary('jobTitle', user.job_titles, user.job_title)">
-            <icon name="star" title="primary" class="primary-icon" ng-if="title === user.job_title"></icon>
+        <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
+          <li class="list__item" ng-repeat="title in orderByPrimary('jobTitle', user.job_titles, user.job_title)">
+            <icon name="direction-up" title="primary" class="primary-icon" ng-if="title === user.job_title"></icon>
             {{title}} 
           </li>
           <li class="list__item" ng-if="!user.job_titles.length">
@@ -415,9 +426,9 @@
 
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Locations</h3>
-        <ul class="list" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
-          <li class="list__item" ng-class="{'list__item--primary' : isPrimaryLocation(location, user.location)}" ng-repeat="location in orderByPrimary('location', user.locations, user.location)">
-            <icon name="star" text="Primary" class="primary-icon" title="Primary" ng-if="isPrimaryLocation(location, user.location)"></icon>
+        <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
+          <li class="list__item" ng-repeat="location in orderByPrimary('location', user.locations, user.location)">
+            <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="isPrimaryLocation(location, user.location)"></icon>
             <span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
           </li>
           <li class="list__item" ng-if="!user.locations.length">

@@ -28,6 +28,12 @@
 
 /** Add / remove icons here - do not edit above this line */
 
+.icon-direction-up:before {
+  content: "\e95a";
+}
+.icon-cloud-upload:before {
+  content: "\e935";
+}
 .icon-lock:before {
   content: "\e932";
 }

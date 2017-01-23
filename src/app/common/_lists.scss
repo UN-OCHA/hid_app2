@@ -25,6 +25,10 @@
     padding-left: $base-unit*5;
   }
 
+  .list--has-primary & {
+    padding-left: $base-unit*3;
+  }
+
   &:last-child {
     margin-bottom: $base-unit;
   }
@@ -48,10 +52,6 @@
       text-decoration: underline;
     }
   }
-}
-
-.list__item--primary {
-  padding-left: $base-unit*3;
 
   .primary-icon {
     position: absolute;
