@@ -173,6 +173,10 @@ legend {
   .list__item {
     @include font-size($small-font-size);
   }
+
+  .list__button {
+    top: 0;
+  }
 }
 
 .form-section__info {

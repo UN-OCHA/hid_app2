@@ -79,10 +79,11 @@
         return object;
       }
       var primaryIndex = getPrimaryIndex(type, object, primary);
-      object.splice(0, 0, object.splice(primaryIndex,1)[0]);
+      if (primaryIndex !== -1) {
+        object.splice(0, 0, object.splice(primaryIndex,1)[0]);
+      }
       return object;
     }
-
 
     $scope.user = User.get({userId: $routeParams.userId}, function(user) {
       $scope.$broadcast('userLoaded');
