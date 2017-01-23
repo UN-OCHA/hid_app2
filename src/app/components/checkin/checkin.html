@@ -280,12 +280,12 @@
               <ul class="list">
                 <li class="list__item" ng-repeat="location in user.locations">
                   <input type="radio"
-                  id="location-{{location.country.id}}"
+                  id="location-{{$index}}"
                   name="locations"
                   ng-model="primaryLocationId"
                   ng-value="getLocationId(location)"
                   ng-change="setPrimaryLocation(location)" />
-                  <label class="clickie-label" for="location-{{location.country.id}}"><span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}</label>
+                  <label class="clickie-label" for="location-{{$index}}"><span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}</label>
                 </li>
               </ul>
             </fieldset>
