@@ -75,6 +75,9 @@
     }
 
     $scope.orderByPrimary = function (type, object, primary) {
+      if (!primary) {
+        return object;
+      }
       var primaryIndex = getPrimaryIndex(type, object, primary);
       object.splice(0, 0, object.splice(primaryIndex,1)[0]);
       return object;
