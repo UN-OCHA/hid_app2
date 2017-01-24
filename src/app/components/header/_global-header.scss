@@ -4,11 +4,13 @@
 
   .dropdown-menu {
     min-width: 106px;
+    font-family: $heading-font-light;
 
     a {
       &:hover, &:focus {
         text-decoration: none;
-        font-weight: bold;
+        background: $primary-color;
+        color: $text-light;
       }
     }
   }
@@ -44,7 +46,7 @@
   .dropdown-menu {
     left: 0;
     right: auto;
-    width: 240px;
+    width: 232px;
   }
 }
 
