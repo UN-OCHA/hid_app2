@@ -18,19 +18,19 @@
     $scope.slides = [
       {
         id: 1,
-        image: '/assets/img/tutorial-slide-1.jpg',
+        image: '/img/tutorial-slide-1.jpg',
         heading: 'Find others',
         text: 'No matter whether you are looking for an individual, a contact list or a specific role – all contacts are at your finger tip.',
       },
       {
         id: 2,
-        image: '/assets/img/tutorial-slide-1.jpg',
+        image: '/img/tutorial-slide-1.jpg',
         heading: 'Check in and out',
         text: 'You’re deploying to a country, disaster or joining a sector? Check into the contact list when you arrive and out when you leave.'
       },
       {
         id: 3,
-        image: '/assets/img/tutorial-slide-1.jpg',
+        image: '/img/tutorial-slide-1.jpg',
         heading: 'Manage your own lists',
         text: 'Create your own contact lists and share them with others. Let others check into your lists or decide yourself whom to add.'
       }
