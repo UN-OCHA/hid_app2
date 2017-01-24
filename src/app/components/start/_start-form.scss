@@ -1,0 +1,33 @@
+.start-form {
+	max-width: 300px;
+	width: 80%;
+	margin: 0 auto;
+
+	.btn-block {
+		width: 60%;
+		margin: $base-unit*3 auto 0 auto;
+	}
+
+	.ui-select-container {
+		max-width: 280px;
+		margin: 0 auto;
+	}
+}
+
+.start-form-header, .start-form__heading, .start-form__intro {
+	text-align: center;
+}
+
+.start-form-header {
+	margin-bottom: $base-unit*2;
+}
+
+.start-form__heading {
+	@include font-size($medium-font-size);
+	color: $dark-blue;
+	margin-top: $base-unit;
+}
+
+.start-form__intro {
+	font-family: $heading-font-light;
+}

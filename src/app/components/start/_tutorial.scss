@@ -1,0 +1,31 @@
+.tutorial-carousel {
+	width: 280px;
+	margin: 0 auto;
+
+	.carousel-caption {
+		padding-top: $base-unit*2;
+	}
+
+	.carousel-control {
+		top: 282px;
+		margin-top: 0;
+	}
+
+	.carousel-indicators {
+		top: $base-unit*36;
+		bottom: auto;
+	}
+}
+
+.tutorial-carousel__button {
+	width: 60%;
+	margin: $base-unit*3 auto 0 auto;
+}
+
+.tutorial-carousel__more {
+	padding-top: $base-unit*2;
+
+	img {
+		margin-top: $base-unit;
+	}
+}
