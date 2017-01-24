@@ -10,6 +10,7 @@
   function AuthService ($http, $window, $rootScope, $interval, $location, config, offlineService, notificationsService) {
     var jwt = {
       _notificationsHelper: function (permission, userId) {
+        if (!("Notification" in window)) {return;}
         if (permission === 'granted' && !$rootScope.notificationPromise) {
           $rootScope.notificationPromise = true;
           $rootScope.notificationPromise = $interval(function () {
@@ -55,9 +56,12 @@
             $rootScope.offlinePromise = $interval(function () {
               offlineService.cacheListsForUser(response.data.user);
             }, 600000);
-            Notification.requestPermission(function (permission) {
-              that._notificationsHelper(permission, response.data.user._id);
-            });
+
+            if (("Notification" in window)) {
+              Notification.requestPermission(function (permission) {
+                that._notificationsHelper(permission, response.data.user._id);
+              });
+            }
           }
         });
         return promise;
@@ -86,9 +90,11 @@
           else {
             var that = this;
             if (!$rootScope.notificationPromise) {
-              Notification.requestPermission(function (permission) {
-                that._notificationsHelper(permission, parsed.id);
-              });
+              if (("Notification" in window)) {
+                Notification.requestPermission(function (permission) {
+                  that._notificationsHelper(permission, parsed.id);
+                });
+              }
             }
             if (!$rootScope.offlinePromise) {
               $rootScope.offlinePromise = true;
