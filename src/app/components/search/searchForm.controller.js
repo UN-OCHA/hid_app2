@@ -34,8 +34,12 @@
       });
     };
 
-    $scope.fullSearch = function (searchTerm) {
-      $location.path('/search').search({q: searchTerm});
+    $scope.fullSearch = function (searchTerm, view) {
+      var params = {q: searchTerm};
+      if (view) {
+        params.view = view;
+      }
+      $location.path('/search').search(params);
     };
 
     $scope.searchUsersAutocomplete = function () {

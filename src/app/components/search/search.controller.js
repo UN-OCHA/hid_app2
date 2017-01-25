@@ -11,6 +11,8 @@
     $scope.heading = $routeParams.q ? 'Search Results' : 'Humanitarian contacts';
     $scope.searchTerm = $routeParams.q;
 
+    $scope.showLists = $routeParams.view === 'lists' ? true : false;
+
     $scope.$on('user-service-ready', function() {
       $scope.$broadcast('populate-list');
     });
