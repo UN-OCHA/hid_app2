@@ -5,8 +5,8 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'UserDataService', 'User', 'List'];
-  function UsersCtrl($scope, $rootScope, $routeParams, $window, hrinfoService, UserDataService, User, List) {
+  UsersCtrl.$inject = ['$log', '$q', '$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'UserDataService', 'User', 'List'];
+  function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, UserDataService, User, List) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -19,7 +19,8 @@
       offset: 0,
       sort: 'name'
     };
-    var listInfo =[];
+    var listInfo = [];
+    var operationIds = [];
 
     $scope.request = angular.copy(defaultRequest);
 
@@ -37,7 +38,7 @@
         users.$httpPromise.then(function(users) {
           $scope.users = checkPending(users);
           $scope.totalItems = users.headers["x-total-count"];
-        })
+        });
       });
     }
 
@@ -56,6 +57,34 @@
         });
       });
       return users;
+    }
+
+    function getMultipleLists (operationIds, search, type) {
+      var promises = [];
+      angular.forEach(operationIds, function(operationId) {
+        promises.push(List.query({type: type, name: search, 'metadata.operation.id' : operationId}).$promise);
+      });
+      return $q.all(promises).then(function(data) {
+        return data;
+      }, function (error) {
+        $log.error(error);
+      });
+    }
+
+    function removeDuplicateLists (listsArray) {
+      var deDupedLists = [];
+      angular.forEach(listsArray, function(value) {
+        var exists = false;
+        angular.forEach(deDupedLists, function(val2) {
+          if (angular.equals(value._id, val2._id)) { 
+            exists = true;
+          }
+        });
+        if (exists === false && value._id !== '') { 
+          deDupedLists.push(value); 
+        }
+      });
+      return deDupedLists;
     }
 
     $scope.$on('users-export-csv', function () {
@@ -86,6 +115,10 @@
       listInfo = listType;
       $scope.showAdmin = listType !== undefined ? true : false;
       getUsers();
+
+      if ($scope.list) {
+        operationIds = $scope.list.associatedOperations();
+      }
     });
 
     $scope.pageChanged = function () {
@@ -143,11 +176,25 @@
 
     $scope.bundles = [];
     $scope.getBundles = function(search) {
+      if (operationIds.length) {
+        getMultipleLists(operationIds, search, 'bundle').then(function(listsArray) {
+          var mergedArray =  Array.prototype.concat.apply([], listsArray);
+          $scope.bundles = removeDuplicateLists(mergedArray);
+        });
+        return;
+      }
       $scope.bundles = List.query({type: 'bundle', name: search});
     };
 
     $scope.disasters = [];
     $scope.getDisasters = function(search) {
+      if (operationIds.length) {
+        getMultipleLists(operationIds, search, 'disaster').then(function(listsArray) {
+          var mergedArray =  Array.prototype.concat.apply([], listsArray);
+          $scope.disasters = removeDuplicateLists(mergedArray);
+        });
+        return;
+      }
       $scope.disasters = List.query({type: 'disaster', name: search});
     };
 
