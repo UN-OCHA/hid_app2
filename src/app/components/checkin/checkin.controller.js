@@ -94,28 +94,6 @@
       });
     }
 
-    function getListOperations (list) {
-      var operations = [];
-
-      // If an operation, get its id
-      if (list.type === 'operation') {
-        operations.push(list.remote_id);
-        return operations;
-      }
-
-      // If no associated operations return
-      if (!list.metadata.operation) {
-        return;
-      }
-
-      // Get all the associated operations
-      angular.forEach(list.metadata.operation, function(operation) {
-        operations.push(operation.id);
-      });
-
-      return operations;
-    }
-
     function showAssociatedLists (list, searchTerm) {
       if (list.type === 'role' || list.type === 'list') {
         return;
@@ -130,7 +108,7 @@
       }
 
       //Otherwise user the associated operations
-      getAssociatedLists(getListOperations(list)).then(function (listsArray) {          
+      getAssociatedLists(list.associatedOperations()).then(function (listsArray) {          
         var mergedLists = Array.prototype.concat.apply([], listsArray);
         $scope.associatedLists = filterLists(mergedLists, $scope.selectedLists, $scope.user);
       });

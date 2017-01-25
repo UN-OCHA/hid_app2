@@ -53,6 +53,28 @@
       User.query(request).$httpPromise.then(recursiveFunction);
     };
 
+    List.prototype.associatedOperations = function () {
+      var operationIds = [];
+
+      // If an operation, get its id
+      if (this.type === 'operation') {
+        operationIds.push(this.remote_id);
+        return operationIds;
+      }
+
+      // If no associated operations return
+      if (!this.metadata.operation) {
+        return;
+      }
+
+      // Get all the associated operations
+      angular.forEach(this.metadata.operation, function(operation) {
+        operationIds.push(operation.id);
+      });
+      
+      return operationIds;
+    }
+
     return List;
   }
 })();
