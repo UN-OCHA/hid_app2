@@ -104,7 +104,7 @@
     function addList (list, listType, callback) {
       $scope.$emit('editUser', {status: 'saving'});
       UserCheckInService.save({userId: $scope.user._id, listType: listType}, {list: list.list._id}, function (response) {
-        $scope.user[listType] = angular.copy(response[listType]);
+        $scope.$parent.user[listType] = angular.copy(response[listType]);
         updateCurrentUser();
         var capitalized = listType.charAt(0).toUpperCase() + listType.slice(1);
         $scope.$emit('editUser', {
@@ -124,12 +124,6 @@
       UserCheckInService.delete({userId: $scope.user._id, listType: listType + 's', checkInId: listUser._id}, {}, function () {
         updateCurrentUser();
         $scope.$emit('editUser', {status: 'success', message: listType + gettextCatalog.getString(' removed')});
-      });
-    }
-
-    function checkinAndSave (type) {
-      UserCheckInService.save({userId: $scope.user._id, listType: 'organization'}, {list: $scope.organization.list._id}, function () {
-        saveUpdatedUser(type);
       });
     }
 
@@ -160,22 +154,7 @@
 
     function saveUser (type, callback) {
       $scope.$emit('editUser', {status: 'saving'});
-
-      if ($scope.organization.list && (!$scope.user.organization.list || $scope.organization.list._id != $scope.user.organization.list._id)) {
-        if ($scope.user.organization.list) {
-          // Check out from the old organization
-          UserCheckInService.delete({userId: $scope.user._id, listType: 'organization', checkInId: $scope.user.organization._id}, {}, function () {
-            checkinAndSave(type);
-          });
-        }
-        else {
-          // Check into the new organization
-          checkinAndSave(type);
-        }
-      }
-      else {
-        saveUpdatedUser(type, callback);
-      }
+      saveUpdatedUser(type, callback);
     }
 
     function getOrganizations(search) {

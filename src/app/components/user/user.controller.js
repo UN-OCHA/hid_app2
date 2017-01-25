@@ -19,7 +19,7 @@
 
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
-    }
+    };
 
     function userPicture (picture, email) {
       var emailHash = '';
@@ -74,20 +74,38 @@
       }
     }
 
-    $scope.orderByPrimary = function (type, object, primary) {
+    function orderByPrimary (type, object, primary) {
       if (!primary) {
         return object;
       }
+      
       var primaryIndex = getPrimaryIndex(type, object, primary);
-      if (primaryIndex !== -1) {
-        object.splice(0, 0, object.splice(primaryIndex,1)[0]);
+      var primaryObject = object.splice(primaryIndex,1)[0];
+      
+      if (primaryIndex !== -1 && primaryObject) {
+        object.splice(0, 0, primaryObject);
       }
       return object;
     }
 
-    $scope.user = User.get({userId: $routeParams.userId}, function(user) {
+    function orderPrimaryFields (user) {
+      orderByPrimary('location', user.locations, user.location);
+      orderByPrimary('email', user.emails, user.email);
+      orderByPrimary('phone', user.phone_numbers, user.phone_number);
+      orderByPrimary('organization', user.organizations, user.organization);
+      orderByPrimary('jobTitle', user.job_titles, user.job_title);
+    }
+
+    User.get({userId: $routeParams.userId}).$promise.then(function (user) {
+      $scope.user = user;
+
+      user.$httpPromise.then(function () {
+        orderPrimaryFields($scope.user);
+      });
+      
+      userPicture(user.picture, user.email);    
+      
       $scope.$broadcast('userLoaded');
-      userPicture(user.picture, user.email);      
     });
 
     //Listen for user edited event
@@ -190,7 +208,7 @@
           $location.path('/landing');
         });
       });
-    }
+    };
 
   }
 })();
