@@ -600,7 +600,7 @@
         </form>
 
         <div ng-class="{'form-section__edit' : showProfileForm && user.websites.length}">
-          <h4 class="form-section__sub-heading" translate>Websites:</h4>
+          <h4 class="form-section__sub-heading" ng-if="user.websites.length" translate>Websites:</h4>
           <ul class="list list--has-buttons">
             <li class="list__item" ng-repeat="website in user.websites">
               <a ng-href="{{website.url}}">{{website.url}}</a>

@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserEditCtrl', UserEditCtrl);
 
-  UserEditCtrl.$inject = ['$location', '$scope', 'alertService', 'gettextCatalog', 'hrinfoService', 'List', 'User', 'UserCheckInService'];
+  UserEditCtrl.$inject = ['$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'User', 'UserCheckInService'];
 
-  function UserEditCtrl($location, $scope, alertService, gettextCatalog, hrinfoService, List, User, UserCheckInService) {
+  function UserEditCtrl($location, $scope, alertService, config, gettextCatalog, hrinfoService, List, User, UserCheckInService) {
     $scope.phoneNumberTypes = [];
     $scope.emailTypes = [];
     $scope.voipTypes = [];
@@ -38,10 +38,6 @@
     $scope.currentStep = 1;
     var defaultSettings = {};
     var lastStep = 4;
-
-    function getRoles () {
-      $scope.roles = List.query({'type': 'functional_role'});
-    }
 
     function getCountries () {
       hrinfoService.getCountries().then(function (countries) {
@@ -157,8 +153,29 @@
       saveUpdatedUser(type, callback);
     }
 
+    function isListMember (list, user) {
+      var inList = false;
+      angular.forEach(config.listTypes, function (listType) {
+        angular.forEach(user[listType + 's'], function (userList) {
+          if (list._id === userList.list._id) {
+            return inList = true;
+          }
+        });
+      });
+      return inList;
+    }
+
+    function filterLists (lists, user) {
+      var filteredLists = lists.filter(function (list) {
+        return !isListMember(list, user);
+      });
+      return filteredLists;
+    }
+
     function getOrganizations(search) {
-      $scope.organizations = List.query({'name': search, 'type': 'organization'});
+      List.query({'name': search, 'type': 'organization'}, function (orgs) {
+        $scope.organizations = filterLists(orgs, $scope.user);
+      });
     }
 
     function setRegions ($item) {
@@ -168,8 +185,55 @@
       });
     }
 
+    function getRoles () {
+      List.query({'type': 'functional_role'}, function (roles) {
+        $scope.roles = filterLists(roles, $scope.user);
+      })
+    }
+
+    function hasDuplicates (key, user, temp) {
+      var duplicates = [];
+
+      if (key === 'location') {
+        duplicates = user.locations.filter(function(location) {
+          return angular.equals(location, temp.location);
+        });
+      }
+
+      if (key === 'phone_number') {
+        duplicates = user.phone_numbers.filter(function(phone_number) {
+          return phone_number.number ===  temp.phone_number.number;
+        });
+      }
+
+      if (key === 'email') {
+        duplicates = user.emails.filter(function(email) {
+          return email.email ===  temp.email.email;
+        });
+      }
+
+      if (key === 'job_title') {
+        duplicates = user.job_titles.filter(function(job_title) {
+          return job_title ===  temp.job_title;
+        });
+      }
+
+      if (key === 'website') {
+        duplicates = user.websites.filter(function(website) {
+          return website.url ===  temp.website.url;
+        });
+      }
+
+      return duplicates.length ? true : false;
+    }
+
     function addItem (key, callback) {
       if (!$scope.user[key + 's'] || angular.equals($scope.temp[key], defaultSettings[key])) {
+        return;
+      }
+
+      if (hasDuplicates(key, $scope.user, $scope.temp)) {
+        alertService.add('danger', 'Already added');
         return;
       }
 
@@ -180,6 +244,7 @@
         $scope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
+
       $scope.temp[key] = angular.copy(defaultSettings[key]);
       saveUser('add' + key, callback);
     }
