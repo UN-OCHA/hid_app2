@@ -556,28 +556,48 @@
       <div class="form-section form-section--compact" ng-show="user.operations && user.operations.length">
         <h3 class="form-section__heading" translate>Operations</h3>
         <ul class="tag-list">
-          <li class="tag-list__item" ng-repeat="(key, val) in user.operations"><a href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.operations">
+            <a href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('operation', val)">
+              <icon name="cancel" text="Check out"></icon>
+            </button>
+          </li>
         </ul>
       </div>
 
       <div class="form-section form-section--compact" ng-show="user.bundles && user.bundles.length">
         <h3 class="form-section__heading" translate>Clusters / Working Groups</h3>
         <ul class="tag-list">
-          <li class="tag-list__item" ng-repeat="(key, val) in user.bundles"><a href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.bundles">
+            <a href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('bundle', val)">
+              <icon name="cancel" text="Check out"></icon>
+            </button>
+          </li>
         </ul>
       </div>
 
       <div class="form-section form-section--compact" ng-show="user.disasters && user.disasters.length">
         <h3 class="form-section__heading" translate>Disasters</h3>
         <ul class="tag-list">
-          <li class="tag-list__item" ng-repeat="(key, val) in user.disasters"><a href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.disasters">
+            <a href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('disaster', val)">
+              <icon name="cancel" text="Check out"></icon>
+            </button>
+          </li>
         </ul>
       </div>
 
       <div class="form-section form-section--compact" ng-show="user.lists && user.lists.length">
         <h3 class="form-section__heading" translate>Other lists</h3>
         <ul class="tag-list">
-          <li class="tag-list__item" ng-repeat="(key, val) in user.lists"><a href="/lists/{{val.list._id}}">{{val.list.name}}</a></li>
+          <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.lists">
+            <a href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('list', val)">
+              <icon name="cancel" text="Check out"></icon>
+            </button>
+          </li>
         </ul>
       </div>
 

@@ -29,7 +29,8 @@
       var params = angular.extend($scope.request, $scope.userFilters);
 
       // cached resource is returned immediately
-      User.query(params).$promise.then(function(users) {
+      // User.query(params).$promise.then(function(users) {
+      User.query(params, function(users) {
         $scope.users = transformUsers(users);
         $scope.totalItems = users.headers["x-total-count"];
         $scope.usersLoaded = true;

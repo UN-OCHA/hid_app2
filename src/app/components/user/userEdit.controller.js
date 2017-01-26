@@ -255,9 +255,12 @@
       }
       $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
 
-      if (key === 'organization' || key === 'functional_role') {
-        removeList(key, value);
-        return;
+      if (config.listTypes.indexOf(key) !== -1) {
+        alertService.add('danger', 'Are you sure you want to check out of this list', true, function () {
+          removeList(key, value);
+          return;
+        });
+        return
       }
 
       saveUser();

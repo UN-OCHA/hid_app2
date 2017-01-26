@@ -1,10 +1,11 @@
 .tag-list__item {
+  position: relative;
   display: inline-block;
   margin: 0 $base-unit/2 $base-unit/2 0;
+  background: $light-grey;
 
   a {
     display: block;
-    background: $light-grey;
     color: $dark-blue;
     padding: $base-unit/4 $base-unit*2;
     border: 1px solid $light-grey;
@@ -12,9 +13,24 @@
     font-style: italic; 
 
     &:hover, &:focus {
-      border-color: $primary-color;
-      color: $dark-blue;
+      background: $primary-color;
+      color: $text-light;
       text-decoration: none;
     }
+  }
+}
+
+.tag-list__item--has-button {
+  padding-right: $base-unit*3;
+}
+
+.tag-list__button {
+  position: absolute;
+  padding: $base-unit/2;
+  right: 0;
+  top: 1px;;
+
+  .icon {
+    margin: 0;
   }
 }
