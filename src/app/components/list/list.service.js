@@ -63,7 +63,7 @@
       }
 
       // If no associated operations return
-      if (!this.metadata.operation) {
+      if (!this.metadata || !this.metadata.operation) {
         return;
       }
 
