@@ -198,6 +198,18 @@
       $scope.disasters = List.query({type: 'disaster', name: search});
     };
 
+    $scope.offices = [];
+    $scope.getOffices = function(search) {
+      if (operationIds && operationIds.length) {
+        getMultipleLists(operationIds, search, 'office').then(function(listsArray) {
+          var mergedArray =  Array.prototype.concat.apply([], listsArray);
+          $scope.offices = removeDuplicateLists(mergedArray);
+        });
+        return;
+      }
+      $scope.offices = List.query({type: 'office', name: search});
+    };
+
     $scope.roles = [];
     $scope.roles = List.query({'type': 'functional_role'}, function (roles) {
       $scope.roles = roles;

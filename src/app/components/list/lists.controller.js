@@ -47,6 +47,10 @@
         val: 'Role'
       },
       {
+        key: 'office',
+        val: 'Co-ordination hub'
+      },
+      {
         key: 'list',
         val: 'Custom'
       }

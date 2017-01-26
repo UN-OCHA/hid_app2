@@ -55,6 +55,16 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           </ui-select>
         </div>
 
+        <div class="filter" ng-if="!list || list.type !== 'office'">
+          <label for="office" class="sr-only" translate>Filter by co-ordination hub</label>
+           <ui-select ng-model="selectedFilters['offices.list']" name="offices">
+            <ui-select-match allow-clear="true" placeholder="Co-ordination hub">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices refresh="getOffices($select.search)" repeat="office._id as office in offices | filter: $select.search" minimum-input-length="3">
+              {{office.name}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+
       </div>
     </div>
 

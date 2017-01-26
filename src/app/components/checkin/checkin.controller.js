@@ -41,6 +41,9 @@
         if (listType === 'functional_role') {
           label = 'Role'
         }
+        if (listType === 'office') {
+          label = 'Co-ordination hub'
+        }
         if (listType === 'list') {
           return;
         }
