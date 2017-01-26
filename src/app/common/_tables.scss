@@ -135,7 +135,6 @@ td.table-actions {
     td {
       display: table-cell;
       padding: $base-unit*1.5 $base-unit;
-      @include font-size($base-font-size);
 
       &:empty {
         display: table-cell;
