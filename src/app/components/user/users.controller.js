@@ -30,32 +30,68 @@
 
       // cached resource is returned immediately
       User.query(params).$promise.then(function(users) {
-        $scope.users = checkPending(users);
+        $scope.users = transformUsers(users);
         $scope.totalItems = users.headers["x-total-count"];
 
         // update users again when the http response resolves so don't lose pending
         // otherwise it overwrites them
         users.$httpPromise.then(function(users) {
-          $scope.users = checkPending(users);
+          $scope.users = transformUsers(users, operationIds);
           $scope.totalItems = users.headers["x-total-count"];
         });
       });
     }
 
-    function checkPending (users) {
+    function checkPending (user, listType, listId) {
+      angular.forEach(user.listType, function (userList) {
+        if ( (listId === userList.list._id) && userList.pending) {
+          user.pending = true;
+        }
+      });
+      return user;
+    }
+
+    function filterClusters (user, operationIds, operationName) {
+      var bundles = user.bundles;
+      var operationBundles = [];
+      var displayName = '';
+      
+      if (!bundles.length) {
+        return user;
+      }
+
+      angular.forEach(bundles, function (bundle) {
+        angular.forEach(operationIds, function (operationId) {
+          angular.forEach(bundle.list.metadata.operation, function (operation) {
+            if (operation.id.toString() === operationId.toString()) {
+              displayName = bundle.list.name.replace(operationName + ' :', '');
+              displayName = displayName.replace(operationName + ':', '');
+              bundle.displayName = displayName;
+              operationBundles.push(bundle);
+            }
+          });
+          
+        });
+      });
+
+      user.operationBundles = operationBundles;
+
+      return user;
+    }
+
+    function transformUsers (users, operationIds) {
       if (!$scope.list) {
         return users;
       }
 
-      var listType = $scope.list.type + 's';
-
       angular.forEach(users, function (user) {
-        angular.forEach(user[listType], function (list) {
-          if ( ($scope.list._id === list.list._id) && list.pending) {
-            user.pending = true;
-          }
-        });
+        checkPending(user, $scope.list.type + 's', $scope.list._id);
+
+        if ($scope.list.type === 'operation') {
+          filterClusters(user, operationIds, $scope.list.name);
+        }
       });
+
       return users;
     }
 
