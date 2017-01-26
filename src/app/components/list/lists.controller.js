@@ -67,15 +67,30 @@
       }
     ];
 
+    function formatTypes (lists) {
+      var listType;
+
+      angular.forEach(lists, function (list) {
+        listType = $scope.listTypes.find(function (type) {
+          return type.key === list.type;
+        });
+        list.type = listType.val;
+      });
+    }
+
     var queryCallback = function (resp) {
       $scope.totalItems = resp.headers["x-total-count"];
+      formatTypes(resp);
+
+      resp.$httpPromise.then(function (lists) {
+        formatTypes(lists);
+      });
     };
 
     ListDataService.subscribe($scope, function () {
       $scope.currentPage = 1;
       $scope.pageChanged();
     });
-
 
     $scope.lists = List.query($scope.request, queryCallback);
 
@@ -85,10 +100,10 @@
     });
 
     $scope.setLimit = function (limit) {
-      $scope.itemsPerPage = limit
+      $scope.itemsPerPage = limit;
       $scope.request.limit = limit;
       $scope.pageChanged();
-    }
+    };
 
     $scope.resetFilters = function () {
       ListDataService.setFilters({});
@@ -96,7 +111,7 @@
       $scope.selectedFilters = {};
       $scope.currentPage = 1;
       $scope.pageChanged();
-    }
+    };
 
     $scope.pageChanged = function () {
       currentSortOrder = $scope.request.sort;
