@@ -4,7 +4,7 @@
   describe('User edit controller', function () {
 
     var countries, currentUserId, differentUserId, scope, mockhrinfoService,
-    mockList, mockUser, mockGetText, mockUserCheckInService, testUser, mockGetString;
+    mockList, mockUser, mockGetText, mockUserCheckInService, testUser, mockGetString, mockConfig, mockAlertService;
 
     countries = ['france', 'uk'];
     currentUserId = '1234';
@@ -54,6 +54,8 @@
         scope.editEmailForm = {};
         scope.editLocationForm = {};
 
+        mockAlertService.add = function () {}
+
         mockhrinfoService.getCountries = function () {
           var defer = $q.defer();
           defer.resolve(countries);
@@ -82,6 +84,9 @@
         }
 
         spyOn(scope, '$emit').and.callThrough();
+        spyOn(mockAlertService, 'add').and.callFake(function (argument1, argument2, arg3, callback) {
+          callback([argument1, argument2, arg3]);
+        });
 
         spyOn(testUser, 'get').and.callFake(function (params, callback) {
           scope.user = testUser;
@@ -120,9 +125,10 @@
       module('app.user');
 
       mockhrinfoService = {};
+      mockAlertService = {};
       module('app.common', function($provide) {
         $provide.value('hrinfoService', mockhrinfoService);
-        $provide.value('alertService', {});
+        $provide.value('alertService', mockAlertService);
       });
 
       mockList = {};
@@ -140,6 +146,12 @@
       mockGetText = {};
       module('gettext', function($provide) {
         $provide.value('gettextCatalog', mockGetText);
+      });
+
+      mockConfig = {}
+      mockConfig.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
+      module('app.user', function($provide) {
+        $provide.constant('config', mockConfig);
       });
 
     });
@@ -270,6 +282,10 @@
         var value = {_id: '7664'};
         scope.dropItem(key, value);
 
+      });
+
+      it('should ask the user to confirm', function () {
+        expect(mockAlertService.add).toHaveBeenCalled();
       });
 
       it('should remove the item from the user', function () {

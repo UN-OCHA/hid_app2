@@ -106,7 +106,6 @@
         });
         return;
       }
-
       ListDataService.getManagedAndOwnedLists($scope.currentUser, searchTerm, function (lists) {
         $scope.availableLists = filterLists(lists, $scope.selectedLists, user);
         if (!lists.length) {
@@ -134,7 +133,6 @@
         size: 'sm',
         templateUrl: 'app/components/user/checkInToListModal.html',
         controller: function () {
-          // getAvailableLists(user, currentUser);
           return;
         }
       });

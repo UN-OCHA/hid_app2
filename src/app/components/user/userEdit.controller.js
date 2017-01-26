@@ -252,7 +252,7 @@
       if (!$scope.user[key + 's']) {
         return;
       }
-
+      
       if (config.listTypes.indexOf(key) !== -1) {
         alertService.add('danger', 'Are you sure you want to check out of this list', true, function () {
           removeList(key, value);

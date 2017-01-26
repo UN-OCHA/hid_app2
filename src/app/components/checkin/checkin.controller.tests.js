@@ -3,35 +3,12 @@
 
   describe('Check-in controller', function () {
 
-    var countries, currentUserId, differentUserId, list1, list2, list3, list4, listQueryResponse, scope, mockhrinfoService,
-    mockList, mockUser, mockGetText, mockConfig, testUser;
+    var countries, currentUserId, differentUserId, list1, list2, list3, list4, listDisaster, listQueryResponse, scope, mockhrinfoService,
+    mockList, mockUser, mockGetText, mockConfig, mockService, testList, testUser, modalResult, mockUibModal;
 
     countries = ['france', 'uk'];
     currentUserId = '1234';
     differentUserId = '4321';
-    list1 = {_id: 1, name: 'My list', metadata: {}};
-    list2 = {_id: 2, name: 'Another', type: 'operation', remote_id: 78, metadata: {}};
-    list3 = {_id: 3, name: 'Words', metadata: {}};
-    list4 = {_id: 4, name: 'Guitars', metadata: {}};
-
-    var listDisaster = {
-      _id: 5,
-      name: 'Disasterous',
-      type: 'disaster',
-      remote_id: '214354',
-      metadata: {
-        operation: [
-          {
-            id: 99
-          },
-           {
-            id: 100
-           }
-        ]
-      }
-    };
-
-    listQueryResponse = [list1, list2, list3, list4];
 
     function ctrlSetup (isCurrentUser) {
       inject(function($controller, $rootScope, $q, $injector) {
@@ -68,12 +45,78 @@
           return;
         };
 
+        var ListObj = $injector.get('List');
+        list1 = Object.assign({}, ListObj);
+        list1._id = 1;
+        list1.name = 'My list',
+        list1.metadata = {};
+        list1.associatedOperations = function () {
+          return;
+        }
+
+        list2 = Object.assign({}, ListObj);
+        list2._id = 2;
+        list2.name = 'My Another';
+        list2.type = 'operation';
+        list2.remote_id = 78;
+        list2.metadata = {};
+        list2.associatedOperations = function () {
+          return;
+        }
+
+        list3 = Object.assign({}, ListObj);
+        list3._id = 3;
+        list3.name = 'Words',
+        list3.metadata = {};
+        list3.associatedOperations = function () {
+          return;
+        }
+
+        list4 = Object.assign({}, ListObj);
+        list4._id = 4;
+        list4.name = 'Guitars',
+        list4.metadata = {};
+        list4.associatedOperations = function () {
+          return;
+        }
+
+        listDisaster = Object.assign({}, ListObj);
+        listDisaster._id = 5;
+        listDisaster.name = 'Disasterous',
+        listDisaster.type = 'disaster',
+        listDisaster.remote_id = '214354',
+        listDisaster.metadata = {
+          operation: [
+            {
+              id: 99
+            },
+             {
+              id: 100
+             }
+          ]
+        };
+        listDisaster.associatedOperations = function () {
+          return;
+        }
+
+        listQueryResponse = [list1, list2, list3, list4];
+
         scope.currentUser = {
           _id: currentUserId
         };
         scope.editPhoneForm = {};
         scope.editEmailForm = {};
         scope.editLocationForm = {};
+
+        modalResult = {
+          then: function(callback) {}
+        };
+        mockUibModal = {
+          open: function() {}
+        }; 
+   
+        spyOn(mockUibModal, 'open').and.returnValue({result: modalResult });
+
 
         mockhrinfoService.getCountries = function () {
           var defer = $q.defer();
@@ -110,7 +153,8 @@
 
         $controller('CheckinCtrl', {
           $scope: scope,
-          $routeParams: {userId: isCurrentUser ? currentUserId : differentUserId}
+          $routeParams: {userId: isCurrentUser ? currentUserId : differentUserId},
+          $uibModal: mockUibModal
         });
 
         scope.$digest();
@@ -138,15 +182,18 @@
         $provide.value('User', mockUser);
       });
 
-      mockGetText = {
-      };
+      mockService = {};
+      module('app.service', function ($provide) {
+        $provide.value('Service', mockService);
+      });
+
+      mockGetText = {};
       module('gettext', function($provide) {
         $provide.value('gettextCatalog', mockGetText);
       });
 
       mockConfig = {}
       mockConfig.listTypes = ['operation', 'list'];
-
       module('app.checkin', function($provide) {
         $provide.constant('config', mockConfig);
       });

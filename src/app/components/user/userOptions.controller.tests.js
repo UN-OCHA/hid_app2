@@ -33,7 +33,7 @@
       }
     };
 
-    var ownedLists = [list1, list2];
+    var allLists = [list1, list2];
     var ownedAndManagedLists = [list1, list2, list3];
     
     beforeEach(function() {
@@ -80,6 +80,7 @@
         mockUserCheckInService.delete = function () {}
         mockList.query = function () {};
         mockListDataService.getManagedAndOwnedLists = function () {}
+
         
         verifiedUser = $injector.get('User');
         verifiedUser._id = 'user-id';
@@ -105,11 +106,13 @@
         });
 
         spyOn(mockUserCheckInService, 'delete').and.callThrough();
-        spyOn(mockListDataService, 'getManagedAndOwnedLists').and.callFake(function({}, callback) {
+
+        var searchTerm = 'findme';
+        spyOn(mockListDataService, 'getManagedAndOwnedLists').and.callFake(function({}, searchTerm, callback) {
           callback(ownedAndManagedLists);
         });
         spyOn(mockList, 'query').and.callFake(function({}, callback) {
-          callback(ownedLists);
+          callback(allLists);
         });
       });
 
@@ -199,17 +202,58 @@
         describe('Getting available lists', function () {
           beforeEach(function () {
             scope.currentUser = {
-              _id: 124
+              _id: 124,
+              is_admin: true
             };
-            scope.getAvailableLists(true)
+            scope.getAvailableLists(scope.currentUser, {}, 'findme')
           });
 
-          it('should get lists you own and manage', function () {
-            expect(mockListDataService.getManagedAndOwnedLists).toHaveBeenCalledWith({_id: 124}, jasmine.any(Function));
+          it('should get lists with your searchTerm', function () {
+            var params = {
+              name: 'findme',
+              limit: 50,
+              sort: 'name'
+            }
+            expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
           });
 
           it('should combine the managed and owned lists and remove any duplicates', function () {
-            expect(scope.availableLists).toEqual(ownedAndManagedLists);
+            expect(scope.availableLists).toEqual(allLists);
+          });
+
+        });
+        
+      });
+
+      describe('As a global manager', function () {
+        beforeEach(function () {
+          scope.openCheckInModal({}, true)
+        });
+
+        it('should open the modal', function () {
+          expect(mockUibModal.open).toHaveBeenCalled();
+        });
+
+        describe('Getting available lists', function () {
+          beforeEach(function () {
+            scope.currentUser = {
+              _id: 124,
+              isManager: true
+            };
+            scope.getAvailableLists(scope.currentUser, {}, 'findme')
+          });
+
+          it('should get lists with your searchTerm', function () {
+            var params = {
+              name: 'findme',
+              limit: 50,
+              sort: 'name'
+            }
+            expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
+          });
+
+          it('should combine the managed and owned lists and remove any duplicates', function () {
+            expect(scope.availableLists).toEqual(allLists);
           });
 
         });
@@ -223,19 +267,15 @@
             scope.currentUser = {
               _id: 124
             };
-            scope.getAvailableLists(false)
+            scope.getAvailableLists(scope.currentUser, {}, 'findme');
           });
 
-          it('should get lists you own', function () {
-            expect(mockList.query).toHaveBeenCalledWith({'owner': 124}, jasmine.any(Function));
-          });
-
-          it('should not get lists you manage', function () {
-            expect(mockListDataService.getManagedAndOwnedLists).not.toHaveBeenCalled();
+          it('should get lists you own and manage', function () {
+            expect(mockListDataService.getManagedAndOwnedLists).toHaveBeenCalledWith(scope.currentUser, 'findme', jasmine.any(Function));
           });
 
           it('should add the owned lists to scope', function () {
-            expect(scope.availableLists).toEqual(ownedLists);
+            expect(scope.availableLists).toEqual(ownedAndManagedLists);
           });
 
         });
