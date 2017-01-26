@@ -1,12 +1,15 @@
 @keyframes loaderAnimation {
   0% { 
   	transform: scale(1);
+  	opacity: 0.9;
   }
   50% { 
   	transform: scale(1.1); 
+  	opacity: 1;
   }
   100% { 
   	transform: scale(1); 
+  	opacity: 0.9;
   }
 }
 
@@ -21,9 +24,9 @@
 
 .loader__icon {
 	display: block;
-	width: $base-unit*5;
-	height: $base-unit*5;
-	margin-right: $base-unit;
+	width: $base-unit*4;
+	height: $base-unit*4;
+	margin-right: $base-unit*.75;
 	background: url('../img/logo-globe.svg') center no-repeat;
 	background-size: 100%;
 	animation:  loaderAnimation 1s infinite; 
