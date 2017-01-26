@@ -9,26 +9,29 @@
 
     <div ng-if="isManager || isOwner || currentUser.is_admin || currentUser.isManager">
       <form class="sidebar-section"  ng-submit="addMemberToList()">
-          <label for="member" class="sidebar-section__heading" translate>Add new Member</label>
+        <label for="member" class="sidebar-section__heading" translate>Add new Member</label>
+        <div class="sidebar-section__form-field">
           <ui-select ng-model="usersAdded.users" multiple name="member">
             <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
             <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers">
               {{person.name}}
             </ui-select-choices>
           </ui-select>
+        </div>
         <button type="submit" class="btn-primary btn-block" translate>Add Member</button>
       </form>
     </div>
+
     <div ng-if="isManager || isOwner || currentUser.is_admin">
       <div class="sidebar-section">
         <h2 class="sidebar-section__heading" translate>List Settings</h2>
 
-        <a class="btn-primary btn-block" href="lists/{{list._id}}/edit">
+        <a class="btn-transparent sidebar-section__button" href="lists/{{list._id}}/edit">
           <icon name="edit"></icon>
           <span translate>Edit List Settings</span>
         </a>
 
-        <button type="button" class="btn-danger btn-block" ng-click="deleteList();">
+        <button type="button" class="btn-transparent sidebar-section__button" ng-click="deleteList();">
           <icon name="trash"></icon>
           <span translate>Delete List</span>
         </button>
@@ -38,17 +41,16 @@
     <div ng-if="(list.joinability == 'public' || list.joinability == 'moderated') && !isMember" class="sidebar-section">
       <h2 class="sidebar-section__heading" translate>Check in</h2>
       <form ng-submit="checkIn()">
-        <div class="form-group">
-          <label for="checkoutDate" translate>Checkout date</label>
-          <div class="form-field form-inline-fields">
+        <div class="sidebar-section__form-field">
+          <label for="checkoutDate" class="sidebar-section__form-label" translate>Checkout date</label>
+          <div class="form-inline-fields">
             <input type="text" class="form-inline-fields__item" id="checkoutDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="bottom-left" ng-model="checkinUser.checkoutDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
             <button type="button" class="btn-transparent" ng-click="showDatePicker()">
               <icon name="calendar" text="Select a date"></icon>
             </button>
           </div>
-
-          <p translate>Select a checkout date if you would like to be checked out automatically (you will receive emails from the system beforehand)</p>
         </div>
+        <p class="sidebar-section__text" translate>Select a checkout date if you would like to be checked out automatically (you will receive emails from the system beforehand)</p>
         <button type="submit" class="btn-primary btn-block">
           <icon name="check"></icon>
           <span translate>Check in</span>
@@ -59,12 +61,15 @@
     <div ng-if="isMember" >
       <div ng-if="isPending" class="sidebar-section">
         <h2 class="sidebar-section__heading" translate>Check in</h2>
-        <p translate>Your request for check-in is pending. We will get back to you soon.</p>
+        <p class="sidebar-section__text" translate>Your request for check-in is pending. We will get back to you soon.</p>
       </div>
 
       <div ng-if="!isPending" class="sidebar-section">
         <h2 class="sidebar-section__heading" translate>Check out</h2>
-        <p ng-if="currentListUser && currentListUser.checkoutDate">You will be checked out of this list automatically on <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span></p>
+        <p class="sidebar-section__text" ng-if="currentListUser && currentListUser.checkoutDate">
+          <span translate>You will be checked out of this list automatically on </span>
+          <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span>
+        </p>
         <button type="submit" class="btn-primary btn-block" ng-click="checkOut();">
           <icon name="cancel"></icon>
           <span translate>Check out</span>
@@ -73,8 +78,8 @@
     </div>
 
     <div class="sidebar-section">
-      <h2 class="sidebar-section__heading" translate>Export</h2>
-      <button type="button" class="btn-primary btn-block" ng-if="currentUser.verified" ng-click="exportEmails()">
+      <h2 class="sidebar-section__heading" translate>Options</h2>
+      <button type="button" class="btn-transparent sidebar-section__button" ng-if="currentUser.verified" ng-click="exportEmails()">
         <icon name="copy"></icon>
         <span translate>Copy Email Addresses</span>
       </button>
@@ -92,36 +97,33 @@
         </div>
       </script>
 
-      <button type="button" class="btn-primary btn-block" ng-click="exportPDF()">
+      <button type="button" class="btn-transparent sidebar-section__button" ng-click="exportPDF()">
         <icon name="document-file-pdf"></icon>
         <span translate>View PDF</span>
       </button>
 
-      <button type="button" class="btn-primary btn-block" ng-click="exportPDF('meeting-compact')">
+      <button type="button" class="btn-transparent sidebar-section__button" ng-click="exportPDF('meeting-compact')">
         <icon name="users"></icon>
         <span translate>Meeting Attendance (Compact)</span>
       </button>
 
-      <button type="button" class="btn-primary btn-block" ng-click="exportPDF('meeting-comfortable')">
+      <button type="button" class="btn-transparent sidebar-section__button" ng-click="exportPDF('meeting-comfortable')">
         <icon name="users"></icon>
         <span translate>Meeting Attendance (Comfortable)</span>
       </button>
 
-      <button type="button" class="btn-primary btn-block" ng-if="currentUser.verified" ng-click="exportCSV()">
+      <button type="button" class="btn-transparent sidebar-section__button" ng-if="currentUser.verified" ng-click="exportCSV()">
         <icon name="inbox-download"></icon>
         <span translate>Export into CSV</span>
       </button>
-    </div>
-
-    <div class="sidebar-section">
-      <h2 class="sidebar-section__heading" translate>Favorite</h2>
-      <button type="button" class="btn-primary btn-block" ng-click="star()" ng-if="!isFavorite">
+   
+      <button type="button" class="btn-transparent sidebar-section__button" ng-click="star()" ng-if="!isFavorite">
         <icon name="star"></icon>
-        <span translate>Star</span>
+        <span translate>Mark as favorite</span>
       </button>
       <button type="button" class="btn-primary btn-block" ng-click="unstar()" ng-if="isFavorite">
         <icon name="cancel"></icon>
-        <span translate>Unstar</span>
+        <span translate>Unfavourite</span>
       </button>
     </div>
   </div>
