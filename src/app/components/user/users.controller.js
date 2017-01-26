@@ -176,7 +176,7 @@
 
     $scope.bundles = [];
     $scope.getBundles = function(search) {
-      if (operationIds.length) {
+      if (operationIds && operationIds.length) {
         getMultipleLists(operationIds, search, 'bundle').then(function(listsArray) {
           var mergedArray =  Array.prototype.concat.apply([], listsArray);
           $scope.bundles = removeDuplicateLists(mergedArray);
@@ -188,7 +188,7 @@
 
     $scope.disasters = [];
     $scope.getDisasters = function(search) {
-      if (operationIds.length) {
+      if (operationIds && operationIds.length) {
         getMultipleLists(operationIds, search, 'disaster').then(function(listsArray) {
           var mergedArray =  Array.prototype.concat.apply([], listsArray);
           $scope.disasters = removeDuplicateLists(mergedArray);
