@@ -210,7 +210,10 @@
       getUsers();
     };
 
-    $scope.operations = List.query({type: 'operation'});
+    $scope.operations = [];
+    $scope.getOperations = function (search) {
+      $scope.operations = List.query({type: 'operation', name: search});
+    };
 
     $scope.bundles = [];
     $scope.getBundles = function(search) {
@@ -249,19 +252,21 @@
     };
 
     $scope.roles = [];
-    $scope.roles = List.query({'type': 'functional_role'}, function (roles) {
-      $scope.roles = roles;
-    });
-
+    $scope.getRoles = function (search) {
+      $scope.roles = List.query({'type': 'functional_role', name: search});
+    };
+   
     $scope.organizations = [];
     $scope.getOrganizations = function(search) {
       $scope.organizations = List.query({type: 'organization', name: search});
     };
 
     $scope.countries = [];
-    hrinfoService.getCountries().then(function (d) {
-      $scope.countries = d;
-    });
+    $scope.getCountries = function (search) {
+      hrinfoService.getCountries({name: search}).then(function (d) {
+        $scope.countries = d;
+      });
+    };
 
     $scope.sortBy = [
       {
