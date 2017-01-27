@@ -211,3 +211,17 @@ em {
     display: block;
   }
 }
+
+/* overrides for jira feedback popup to make it responsive */
+#atlwdg-container {
+  position: absolute!important;
+  width: 100%;
+  max-width: 600px;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    right: 0
+  }
+
+}
