@@ -56,7 +56,8 @@
   background: transparent;
   opacity: 0.8;
   width: $base-unit*4;
-   
+  z-index: 99;
+
   &.right {
    	left: auto;
    	right: -$base-unit*2;
