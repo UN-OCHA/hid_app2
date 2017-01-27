@@ -74,7 +74,9 @@
         listType = $scope.listTypes.find(function (type) {
           return type.key === list.type;
         });
-        list.type = listType.val;
+        if (listType) {
+          list.displayType = listType.val;
+        }
       });
     }
 
