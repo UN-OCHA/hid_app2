@@ -149,6 +149,27 @@
       return url + urlp;
     };
 
+    User.prototype.setAppMetaData = function (param) {
+      var hidMeta = {
+        hid: param
+      };
+      var key = Object.keys(param);
+   
+      if (!this.appMetadata) {
+        this.appMetadata = {
+          hid: param
+        };
+        return this;
+      }
+
+      if (this.appMetadata && !this.appMetadata.hid) {
+        angular.extend(this.appMetadata, hidMeta);
+        return this;
+      }
+      this.appMetadata.hid[key[0]] = true;
+      return this;
+    };
+
     return User;
 
   }
