@@ -4,11 +4,13 @@
   <icon name="wheel" text="Actions"></icon>
 </button>
 
+<loader ng-if="!listLoaded"></loader>
+
 <div class="page-header" ng-if="list.visible">
   <h1 class="page-header__heading">{{list.name}}</h1>
 </div>
 
-<div class="row" ng-if="!list.visible">
+<div class="row" ng-if="listLoaded && !list.visible">
   <div class="page-header page-header--alert col-md-8" >
 
     <icon name="lock" class="page-header__alert-icon"></icon>

@@ -13,6 +13,7 @@
     $scope.currentPage = 1;
     $scope.selectedFilters = {};
     $scope.showAdmin = false;
+    $scope.usersLoaded = false;
     var currentSortOrder = $scope.request.name;
     var defaultRequest = {
       limit: $scope.itemsPerPage,
@@ -32,6 +33,7 @@
       User.query(params).$promise.then(function(users) {
         $scope.users = transformUsers(users);
         $scope.totalItems = users.headers["x-total-count"];
+        $scope.usersLoaded = true;
 
         // update users again when the http response resolves so don't lose pending
         // otherwise it overwrites them
