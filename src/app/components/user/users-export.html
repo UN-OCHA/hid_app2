@@ -1,0 +1,39 @@
+<div ng-controller="UserExportCtrl">
+	<button type="button" class="btn-transparent sidebar-section__button" ng-if="currentUser.verified" ng-click="exportEmails()">
+		<icon name="copy"></icon>
+		<span translate>Copy Email Addresses</span>
+	</button>
+	<script type="text/ng-template" id="exportEmailsModal.html">
+		<div class="modal-header">
+			<h3 class="modal-title" id="modal-title" translate>Copy Email Addresses</h3>
+			<p><span translate>Please email responsibly. Follow our</span> <a href="https://humanitarian.id/code-of-conduct" target="_blank" translate>Code of conduct</a></p>
+			<button type="button" class="btn-icon modal-close" ng-click="closeExportEmailslModal()">
+				<icon name="cancel" text="Close"></icon>
+			</button>
+		</div>
+		<div class="modal-body" id="modal-body">
+
+			<textarea rows="15" cols="100">{{emailsText}}</textarea>
+		</div>
+	</script>
+
+	<button type="button" class="btn-transparent sidebar-section__button" ng-click="exportPDF()">
+		<icon name="document-file-pdf"></icon>
+		<span translate>View PDF</span>
+	</button>
+
+	<button type="button" class="btn-transparent sidebar-section__button" ng-click="exportPDF('meeting-compact')">
+		<icon name="users"></icon>
+		<span translate>Meeting Attendance (Compact)</span>
+	</button>
+
+	<button type="button" class="btn-transparent sidebar-section__button" ng-click="exportPDF('meeting-comfortable')">
+		<icon name="users"></icon>
+		<span translate>Meeting Attendance (Comfortable)</span>
+	</button>
+
+	<button type="button" class="btn-transparent sidebar-section__button" ng-if="currentUser.verified" ng-click="exportCSV()">
+		<icon name="inbox-download"></icon>
+		<span translate>Export into CSV</span>
+	</button>
+</div>

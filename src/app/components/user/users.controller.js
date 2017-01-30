@@ -12,7 +12,6 @@
     $scope.itemsPerPage = 50;
     $scope.currentPage = 1;
     $scope.selectedFilters = {};
-    $scope.showAdmin = false;
     $scope.usersLoaded = false;
     var currentSortOrder = $scope.request.name;
     var defaultRequest = {
@@ -125,18 +124,18 @@
       return deDupedLists;
     }
 
-    $scope.$on('users-export-csv', function () {
+    $rootScope.$on('users-export-csv', function () {
       var params = angular.extend($scope.request, $scope.filters);
       var url = User.getCSVUrl(params);
       $window.open(url);
     });
 
-    $scope.$on('users-export-txt', function (evt, success, error) {
+    $rootScope.$on('users-export-txt', function (evt, success, error) {
       var params = angular.extend($scope.request, $scope.filters);
       User.exportTXT(params, success, error);
     });
 
-    $scope.$on('users-export-pdf', function (evt, format) {
+    $rootScope.$on('users-export-pdf', function (evt, format) {
       var params = angular.extend($scope.request, $scope.filters);
       var url = User.getPDFUrl(params, format);
       $window.open(url);
@@ -151,7 +150,6 @@
         $scope.selectedFilters.name = $routeParams.q;
       }
       listInfo = listType;
-      $scope.showAdmin = listType !== undefined ? true : false;
       getUsers();
 
       if ($scope.list) {

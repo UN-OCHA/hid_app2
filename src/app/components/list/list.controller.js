@@ -137,35 +137,6 @@
       });
     };
 
-    // Export email addresses
-    // TODO: fix issue that only x first emails are exported
-    $scope.exportEmails = function() {
-      $scope.emailsText = '';
-      $scope.$broadcast('users-export-txt', function (resp) {
-        $scope.emailsText = resp.data;
-        exportEmailModal = $uibModal.open({
-          animation: true,
-          ariaLabelledBy: 'modal-title',
-          ariaDescribedBy: 'modal-body',
-          templateUrl: 'exportEmailsModal.html',
-          size: 'lg',
-          scope: $scope,
-        });
-      });
-    };
-
-    $scope.closeExportEmailslModal = function () {
-      exportEmailModal.close();
-    }
-
-    $scope.exportCSV = function() {
-      $scope.$broadcast('users-export-csv');
-    };
-
-    $scope.exportPDF = function(format) {
-      $scope.$broadcast('users-export-pdf', format);
-    };
-
     // Star a list as favorite
     $scope.star = function() {
       if (!$scope.currentUser.favoriteLists) {

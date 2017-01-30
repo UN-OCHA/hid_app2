@@ -2,6 +2,26 @@
   <h1 class="page-header__heading" translate>{{heading}}</h1>
 </div>
 
+<div class="sidebar collapse" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
+  <div ng-if="sidebar.sidebars.admin" class="sidebar__inner">
+
+    <h2 class="sidebar__heading" translate>Contacts admin</h2>
+
+    <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
+      <icon name="cancel" text="close"></icon>
+    </button>
+
+    <div class="sidebar-section">
+      <h2 class="sidebar-section__heading" translate>Options</h2>
+			<ng-include ng-if="!showLists" src="'app/components/user/users-export.html'"></ng-include>
+		</div>
+	</div>
+</div>
+
+<button class="btn-icon btn-toggle-admin" type="button" ng-if="!showLists" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
+  <icon name="wheel" text="Actions"></icon>
+</button>
+
 <div class="tabs-nav">
   <button type="button" class="tabs-nav__button" ng-click="showLists = !showLists" ng-disabled="!showLists" translate>
     Showing contacts
