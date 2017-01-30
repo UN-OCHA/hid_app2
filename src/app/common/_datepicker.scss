@@ -1,11 +1,14 @@
 .uib-datepicker-popup {
   position: absolute;
   z-index: map-get($zindex, dropdown);
-  width: $base-unit*32;
-  border: 1px solid $primary-color;
+  width: $base-unit*38;
+  box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.2);
   background: white;
 
   &.dropdown-menu {
+    left: auto!important;
+    right: 0;
+
     li {
       border-bottom: none;
     }
@@ -15,7 +18,14 @@
     @include btn;
     padding: $base-unit;
     border: none;
+    border-radius: $base-unit*2;
     background: none;
+    text-transform: none;
+    color: $text-dark;
+
+    .text-muted {
+      opacity: 0.6;
+    }
   }
 }
 
@@ -29,12 +39,13 @@
     }
   }
 
-  thead {
-    border-bottom: 2px solid $primary-color;
-  }
-
   th {
     text-align: center;
+    padding: $base-unit $base-unit/4;
+  }
+
+  td {
+    padding: $base-unit/4;
   }
 
   small {
@@ -64,24 +75,18 @@
   }
 
   .uib-right {
-    &:before {
-      content: "\e947";
-    }
+    @extend .icon-arrow-right;
   }
 
   .uib-left {
-    &:before {
-      content: "\e946";
-    }
+    @extend .icon-arrow-left;
   }
 }
 
 .uib-button-bar {
   text-align: center;
-  border-top: 2px solid $primary-color;
   @include clearfix;
-  padding: 0;
-
+  padding: $base-unit 0;
 
   .pull-left {
     float: left;
