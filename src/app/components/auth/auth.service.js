@@ -5,9 +5,20 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', '$location', 'config', 'offlineService', 'notificationsService'];
+  AuthService.$inject = ['$cachedResource', '$http', '$window', '$rootScope', '$interval', '$location', 'config', 'offlineService', 'notificationsService'];
 
-  function AuthService ($http, $window, $rootScope, $interval, $location, config, offlineService, notificationsService) {
+  function AuthService ($cachedResource, $http, $window, $rootScope, $interval, $location, config, offlineService, notificationsService) {
+
+    function storeUser (response) {
+      try {
+        $window.localStorage.setItem('jwtToken', response.data.token);
+        $window.localStorage.setItem('currentUser', JSON.stringify(response.data.user));
+      } catch (e) {
+        $window.localStorage.clear();
+        storeUser(response);
+      }
+    }
+
     var jwt = {
       _notificationsHelper: function (permission, userId) {
         if (!("Notification" in window)) {return;}
@@ -49,8 +60,7 @@
         var that = this;
         var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password }).then(function (response) {
           if (response.data && response.data.token) {
-            $window.localStorage.setItem('jwtToken', response.data.token);
-            $window.localStorage.setItem('currentUser', JSON.stringify(response.data.user));
+            storeUser(response);
             offlineService.cacheListsForUser(response.data.user);
             // Cache lists every 10 mins
             $rootScope.offlinePromise = $interval(function () {
@@ -70,6 +80,7 @@
       logout: function() {
         $window.localStorage.removeItem('jwtToken');
         $window.localStorage.removeItem('currentUser');
+        $cachedResource.clearCache();
         $interval.cancel($rootScope.offlinePromise);
         $interval.cancel($rootScope.notificationPromise);
       },
