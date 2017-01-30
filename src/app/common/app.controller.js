@@ -22,6 +22,14 @@
         userFilters: false
       }
     };
+    $scope.keyupEvent = function (event) {
+      if (!$scope.sidebar) {
+        return;
+      }
+      if ($scope.sidebar.open && (event.key === 'Escape' || event.code === 'Escape' || event.keyCode === 27)) {
+        $scope.sidebar.open = false;
+      }
+    }
 
     $scope.closeSidebar = function () {
       $scope.sidebar.open = false;
