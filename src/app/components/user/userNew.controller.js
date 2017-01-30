@@ -9,6 +9,7 @@
 
   function UserNewCtrl($scope, $location, alertService, User, gettextCatalog) {
     $scope.user = new User();
+    $scope.user.setAppMetaData({hasLoggedIn: true});
     $scope.user.locale = gettextCatalog.getCurrentLanguage();
     $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/reset_password?orphan=true';
     $scope.currentPath = $location.path();

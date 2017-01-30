@@ -305,7 +305,7 @@ app.config(['$routeProvider', '$locationProvider',
       })
       .when('/tutorial', {
         templateUrl: 'app/components/start/tutorial.html',
-        controller: 'StartCtrl',
+        controller: 'TutorialCtrl',
         authenticate: true,
         title: 'Tutorial'
       })
