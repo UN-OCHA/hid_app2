@@ -35,14 +35,18 @@
       </div>
       <div class="form-group" ng-if="service.type === 'mailchimp' && service.mailchimp.apiKey" ng-init>
         <label for="mailchimpList" translate>Mailchimp list</label>
-        <select name="mailchimpList" ng-model="service.mailchimp.list" ng-options="list.name for list in mailchimpLists track by list.id">
-        </select>
+        <div class="styled-select">
+          <select name="mailchimpList" ng-model="service.mailchimp.list" ng-options="list.name for list in mailchimpLists track by list.id">
+          </select>
+        </div>
       </div>
       <div class="form-group" ng-if="service.type === 'googlegroup'" ng-init>
         <label for="ggDomain" translate>Domain</label>
-        <select name="ggDomain" ng-model="service.googlegroup.domain" ng-blur="getGoogleGroups()">
-          <option ng-repeat="cred in credentials" ng-value="cred.googlegroup.domain">{{cred.googlegroup.domain}}</option>
-        </select>
+        <div class="styled-select">
+          <select name="ggDomain" ng-model="service.googlegroup.domain" ng-blur="getGoogleGroups()">
+            <option ng-repeat="cred in credentials" ng-value="cred.googlegroup.domain">{{cred.googlegroup.domain}}</option>
+          </select>
+        </div>
       </div>
       <div class="form-group" ng-if="service.type === 'googlegroup' && service.googlegroup.domain" ng-init>
         <label for="googleGroup" translate>Group</label>

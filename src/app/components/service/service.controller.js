@@ -139,7 +139,11 @@
       Service
         .getMailchimpLists($scope.service.mailchimp.apiKey)
         .then(function (result) {
-          $scope.mailchimpLists = result.data.lists;
+          $scope.mailchimpLists = result.data.lists;          
+        }, function () {
+          alertService.add('danger', 'Invalid API key');
+          $scope.service.mailchimp.apiKey = '';
+          $scope.mailchimpLists = [];
         });
     };
 
