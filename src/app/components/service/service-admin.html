@@ -9,13 +9,15 @@
 
     <div class="sidebar-section" ng-if="service.isOwner(currentUser) || service.isManager(currentUser) || currentUser.is_admin">
       <form class="sidebar-section"  ng-submit="subscribe(userSubscribed.user)">
-          <label for="member" class="sidebar-section__heading" translate>Subscribe user</label>
+        <div class="sidebar-section__form-field">
+          <label for="member" class="sidebar-section__form-label" translate>Subscribe user</label>
           <ui-select ng-model="userSubscribed.user" name="member">
             <ui-select-match placeholder="Select someone">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices refresh="getUsers($select.search)" repeat="person in newUsers">
               {{person.name}}
             </ui-select-choices>
           </ui-select>
+        </div>
         <button type="submit" class="btn-primary btn-block" translate>Subscribe</button>
       </form>
     </div>
@@ -23,12 +25,12 @@
     <div class="sidebar-section" ng-if="service.isOwner(currentUser) || service.isManager(currentUser) || currentUser.is_admin">
       <h2 class="sidebar-section__heading" translate>Service settings</h2>
 
-        <a class="btn-block btn-primary" href="services/{{service._id}}/edit" translate>
+        <a class="btn-transparent sidebar-section__button" href="services/{{service._id}}/edit" translate>
           <icon name="edit"></icon>
           <span translate>Edit service</span>
         </a>
 
-        <button type="button" class="btn-block btn-danger" ng-click="deleteService();" ng-if="service.isOwner(currentUser) || currentUser.is_admin" translate>
+        <button type="button" class="btn-transparent sidebar-section__button" ng-click="deleteService();" ng-if="service.isOwner(currentUser) || currentUser.is_admin" translate>
           <icon name="trash"></icon>
           <span translate>Delete service</span>
         </button>
