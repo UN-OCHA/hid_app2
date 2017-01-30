@@ -175,6 +175,7 @@
     });
 
     $scope.filter = function() {
+      $scope.usersLoaded = false;
       if ($scope.selectedFilters.name === '') {
         delete $scope.selectedFilters.name;
         delete $scope.request.name;

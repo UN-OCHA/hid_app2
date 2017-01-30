@@ -15,6 +15,7 @@
     $scope.request.limit = $scope.itemsPerPage;
     $scope.request.offset = 0;
     $scope.request.sort = 'name';
+    $scope.listsLoaded = false;
 
     $scope.listFilters = {};
     if ($routeParams.q) {
@@ -83,6 +84,7 @@
     var queryCallback = function (resp) {
       $scope.totalItems = resp.headers["x-total-count"];
       formatTypes(resp);
+      $scope.listsLoaded = true;
 
       resp.$httpPromise.then(function (lists) {
         formatTypes(lists);
@@ -124,6 +126,7 @@
     };
 
     $scope.filter = function() {
+      $scope.listsLoaded = false;
       $scope.listFilters = angular.copy($scope.selectedFilters);
       ListDataService.setFilters($scope.listFilters);
       $scope.currentPage = 1;

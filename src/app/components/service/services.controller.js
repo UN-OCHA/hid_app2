@@ -15,9 +15,11 @@
     $scope.request.limit = $scope.itemsPerPage;
     $scope.request.offset = 0;
     $scope.request.sort = 'name';
+    $scope.servicesLoaded = false;
 
     var setTotalServices = function (clients, headers) {
       $scope.totalItems = headers()["x-total-count"];
+      $scope.servicesLoaded = true;
     };
 
     $scope.services = Service.query($scope.request, setTotalServices);
