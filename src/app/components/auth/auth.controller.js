@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$scope', '$routeParams', '$location', 'alertService', 'AuthService', 'User'];
+  AuthCtrl.$inject = ['$log', '$scope', '$routeParams', '$location', 'alertService', 'AuthService', 'User'];
 
-  function AuthCtrl ($scope, $routeParams, $location, alertService, AuthService, User) {
+  function AuthCtrl ($log, $scope, $routeParams, $location, alertService, AuthService, User) {
     $scope.email = '';
 
     $scope.login = function() {
@@ -40,7 +40,8 @@
         $location.path('/landing');
 
       }, function (data) {
-        if (data.message == 'Please verify your email address') {
+        $log.error('Log in error', data);
+        if (data.message === 'Please verify your email address') {
           alertService.add('danger', 'We could not log you in because your email address is not verified yet.');
         }
         else {
