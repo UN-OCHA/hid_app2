@@ -355,13 +355,13 @@
               <ul class="list list--has-buttons">
                 <li class="list__item" ng-repeat="org in user.organizations">
                   <input type="radio"
-                  id="org-{{org._id}}"
+                  id="org-{{org.list}}"
                   name="organizations"
-                  ng-model="user.organization._id"
-                  ng-value="org._id"
+                  ng-model="user.organization.list"
+                  ng-value="org.list"
                   ng-change="setPrimaryOrganization(org)" />
-                  <label class="clickie-label" for="org-{{org._id}}">{{org.list.name}}</label>
-                  <button type="button" class="btn-transparent list__button" ng-show="org._id !== user.organization._id" ng-click="dropItem('organization', org)"><icon name="cancel" text="Remove organization"></icon></button>
+                  <label class="clickie-label" for="org-{{org.list}}">{{org.name}}</label>
+                  <button type="button" class="btn-transparent list__button" ng-show="org.list !== user.organization.list" ng-click="dropItem('organization', org)"><icon name="cancel" text="Remove organization"></icon></button>
                 </li>
               </ul>
             </fieldset>
