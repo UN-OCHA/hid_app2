@@ -53,7 +53,7 @@
       return user;
     }
 
-    function filterClusters (user, operationIds, operationName) {
+    function filterClusters (user, operationName) {
       var bundles = user.bundles;
       var operationBundles = [];
       var displayName = '';
@@ -63,21 +63,15 @@
       }
 
       angular.forEach(bundles, function (bundle) {
-        angular.forEach(operationIds, function (operationId) {
-          angular.forEach(bundle.list.metadata.operation, function (operation) {
-            if (operation.id.toString() === operationId.toString()) {
-              displayName = bundle.name.replace(operationName + ' :', '');
-              displayName = displayName.replace(operationName + ':', '');
-              bundle.displayName = displayName;
-              operationBundles.push(bundle);
-            }
-          });
-
-        });
+        if (bundle.name.indexOf(operationName) !== -1) {
+          displayName = bundle.name.replace(operationName + ' :', '');
+          displayName = displayName.replace(operationName + ':', '');
+          bundle.displayName = displayName;
+          operationBundles.push(bundle);
+        }
       });
 
       user.operationBundles = operationBundles;
-
       return user;
     }
 
@@ -90,7 +84,7 @@
         checkPending(user, $scope.list.type + 's', $scope.list._id);
 
         if ($scope.list.type === 'operation') {
-          filterClusters(user, operationIds, $scope.list.name);
+          filterClusters(user, $scope.list.name);
         }
       });
 
