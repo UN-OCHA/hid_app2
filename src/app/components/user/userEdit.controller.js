@@ -253,16 +253,16 @@
       if (!$scope.user[key + 's']) {
         return;
       }
-      $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
 
       if (config.listTypes.indexOf(key) !== -1) {
         alertService.add('danger', 'Are you sure you want to check out of this list', true, function () {
           removeList(key, value);
+          $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
           return;
         });
         return
       }
-
+      $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
       saveUser();
     }
 
