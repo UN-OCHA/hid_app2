@@ -93,7 +93,7 @@
 
     function updateCurrentUser () {
       if ($scope.user._id === $scope.currentUser._id) {
-        $scope.setCurrentUser($scope.currentUser);
+        $scope.setCurrentUser($scope.user);
       }
     }
 

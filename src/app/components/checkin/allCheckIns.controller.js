@@ -13,9 +13,7 @@
     $scope.page = 1;
     $scope.itemsPerPage = 10;
     $scope.listSearchTerm = {
-      list: {
-        name: ''
-      }
+      name: ''
     };
 
     function leaveList (checkin) {
