@@ -53,13 +53,13 @@
       <td>
         {{user.job_title}}
       </td>
-      <td><a ng-href="/lists/{{user.organization.list._id}}" ng-if="user.organization.list">{{user.organization.list.acronym || user.organization.list.name}}</a></td>
+      <td><a ng-href="/lists/{{user.organization.list}}" ng-if="user.organization.list">{{user.organization.acronym || user.organization.name}}</a></td>
       <td>
         <span ng-if="list.type === 'operation'" ng-repeat="bundle in user.operationBundles">
-          <a ng-href="/lists/{{bundle.list._id}}">{{bundle.displayName}}</a><span ng-if="$index +1 < user.operationBundles.length">,&nbsp;</span>
+          <a ng-href="/lists/{{bundle.list}}">{{bundle.displayName}}</a><span ng-if="$index +1 < user.operationBundles.length">,&nbsp;</span>
         </span>
         <span ng-if="list.type !== 'operation'" ng-repeat="bundle in user.bundles">
-          <a ng-href="/lists/{{bundle.list._id}}">{{bundle.list.name}}</a><span ng-if="$index +1 < user.bundles.length">, </span>
+          <a ng-href="/lists/{{bundle.list}}">{{bundle.name}}</a><span ng-if="$index +1 < user.bundles.length">, </span>
         </span>
 
       </td>

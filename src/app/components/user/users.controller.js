@@ -57,7 +57,7 @@
       var bundles = user.bundles;
       var operationBundles = [];
       var displayName = '';
-      
+
       if (!bundles.length) {
         return user;
       }
@@ -66,13 +66,13 @@
         angular.forEach(operationIds, function (operationId) {
           angular.forEach(bundle.list.metadata.operation, function (operation) {
             if (operation.id.toString() === operationId.toString()) {
-              displayName = bundle.list.name.replace(operationName + ' :', '');
+              displayName = bundle.name.replace(operationName + ' :', '');
               displayName = displayName.replace(operationName + ':', '');
               bundle.displayName = displayName;
               operationBundles.push(bundle);
             }
           });
-          
+
         });
       });
 
@@ -114,12 +114,12 @@
       angular.forEach(listsArray, function(value) {
         var exists = false;
         angular.forEach(deDupedLists, function(val2) {
-          if (angular.equals(value._id, val2._id)) { 
+          if (angular.equals(value._id, val2._id)) {
             exists = true;
           }
         });
-        if (exists === false && value._id !== '') { 
-          deDupedLists.push(value); 
+        if (exists === false && value._id !== '') {
+          deDupedLists.push(value);
         }
       });
       return deDupedLists;
@@ -255,7 +255,7 @@
     $scope.getRoles = function (search) {
       $scope.roles = List.query({'type': 'functional_role', name: search});
     };
-   
+
     $scope.organizations = [];
     $scope.getOrganizations = function(search) {
       $scope.organizations = List.query({type: 'organization', name: search});
