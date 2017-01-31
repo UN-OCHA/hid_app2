@@ -112,7 +112,7 @@
       var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         var checkInId = 0;
         for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {
-          if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list._id)) {
+          if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list)) {
             checkInId = $scope.currentUser[$scope.list.type + 's'][i]._id;
           }
         }

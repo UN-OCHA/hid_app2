@@ -163,10 +163,10 @@
                 <div class="form-inline-fields__item">
                   <bc-phone-number name="phone_number" label="Phone number" ng-model="temp.phone_number.number" is-valid="isValidPhoneNumber" ng-class="{'has-error': temp.phone_number.number && !isValidPhoneNumber, 'has-success': temp.phone_number.number && isValidPhoneNumber}"></bc-phone-number>
                 </div>
-                <button type="submit" 
-                  class="btn-transparent" 
-                  ng-class="{'active': temp.phone_number.type && temp.phone_number.number && isValidPhoneNumber}" 
-                  ng-disabled="!temp.phone_number.type || !temp.phone_number.number || !isValidPhoneNumber" 
+                <button type="submit"
+                  class="btn-transparent"
+                  ng-class="{'active': temp.phone_number.type && temp.phone_number.number && isValidPhoneNumber}"
+                  ng-disabled="!temp.phone_number.type || !temp.phone_number.number || !isValidPhoneNumber"
                   ng-click="addItem('phone_number')">
                   <icon name="plus" text="Add"></icon>
                 </button>
@@ -227,10 +227,10 @@
               <div class="form-field form-field--compact form-inline-fields">
                 <label for="new_email" class="sr-only" translate>Email address</label>
                 <input type="email" id="new_email" ng-model="temp.email.email" class="form-inline-fields__item" placeholder="{{'Email address' | translate}}" />
-                <button type="submit" 
-                  class="btn-transparent" 
-                  ng-class="{'active': temp.email.type && temp.email.email}" 
-                  ng-disabled="!temp.email.type || !temp.email.email" 
+                <button type="submit"
+                  class="btn-transparent"
+                  ng-class="{'active': temp.email.type && temp.email.email}"
+                  ng-disabled="!temp.email.type || !temp.email.email"
                   ng-click="addItem('email')">
                   <icon name="plus" text="Add"></icon>
                 </button>
@@ -285,10 +285,10 @@
             <div class="form-field form-field--compact form-inline-fields">
               <label for="new_voip_username" class="sr-only">Username</label>
               <input type="text" class="form-inline-fields__item" name="username" id="new_voip_username" ng-model="temp.voip.username" placeholder="{{'Username' | translate}}" />
-              <button type="submit" 
-                class="btn-transparent" 
-                ng-class="{'active': temp.voip.type && temp.voip.username}" 
-                ng-disabled="!temp.voip.type || !temp.voip.username" 
+              <button type="submit"
+                class="btn-transparent"
+                ng-class="{'active': temp.voip.type && temp.voip.username}"
+                ng-disabled="!temp.voip.type || !temp.voip.username"
                 ng-click="addItem('voip')">
                 <icon name="plus" text="Add"></icon>
               </button>
@@ -316,8 +316,8 @@
         <h3 class="form-section__heading" translate>Organizations</h3>
         <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="org in user.organizations">
-            <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="user.organization._id === org._id"></icon>
-            <a href="/lists/{{org.list._id}}">{{org.list.name}}</a>
+            <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="user.organization.list === org.list"></icon>
+            <a href="/lists/{{org.list}}">{{org.name}}</a>
           </li>
           <li class="list__item" ng-if="!user.organizations.length">
             <em translate>No organizations</em>
@@ -339,16 +339,16 @@
                   </ui-select-choices>
                 </ui-select>
               </div>
-              <button type="submit" 
-                class="btn-transparent" 
-                ng-class="{'active': temp.organization.list}" 
-                ng-disabled="!temp.organization.list" 
+              <button type="submit"
+                class="btn-transparent"
+                ng-class="{'active': temp.organization.list}"
+                ng-disabled="!temp.organization.list"
                 ng-click="addItem('organization')">
                 <icon name="plus" text="Add"></icon>
               </button>
             </div>
           </form>
-          
+
           <form ng-if="user.organizations.length" class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Set primary organization:</legend>
@@ -375,7 +375,7 @@
         <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="title in user.job_titles">
             <icon name="direction-up" title="primary" class="primary-icon" ng-if="title === user.job_title"></icon>
-            {{title}} 
+            {{title}}
           </li>
           <li class="list__item" ng-if="!user.job_titles.length">
             <em translate>No job titles</em>
@@ -387,10 +387,10 @@
             <label class="form-section__sub-heading" for="job_title">Add a job title:</label>
             <div class="form-field form-field--compact form-inline-fields">
               <input type="text" class="form-inline-fields__item" name="job_title" id="job_title" ng-model="temp.job_title" placeholder="Add a job title" />
-              <button type="submit" 
-              class="btn-transparent" 
-              ng-class="{'active': temp.job_title}" 
-              ng-disabled="!temp.job_title" 
+              <button type="submit"
+              class="btn-transparent"
+              ng-class="{'active': temp.job_title}"
+              ng-disabled="!temp.job_title"
               ng-click="addItem('job_title')">
                 <icon name="plus" text="Add job title"></icon>
               </button>
@@ -450,11 +450,11 @@
                 </ui-select-choices>
               </ui-select>
 
-              <button type="submit" 
-                class="btn-transparent" 
-                ng-if="!showRegion" 
-                ng-class="{'active': temp.location.country}" 
-                ng-disabled="!temp.location.country" 
+              <button type="submit"
+                class="btn-transparent"
+                ng-if="!showRegion"
+                ng-class="{'active': temp.location.country}"
+                ng-disabled="!temp.location.country"
                 ng-click="addItem('location')">
                 <icon name="plus" text="Add location"></icon>
               </button>
@@ -470,10 +470,10 @@
                   </ui-select-choices>
                 </ui-select>
               </div>
-              <button type="submit" 
-                class="btn-transparent" 
-                ng-class="{'active': temp.location.country}" 
-                ng-disabled="!temp.location.country" 
+              <button type="submit"
+                class="btn-transparent"
+                ng-class="{'active': temp.location.country}"
+                ng-disabled="!temp.location.country"
                 ng-click="addItem('location')">
                 <icon name="plus" text="Add location"></icon>
               </button>
@@ -527,10 +527,10 @@
                 </ui-select-choices>
               </ui-select>
             </div>
-            <button type="submit" 
-              class="btn-transparent" 
-              ng-class="{'active': temp.functional_role.list}" 
-              ng-disabled="!temp.functional_role.list" 
+            <button type="submit"
+              class="btn-transparent"
+              ng-class="{'active': temp.functional_role.list}"
+              ng-disabled="!temp.functional_role.list"
               ng-click="addItem('functional_role')">
               <icon name="plus" text="Add"></icon>
             </button>
@@ -557,7 +557,7 @@
         <h3 class="form-section__heading" translate>Operations</h3>
         <ul class="tag-list">
           <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.operations">
-            <a href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <a href="/lists/{{val.list}}">{{val.name}}</a>
             <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('operation', val)">
               <icon name="cancel" text="Check out"></icon>
             </button>
@@ -569,7 +569,7 @@
         <h3 class="form-section__heading" translate>Clusters / Working Groups</h3>
         <ul class="tag-list">
           <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.bundles">
-            <a href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <a href="/lists/{{val.list}}">{{val.name}}</a>
             <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('bundle', val)">
               <icon name="cancel" text="Check out"></icon>
             </button>
@@ -581,7 +581,7 @@
         <h3 class="form-section__heading" translate>Disasters</h3>
         <ul class="tag-list">
           <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.disasters">
-            <a href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <a href="/lists/{{val.list}}">{{val.name}}</a>
             <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('disaster', val)">
               <icon name="cancel" text="Check out"></icon>
             </button>
@@ -593,7 +593,7 @@
         <h3 class="form-section__heading" translate>Other lists</h3>
         <ul class="tag-list">
           <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.lists">
-            <a href="/lists/{{val.list._id}}">{{val.list.name}}</a>
+            <a href="/lists/{{val.list}}">{{val.name}}</a>
             <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('list', val)">
               <icon name="cancel" text="Check out"></icon>
             </button>
@@ -609,10 +609,10 @@
           <label class="form-section__sub-heading" for="newWebsite" translate="">Add website:</label>
           <div class="form-field form-field--compact form-inline-fields">
             <input type="url" class="form-inline-fields__item" ng-model="temp.website.url" id="newWebsite" placeholder="URL" />
-            <button type="submit" 
-              class="btn-transparent" 
-              ng-class="{'active': temp.website.url}" 
-              ng-disabled="!temp.website.url" 
+            <button type="submit"
+              class="btn-transparent"
+              ng-class="{'active': temp.website.url}"
+              ng-disabled="!temp.website.url"
               ng-click="addItem('website')">
               <icon name="plus" text="Add"></icon>
             </button>
