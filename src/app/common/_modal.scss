@@ -67,7 +67,7 @@
 }
 
 .modal-header {
-  padding-bottom: $base-unit;
+  padding-bottom: $base-unit*1.5;
   border-bottom: 1px solid $primary-color;
 }
 
@@ -90,6 +90,15 @@
 
   h2 {
     line-height: 1.2;
+  }
+}
+
+.modal-body__content {
+  padding: $base-unit*2 0;
+
+  h1, h2, h3, h4, p {
+    @include font-size($small-font-size);
+    margin-bottom: $base-unit;
   }
 }
 
@@ -150,6 +159,12 @@
 
   .modal-body {
     padding: 0 0 $base-unit*2 0;
+  }
+
+  .modal-body__content {
+    h1, h2, h3, h4, p {
+      @include font-size($base-font-size);
+    }
   }
 
   .modal-footer {

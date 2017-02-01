@@ -5,9 +5,9 @@
     .module('app.checkin')
     .controller('CheckinCtrl', CheckinCtrl);
 
-  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', '$q', '$location', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List', 'Service'];
+  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', '$q', '$location', '$uibModal', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List', 'Service'];
 
-  function CheckinCtrl ($scope, $routeParams, $filter, $q, $location, gettextCatalog, config, alertService, User, UserCheckInService, List, Service) {
+  function CheckinCtrl ($scope, $routeParams, $filter, $q, $location, $uibModal, gettextCatalog, config, alertService, User, UserCheckInService, List, Service) {
     $scope.request = $routeParams;
     $scope.organization = {};
     $scope.selectedLists = [];
@@ -274,6 +274,27 @@
       }
 
     });
+    var listTypesModal;
+
+    
+    $scope.openListTypesModal = function () {
+     listTypesModal = $uibModal.open({
+        animation: false,
+        size: 'lg',
+        scope: $scope,
+        templateUrl: 'app/components/checkIn/listTypesModal.html'
+      });
+
+      listTypesModal.result.then(function () {
+        return;
+      }, function () {
+        return;
+      });
+    }
+
+    $scope.closeListTypesModal = function () {
+      listTypesModal.close();
+    }
 
     function init() {
       getUser();

@@ -1,7 +1,5 @@
 .block {
-  // &+.block {
-    margin-bottom: $base-unit*2;
-  // }
+  margin-bottom: $base-unit*2;
 }
 
 .block-heading {
@@ -13,6 +11,12 @@
   font-weight: normal;
   display: block;
   margin-bottom: $base-unit/2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.block-heading__action {
+
 }
 
 .secondary-block {
