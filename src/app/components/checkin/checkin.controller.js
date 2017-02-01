@@ -251,7 +251,7 @@
         alertService.add('success', data.message);
 
         if (data.type === 'primaryOrganization') {
-          $scope.modifications.organization = 'Changed primary organization to: ' + $scope.user.organization.list.name;
+          $scope.modifications.organization = 'Changed primary organization to: ' + $scope.user.organization.name;
         }
 
         if (data.type === 'primaryPhone') {

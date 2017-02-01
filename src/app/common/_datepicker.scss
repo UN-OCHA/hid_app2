@@ -16,12 +16,13 @@
 
   button {
     @include btn;
-    padding: $base-unit;
+    padding: 0;
+    // padding: $base-unit;
     border: none;
-    border-radius: $base-unit*2;
     background: none;
     text-transform: none;
-    color: $text-dark;
+    color: $dark-blue;
+    @include font-size($small-font-size);
 
     .text-muted {
       opacity: 0.6;
@@ -39,13 +40,31 @@
     }
   }
 
+  thead{
+    background: $primary-color;
+    color: $text-light;
+
+    button {
+      color: $text-light;
+    }
+  }
+
   th {
     text-align: center;
-    padding: $base-unit $base-unit/4;
+    padding: $base-unit/2 $base-unit/4;
   }
 
   td {
+    text-align: center;
     padding: $base-unit/4;
+  }
+
+  tbody {
+    td button {
+      padding: 0;
+      width: $base-unit*4;
+      height: $base-unit*4;
+    }
   }
 
   small {
@@ -65,6 +84,7 @@
 
   button.uib-right, button.uib-left {
     font-family: 'icomoon';
+    font-weight: bold;
 
     &:hover, &:focus {
       background: $primary-color;
@@ -86,7 +106,9 @@
 .uib-button-bar {
   text-align: center;
   @include clearfix;
-  padding: $base-unit 0;
+  padding: $base-unit/2 0;
+  background: $primary-color;
+  color: $text-light;
 
   .pull-left {
     float: left;
@@ -97,8 +119,8 @@
   }
 
   button {
-    color: $primary-color;
-    @include font-size($small-font-size);
+    padding: $base-unit;
+    color: $text-light;
 
     &:hover, &:focus {
       background: $primary-color;

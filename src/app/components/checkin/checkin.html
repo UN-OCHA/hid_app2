@@ -11,7 +11,7 @@
 
       <h2 class="block-heading" translate>Select lists</h2>
 
-      <div class="form-inline-fields form-inline-fields--clickies">
+      <div class="form-inline-fields form-inline-fields--clickies checkin-types">
         <p><input type="radio" name="listTypes" id="all" ng-model="selectedTypes.name" value="all" checked="checked" />
         <label for="all" class="clickie-label">All</label>
         </p>
@@ -84,7 +84,7 @@
         <h3 class="form-section__heading" translate>Current organization</h3>
 
         <p ng-show="!editOrganizationForm.$visible">
-          {{user.organization.list.name}}
+          {{user.organization.name}}
         </p>
 
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editOrganizationForm.$show()" ng-show="!editOrganizationForm.$visible">
@@ -101,12 +101,12 @@
               <ul class="list">
                 <li class="list__item" ng-repeat="org in user.organizations">
                   <input type="radio"
-                  id="org-{{org._id}}"
+                  id="org-{{org.list}}"
                   name="organizations"
-                  ng-model="user.organization._id"
-                  ng-value="org._id"
+                  ng-model="user.organization.list"
+                  ng-value="org.list"
                   ng-change="setPrimaryOrganization(org)" />
-                  <label class="clickie-label" for="org-{{org._id}}">{{org.list.name}}</label>
+                  <label class="clickie-label" for="org-{{org.list}}">{{org.name}}</label>
                 </li>
               </ul>
             </fieldset>
@@ -126,7 +126,10 @@
                     </ui-select-choices>
                   </ui-select>
                 </div>
-                <button type="button" class="btn-primary" ng-click="addItem('organization')">
+                <button type="button" class="btn-primary" 
+                  ng-class="{'active': temp.organization.list}"
+                  ng-disabled="!temp.organization.list"
+                  ng-click="addItem('organization')">
                   <icon name="plus" text="Add"></icon>
                 </button>
               </div>
