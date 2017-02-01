@@ -125,7 +125,7 @@
 
     function saveUpdatedUser (type, callback) {
       $scope.user.$update(function (user) {
-        $scope.$parent.user = angular.copy(user);
+        $scope.$parent.user = new User(angular.copy(user));
         updateCurrentUser();
         $scope.showRegion = false;
         $scope.$emit('editUser', {
