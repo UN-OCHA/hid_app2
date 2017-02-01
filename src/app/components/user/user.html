@@ -67,7 +67,7 @@
         <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
 
         <div ng-show="showProfileForm">
-          <label class="btn-secondary btn-upload profile-header__upload" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
+          <label class="btn-secondary btn-upload profile-header__upload" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
             <icon name="cloud-upload"></icon>
             <span translate>Upload</span>
           </label>
