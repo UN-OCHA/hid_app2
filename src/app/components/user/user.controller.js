@@ -16,6 +16,7 @@
       message: '',
       show: false
     };
+    $scope.apiUrl = config.apiUrl;
 
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
@@ -42,19 +43,19 @@
 
     function getPrimaryIndex (type, object, primary) {
       if (type === 'phone') {
-        return object.map(function (phoneNumber) { 
+        return object.map(function (phoneNumber) {
           return phoneNumber.number;
         }).indexOf(primary);
       }
 
       if (type === 'email') {
-        return object.map(function (email) { 
+        return object.map(function (email) {
           return email.email;
         }).indexOf(primary);
       }
 
       if (type === 'organization') {
-        return object.map(function (org) { 
+        return object.map(function (org) {
           return org.list;
         }).indexOf(primary.list);
       }
@@ -78,10 +79,10 @@
       if (!primary) {
         return object;
       }
-      
+
       var primaryIndex = getPrimaryIndex(type, object, primary);
       var primaryObject = object.splice(primaryIndex,1)[0];
-      
+
       if (primaryIndex !== -1 && primaryObject) {
         object.splice(0, 0, primaryObject);
       }
@@ -102,9 +103,9 @@
       user.$httpPromise.then(function () {
         orderPrimaryFields($scope.user);
       });
-      
-      userPicture(user.picture, user.email);    
-      
+
+      userPicture(user.picture, user.email);
+
       $scope.$broadcast('userLoaded');
     });
 
