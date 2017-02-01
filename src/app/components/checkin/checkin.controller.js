@@ -282,7 +282,7 @@
         animation: false,
         size: 'lg',
         scope: $scope,
-        templateUrl: 'app/components/checkIn/listTypesModal.html'
+        templateUrl: 'app/components/checkin/listTypesModal.html'
       });
 
       listTypesModal.result.then(function () {
