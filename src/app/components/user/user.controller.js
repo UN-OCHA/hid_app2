@@ -55,8 +55,8 @@
 
       if (type === 'organization') {
         return object.map(function (org) { 
-          return org._id;
-        }).indexOf(primary._id);
+          return org.list;
+        }).indexOf(primary.list);
       }
 
       if (type === 'jobTitle') {
