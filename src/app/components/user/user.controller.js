@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$scope', '$routeParams', '$timeout', '$location', 'gettextCatalog', 'alertService', 'md5', 'User'];
+  UserCtrl.$inject = ['$scope', '$routeParams', '$timeout', '$location', 'gettextCatalog', 'alertService', 'md5', 'User', 'config'];
 
-  function UserCtrl($scope, $routeParams, $timeout, $location, gettextCatalog, alertService, md5, User) {
+  function UserCtrl($scope, $routeParams, $timeout, $location, gettextCatalog, alertService, md5, User, config) {
     $scope.pictureUrl = '';
     $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin || $scope.currentUser.isManager);
     $scope.showProfileForm  = $routeParams.edit && $scope.canEditUser ? true : false;
