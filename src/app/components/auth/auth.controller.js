@@ -13,21 +13,20 @@
     $scope.login = function() {
       AuthService.login($scope.email, $scope.password).then(function () {
         $scope.initCurrentUser();
-        var user = new User($scope.currentUser);
-        
+
         if (!$scope.currentUser.appMetadata || ($scope.currentUser.appMetadata && !$scope.currentUser.appMetadata.hid)) {
-          user.setAppMetaData({hasLoggedIn: true});
-          user.$update(function () {
-            $scope.setCurrentUser(user);
+          $scope.currentUser.setAppMetaData({hasLoggedIn: true});
+          $scope.currentUser.$update(function () {
+            $scope.setCurrentUser($scope.currentUser);
             $location.path('/tutorial');
           });
           return;
         }
 
         if (!$scope.currentUser.appMetadata.hid.hasLoggedIn) {
-          user.setAppMetaData({hasLoggedIn: true});
-          user.$update(function () {
-            $scope.setCurrentUser(user);
+          $scope.currentUser.setAppMetaData({hasLoggedIn: true});
+          $scope.currentUser.$update(function () {
+            $scope.setCurrentUser($scope.currentUser);
             $location.path('/start');
           });
           return;

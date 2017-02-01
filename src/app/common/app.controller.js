@@ -53,7 +53,7 @@
     };
 
     $scope.setCurrentUser = function (user) {
-      $scope.currentUser = user;
+      $scope.currentUser = new User(user);
       $window.localStorage.setItem('currentUser', JSON.stringify(user));
     };
 

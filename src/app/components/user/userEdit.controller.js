@@ -391,7 +391,7 @@
 
       addItem('organization', function () {
         var primaryOrg = $scope.user.organizations.find(function (org) {
-          return org.list._id === orgId;
+          return org.list === orgId;
         });
 
         setPrimaryOrganization(primaryOrg, function () {
