@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$log', '$scope', '$routeParams', '$location', 'alertService', 'AuthService', 'User'];
+  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'alertService', 'AuthService', 'User'];
 
-  function AuthCtrl ($log, $scope, $routeParams, $location, alertService, AuthService, User) {
+  function AuthCtrl ($exceptionHandler, $scope, $routeParams, $location, alertService, AuthService, User) {
     $scope.email = '';
 
     $scope.login = function() {
@@ -38,14 +38,17 @@
         }
         $location.path('/landing');
 
-      }, function (data) {
-        $log.error('Log in error', data);
-        if (data.message === 'Please verify your email address') {
+      }, function (error) {
+        if (error.data.message === 'Please verify your email address') {
           alertService.add('danger', 'We could not log you in because your email address is not verified yet.');
+          return;
         }
-        else {
+        if (error.data.message === 'invalid email or password') {
           alertService.add('danger', 'We could not log you in. Please verify your email and password.');
+          return;
         }
+        alertService.add('danger', 'There was an error logging in.');
+        $exceptionHandler(error, 'Log in fail');
       });
     };
 

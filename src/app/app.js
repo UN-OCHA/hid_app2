@@ -347,6 +347,28 @@ app.config(["$httpProvider", function ($httpProvider) {
   $httpProvider.interceptors.push('APIInterceptor');
 }]);
 
+app.config(function ($provide) {
+    $provide.decorator('$exceptionHandler', function ($delegate, $injector, $log) {
+      return function (exception, cause) {
+        if (newrelic && newrelic.noticeError) {
+          var errorMessage = cause;
+          if (exception.data && exception.data.error) {
+            errorMessage += ' - ' + exception.data.error;
+            if (exception.data.message) {
+              errorMessage += ' - ' + exception.data.message;
+            }
+          }
+          try {
+            newrelic.noticeError(errorMessage);
+          } catch (newRelicError) {
+            $log.error( newRelicError );
+          }
+        }
+        $delegate(exception, cause);
+      };
+    });
+});
+
 // Configure xeditable
 app.run(function (editableOptions) {
   editableOptions.theme = 'bs3';
