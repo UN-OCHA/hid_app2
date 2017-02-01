@@ -245,8 +245,8 @@
     right: $base-unit*1.5;
 
     &:before {
-      width: ($base-unit*4) - 2;
-      height: ($base-unit*4) - 2;
+      width: $base-unit*3.5;
+      height: $base-unit*3.5;
     }
   }
 
