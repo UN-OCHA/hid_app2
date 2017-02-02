@@ -12,7 +12,9 @@
     $scope.page = 1;
     $scope.itemsPerPage = 10;
     $scope.subscriptionSearchTerm = {
-      name: ''
+      service: {
+        name: ''
+      }
     };
 
     function unsubscribe (subscription) {
