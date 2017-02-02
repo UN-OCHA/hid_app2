@@ -139,6 +139,14 @@
       delete par.limit;
       delete par.offset;
       par.token = $window.localStorage.getItem('jwtToken');
+
+      //remove any undefined params
+      angular.forEach(par, function (value, key) {
+        if (value === undefined) {
+          delete par[key];
+        }
+      });
+
       var urlp = Object.keys(par).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');
@@ -146,6 +154,7 @@
       if (format) {
         url += 'format=' + format + '&';
       }
+
       return url + urlp;
     };
 
