@@ -1,4 +1,4 @@
-(function () {
+consfunction () {
   'use strict';
 
   angular
@@ -33,7 +33,6 @@
     function getSubscriptions () {
       $scope.subscriptions = $scope.currentUser.subscriptions;
       angular.forEach($scope.subscriptions, function (sub) {
-        console.log(sub.service)
         if (sub.service.owner === $scope.currentUser._id) {
           sub.isOwner = true;
         }
