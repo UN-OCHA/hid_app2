@@ -5,24 +5,32 @@
     .module('app.service')
     .controller('ServicesCtrl', ServicesCtrl);
 
-  ServicesCtrl.$inject = ['$scope', '$routeParams', 'Service', 'alertService', 'gettextCatalog'];
+  ServicesCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', 'Service', 'alertService', 'gettextCatalog'];
 
-  function ServicesCtrl ($scope, $routeParams, Service, alertService, gettextCatalog) {
-    $scope.request = $routeParams;
-    $scope.totalItems = 0;
-    $scope.itemsPerPage = 10;
-    $scope.currentPage = 1;
-    $scope.request.limit = $scope.itemsPerPage;
-    $scope.request.offset = 0;
-    $scope.request.sort = 'name';
+  function ServicesCtrl ($exceptionHandler, $scope, $routeParams, Service, alertService, gettextCatalog) {
     $scope.servicesLoaded = false;
-
-    var setTotalServices = function (clients, headers) {
-      $scope.totalItems = headers()["x-total-count"];
-      $scope.servicesLoaded = true;
+    $scope.services = [];
+    $scope.pagination = {
+      currentPage: 1,
+      itemsPerPage: 10,
+      totalItems: 0
     };
 
-    $scope.services = Service.query($scope.request, setTotalServices);
+    function getServices (offset) {
+      var params = {
+        sort: 'name',
+        limit: $scope.pagination.itemsPerPage 
+      };
+      params.offset = offset || 0;
+
+      Service.query(params, function (services, headers) {
+        $scope.services = services;
+        $scope.pagination.totalItems = headers()["x-total-count"];
+        $scope.servicesLoaded = true;
+      });
+    }
+
+    getServices();
 
     $scope.subscribe = function (service, user) {
       service.subscribe(user)
@@ -35,8 +43,9 @@
             alertService.add('success', gettextCatalog.getString('The user was successfully subscribed to this service'));
           }
         })
-        .catch(function (err) {
+        .catch(function (error) {
           alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
+          $exceptionHandler(error, 'Subscribe fail');
         });
     };
 
@@ -51,17 +60,23 @@
             alertService.add('success', gettextCatalog.getString('The user was successfully unsubscribed from this service'));
           }
         })
-        .catch(function (err) {
+        .catch(function (error) {
           alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
+          $exceptionHandler(error, 'Unsubscribe fail');
         });
     };
 
     $scope.deleteService = function (service) {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-        service.$delete(function (resp, headers) {
+      alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+        service.$delete(function () {
           alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
         });
       });
+    };
+
+    $scope.pageChanged = function () {
+      var offset = $scope.pagination.itemsPerPage * ($scope.pagination.currentPage - 1);
+      getServices(offset);
     };
   }
 })();

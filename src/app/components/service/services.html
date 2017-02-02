@@ -27,4 +27,12 @@
     </tr>
   </tbody>
 </table>
-<ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+
+<uib-pagination 
+  total-items="pagination.totalItems" 
+  ng-model="pagination.currentPage"
+  ng-change="pageChanged()" 
+  direction-links="false" 
+  items-per-page=pagination.itemsPerPage
+  class="pagination" >    
+</uib-pagination>
