@@ -1,4 +1,4 @@
-consfunction () {
+function () {
   'use strict';
 
   angular
