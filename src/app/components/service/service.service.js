@@ -29,7 +29,7 @@
     }
 
     Service.prototype.subscribe = function (user) {
-      return $http.post(config.apiUrl + 'user/' + user._id + '/subscriptions', {service: this._id});
+      return $http.post(config.apiUrl + 'user/' + user._id + '/subscriptions', {service: this._id, email: user.email});
     };
 
     Service.prototype.unsubscribe = function (user) {

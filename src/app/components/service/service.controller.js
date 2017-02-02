@@ -5,9 +5,9 @@
     .module('app.service')
     .controller('ServiceCtrl', ServiceCtrl);
 
-  ServiceCtrl.$inject = ['$scope', '$routeParams', '$http', '$log', '$window', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List', 'User'];
+  ServiceCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$http', '$log', '$window', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List', 'User'];
 
-  function ServiceCtrl ($scope, $routeParams, $http, $log, $window, $location, gettextCatalog, alertService, Service, ServiceCredentials, List, User) {
+  function ServiceCtrl ($exceptionHandler, $scope, $routeParams, $http, $log, $window, $location, gettextCatalog, alertService, Service, ServiceCredentials, List, User) {
     $scope.serviceTypes = [
       {
         value: 'mailchimp',
@@ -26,13 +26,12 @@
     $scope.isSubscribed = false;
     $scope.userSubscribed = {};
     $scope.userUnsubscribed = {};
+    $scope.subscribersLoaded = false;
     $scope.pagination = {
       currentPage: 1,
       itemsPerPage: 50,
       totalItems: 0
     };
-
-    var offset = 0;
 
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
@@ -83,11 +82,12 @@
           else {
             alertService.add('success', gettextCatalog.getString('The user was successfully subscribed to this service'));
           }
-
+          $scope.newUsers = [];
           $scope.subscribers.push(user);
         })
-        .catch(function () {
+        .catch(function (error) {
           alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
+          $exceptionHandler(error, 'Subscribe fail');
         });
     };
 
@@ -105,8 +105,9 @@
 
           $scope.subscribers.splice($scope.subscribers.indexOf(user), 1);
         })
-        .catch(function () {
+        .catch(function (error) {
           alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
+          $exceptionHandler(error, 'Unsubscribe fail');
         });
     };
 
@@ -118,6 +119,7 @@
       };
       var error = function () {
         alertService.add('danger', gettextCatalog.getString('There was an error saving this service'));
+        $exceptionHandler(error, 'Save service fail');
       };
       if ($scope.service._id) {
         $scope.service.$update(success, error);
@@ -171,8 +173,38 @@
       return inLists ? true : false;
     };
 
+    function filterUsers (users, subscribers) {
+      if (!subscribers.length) {
+        return users;
+      }
+      var serviceId = $scope.service._id;
+      var filteredUsers = [];
+
+      angular.forEach(users, function (user) {
+        var isSubscribed = false;
+        if (!user.subscriptions.length) {
+          filteredUsers.push(user);
+          return;
+        }
+        angular.forEach(user.subscriptions, function (subscription) {
+          if (subscription.service === serviceId) {
+            isSubscribed = true;
+          }
+        });
+
+        if (!isSubscribed) {
+          filteredUsers.push(user);
+        }
+
+      });
+
+      return filteredUsers;
+    }
+
     $scope.getUsers = function(search) {
-      $scope.newUsers = User.query({'name': search});
+      User.query({'name': search}, function (users) {
+        $scope.newUsers = filterUsers(users, $scope.subscribers);
+      });
     };
 
     $scope.removeManager = function (list) {
@@ -187,14 +219,21 @@
     };
 
     $scope.pageChanged = function () {
-      offset = ($scope.pagination.currentPage - 1);
-      $scope.getSubscribers();
+      var offset = $scope.pagination.itemsPerPage * ($scope.pagination.currentPage - 1);
+      $scope.getSubscribers(offset);
     };
 
-    $scope.getSubscribers = function () {
-      User.query({subscriptions: $scope.service._id, limit: $scope.pagination.itemsPerPage, offset: offset}, function (response) {
+    $scope.getSubscribers = function (offset) {
+      var params = {
+        'subscriptions.service': $scope.service._id,
+        limit: $scope.pagination.itemsPerPage,
+        sort: 'name'
+      };
+      params.offset = offset || 0;
+      User.query(params, function (response) {
         $scope.subscribers = response;
         $scope.pagination.totalItems = response.headers['x-total-count'];
+        $scope.subscribersLoaded = true;
       });
     };
     

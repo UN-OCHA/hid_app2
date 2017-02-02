@@ -151,7 +151,7 @@
       <ul class="secondary-block__list list list--has-buttons">
         <li class="list__item" ng-if="!subscriptions.length"><em>No subscriptions</em></li>
         <li class="list__item" ng-repeat="subscription in subscriptions">
-          {{subscription.name}}
+          {{subscription.service.name}}
           <div uib-dropdown class="list__button">
             <button type="button" class="btn-transparent" uib-dropdown-toggle>
               <icon name="dots" text="Options"></icon>

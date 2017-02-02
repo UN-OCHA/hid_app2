@@ -4,6 +4,8 @@
   <icon name="wheel" text="Actions"></icon>
 </button>
 
+<loader ng-if="!subscribersLoaded"></loader>
+
 <div class="page-header">
   <h1 class="page-header__heading">{{service.name}}</h1>
   <p>{{service.description}}</p>
