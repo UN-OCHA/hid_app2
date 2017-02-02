@@ -67,7 +67,7 @@
     Service.prototype.isSubscribed = function (user) {
       var index = -1;
       for (var i = 0; i < user.subscriptions.length; i++) {
-        if (user.subscriptions[i]._id.toString() === this._id.toString()) {
+        if (user.subscriptions[i].service._id.toString() === this._id.toString()) {
           index = i;
         }
       }
