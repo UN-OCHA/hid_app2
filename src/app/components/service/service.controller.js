@@ -26,6 +26,7 @@
     $scope.isSubscribed = false;
     $scope.userSubscribed = {};
     $scope.userUnsubscribed = {};
+    $scope.subscribers = [];
     $scope.subscribersLoaded = false;
     $scope.pagination = {
       currentPage: 1,

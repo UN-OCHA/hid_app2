@@ -161,7 +161,7 @@
                 <button type="button" class="btn-link" ng-click="unsubscribe(subscription)" translate>Unsubscribe</button>
               </li>
               <li ng-if="subscription.isOwner || subscription.isManager">
-                <a href="services/{{subscription._id}}/edit" translate>Edit Service</a>
+                <a href="services/{{subscription.service._id}}/edit" translate>Edit Service</a>
               </li>
               <li ng-if="subscription.isOwner">
                 <button type="button" class="btn-link" ng-click="deleteService(subscription)" translate>Delete service</button>

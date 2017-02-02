@@ -33,13 +33,14 @@
     function getSubscriptions () {
       $scope.subscriptions = $scope.currentUser.subscriptions;
       angular.forEach($scope.subscriptions, function (sub) {
-        if (sub.owner === $scope.currentUser._id) {
+        console.log(sub.service)
+        if (sub.service.owner === $scope.currentUser._id) {
           sub.isOwner = true;
         }
 
         angular.forEach(sub.managers, function (manager) {
           if (manager === $scope.currentUser._id) {
-            sub.isManager = true;
+            sub.service.isManager = true;
           }
         });
       });
@@ -100,7 +101,7 @@
     }
 
     $scope.unsubscribe = function (subscription) {
-      var service = new Service(subscription);
+      var service = new Service(subscription.service);
       alertService.add('warning', 'Are you sure?', true, function() {
         service.unsubscribe($scope.currentUser)
           .then(function (response) {
@@ -114,7 +115,7 @@
     };
 
     $scope.deleteService = function (subscription) {
-      var service = new Service(subscription);
+      var service = new Service(subscription.service);
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         service.$delete(function () {
           alertService.add('success', gettextCatalog.getString('Service deleted successfully'));

@@ -18,7 +18,7 @@
     };
 
     function unsubscribe (subscription) {
-      var service = new Service(subscription);
+      var service = new Service(subscription.service);
       alertService.add('warning', 'Are you sure?', true, function() {
         service.unsubscribe($scope.currentUser)
           .then(function (response) {
