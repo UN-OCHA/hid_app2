@@ -50,8 +50,8 @@
   }
 
   function checkPending (user, listType, listId) {
-    angular.forEach(user.listType, function (userList) {
-      if ( (listId === userList.list._id) && userList.pending) {
+    angular.forEach(user[listType], function (userList) {
+      if ( (listId === userList.list) && userList.pending) {
         user.pending = true;
       }
     });

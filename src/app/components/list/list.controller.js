@@ -33,7 +33,7 @@
 
     function checkInStatus () {
       var pending = $scope.currentUser.lists.filter(function(list) {
-        return list.pending && (list.list._id === $scope.list._id);
+        return list.pending && (list.list === $scope.list._id);
       })[0];
       $scope.isPending = pending ? true : false;
     }
@@ -168,7 +168,7 @@
 
       var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         angular.forEach(user[$scope.list.type + 's'], function (list) {
-          if ($scope.list._id === list.list._id) {
+          if ($scope.list._id === list.list) {
             checkInId = list._id;
           }
         });
