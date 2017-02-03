@@ -119,18 +119,18 @@
       return deDupedLists;
     }
 
-    $rootScope.$on('users-export-csv', function () {
+    $scope.$on('users-export-csv', function () {
       var params = angular.extend($scope.request, $scope.filters);
       var url = User.getCSVUrl(params);
       $window.open(url);
     });
 
-    $rootScope.$on('users-export-txt', function (evt, success, error) {
+    $scope.$on('users-export-txt', function (evt, success, error) {
       var params = angular.extend($scope.request, $scope.filters);
       User.exportTXT(params, success, error);
     });
 
-    $rootScope.$on('users-export-pdf', function (evt, format) {
+    $scope.$on('users-export-pdf', function (evt, format) {
       var params = angular.extend($scope.request, $scope.filters);
       var url = User.getPDFUrl(params, format);
       $window.open(url);
