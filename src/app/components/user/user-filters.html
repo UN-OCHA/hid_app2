@@ -109,33 +109,13 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           </ui-select>
         </div>
         <div class="filter" ng-if="currentUser.is_admin || currentUser.isManager">
-          <h4>
-            <button type="button" class="btn btn-transparent filter__heading" ng-click="isFilter7Collapsed = !isFilter7Collapsed">
-              <span translate>Type of user</span>
-              <icon name="arrow-down"></icon>
-            </button>
-          </h4>
-          <div uib-collapse="!isFilter7Collapsed" class="filter__inner">
-            <p>
-              <input type="checkbox" ng-model="selectedFilters.is_orphan" name="is_orphan" id="is_orphan" /> 
-              <label for="is_orphan" class="clickie-label">Orphan</label>
-            </p>
-
-            <p>
-              <input type="checkbox" ng-model="selectedFilters.is_ghost" name="is_ghost" id="is_ghost" />
-              <label for="is_ghost" class="clickie-label">Ghost</label>
-            </p>
-
-            <p>
-              <input type="checkbox" ng-model="selectedFilters.verified" name="verified" id="verified" />
-              <label for="verified" class="clickie-label">Verified</label>
-            </p>
-
-            <p>
-              <input type="checkbox" ng-model="selectedFilters.is_admin" name="is_admin" id="is_admin" />
-              <label for="is_admin" class="clickie-label">Administrator</label>
-            </p>
-          </div>
+          <label for="userTypes" class="sr-only" translate>Type of user</label>
+          <ui-select ng-model="selectedFilters.user_type" name="userTypes" id="userTypes">
+            <ui-select-match allow-clear="true" placeholder="Type of user">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="type.value as type in userTypes | filter: $select.search">
+                {{type.name}}
+            </ui-select-choices>
+          </ui-select>
         </div>
 
       </div>
@@ -152,7 +132,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
       <div uib-collapse="!filterGroup3" class="filters-group__inner">
         <div class="filter">
           <label for="sort" class="sr-only" translate>Sort by</label>
-          <ui-select ng-model="request['sort']" name="sort" class="always-show-placeholder">
+          <ui-select ng-model="request['sort']" name="sort">
             <ui-select-match placeholder="Sort by">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices repeat="sort.label as sort in sortBy | filter: $select.search">
                 {{sort.name}}

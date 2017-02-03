@@ -21,13 +21,12 @@
     };
     var listInfo = [];
     var operationIds = [];
-
     $scope.request = angular.copy(defaultRequest);
 
     function getUsers () {
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
       var params = angular.extend($scope.request, $scope.userFilters);
-
+      
       // cached resource is returned immediately
       // User.query(params).$promise.then(function(users) {
       User.query(params, function(users) {
@@ -166,8 +165,41 @@
 
     $rootScope.$on('sidebar-closed', function () {
       $scope.selectedFilters = angular.copy($scope.userFilters);
+
+      angular.forEach($scope.userTypes, function (type) {
+        //handle unverified - swithced tos vefri
+        if ($scope.selectedFilters.hasOwnProperty(type.value)) {
+          $scope.selectedFilters.user_type = {};
+
+          if ($scope.selectedFilters.verified === false) {
+            $scope.selectedFilters.user_type = 'unverified';
+          }
+
+          $scope.selectedFilters.user_type = type.value;
+          delete $scope.selectedFilters[type];
+        }
+      }); 
       $scope.request.sort = currentSortOrder;
     });
+
+    function handleUserTypes () {
+      angular.forEach($scope.userTypes, function (type) {
+        if ($scope.request.hasOwnProperty(type.value)) {
+          delete $scope.request[type.value];
+        }
+      }); 
+      if ($scope.selectedFilters.user_type === undefined) {
+        return;
+      }
+      delete $scope.userFilters.user_type;
+
+      if ($scope.selectedFilters.user_type === 'unverified') {
+        $scope.userFilters.verified = false;
+        return;
+      }
+
+      $scope.userFilters[$scope.selectedFilters.user_type] = true;
+    }
 
     $scope.filter = function() {
       $scope.usersLoaded = false;
@@ -175,7 +207,11 @@
         delete $scope.selectedFilters.name;
         delete $scope.request.name;
       }
+
       $scope.userFilters = angular.copy($scope.selectedFilters);
+      if ($scope.selectedFilters.user_type || $scope.selectedFilters.user_type === undefined) {
+        handleUserTypes();
+      }
       $scope.currentPage = 1;
       getUsers();
     };
@@ -278,6 +314,28 @@
       {
         label: 'verified',
         name: 'Verified'
+      }
+    ];
+    $scope.userTypes = [
+      {
+        value: 'is_orphan',
+        name: 'Orphan'
+      },
+      {
+        value: 'is_ghost',
+        name: 'Ghost'
+      },
+      {
+        value: 'verified',
+        name: 'Verified'
+      },
+      {
+        value: 'unverified',
+        name: 'Un-verified'
+      },
+      {
+        value: 'is_admin',
+        name: 'Adminstrator'
       }
     ];
 
