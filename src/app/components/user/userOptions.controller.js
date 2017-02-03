@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserOptionsCtrl', UserOptionsCtrl);
 
-  UserOptionsCtrl.$inject = ['$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'UserCheckInService', 'UserDataService'];
+  UserOptionsCtrl.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'UserCheckInService', 'UserDataService'];
 
-  function UserOptionsCtrl($scope, $uibModal, alertService, config, List, ListDataService, UserCheckInService, UserDataService, User) {
+  function UserOptionsCtrl($exceptionHandler, $scope, $uibModal, alertService, config, List, ListDataService, UserCheckInService, UserDataService) {
     var checkInModal;
     $scope.selectedLists = [];
     $scope.availableLists = [];
@@ -42,17 +42,23 @@
     }
 
     function removeFromList (user, list) {
-      var alert = alertService.add('warning', 'Are you sure?', true, function () {
-        var checkInId = 0;
-        for (var i = 0, len = user[list.type + 's'].length; i < len; i++) {
-          if (angular.equals(list._id, user[list.type + 's'][i].list._id)) {
-            checkInId = user[list.type + 's'][i]._id;
+      var listType = list.type + 's';
+      
+      alertService.add('warning', 'Are you sure?', true, function () {
+        var checkInId;
+
+        angular.forEach(user[listType], function (userList) {
+          if (list._id === userList.list) {
+            checkInId = userList._id;
           }
-        }
-        if (checkInId !== 0) {
-          UserCheckInService.delete({userId: user._id, listType: list.type + 's', checkInId: checkInId}, {}, function() {
+        });
+
+        if (checkInId) {
+          UserCheckInService.delete({userId: user._id, listType: listType, checkInId: checkInId}, {}, function () {
             alertService.add('success', 'The user was successfully checked out.');
             UserDataService.notify();
+          }, function (error) {
+            $exceptionHandler(error, 'Remove from list fail');
           });
         }
       });
@@ -75,7 +81,8 @@
       angular.forEach(config.listTypes, function (listType) {
         angular.forEach(user[listType + 's'], function (userList) {
           if (list._id === userList.list._id) {
-            return inList = true;
+            inList = true;
+            return inList;
           }
         });
       });
@@ -86,7 +93,8 @@
       var listSelected = false;
       angular.forEach(selectedLists, function(selectedList) {
         if (list._id === selectedList._id) {
-          return listSelected = true;
+          listSelected = true;
+          return listSelected;
         }
       });
       return listSelected;
@@ -126,7 +134,7 @@
       });
     }
 
-    function openCheckInModal (user, currentUser) {
+    function openCheckInModal () {
       checkInModal = $uibModal.open({
         animation: false,
         scope: $scope,

@@ -7,30 +7,23 @@
 
     var user = {
       _id: 'user-id',
-      lists: [
-      ]
+      lists: []
     };
     var listToRemove = {
       _id: 'list-id-1',
       type: 'list'
-    }
+    };
     var list1 = {
       _id: 'checkin-id-1',
-      list: listToRemove
+      list: 'list-id-1'
     };
     var list2 = {
       _id: 'checkin-id-2',
-      list: {
-        _id: 'list-id-2',
-        type: 'list',
-      }
+      list: 'list-id-2'
     };
     var list3 = {
       _id: 'checkin-id-3',
-      list: {
-        _id: 'list-id-3',
-        type: 'list',
-      }
+      list: 'list-id-3'
     };
 
     var allLists = [list1, list2];
@@ -43,7 +36,7 @@
       });
 
       modalResult = {
-        then: function(callback) {}
+        then: function() {}
       };
 
       mockUibModal = {
@@ -76,28 +69,21 @@
       inject(function($rootScope, $q, $injector) {
         scope = $rootScope.$new();
 
-        mockAlertService.add = function () {}
-        mockUserCheckInService.delete = function () {}
+        mockAlertService.add = function () {};
+        mockUserCheckInService.delete = function () {};
         mockList.query = function () {};
-        mockListDataService.getManagedAndOwnedLists = function () {}
+        mockListDataService.getManagedAndOwnedLists = function () {};
 
-        
         verifiedUser = $injector.get('User');
         verifiedUser._id = 'user-id';
         verifiedUser.verified = true;
-        verifiedUser.$update = function () {
-          return;
-        };
-        verifiedUser.$delete = function () {
-          return;
-        };
+        verifiedUser.$update = function () {};
+        verifiedUser.$delete = function () {};
 
         unVerifiedUser = $injector.get('User');
         unVerifiedUser._id = 'user-id-2';
         unVerifiedUser.verified = false;
-        unVerifiedUser.$update = function () {
-          return;
-        };
+        unVerifiedUser.$update = function () {};
 
         spyOn(verifiedUser, '$update').and.callFake(function () {});
         spyOn(verifiedUser, '$delete').and.callFake(function () {});
@@ -147,7 +133,7 @@
 
       it('should call check the user out of the list', function () {
         var deleteParams = {userId: 'user-id', listType: 'lists', checkInId: 'checkin-id-1'};
-        expect(mockUserCheckInService.delete).toHaveBeenCalledWith(deleteParams, {}, jasmine.any(Function));
+        expect(mockUserCheckInService.delete).toHaveBeenCalledWith(deleteParams, {}, jasmine.any(Function), jasmine.any(Function));
       });
 
     });
@@ -192,7 +178,7 @@
 
       describe('As an admin', function () {
         beforeEach(function () {
-          scope.openCheckInModal({}, true)
+          scope.openCheckInModal({}, true);
         });
 
         it('should open the modal', function () {
@@ -205,7 +191,7 @@
               _id: 124,
               is_admin: true
             };
-            scope.getAvailableLists(scope.currentUser, {}, 'findme')
+            scope.getAvailableLists(scope.currentUser, {}, 'findme');
           });
 
           it('should get lists with your searchTerm', function () {
@@ -213,7 +199,7 @@
               name: 'findme',
               limit: 50,
               sort: 'name'
-            }
+            };
             expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
           });
 
@@ -227,7 +213,7 @@
 
       describe('As a global manager', function () {
         beforeEach(function () {
-          scope.openCheckInModal({}, true)
+          scope.openCheckInModal({}, true);
         });
 
         it('should open the modal', function () {
@@ -240,7 +226,7 @@
               _id: 124,
               isManager: true
             };
-            scope.getAvailableLists(scope.currentUser, {}, 'findme')
+            scope.getAvailableLists(scope.currentUser, {}, 'findme');
           });
 
           it('should get lists with your searchTerm', function () {
@@ -248,7 +234,7 @@
               name: 'findme',
               limit: 50,
               sort: 'name'
-            }
+            };
             expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
           });
 
