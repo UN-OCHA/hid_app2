@@ -27,67 +27,11 @@
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
       var params = angular.extend($scope.request, $scope.userFilters);
       
-      // cached resource is returned immediately
-      // User.query(params).$promise.then(function(users) {
-      User.query(params, function(users) {
-        $scope.users = transformUsers(users);
-        $scope.totalItems = users.headers["x-total-count"];
+      UserDataService.getUsers(params, $scope.list, function () {
+        $scope.users = UserDataService.listUsers;
+        $scope.totalItems = UserDataService.listUsersTotal;
         $scope.usersLoaded = true;
-
-        // update users again when the http response resolves so don't lose pending
-        // otherwise it overwrites them
-        users.$httpPromise.then(function(users) {
-          $scope.users = transformUsers(users, operationIds);
-          $scope.totalItems = users.headers["x-total-count"];
-        });
       });
-    }
-
-    function checkPending (user, listType, listId) {
-      angular.forEach(user.listType, function (userList) {
-        if ( (listId === userList.list._id) && userList.pending) {
-          user.pending = true;
-        }
-      });
-      return user;
-    }
-
-    function filterClusters (user, operationName) {
-      var bundles = user.bundles;
-      var operationBundles = [];
-      var displayName = '';
-
-      if (!bundles.length) {
-        return user;
-      }
-
-      angular.forEach(bundles, function (bundle) {
-        if (bundle.name.indexOf(operationName) !== -1) {
-          displayName = bundle.name.replace(operationName + ' :', '');
-          displayName = displayName.replace(operationName + ':', '');
-          bundle.displayName = displayName;
-          operationBundles.push(bundle);
-        }
-      });
-
-      user.operationBundles = operationBundles;
-      return user;
-    }
-
-    function transformUsers (users, operationIds) {
-      if (!$scope.list) {
-        return users;
-      }
-
-      angular.forEach(users, function (user) {
-        checkPending(user, $scope.list.type + 's', $scope.list._id);
-
-        if ($scope.list.type === 'operation') {
-          filterClusters(user, $scope.list.name);
-        }
-      });
-
-      return users;
     }
 
     function getMultipleLists (operationIds, search, type) {
