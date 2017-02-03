@@ -13,6 +13,8 @@
     $scope.listsMember = [];
     $scope.listsOwnedOrManaged = [];
     $scope.subscriptions = [];
+    $scope.itemsPerPage = 5;
+    $scope.currentPage = 1;
 
     ListDataService.getManagedAndOwnedLists($scope.currentUser, '', function (lists) {
       $scope.listsOwnedOrManaged = lists;

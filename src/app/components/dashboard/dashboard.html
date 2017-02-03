@@ -150,7 +150,7 @@
 
       <ul class="secondary-block__list list list--has-buttons">
         <li class="list__item" ng-if="!subscriptions.length"><em>No subscriptions</em></li>
-        <li class="list__item" ng-repeat="subscription in subscriptions">
+        <li class="list__item" ng-repeat="subscription in filterData = currentUser.subscriptions | limitTo:itemsPerPage:itemsPerPage*(currentPage-1) | orderBy: 'createdAt' : true"">
           {{subscription.service.name}}
           <div uib-dropdown class="list__button">
             <button type="button" class="btn-transparent" uib-dropdown-toggle>
@@ -172,6 +172,16 @@
       </ul>
 
     </div>
+
+    <uib-pagination 
+      ng-show="subscriptions.length > itemsPerPage"
+      total-items="subscriptions.length" 
+      ng-model="currentPage"
+      ng-change="pageChanged()" 
+      direction-links="false" 
+      items-per-page="itemsPerPage"
+      class="pagination" >    
+    </uib-pagination>
 
   </div>
 </div>
