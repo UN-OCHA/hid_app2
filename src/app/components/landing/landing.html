@@ -35,7 +35,7 @@
         </div>
 
         <p ng-if="recentUserSearches.length" class="recent-searches">
-          <span translate>Recent: </span>
+          <span translate>Recent:&nbsp;</span>
           <span ng-repeat="search in recentUserSearches track by $index">
             <a ng-href="{{search.link}}">{{search.name}}</a><span ng-if="$index +1 < recentUserSearches.length">,&nbsp;</span>
           </span>
@@ -67,7 +67,7 @@
         </div>
 
         <p ng-if="recentListSearches.length" class="recent-searches">
-          <span translate>Recent: </span>
+          <span translate>Recent:&nbsp;</span>
           <span ng-repeat="search in recentListSearches track by $index">
             <a ng-href="{{search.link}}">{{search.name}}</a><span ng-if="$index +1 < recentListSearches.length">,&nbsp;</span>
           </span>
