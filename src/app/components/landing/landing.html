@@ -26,7 +26,7 @@
             <li ng-if="landingUsers.length">
               <ul>
                 <li ng-repeat="result in landingUsers">
-                  <a href="users/{{result._id}}">{{result.name}}</a>
+                  <a ng-href="users/{{result._id}}" ng-click="saveSearch(result, 'user')">{{result.name}}</a>
                 </li>
               </ul>
             </li>
@@ -58,11 +58,11 @@
             <li ng-if="landingLists.length">
               <ul>
                 <li ng-repeat="result in landingLists">
-                  <a href="lists/{{result._id}}">{{result.name}}</a>
+                  <a ng-href="lists/{{result._id}}" ng-click="saveSearch(result, 'list')">{{result.name}}</a>
                 </li>
               </ul>
             </li>
-            <li><button type="button" ng-click="fullSearch(searchListsTerm)" class="btn-transparent" translate>View all</button></li>
+            <li><button type="button" ng-click="fullSearch(searchListsTerm, 'lists')" class="btn-transparent" translate>View all</button></li>
           </ul>
         </div>
 
