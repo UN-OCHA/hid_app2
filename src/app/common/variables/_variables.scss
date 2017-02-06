@@ -67,6 +67,16 @@ $border-grey: #CFD1D2;
 
 $error-color: red;
 
+// list type colours
+$list-color-operation: #d06573;
+$list-color-bundle: $primary-color;
+$list-color-disaster: #c14456;
+$list-color-organization: $dark-blue;
+$list-color-list: $light-blue;
+$list-color-functional_role: #58585a;
+$list-color-office: #777777;
+
+
 //z-index
 $zindex: (
   sidebar: 1,

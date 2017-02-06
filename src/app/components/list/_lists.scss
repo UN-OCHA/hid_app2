@@ -1,0 +1,31 @@
+.list-type {
+	text-transform: uppercase;
+	font-family: $heading-font-light;
+	padding: $base-unit/4 $base-unit/2;
+	color: $text-light;
+
+	&.list-type--operation {
+		background: $list-color-operation;
+	}
+	&.list-type--bundle {
+		background: $list-color-bundle;
+	}
+	&.list-type--disaster {
+		background: $list-color-disaster;
+	}
+	&.list-type--organization {
+		background: $list-color-organization;
+	}
+	&.list-type--list {
+		background: $list-color-list;
+		color: $dark-blue;
+	}
+	&.list-type--functional_role {
+		background: $list-color-functional_role;
+	}
+	&.list-type--office {
+		background: $list-color-office;
+	}
+
+}
+

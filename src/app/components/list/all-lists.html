@@ -44,7 +44,11 @@
     <tbody>
       <tr ng-repeat="list in lists">
         <td><a ng-href="/lists/{{list._id}}" ng-click="saveSearch(list)">{{list.name}}</a></td>
-        <td>{{list.displayType || list.type}}</td>
+        <td>
+          <span class="list-type list-type--{{list.type}}">
+            {{list.displayType || list.type}}
+          </span>
+        </td>
         <td><a ng-if="list.owner.name" ng-href="/users/{{list.owner._id}}">{{list.owner.name}}</a></td>
       </tr>
     </tbody>

@@ -128,6 +128,9 @@
     $scope.filter = function() {
       $scope.listsLoaded = false;
       $scope.listFilters = angular.copy($scope.selectedFilters);
+      if ($routeParams.q) {
+        $scope.listFilters.name = $routeParams.q;
+      }
       ListDataService.setFilters($scope.listFilters);
       $scope.currentPage = 1;
       $scope.pageChanged();
