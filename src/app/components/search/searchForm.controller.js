@@ -66,6 +66,12 @@
       });
     };
 
+    $scope.saveSearch = function (result, type) {
+      SearchService.saveSearch($scope.currentUser, result, type, function (user) {
+        $scope.setCurrentUser(user);
+      });
+    }
+
     $rootScope.$on('$routeChangeSuccess', function () {
       $scope.showAutocomplete = false;
       $scope.searchTerm = '';

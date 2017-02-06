@@ -162,7 +162,6 @@
       var hidMeta = {
         hid: param
       };
-      var key = Object.keys(param);
    
       if (!this.appMetadata) {
         this.appMetadata = {
@@ -175,7 +174,7 @@
         angular.extend(this.appMetadata, hidMeta);
         return this;
       }
-      this.appMetadata.hid[key[0]] = true;
+      angular.extend(this.appMetadata.hid, hidMeta.hid);
       return this;
     };
 

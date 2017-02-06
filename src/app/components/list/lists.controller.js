@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListsCtrl', ListsCtrl);
 
-  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'List'];
+  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'List', 'SearchService'];
 
-  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, gettextCatalog, hrinfoService, alertService, ListDataService, List) {
+  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, gettextCatalog, hrinfoService, alertService, ListDataService, List, SearchService) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -131,6 +131,15 @@
       ListDataService.setFilters($scope.listFilters);
       $scope.currentPage = 1;
       $scope.pageChanged();
+    };
+
+    $scope.saveSearch = function (searchList) {
+      if (!$scope.searchTerm) {
+        return;
+      }
+      SearchService.saveSearch($scope.currentUser, searchList, 'list', function (user) {
+        $scope.setCurrentUser(user);
+      });
     };
   }
 })();

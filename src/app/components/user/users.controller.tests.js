@@ -3,7 +3,7 @@
 
   describe('Users controller', function () {
 
-    var scope, mockhrinfoService, mockList, countries, listQueryResponse, roles, rootScope, mockUser, mockUserDataService, mockGetText;
+    var scope, mockhrinfoService, mockList, countries, listQueryResponse, roles, rootScope, mockUser, mockUserDataService, mockGetText, mockSearchService;
 
     countries = ['france', 'uk'];
     listQueryResponse = ['something'];
@@ -67,6 +67,11 @@
       mockGetText = {};
       module('gettext', function($provide) {
         $provide.value('gettextCatalog', mockGetText);
+      });
+
+      mockSearchService = {};
+      module('app.search', function($provide) {
+        $provide.value('SearchService', mockSearchService);
       });
 
       module('app.user', function($provide) {

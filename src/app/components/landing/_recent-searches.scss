@@ -1,0 +1,13 @@
+.recent-searches {
+	@include font-size($small-font-size);
+	padding: $base-unit;
+	font-style: italic;
+
+	a {
+		text-decoration: none;
+
+		&:hover, &:focus {
+			text-decoration: underline;
+		}
+	}
+}

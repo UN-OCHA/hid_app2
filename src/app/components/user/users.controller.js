@@ -5,8 +5,8 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$log', '$q', '$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'UserDataService', 'User', 'List'];
-  function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, UserDataService, User, List) {
+  UsersCtrl.$inject = ['$log', '$q', '$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'SearchService', 'UserDataService', 'User', 'List'];
+  function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, SearchService, UserDataService, User, List) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -282,6 +282,15 @@
         name: 'Adminstrator'
       }
     ];
+
+    $scope.saveSearch = function (searchUser) {
+      if ($scope.list || !$scope.searchTerm) {
+        return;
+      }
+      SearchService.saveSearch($scope.currentUser, searchUser, 'user', function (user) {
+        $scope.setCurrentUser(user);
+      });
+    };
 
   }
 
