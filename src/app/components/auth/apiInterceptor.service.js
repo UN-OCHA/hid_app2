@@ -11,10 +11,10 @@
     return {
       request: function(request) {
         
-        var user = JSON.parse($window.localStorage.getItem('currentUser'));
-        if (user && user.locale) {
-          request.headers['Accept-Language'] = user.locale;
-        }
+        // var user = JSON.parse($window.localStorage.getItem('currentUser'));
+        // if (user && user.locale) {
+        //   request.headers['Accept-Language'] = user.locale;
+        // }
 
         // Add authorization header only for calls to our API
         if (request.url.indexOf(config.apiUrl) != -1) {
