@@ -286,7 +286,7 @@
 
     //Create an id for each location so can use as radio buttons
     function getLocationId (location) {
-      if (!location) {
+      if (!location || !location.country) {
         return;
       }
       var id = location.country.id;
@@ -298,7 +298,7 @@
 
 
     function isPrimaryLocation (location, primaryLocation) {
-      if (!primaryLocation || (location.country.id !== primaryLocation.country.id)) {
+      if (!primaryLocation || !location.country || (location.country.id !== primaryLocation.country.id)) {
         return false;
       }
       if (location.region && primaryLocation.region) {
