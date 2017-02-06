@@ -1,151 +1,135 @@
-<h2>{{title}}</h2>
-<form name="kiosk" ng-submit="step === 3 && kiosk.$valid && kioskCreate(kiosk)" novalidate>
-  <div ng-show="step === 1">
-    <div class="form-group">
-      <label for="list" translate>Choose the list</label>
-      <ui-select ng-model="list.list" name="list" theme="bootstrap" style="min-width: 300px;" required>
-        <ui-select-match placeholder="Select a list">{{$select.selected.name}}</ui-select-match>
-        <ui-select-choices refresh="getLists($select.search)" repeat="list in lists">
-          {{list.name}}
-        </ui-select-choices>
-      </ui-select>
-      <div class="clearfix">
-        <div ng-messages="kiosk.list.$error" ng-show="step1clicked == true" ng-messages-multiple="ng-messages-multiple">
-          <div ng-messages-include="app/common/messages.html"></div>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
+    <div class="page-header">
+      <h1 class="page-header__heading">{{title}}</h1>
+    </div>
+
+    <form name="kiosk" ng-submit="step === 3 && kiosk.$valid && kioskCreate(kiosk)" novalidate>
+      <div ng-show="step === 1">
+        <div class="form-field">
+          <label for="list" translate>Choose the list</label>
+          <ui-select ng-model="list.list" name="list" required>
+            <ui-select-match placeholder="Select a list">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices refresh="getLists($select.search)" repeat="list in lists">
+              {{list.name}}
+            </ui-select-choices>
+          </ui-select>
+          <div ng-messages="kiosk.list.$error" ng-show="step1clicked == true" ng-messages-multiple="ng-messages-multiple">
+            <div ng-messages-include="app/common/messages.html"></div>
+          </div>
+        </div>
+        <div class="form-field">
+          <button type="button" class="btn btn-primary" ng-click="setStep1Clicked() && kiosk.list.$valid && gotoStep(2)" translate>Next</button>
         </div>
       </div>
-    </div>
-    <div class="text-right">
-      <button type="button" class="btn btn-primary" ng-click="setStep1Clicked() && kiosk.list.$valid && gotoStep(2)" translate>Next &gt;</button>
-    </div>
-  </div>
-  <div ng-show="step === 2">
-    <div class="form-group" ng-class="{'has-error': kiosk.email.$touched && kiosk.email.$invalid}">
-      <label for="email" translate>Email</label>
-      <input type="email" name="email" class="form-control" id="email" placeholder="{{'Your email address'|translate}}" ng-model="user.email" required>
-      <div class="clearfix">
-        <div ng-messages="kiosk.email.$error" ng-show="step2clicked == true" ng-messages-multiple="ng-messages-multiple">
-          <div ng-messages-include="app/common/messages.html"></div>
+      <div ng-show="step === 2">
+        <div class="form-field" ng-class="{'has-error': kiosk.email.$touched && kiosk.email.$invalid}">
+          <label for="email" translate>Email</label>
+          <input type="email" name="email" class="form-control" id="email" placeholder="{{'Your email address'|translate}}" ng-model="user.email" required>
+          <div ng-messages="kiosk.email.$error" ng-show="step2clicked == true" ng-messages-multiple="ng-messages-multiple">
+            <div ng-messages-include="app/common/messages.html"></div>
+          </div>
+        </div>
+        <div class="form-field">
+          <button type="button" class="btn btn-primary" ng-click="setStep2Clicked() && kiosk.email.$valid && gotoStep(3)" translate>Next</button>
         </div>
       </div>
-    </div>
-    <div class="text-right">
-      <button type="button" class="btn btn-primary" ng-click="setStep2Clicked() && kiosk.email.$valid && gotoStep(3)" translate>Next &gt;</button>
-    </div>
-  </div>
-  <div ng-show="step === 3">
-    <div class="panel panel-default" ng-if="!user._id">
-      <div class="panel-heading">
-        <h3 class="panel-title" translate>Enter your personal details</h3>
-      </div>
-      <div class="panel-body">
-        <div class="form-group" ng-class="{'has-error': kiosk.given_name.$touched && kiosk.given_name.$invalid}">
-          <label for="given_name" translate>First Name</label>
-          <input type="text" name="given_name" class="form-control" id="given_name" placeholder="{{'Your first name'|translate}}" ng-model="user.given_name" required>
-          <div class="clearfix">
+      <div ng-show="step === 3">
+        <div class="form-section" ng-if="!user._id">
+          <h3 class="form-section__heading" translate>Enter your personal details</h3>
+            <div class="form-field" ng-class="{'has-error': kiosk.given_name.$touched && kiosk.given_name.$invalid}">
+            <label for="given_name" translate>First Name</label>
+            <input type="text" name="given_name" class="form-control" id="given_name" placeholder="{{'Your first name'|translate}}" ng-model="user.given_name" required>
             <div ng-messages="kiosk.given_name.$error" ng-show="kiosk.given_name.$touched" ng-messages-multiple="ng-messages-multiple">
               <div ng-messages-include="app/common/messages.html"></div>
             </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="middle_name" translate>Middle Name</label>
-          <input type="text" class="form-control" id="middle_name" placeholder="{{'Your middle name'|translate}}" ng-model="user.middle_name">
-        </div>
-        <div class="form-group" ng-class="{'has-error': kiosk.family_name.$touched && kiosk.family_name.$invalid}">
-          <label for="family_name" translate>Last Name</label>
-          <input type="text" name="family_name" class="form-control" id="family_name" placeholder="{{'Your last name'|translate}}" ng-model="user.family_name" required>
-          <div class="clearfix">
-            <div ng-messages="kiosk.family_name.$error" ng-show="kiosk.family_name.$touched" ng-messages-multiple="ng-messages-multiple">
-              <div ng-messages-include="app/common/messages.html"></div>
+            <div class="form-field">
+              <label for="middle_name" translate>Middle Name</label>
+              <input type="text" class="form-control" id="middle_name" placeholder="{{'Your middle name'|translate}}" ng-model="user.middle_name">
+            </div>
+            <div class="form-field" ng-class="{'has-error': kiosk.family_name.$touched && kiosk.family_name.$invalid}">
+              <label for="family_name" translate>Last Name</label>
+              <input type="text" name="family_name" class="form-control" id="family_name" placeholder="{{'Your last name'|translate}}" ng-model="user.family_name" required>
+              <div ng-messages="kiosk.family_name.$error" ng-show="kiosk.family_name.$touched" ng-messages-multiple="ng-messages-multiple">
+                <div ng-messages-include="app/common/messages.html"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <p ng-if="user._id">You will be checked into {{list.list.name}}, {{user.name}}</p>
+        <p ng-if="user._id">You will be checked into {{list.list.name}}, {{user.name}}</p>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title" translate>Would you like to be checked out automatically ? If so, when ?</h3>
-      </div>
-      <div class="panel-body">
-      <div class="form-field form-inline-fields">
-          <input type="text" class="form-inline-fields__item" id="departureDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="auto bottom-right" ng-model="departureDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
-          <button type="button" class="btn-transparent" ng-click="showDatePicker()">
-            <icon name="calendar" text="Select a date"></icon>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title" translate>Where are you currently ?</h3>
-      </div>
-      <div class="panel-body">
-        <ui-select ng-model="user.location.country" name="country" theme="bootstrap" style="min-width:300px;" on-select="setRegions($item, $model)">
-          <ui-select-match placeholder="{{'Country'|translate}}">
-            {{$select.selected.name}}
-          </ui-select-match>
-          <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
-            {{country.name}}
-          </ui-select-choices>
-        </ui-select>
-        <ui-select ng-model="user.location.region" name="region" theme="bootstrap" style="min-width: 300px;">
-          <ui-select-match placeholder="{{'Region'|translate}}">
-            {{$select.selected.name}}
-          </ui-select-match>
-          <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
-            {{region.name}}
-          </ui-select-choices>
-        </ui-select>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Please make sure your information is accurate</h3>
-      </div>
-      <div class="panel-body">
-        <div class="form-group">
-          <label for="organization">Organization</label>
-          <ui-select ng-model="organization.list" name="organization" theme="bootstrap" style="min-width:300px;">
-            <ui-select-match placeholder="{{'Organization'|translate}}">
-              {{$select.selected.name}}
-            </ui-select-match>
-            <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
-              {{organization.name}}
-            </ui-select-choices>
-          </ui-select>
-        </div>
-        <div class="form-group">
-          <label for="jobTitle">Job Title</label>
-          <input type="text" class="form-control" id="jobTitle" ng-model="user.job_title" placeholder="Job Title">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <div class="row">
-            <div class="col-sm-3">
-              <select class="form-control" ng-model="user.phone_number_type">
-                <option value="Landline">Landline</option>
-                <option value="Mobile">Mobile</option>
-              </select>
-            </div>
-            <div class="col-sm-9">
-              <bc-phone-number name="phone_number" ng-model="user.phone_number" is-valid="isValidPhoneNumber" ng-class="{'has-error': user.phone_number && !isValidPhoneNumber, 'has-success': user.phone_number && isValidPhoneNumber}"></bc-phone-number>
-            </div>
+        <div class="form-section">
+          <h3 class="form-section__heading" translate>Would you like to be checked out automatically ? If so, when ?</h3>
+          <div class="form-field form-inline-fields">
+            <input type="text" class="form-inline-fields__item" id="departureDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="auto bottom-right" ng-model="departureDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
+            <button type="button" class="btn-transparent" ng-click="showDatePicker()">
+              <icon name="calendar" text="Select a date"></icon>
+            </button>
           </div>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Email">
-        </div>
-      </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary" ng-disabled="kiosk.$invalid || kioskCreating === true" translate>Register</button>
+        <div class="form-section">
+          <h3 class="form-section__heading" translate>Where are you currently ?</h3>
+          <div class="form-field">
+            <ui-select ng-model="user.location.country" name="country" theme="bootstrap" style="min-width:300px;" on-select="setRegions($item, $model)">
+              <ui-select-match placeholder="{{'Country'|translate}}">
+                {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
+                {{country.name}}
+              </ui-select-choices>
+            </ui-select>
+            <ui-select ng-model="user.location.region" name="region" theme="bootstrap" style="min-width: 300px;">
+              <ui-select-match placeholder="{{'Region'|translate}}">
+                {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
+                {{region.name}}
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="form-section__heading">Please make sure your information is accurate</h3>
+          <div class="form-field">
+            <label for="organization">Organization</label>
+            <ui-select ng-model="organization.list" name="organization" theme="bootstrap" style="min-width:300px;">
+              <ui-select-match placeholder="{{'Organization'|translate}}">
+                {{$select.selected.name}}
+              </ui-select-match>
+              <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+                {{organization.name}}
+              </ui-select-choices>
+            </ui-select>
+          </div>
+          <div class="form-field">
+            <label for="jobTitle">Job Title</label>
+            <input type="text" class="form-control" id="jobTitle" ng-model="user.job_title" placeholder="Job Title">
+          </div>
+          <div class="form-field">
+            <label for="phone">Phone</label>
+            <div class="row">
+              <div class="col-sm-3">
+                <select class="form-control" ng-model="user.phone_number_type">
+                  <option value="Landline">Landline</option>
+                  <option value="Mobile">Mobile</option>
+                </select>
+              </div>
+              <div class="col-sm-9">
+                <bc-phone-number name="phone_number" ng-model="user.phone_number" is-valid="isValidPhoneNumber" ng-class="{'has-error': user.phone_number && !isValidPhoneNumber, 'has-success': user.phone_number && isValidPhoneNumber}"></bc-phone-number>
+              </div>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Email">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" ng-disabled="kiosk.$invalid || kioskCreating === true" translate>Register</button>
+      </div>
+    </form>
   </div>
-</form>
-
+</div>

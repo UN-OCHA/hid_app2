@@ -202,6 +202,15 @@ em {
   display: none;
 }
 
+.collapse {
+  display: none;
+  visibility: hidden;
+}
+.collapse.in {
+  display: block;
+  visibility: visible;
+}
+
 @include media-query(sm) {
   h1 {
     @include font-size($large-font-size);
