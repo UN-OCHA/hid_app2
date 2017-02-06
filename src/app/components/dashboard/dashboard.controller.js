@@ -8,7 +8,7 @@
   DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'List', 'ListDataService', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
   function DashboardCtrl($scope, alertService, config, gettextCatalog, List, ListDataService, Service, User, UserCheckInService, UserDataService) {
-    $scope.tabs = {}
+    $scope.tabs = {};
     $scope.activeTab = 'favorites';
     $scope.listsMember = [];
     $scope.listsOwnedOrManaged = [];
@@ -58,23 +58,22 @@
     };
 
     $scope.leaveList = function (list) {
-
       alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-        var checkInId = 0;
-        for (var i = 0, len = $scope.currentUser[list.type + 's'].length; i < len; i++) {
-          if (angular.equals(list._id, $scope.currentUser[list.type + 's'][i].list._id)) {
-            checkInId = $scope.currentUser[list.type + 's'][i]._id;
+        var checkInId;
+        angular.forEach($scope.currentUser[list.type + 's'], function (userList) {
+          if (list._id === userList.list) {
+            checkInId = userList._id;
           }
-        }
-        if (checkInId !== 0) {
-          UserCheckInService.delete({userId: $scope.currentUser._id, listType: list.type + 's', checkInId: checkInId}, {}, function() {
+        });
+        if (checkInId) {
+          UserCheckInService.delete({userId: $scope.currentUser._id, listType: list.type + 's', checkInId: checkInId}, {}, function(user) {
             alertService.add('success', gettextCatalog.getString('Successfully removed from list.'));
             $scope.listsMember.splice($scope.listsMember.indexOf(list), 1);
             UserDataService.notify();
+            $scope.setCurrentUser(user);
           });
         }
       });
-
     };
 
     $scope.deleteList = function (list) {
@@ -88,7 +87,7 @@
     $scope.toggleTabs = function(tabName) {
       $scope.tabs[tabName] = !$scope.tabs[tabName];
       $scope.activeTab = tabName;
-    }
+    };
 
     $scope.tabClass = function (tabName) {
       var classes = [];
@@ -99,7 +98,7 @@
         classes.push('desktop-active');
       }
       return classes;
-    }
+    };
 
     $scope.unsubscribe = function (subscription) {
       var service = new Service(subscription.service);
