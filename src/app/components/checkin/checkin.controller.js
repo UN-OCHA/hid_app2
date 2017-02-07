@@ -5,9 +5,9 @@
     .module('app.checkin')
     .controller('CheckinCtrl', CheckinCtrl);
 
-  CheckinCtrl.$inject = ['$scope', '$routeParams', '$filter', '$q', '$location', '$uibModal', 'gettextCatalog', 'config', 'alertService', 'User', 'UserCheckInService', 'List', 'Service'];
+  CheckinCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$filter', '$q', '$location', '$uibModal', 'gettextCatalog', 'config', 'alertService', 'User', 'UserDataService', 'UserCheckInService', 'List', 'Service'];
 
-  function CheckinCtrl ($scope, $routeParams, $filter, $q, $location, $uibModal, gettextCatalog, config, alertService, User, UserCheckInService, List, Service) {
+  function CheckinCtrl ($exceptionHandler, $scope, $routeParams, $filter, $q, $location, $uibModal, gettextCatalog, config, alertService, User, UserDataService, UserCheckInService, List, Service) {
     $scope.request = $routeParams;
     $scope.organization = {};
     $scope.selectedLists = [];
@@ -39,10 +39,10 @@
           label = 'Group';
         }
         if (listType === 'functional_role') {
-          label = 'Role'
+          label = 'Role';
         }
         if (listType === 'office') {
-          label = 'Co-ordination hub'
+          label = 'Co-ordination hub';
         }
         if (listType === 'list') {
           return;
@@ -61,7 +61,8 @@
       angular.forEach(config.listTypes, function (listType) {
         angular.forEach(user[listType + 's'], function (userList) {
           if (list._id === userList.list._id) {
-            return inList = true;
+            inList = true;
+            return inList;
           }
         });
       });
@@ -72,7 +73,8 @@
       var listSelected = false;
       angular.forEach(selectedLists, function(selectedList) {
         if (list._id === selectedList._id) {
-          return listSelected = true;
+          listSelected = true;
+          return listSelected;
         }
       });
       return listSelected;
@@ -88,12 +90,12 @@
     function getAssociatedLists (operations) {
       var promises = [];
        angular.forEach(operations, function(operationId) {
-        promises.push(List.query({limit: 20, 'metadata.operation.id' : operationId}).$promise)
-      })
+        promises.push(List.query({limit: 20, 'metadata.operation.id' : operationId}).$promise);
+      });
       return $q.all(promises).then(function(data) {
         return data;
       }, function (error) {
-        $log.error(error);
+        $exceptionHandler(error, 'getAssociatedLists');
       });
     }
 
@@ -107,7 +109,7 @@
         List.query({name: searchTerm, limit: 20}, function (lists) {
           $scope.associatedLists = filterLists(lists, $scope.selectedLists, $scope.user);
         });
-        return
+        return;
       }
 
       //Otherwise user the associated operations
@@ -119,10 +121,12 @@
 
     function getUser () {
       var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
-      User.get({userId: userId}, function (user) {
-        $scope.user = angular.copy(user);
+      UserDataService.getUser(userId, function () {
+        $scope.user = UserDataService.user;
         $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
-        $scope.$broadcast('userLoaded');
+        $scope.$broadcast('userLoaded'); 
+      }, function (error) {
+        $exceptionHandler(error, 'getUser');
       });
     }
     
@@ -146,7 +150,7 @@
     $scope.addList = function (list) {
       $scope.selectedLists.push(list);
       $scope.associatedLists.splice($scope.associatedLists.indexOf(list), 1);
-    }
+    };
 
     $scope.selectList = function (list) {
       $scope.selectedLists.push(list);
@@ -174,7 +178,7 @@
               return list._id.toString();
             });
 
-            Service.getSuggestions(listIds.join(','), $scope.currentUser).$promise.then(function (services) {
+            Service.getSuggestions(listIds.join(','), $scope.currentUser).$promise.then(function () {
               if (Service.suggestedServices.length) {
                 $location.path('services/suggestions').search({lists: listIds.join(',') });
                 return;
@@ -249,6 +253,7 @@
 
       if (data.status === 'success') {
         alertService.add('success', data.message);
+        UserDataService.formatUserLocations();
 
         if (data.type === 'primaryOrganization') {
           $scope.modifications.organization = 'Changed primary organization to: ' + $scope.user.organization.name;
@@ -290,11 +295,11 @@
       }, function () {
         return;
       });
-    }
+    };
 
     $scope.closeListTypesModal = function () {
       listTypesModal.close();
-    }
+    };
 
     function init() {
       getUser();

@@ -16,6 +16,7 @@ module.exports = function(config) {
     files: [
         'bower_components/angular/angular.min.js',
         'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/karma-read-json/karma-read-json.js',
         'bower_components/angular-gettext/dist/angular-gettext.min.js',
         'bower_components/angular-route/angular-route.min.js',
         'bower_components/angular-resource/angular-resource.min.js',
@@ -45,7 +46,8 @@ module.exports = function(config) {
         'app/components/**/*.controller.js',
         'app/components/**/*.service.js',
         'app/components/**/*.directive.js',
-        'app/components/**/*.tests.js'
+        'app/components/**/*.tests.js',
+        {pattern: 'app/test-fixtures/**/*.json', included: false},
     ],
 
 
