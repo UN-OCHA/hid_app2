@@ -67,7 +67,7 @@
 }
 
 .modal-header {
-  padding-bottom: $base-unit*1.5;
+  padding-bottom: $base-unit;
   border-bottom: 1px solid $primary-color;
 }
 
@@ -77,6 +77,9 @@
 
 .modal-title {
   margin: 0;
+  color: $dark-blue;
+  font-family: $heading-font-light;
+  @include font-size($medium-font-size);
 }
 
 .modal-body {
@@ -164,6 +167,10 @@
   .modal-body__content {
     h1, h2, h3, h4, p {
       @include font-size($base-font-size);
+    }
+
+    p {
+      margin-bottom: $base-unit*2;
     }
   }
 

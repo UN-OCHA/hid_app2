@@ -9,6 +9,36 @@
 
   function ListDataService($rootScope, $localForage, List) {
     var filters = {}, lists = {}, request = {};
+    var listTypes = [
+      {
+        key: 'operation',
+        val: 'Operation'
+      },
+      {
+        key: 'bundle',
+        val: 'Group'
+      },
+      {
+        key: 'organization',
+        val: 'Organization'
+      },
+      {
+        key: 'disaster',
+        val: 'Disaster'
+      },
+      {
+        key: 'functional_role',
+        val: 'Role'
+      },
+      {
+        key: 'office',
+        val: 'Co-ordination hub'
+      },
+      {
+        key: 'list',
+        val: 'Custom'
+      }
+    ];
 
     return {
       addFilter: function(key, val, notify) {
@@ -80,6 +110,18 @@
 
       notify: function () {
         $rootScope.$emit('lists-updated-event');
+      },
+
+      listTypes: listTypes,
+
+      setListTypeLabel: function (list) {
+        var listType = listTypes.find(function (type) {
+          return type.key === list.type;
+        });
+        if (listType) {
+          list.displayType = listType.val;
+        }
+        return list;
       }
     };
   }

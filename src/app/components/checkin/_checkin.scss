@@ -1,6 +1,6 @@
 .checkin-types {
   background: $light-grey;
-  padding: 0 $base-unit/2;
+  padding: $base-unit/2;
   margin-bottom: $base-unit*1.5;
 }
 
@@ -17,7 +17,6 @@
 
 .associated-lists__heading, .associated-lists__button {
   font-family: $heading-font-light;
-  
   font-style: italic;
   text-transform: none;
 }

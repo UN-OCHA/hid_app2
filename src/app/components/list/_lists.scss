@@ -3,6 +3,11 @@
 	font-family: $heading-font-light;
 	padding: $base-unit/4 $base-unit/2;
 	color: $text-light;
+	display: inline-block;
+
+	&.list-type--all {
+		color: $text-dark;
+	}
 
 	&.list-type--operation {
 		background: $list-color-operation;
@@ -27,5 +32,24 @@
 		background: $list-color-office;
 	}
 
-}
+	.page-header & {
+		margin-top: $base-unit;
+	}
 
+	&.clickie-label {
+		padding: $base-unit/4 $base-unit*.75 $base-unit/4 $base-unit*3.5;
+		height: $base-unit*3;
+		@include font-size($small-font-size);
+		border-radius: $base-unit*2 0 0 $base-unit*2;
+    margin: $base-unit/2 $base-unit $base-unit/2 0;
+
+		&:before {
+			left: $base-unit/4;
+		}
+	}
+}
+input:checked + .clickie-label.list-type {
+	&:after {
+		left: $base-unit*.75;
+	}
+}

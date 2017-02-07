@@ -9,18 +9,35 @@
 <div class="modal-body" id="modal-body">
   <div class="modal-body__content">
     <p translate>You can check into different types of contact lists. To easier find the ones you want to check in, choose a type of list first. These are the different types:</p>
-    <h4 translate>Operations</h4>
+    <h4>
+      <span class="list-type list-type--operation" translate>Operation</span>
+    </h4>
     <p translate>Operations usually refer to single countries, like Afghanistan or Iraq. In some cases they also refer to a bigger humanitarian response across borders, for example the Whole of Syria.</p>
-    <h4 translate>Groups</h4>
+    <h4>
+      <span class="list-type list-type--bundle" translate>Group</span>
+    </h4>
     <p translate>Groups can be clusters, sectors or simply working groups that are set up in a specific country to facilitate coordination among humanitarian partners.</p>
-    <h4 translate>Disasters</h4>
+    <h4>
+      <span class="list-type list-type--disaster" translate>Disaster</span>
+    </h4>
     <p translate>Disasters usually refer to sudden-onset emergencies in a country or region. The Nepal Earthquake, the Haiti Hurricane Matthew or the floods in the Balkans are just a few examples.</p>
-    <h4 translate>Organizations</h4>
+    <h4>
+      <span class="list-type list-type--organization" translate>Organization</span>
+    </h4>
     <p translate>You should only check into an organization that you belong to. All organizations are moderated, i.e. your check-in will have to be approved by a Humanitarian ID manager.</p>
-    <h4 translate>Roles</h4>
+    <h4>
+      <span class="list-type list-type--functional_role" translate>Role</span>
+    </h4>
     <p translate>Roles are functional positions used in a humanitarian response. Very common roles are the Humanitarian Coordinator, Information Management Officers or UNDAC members for example. As for organizations, these check-ins are moderated.</p>
-    <h4 translate>Co-ordination hub</h4>
+    <h4>
+      <span class="list-type list-type--office" translate>Co-ordination hub</span>
+    </h4>
     <p translate>A co-ordination hub is an area that does not correspond to official administrative boundaries. Instead it is hub (usually a bigger city) where coordination takes place. Often times, an OSOCC is set up in a sudden-onset disaster and becomes the co-ordination hub a few weeks after the disaster strikes.</p>
-    <button type="button" class="btn-primary" ng-click="closeListTypesModal()" translate="">Close</button>
+
+    <div class="row">
+      <div class="col-xs-6 col-sm-4 offset-xs-3 offset-sm-4">
+        <button type="button" class="btn-primary btn-block" ng-click="closeListTypesModal()" translate="">Close</button>
+      </div>
+    </div>
   </div>
 </div>

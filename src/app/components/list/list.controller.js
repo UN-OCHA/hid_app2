@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$uibModal', '$timeout', '$localForage', 'config', 'List', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
-
-  function ListCtrl ($scope, $rootScope, $routeParams, $location, $uibModal, $timeout, $localForage, config, List, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
+  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$uibModal', '$timeout', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
+  
+  function ListCtrl ($scope, $rootScope, $routeParams, $location, $uibModal, $timeout, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -40,15 +40,15 @@
 
     $scope.$on('user-service-ready', function() {
 
-
       $scope.list = List.get({'listId': $routeParams.list});
       var listCallback = function () {
         $scope.listLoaded = true;
+
         if (!$scope.list.visible) {
           return;
         }
+        ListDataService.setListTypeLabel($scope.list);
         populateList();
-
         checkInStatus();
 
         angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {

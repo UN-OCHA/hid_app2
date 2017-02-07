@@ -26,36 +26,7 @@
     var currentSortOrder = $scope.request.name;
     ListDataService.setRequest($scope.request);
 
-    $scope.listTypes = [
-      {
-        key: 'operation',
-        val: 'Operation'
-      },
-      {
-        key: 'bundle',
-        val: 'Group'
-      },
-      {
-        key: 'organization',
-        val: 'Organization'
-      },
-      {
-        key: 'disaster',
-        val: 'Disaster'
-      },
-      {
-        key: 'functional_role',
-        val: 'Role'
-      },
-      {
-        key: 'office',
-        val: 'Co-ordination hub'
-      },
-      {
-        key: 'list',
-        val: 'Custom'
-      }
-    ];
+    $scope.listTypes = ListDataService.listTypes;
 
     $scope.sortBy = [
       {
@@ -72,12 +43,7 @@
       var listType;
 
       angular.forEach(lists, function (list) {
-        listType = $scope.listTypes.find(function (type) {
-          return type.key === list.type;
-        });
-        if (listType) {
-          list.displayType = listType.val;
-        }
+        ListDataService.setListTypeLabel(list);
       });
     }
 

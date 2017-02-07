@@ -16,12 +16,12 @@
 
       <div class="form-inline-fields form-inline-fields--clickies checkin-types">
         <p><input type="radio" name="listTypes" id="all" ng-model="selectedTypes.name" value="all" checked="checked" />
-        <label for="all" class="clickie-label">All</label>
+        <label for="all" class="clickie-label list-type list-type--all">All</label>
         </p>
 
         <p ng-repeat="type in listTypes">
           <input type="radio" name="listTypes" id="{{type.name}}" ng-model="selectedTypes.name" value="{{type.name}}" />
-          <label for="{{type.name}}" class="clickie-label">{{type.label}}</label>
+          <label for="{{type.name}}" class="clickie-label list-type list-type--{{type.name}}">{{type.label}}</label>
         </p>
       </div>
 

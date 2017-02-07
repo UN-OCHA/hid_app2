@@ -8,6 +8,7 @@
 
 <div class="page-header" ng-if="list.visible">
   <h1 class="page-header__heading">{{list.name}}</h1>
+  <p><span class="list-type list-type--{{list.type}}">{{list.displayType}}</span></p>
 </div>
 
 <div class="row" ng-if="listLoaded && !list.visible">
