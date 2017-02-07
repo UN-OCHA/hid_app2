@@ -8,8 +8,6 @@
   CheckinCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$filter', '$q', '$location', '$uibModal', 'gettextCatalog', 'config', 'alertService', 'User', 'UserDataService', 'UserCheckInService', 'List', 'Service'];
 
   function CheckinCtrl ($exceptionHandler, $scope, $routeParams, $filter, $q, $location, $uibModal, gettextCatalog, config, alertService, User, UserDataService, UserCheckInService, List, Service) {
-    $scope.request = $routeParams;
-    $scope.organization = {};
     $scope.selectedLists = [];
     $scope.modifications = {};
     $scope.listTypes = [];
@@ -60,7 +58,7 @@
       var inList = false;
       angular.forEach(config.listTypes, function (listType) {
         angular.forEach(user[listType + 's'], function (userList) {
-          if (list._id === userList.list._id) {
+          if (list._id === userList.list) {
             inList = true;
             return inList;
           }
@@ -161,7 +159,7 @@
       $scope.selectedLists.splice($scope.selectedLists.indexOf(list), 1);
     };
 
-    $scope._checkinHelper = function () {
+    $scope.checkin = function () {
       var defer = $q.defer();
       var promises = [];
 
@@ -211,33 +209,10 @@
           promises.push(checkinOneList(value));
       });
 
-      $q.all(promises).then(lastTask);
-    };
-
-    // Check user in in the lists selected
-    $scope.checkin = function () {
-      var checkinUser = {};
-      if ($scope.organization.list && (!$scope.user.organization.list || $scope.organization.list._id != $scope.user.organization.list._id)) {
-        checkinUser = {
-          list: $scope.organization.list._id,
-        };
-        if ($scope.user.organization.list) {
-          // Check out from the old organization
-          UserCheckInService.delete({userId: $scope.user._id, listType: 'organization', checkInId: $scope.user.organization._id}, {}, function () {
-            UserCheckInService.save({userId: $scope.user._id, listType: 'organization'}, checkinUser, function () {
-              $scope._checkinHelper();
-            });
-          });
-        }
-        else {
-          UserCheckInService.save({userId: $scope.user._id, listType: 'organization'}, checkinUser, function () {
-            $scope._checkinHelper();
-          });
-        }
-      }
-      else {
-        $scope._checkinHelper();
-      }
+      $q.all(promises).then(lastTask, function (error) {
+        alertService.add('danger', 'Unable to check in');
+        $exceptionHandler(error, 'Checkin');
+      });
     };
 
     $scope.showDatePicker = function() {
