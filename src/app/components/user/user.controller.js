@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$scope', '$routeParams', '$timeout', '$location', 'gettextCatalog', 'alertService', 'md5', 'User', 'config'];
+  UserCtrl.$inject = ['$scope', '$routeParams', '$timeout', '$location', '$localForage', 'gettextCatalog', 'alertService', 'md5', 'User', 'config'];
 
-  function UserCtrl($scope, $routeParams, $timeout, $location, gettextCatalog, alertService, md5, User, config) {
+  function UserCtrl($scope, $routeParams, $timeout, $location, $localForage, gettextCatalog, alertService, md5, User, config) {
     $scope.pictureUrl = '';
     $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin || $scope.currentUser.isManager);
     $scope.showProfileForm  = $routeParams.edit && $scope.canEditUser ? true : false;
@@ -97,16 +97,22 @@
       orderByPrimary('jobTitle', user.job_titles, user.job_title);
     }
 
-    User.get({userId: $routeParams.userId}).$promise.then(function (user) {
+    function loadUser (user) {
       $scope.user = user;
-
-      user.$httpPromise.then(function () {
-        orderPrimaryFields($scope.user);
-      });
-
+      orderPrimaryFields($scope.user);
       userPicture(user.picture, user.email);
-
       $scope.$broadcast('userLoaded');
+    }
+
+    User.get({userId: $routeParams.userId}).$promise.then(function (user) {
+      $localForage.setItem('user/' + user.id, user);
+      loadUser(user);
+    })
+    .catch(function (err) {
+      $localForage.getItem('user/' + $routeParams.userId).then(function (user) {
+        console.log('pulled from cache');
+        loadUser(user);
+      });
     });
 
     //Listen for user edited event

@@ -5,9 +5,9 @@
     .module('app.list')
     .factory('List', List);
 
-  List.$inject = ['$cachedResource', 'config', 'User'];
+  List.$inject = ['$cachedResource', '$localForage', 'config', 'User'];
 
-  function List ($cachedResource, config, User) {
+  function List ($cachedResource, $localForage, config, User) {
     var List = $cachedResource('list', config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
       'save': {
@@ -46,11 +46,16 @@
         if (users.length > 49) {
           // There is another page of data
           request.offset = request.offset + 50;
-          User.query(request).$httpPromise.then(recursiveFunction);
+          User.query(request).$promise.then(function (users) {
+            for (var i = 0; i < users.length; i++) {
+              $localForage.setItem('user/' + users[i].id, users[i]);
+            }
+            recursiveFunction(users);
+          });
         }
-      }
+      };
       request[this.type + 's.list'] = this._id;
-      User.query(request).$httpPromise.then(recursiveFunction);
+      User.query(request).$promise.then(recursiveFunction);
     };
 
     List.prototype.associatedOperations = function () {
@@ -71,7 +76,7 @@
       angular.forEach(this.metadata.operation, function(operation) {
         operationIds.push(operation.id);
       });
-      
+
       return operationIds;
     }
 

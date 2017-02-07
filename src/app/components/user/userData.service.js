@@ -24,7 +24,7 @@
     };
 
     UserDataService.getHttpUsers = function (users, list) {
-      return users.$httpPromise.then(function (response) {
+      return users.$promise.then(function (response) {
         UserDataService.listUsers = list ? transformUsers(response, list) : response;
         UserDataService.listUsersTotal = response.headers["x-total-count"];
         return;
@@ -35,13 +35,14 @@
 
     UserDataService.getUsers = function (params, list, callback) {
       // cached resource is returned immediately
-      return User.query(params).$promise.then(function (response) {
+      return User.query(params, function (response, headers) {
+        console.log(headers());
         UserDataService.listUsers = list ? transformUsers(response, list) : response;
-        UserDataService.listUsersTotal = response.headers["x-total-count"];
-        
+        UserDataService.listUsersTotal = headers()["x-total-count"];
+
         // transform users again when the http response resolves so don't lose changes
         // otherwise it overwrites them
-        UserDataService.getHttpUsers(response, list);
+        //UserDataService.getHttpUsers(response, list);
         return callback();
       });
     };

@@ -5,15 +5,14 @@
   .module('app.user')
   .factory('User', User);
 
-  User.$inject = ['$cachedResource', '$http', '$location', '$window', 'config'];
+  User.$inject = ['$resource', '$http', '$location', '$window', 'config'];
 
-  function User($cachedResource, $http, $location, $window, config) {
+  function User($resource, $http, $location, $window, config) {
 
-   var User = $cachedResource('users', config.apiUrl + 'user/:userId', {userId: '@_id'},
+   var User = $resource(config.apiUrl + 'user/:userId', {userId: '@_id'},
    {
     'save': {
-      method: 'POST',
-      cache: false
+      method: 'POST'
     },
     'remove': {
       method: 'DELETE',
@@ -162,7 +161,7 @@
       var hidMeta = {
         hid: param
       };
-   
+
       if (!this.appMetadata) {
         this.appMetadata = {
           hid: param

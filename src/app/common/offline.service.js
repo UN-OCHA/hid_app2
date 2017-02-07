@@ -23,8 +23,8 @@
       angular.forEach(config.listTypes, function (listType) {
 
         angular.forEach(user[listType + 's'], function (userList) {
-          if (userList.list && userList.list._id) {
-            List.get({listId: userList.list._id}).$httpPromise.then(function (list) {
+          if (userList.list) {
+            List.get({listId: userList.list}).$httpPromise.then(function (list) {
               list.cache();
             });
           }
@@ -37,14 +37,13 @@
       // Cache user lists for offline use
       cacheListsForUser: function (user) {
         // Make sure we are online to do the caching
-        return;
-        /*if (Offline.state === 'up') {
+        if (Offline.state === 'up') {
           $log.info('Starting Offline caching');
           getFavouriteLists(user);
           getUserLists(user);
           return;
         }
-        $log.info('Not doing offline caching:  we are offline');*/
+        $log.info('Not doing offline caching:  we are offline');
       }
     };
 
