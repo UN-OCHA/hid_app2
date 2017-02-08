@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
+var app = angular.module('hidApp', ['ngRoute', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
 
 app.constant('config', env);
 
@@ -32,7 +32,7 @@ app.run(function ($rootScope) {
 
 // Check if user is authenticated for paths which require it
 app.run(function ($rootScope, $window, $location, AuthService, alertService) {
-  
+
   $rootScope.isAuthenticated = false;
   $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
     var user = JSON.parse($window.localStorage.getItem('currentUser'));
@@ -367,6 +367,21 @@ app.config(function ($provide) {
         $delegate(exception, cause);
       };
     });
+});
+
+app.config(['$localForageProvider', function ($localForageProvider) {
+  $localForageProvider.config({
+      driver      : 'asyncStorage', // if you want to force a driver
+      name        : 'users', // name of the database and prefix for your data, it is "lf" by default
+      storeName   : 'users', // name of the table
+  });
+}]);
+
+app.run(function ($localForage) {
+  $localForage.createInstance({
+    name: 'lists',
+    storeName: 'lists'
+  });
 });
 
 // Configure xeditable

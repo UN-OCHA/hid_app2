@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListsCtrl', ListsCtrl);
 
-  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'List', 'SearchService'];
+  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'SearchService'];
 
-  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, gettextCatalog, hrinfoService, alertService, ListDataService, List, SearchService) {
+  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, SearchService) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -81,14 +81,10 @@
       });
     }
 
-    var queryCallback = function (resp) {
-      $scope.totalItems = resp.headers["x-total-count"];
-      formatTypes(resp);
+    var queryCallback = function (lists, headers) {
+      $scope.totalItems = headers()["x-total-count"];
+      formatTypes(lists);
       $scope.listsLoaded = true;
-
-      resp.$httpPromise.then(function (lists) {
-        formatTypes(lists);
-      });
     };
 
     ListDataService.subscribe($scope, function () {
@@ -96,7 +92,12 @@
       $scope.pageChanged();
     });
 
-    $scope.lists = List.query($scope.request, queryCallback);
+    ListDataService.queryLists($scope.request, function (lists, number) {
+      $scope.lists = lists;
+      $scope.totalItems = number;
+      formatTypes($scope.lists);
+      $scope.listsLoaded = true;
+    });
 
     $rootScope.$on('sidebar-closed', function () {
       $scope.selectedFilters = angular.copy($scope.listFilters);

@@ -50,7 +50,6 @@
       $exceptionHandler(error, 'getUser');
     });
 
-
     //Listen for user edited event
     $scope.$on('editUser', function (event, data) {
       if (data.status === 'saving') {

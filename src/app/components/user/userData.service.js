@@ -5,9 +5,9 @@
     .module('app.user')
     .factory('UserDataService', UserDataService);
 
-  UserDataService.$inject = ['$rootScope', '$exceptionHandler', 'User'];
+  UserDataService.$inject = ['$rootScope', '$localForage', '$exceptionHandler', 'User'];
 
-  function UserDataService($rootScope, $exceptionHandler, User) {
+  function UserDataService($rootScope, $localForage, $exceptionHandler, User) {
 
     var UserDataService = {};
     UserDataService.listUsers = [];
@@ -24,41 +24,68 @@
       $rootScope.$emit('users-updated-event', request);
     };
 
-    UserDataService.getHttpUsers = function (users, list) {
-      return users.$httpPromise.then(function (response) {
-        UserDataService.listUsers = list ? transformUsers(response, list) : response;
-        UserDataService.listUsersTotal = response.headers["x-total-count"];
-        return;
-      }, function (error) {
-        $exceptionHandler(error, 'getHttpUsers');
-      });
+    // Belongs to list
+    UserDataService.userHasList = function (user, list) {
+      var out = false;
+      if (user[list.type + 's'] && user[list.type + 's'].length) {
+        for (var i = 0; i < user[list.type + 's'].length; i++) {
+          if (user[list.type + 's'][i].list === list._id) {
+            out = true;
+          }
+        }
+      }
+      return out;
     };
 
     UserDataService.getUsers = function (params, list, callback) {
       // cached resource is returned immediately
-      return User.query(params).$promise.then(function (response) {
+      return User.query(params, function (response, headers) {
         UserDataService.listUsers = list ? transformUsers(response, list) : response;
-        UserDataService.listUsersTotal = response.headers["x-total-count"];
-        
+        UserDataService.listUsersTotal = headers()["x-total-count"];
+
         // transform users again when the http response resolves so don't lose changes
         // otherwise it overwrites them
-        UserDataService.getHttpUsers(response, list);
         return callback();
-      });
-    };
-
-    UserDataService.getHttpUser = function (user) {
-      return user.$httpPromise.then(function (response) {
-        UserDataService.user = transformUser(response);
-      }, function (error) {
-        $exceptionHandler(error, 'getHttpUser');
+      }, function (response) {
+        // Indexeddb fallback
+        var lfusers = $localForage.instance('users');
+        var users = [], nbUsers = 0;
+        lfusers.iterate(function (user, key, index) {
+          if (!list) {
+            if (index > params.offset && index < params.offset + params.limit) {
+              users.push(user);
+            }
+            nbUsers++;
+          }
+          else {
+            if (UserDataService.userHasList(user, list)) {
+              nbUsers++;
+              if (nbUsers > params.offset && nbUsers < params.offset + params.limit) {
+                users.push(user);
+              }
+            }
+          }
+        })
+        .then(function () {
+          UserDataService.listUsers = users;
+          UserDataService.listUsersTotal = nbUsers;
+          return callback();
+        });
       });
     };
 
     UserDataService.getUser = function (userId, callback) {
-      return User.get({userId: userId}).$promise.then(function (response) {
-        UserDataService.user = transformUser(response);
-        UserDataService.getHttpUser(response);
+      User.get({userId: userId}).$promise.then(function (user) {
+        var lfusers = $localForage.instance('users');
+        lfusers.setItem(user.id, user);
+        UserDataService.user = transformUser(user);
+        return callback();
+      })
+      .catch(function (err) {
+        var lfusers = $localForage.instance('users');
+        lfusers.getItem(userId).then(function (user) {
+          UserDataService.user = transformUser(user);
+        });
         return callback();
       });
     };
@@ -168,7 +195,7 @@
     if (!primary) {
       return;
     }
-    angular.forEach(locations, function (location, index) {        
+    angular.forEach(locations, function (location, index) {
       if (angular.equals(location, primary)) {
         addTempLocationId(location, index);
         primary.tempId = location.tempId;

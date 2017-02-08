@@ -5,29 +5,24 @@
   .module('app.user')
   .factory('User', User);
 
-  User.$inject = ['$cachedResource', '$http', '$location', '$window', 'config'];
+  User.$inject = ['$resource', '$http', '$location', '$window', 'config'];
 
-  function User($cachedResource, $http, $location, $window, config) {
+  function User($resource, $http, $location, $window, config) {
 
-   var User = $cachedResource('users', config.apiUrl + 'user/:userId', {userId: '@_id'},
+   var User = $resource(config.apiUrl + 'user/:userId', {userId: '@_id'},
    {
     'save': {
-      method: 'POST',
-      cache: false
+      method: 'POST'
     },
     'remove': {
-      method: 'DELETE',
-      cache: false
+      method: 'DELETE'
     },
     'delete': {
-      method: 'DELETE',
-      cache: false
+      method: 'DELETE'
     },
     'update': {
       method: 'PUT',
-        // TODO: find a way to cache these requests, and fix https://github.com/goodeggs/angular-cached-resource/issues/72
-        cache: false
-      }
+    }
     });
 
     // Return current user checkin
@@ -162,7 +157,7 @@
       var hidMeta = {
         hid: param
       };
-   
+
       if (!this.appMetadata) {
         this.appMetadata = {
           hid: param
