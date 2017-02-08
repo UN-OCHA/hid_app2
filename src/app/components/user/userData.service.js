@@ -77,7 +77,6 @@
           }
         })
         .then(function () {
-          console.log(users.length);
           UserDataService.listUsers = users;
           UserDataService.listUsersTotal = nbUsers;
           return callback();
