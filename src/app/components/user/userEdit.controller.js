@@ -145,7 +145,9 @@
       angular.forEach($scope.user.locations, function (location) {
         delete location.tempId;
       });
-      delete $scope.user.location.tempId;
+      if ($scope.user.location) {
+        delete $scope.user.location.tempId;
+      }
       saveUpdatedUser(type, callback);
     }
 
