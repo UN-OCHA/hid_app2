@@ -23,16 +23,6 @@
       $rootScope.$emit('users-updated-event', request);
     };
 
-    UserDataService.getHttpUsers = function (users, list) {
-      return users.$promise.then(function (response) {
-        UserDataService.listUsers = list ? transformUsers(response, list) : response;
-        UserDataService.listUsersTotal = response.headers["x-total-count"];
-        return;
-      }, function (error) {
-        $log.error(error);
-      });
-    };
-
     // Belongs to list
     UserDataService.userHasList = function (user, list) {
       var out = false;
