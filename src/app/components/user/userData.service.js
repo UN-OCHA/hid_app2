@@ -84,7 +84,7 @@
       .catch(function (err) {
         var lfusers = $localForage.instance('users');
         lfusers.getItem(userId).then(function (user) {
-          transformUser(user);
+          UserDataService.user = transformUser(user);
         });
         return callback();
       });
@@ -195,7 +195,7 @@
     if (!primary) {
       return;
     }
-    angular.forEach(locations, function (location, index) {        
+    angular.forEach(locations, function (location, index) {
       if (angular.equals(location, primary)) {
         addTempLocationId(location, index);
         primary.tempId = location.tempId;
