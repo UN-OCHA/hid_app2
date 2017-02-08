@@ -63,6 +63,11 @@
 				</div>
 
 				<div class="form-field">
+          <label for="locality" class="sr-only" translate>Locality</label>
+          <input type="text" placeholder="{{'Type a locality' | translate}}" id="locality" ng-model="temp.location.locality">
+        </div>
+
+				<div class="form-field">
 					<button type="submit" 
 						class="btn-primary btn-block"
 						ng-click="addPrimaryLocation()"
