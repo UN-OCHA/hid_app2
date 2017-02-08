@@ -5,30 +5,25 @@
     .module('app.user')
     .factory('UserCheckInService', UserCheckInService);
 
-  UserCheckInService.$inject = ['$cachedResource', 'config'];
+  UserCheckInService.$inject = ['$resource', 'config'];
 
-  function UserCheckInService($cachedResource, config) {
+  function UserCheckInService($resource, config) {
 
-    return $cachedResource('userCheckins', config.apiUrl + 'user/:userId/:listType/:checkInId', {},
+    return $resource(config.apiUrl + 'user/:userId/:listType/:checkInId', {},
       {
-       'save': {
-         method: 'POST',
-         cache: false
-       },
-       'remove': {
-         method: 'DELETE',
-         cache: false
-       },
-       'delete': {
-         method: 'DELETE',
-         cache: false
-       },
-       'update': {
-         method: 'PUT',
-           // TODO: find a way to cache these requests, and fix https://github.com/goodeggs/angular-cached-resource/issues/72
-           cache: false
-         }
-       }
+        'save': {
+          method: 'POST'
+        },
+        'remove': {
+          method: 'DELETE'
+        },
+        'delete': {
+          method: 'DELETE'
+        },
+        'update': {
+          method: 'PUT'
+        }
+      }
      );
 
   }

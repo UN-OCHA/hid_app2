@@ -5,9 +5,9 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$cachedResource', '$http', '$window', '$rootScope', '$interval', '$location', 'config', 'offlineService', 'notificationsService'];
+  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', '$location', 'config', 'offlineService', 'notificationsService'];
 
-  function AuthService ($cachedResource, $http, $window, $rootScope, $interval, $location, config, offlineService, notificationsService) {
+  function AuthService ($http, $window, $rootScope, $interval, $location, config, offlineService, notificationsService) {
 
     function storeUser (response) {
       try {
@@ -80,7 +80,6 @@
       logout: function() {
         $window.localStorage.removeItem('jwtToken');
         $window.localStorage.removeItem('currentUser');
-        $cachedResource.clearCache();
         $interval.cancel($rootScope.offlinePromise);
         $interval.cancel($rootScope.notificationPromise);
       },
