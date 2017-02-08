@@ -77,12 +77,12 @@
     UserDataService.getUser = function (userId, callback) {
       User.get({userId: userId}).$promise.then(function (user) {
         var lfusers = $localForage.instance('users');
-        lfusers.setItem(user.id, user, function (err) {
-          if (err) {
-            $exceptionHandler(err, 'Failed to write to Indexeddb');
-          }
+        lfusers.setItem(user.id, user).then(function () {
           UserDataService.user = transformUser(user);
           return callback();
+        })
+        .catch(function (err) {
+          $exceptionHandler(err, 'Failed to write to Indexeddb');
         });
       })
       .catch(function (err) {

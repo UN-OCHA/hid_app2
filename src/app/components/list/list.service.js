@@ -50,10 +50,11 @@
           // There is another page of data
           User.query(request).$promise.then(function (users) {
             for (var i = 0; i < users.length; i++) {
-              lfusers.setItem(users[i].id, users[i], function (err) {
-                if (err) {
+              lfusers.setItem(users[i].id, users[i]).then(function () {
+
+              })
+              .catch(function (err) {
                   $exceptionHandler(err, 'Failed to write to Indexeddb');
-                }
               });
             }
             request.offset = request.offset + 50;
