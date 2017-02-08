@@ -5,9 +5,9 @@
     .module('app.list')
     .factory('List', List);
 
-  List.$inject = ['$resource', '$localForage', 'config', 'User'];
+  List.$inject = ['$resource', '$localForage', '$exceptionHandler', 'config', 'User'];
 
-  function List ($resource, $localForage, config, User) {
+  function List ($resource, $localForage, $exceptionHandler, config, User) {
     var List = $resource(config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
       'save': {
@@ -40,13 +40,21 @@
       var lfusers = $localForage.instance('users');
       var lflists = $localForage.instance('lists');
       var request = { limit: 50, offset: 0, sort: 'name'};
-      lflists.setItem(this._id, this);
+      lflists.setItem(this._id, this, function (err) {
+        if (err) {
+          $exceptionHandler(err, 'Failed to write to Indexeddb');
+        }
+      });
       var recursiveFunction = function (users) {
         if (users.length > 49) {
           // There is another page of data
           User.query(request).$promise.then(function (users) {
             for (var i = 0; i < users.length; i++) {
-              lfusers.setItem(users[i].id, users[i]);
+              lfusers.setItem(users[i].id, users[i], function (err) {
+                if (err) {
+                  $exceptionHandler(err, 'Failed to write to Indexeddb');
+                }
+              });
             }
             request.offset = request.offset + 50;
             recursiveFunction(users);
