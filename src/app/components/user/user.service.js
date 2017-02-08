@@ -15,18 +15,14 @@
       method: 'POST'
     },
     'remove': {
-      method: 'DELETE',
-      cache: false
+      method: 'DELETE'
     },
     'delete': {
-      method: 'DELETE',
-      cache: false
+      method: 'DELETE'
     },
     'update': {
       method: 'PUT',
-        // TODO: find a way to cache these requests, and fix https://github.com/goodeggs/angular-cached-resource/issues/72
-        cache: false
-      }
+    }
     });
 
     // Return current user checkin

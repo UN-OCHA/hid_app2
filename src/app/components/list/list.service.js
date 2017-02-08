@@ -5,26 +5,22 @@
     .module('app.list')
     .factory('List', List);
 
-  List.$inject = ['$cachedResource', '$localForage', 'config', 'User'];
+  List.$inject = ['$resource', '$localForage', 'config', 'User'];
 
-  function List ($cachedResource, $localForage, config, User) {
-    var List = $cachedResource('list', config.apiUrl + 'list/:listId', {listId: '@_id'},
+  function List ($resource, $localForage, config, User) {
+    var List = $resource(config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
       'save': {
-        method: 'POST',
-        cache: false
+        method: 'POST'
       },
       'remove': {
-        method: 'DELETE',
-        cache: false
+        method: 'DELETE'
       },
       'delete': {
-        method: 'DELETE',
-        cache: false
+        method: 'DELETE'
       },
       'update': {
-        method: 'PUT',
-        cache: false
+        method: 'PUT'
       }
     });
 
@@ -41,15 +37,18 @@
 
     // Cache a list for future offline use
     List.prototype.cache = function () {
+      var lfusers = $localForage.instance('users');
+      var lflists = $localForage.instance('lists');
       var request = { limit: 50, offset: 0, sort: 'name'};
+      lflists.setItem(this._id, this);
       var recursiveFunction = function (users) {
         if (users.length > 49) {
           // There is another page of data
-          request.offset = request.offset + 50;
           User.query(request).$promise.then(function (users) {
             for (var i = 0; i < users.length; i++) {
-              $localForage.setItem('user/' + users[i].id, users[i]);
+              lfusers.setItem(users[i].id, users[i]);
             }
+            request.offset = request.offset + 50;
             recursiveFunction(users);
           });
         }

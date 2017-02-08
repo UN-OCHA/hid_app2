@@ -105,12 +105,13 @@
     }
 
     User.get({userId: $routeParams.userId}).$promise.then(function (user) {
-      $localForage.setItem('user/' + user.id, user);
+      var users = $localForage.instance('users');
+      users.setItem(user.id, user);
       loadUser(user);
     })
     .catch(function (err) {
-      $localForage.getItem('user/' + $routeParams.userId).then(function (user) {
-        console.log('pulled from cache');
+      var users = $localForage.instance('users');
+      users.getItem($routeParams.userId).then(function (user) {
         loadUser(user);
       });
     });

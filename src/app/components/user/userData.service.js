@@ -5,9 +5,9 @@
     .module('app.user')
     .factory('UserDataService', UserDataService);
 
-  UserDataService.$inject = ['$rootScope', '$log', 'User'];
+  UserDataService.$inject = ['$rootScope', '$log', '$localForage', 'User'];
 
-  function UserDataService($rootScope, $log, User) {
+  function UserDataService($rootScope, $log, $localForage, User) {
 
     var UserDataService = {};
     UserDataService.listUsers = [];
@@ -33,10 +33,22 @@
       });
     };
 
+    // Belongs to list
+    UserDataService.userHasList = function (user, list) {
+      var out = false;
+      if (user[list.type + 's'] && user[list.type + 's'].length) {
+        for (var i = 0; i < user[list.type + 's'].length; i++) {
+          if (user[list.type + 's'][i].list === list._id) {
+            out = true;
+          }
+        }
+      }
+      return out;
+    };
+
     UserDataService.getUsers = function (params, list, callback) {
       // cached resource is returned immediately
       return User.query(params, function (response, headers) {
-        console.log(headers());
         UserDataService.listUsers = list ? transformUsers(response, list) : response;
         UserDataService.listUsersTotal = headers()["x-total-count"];
 
@@ -44,6 +56,32 @@
         // otherwise it overwrites them
         //UserDataService.getHttpUsers(response, list);
         return callback();
+      }, function (response) {
+        // Indexeddb fallback
+        var lfusers = $localForage.instance('users');
+        var users = [], nbUsers = 0;
+        lfusers.iterate(function (user, key, index) {
+          if (!list) {
+            if (index > params.offset && index < params.offset + params.limit) {
+              users.push(user);
+            }
+            nbUsers++;
+          }
+          else {
+            if (UserDataService.userHasList(user, list)) {
+              nbUsers++;
+              if (nbUsers > params.offset && nbUsers < params.offset + params.limit) {
+                users.push(user);
+              }
+            }
+          }
+        })
+        .then(function () {
+          console.log(users.length);
+          UserDataService.listUsers = users;
+          UserDataService.listUsersTotal = nbUsers;
+          return callback();
+        });
       });
     };
 

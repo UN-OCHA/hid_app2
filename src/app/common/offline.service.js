@@ -12,7 +12,7 @@
     function getFavouriteLists (user) {
       angular.forEach(user.favoriteLists, function (list) {
         if (list._id) {
-          List.get({listId: list._id}).$httpPromise.then(function (list) {
+          List.get({listId: list._id}).$promise.then(function (list) {
             list.cache();
           });
         }
@@ -24,7 +24,7 @@
 
         angular.forEach(user[listType + 's'], function (userList) {
           if (userList.list) {
-            List.get({listId: userList.list}).$httpPromise.then(function (list) {
+            List.get({listId: userList.list}).$promise.then(function (list) {
               list.cache();
             });
           }

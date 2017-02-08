@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$uibModal', '$timeout', 'List', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
+  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$uibModal', '$timeout', '$localForage', 'List', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
 
-  function ListCtrl ($scope, $rootScope, $routeParams, $location, $uibModal, $timeout, List, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
+  function ListCtrl ($scope, $rootScope, $routeParams, $location, $uibModal, $timeout, $localForage, List, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -71,7 +71,17 @@
           }
         });
       };
-      $scope.list.$promise.then(listCallback);
+      List.get({'listId': $routeParams.list}, function (list) {
+        $scope.list = list;
+        listCallback();
+      }, function (resp) {
+        // Offline fallback
+        var lflists = $localForage.instance('lists');
+        lflists.getItem($routeParams.list).then(function (list) {
+          $scope.list = list;
+          listCallback();
+        });
+      });
       $scope.usersAdded = {};
     });
 
@@ -172,7 +182,7 @@
             checkInId = list._id;
           }
         });
-        
+
         if (checkInId) {
           UserCheckInService.update({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {pending: false}, function () {
             alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));

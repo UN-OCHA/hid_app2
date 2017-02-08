@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListsCtrl', ListsCtrl);
 
-  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'List', 'SearchService'];
+  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'List', 'SearchService'];
 
-  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, gettextCatalog, hrinfoService, alertService, ListDataService, List, SearchService) {
+  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, List, SearchService) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -81,14 +81,10 @@
       });
     }
 
-    var queryCallback = function (resp) {
-      $scope.totalItems = resp.headers["x-total-count"];
-      formatTypes(resp);
+    var queryCallback = function (lists, headers) {
+      $scope.totalItems = headers()["x-total-count"];
+      formatTypes(lists);
       $scope.listsLoaded = true;
-
-      resp.$httpPromise.then(function (lists) {
-        formatTypes(lists);
-      });
     };
 
     ListDataService.subscribe($scope, function () {
@@ -96,7 +92,21 @@
       $scope.pageChanged();
     });
 
-    $scope.lists = List.query($scope.request, queryCallback);
+    $scope.lists = List.query($scope.request, queryCallback, function (resp) {
+      // Offline fallback
+      var lflists = $localForage.instance('lists');
+      lflists.iterate(function (list, key, index) {
+        if (index > $scope.request.offset && index < $scope.request.offset + $scope.request.limit) {
+          $scope.lists.push(list);
+        }
+      })
+      .then(function () {
+        formatTypes($scope.lists);
+        lflists.length().then(function (number) {
+          $scope.totalItems = number;
+        });
+      });
+    });
 
     $rootScope.$on('sidebar-closed', function () {
       $scope.selectedFilters = angular.copy($scope.listFilters);

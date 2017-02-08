@@ -369,6 +369,21 @@ app.config(function ($provide) {
     });
 });
 
+app.config(['$localForageProvider', function ($localForageProvider) {
+  $localForageProvider.config({
+      driver      : 'asyncStorage', // if you want to force a driver
+      name        : 'users', // name of the database and prefix for your data, it is "lf" by default
+      storeName   : 'users', // name of the table
+  });
+}]);
+
+app.run(function ($localForage) {
+  $localForage.createInstance({
+    name: 'lists',
+    storeName: 'lists'
+  });
+});
+
 // Configure xeditable
 app.run(function (editableOptions) {
   editableOptions.theme = 'bs3';
