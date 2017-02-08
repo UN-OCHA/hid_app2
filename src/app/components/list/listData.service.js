@@ -5,9 +5,9 @@
     .module('app.list')
     .factory('ListDataService', ListDataService);
 
-  ListDataService.$inject = ['$rootScope', 'List'];
+  ListDataService.$inject = ['$rootScope', '$localForage', 'List'];
 
-  function ListDataService($rootScope, List) {
+  function ListDataService($rootScope, $localForage, List) {
     var filters = {}, lists = {}, request = {};
 
     return {
@@ -36,6 +36,27 @@
         lists.length = 0;
         angular.merge(trequest, filters);
         lists = List.query(trequest, cb);
+      },
+
+      queryLists: function (request, cb) {
+        List.query(request, function (lists, headers) {
+          var count = headers()['x-total-count'];
+          return cb(lists, count);
+        }, function (resp) {
+          // Offline fallback
+          var lists = [];
+          var lflists = $localForage.instance('lists');
+          lflists.iterate(function (list, key, index) {
+            if (index > request.offset && index < request.offset + request.limit) {
+              lists.push(list);
+            }
+          })
+          .then(function () {
+            lflists.length().then(function (number) {
+              return cb(lists, number);
+            });
+          });
+        });
       },
 
       getLists: function() {
@@ -79,11 +100,9 @@
         }
         return !isOwned;
       });
-      
+
       var lists = ownedLists.concat(filteredManagedLists);
-      return callback(lists);       
+      return callback(lists);
     });
   }
 })();
-
-

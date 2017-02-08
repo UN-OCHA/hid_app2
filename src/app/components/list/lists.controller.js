@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListsCtrl', ListsCtrl);
 
-  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'List', 'SearchService'];
+  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'SearchService'];
 
-  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, List, SearchService) {
+  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, SearchService) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -92,20 +92,11 @@
       $scope.pageChanged();
     });
 
-    $scope.lists = List.query($scope.request, queryCallback, function (resp) {
-      // Offline fallback
-      var lflists = $localForage.instance('lists');
-      lflists.iterate(function (list, key, index) {
-        if (index > $scope.request.offset && index < $scope.request.offset + $scope.request.limit) {
-          $scope.lists.push(list);
-        }
-      })
-      .then(function () {
-        formatTypes($scope.lists);
-        lflists.length().then(function (number) {
-          $scope.totalItems = number;
-        });
-      });
+    ListDataService.queryLists($scope.request, function (lists, number) {
+      $scope.lists = lists;
+      $scope.totalItems = number;
+      formatTypes($scope.lists);
+      $scope.listsLoaded = true;
     });
 
     $rootScope.$on('sidebar-closed', function () {
