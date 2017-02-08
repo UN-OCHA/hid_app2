@@ -429,8 +429,8 @@
 
         <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="location in user.locations">
-            <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="isPrimaryLocation(location, user.location)"></icon>
-            <span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
+            <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="location.tempId === user.location.tempId"></icon> 
+            <span ng-if="location.locality">{{location.locality}}, </span><span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
           </li>
           <li class="list__item" ng-if="!user.locations.length">
             <em translate>No locations</em>
@@ -440,7 +440,7 @@
         <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <form class="form-section__edit">
             <label class="form-section__sub-heading" for="location">Add a location:</label>
-            <div class="form-field form-field--compact" ng-class="{'form-inline-fields' : !showRegion}">
+            <div class="form-field form-field--compact">
               <ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
                 <ui-select-match placeholder="{{'Select a country' | translate}}">
                   {{$select.selected.name}}
@@ -449,35 +449,31 @@
                   {{country.name}}
                 </ui-select-choices>
               </ui-select>
+            </div>
+            <div class="form-field form-field--compact" ng-if="showRegion">
+              <ui-select ng-model="temp.location.region">
+                <ui-select-match placeholder="{{'Select a region' | translate}}">
+                  {{$select.selected.name}}
+                </ui-select-match>
+                <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
+                  {{region.name}}
+                </ui-select-choices>
+              </ui-select>
+            </div>
 
-              <button type="submit"
-                class="btn-transparent"
-                ng-if="!showRegion"
-                ng-class="{'active': temp.location.country}"
-                ng-disabled="!temp.location.country"
-                ng-click="addItem('location')">
-                <icon name="plus" text="Add location"></icon>
-              </button>
+            <div class="form-field form-field--compact" >
+              <label for="locality" class="sr-only" translate>Locality</label>
+              <input type="text" placeholder="{{'Type a locality' | translate}}" id="locality" ng-model="temp.location.locality">
             </div>
-            <div class="form-field form-field--compact form-inline-fields" ng-if="showRegion">
-              <div class="form-inline-fields__item">
-                <ui-select ng-model="temp.location.region">
-                  <ui-select-match placeholder="{{'Select a region' | translate}}">
-                    {{$select.selected.name}}
-                  </ui-select-match>
-                  <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
-                    {{region.name}}
-                  </ui-select-choices>
-                </ui-select>
-              </div>
-              <button type="submit"
+            
+            <button type="submit"
                 class="btn-transparent"
                 ng-class="{'active': temp.location.country}"
                 ng-disabled="!temp.location.country"
                 ng-click="addItem('location')">
-                <icon name="plus" text="Add location"></icon>
+                <icon name="plus"></icon>
+                <span translate>Add location</span>
               </button>
-            </div>
           </form>
 
           <form ng-if="user.locations.length" class="form-section__edit">
@@ -489,14 +485,14 @@
                   type="radio"
                   id="location-{{$index}}"
                   name="locations"
-                  ng-model="primaryLocationId"
-                  ng-value="getLocationId(location)"
+                  ng-model="user.location.tempId"
+                  ng-value="location.tempId"
                   ng-change="setPrimaryLocation(location)"
                   />
                   <label class="clickie-label" for="location-{{$index}}">
-                    <span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
+                    <span ng-if="location.locality">{{location.locality}}, </span><span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
                   </label>
-                  <button type="button" class="btn-transparent list__button" ng-click="dropItem('location', location)" ng-if="!isPrimaryLocation(location, user.location)">
+                  <button type="button" class="btn-transparent list__button" ng-click="dropItem('location', location)" ng-if="location.tempId !== user.location.tempId">
                     <icon name="cancel" text="Remove location"></icon>
                   </button>
                 </li>

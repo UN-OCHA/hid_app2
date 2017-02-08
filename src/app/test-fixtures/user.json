@@ -1,0 +1,32 @@
+{
+	"user1": {
+		"_id": "11111",
+		"name": "Kathleen",
+		"is_admin": false,
+		"isManager": false,
+		"email": "kathleen@example.com",
+		"picture": "my-picture.jpg",
+		"verified": false
+	},
+	"user2": {
+		"_id": "22222",
+		"name": "Hanna",
+		"is_admin": false,
+		"isManager": false,
+		"email": "hanna@example.com"
+	},
+	"adminUser": {
+		"_id": "33333",
+		"name": "I am admin",
+		"is_admin": true,
+		"isManager": false,
+		"email": "admin@example.com"
+	},
+	"globalManagerUser": {
+		"_id": "4444",
+		"name": "I am global manager",
+		"is_admin": false,
+		"isManager": true,
+		"email": "globalmanager@example.com"
+	}
+}

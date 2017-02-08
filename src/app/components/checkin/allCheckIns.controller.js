@@ -5,9 +5,9 @@
     .module('app.checkin')
     .controller('AllCheckInsCtrl', AllCheckInsCtrl);
 
-  AllCheckInsCtrl.$inject = ['$scope', 'alertService', 'config', 'UserCheckInService'];
+  AllCheckInsCtrl.$inject = ['$scope', 'alertService', 'config', 'UserCheckInService', 'UserDataService'];
   
-  function AllCheckInsCtrl ($scope, alertService, config, UserCheckInService) {
+  function AllCheckInsCtrl ($scope, alertService, config, UserCheckInService, UserDataService) {
     $scope.listsMember = [];
     $scope.leaveList = leaveList;
     $scope.page = 1;
@@ -18,7 +18,7 @@
 
     function leaveList (checkin) {
       alertService.add('warning', 'Are you sure?', true, function() {
-        UserCheckInService.delete({userId: $scope.currentUser._id, listType: checkin.list.type + 's', checkInId: checkin._id}, {}, function () {
+        UserCheckInService.delete({userId: $scope.currentUser._id, listType: checkin.type + 's', checkInId: checkin._id}, {}, function () {
           alertService.add('success', 'Successfully removed from list');
           $scope.listsMember.splice($scope.listsMember.indexOf(checkin), 1);
           UserDataService.notify();
@@ -31,6 +31,7 @@
     function getUserLists () {
       angular.forEach(config.listTypes, function (listType) {
         angular.forEach($scope.currentUser[listType + 's'], function (val) {
+          val.type = listType;
           $scope.listsMember.push(val);
         });
       });

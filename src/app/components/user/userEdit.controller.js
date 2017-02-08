@@ -22,8 +22,6 @@
     $scope.addItem = addItem;
     $scope.dropItem = dropItem;
     $scope.setPrimaryOrganization = setPrimaryOrganization;
-    $scope.getLocationId = getLocationId;
-    $scope.isPrimaryLocation  = isPrimaryLocation;
     $scope.setPrimaryLocation = setPrimaryLocation;
     $scope.setPrimaryJobTitle = setPrimaryJobTitle;
     $scope.onUploadSuccess = onUploadSuccess;
@@ -85,7 +83,6 @@
       };
       $scope.temp = angular.copy(defaultSettings);
       angular.copy($scope.user.organization, $scope.organization);
-      $scope.primaryLocationId = getLocationId($scope.user.location);
 
       getCountries();
       getRoles();
@@ -137,10 +134,6 @@
           callback();
         }
 
-        if (type === 'primaryLocation') {
-          $scope.primaryLocationId = getLocationId($scope.user.location);
-        }
-
       }, function () {
         alertService.add('danger', gettextCatalog.getString('There was an error saving the profile'));
         $scope.$emit('editUser', {status: 'fail'});
@@ -149,6 +142,12 @@
 
     function saveUser (type, callback) {
       $scope.$emit('editUser', {status: 'saving'});
+      angular.forEach($scope.user.locations, function (location) {
+        delete location.tempId;
+      });
+      if ($scope.user.location) {
+        delete $scope.user.location.tempId;
+      }
       saveUpdatedUser(type, callback);
     }
 
@@ -284,31 +283,6 @@
       });
     }
 
-    //Create an id for each location so can use as radio buttons
-    function getLocationId (location) {
-      if (!location || !location.country) {
-        return;
-      }
-      var id = location.country.id;
-      if (location.region) {
-        id += '-' + location.region.id;
-      }
-      return id;
-    }
-
-
-    function isPrimaryLocation (location, primaryLocation) {
-      if (!primaryLocation || !location.country || (location.country.id !== primaryLocation.country.id)) {
-        return false;
-      }
-      if (location.region && primaryLocation.region) {
-        if (location.region.id !== primaryLocation.region.id) {
-          return false;
-        }
-      }
-      return true;
-    }
-
     function setPrimaryLocation (location, callback) {
       $scope.user.location = angular.copy(location);
       saveUser('primaryLocation', callback);
@@ -378,8 +352,6 @@
       }
       saveUser();
     }
-
-    
 
     function addPrimaryOrg () {
       if (!Object.keys($scope.temp.organization).length) {

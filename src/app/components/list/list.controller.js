@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$uibModal', '$timeout', '$localForage', 'List', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
+  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$uibModal', '$timeout', '$localForage', 'config', 'List', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
 
-  function ListCtrl ($scope, $rootScope, $routeParams, $location, $uibModal, $timeout, $localForage, List, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
+  function ListCtrl ($scope, $rootScope, $routeParams, $location, $uibModal, $timeout, $localForage, config, List, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -85,9 +85,47 @@
       $scope.usersAdded = {};
     });
 
+    function isListMember (listId, user) {
+      var inList = false;
+
+      angular.forEach(config.listTypes, function (listType) {
+        angular.forEach(user[listType + 's'], function (userList) {
+          if (listId === userList.list) {
+            inList = true;
+            return inList;
+          }
+        });
+      });
+      return inList;
+    }
+
+    function isSelected (selectedUsers, user) {
+      var userSelected = false;
+      angular.forEach(selectedUsers, function(selectedUser) {
+        if (user._id === selectedUser) {
+          userSelected = true;
+          return userSelected;
+        }
+      });
+      return userSelected;
+    }
+
+    function filterUsers (users, selectedUsers) {
+      var filteredUsers = users.filter(function (user) {
+        return !isListMember($scope.list._id, user) && !isSelected(selectedUsers, user);
+      });
+      return filteredUsers;
+    }
+
     // Retrieve users
     $scope.getUsers = function(search) {
-      $scope.newMembers = User.query({'name': search});
+      if (search) {
+        User.query({'name': search}, function (users) {
+          if (users) {
+            $scope.newMembers = filterUsers(users, $scope.usersAdded.users);
+          }
+        })
+      }
     };
 
     // Add users to a list
@@ -97,8 +135,9 @@
         UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
           UserDataService.notify();
           alertService.add('success', 'Successfully added to list');
+          $scope.usersAdded.users = [];
         }, function (error) {
-          alertService.add('danger', error);
+          alertService.add('danger', 'There was an error adding members to the list');
         });
       });
     };

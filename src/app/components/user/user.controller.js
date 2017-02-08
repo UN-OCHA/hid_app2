@@ -5,11 +5,11 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$scope', '$routeParams', '$timeout', '$location', '$localForage', 'gettextCatalog', 'alertService', 'md5', 'User', 'config'];
+  UserCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'User', 'UserDataService', 'config'];
 
-  function UserCtrl($scope, $routeParams, $timeout, $location, $localForage, gettextCatalog, alertService, md5, User, config) {
+  function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, User, UserDataService, config) {
     $scope.pictureUrl = '';
-    $scope.canEditUser = ($routeParams.userId == $scope.currentUser.id || $scope.currentUser.is_admin || $scope.currentUser.isManager);
+    $scope.canEditUser = ($routeParams.userId === $scope.currentUser._id) || $scope.currentUser.is_admin || $scope.currentUser.isManager;
     $scope.showProfileForm  = $routeParams.edit && $scope.canEditUser ? true : false;
     $scope.saving = {
       status: '',
@@ -28,6 +28,7 @@
         $scope.pictureUrl = picture;
         return;
       }
+      if (!email) { return; }
       emailHash = md5.createHash(email.trim().toLowerCase());
       $scope.pictureUrl = 'https://secure.gravatar.com/avatar/' + emailHash + '?s=200';
     }
@@ -41,79 +42,12 @@
       }, 5000);
     }
 
-    function getPrimaryIndex (type, object, primary) {
-      if (type === 'phone') {
-        return object.map(function (phoneNumber) {
-          return phoneNumber.number;
-        }).indexOf(primary);
-      }
-
-      if (type === 'email') {
-        return object.map(function (email) {
-          return email.email;
-        }).indexOf(primary);
-      }
-
-      if (type === 'organization') {
-        return object.map(function (org) {
-          return org.list;
-        }).indexOf(primary.list);
-      }
-
-      if (type === 'jobTitle') {
-        return object.indexOf(primary);
-      }
-
-      if (type === 'location') {
-        var primaryIndex;
-        angular.forEach(object, function (location, index) {
-          if (angular.equals(location, primary)) {
-            primaryIndex = index;
-          }
-        });
-        return primaryIndex;
-      }
-    }
-
-    function orderByPrimary (type, object, primary) {
-      if (!primary) {
-        return object;
-      }
-
-      var primaryIndex = getPrimaryIndex(type, object, primary);
-      var primaryObject = object.splice(primaryIndex,1)[0];
-
-      if (primaryIndex !== -1 && primaryObject) {
-        object.splice(0, 0, primaryObject);
-      }
-      return object;
-    }
-
-    function orderPrimaryFields (user) {
-      orderByPrimary('location', user.locations, user.location);
-      orderByPrimary('email', user.emails, user.email);
-      orderByPrimary('phone', user.phone_numbers, user.phone_number);
-      orderByPrimary('organization', user.organizations, user.organization);
-      orderByPrimary('jobTitle', user.job_titles, user.job_title);
-    }
-
-    function loadUser (user) {
-      $scope.user = user;
-      orderPrimaryFields($scope.user);
-      userPicture(user.picture, user.email);
+    UserDataService.getUser($routeParams.userId, function () {
+      $scope.user = UserDataService.user;
+      userPicture($scope.user.picture, $scope.user.email);
       $scope.$broadcast('userLoaded');
-    }
-
-    User.get({userId: $routeParams.userId}).$promise.then(function (user) {
-      var users = $localForage.instance('users');
-      users.setItem(user.id, user);
-      loadUser(user);
-    })
-    .catch(function (err) {
-      var users = $localForage.instance('users');
-      users.getItem($routeParams.userId).then(function (user) {
-        loadUser(user);
-      });
+    }, function (error) {
+      $exceptionHandler(error, 'getUser');
     });
 
     //Listen for user edited event
@@ -135,22 +69,23 @@
 
       $scope.saving.status = data.status;
       showSavedMessage(data.message);
+      UserDataService.formatUserLocations();
     });
 
     $scope.notify = function () {
       $scope.user.notify('Test', function () {
-        alertService.add('success', gettextCatalog.getString('User was successfully notified'));
+        alertService.add('success', 'User was successfully notified');
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error notifying this user'));
+        alertService.add('danger', 'There was an error notifying this user');
       });
     };
 
     $scope.sendClaimEmail = function () {
-      alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      alertService.add('warning', 'Are you sure?', true, function() {
         $scope.user.claimEmail(function () {
-          alertService.add('success', gettextCatalog.getString('Claim email sent successfully'));
+          alertService.add('success', 'Claim email sent successfully');
         }, function () {
-          alertService.add('danger', gettextCatalog.getString('There was an error sending the claim email'));
+          alertService.add('danger', 'There was an error sending the claim email');
         });
       });
     };
@@ -193,14 +128,17 @@
     };
 
     $scope.verifyUser = function () {
+      if (!$scope.currentUser.is_admin || $scope.currentUser.isManager) {
+        return;
+      }
       $scope.user.verified = !$scope.user.verified;
       $scope.user.$update(function () {
         if ($scope.user.id === $scope.currentUser.id) {
           $scope.setCurrentUser($scope.user);
         }
-        alertService.add('success', gettextCatalog.getString('User updated'));
+        alertService.add('success', 'User updated');
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error updating this user'));
+        alertService.add('danger', 'There was an error updating this user');
       });
     };
 
