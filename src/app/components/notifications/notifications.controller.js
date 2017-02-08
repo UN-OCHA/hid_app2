@@ -25,6 +25,9 @@
         var listId = typeof notification.params.list === 'string' ? notification.params.list : notification.params.list._id
         return '/lists/' + listId;
       }
+      if (notification.type === 'connection_request') {
+        return '/settings'
+      }
       return '/users/' + notification.user;
     };
 

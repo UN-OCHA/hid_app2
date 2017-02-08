@@ -228,6 +228,10 @@
 
 }
 
+.profile-permissions {
+  text-transform: capitalize;
+}
+
 @include media-query(md) {
 
   .profile-header__image {

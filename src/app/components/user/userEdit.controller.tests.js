@@ -1,62 +1,26 @@
 (function() {
   'use strict';
 
-  describe('User edit controller', function () {
+  describe('User controller', function () {
 
-    var countries, currentUserId, differentUserId, scope, mockhrinfoService,
-    mockList, mockUser, mockGetText, mockUserCheckInService, testUser, mockGetString, mockConfig, mockAlertService;
+  	var countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList, mockUserCheckInService, mockUserDataService, mockUser, scope, scopeUser, userFixture;
 
-    countries = ['france', 'uk'];
-    currentUserId = '1234';
-    differentUserId = '4321';
+  	countries = ['france', 'uk'];
 
-    function ctrlSetup (isCurrentUser) {
-      inject(function($controller, $rootScope, $q, $injector) {
-        scope = $rootScope.$new();
+  	function setUpCtrl(user, currentUser) {
+  		inject(function($rootScope, $controller, $injector, $q) {
+  			scope = $rootScope.$new();
+  			scopeUser = {};
+  			scope.currentUser = currentUser;
+  			scope.setCurrentUser = function () {};
 
-        testUser = $injector.get('User');
-        testUser._id = isCurrentUser ? currentUserId : differentUserId;
-        testUser.organization = [];
-        testUser.organizations = [];
-        testUser.emails = [{id: 1, email: 'xx@xx.com', type: 'Work'}];
-        testUser.location = {
-          country: {
-            name: 'UK'
-          },
-          region: {
-            name: 'SoYo'
-          }
-        };
-        testUser.job_titles = [];
-        testUser.addPhone = function () {
-          return;
-        };
-        testUser.setPrimaryPhone = function () {
-          return;
-        };
-        testUser.addEmail = function () {
-          return;
-        };
-        testUser.setPrimaryEmail = function () {
-          return;
-        };
-        testUser.$update = function () {
-          return;
-        };
-        testUser.get = function () {
-          return;
-        };
+  			mockUser = $injector.get('User');
+  			scopeUser = new mockUser(user);
+  			scopeUser.$update = function () {};
+  			scopeUser.$delete = function () {};
+  			scope.user = scopeUser;
 
-        scope.currentUser = {
-          _id: currentUserId
-        };
-        scope.editPhoneForm = {};
-        scope.editEmailForm = {};
-        scope.editLocationForm = {};
-
-        mockAlertService.add = function () {}
-
-        mockhrinfoService.getCountries = function () {
+  			mockhrinfoService.getCountries = function () {
           var defer = $q.defer();
           defer.resolve(countries);
           return defer.promise;
@@ -66,108 +30,82 @@
           var defer = $q.defer();
           defer.resolve();
           return defer.promise;
-        }
+        };
 
-        mockGetText.getString = function () {
-          return;
-        }
+	      spyOn(scopeUser, '$update').and.callFake(function (callback) {
+	      	callback();
+	      });
+	      spyOn(scopeUser, '$delete').and.callFake(function (callback) {
+	      	callback();
+	      });
 
-        mockUserCheckInService.save = function () {
-          return;
-        }
-        mockUserCheckInService.delete = function () {
-          return;
-        }
-
-        mockList.query = function () {
-          return;
-        }
-
-        spyOn(scope, '$emit').and.callThrough();
-        spyOn(mockAlertService, 'add').and.callFake(function (argument1, argument2, arg3, callback) {
-          callback([argument1, argument2, arg3]);
-        });
-
-        spyOn(testUser, 'get').and.callFake(function (params, callback) {
-          scope.user = testUser;
-            callback();
-        });
-        spyOn(testUser, 'addPhone').and.callFake(function (params, callback) {
-            callback();
-        });
-        spyOn(testUser, 'setPrimaryPhone').and.callFake(function (params, callback) {
-            callback();
-        });
-        spyOn(testUser, 'addEmail').and.callFake(function (params, callback) {
-            callback();
-        });
-        spyOn(testUser, 'setPrimaryEmail').and.callFake(function (params, callback) {
-            callback();
-        });
-        spyOn(testUser, '$update').and.callFake(function (callback) {
-            callback();
-        });
-
-        spyOn(mockUserCheckInService, 'save').and.callThrough();
-        spyOn(mockUserCheckInService, 'delete').and.callThrough();
-
-        $controller('UserEditCtrl', {
+	      spyOn(scope, '$emit').and.callThrough();
+	      
+  			$controller('UserEditCtrl', {
           $scope: scope
-        });
-
+         });
         scope.$digest();
+  		});
+  	}
 
-      });
+  	beforeEach(function() {
+  		userFixture = readJSON('app/test-fixtures/user.json');
+  		mockAlertService = {};
+  		mockUserDataService = {};
+  		mockUserCheckInService = {};
+  		mockGetText = {};
+  		mockhrinfoService = {};
+  		mockConfig = {};
+  		mockConfig.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
 
-    }
-
-    beforeEach(function() {
-      module('app.user');
-
-      mockhrinfoService = {};
-      mockAlertService = {};
-      module('app.common', function($provide) {
-        $provide.value('hrinfoService', mockhrinfoService);
-        $provide.value('alertService', mockAlertService);
-      });
-
-      mockList = {};
-      module('app.list', function($provide) {
-        $provide.value('List', mockList);
-      });
-
-      mockUser = {};
-      mockUserCheckInService = {};
-      module('app.user', function($provide) {
-        $provide.value('User', mockUser);
+  		module('app.user', function($provide) {
+        $provide.constant('config', mockConfig);
+        $provide.constant('UserDataService', mockUserDataService);
         $provide.value('UserCheckInService', mockUserCheckInService);
       });
+      mockUserDataService.getUser = function () {};
+      mockUserDataService.formatUserLocations = function () {};
+      spyOn(mockUserDataService, 'formatUserLocations').and.callThrough();
+
+      mockUserCheckInService.save = function () {};
+      mockUserCheckInService.delete = function () {};
+      spyOn(mockUserCheckInService, 'save').and.callThrough();
+      spyOn(mockUserCheckInService, 'delete').and.callThrough();
+
+      module('app.common', function($provide) {
+        $provide.value('alertService', mockAlertService);
+        $provide.value('hrinfoService', mockhrinfoService);
+      });
+      mockAlertService.add = function () {};
+      spyOn(mockAlertService, 'add').and.callFake(function (argument1, argument2, arg3, callback) {
+        	callback([argument1, argument2, arg3]);
+      });
+      // spyOn(mockAlertService, 'add').and.callThrough();
 
       mockGetText = {};
       module('gettext', function($provide) {
         $provide.value('gettextCatalog', mockGetText);
       });
+      mockGetText.getString = function () {};
 
-      mockConfig = {}
-      mockConfig.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
-      module('app.user', function($provide) {
-        $provide.constant('config', mockConfig);
+      mockList = {};
+      module('app.list', function($provide) {
+        $provide.value('List', mockList);
       });
+      mockList.query = function () {};
+     
+      
+  	});
 
-    });
-
-
-    describe('Adding a new item', function () {
+  	describe('Adding a new item', function () {
 
       beforeEach(function () {
-        ctrlSetup(false);
-        scope.user = testUser;
+        setUpCtrl(userFixture.user1, userFixture.user1);
         scope.$emit('userLoaded');
 
         var key = 'job_title';
         scope.temp[key] = 'new job title';
         scope.addItem(key);
-
       });
 
       it('should add the new item to the user', function () {
@@ -181,12 +119,12 @@
       it('should emit the saving event', function () {
         var emitObj = {
           status: 'saving'
-        }
+        };
         expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
       });
 
       it('should update the user', function () {
-        expect(mockUser.$update).toHaveBeenCalled();
+        expect(scopeUser.$update).toHaveBeenCalled();
       });
 
       it('should emit the success event', function () {
@@ -194,7 +132,7 @@
           status: 'success',
           type: 'addjob_title',
           message: undefined
-        }
+        };
         expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
       });
 
@@ -203,18 +141,15 @@
     describe('Adding an empty item', function () {
 
       beforeEach(function () {
-        ctrlSetup(false);
-        scope.user = testUser;
+        setUpCtrl(userFixture.user1, userFixture.user1);
         scope.$emit('userLoaded');
-
         var key = 'job_title';
         scope.temp[key] = '';
         scope.addItem(key);
-
       });
 
       it('should not update the user', function () {
-        expect(mockUser.$update).not.toHaveBeenCalled();
+        expect(scopeUser.$update).not.toHaveBeenCalled();
       });
 
     });
@@ -222,15 +157,12 @@
     describe('Adding a new organization', function () {
 
       beforeEach(function () {
-        ctrlSetup(false);
-        scope.user = testUser;
+        setUpCtrl(userFixture.user1, userFixture.user1);
         scope.$emit('userLoaded');
-        scope.$digest()
 
         var key = 'organization';
         scope.temp[key] = {_id: '3454', list: {_id: '999'}};
         scope.addItem(key);
-
       });
 
       it('should call the user checkin service', function () {
@@ -241,16 +173,13 @@
 
     describe('Removing an item', function () {
       beforeEach(function () {
-        ctrlSetup(false);
-        scope.user = testUser;
+        setUpCtrl(userFixture.user1, userFixture.user1);
         scope.user.job_titles = ['new job title', 'web developer'];
         scope.$emit('userLoaded');
-        scope.$digest()
 
         var key = 'job_title';
         var value = 'new job title';
         scope.dropItem(key, value);
-
       });
 
       it('should remove the item from the user', function () {
@@ -258,30 +187,19 @@
       });
 
       it('should update the user', function () {
-        expect(mockUser.$update).toHaveBeenCalled();
+        expect(scopeUser.$update).toHaveBeenCalled();
       });
 
     });
 
     describe('Removing an organization', function () {
       beforeEach(function () {
-        ctrlSetup(false);
-        scope.user = testUser;
-        scope.user.organizations = [
-          {
-            _id: '3456'
-          },
-          {
-            _id: '7664'
-          }
-        ];
+        setUpCtrl(userFixture.user1, userFixture.user1);
         scope.$emit('userLoaded');
-        scope.$digest()
 
         var key = 'organization';
         var value = {_id: '7664'};
         scope.dropItem(key, value);
-
       });
 
       it('should ask the user to confirm', function () {
@@ -298,10 +216,47 @@
 
     });
 
+  	describe('Contact permissions', function () {
+
+      beforeEach(function () {
+        setUpCtrl(userFixture.user1, userFixture.user1);
+        scope.$emit('userLoaded');
+        scope.temp.phonesVisibility = 'verified';
+        scope.changePermission('phonesVisibility');
+      });
+
+      it('should update the permission on the user', function () {
+        expect(scope.user.phonesVisibility).toEqual('verified');
+      });
+
+      it('should emit the saving event', function () {
+        var emitObj = {
+          status: 'saving'
+        };
+        expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
+      });
+
+      it('should update the user', function () {
+        expect(scopeUser.$update).toHaveBeenCalled();
+      });
+
+      it('should emit the success event', function () {
+        var emitObj = {
+          status: 'success',
+          type: 'phonesVisibility',
+          message: undefined
+        };
+        expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
+      });
+
+    });
+
   });
-})();
+
+ })();
 
 // TO DO:
+
 // - on init:
 //   - get countries
 //   - get roles

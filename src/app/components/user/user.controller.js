@@ -17,10 +17,41 @@
       show: false
     };
     $scope.apiUrl = config.apiUrl;
+    $scope.showRequestPhoneConnection = false;
+    $scope.connectionInfo = {
+      phonesPermission: '',
+      emailsPermission: '',
+      locationsPermission: ''
+    }
 
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
     };
+
+    function getPermission(value, pending, permission) {
+      if (value !== null) {
+        return 'view';
+      }
+      return (pending && permission === 'connections') ? 'pending' : permission;
+    }
+
+    function setConnectionInfo (user, currentUserId) {
+
+     var connectionPending = false;
+     if (user.connections) {
+        angular.forEach(user.connections, function (connection) {
+          if (connection.user === currentUserId) {
+            if (connection.pending) {
+              connectionPending = true;
+            }
+          }
+        });
+      }
+
+      $scope.connectionInfo.phonesPermission = getPermission(user.phone_number, connectionPending, user.phonesVisibility);
+      $scope.connectionInfo.emailsPermission = getPermission(user.email, connectionPending, user.emailsVisibility);
+      $scope.connectionInfo.locationsPermission = getPermission(user.location, connectionPending, user.locationsVisibility);    
+    }
 
     function userPicture (picture, email) {
       var emailHash = '';
@@ -45,6 +76,7 @@
     UserDataService.getUser($routeParams.userId, function () {
       $scope.user = UserDataService.user;
       userPicture($scope.user.picture, $scope.user.email);
+      setConnectionInfo($scope.user, $scope.currentUser._id);
       $scope.$broadcast('userLoaded');
     }, function (error) {
       $exceptionHandler(error, 'getUser');
@@ -156,5 +188,13 @@
       });
     };
 
+    $scope.requestConnection = function () {
+      $scope.user.requestConnection($scope.user._id, function () {
+        alertService.add('success', 'Connection request sent');
+        $scope.connectionInfo.phonesPermission = 'pending';
+      }, function (error) {
+        $exceptionHandler(error, 'requestConnection');
+      })
+    }
   }
 })();

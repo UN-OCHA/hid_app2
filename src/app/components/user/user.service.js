@@ -173,6 +173,18 @@
       return this;
     };
 
+    User.prototype.requestConnection = function (userId, success, error) {
+      $http.post(config.apiUrl + 'user/' + userId + '/connections', {}).then(success, error);
+    };
+
+    User.prototype.approveConnection = function (userId, connectionId, success, error) {
+      $http.put(config.apiUrl + 'user/' + userId + '/connections/' + connectionId, {}).then(success, error);
+    };
+
+    User.prototype.deleteConnection = function (userId, connectionId, success, error) {
+      $http.delete(config.apiUrl + 'user/' + userId + '/connections/' + connectionId, {}).then(success, error);
+    };
+
     return User;
 
   }

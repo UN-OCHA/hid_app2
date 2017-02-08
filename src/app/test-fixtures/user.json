@@ -4,7 +4,56 @@
 		"name": "Kathleen",
 		"is_admin": false,
 		"isManager": false,
+		"connections": [
+			{
+				"_id": "1",
+				"pending": false,
+				"user": {
+					"_id": "1",
+					"name": "connection1"
+				}
+			},
+			{
+				"_id": "2",
+				"pending": true,
+				"user": {
+					"_id": "2",
+					"name": "connection2"
+				}
+			},
+			{
+				"_id": "3",
+				"pending": true,
+				"user": {
+					"_id": "3",
+					"name": "connection3"
+				}
+			},
+			{
+				"_id": "4",
+				"pending": false,
+				"user": {
+					"_id": "4",
+					"name": "connection4"
+				}
+			}
+		],
 		"email": "kathleen@example.com",
+		"job_titles": [],
+		"location": {
+			"country": {
+				"name": "UK"
+			}
+		},
+		"organization": [],
+		"organizations": [
+			{
+				"_id": "3456"
+			},
+			{
+				"_id": "7664"
+			}
+		],
 		"picture": "my-picture.jpg",
 		"verified": false
 	},

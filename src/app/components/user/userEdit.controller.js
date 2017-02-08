@@ -34,6 +34,7 @@
     $scope.addPrimaryLocation = addPrimaryLocation;
     $scope.nextStep = nextStep;
     $scope.currentStep = 1;
+    $scope.visibilityOptions = ['anyone', 'verified', 'connections'];
     var defaultSettings = {};
     var lastStep = 4;
 
@@ -69,6 +70,9 @@
           type: '',
           number: '1'
         },
+        phonesVisibility: '',
+        emailsVisibility: '',
+        locationsVisibility: '',
         voip: {
           type: '',
           username: ''
@@ -83,6 +87,9 @@
       };
       $scope.temp = angular.copy(defaultSettings);
       angular.copy($scope.user.organization, $scope.organization);
+      $scope.temp.phonesVisibility = angular.copy($scope.user.phonesVisibility);
+      $scope.temp.emailsVisibility = angular.copy($scope.user.emailsVisibility);
+      $scope.temp.locationsVisibility = angular.copy($scope.user.locationsVisibility);
 
       getCountries();
       getRoles();
@@ -242,7 +249,6 @@
         $scope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
-
       $scope.temp[key] = angular.copy(defaultSettings[key]);
       saveUser('add' + key, callback);
     }
@@ -390,6 +396,11 @@
         return;
       }
       $scope.currentStep = $scope.currentStep + 1;
+    }
+
+    $scope.changePermission = function (key) {
+      $scope.user[key] = $scope.temp[key];
+      saveUser(key);
     }
    
     //Wait until user is loaded into scope by parent controller

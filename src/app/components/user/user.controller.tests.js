@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('User controller', function () {
+  fdescribe('User controller', function () {
 
   	var mockAlertService, mockConfig, mockmd5, mockUserDataService, mockUser, scope, scopeUser, userFixture, user;
 
@@ -17,6 +17,7 @@
   			scopeUser = new mockUser(user)
   			scopeUser.$update = function () {};
   			scopeUser.$delete = function () {};
+  			scopeUser.requestConnection = function () {};
 
   			spyOn(mockUserDataService, 'getUser').and.callFake(function ({}, callback) {
 	      	mockUserDataService.user = scopeUser;
@@ -26,6 +27,9 @@
 	      	callback();
 	      })
 	      spyOn(scopeUser, '$delete').and.callFake(function (callback) {
+	      	callback();
+	      })
+	      spyOn(scopeUser, 'requestConnection').and.callFake(function (arg1, callback) {
 	      	callback();
 	      })
 	      
@@ -263,6 +267,209 @@
 			// it('should delete the user', function () {
 			// 	expect(scopeUser.$delete).toHaveBeenCalled();
 			// });
+
+		});
+
+		describe('User contact information permissions', function () {
+
+			describe('Contact information can be viewed by anyone', function () {
+				beforeEach(function () {
+					userFixture.user2.phone_number = '0114';
+					userFixture.user2.phonesVisibility = 'anyone';
+					userFixture.user2.email = 'email@email.com';
+					userFixture.user2.emailsVisibility = 'anyone';
+					userFixture.user2.location = 'somewhere';
+					userFixture.user2.locationsVisibility = 'anyone';
+					setUpCtrl(userFixture.user2, userFixture.user1);
+				});
+
+				it('should show the phone numbers', function () {
+					expect(scope.connectionInfo.phonesPermission).toBe('view');
+				});
+
+				it('should show the emails', function () {
+					expect(scope.connectionInfo.emailsPermission).toBe('view');
+				});
+
+				it('should show the locations', function () {
+					expect(scope.connectionInfo.locationsPermission).toBe('view');
+				});
+			});
+
+			describe('Contact information can only be viewed by verified users', function () {
+
+				describe('Viewing as a verified user', function () {
+					beforeEach(function () {
+						userFixture.user1.verified = true;
+						userFixture.user2.phone_number = '12335';
+						userFixture.user2.phonesVisibility = 'verified';
+						userFixture.user2.email = '12335';
+						userFixture.user2.emailsVisibility = 'verified';
+						userFixture.user2.location = '12335';
+						userFixture.user2.locationsVisibility = 'verified';
+						setUpCtrl(userFixture.user2, userFixture.user1);
+					});
+
+					it('should show the phone numbers', function () {
+						expect(scope.connectionInfo.phonesPermission).toBe('view');
+					});
+
+					it('should show the emails', function () {
+						expect(scope.connectionInfo.emailsPermission).toBe('view');
+					});
+
+					it('should show the locations', function () {
+						expect(scope.connectionInfo.locationsPermission).toBe('view');
+					});
+
+				});
+
+				describe('Viewing as an un-verified user', function () {
+					beforeEach(function () {
+						userFixture.user1.verified = false;
+						userFixture.user2.phone_number = null;
+						userFixture.user2.phonesVisibility = 'verified';
+						userFixture.user2.email = null;
+						userFixture.user2.emailsVisibility = 'verified';
+						userFixture.user2.location = null;
+						userFixture.user2.locationsVisibility = 'verified';
+						setUpCtrl(userFixture.user2, userFixture.user1);
+					});
+
+					it('should show the you must be verified message for phone numbers', function () {
+						expect(scope.connectionInfo.phonesPermission).toBe('verified');
+					});
+
+					it('should show the you must be verified message for emails', function () {
+						expect(scope.connectionInfo.emailsPermission).toBe('verified');
+					});
+
+					it('should show the you must be verified message for locations', function () {
+						expect(scope.connectionInfo.locationsPermission).toBe('verified');
+					});
+
+				});
+
+			});
+
+			describe('Contact information can only be viewed by connections', function () {
+
+				describe('Not in the user\'s connections', function () {
+
+					beforeEach(function () {
+						userFixture.user2.phone_number = null;
+						userFixture.user2.phonesVisibility = 'connections';
+						userFixture.user2.email = null;
+						userFixture.user2.emailsVisibility = 'connections';
+						userFixture.user2.location = null;
+						userFixture.user2.locationsVisibility = 'connections';
+						setUpCtrl(userFixture.user2, userFixture.user1);
+					});
+
+					it('should show the request phone numbers button', function () {
+						expect(scope.connectionInfo.phonesPermission).toBe('connections');
+					});
+
+					it('should show the request emails button', function () {
+						expect(scope.connectionInfo.emailsPermission).toBe('connections');
+					});
+
+					it('should show the request locations button', function () {
+						expect(scope.connectionInfo.locationsPermission).toBe('connections');
+					});
+
+				});
+
+				describe('Has sent a connection request', function () {
+
+					beforeEach(function () {
+						userFixture.user2.phone_number = null;
+						userFixture.user2.phonesVisibility = 'connections';
+						userFixture.user2.email = null;
+						userFixture.user2.emailsVisibility = 'connections';
+						userFixture.user2.location = null;
+						userFixture.user2.locationsVisibility = 'connections';
+						userFixture.user2.connections = [
+							{
+								_id: '1234',
+								pending: true,
+								user: userFixture.user1._id
+							},
+							{
+								_id: '12345',
+								pending: false,
+								user: '7897987'
+							}
+						];
+						setUpCtrl(userFixture.user2, userFixture.user1);
+					});
+
+					it('should show the connection pending message for phone number', function () {
+						expect(scope.connectionInfo.phonesPermission).toBe('pending');
+					});
+
+					it('should show the connection pending message for email', function () {
+						expect(scope.connectionInfo.emailsPermission).toBe('pending');
+					});
+
+					it('should show the connection pending message for location', function () {
+						expect(scope.connectionInfo.locationsPermission).toBe('pending');
+					});
+
+				});
+
+				describe('In the user\'s connections', function () {
+
+					beforeEach(function () {
+						userFixture.user2.phone_number = '0114';
+						userFixture.user2.phonesVisibility = 'connections';
+						userFixture.user2.email = 'email@email.com';
+						userFixture.user2.emailsVisibility = 'connections';
+						userFixture.user2.location = 'somewhere';
+						userFixture.user2.locationsVisibility = 'connections';
+						setUpCtrl(userFixture.user2, userFixture.user1);
+					});
+
+					it('should show the phone numbers', function () {
+						expect(scope.connectionInfo.phonesPermission).toBe('view');
+					});
+
+					it('should show the emails', function () {
+						expect(scope.connectionInfo.emailsPermission).toBe('view');
+					});
+
+					it('should show the locations', function () {
+						expect(scope.connectionInfo.locationsPermission).toBe('view');
+					});
+
+				});
+
+			});
+
+			describe('Requesting to become a users connection so can view their contact details', function () {
+
+				beforeEach(function () {
+					userFixture.user2.phone_number = null;
+					userFixture.user2.phonesVisibility = 'connections';
+					setUpCtrl(userFixture.user2, userFixture.user1);
+				});
+				
+				it('should send a request to be added to the user\'s connections', function () {
+					scope.requestConnection();
+					expect(scopeUser.requestConnection).toHaveBeenCalledWith(userFixture.user2._id, jasmine.any(Function), jasmine.any(Function));
+				});
+
+				it('should show a confirmation that the request has been sent', function () {
+					scope.requestConnection();
+					expect(mockAlertService.add).toHaveBeenCalledWith('success', 'Connection request sent')
+				});
+
+				it('should show that the request has been sent on the profile', function () {
+					scope.requestConnection();
+					expect(scope.connectionInfo.phonesPermission).toBe('pending');
+				});
+
+			});
 
 		});
 

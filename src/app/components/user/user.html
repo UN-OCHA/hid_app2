@@ -139,8 +139,15 @@
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
 
         <h3 class="form-section__heading" translate>Phone numbers</h3>
+        <p class="list__item" ng-if="connectionInfo.phonesPermission === 'connections'">
+          <button type="button" class="btn-link" ng-click="requestConnection()" translate>
+            <em><span translate>Request</span> {{user.given_name}}'s <span translate>phone number</span></em>
+          </button>
+          </p>
+        <p class="list__item" ng-if="connectionInfo.phonesPermission === 'pending'"><em translate>Your connection request is pending</em></p>
+        <p class="list__item" ng-if="connectionInfo.phonesPermission === 'verified'"><em translate>{{user.given_name}}'s phone numbers can only be viewed by verified users.</em></p>
 
-        <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
+        <ul class="list list--has-primary" ng-if="connectionInfo.phonesPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="phone in user.phone_numbers">
             <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="user.phone_number === phone.number"></icon>
             <a ng-href="tel:{{phone.number}}">{{phone.number}}</a>
@@ -195,6 +202,26 @@
               </ul>
             </fieldset>
           </form>
+
+          <form class="form-section__edit">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Who should be able to see your phone numbers?</legend>
+              <ul class="list list--has-buttons profile-permissions">
+                <li class="list__item" ng-repeat="permission in visibilityOptions">
+                  <input type="radio"
+                  id="permission-phone-{{$index}}"
+                  name="phonesVisibility"
+                  ng-model="temp.phonesVisibility"
+                  ng-value="permission"
+                  ng-change="changePermission('phonesVisibility')"
+                  />
+                  <label class="clickie-label" for="permission-phone-{{$index}}">
+                    {{permission}}
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </form>
         </div>
 
       </div>
@@ -203,7 +230,14 @@
 
         <h3 class="form-section__heading" translate>Email</h3>
 
-        <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
+        <p class="list__item" ng-if="connectionInfo.emailsPermission === 'connections'">
+          <button type="button" class="btn-link" ng-click="requestConnection()">
+          <em><span translate>Request</span> {{user.given_name}}'s <span translate>email address</span></button></em>
+        </p>
+        <p class="list__item" ng-if="connectionInfo.emailsPermission === 'pending'"><em translate>Your connection request is pending</em></p>
+        <p class="list__item" ng-if="connectionInfo.emailsPermission === 'verified'"><em translate>{{user.given_name}}'s email addresses can only be viewed by verified users.</em></p>
+
+        <ul class="list list--has-primary" ng-if="connectionInfo.emailsPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="email in user.emails">
             <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="user.email === email.email"></icon>
             <a ng-href="mailto:{{email.email}}">{{email.email}}</a>
@@ -260,6 +294,26 @@
                     </span>
                   </label>
                   <button type="button" class="btn-transparent list__button" ng-click="dropItem('email', email)" ng-if="email.email != user.email"><icon name="cancel" text="Remove"></icon></button>
+                </li>
+              </ul>
+            </fieldset>
+          </form>
+
+          <form class="form-section__edit">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Who should be able to see your email addresses?</legend>
+              <ul class="list list--has-buttons profile-permissions">
+                <li class="list__item" ng-repeat="permission in visibilityOptions">
+                  <input type="radio"
+                  id="permission-email-{{$index}}"
+                  name="emailsVisibility"
+                  ng-model="temp.emailsVisibility"
+                  ng-value="permission"
+                  ng-change="changePermission('emailsVisibility')"
+                  />
+                  <label class="clickie-label" for="permission-email-{{$index}}">
+                    {{permission}}
+                  </label>
                 </li>
               </ul>
             </fieldset>
@@ -427,7 +481,15 @@
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Locations</h3>
 
-        <ul class="list list--has-primary" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
+        <p class="list__item" ng-if="connectionInfo.locationsPermission === 'connections'">
+          <button type="button" class="btn-link" ng-click="requestConnection()">
+            <em><span translate>Request</span> {{user.given_name}}'s <span translate>location</span></em>
+          </button>
+        </p>
+        <p class="list__item" ng-if="connectionInfo.locationsPermission === 'pending'"><em translate>Your connection request is pending</em></p>
+        <p class="list__item" ng-if="connectionInfo.locationsPermission === 'verified'"><em translate>{{user.given_name}}'s locations can only be viewed by verified users.</em></p>
+
+        <ul class="list list--has-primary" ng-if="connectionInfo.locationsPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="location in user.locations">
             <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="location.tempId === user.location.tempId"></icon> 
             <span ng-if="location.locality">{{location.locality}}, </span><span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
@@ -495,6 +557,26 @@
                   <button type="button" class="btn-transparent list__button" ng-click="dropItem('location', location)" ng-if="location.tempId !== user.location.tempId">
                     <icon name="cancel" text="Remove location"></icon>
                   </button>
+                </li>
+              </ul>
+            </fieldset>
+          </form>
+
+          <form class="form-section__edit">
+            <fieldset>
+              <legend class="form-section__sub-heading" translate>Who should be able to see your locations?</legend>
+              <ul class="list list--has-buttons profile-permissions">
+                <li class="list__item" ng-repeat="permission in visibilityOptions">
+                  <input type="radio"
+                  id="permission-locations-{{$index}}"
+                  name="locationsVisibility"
+                  ng-model="temp.locationsVisibility"
+                  ng-value="permission"
+                  ng-change="changePermission('locationsVisibility')"
+                  />
+                  <label class="clickie-label" for="permission-locations-{{$index}}">
+                    {{permission}}
+                  </label>
                 </li>
               </ul>
             </fieldset>

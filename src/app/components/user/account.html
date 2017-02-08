@@ -69,18 +69,18 @@
       </fieldset>
     </form>
 
-    <fieldset class="form-section">
-      <legend class="form-section__heading" translate>Delete account</legend>
+    <div class="form-section">
+      <h2 class="form-section__heading" translate>Delete account</h2>
 
       <p class="form-section__info" translate>Deleting your account means that you will lose your access to Humanitarian ID.</p>
       <button type="button" class="btn-danger" ng-disabled="!isOnline" ng-click="deleteAccount()" translate>Delete account</button>
-    </fieldset>
+    </div>
 
   </div>
 
   <div class="col-md-6">
-   <fieldset class="form-section">
-    <legend class="form-section__heading" translate>Authorized Applications</legend>
+   <div class="form-section">
+    <h2 class="form-section__heading" translate>Authorized Applications</h2>
     <p class="form-section__info" ng-if="!user.authorizedClients.length" translate><em>No applications currently have access to your Humanitarian ID account.</em></p>
     <p class="form-section__info" ng-if="user.authorizedClients.length" translate>You have granted the following applications access to your Humanitarian ID account.</p>
     <ul class="list list--has-buttons">
@@ -91,7 +91,29 @@
         </button>
       </li>
     </ul>
-   </fieldset>
   </div>
 
+  <div class="form-section" ng-if="pendingConnections.length">
+    <h2 class="form-section__heading" translate>Pending connections</h2>
+    <ul class="list">
+      <li class="list__item list--has-buttons" ng-repeat="connection in pendingConnections">
+        {{connection.user.name}}
+        <button class="btn-transparent" ng-disabled="!isOnline" ng-click="approveConnection(connection)" translate>
+          Approve
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div class="form-section" ng-if="approvedConnections.length">
+    <h2 class="form-section__heading" translate>Approved connections</h2>
+    <ul class="list list--has-buttons">
+      <li class="list__item list--has-buttons" ng-repeat="connection in approvedConnections">
+        {{connection.user.name}}
+        <button class="btn-transparent" ng-disabled="!isOnline" ng-click="removeConnection(connection)" translate>
+          Remove
+        </button>
+      </li>
+    </ul>
+  </div>
+  
 </div>
