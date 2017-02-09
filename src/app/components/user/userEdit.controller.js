@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserEditCtrl', UserEditCtrl);
 
-  UserEditCtrl.$inject = ['$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'User', 'UserCheckInService'];
+  UserEditCtrl.$inject = ['$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'UserCheckInService'];
 
-  function UserEditCtrl($location, $scope, alertService, config, gettextCatalog, hrinfoService, List, User, UserCheckInService) {
+  function UserEditCtrl($location, $scope, alertService, config, gettextCatalog, hrinfoService, List, UserCheckInService) {
     $scope.phoneNumberTypes = [];
     $scope.emailTypes = [];
     $scope.voipTypes = [];

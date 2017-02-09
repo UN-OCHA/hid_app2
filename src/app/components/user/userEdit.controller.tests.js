@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('User controller', function () {
+  describe('User edit controller', function () {
 
   	var countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList, mockUserCheckInService, mockUserDataService, mockUser, scope, scopeUser, userFixture;
 
@@ -13,9 +13,7 @@
   			scopeUser = {};
   			scope.currentUser = currentUser;
   			scope.setCurrentUser = function () {};
-
-  			mockUser = $injector.get('User');
-  			scopeUser = new mockUser(user);
+        scopeUser = user;
   			scopeUser.$update = function () {};
   			scopeUser.$delete = function () {};
   			scope.user = scopeUser;

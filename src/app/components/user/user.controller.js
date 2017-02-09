@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'User', 'UserDataService', 'config'];
+  UserCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config'];
 
-  function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, User, UserDataService, config) {
+  function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config) {
     $scope.pictureUrl = '';
     $scope.userLoaded = false;
     $scope.canEditUser = ($routeParams.userId === $scope.currentUser._id) || $scope.currentUser.is_admin || $scope.currentUser.isManager;
@@ -170,7 +170,7 @@
         if ($scope.user.id === $scope.currentUser.id) {
           $scope.setCurrentUser($scope.user);
         }
-        alertService.add('success', 'User updated');
+        alertService.add('success', 'User updated', false, function () {});
       }, function () {
         alertService.add('danger', 'There was an error updating this user');
       });
@@ -184,7 +184,7 @@
     $scope.deleteUser = function (user) {
       alertService.add('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, function() {
         user.$delete(function () {
-          alertService.add('success', 'The user was successfully deleted.');
+          alertService.add('success', 'The user was successfully deleted.', false, function () {});
           $location.path('/landing');
         });
       });
@@ -192,7 +192,7 @@
 
     $scope.requestConnection = function () {
       $scope.user.requestConnection($scope.user._id, function () {
-        alertService.add('success', 'Connection request sent');
+        alertService.add('success', 'Connection request sent', false, function () {});
         $scope.connectionInfo.phonesPermission = 'pending';
       }, function (error) {
         $exceptionHandler(error, 'requestConnection');

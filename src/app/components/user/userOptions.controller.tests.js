@@ -66,7 +66,7 @@
       });
 
 
-      inject(function($rootScope, $q, $injector) {
+      inject(function($rootScope, $q, $injector, $controller) {
         scope = $rootScope.$new();
 
         mockAlertService.add = function () {};
@@ -100,6 +100,13 @@
         spyOn(mockList, 'query').and.callFake(function({}, callback) {
           callback(allLists);
         });
+
+        $controller('UserOptionsCtrl', {
+            $scope: scope,
+            $uibModal: mockUibModal
+          });
+
+          scope.$digest();
       });
 
     });
@@ -119,7 +126,7 @@
     }
 
     describe('Remove user from the list', function () {
-      controllerSetup();
+      // controllerSetup();
 
       beforeEach(function () {
         user.lists.push(list1);

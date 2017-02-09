@@ -1,37 +1,35 @@
 (function() {
   'use strict';
 
-  fdescribe('User controller', function () {
+  describe('User controller', function () {
 
-  	var mockAlertService, mockConfig, mockmd5, mockUserDataService, mockUser, scope, scopeUser, userFixture, user;
+  	var mockAlertService, mockConfig, mockmd5, mockUserDataService, scope, scopeUser, userFixture;
 
   	userFixture = readJSON('app/test-fixtures/user.json');
 
   	function setUpCtrl(user, currentUser) {
-  		inject(function($rootScope, $controller, $injector) {
+  		inject(function($rootScope, $controller) {
   			scope = $rootScope.$new();
   			scope.currentUser = currentUser;
   			scope.setCurrentUser = function () {};
-
-  			mockUser = $injector.get('User');
-  			scopeUser = new mockUser(user)
+  			scopeUser = user;
   			scopeUser.$update = function () {};
   			scopeUser.$delete = function () {};
   			scopeUser.requestConnection = function () {};
 
-  			spyOn(mockUserDataService, 'getUser').and.callFake(function ({}, callback) {
+  			spyOn(mockUserDataService, 'getUser').and.callFake(function (arg, callback) {
 	      	mockUserDataService.user = scopeUser;
 	      	callback();
 	      });
 	      spyOn(scopeUser, '$update').and.callFake(function (callback) {
 	      	callback();
-	      })
+	      });
 	      spyOn(scopeUser, '$delete').and.callFake(function (callback) {
 	      	callback();
-	      })
+	      });
 	      spyOn(scopeUser, 'requestConnection').and.callFake(function (arg1, callback) {
 	      	callback();
-	      })
+	      });
 	      
   			$controller('UserCtrl', {
           $scope: scope,
@@ -61,16 +59,13 @@
         $provide.value('md5', mockmd5);
       });
       mockAlertService.add = function () {};
-      // spyOn(mockAlertService, 'add').and.callFake(function (argument1, argument2, arg3, callback) {
-      //   	callback([argument1, argument2, arg3]);
-      // });
-      spyOn(mockAlertService, 'add').and.callThrough();
+      spyOn(mockAlertService, 'add').and.callFake(function (a1, a2, a3, callback) {
+        callback();
+      });
      
-      
-
       mockmd5.createHash = function () {
       	return 'fake-hash';
-      }
+      };
   	});
 
   	describe('Profile permissions', function () {
@@ -142,7 +137,7 @@
 
 			it('should get the api url from config for use on photo upload', function () {
 				expect(scope.apiUrl).toEqual('the-url');
-			})
+			});
 
   	});
 
@@ -215,7 +210,7 @@
 				it('should update the profile image in the view', function () {
 					expect(scope.pictureUrl).toBe('new-image.jpg');
 				});
-			})
+			});
 
   	});
 
@@ -264,9 +259,9 @@
 				expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, jasmine.any(Function));
 			});
 
-			// it('should delete the user', function () {
-			// 	expect(scopeUser.$delete).toHaveBeenCalled();
-			// });
+			it('should delete the user', function () {
+				expect(scopeUser.$delete).toHaveBeenCalled();
+			});
 
 		});
 
@@ -461,7 +456,7 @@
 
 				it('should show a confirmation that the request has been sent', function () {
 					scope.requestConnection();
-					expect(mockAlertService.add).toHaveBeenCalledWith('success', 'Connection request sent')
+					expect(mockAlertService.add).toHaveBeenCalledWith('success', 'Connection request sent', false, jasmine.any(Function));
 				});
 
 				it('should show that the request has been sent on the profile', function () {

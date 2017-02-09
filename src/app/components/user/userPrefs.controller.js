@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserPrefsCtrl', UserPrefsCtrl);
 
-  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'AuthService', 'alertService', 'User'];
+  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'AuthService', 'alertService', 'UserDataService'];
 
-  function UserPrefsCtrl($exceptionHandler, $scope, $location, AuthService, alertService, User) {
+  function UserPrefsCtrl($exceptionHandler, $scope, $location, AuthService, alertService, UserDataService) {
     $scope.pendingConnections = [];
     $scope.approvedConnections = [];
     $scope.password = {
@@ -17,9 +17,9 @@
 
     $scope.timezones = moment.tz.names();
 
-    User.get({userId: $scope.currentUser.id}, function(user) {
-      $scope.user = user;
-      getConnections(user);
+    UserDataService.getUser($scope.currentUser.id, function () {
+      $scope.user = UserDataService.user;
+      getConnections($scope.user);
     });
 
     // Set a new password for the current user
@@ -51,8 +51,8 @@
     // Delete current user account
     $scope.deleteAccount = function () {
       alertService.add('danger', 'Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore.', true, function() {
-        User.delete({userId: $scope.user.id}, function () {
-          alertService.add('success', 'Your account was successfully removed. You are now logged out. Sorry to have you go.');
+        $scope.user.$delete(function () {
+          alertService.add('success', 'Your account was successfully removed. You are now logged out. Sorry to have you go.', false, function () {});
           AuthService.logout();
           $scope.removeCurrentUser();
           $location.path('/');
@@ -92,8 +92,8 @@
     }
 
     $scope.approveConnection = function (connection) {
-      $scope.user.approveConnection($scope.user.id, connection._id, function () {
-        alertService.add('success', 'Connection approved');
+      $scope.user.approveConnection($scope.user._id, connection._id, function () {
+        alertService.add('success', 'Connection approved', false, function () {});
         var index = $scope.user.connections.indexOf(connection);
         $scope.user.connections[index].pending = false;
         getConnections($scope.user);
@@ -105,8 +105,8 @@
     };
 
     $scope.removeConnection = function (connection) {
-      $scope.user.deleteConnection($scope.user.id, connection._id, function () {
-        alertService.add('success', 'Connection removed');
+      $scope.user.deleteConnection($scope.user._id, connection._id, function () {
+        alertService.add('success', 'Connection removed', false, function () {});
         $scope.user.connections.splice($scope.user.connections.indexOf(connection), 1);
         getConnections($scope.user);
         $scope.setCurrentUser($scope.user);
