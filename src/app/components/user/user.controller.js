@@ -9,6 +9,7 @@
 
   function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, User, UserDataService, config) {
     $scope.pictureUrl = '';
+    $scope.userLoaded = false;
     $scope.canEditUser = ($routeParams.userId === $scope.currentUser._id) || $scope.currentUser.is_admin || $scope.currentUser.isManager;
     $scope.showProfileForm  = $routeParams.edit && $scope.canEditUser ? true : false;
     $scope.saving = {
@@ -77,6 +78,7 @@
       $scope.user = UserDataService.user;
       userPicture($scope.user.picture, $scope.user.email);
       setConnectionInfo($scope.user, $scope.currentUser._id);
+      $scope.userLoaded = true;
       $scope.$broadcast('userLoaded');
     }, function (error) {
       $exceptionHandler(error, 'getUser');

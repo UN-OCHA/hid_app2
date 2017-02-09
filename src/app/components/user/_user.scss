@@ -38,6 +38,7 @@
   width: 100%;
   position: relative;
   margin-right: $base-unit;
+  flex-shrink: 0;
 
   .no-flexbox & {
     float: left;
@@ -73,6 +74,7 @@
 
 .profile-header__content {
   flex-direction: column;
+  flex-shrink: 0;
   width: 100%;
 
   .no-flexbox & {

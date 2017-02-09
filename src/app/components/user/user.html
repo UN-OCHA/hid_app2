@@ -1,3 +1,4 @@
+<loader ng-if="!userLoaded"></loader>
 <div class="profile-alert" ng-class="{'profile-alert--show': saving.show}">
   <div class="profile-alert__inner profile-alert__inner--{{saving.status}}" >
     <div ng-if="saving.status === 'saving'">
