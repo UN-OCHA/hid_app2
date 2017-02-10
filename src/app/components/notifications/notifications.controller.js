@@ -28,6 +28,9 @@
       if (notification.type === 'connection_request') {
         return '/settings'
       }
+      if (notification.type === 'connection_approved') {
+        return '/users/' + notification.createdBy;
+      }
       return '/users/' + notification.user;
     };
 
