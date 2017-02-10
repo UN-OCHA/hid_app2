@@ -1,6 +1,8 @@
 .global-header {
   background: $primary-color;
   color: $text-light;
+  font-family: $body-font;
+  @include font-size($small-font-size);
 
   .dropdown-menu {
     min-width: 106px;
@@ -13,6 +15,14 @@
         color: $text-light;
       }
     }
+  }
+
+  .global-header__sites-btn, button, a {
+    font-family: $body-font;
+  }
+
+  .nav button, a {
+    @include font-size($global-nav-font-size);
   }
 }
 
@@ -46,7 +56,7 @@
   .dropdown-menu {
     left: 0;
     right: auto;
-    width: 232px;
+    width: 200px;
   }
 }
 
@@ -66,6 +76,7 @@
 
   .icon {
     @include font-size($tiny-font-size);
+    margin-top: 0px;
   }
 }
 
@@ -84,10 +95,11 @@
   }
 
   .global-header__sites-btn {
-    @include font-size($small-font-size);
+    @include font-size($global-nav-font-size);
 
     .icon {
-      @include font-size($small-font-size);
+      @include font-size($global-nav-font-size);
+      padding-top: 2px;
     }
   }
 
