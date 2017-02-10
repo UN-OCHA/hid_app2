@@ -77,5 +77,10 @@
 		"is_admin": false,
 		"isManager": true,
 		"email": "globalmanager@example.com"
+	},
+	"orphanUser": {
+		"_id": "555",
+		"name": "black",
+		"is_orphan": "true"
 	}
 }

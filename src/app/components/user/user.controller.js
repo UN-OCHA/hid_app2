@@ -108,7 +108,7 @@
 
     $scope.notify = function () {
       $scope.user.notify('Test', function () {
-        alertService.add('success', 'User was successfully notified');
+        alertService.add('success', 'User was successfully notified', false, function () {});
       }, function () {
         alertService.add('danger', 'There was an error notifying this user');
       });
@@ -117,7 +117,7 @@
     $scope.sendClaimEmail = function () {
       alertService.add('warning', 'Are you sure?', true, function() {
         $scope.user.claimEmail(function () {
-          alertService.add('success', 'Claim email sent successfully');
+          alertService.add('success', 'Claim email sent successfully', false, function () {});
         }, function () {
           alertService.add('danger', 'There was an error sending the claim email');
         });
