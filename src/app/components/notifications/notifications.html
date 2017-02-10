@@ -1,10 +1,11 @@
+<loader ng-if="!notificationsLoaded"></loader>
 <div class="row">
   <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <div class="page-header">
       <h1 class="page-header__heading" translate>Notifications</h1>
     </div>
 
-    <ul class="block-list">
+    <ul class="block-list" ng-if="notificationsLoaded">
       <li ng-repeat="notification in notifications.all">
         <a href="{{getLink(notification)}}" class="block-list__item">
           {{notification.text}}

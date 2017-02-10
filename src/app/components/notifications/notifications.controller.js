@@ -13,6 +13,7 @@
     $scope.totalItems = 0;
     $scope.notifications = {};
     $scope.currentPage = 1;
+    $scope.notificationsLoaded = false;
 
     var params = {
       limit: limit,
@@ -40,6 +41,7 @@
       notificationsService.getNotifications(params).then(function () {
         $scope.notifications = notificationsService;
         $scope.totalItems = notificationsService.total;
+        $scope.notificationsLoaded = true;
 
         if (notificationsService.totalUnread > 0 ) {
           notificationsService.markAsRead();
