@@ -8,7 +8,7 @@
   ListEditCtrl.$inject = ['$scope', '$routeParams', '$location', 'List', 'User'];
 
   function ListEditCtrl($scope, $routeParams, $location, List, User) {
-
+    $scope.saving = false;
     $scope.visibility = [
       {
         value: 'me',
@@ -58,16 +58,20 @@
 
     // Save list settings
     $scope.listSave = function() {
+      $scope.saving = true;
       if ($scope.list._id) {
         $scope.list.$update();
         $scope.list.$promise.then(function() {
+          $scope.saving = false;
           $location.path('/lists/' + $scope.list._id);
         });
       }
       else {
+        $scope.saving = true;
         $scope.list.label = $scope.list.name;
         $scope.list = List.save($scope.list);
         $scope.list.$promise.then(function() {
+          $scope.saving = false;
           $location.path('/lists/' + $scope.list._id);
         });
       }

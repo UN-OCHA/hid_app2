@@ -35,7 +35,10 @@
           </ui-select-choices>
         </ui-select>
       </div>
-      <button type="submit" class="btn-primary" translate>Save</button>
+      <button type="submit" class="btn-primary" ng-class="{'saving' : saving}">
+        <loader type="inline" text="" ng-if="saving"></loader>
+        <span ng-if="!saving" translate>Save</span>
+      </button>
     </form>
   </div>
 </div>

@@ -49,3 +49,15 @@
 		background-image: url('../img/logo-globe.png')
 	}	
 }
+
+button .loader {
+	margin: 0;
+	@include font-size($base-font-size);
+	justify-content: center;
+
+	.loader__icon {
+		width: $base-unit*2;
+		height: $base-unit*2;
+		margin-left: $base-unit*.75;
+	}
+}

@@ -34,5 +34,8 @@
       <div ng-messages-include="app/common/messages.html"></div>
     </div>
   </div>
-  <button type="submit" class="btn-primary" ng-disabled="register.$invalid || register.$submitted" translate>Register</button>
+  <button type="submit" class="btn-primary" ng-disabled="register.$invalid || register.$submitted" ng-class="{'saving' : saving}">
+    <loader type="inline" text="" ng-if="saving"></loader>
+    <span ng-if="!saving" translate>Register</span>
+  </button>
 </form>

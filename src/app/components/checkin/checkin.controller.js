@@ -27,6 +27,7 @@
     $scope.lists = [];
     $scope.associatedLists = [];
     $scope.showAllAssociated = false;
+    $scope.saving = false;
     var searchTerm = '';
 
     function getListTypes () {
@@ -162,6 +163,7 @@
     $scope.checkin = function () {
       var defer = $q.defer();
       var promises = [];
+      $scope.saving = true;
 
       function lastTask(){
         if ($scope.currentUser._id === $scope.user._id) {
@@ -187,12 +189,14 @@
                 message += ' Some of you check-ins are pending, we will get back to you soon.';
               }
               alertService.add('success', message);
+              $scope.saving = false;
               $location.path('/dashboard');
             });
           });
         }
         else {
           alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
+          $scope.saving = false;
           defer.resolve();
         }
       }

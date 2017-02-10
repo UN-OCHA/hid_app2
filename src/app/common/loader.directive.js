@@ -1,7 +1,8 @@
 /**
  * Icons
- * Usage: <loader type=""></loader>
+ * Usage: <loader type="" text=""></loader>
  * Type is optional, set to 'inline' to not have the loader cover the page
+ * Text is optional, give a string to over-ride the default text 'Loading'. To have no text, give an empty string.
  */
 
 (function() {
@@ -13,23 +14,28 @@
 
   function loader() {
 
-    function buildTemplate (type) {
-      var loaderTemplate = '<div class="loader"><span class="loader__icon"></span><span translate>Loading</span></div>';
+    function buildTemplate (type, text) {
+      var loaderText = text || 'Loading';
+      var loaderTemplate = '<div class="loader"><span class="loader__icon"></span>';
+      if (text !== '') {
+        loaderTemplate += '<span translate>' + loaderText + '</span>';
+      }
+      loaderTemplate += '</div>';
       if (type === 'inline') {
         return loaderTemplate;
       }
       return '<div class="loader-container">' + loaderTemplate + '</div>';
     }
 
-    
     var directive = {
       restrict: 'E',
       replace: 'true',
       scope: {
-        type: '@'
+        type: '@',
+        text: '@'
       },
       link: function(scope, element) {
-        element.html(buildTemplate(scope.type));
+        element.html(buildTemplate(scope.type, scope.text));
       }
     };
 

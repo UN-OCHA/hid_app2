@@ -9,8 +9,10 @@
 
   function AuthCtrl ($exceptionHandler, $scope, $routeParams, $location, alertService, AuthService, User) {
     $scope.email = '';
+    $scope.saving = false;
 
     $scope.login = function() {
+      $scope.saving = true;
       AuthService.login($scope.email, $scope.password).then(function () {
         $scope.initCurrentUser();
 
@@ -18,6 +20,7 @@
           $scope.currentUser.setAppMetaData({hasLoggedIn: true});
           $scope.currentUser.$update(function () {
             $scope.setCurrentUser($scope.currentUser);
+            $scope.saving = false;
             $location.path('/tutorial');
           });
           return;
@@ -27,18 +30,22 @@
           $scope.currentUser.setAppMetaData({hasLoggedIn: true});
           $scope.currentUser.$update(function () {
             $scope.setCurrentUser($scope.currentUser);
+            $scope.saving = false;
             $location.path('/start');
           });
           return;
         }
 
         if (!$scope.currentUser.appMetadata.hid.viewedTutorial) {
+          $scope.saving = false;
           $location.path('/tutorial');
           return;
         }
+        $scope.saving = false;
         $location.path('/landing');
 
       }, function (error) {
+        $scope.saving = false;
         if (error.data.message === 'Please verify your email address') {
           alertService.add('danger', 'We could not log you in because your email address is not verified yet.');
           return;

@@ -428,10 +428,13 @@
         </ul>
       </div>
 
-      <button type="button" class="btn-primary btn-block" ng-click="checkin()" ng-disabled="!selectedLists.length">
-        <span ng-if="isCurrentUser" translate="">Check me in</span>
-        <span ng-if="!isCurrentUser" translate="">Check in</span>
-        <icon name="arrow-right"></icon>
+      <button type="button" class="btn-primary btn-block" ng-class="{'saving' : saving}" ng-click="checkin()" ng-disabled="!selectedLists.length">
+        <loader type="inline" text="" ng-if="saving"></loader>
+        <span ng-if="!saving">
+          <span ng-if="isCurrentUser" translate>Check me in</span>
+          <span ng-if="!isCurrentUser" translate>Check in</span>
+          <icon name="arrow-right"></icon>
+        </span>
       </button>
     </div>
   </div>

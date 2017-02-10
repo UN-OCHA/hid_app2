@@ -14,6 +14,8 @@
     $scope.isFavorite = false;
     $scope.isPending = false;
     $scope.listLoaded = false;
+    $scope.savingCheckin = false;
+    $scope.savingMembers = false;
     $scope.datePicker = {
       opened: false
     };
@@ -130,20 +132,24 @@
 
     // Add users to a list
     $scope.addMemberToList = function() {
+      $scope.savingMembers = true;
       var promises = [];
       angular.forEach($scope.usersAdded.users, function (value, key) {
         UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
           UserDataService.notify();
           alertService.add('success', 'Successfully added to list');
           $scope.usersAdded.users = [];
+          $scope.savingMembers = false;
         }, function (error) {
           alertService.add('danger', 'There was an error adding members to the list');
+          $scope.savingMembers = false;
         });
       });
     };
 
     // Check current user in this list
     $scope.checkIn = function () {
+      $scope.savingCheckin = true;
       UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, $scope.checkinUser, function (user) {
         var message = $scope.list.joinability === 'moderated' ? 'Your request for check-in is pending. We will get back to you soon.' : 'You were successfully checked in.';
 
@@ -152,12 +158,13 @@
         $scope.setCurrentUser(user);
         checkInStatus();
         UserDataService.notify();
+        $scope.savingCheckin = false;
       });
     };
 
     // Check current user out of this list
     $scope.checkOut = function () {
-
+      $scope.savingCheckin = true;
       var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         var checkInId = 0;
         for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {
@@ -171,6 +178,7 @@
             $scope.isMember = false;
             $scope.setCurrentUser(user);
             UserDataService.notify();
+            $scope.savingCheckin = false;
           });
         }
       });

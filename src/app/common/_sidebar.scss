@@ -76,6 +76,10 @@
   color: $dark-blue;
   border-bottom: 1px solid $border-grey;
   display: block;
+
+  &+ .btn-block {
+    margin-top: $base-unit*2;
+  }
 }
 
 .sidebar-section__button {
@@ -90,7 +94,6 @@
   .iconholder {
     position: absolute;
     left: $base-unit/2;
-    margin-top: -2px;
   }
 
   &:hover, &:focus {

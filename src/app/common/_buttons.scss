@@ -38,10 +38,9 @@ button[disabled], a.disabled {
   background: transparent;
 
   .icon {
-    margin: 0 $base-unit/2;
-    @include font-size(18);
+    margin: -1px $base-unit/2 0 $base-unit/2;
+    @include font-size(18);    
     display: inline-block;
-    padding-top: 1px; // to make look right with Exo font which has a slightly off line height
   }
 
   &.active {
@@ -62,9 +61,21 @@ button[disabled], a.disabled {
   border: 1px solid $primary-color;
   color: $primary-color;
 
+  .icon {
+    position: absolute;
+  }
+
   &:hover, &:focus, &.active {
     background: $primary-color;
     color: white;
+  }
+
+  &.saving {
+    &:hover, &:focus {
+      border: 1px solid $primary-color;
+      background: transparent;
+      color: $primary-color;
+    }
   }
 }
 
@@ -72,6 +83,10 @@ button[disabled], a.disabled {
   @include btn();
   border: 1px solid $text-dark;
   color: $text-dark;
+
+  .icon {
+    position: absolute;
+  }
 
   &:hover, &:focus, &.active {
     background: $text-dark;
@@ -83,6 +98,10 @@ button[disabled], a.disabled {
   @include btn();
   border: 1px solid $error-color;
   color: $error-color;
+
+  .icon {
+    position: absolute;
+  }
 
   &:hover, &:focus, &.active {
     background: $error-color;

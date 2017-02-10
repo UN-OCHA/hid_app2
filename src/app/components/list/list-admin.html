@@ -18,7 +18,10 @@
             </ui-select-choices>
           </ui-select>
         </div>
-        <button type="submit" class="btn-primary btn-block" translate>Add Member</button>
+        <button type="submit" class="btn-primary btn-block" ng-class="{'saving' : savingMembers}">
+          <loader type="inline" text="" ng-if="savingMembers"></loader>
+          <span ng-if="!savingMembers" translate>Add Member</span>
+        </button>
       </form>
     </div>
 
@@ -51,9 +54,12 @@
           </div>
         </div>
         <p class="sidebar-section__text" translate>Select a checkout date if you would like to be checked out automatically (you will receive emails from the system beforehand)</p>
-        <button type="submit" class="btn-primary btn-block">
-          <icon name="check"></icon>
-          <span translate>Check in</span>
+        <button type="submit" class="btn-primary btn-block" ng-class="{'saving' : savingCheckin}">
+          <loader type="inline" text="" ng-if="savingCheckin"></loader>
+          <span ng-if="!savingCheckin">
+            <icon name="check"></icon>
+            <span translate>Check in</span>
+          </span>
         </button>
       </form>
     </div>
@@ -70,9 +76,12 @@
           <span translate>You will be checked out of this list automatically on </span>
           <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span>
         </p>
-        <button type="submit" class="btn-primary btn-block" ng-click="checkOut();">
-          <icon name="cancel"></icon>
-          <span translate>Check out</span>
+        <button type="submit" class="btn-primary btn-block" ng-click="checkOut();" ng-class="{'saving' : savingCheckin}">
+          <loader type="inline" text="" ng-if="savingCheckin"></loader>
+          <span ng-if="!savingCheckin">
+            <icon name="cancel"></icon>
+            <span translate>Check out</span>
+          </span>
         </button>
       </div>
     </div>
