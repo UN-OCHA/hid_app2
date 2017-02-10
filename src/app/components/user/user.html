@@ -67,7 +67,7 @@
 
         <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
 
-        <div ng-show="showProfileForm">
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <label class="btn-secondary btn-upload profile-header__upload" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
             <icon name="cloud-upload"></icon>
             <span translate>Upload</span>
@@ -85,14 +85,13 @@
 
           <ul class="profile-header__info"  ng-if="!showProfileForm">
             <li ng-if="user.organization && user.organization.list"><icon name="home"></icon>{{user.organization.acronym || user.organization.name}}</li>
-            <!-- <li><icon name="user"></icon> Cluster</li> -->
             <li ng-if="user.location"><icon name="map-pin"></icon></i>{{user.location.country.name}}</li>
           </ul>
 
           <p class="profile-header__status">{{user.status}}</p>
         </div>
 
-        <div ng-if="showProfileForm">
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <label for="given_name" class="sr-only" translate>Given name</label>
           <input type="text" id="given_name" ng-model="user.given_name" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.given_name)" />
 
@@ -103,7 +102,7 @@
           <textarea id="user_status" ng-model="user.status" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.status)"></textarea>
         </div>
 
-        <div ng-show="showProfileForm">
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <label class="btn-secondary btn-upload profile-header__upload--mobile" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
             <icon name="cloud-upload"></icon>
             Upload
@@ -111,16 +110,14 @@
           <p class="form-hint profile-header__upload-info--mobile"><em translate>JPEG format 200x200px</em></p>
         </div>
 
-        <div class="profile-header__controls">
-          <button type="button" class="btn-icon" ng-click="toggleForm()" ng-if="!showProfileForm && canEditUser" ng-disabled="!isOnline">
+        <div class="profile-header__controls" ng-if="canEditUser">
+          <button type="button" class="btn-icon" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-disabled="!isOnline">
             <icon name="edit" text="Edit"></icon>
           </button>
 
-          <div ng-show="showProfileForm">
-            <button type="button" class="btn-icon btn-secondary" ng-click="toggleForm()">
-              <icon name="check" text="Close"></icon>
-            </button>
-          </div>
+          <button type="button" class="btn-icon btn-secondary" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="toggleForm()">
+            <icon name="check" text="Close"></icon>
+          </button>
         </div>
 
       </div>
@@ -157,7 +154,7 @@
           <li class="list__item" ng-if="!user.phone_numbers.length"><em translate>No phone numbers</em></li>
         </ul>
 
-        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <form class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Add phone number:</legend>
@@ -247,7 +244,7 @@
           <li class="list__item" ng-if="!user.emails.length"><em translate>No emails</em></li>
         </ul>
 
-        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <form class="form-section__edit">
             <fieldset>
               <legend class="form-section__sub-heading" translate>Add email:</legend>
@@ -326,7 +323,7 @@
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Social Networks</h3>
 
-        <form ng-show="showProfileForm" class="form-section__edit">
+        <form ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="form-section__edit">
           <fieldset>
             <legend class="form-section__sub-heading" translate>Add social network:</legend>
             <div class="form-field form-field--compact">
@@ -354,7 +351,7 @@
         <ul class="list list--has-buttons" ng-class="{'form-section__edit' : showProfileForm && user.voips.length}">
           <li class="list__item" ng-repeat="voip in user.voips">
             {{voip.type}}: {{voip.username}}
-            <button type="button" class="btn-transparent list__button" ng-show="showProfileForm" ng-click="dropItem('voip', voip)"><icon name="cancel" text="Remove"></icon></button>
+            <button type="button" class="btn-transparent list__button" ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="dropItem('voip', voip)"><icon name="cancel" text="Remove"></icon></button>
           </li>
           <li class="list__item" ng-if="!user.voips.length && !showProfileForm"><em translate>No social networks</em></li>
         </ul>
@@ -379,7 +376,7 @@
           </li>
         </ul>
 
-        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
 
           <form class="form-section__edit">
             <label class="form-section__sub-heading" for="newOrganization" translate>Add an organization:</label>
@@ -437,7 +434,7 @@
           </li>
         </ul>
 
-        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <form class="form-section__edit">
             <label class="form-section__sub-heading" for="job_title">Add a job title:</label>
             <div class="form-field form-field--compact form-inline-fields">
@@ -500,7 +497,7 @@
           </li>
         </ul>
 
-        <div ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <form class="form-section__edit">
             <label class="form-section__sub-heading" for="location">Add a location:</label>
             <div class="form-field form-field--compact">
@@ -617,7 +614,6 @@
         </form>
 
         <div ng-class="{'form-section__edit' : showProfileForm && user.functional_roles.length}">
-          <h4 class="form-section__sub-heading" translate>Roles:</h4>
           <ul class="list list--has-buttons" aria-hidden="{{showProfileForm}}">
             <li class="list__item" ng-repeat="role in user.functional_roles">
               <a href="lists/{{role.list}}">{{role.name}}</a>
@@ -625,7 +621,7 @@
                 <icon name="cancel" text="Remove"></icon>
               </button>
             </li>
-            <li class="list__item" ng-if="!user.functional_roles.length">
+            <li class="list__item" ng-if="!user.functional_roles.length" ng-show="!showProfileForm">
               <em translate>No roles</em>
             </li>
           </ul>
@@ -637,7 +633,7 @@
         <ul class="tag-list">
           <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.operations">
             <a href="/lists/{{val.list}}">{{val.name}}</a>
-            <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('operation', val)">
+            <button type="button" class="btn-transparent tag-list__button" ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="dropItem('operation', val)">
               <icon name="cancel" text="Check out"></icon>
             </button>
           </li>
@@ -649,7 +645,7 @@
         <ul class="tag-list">
           <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.bundles">
             <a href="/lists/{{val.list}}">{{val.name}}</a>
-            <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('bundle', val)">
+            <button type="button" class="btn-transparent tag-list__button" ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="dropItem('bundle', val)">
               <icon name="cancel" text="Check out"></icon>
             </button>
           </li>
@@ -661,7 +657,7 @@
         <ul class="tag-list">
           <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.disasters">
             <a href="/lists/{{val.list}}">{{val.name}}</a>
-            <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('disaster', val)">
+            <button type="button" class="btn-transparent tag-list__button" ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="dropItem('disaster', val)">
               <icon name="cancel" text="Check out"></icon>
             </button>
           </li>
@@ -673,7 +669,7 @@
         <ul class="tag-list">
           <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.lists">
             <a href="/lists/{{val.list}}">{{val.name}}</a>
-            <button type="button" class="btn-transparent tag-list__button" ng-if="showProfileForm" ng-click="dropItem('list', val)">
+            <button type="button" class="btn-transparent tag-list__button" ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="dropItem('list', val)">
               <icon name="cancel" text="Check out"></icon>
             </button>
           </li>
@@ -684,7 +680,7 @@
 
         <h3 class="form-section__heading" translate>Websites</h3>
 
-        <form ng-if="showProfileForm" class="form-section__edit">
+        <form ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="form-section__edit">
           <label class="form-section__sub-heading" for="newWebsite" translate="">Add website:</label>
           <div class="form-field form-field--compact form-inline-fields">
             <input type="url" class="form-inline-fields__item" ng-model="temp.website.url" id="newWebsite" placeholder="URL" />
@@ -699,21 +695,20 @@
         </form>
 
         <div ng-class="{'form-section__edit' : showProfileForm && user.websites.length}">
-          <h4 class="form-section__sub-heading" ng-if="user.websites.length" translate>Websites:</h4>
           <ul class="list list--has-buttons">
             <li class="list__item" ng-repeat="website in user.websites">
               <a ng-href="{{website.url}}">{{website.url}}</a>
-              <button type="button" class="btn-transparent list__button" ng-if="showProfileForm" ng-click="dropItem('website', website)">
+              <button type="button" class="btn-transparent list__button" ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="dropItem('website', website)">
                 <icon name="cancel" text="Remove"></icon>
               </button>
             </li>
-            <li class="list__item" ng-if="!user.websites.length"><em translate>No websites</em></li>
+            <li class="list__item" ng-if="!user.websites.length" ng-show="!showProfileForm"><em translate>No websites</em></li>
           </ul>
         </div>
 
       </div>
 
-      <div class="form-section form-section--compact" ng-show="currentUser.is_admin && user.verified_by">
+      <div class="form-section form-section--compact" ng-if="currentUser.is_admin && user.verified_by">
         <h3 class="form-section__heading" translate>Verified by</h3>
         <p><a href="/users/{{user.verified_by.id}}">{{user.verified_by.name}}</a></p>
       </div>
@@ -726,7 +721,7 @@
         <p ng-if="user.isManager && !showProfileForm" translate>Manager</p>
         <p ng-if="!user.is_admin && !user.isManager && !showProfileForm"><em translate>No permissions set</em></p>
 
-        <ul class="list form-section__edit" ng-if="showProfileForm && currentUser.is_admin">
+        <ul class="list form-section__edit" ng-if="canEditUser && currentUser.is_admin" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <li class="list__item">
             <input type="checkbox"
             id="isAdmin"
