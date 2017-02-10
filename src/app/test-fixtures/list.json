@@ -1,0 +1,34 @@
+{
+	"lists": [
+		{
+			"_id": "list-1-id",
+			"name": "list-1",
+			"type": "list"
+		},
+		{
+			"_id": "list-2-id",
+			"name": "list-2",
+			"type": "list"
+		},
+		{
+			"_id": "list-3-id",
+			"name": "list-3",
+			"type": "operation"
+		},
+		{
+			"_id": "list-4-id",
+			"name": "list-4",
+			"type": "office"
+		},
+		{
+			"_id": "list-5-id",
+			"name": "list-5",
+			"type": "disaster"
+		},
+		{
+			"_id": "list-6-id",
+			"name": "list-6",
+			"type": "bundle"
+		}
+	]
+}

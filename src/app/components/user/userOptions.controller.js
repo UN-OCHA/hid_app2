@@ -52,7 +52,6 @@
             checkInId = userList._id;
           }
         });
-
         if (checkInId) {
           UserCheckInService.delete({userId: user._id, listType: listType, checkInId: checkInId}, {}, function () {
             alertService.add('success', 'The user was successfully checked out.');
@@ -80,7 +79,7 @@
       var inList = false;
       angular.forEach(config.listTypes, function (listType) {
         angular.forEach(user[listType + 's'], function (userList) {
-          if (list._id === userList.list._id) {
+          if (list._id === userList.list) {
             inList = true;
             return inList;
           }
@@ -114,7 +113,7 @@
         });
         return;
       }
-      ListDataService.getManagedAndOwnedLists($scope.currentUser, searchTerm, function (lists) {
+      ListDataService.getManagedAndOwnedLists(currentUser, searchTerm, function (lists) {
         $scope.availableLists = filterLists(lists, $scope.selectedLists, user);
         if (!lists.length) {
           $scope.hasLists = false;
