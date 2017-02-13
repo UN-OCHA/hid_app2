@@ -39,6 +39,10 @@
 			}
 		],
 		"email": "kathleen@example.com",
+		"favoriteLists": [
+			{"_id": "1"},
+			{"_id": "2"}
+		],
 		"job_titles": [],
 		"lists": [
 			{

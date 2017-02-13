@@ -5,9 +5,9 @@
     .module('app.dashboard')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  DashboardCtrl.$inject = ['$scope', 'alertService', 'config', 'gettextCatalog', 'List', 'ListDataService', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
+  DashboardCtrl.$inject = ['$rootScope', '$scope', 'alertService', 'config', 'DashboardService', 'gettextCatalog', 'List', 'ListDataService', 'offlineService', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
-  function DashboardCtrl($scope, alertService, config, gettextCatalog, List, ListDataService, Service, User, UserCheckInService, UserDataService) {
+  function DashboardCtrl($rootScope, $scope, alertService, config, DashboardService, gettextCatalog, List, ListDataService, offlineService, Service, User, UserCheckInService, UserDataService) {
     $scope.tabs = {};
     $scope.activeTab = 'favorites';
     $scope.listsMember = [];
@@ -16,20 +16,20 @@
     $scope.itemsPerPage = 5;
     $scope.currentPage = 1;
 
-    ListDataService.getManagedAndOwnedLists($scope.currentUser, '', function (lists) {
-      $scope.listsOwnedOrManaged = lists;
+    console.log($scope.currentUser)
+
+    offlineService.checkCachedLists();
+    DashboardService.getFavoriteLists($scope.currentUser);
+    DashboardService.getListsMember($scope.currentUser);
+    $scope.favoriteLists = DashboardService.favoriteLists;
+    $scope.listsMember = DashboardService.listsMember;
+    
+    $rootScope.$on('updateCachedLists', function () {
+      DashboardService.updateListsCacheStatus();
     });
 
-    angular.forEach(config.listTypes, function (listType) {
-      angular.forEach($scope.currentUser[listType + 's'], function (val) {
-        var listId = val.list;
-        if (typeof val.list === "object") {
-          listId = val.list._id;
-        }
-        var tmpList = List.get({listId: listId}, function () {
-          $scope.listsMember.push(tmpList);
-        });
-      });
+    ListDataService.getManagedAndOwnedLists($scope.currentUser, '', function (lists) {
+      $scope.listsOwnedOrManaged = lists;
     });
 
     function getSubscriptions () {

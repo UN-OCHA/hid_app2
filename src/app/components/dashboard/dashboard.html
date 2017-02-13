@@ -49,10 +49,12 @@
           ng-class="tabClass('favorites')"
           >
           <ul class="list list--has-buttons list--has-dividers">
-              <li class="list__item" ng-if="!currentUser.favoriteLists.length" translate>
+              <li class="list__item" ng-if="!favoriteLists.length" translate>
                 You don't have any favorite lists
               </li>
-              <li class="list__item" ng-repeat="list in currentUser.favoriteLists track by $index">
+              <li class="list__item" ng-repeat="list in favoriteLists track by $index">
+                <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
+                <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
                 <a href="/lists/{{list._id}}">{{list.name}}</a>
                 <div uib-dropdown class="list__button">
                   <button type="button" class="btn-transparent" uib-dropdown-toggle>
@@ -84,6 +86,8 @@
                 You are not part of any lists
               </li>
               <li class="list__item" ng-repeat="list in listsMember track by $index">
+                <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
+                <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved" ></icon>
                 <a href="/lists/{{list._id}}">{{list.name}}</a>
                 <div uib-dropdown class="list__button">
                   <button type="button" class="btn-transparent" uib-dropdown-toggle>
@@ -129,7 +133,7 @@
             </ul>
         </div>
       </div>
-     
+      
     </div>
 
   </div>

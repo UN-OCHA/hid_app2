@@ -8,6 +8,11 @@
   }
 }
 
+.dashboard-cache-icon {
+  color: $primary-color;
+  margin-right: $base-unit/2;
+}
+
 @include media-query(sm) {
 
   .dashboard-ctas {
