@@ -39,7 +39,23 @@
 			}
 		],
 		"email": "kathleen@example.com",
+		"favoriteLists": [
+			{"_id": "1"},
+			{"_id": "2"}
+		],
 		"job_titles": [],
+		"lists": [
+			{
+				"_id": "checkin-id-1",
+				"list": "list-1-id",
+				"name": "list-1"
+			},
+			{
+				"_id": "checkin-id-2",
+				"list": "list-2-id",
+				"name": "list-2"
+			}
+		],
 		"location": {
 			"country": {
 				"name": "UK"
@@ -77,5 +93,10 @@
 		"is_admin": false,
 		"isManager": true,
 		"email": "globalmanager@example.com"
+	},
+	"orphanUser": {
+		"_id": "555",
+		"name": "black",
+		"is_orphan": "true"
 	}
 }

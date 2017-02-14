@@ -3,37 +3,22 @@
 
   describe('User options controller', function () {
 
-    var scope, mockAlertService, mockList, mockListDataService, mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, unVerifiedUser, verifiedUser;
-
-    var user = {
-      _id: 'user-id',
-      lists: []
-    };
-    var listToRemove = {
-      _id: 'list-id-1',
-      type: 'list'
-    };
-    var list1 = {
-      _id: 'checkin-id-1',
-      list: 'list-id-1'
-    };
-    var list2 = {
-      _id: 'checkin-id-2',
-      list: 'list-id-2'
-    };
-    var list3 = {
-      _id: 'checkin-id-3',
-      list: 'list-id-3'
-    };
-
-    var allLists = [list1, list2];
-    var ownedAndManagedLists = [list1, list2, list3];
+    var allLists, listFixture, ownedAndManagedLists, mockConfig, mockAlertService, mockList, mockListDataService, 
+    mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm, userFixture;    
     
     beforeEach(function() {
-      mockUser = {};
-      module('app.user', function ($provide) {
-        $provide.value('User', mockUser);
-      });
+      userFixture = readJSON('app/test-fixtures/user.json');
+      listFixture = readJSON('app/test-fixtures/list.json');
+      searchTerm = 'findme';
+
+      allLists = listFixture.lists;
+      ownedAndManagedLists = listFixture.lists;
+
+      mockUser = userFixture.user1;
+      mockUser.$update = function () {};
+      mockUser.$delete = function () {};
+      spyOn(mockUser, '$update').and.callFake(function () {});
+      spyOn(mockUser, '$delete').and.callFake(function () {});
 
       modalResult = {
         then: function() {}
@@ -59,12 +44,13 @@
 
       mockUserCheckInService = {};
       mockUserDataService = {};
+      mockConfig = {};
+      mockConfig.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
       module('app.user', function($provide) {
         $provide.value('UserCheckInService', mockUserCheckInService);
         $provide.value('UserDataService', mockUserDataService);
-        $provide.constant('config', {});
+        $provide.constant('config', mockConfig);
       });
-
 
       inject(function($rootScope, $q, $injector, $controller) {
         scope = $rootScope.$new();
@@ -74,101 +60,67 @@
         mockList.query = function () {};
         mockListDataService.getManagedAndOwnedLists = function () {};
 
-        verifiedUser = $injector.get('User');
-        verifiedUser._id = 'user-id';
-        verifiedUser.verified = true;
-        verifiedUser.$update = function () {};
-        verifiedUser.$delete = function () {};
-
-        unVerifiedUser = $injector.get('User');
-        unVerifiedUser._id = 'user-id-2';
-        unVerifiedUser.verified = false;
-        unVerifiedUser.$update = function () {};
-
-        spyOn(verifiedUser, '$update').and.callFake(function () {});
-        spyOn(verifiedUser, '$delete').and.callFake(function () {});
         spyOn(mockAlertService, 'add').and.callFake(function (argument1, argument2, arg3, callback) {
-            callback([argument1, argument2, arg3]);
+            callback();
         });
 
         spyOn(mockUserCheckInService, 'delete').and.callThrough();
-
-        var searchTerm = 'findme';
-        spyOn(mockListDataService, 'getManagedAndOwnedLists').and.callFake(function({}, searchTerm, callback) {
+        spyOn(mockListDataService, 'getManagedAndOwnedLists').and.callFake(function(arg, searchTerm, callback) {
           callback(ownedAndManagedLists);
         });
-        spyOn(mockList, 'query').and.callFake(function({}, callback) {
+        spyOn(mockList, 'query').and.callFake(function(arg, callback) {
           callback(allLists);
         });
 
         $controller('UserOptionsCtrl', {
-            $scope: scope,
-            $uibModal: mockUibModal
-          });
+          $scope: scope,
+          $uibModal: mockUibModal
+        });
 
-          scope.$digest();
+        scope.$digest();
       });
 
     });
 
-    function controllerSetup () {
-      beforeEach (function () {
-        inject(function($controller) {
-
-          $controller('UserOptionsCtrl', {
-            $scope: scope,
-            $uibModal: mockUibModal
-          });
-
-          scope.$digest();
-        });
-      });
-    }
-
     describe('Remove user from the list', function () {
-      // controllerSetup();
 
       beforeEach(function () {
-        user.lists.push(list1);
-        user.lists.push(list2);
-        scope.removeFromList(user, listToRemove);
+        scope.removeFromList(mockUser, listFixture.lists[1]);
       });
 
       it('should ask the user to confirm they want the removal', function () {
         expect(mockAlertService.add).toHaveBeenCalledWith('warning', 'Are you sure?', true, jasmine.any(Function));
       });
 
-      it('should call check the user out of the list', function () {
-        var deleteParams = {userId: 'user-id', listType: 'lists', checkInId: 'checkin-id-1'};
+      it('should check the user out of the list', function () {
+        var deleteParams = {userId: mockUser._id, listType: 'lists', checkInId: 'checkin-id-2'};
         expect(mockUserCheckInService.delete).toHaveBeenCalledWith(deleteParams, {}, jasmine.any(Function), jasmine.any(Function));
       });
 
     });
 
     describe('Verifying / unverifying users', function () {
-      controllerSetup();
 
       it('should verify the user', function () { 
-        scope.verifyUser(unVerifiedUser);
+        scope.verifyUser(mockUser);
 
-        expect(unVerifiedUser.verified).toBe(true);
+        expect(mockUser.verified).toBe(true);
         expect(mockUser.$update).toHaveBeenCalled();
       });
 
       it('should un-verify the user', function () { 
-        scope.verifyUser(verifiedUser);
+        mockUser.verified = true;
+        scope.verifyUser(mockUser);
 
-        expect(verifiedUser.verified).toBe(true);
+        expect(mockUser.verified).toBe(false);
         expect(mockUser.$update).toHaveBeenCalled();
       });
     });
     
-
     describe('Deleting a user', function () {
-      controllerSetup();
 
       beforeEach(function () {
-        scope.deleteUser(verifiedUser);
+        scope.deleteUser(mockUser);
       });
 
       it('should ask the user to confirm they want to delete', function () {
@@ -181,10 +133,10 @@
     });
     
     describe('Checking user into lists', function () {
-      controllerSetup();
 
       describe('As an admin', function () {
         beforeEach(function () {
+          scope.selectedLists = [listFixture.lists[4]];
           scope.openCheckInModal({}, true);
         });
 
@@ -194,11 +146,7 @@
 
         describe('Getting available lists', function () {
           beforeEach(function () {
-            scope.currentUser = {
-              _id: 124,
-              is_admin: true
-            };
-            scope.getAvailableLists(scope.currentUser, {}, 'findme');
+            scope.getAvailableLists(userFixture.adminUser, userFixture.user1, 'findme');
           });
 
           it('should get lists with your searchTerm', function () {
@@ -210,8 +158,9 @@
             expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
           });
 
-          it('should combine the managed and owned lists and remove any duplicates', function () {
-            expect(scope.availableLists).toEqual(allLists);
+          it('should remove any lists the user is already in or that have already been selected', function () {
+            var expectedLists = [listFixture.lists[2], listFixture.lists[3], listFixture.lists[5]];
+            expect(scope.availableLists).toEqual(expectedLists);
           });
 
         });
@@ -220,6 +169,7 @@
 
       describe('As a global manager', function () {
         beforeEach(function () {
+          scope.selectedLists = [listFixture.lists[4]];
           scope.openCheckInModal({}, true);
         });
 
@@ -229,11 +179,7 @@
 
         describe('Getting available lists', function () {
           beforeEach(function () {
-            scope.currentUser = {
-              _id: 124,
-              isManager: true
-            };
-            scope.getAvailableLists(scope.currentUser, {}, 'findme');
+            scope.getAvailableLists(userFixture.globalManagerUser, userFixture.user1, 'findme');
           });
 
           it('should get lists with your searchTerm', function () {
@@ -245,8 +191,9 @@
             expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
           });
 
-          it('should combine the managed and owned lists and remove any duplicates', function () {
-            expect(scope.availableLists).toEqual(allLists);
+          it('should remove any lists the user is already in or that have already been selected', function () {
+            var expectedLists = [listFixture.lists[2], listFixture.lists[3], listFixture.lists[5]];
+            expect(scope.availableLists).toEqual(expectedLists);
           });
 
         });
@@ -257,18 +204,17 @@
         
         describe('Getting available lists', function () {
           beforeEach(function () {
-            scope.currentUser = {
-              _id: 124
-            };
-            scope.getAvailableLists(scope.currentUser, {}, 'findme');
+            scope.selectedLists = [listFixture.lists[3]];
+            scope.getAvailableLists(userFixture.user2, userFixture.user1, 'findme');
           });
 
           it('should get lists you own and manage', function () {
-            expect(mockListDataService.getManagedAndOwnedLists).toHaveBeenCalledWith(scope.currentUser, 'findme', jasmine.any(Function));
+            expect(mockListDataService.getManagedAndOwnedLists).toHaveBeenCalledWith(userFixture.user2, 'findme', jasmine.any(Function));
           });
 
-          it('should add the owned lists to scope', function () {
-            expect(scope.availableLists).toEqual(ownedAndManagedLists);
+          it('should remove any lists the user is already in or that have already been selected', function () {
+            var expectedLists = [listFixture.lists[2], listFixture.lists[4], listFixture.lists[5]];
+            expect(scope.availableLists).toEqual(expectedLists);
           });
 
         });

@@ -7,7 +7,7 @@
 
   	userFixture = readJSON('app/test-fixtures/user.json');
 
-  	function setUpCtrl(user, currentUser) {
+  	function setUpCtrl(user, currentUser, edit) {
   		inject(function($rootScope, $controller) {
   			scope = $rootScope.$new();
   			scope.currentUser = currentUser;
@@ -16,6 +16,8 @@
   			scopeUser.$update = function () {};
   			scopeUser.$delete = function () {};
   			scopeUser.requestConnection = function () {};
+  			scopeUser.notify = function () {};
+  			scopeUser.claimEmail = function () {};
 
   			spyOn(mockUserDataService, 'getUser').and.callFake(function (arg, callback) {
 	      	mockUserDataService.user = scopeUser;
@@ -30,10 +32,21 @@
 	      spyOn(scopeUser, 'requestConnection').and.callFake(function (arg1, callback) {
 	      	callback();
 	      });
+	      spyOn(scopeUser, 'notify').and.callFake(function (arg1, callback) {
+	      	callback();
+	      });
+	      spyOn(scopeUser, 'claimEmail').and.callFake(function (callback) {
+	      	callback();
+	      });
+
+	      var routeParams = {userId: user._id};
+	      if (edit) {
+	      	routeParams.edit = 'edit';
+	      }
 	      
   			$controller('UserCtrl', {
           $scope: scope,
-          $routeParams: {userId: user._id}
+          $routeParams: routeParams
         });
         scope.$digest();
   		});
@@ -466,14 +479,61 @@
 
 			});
 
-		});
+			describe('Reporting a problem', function () {
 
-		//TO DO
-  	// notify?
-  	// user claim email?
-  	// v card
-  	// open and close edit form
-  	//show profile form if /edit
+				beforeEach(function () {
+					setUpCtrl(userFixture.user2, userFixture.user1);
+					scope.notify();
+				});
+
+				it('should send a notification to the user', function () {
+					expect(scopeUser.notify).toHaveBeenCalled();
+				});
+
+				it('should show the success message', function () {
+					expect(mockAlertService.add).toHaveBeenCalledWith('success', 'User was successfully notified', false, jasmine.any(Function));
+				});
+
+			});
+
+			describe('Claiming an orphan account', function () {
+
+				beforeEach(function () {
+					setUpCtrl(userFixture.orphanUser, userFixture.user1);
+					scope.sendClaimEmail();
+				});
+
+				it('should ask you to confirm', function () {
+					expect(mockAlertService.add).toHaveBeenCalledWith('warning', 'Are you sure?', true, jasmine.any(Function));
+				});
+
+				it('should claim the email', function () {
+					expect(scopeUser.claimEmail).toHaveBeenCalled();
+				});
+
+				it('should show the success message', function () {
+					expect(mockAlertService.add).toHaveBeenCalledWith('success', 'Claim email sent successfully', false, jasmine.any(Function));
+				});
+
+			});
+
+			describe('Edit profile', function () {
+
+				it('should have the edit profile form open if user follows an edit link', function () {
+					setUpCtrl(userFixture.user1, userFixture.user1, true);
+					scope.sendClaimEmail();
+					expect(scope.showProfileForm).toBe(true);
+				});
+
+				it('should not have the edit profile form open if user follows an edit link to a profile they cannot edit', function () {
+					setUpCtrl(userFixture.user1, userFixture.user2, true);
+					scope.sendClaimEmail();
+					expect(scope.showProfileForm).toBe(false);
+				});
+
+			});
+
+		});
 
   });
 
