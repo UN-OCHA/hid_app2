@@ -16,8 +16,6 @@
     $scope.itemsPerPage = 5;
     $scope.currentPage = 1;
 
-    console.log($scope.currentUser)
-
     offlineService.checkCachedLists();
     DashboardService.getFavoriteLists($scope.currentUser);
     DashboardService.getListsMember($scope.currentUser);
