@@ -155,7 +155,7 @@
       background: $light-grey;
 
       .tabs--vertical & { 
-        border-bottom: none;
+        border-bottom-color: transparent;
         border-left: 2px solid $primary-color;
       }
     }
