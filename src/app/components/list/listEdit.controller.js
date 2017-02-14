@@ -53,12 +53,16 @@
 
     // Retrieve managers
     $scope.getManagers = function(search) {
+      if (search === '') {
+        return;
+      }
       $scope.newManagers = User.query({'name': search});
     };
 
     // Save list settings
     $scope.listSave = function() {
       $scope.saving = true;
+
       if ($scope.list._id) {
         $scope.list.$update();
         $scope.list.$promise.then(function() {
@@ -68,7 +72,13 @@
       }
       else {
         $scope.saving = true;
-        $scope.list.label = $scope.list.name;
+        $scope.list.labels = [
+          {
+            text: $scope.list.label,
+            language: $scope.language
+          }
+        ]; 
+
         $scope.list = List.save($scope.list);
         $scope.list.$promise.then(function() {
           $scope.saving = false;
