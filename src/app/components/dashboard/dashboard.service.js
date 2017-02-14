@@ -35,18 +35,20 @@
 
   	dashboardService.getListsMember = function (user) {
   		var lists = [];
-  		angular.forEach(config.listTypes, function (listType) {
-	      angular.forEach(user[listType + 's'], function (val) {
-	        var listId = val.list;
-	        if (typeof val.list === "object") {
-	          listId = val.list._id;
-	        }
-	        List.get({listId: listId}, function (list) {
-	          updateCacheStatus(list);
-	          lists.push(list);
-	        });
-	      });
-	    });
+      angular.forEach(config.listTypes, function (listType) {
+        angular.forEach(user[listType + 's'], function (checkin) {
+          // construct a list object so don't need to make an api request for the list here
+          var list = {
+            _id: checkin.list,
+            name: checkin.name,
+            type: listType,
+            checkinId: checkin._id
+          };
+
+          updateCacheStatus(list);
+          lists.push(list);
+        });
+      });
 	    dashboardService.listsMember = lists;
   	};
 

@@ -50,17 +50,13 @@
 
   		beforeEach(function () {
   			userFixture.user1.lists = [];
-	  		userFixture.user1.organizations = [{list: "3"}];
+	  		userFixture.user1.organizations = [{_id: "some-checkin-id", name: "list-3", list: "3"}];
 	  		DashboardService.getListsMember(userFixture.user1);
   		});
 
-			it('should get the lists the user is a member of', function () {
-	  		expect(mockList.get).toHaveBeenCalledWith({listId: "3"}, jasmine.any(Function));
-	  	});  		
-
-	  	it('should get the lists the user is a member of and update the cache status for each', function () {
-	  		expect(DashboardService.listsMember).toEqual([{_id: "3", cacheStatus: 'caching'}]);
-	  	}); 
+      it('should transform and add cache status to the lists the user is a member of', function () {
+        expect(DashboardService.listsMember).toEqual([{_id: "3", name: "list-3", type: "organization", checkinId: 'some-checkin-id', cacheStatus: 'caching'}]);
+      });   
 
   	});
 

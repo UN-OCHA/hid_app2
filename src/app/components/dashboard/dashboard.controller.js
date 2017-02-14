@@ -57,20 +57,12 @@
 
     $scope.leaveList = function (list) {
       alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-        var checkInId;
-        angular.forEach($scope.currentUser[list.type + 's'], function (userList) {
-          if (list._id === userList.list) {
-            checkInId = userList._id;
-          }
+        UserCheckInService.delete({userId: $scope.currentUser._id, listType: list.type + 's', checkInId: list.checkinId}, {}, function(user) {
+          alertService.add('success', gettextCatalog.getString('Successfully removed from list.'));
+          $scope.listsMember.splice($scope.listsMember.indexOf(list), 1);
+          UserDataService.notify();
+          $scope.setCurrentUser(user);
         });
-        if (checkInId) {
-          UserCheckInService.delete({userId: $scope.currentUser._id, listType: list.type + 's', checkInId: checkInId}, {}, function(user) {
-            alertService.add('success', gettextCatalog.getString('Successfully removed from list.'));
-            $scope.listsMember.splice($scope.listsMember.indexOf(list), 1);
-            UserDataService.notify();
-            $scope.setCurrentUser(user);
-          });
-        }
       });
     };
 
