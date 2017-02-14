@@ -112,7 +112,7 @@
 
       angular.forEach($scope.userTypes, function (type) {
         //handle unverified - swithced tos vefri
-        if ($scope.selectedFilters.hasOwnProperty(type.value)) {
+        if ($scope.selectedFilters && $scope.selectedFilters.hasOwnProperty(type.value)) {
           $scope.selectedFilters.user_type = {};
 
           if ($scope.selectedFilters.verified === false) {
