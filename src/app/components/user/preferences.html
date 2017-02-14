@@ -1,0 +1,201 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h1 class="page-header__heading" translate>Account preferences</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="tabs tabs--responsive tabs--vertical">
+    <nav class="tabs-nav col-md-3">
+      <button type="button" 
+      class="tabs-nav__button" 
+      ng-class="tabClass('connections')"
+      ng-click="toggleTabs('connections')">
+        <span translate>Your connections</span>
+      </button>
+
+      <button type="button" 
+      class="tabs-nav__button" 
+      ng-click="toggleTabs('password')"
+      ng-class="tabClass('password')">
+        <span translate>Change password</span>
+      </button>
+
+      <button type="button" 
+        class="tabs-nav__button" 
+        ng-click="toggleTabs('apps')"
+        ng-class="tabClass('apps')">
+        <span translate>Authorized applications</span>
+      </button>
+
+      <button type="button" 
+        class="tabs-nav__button" 
+        ng-click="toggleTabs('settings')"
+        ng-class="tabClass('settings')">
+        <span translate>Settings</span>
+      </button>
+    </nav>
+
+    <div class="tabs__section col-md-9">
+      <button type="button" 
+      class="tabs-nav__button" 
+      ng-class="tabClass('connections')"
+      ng-click="toggleTabs('connections')">
+        <span translate>Your connections</span>
+        <icon name="arrow-down"></icon>
+      </button>
+
+      <div class="tabs__content" ng-class="tabClass('connections')">
+        <div class="block">
+          <h2 class="block-heading" translate>Pending approval</h2>
+          <ul class="connections-list">
+            <li class="" ng-if="!pendingConnections.length"><em translate>No pending connections</em></li>
+            <li class="connection" ng-repeat="connection in pendingConnections">
+              <a ng-href="/users/{{connection.user._id}}" class="connection__name">{{connection.user.name}}</a>
+              <button class="btn-transparent connection__btn" ng-disabled="!isOnline" ng-click="approveConnection(connection)" translate>
+                Approve
+              </button>
+              <button class="btn-transparent connection__btn" ng-disabled="!isOnline" ng-click="removeConnection(connection)" translate>
+                Deny
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="block">
+          <h2 class="block-heading" translate>Current connections</h2>
+          <ul class="list">
+            <li class="" ng-if="!approvedConnections.length"><em translate>No approved connections</em></li>
+            <li class="connection" ng-repeat="connection in approvedConnections">
+              <a ng-href="/users/{{connection.user._id}}" class="connection__name">{{connection.user.name}}</a>
+              <button class="btn-transparent connection__btn" ng-disabled="!isOnline" ng-click="removeConnection(connection)" translate>
+                Cancel
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs__section col-md-9">
+      <button type="button" 
+      class="tabs-nav__button" 
+      ng-click="toggleTabs('password')"
+      ng-class="tabClass('password')">
+        <span translate>Change password</span>
+        <icon name="arrow-down"></icon>
+      </button>
+
+      <div class="tabs__content" ng-class="tabClass('password')">
+        <form name="changePassword" ng-submit="changePassword.$valid && savePassword(changePassword)" autocomplete="off" novalidate>
+
+        <fieldset class="block">
+          <legend class="block-heading" translate>Change password</legend>
+
+          <div class="form-field" ng-class="{'has-error': changePassword.oldPassword.$touched && changePassword.oldPassword.$invalid}">
+
+            <label for="oldPassword" translate>Current password</label>
+            <input name="oldPassword" id="oldPassword" type="password" class="form-control" placeholder="Your current password" ng-model="password.old" required>
+            <div ng-messages="changePassword.oldPassword.$error" ng-show="changePassword.oldPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+              <div ng-messages-include="app/common/messages.html"></div>
+            </div>
+          </div>
+          <div class="form-field" ng-class="{'has-error': changePassword.newPassword.$touched && changePassword.newPassword.$invalid}">
+            <label for="newPassword" translate>New password</label>
+            <input type="password" name="newPassword" id="newPassword" class="form-control" placeholder="Your new password" ng-model="password.new" required>
+            <div ng-messages="changePassword.newPassword.$error" ng-show="changePassword.newPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+              <div ng-messages-include="app/common/messages.html"></div>
+            </div>
+          </div>
+
+          <div class="form-field" ng-class="{'has-error': changePassword.confirmPassword.$touched && changePassword.confirmPassword.$invalid}">
+            <label for="confirmPassword" translate>Confirm new password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" match-password="newPassword" placeholder="Your new password" ng-model="confirmPassword" required>
+            <div ng-messages="changePassword.confirmPassword.$error" ng-show="changePassword.confirmPassword.$touched" ng-messages-multiple="ng-messages-multiple">
+              <div ng-messages-include="app/common/messages.html"></div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" ng-disabled="!isOnline || changePassword.$invalid || changePassword.$submitted" translate>Update password</button>
+        </fieldset>
+      </form>
+      </div>
+    </div>
+
+    <div class="tabs__section col-md-9">
+      <button type="button" 
+        class="tabs-nav__button" 
+        ng-click="toggleTabs('apps')"
+        ng-class="tabClass('apps')">
+        <span translate>Authorized applications</span>
+        <icon name="arrow-down"></icon>
+      </button>
+
+      <div class="tabs__content" ng-class="tabClass('apps')">
+        <div class="block">
+          <h2 class="block-heading" translate>Authorized Applications</h2>
+          <p class="form-section__info" ng-if="!user.authorizedClients.length" translate><em>No applications currently have access to your Humanitarian ID account.</em></p>
+          <p class="form-section__info" ng-if="user.authorizedClients.length" translate>You have granted the following applications access to your Humanitarian ID account.</p>
+          <ul class="list list--has-buttons">
+            <li class="list__item" ng-repeat="client in user.authorizedClients">
+              {{client.name}}
+              <button class="btn-transparent" ng-disabled="!isOnline" ng-click="revokeClient(client)">
+                <icon name="cancel" text="Revoke access for {{client.name}}"></icon>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs__section col-md-9">
+      <button type="button" 
+        class="tabs-nav__button" 
+        ng-click="toggleTabs('settings')"
+        ng-class="tabClass('settings')">
+        <span translate>Settings</span>
+        <icon name="arrow-down"></icon>
+      </button>
+
+      <div class="tabs__content" ng-class="tabClass('settings')">
+        <form name="settings" ng-submit="settings.$valid && saveSettings(settings)" autocomplete="off" novalidate>
+          <fieldset class="block">
+            <legend class="block-heading" translate>Change settings</legend>
+
+            <div class="form-field">
+              <label for="locale" translate>Locale</label>
+              <div class="styled-select">
+                <select name="locale" id="locale" ng-model="user.locale">
+                  <option value="en">English</option>
+                  <option value="fr">Français</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="zoneinfo" translate>Timezone</label>
+              <ui-select ng-model="user.zoneinfo" name="zoneinfo" id="zoneinfo">
+                <ui-select-match placeholder="{{'Timezone'|translate}}">
+                  {{$select.selected}}
+                </ui-select-match>
+                <ui-select-choices repeat="timezone in timezones | filter: $select.search track by $index">
+                  {{timezone}}
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <button type="submit" class="btn-primary" ng-disabled="!isOnline" translate>Save settings</button>
+          </fieldset>
+        </form>
+
+        <div class="block">
+          <h2 class="block-heading" translate>Delete account</h2>
+
+          <p class="form-section__info" translate>Deleting your account means that you will lose your access to Humanitarian ID.</p>
+          <button type="button" class="btn-danger" ng-disabled="!isOnline" ng-click="deleteAccount()" translate>Delete account</button>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>

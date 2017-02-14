@@ -1,0 +1,50 @@
+.connection {
+	display: block;
+	margin-bottom: $base-unit*2;
+}
+
+.connection__name {
+	display: block;
+	text-decoration: none;
+	color: $dark-blue;
+	margin-bottom: $base-unit/2;
+	word-wrap: break-word;
+
+	&:hover, &:focus {
+		text-decoration: underline;
+	}
+}
+
+.connection__btn {
+	@include font-size($small-font-size);
+	padding: 0;
+
+	&+ .connection__btn {
+		border-left: 1px solid $border-grey;
+    padding-left: $base-unit;
+    margin-left: $base-unit/2;
+    height: $base-unit*1.5;
+	}
+}
+
+@include media-query(sm) {
+
+	.connections-list {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.connection {
+		padding-right: $base-unit*2;
+		width: 50%;
+	}
+
+}
+
+@include media-query(md) {
+
+	.connection {
+		width: 25%;
+	}
+
+}

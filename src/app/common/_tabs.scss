@@ -23,6 +23,10 @@
 
 .tabs__section {
   border-bottom: 1px solid $border-grey;
+
+  .tabs--vertical & { 
+    border: none;
+  }
 }
 
 .tabs-nav__button {
@@ -37,7 +41,7 @@
   color: $text-dark;
   text-align: left;
 
-  &:hover, &:focus, &:disabled:hover, &:disabled:focus, &.mobile-active, &:disabled {
+  &:hover, &:focus, &:disabled:hover, &:disabled:focus, &.mobile-active, &.mobile-active:focus, &:disabled {
     color: $primary-color;
     font-weight: bold;
     box-shadow: none;
@@ -60,6 +64,10 @@
     padding: $base-unit*2 $base-unit $base-unit*1.5 $base-unit;
   }
 
+  .tabs--vertical & { 
+    border-bottom: 1px solid $border-grey;
+  }
+
 }
 
 .tabs__content {
@@ -67,6 +75,10 @@
 
   &.mobile-active {
     display: block;
+  }
+
+  .tabs--vertical & { 
+    padding: $base-unit 0;
   }
 }
 
@@ -92,6 +104,11 @@
     .tabs--responsive & {
       display: flex;
     }
+
+    .tabs--vertical & {
+      flex-direction: column;
+      border: none;
+    }
     
   }
 
@@ -105,7 +122,13 @@
       display: inline-block;
       width: auto;
       padding: $base-unit*1.5 $base-unit $base-unit $base-unit;
-    
+    }
+
+    .tabs--vertical & { 
+      border-bottom: none;
+      border-left: 2px solid transparent;
+      padding: $base-unit*2.5 $base-unit;
+      @include font-size($small-font-size);
     }
   
     .tabs__section & {
@@ -123,13 +146,18 @@
       font-weight: normal;
     }
 
-    &.desktop-active, &.desktop-active.mobile-active {
+    &.desktop-active, &.desktop-active.mobile-active, &.mobile-active:focus, &.mobile-active:hover,  &.desktop-active:focus,  &.desktop-active:hover {
       color: $primary-color;
       font-weight: bold;
       box-shadow: none;
       border: none;
       border-bottom: 2px solid $primary-color;
       background: $light-grey;
+
+      .tabs--vertical & { 
+        border-bottom: none;
+        border-left: 2px solid $primary-color;
+      }
     }
   }
 
@@ -139,9 +167,13 @@
       display: none;
     }
 
-    &:hover, &:focus, &.desktop-active, &.desktop-active.mobile-active {
+    &.desktop-active, &.desktop-active.mobile-active {
       display: block;     
     } 
+
+    .tabs--vertical & { 
+      padding: 0;
+    }
   }
 }
 
@@ -157,6 +189,11 @@
     @include font-size($base-font-size);
     padding-left: $base-unit*5;
     padding-right: $base-unit*5;
+
+    .tabs--vertical & { 
+      padding-right: $base-unit;
+      @include font-size($small-font-size);
+    }
   }
 
 }

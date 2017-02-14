@@ -115,13 +115,13 @@ app.config(['$routeProvider', '$locationProvider',
         title: 'Dashboard'
       }).
       when('/settings', {
-        templateUrl: 'app/components/user/account.html',
+        templateUrl: 'app/components/user/preferences.html',
         controller: 'UserPrefsCtrl',
         authenticate: true,
         title: 'Settings'
       }).
       when('/settings/:userId', {
-        templateUrl: 'app/components/user/account.html',
+        templateUrl: 'app/components/user/preferences.html',
         controller: 'UserCtrl',
         authenticate: true,
         title: 'Settings'
@@ -359,7 +359,7 @@ app.config(function ($provide) {
             }
           }
           try {
-            newrelic.noticeError(errorMessage);
+            // newrelic.noticeError(errorMessage);
           } catch (newRelicError) {
             $log.error( newRelicError );
           }

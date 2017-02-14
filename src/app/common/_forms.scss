@@ -107,6 +107,15 @@ legend {
   font-weight: bold;
 }
 
+fieldset > legend {
+  float: left;
+  width: 100%;
+
+  & + * {
+    clear: both;
+  }
+}
+
 .form-group {
   margin-bottom: $base-unit*3;
 }

@@ -16,6 +16,23 @@
     };
 
     $scope.timezones = moment.tz.names();
+    $scope.tabs = {};
+    $scope.activeTab = 'connections';
+
+    $scope.toggleTabs = function(tabName) {
+      $scope.tabs[tabName] = !$scope.tabs[tabName];
+      $scope.activeTab = tabName;
+    };
+    $scope.tabClass = function (tabName) {
+      var classes = [];
+      if ($scope.tabs[tabName]) {
+        classes.push('mobile-active');
+      }
+      if ($scope.activeTab === tabName) {
+        classes.push('desktop-active');
+      }
+      return classes;
+    };
 
     UserDataService.getUser($scope.currentUser.id, function () {
       $scope.user = UserDataService.user;
