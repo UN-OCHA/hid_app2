@@ -5,29 +5,23 @@
     .module('app.dashboard')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  DashboardCtrl.$inject = ['$rootScope', '$scope', 'alertService', 'config', 'DashboardService', 'gettextCatalog', 'List', 'ListDataService', 'offlineService', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
+  DashboardCtrl.$inject = ['$rootScope', '$scope', 'alertService', 'config', 'UserListsService', 'gettextCatalog', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
-  function DashboardCtrl($rootScope, $scope, alertService, config, DashboardService, gettextCatalog, List, ListDataService, offlineService, Service, User, UserCheckInService, UserDataService) {
+  function DashboardCtrl($rootScope, $scope, alertService, config, UserListsService, gettextCatalog, Service, User, UserCheckInService, UserDataService) {
     $scope.tabs = {};
     $scope.activeTab = 'favorites';
-    $scope.listsMember = [];
-    $scope.listsOwnedOrManaged = [];
     $scope.subscriptions = [];
     $scope.itemsPerPage = 5;
     $scope.currentPage = 1;
 
-    offlineService.checkCachedLists();
-    DashboardService.getFavoriteLists($scope.currentUser);
-    DashboardService.getListsMember($scope.currentUser);
-    $scope.favoriteLists = DashboardService.favoriteLists;
-    $scope.listsMember = DashboardService.listsMember;
+    UserListsService.getListsForUser($scope.currentUser);
+    $scope.favoriteLists = UserListsService.favoriteLists;
+    $scope.listsMember = UserListsService.listsMember;
+    $scope.listsOwnedAndManaged = UserListsService.listsOwnedAndManaged;
+    $scope.listsOwnedAndManagedLoaded = Offline.status === 'up' ? false : true;
     
-    $rootScope.$on('updateCachedLists', function () {
-      DashboardService.updateListsCacheStatus();
-    });
-
-    ListDataService.getManagedAndOwnedLists($scope.currentUser, '', function (lists) {
-      $scope.listsOwnedOrManaged = lists;
+    $rootScope.$on('usersListsLoaded', function () {
+      $scope.listsOwnedAndManagedLoaded = true;
     });
 
     function getSubscriptions () {
@@ -67,9 +61,10 @@
     };
 
     $scope.deleteList = function (list) {
-      alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         list.$delete(function () {
           alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'));
+          $scope.listsOwnedAndManaged.splice($scope.listsOwnedAndManaged.indexOf(list), 1);
         });
       });
     };

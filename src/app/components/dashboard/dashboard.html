@@ -115,10 +115,15 @@
           ng-class="tabClass('manage')"
           >
          <ul class="list list--has-buttons list--has-dividers">
-              <li class="list__item" ng-if="!listsOwnedOrManaged.length" translate>
+            <li class="list__item" ng-if="!listsOwnedAndManagedLoaded">
+            <loader type="inline" text="Loading lists"></loader>
+            </li>
+              <li class="list__item" ng-if="listsOwnedAndManagedLoaded && !listsOwnedAndManaged.length" translate>
                 You don't manage any lists
               </li>
-              <li class="list__item" ng-repeat="list in listsOwnedOrManaged track by $index">
+              <li class="list__item" ng-repeat="list in listsOwnedAndManaged track by $index">
+                <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
+                <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
                 <a href="/lists/{{list._id}}">{{list.name}}</a>
                 <div uib-dropdown class="list__button">
                   <button type="button" class="btn-transparent" uib-dropdown-toggle>

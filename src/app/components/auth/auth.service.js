@@ -5,9 +5,9 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', '$location', 'config', 'offlineService', 'notificationsService'];
+  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
 
-  function AuthService ($http, $window, $rootScope, $interval, $location, config, offlineService, notificationsService) {
+  function AuthService ($http, $window, $rootScope, $interval, $location, config, UserListsService, notificationsService) {
 
     function storeUser (response) {
       try {
@@ -61,10 +61,10 @@
         var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password }).then(function (response) {
           if (response.data && response.data.token) {
             storeUser(response);
-            offlineService.cacheListsForUser(response.data.user);
+            UserListsService.cacheListsForUser(response.data.user);
             // Cache lists every 10 mins
             $rootScope.offlinePromise = $interval(function () {
-              offlineService.cacheListsForUser(response.data.user);
+              UserListsService.cacheListsForUser(response.data.user);
             }, 600000);
 
             if (("Notification" in window)) {
@@ -109,8 +109,9 @@
             if (!$rootScope.offlinePromise) {
               $rootScope.offlinePromise = true;
               var user = JSON.parse($window.localStorage.getItem('currentUser'));
+              UserListsService.cacheListsForUser(user);
               $rootScope.offlinePromise = $interval(function () {
-                offlineService.cacheListsForUser(user);
+                UserListsService.cacheListsForUser(user);
               }, 600000);
             }
             return true;
