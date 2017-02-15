@@ -37,9 +37,9 @@
         searches = user.appMetadata.hid[key];
       } 
 
-      var searchSaved = searches.find(function (search) {
+      var searchSaved = searches.filter(function (search) {
         return search.id === saveResult.id;
-      });
+      })[0];
 
       if (searchSaved) {
         return;

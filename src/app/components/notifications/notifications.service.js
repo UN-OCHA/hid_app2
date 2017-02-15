@@ -17,10 +17,10 @@
     });
 
     function updateUser (notifications) {
-      var update = notifications.find(function (notification) {
+      var update = notifications.filter(function (notification) {
         var notificationTypes = ['approved_checkin', 'admin_edit'];
         return notificationTypes.indexOf(notification.type) !== -1;
-      });
+      })[0]
 
       if (update) {
         $rootScope.$broadcast('updateCurrentUser');

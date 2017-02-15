@@ -60,9 +60,9 @@
       userIds.push(ownerId);
 
       angular.forEach(userIds, function(userId) {
-        var isSubscribed = $scope.subscribers.find(function (subscriber) {
+        var isSubscribed = $scope.subscribers.filter(function (subscriber) {
           return subscriber._id === userId;
-        });
+        })[0];
 
         if (!isSubscribed) {
           service.subscribe({_id: userId}).then(function() {}).catch(function (err) {
@@ -168,9 +168,9 @@
     };
 
     $scope.isSelected = function (list) {
-      var inLists = $scope.service.lists.find(function (selectedList) {
+      var inLists = $scope.service.lists.filter(function (selectedList) {
         return selectedList._id === list._id;
-      });
+      })[0];
       return inLists ? true : false;
     };
 
@@ -213,9 +213,9 @@
     };
 
     $scope.isSelectedManager = function (user) {
-      var inManagers = $scope.service.managers.find(function (manager) {
+      var inManagers = $scope.service.managers.filter(function (manager) {
         return manager._id === user._id;
-      });
+      })[0];
       return inManagers ? true : false;
     };
 

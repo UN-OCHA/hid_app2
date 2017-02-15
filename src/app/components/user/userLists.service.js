@@ -18,9 +18,9 @@
     };
 
     function getCachedList (listId) {
-      return userLists.cachedLists.find(function(cachedList) {
+      return userLists.cachedLists.filter(function(cachedList) {
         return cachedList._id === listId;
-      });
+      })[0];
     }
 
     function updateCachedLists (listId, status) {
@@ -154,9 +154,9 @@
           if (list._id) {
             updateListCacheStatus(list);
 
-            var inArray = userLists.listsOwnedAndManaged.find(function(l) {
+            var inArray = userLists.listsOwnedAndManaged.filter(function(l) {
               return l._id === list._id;
-            });
+            })[0];
 
             if (!inArray) {
               userLists.listsOwnedAndManaged.push(list);

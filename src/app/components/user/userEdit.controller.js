@@ -367,9 +367,9 @@
       var orgId = $scope.temp.organization.list._id;
 
       addItem('organization', function () {
-        var primaryOrg = $scope.user.organizations.find(function (org) {
+        var primaryOrg = $scope.user.organizations.filter(function (org) {
           return org.list === orgId;
-        });
+        })[0];
 
         setPrimaryOrganization(primaryOrg, function () {
           nextStep();

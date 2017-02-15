@@ -115,9 +115,9 @@
       listTypes: listTypes,
 
       setListTypeLabel: function (list) {
-        var listType = listTypes.find(function (type) {
+        var listType = listTypes.filter(function (type) {
           return type.key === list.type;
-        });
+        })[0];
         if (listType) {
           list.displayType = listType.val;
         }
