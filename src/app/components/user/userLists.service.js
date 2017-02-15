@@ -53,6 +53,10 @@
       if (isCurrentlyCaching()) {
         return;
       }
+      // check as currently bug where api response has full lists on the user
+      if (typeof listId !== 'string') {
+        return;
+      }
 
       updateCachedLists(listId, 'caching');
       List.get({listId: listId}).$promise.then(function (list) {
