@@ -164,6 +164,10 @@ button[disabled], a.disabled {
     background: $primary-color;
     color: white;
   }
+
+  .icon {
+    margin-top: 1px;
+  }
 }
 
 .btn-link {
