@@ -18,7 +18,7 @@
     $scope.favoriteLists = UserListsService.favoriteLists;
     $scope.listsMember = UserListsService.listsMember;
     $scope.listsOwnedAndManaged = UserListsService.listsOwnedAndManaged;
-    $scope.listsOwnedAndManagedLoaded = false;
+    $scope.listsOwnedAndManagedLoaded = Offline.status === 'up' ? false : true;
     
     $rootScope.$on('usersListsLoaded', function () {
       $scope.listsOwnedAndManagedLoaded = true;

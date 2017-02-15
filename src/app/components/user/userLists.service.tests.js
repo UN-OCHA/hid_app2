@@ -129,7 +129,7 @@
         it('should cache the lists', function () {
           $rootScope.$digest();
           expect(mockReturnedList.cache).toHaveBeenCalled();
-          expect(mockReturnedList.cache.calls.count()).toEqual(4);// 2 favs, 2 member
+          expect(mockReturnedList.cache.calls.count()).toEqual(4);
         });
 
         it('should store that the list has been cached', function () {
@@ -174,7 +174,7 @@
         describe('cache un-cached lists', function () {
 
           it('should get the list', function () {
-            expect(mockList.get).toHaveBeenCalledWith({listId: 'fav-2'}); //checkh how many ties this called when run altogether
+            expect(mockList.get).toHaveBeenCalledWith({listId: 'fav-2'}); 
           });
 
           it('should cache the list', function () {
@@ -199,7 +199,7 @@
         describe('cache un-cached lists', function () {
 
           it('should get the list', function () {
-            expect(mockList.get).toHaveBeenCalledWith({listId: userFixture.user1.lists[0].list}); //checkh how many ties this called when run altogether
+            expect(mockList.get).toHaveBeenCalledWith({listId: userFixture.user1.lists[0].list}); 
           });
 
           it('should cache the list', function () {

@@ -141,6 +141,9 @@
     }
 
     function getOwnedAndManagedLists (user) {
+      if (Offline.state !== 'up') {
+        return;
+      }
       userLists.listsOwnedAndManaged = [];
       return ListDataService.getManagedAndOwnedLists(user, '', function (lists) { 
         angular.forEach(lists, function (list) {

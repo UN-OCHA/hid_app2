@@ -111,7 +111,7 @@
       $scope.selectedFilters = angular.copy($scope.userFilters);
 
       angular.forEach($scope.userTypes, function (type) {
-        //handle unverified - swithced tos vefri
+        //handle unverified - switched to verified
         if ($scope.selectedFilters && $scope.selectedFilters.hasOwnProperty(type.value)) {
           $scope.selectedFilters.user_type = {};
 
