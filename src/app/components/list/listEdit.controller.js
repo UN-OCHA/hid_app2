@@ -64,6 +64,8 @@
       $scope.saving = true;
 
       if ($scope.list._id) {
+        var index = $scope.list.labels.map(function(e) { return e.language; }).indexOf($scope.language);
+        $scope.list.labels[index].text = $scope.list.label;
         $scope.list.$update();
         $scope.list.$promise.then(function() {
           $scope.saving = false;
