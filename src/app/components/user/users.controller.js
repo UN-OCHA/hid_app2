@@ -256,7 +256,7 @@
         name: 'Organization'
       },
       {
-        label: 'verified',
+        label: '-verified',
         name: 'Verified'
       }
     ];
