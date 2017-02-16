@@ -359,7 +359,7 @@ app.config(function ($provide) {
             }
           }
           try {
-            newrelic.noticeError(errorMessage);
+            // newrelic.noticeError(errorMessage);
           } catch (newRelicError) {
             $log.error( newRelicError );
           }

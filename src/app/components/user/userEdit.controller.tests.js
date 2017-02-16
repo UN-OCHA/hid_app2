@@ -169,6 +169,32 @@
 
     });
 
+    describe('Adding a wesbite', function () {
+      beforeEach(function () {
+        setUpCtrl(userFixture.user1, userFixture.user1);
+        scope.$emit('userLoaded');
+        scope.user.websites = [];
+      });
+
+      it('should add http if the url does not start with http or https', function () {
+        scope.temp.website.url = 'www.my-url.com';
+        scope.addItem('website');
+        expect(scope.user.websites[0]).toEqual({url: 'http://www.my-url.com'});
+      });
+
+      it('should not add http if the url starts with http', function () {
+        scope.temp.website.url = 'http://www.my-url2.com';
+        scope.addItem('website');
+        expect(scope.user.websites[0]).toEqual({url: 'http://www.my-url2.com'});
+      }); 
+
+      it('should not add http if the url starts with https', function () {
+        scope.temp.website.url = 'https://www.my-url3.com';
+        scope.addItem('website');
+        expect(scope.user.websites[0]).toEqual({url: 'https://www.my-url3.com'});
+      }); 
+    });
+
     describe('Removing an item', function () {
       beforeEach(function () {
         setUpCtrl(userFixture.user1, userFixture.user1);

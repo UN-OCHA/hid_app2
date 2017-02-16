@@ -35,6 +35,7 @@
     $scope.nextStep = nextStep;
     $scope.currentStep = 1;
     $scope.visibilityOptions = ['anyone', 'verified', 'connections'];
+    $scope.urlRegEx = RegExp('^((https?|ftp)://)?([a-z]+[.])?[a-z0-9-]+([.][a-z]{1,4}){1,2}(/.*[?].*)?$', 'i');
     var defaultSettings = {};
     var lastStep = 4;
 
@@ -196,6 +197,13 @@
       })
     }
 
+    function formatUrl (url) {
+      if (url.substring(0,7) !== 'http://' && url.substring(0,8) !== 'https://') {
+        return 'http://' + url;
+      }
+      return url;
+    }
+
     function hasDuplicates (key, user, temp) {
       var duplicates = [];
 
@@ -240,6 +248,10 @@
       if (hasDuplicates(key, $scope.user, $scope.temp)) {
         alertService.add('danger', 'Already added');
         return;
+      }
+
+      if (key === 'website') {
+        $scope.temp.website.url = formatUrl($scope.temp.website.url);
       }
 
       $scope.user[key + 's'].push($scope.temp[key]);

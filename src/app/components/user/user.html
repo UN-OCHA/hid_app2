@@ -683,7 +683,7 @@
         <form ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="form-section__edit">
           <label class="form-section__sub-heading" for="newWebsite" translate="">Add website:</label>
           <div class="form-field form-field--compact form-inline-fields">
-            <input type="url" class="form-inline-fields__item" ng-model="temp.website.url" id="newWebsite" placeholder="URL" />
+            <input type="text" ng-pattern="urlRegEx" class="form-inline-fields__item" ng-model="temp.website.url" id="newWebsite" placeholder="URL" />
             <button type="submit"
               class="btn-transparent"
               ng-class="{'active': temp.website.url}"

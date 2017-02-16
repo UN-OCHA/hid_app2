@@ -71,7 +71,8 @@
 			}
 		],
 		"picture": "my-picture.jpg",
-		"verified": false
+		"verified": false,
+		"websites": []
 	},
 	"user2": {
 		"_id": "22222",
