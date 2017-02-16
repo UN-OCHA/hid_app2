@@ -36,7 +36,7 @@
         <span translate>Export Contact Info</span>
       </button>
 
-      <button class="btn-primary btn-block" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-if="user.is_orphan">
+      <button class="btn-primary btn-block" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-if="user.is_orphan && (currentUser.is_admin || currentUser.isManager)">
         <icon name="mail-envelope-closed"></icon>
         <span translate>Send Claim Email</span>
       </button>
