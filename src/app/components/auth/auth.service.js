@@ -109,7 +109,7 @@
             if (!$rootScope.offlinePromise) {
               $rootScope.offlinePromise = true;
               var user = JSON.parse($window.localStorage.getItem('currentUser'));
-              // UserListsService.cacheListsForUser(user);
+              UserListsService.cacheListsForUser(user);
               $rootScope.offlinePromise = $interval(function () {
                 UserListsService.cacheListsForUser(user);
               }, 600000);

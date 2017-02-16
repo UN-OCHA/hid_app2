@@ -543,13 +543,13 @@
                 <li class="list__item" ng-repeat="location in user.locations">
                   <input
                   type="radio"
-                  id="location-{{$index}}"
+                  id="location-{{location.tempId}}"
                   name="locations"
                   ng-model="user.location.tempId"
                   ng-value="location.tempId"
                   ng-change="setPrimaryLocation(location)"
                   />
-                  <label class="clickie-label" for="location-{{$index}}">
+                  <label class="clickie-label" for="location-{{location.tempId}}">
                     <span ng-if="location.locality">{{location.locality}}, </span><span ng-if="location.region">{{location.region.name}}, </span>{{location.country.name}}
                   </label>
                   <button type="button" class="btn-transparent list__button" ng-click="dropItem('location', location)" ng-if="location.tempId !== user.location.tempId">

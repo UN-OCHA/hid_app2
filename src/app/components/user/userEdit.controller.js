@@ -150,12 +150,6 @@
 
     function saveUser (type, callback) {
       $scope.$emit('editUser', {status: 'saving'});
-      angular.forEach($scope.user.locations, function (location) {
-        delete location.tempId;
-      });
-      if ($scope.user.location) {
-        delete $scope.user.location.tempId;
-      }
       saveUpdatedUser(type, callback);
     }
 
