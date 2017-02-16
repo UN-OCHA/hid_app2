@@ -101,7 +101,7 @@
         return;
       }
 
-      var locale = $scope.currentUser.locale;
+      var locale = $scope.currentUser.locale ? $scope.currentUser.locale : 'en';
       var lang = gettextCatalog.getCurrentLanguage();
 
       if (lang !== locale) {
