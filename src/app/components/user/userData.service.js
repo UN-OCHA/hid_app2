@@ -199,9 +199,6 @@
   }
 
   function formatLocations (locations, primary) {
-    if (!primary) {
-      return;
-    }
     angular.forEach(locations, function (location, index) {
       if (angular.equals(location, primary)) {
         addTempLocationId(location, index);
