@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
+var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications']);
 
 app.constant('config', env);
 
@@ -225,6 +225,13 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true,
         adminOnly: true,
         title: 'Edit client'
+      }).
+      when('/duplicates', {
+        templateUrl: 'app/components/duplicate/duplicates.html',
+        controller: 'DuplicatesCtrl',
+        authenticate: true,
+        adminOnly: true,
+        title: 'Duplicates'
       }).
       when('/services/new', {
         templateUrl: 'app/components/service/new-service.html',

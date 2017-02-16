@@ -1,0 +1,25 @@
+<div class="page-header row">
+  <div class="col-sm-8">
+    <h1 class="page-header__heading" translate>
+      Duplicates
+    </h1>
+  </div>
+</div>
+
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th translate>ID</th>
+      <th translate>User</th>
+      <th translate>Duplicates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="duplicate in duplicates">
+      <td>{{duplicate.id}}</td>
+      <td><a ng-href="/users/{{duplicate.user}}">{{duplicate.user}}</a></td>
+      <td><ul><li ng-repeat="duped in duplicate.duplicates"><a ng-href="/users/{{duped}}">{{duped}}</a></li></ul></td>
+    </tr>
+  </tbody>
+</table>
+<ul uib-pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
