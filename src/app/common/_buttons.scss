@@ -61,8 +61,14 @@ button[disabled], a.disabled {
   border: 1px solid $primary-color;
   color: $primary-color;
 
+  .iconholder {
+    display: inline-block;
+    height: $base-unit*2;
+    vertical-align: bottom;
+  }
   .icon {
-    position: absolute;
+    @include font-size($base-font-size);
+    margin-top: 0;
   }
 
   &:hover, &:focus, &.active {
@@ -152,6 +158,12 @@ button[disabled], a.disabled {
   &:hover, &:focus {
     background: none;
     text-decoration: underline;
+  }
+
+  &[disabled], &.active {
+    &:hover, &:focus {
+      text-decoration: none;
+    }
   }
 
   &:focus {

@@ -129,7 +129,7 @@
                     </ui-select-choices>
                   </ui-select>
                 </div>
-                <button type="button" class="btn-primary" 
+                <button type="button" class="btn-transparent" 
                   ng-class="{'active': temp.organization.list}"
                   ng-disabled="!temp.organization.list"
                   ng-click="addItem('organization')">
@@ -190,7 +190,7 @@
                 <div class="form-inline-fields__item">
                   <bc-phone-number name="phone_number" label="Phone number" ng-model="temp.phone_number.number" is-valid="isValidPhoneNumber" ng-class="{'has-error': temp.phone_number.number && !isValidPhoneNumber, 'has-success': temp.phone_number.number && isValidPhoneNumber}"></bc-phone-number>
                 </div>
-                <button type="button" class="btn-primary" ng-click="addItem('phone_number')">
+                <button type="button" class="btn-transparent" ng-class="{'active': temp.phone_number.type && temp.phone_number.number && isValidPhoneNumber}" ng-disabled="!temp.phone_number.type || !temp.phone_number.number || !isValidPhoneNumber" ng-click="addItem('phone_number')">
                   <icon name="plus" text="Add"></icon>
                 </button>
               </div>
@@ -257,7 +257,8 @@
                   <input type="email" id="new_email" ng-model="temp.email.email" class="form-control" placeholder="{{'Email address' | translate}}" />
                 </div>
 
-                <button type="button" class="btn-primary" ng-click="addItem('email')">
+                <button type="button" class="btn-transparent" ng-class="{'active': temp.email.type && temp.email.email}"
+                  ng-disabled="!temp.email.type || !temp.email.email" ng-click="addItem('email')">
                   <icon name="plus" text="Add"></icon>
                 </button>
               </div>
@@ -380,7 +381,7 @@
                   <div class="form-inline-fields__item">
                     <input type="text" ng-model="temp.job_title" placeholder="New job title" />
                   </div>
-                  <button type="button" class="btn-primary" ng-click="addItem('job_title')" translate>
+                  <button type="button" class="btn-transparent" ng-disabled="!temp.job_title" ng-class="{'active': temp.job_title}" ng-click="addItem('job_title')" translate>
                     <icon name="plus" text="Add"></icon>
                   </button>
                 </div>
