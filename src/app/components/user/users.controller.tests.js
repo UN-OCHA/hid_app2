@@ -229,9 +229,9 @@
       controllerSetup();
 
       it('should emit an event with the selected filters when the user filters', function () {
-        scope.selectedFilters = {country: 'hrinfo_loc_416', sort: 'job_title'};
+        scope.selectedFilters = {country: 'hrinfo_loc_416'};
         scope.filter();
-        expect(mockUserDataService.getUsers).toHaveBeenCalledWith({limit: 50, offset: 0, sort: 'job_title', country: 'hrinfo_loc_416'}, undefined, jasmine.any(Function));
+        expect(mockUserDataService.getUsers).toHaveBeenCalledWith({limit: 50, offset: 0, sort: 'name', country: 'hrinfo_loc_416'}, undefined, jasmine.any(Function));
       });
 
     });

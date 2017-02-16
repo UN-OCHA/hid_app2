@@ -21,15 +21,18 @@
     };
     var listInfo = [];
     var operationIds = [];
+    var selectedSortBy;
     $scope.request = angular.copy(defaultRequest);
 
     function getUsers () {
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
       var params = angular.extend($scope.request, $scope.userFilters);
-      
       UserDataService.getUsers(params, $scope.list, function () {
         $scope.users = UserDataService.listUsers;
         $scope.totalItems = UserDataService.listUsersTotal;
+        if (selectedSortBy) {
+          $scope.request.sort = selectedSortBy;
+        }
         $scope.usersLoaded = true;
       });
     }
@@ -151,8 +154,12 @@
         delete $scope.selectedFilters.name;
         delete $scope.request.name;
       }
-
+      selectedSortBy = $scope.request.sort;
+      if ($scope.request.sort !== 'name') {
+        $scope.request.sort += ' name';
+      }
       $scope.userFilters = angular.copy($scope.selectedFilters);
+
       if ($scope.selectedFilters.user_type || $scope.selectedFilters.user_type === undefined) {
         handleUserTypes();
       }
