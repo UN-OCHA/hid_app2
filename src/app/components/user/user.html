@@ -128,8 +128,11 @@
 
   </div>
 
-  <div class="row">
+  <div ng-if="!canViewInfo" class="alert alert-warning">
+    <p translate>Your account must be verified to view this person's information</p>
+  </div>
 
+  <div ng-if="canViewInfo" class="row">
     <div class="col-xs-12 col-md-6 col-lg-4">
       <h2 class="block-heading" translate>Contact Information</h2>
 

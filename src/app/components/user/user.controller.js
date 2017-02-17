@@ -25,6 +25,8 @@
       locationsPermission: ''
     }
 
+    $scope.canViewInfo = true;
+
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
     };
@@ -37,7 +39,6 @@
     }
 
     function setConnectionInfo (user, currentUserId) {
-
      var connectionPending = false;
      if (user.connections) {
         angular.forEach(user.connections, function (connection) {
@@ -83,6 +84,9 @@
       $scope.user = UserDataService.user;
       userPicture($scope.user.picture, $scope.user.email);
       setConnectionInfo($scope.user, $scope.currentUser._id);
+      if (!$scope.currentUser.verified && $scope.user.is_orphan) {
+        $scope.canViewInfo = false
+      }
       $scope.userLoaded = true;
       $scope.$broadcast('userLoaded');
     }, function (error) {

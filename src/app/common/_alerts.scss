@@ -21,19 +21,20 @@
 }
 
 .alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
+  color: $error-color;
+  background-color: white;
+  border-color: $error-color;
 }
 
 .alert-success {
-  color: #3c763d;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
+  background-color: lighten($light-blue, 5%);
+  border-color: $light-blue;
+  color: $dark-blue;
 }
 
 .alert-warning {
   color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
+  background-color: lighten($light-blue, 5%);
+  border-color: $light-blue;
+  color: $dark-blue;
 }
