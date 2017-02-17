@@ -56,7 +56,7 @@
 
     function userPicture (picture, email) {
       var emailHash = '';
-      var defaultImage = '/img/default-avatar.svg';
+      var defaultImage = '/img/default-avatar.png';
       var defaultImagePath = $location.protocol() + '://' + $location.host() + defaultImage;
       if (Offline.state !== 'up' || (!picture && !email)) {
         $scope.pictureUrl = defaultImage;
