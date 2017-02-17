@@ -28,6 +28,9 @@
 
 /** Add / remove icons here - do not edit above this line */
 
+.icon-twitter:before {
+  content: "\e900";
+}
 .icon-direction-up:before {
   content: "\e95a";
 }
@@ -126,5 +129,8 @@
 }
 .icon-refresh:before {
   content: "\e05a";
+}
+.icon-mail:before {
+  content: "\e905";
 }
 

@@ -128,7 +128,7 @@ button[disabled], a.disabled {
 
   &:hover, &:focus, &.active {
     background: $primary-color;
-    color: white;
+    color: $text-light;
   }
 
   .icon {
@@ -147,6 +147,22 @@ button[disabled], a.disabled {
       color: white;
     }
   }
+}
+
+a.btn-icon {
+  line-height: $base-unit*4.5;
+  text-align: center;
+}
+
+.btn-icon--inverted {
+  border-color: $text-light;
+  color: $text-light;
+
+  &:hover, &:focus, &.active {
+    background: $text-light;
+    color: $primary-color;
+  }
+
 }
 
 .btn-transparent {
