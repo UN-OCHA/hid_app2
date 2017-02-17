@@ -56,13 +56,18 @@
 
     function userPicture (picture, email) {
       var emailHash = '';
+      var defaultImage = '/img/default-avatar.svg';
+      var defaultImagePath = $location.protocol() + '://' + $location.host() + defaultImage;
+      if (Offline.state !== 'up' || (!picture && !email)) {
+        $scope.pictureUrl = defaultImage;
+        return;
+      }
       if (picture) {
         $scope.pictureUrl = picture;
         return;
       }
-      if (!email) { return; }
       emailHash = md5.createHash(email.trim().toLowerCase());
-      $scope.pictureUrl = 'https://secure.gravatar.com/avatar/' + emailHash + '?s=200';
+      $scope.pictureUrl = 'https://secure.gravatar.com/avatar/' + emailHash + '?s=200&d=' + defaultImagePath;
     }
 
     function showSavedMessage (message) {

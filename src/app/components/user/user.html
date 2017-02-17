@@ -64,8 +64,7 @@
       <div class="profile-header__image">
 
         <icon name="check-circle" text="Verfied" class="profile-header__verified" ng-show="user.verified"></icon>
-
-        <img ng-if="pictureUrl" ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
+        <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <label class="btn-secondary btn-upload profile-header__upload" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
