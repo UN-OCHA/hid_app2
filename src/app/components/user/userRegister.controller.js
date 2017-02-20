@@ -20,6 +20,7 @@
         registerForm.$setPristine();
         registerForm.$setUntouched();
         $scope.user = new User();
+        $location.path('/');
       }, function (resp) {
         alertService.add('danger', gettextCatalog.getString('There was an error processing your registration.'));
         registerForm.$setPristine();
