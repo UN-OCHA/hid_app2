@@ -120,6 +120,12 @@ td.table-actions {
   }
 }
 
+.table-striped {
+  tr:nth-child(even) {
+    background: $light-grey;
+  }
+}
+
 @include media-query(md) {
 
   .table-responsive {

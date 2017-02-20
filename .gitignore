@@ -4,5 +4,8 @@ src/app/common/translations.js
 .sass-cache/
 **/.DS_Store
 **/*.map
-src/assets/css/
+src/assets/css/*.scss
+src/assets/css/*.css
+src/assets/css/*.css.map
+!src/assets/css/api.scss
 src/app/config/config.js

@@ -1,0 +1,106 @@
+/*
+ * Styles required for the api (forms and pdfs)
+ * Usage:
+ * Run `grunt sass:api` to generate the css
+ * Copy the generated css into the api css file https://github.com/UN-OCHA/hid_api/blob/dev/assets/css/main.css
+ */
+
+@import '../../app/common/variables/variables';
+@import '../../app/common/mixins/clearfix';
+@import '../../app/common/mixins/font-size';
+@import '../../app/common/mixins/media-queries';
+@import '../../app/common/_base';
+@import '../../app/common/_buttons';
+@import '../../app/common/_grid';
+@import '../../app/common/_forms';
+@import '../../app/components/header/_global-header';
+@import '../../app/components/header/_site-header';
+@import '../../app/common/_blocks';
+@import '../../app/common/_tables';
+
+.api-page {
+	padding-top: $base-unit*2;
+	padding-bottom: $base-unit*2;
+}
+
+.global-header {
+	height: $base-unit*4;
+}
+
+.pdf {
+	.col-xs-8 {
+		float: left;
+    width: 66.66667%;
+	}
+
+	.col-xs-4 {
+		float: left;
+    width: 33.33333%;
+	}
+
+	.page-header {
+		padding-top: $base-unit*3;
+		margin-bottom: $base-unit*2;
+
+		img {
+			height: auto;
+		}
+	}
+}
+
+.table {
+	@include font-size($small-font-size);
+}
+
+.table-compact {
+	@include font-size(13);
+	td {
+		padding: 0 $base-unit;
+	}
+}
+
+.filters-param-list {
+	@include font-size($small-font-size);
+	background: $primary-color;
+	color: $text-light;
+	margin-bottom: $base-unit*2;
+	padding: $base-unit;
+}
+
+.filters-param, .filters-param-label {
+	display: inline-block;
+	padding: $base-unit/2 $base-unit;
+	margin: 0 $base-unit 0 0;
+}
+
+.filters-param {
+	background: white;
+	color: $primary-color;
+}
+
+.print-footer {
+	font-weight: bold;
+	@include font-size($small-font-size);
+	width: 100%;
+	text-align: right;
+	padding-bottom: $base-unit/2;
+}
+
+.title-humanitarian {
+	font-family: $heading-font;
+	text-transform: uppercase;
+	color: $dark-blue;
+}
+
+.title-id {
+	font-family: $heading-font;
+	text-transform: uppercase;
+	color: $primary-color;
+}
+
+@include media-query(sm) {
+	.api-page {
+		padding-top: $base-unit*5;
+		padding-bottom: $base-unit*5;
+	}
+}
