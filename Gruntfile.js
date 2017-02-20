@@ -199,6 +199,15 @@ module.exports = function(grunt) {
       tmp: {
         src: ['.tmp']
       }
+    },
+    karma: {
+      unit: {
+        configFile: 'src/karma.conf.js',
+        singleRun: true
+      },
+      watch: {
+        configFile: 'src/karma.conf.js'
+      }
     }
 
   });
@@ -219,6 +228,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-manifest');
   grunt.loadNpmTasks("grunt-cache-bust");
   grunt.loadNpmTasks("grunt-contrib-clean");
+  grunt.loadNpmTasks('grunt-karma');
 
   //load cache buster json and generate manifest
   grunt.registerTask('manifest-gen','Generate manifest from cache buster output', function(){
@@ -226,6 +236,9 @@ module.exports = function(grunt) {
     grunt.log.write('Read cacheBust output');
     grunt.task.run(['manifest']);
   });
+
+  grunt.registerTask('test-watch', ['karma:watch']);
+  grunt.registerTask('test', ['karma:unit'])
 
   // Default task
   grunt.registerTask('default', [

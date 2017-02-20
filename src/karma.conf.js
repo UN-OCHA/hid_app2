@@ -40,6 +40,7 @@ module.exports = function(config) {
         'bower_components/angular-localforage/dist/angular-localForage.min.js',
         'assets/js/modernizr-output.js',
         'bower_components/offline/offline.min.js',
+        '../node_modules/phantomjs-polyfill-object-assign/object-assign-polyfill.js',
         'app/config/config.js',
         'app/app.js',
         'app/common/*.module.js',
@@ -88,7 +89,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

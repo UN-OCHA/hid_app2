@@ -105,7 +105,7 @@
         }
 
 
-        spyOn(mockUserDataService, 'getUsers').and.callFake(function({}, list, callback){
+        spyOn(mockUserDataService, 'getUsers').and.callFake(function(arg1, list, callback){
           callback();
         });
        

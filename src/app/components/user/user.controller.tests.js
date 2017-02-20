@@ -174,7 +174,7 @@
 				});
 
 				it('should use gravatar to get their profile image and add it to the view', function () {
-					var gravatarUrl = 'https://secure.gravatar.com/avatar/fake-hash?s=200';
+					var gravatarUrl = 'https://secure.gravatar.com/avatar/fake-hash?s=200&d=http://server/img/default-avatar.png';
 					expect(scope.pictureUrl).toEqual(gravatarUrl);
 				});
   		});

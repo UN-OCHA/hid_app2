@@ -17,7 +17,6 @@
 * In the app directory `cd hid_app2`
 * Switch to the dev branch `git checkout dev`
 * Install node modules `npm install`
-* In the src directory `cd src`
 * Install Bower modules `bower install`
 * Add the local url to your hosts file:
 on Mac: `sudo vi /etc/hosts`
@@ -49,9 +48,9 @@ npm install -g karma-cli
 
 ### Running the tests
 
-In /src `karma start`
+Single run: `grunt test`
 
-To just run the tests once `karma start --single-run`
+Watch for changes an re-run tests: `grunt test-watch`
 
 ## Front end
 
