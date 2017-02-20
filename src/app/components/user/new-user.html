@@ -1,33 +1,33 @@
 <form name="register" ng-submit="register.$valid && userCreate(register)" novalidate>
-  <div class="form-group" ng-class="{'has-error': register.email.$touched && register.email.$invalid}">
+  <div class="form-field" ng-class="{'has-error': register.email.$touched && register.email.$invalid}">
     <label for="email" translate>Email</label>
     <input type="email" name="email" class="form-control" id="email" placeholder="{{'Email address'|translate}}" ng-model="user.email" ng-required="currentPath === '/register'">
     <div ng-messages="register.email.$error" ng-show="register.email.$touched" ng-messages-multiple="ng-messages-multiple">
       <div ng-messages-include="app/common/messages.html"></div>
     </div>
   </div>
-  <div class="form-group" ng-class="{'has-error': register.given_name.$touched && register.given_name.$invalid}">
+  <div class="form-field" ng-class="{'has-error': register.given_name.$touched && register.given_name.$invalid}">
     <label for="given_name" translate>First Name</label>
     <input type="text" name="given_name" class="form-control" id="given_name" placeholder="{{'First name'|translate}}" ng-model="user.given_name" required>
     <div ng-messages="register.given_name.$error" ng-show="register.given_name.$touched" ng-messages-multiple="ng-messages-multiple">
       <div ng-messages-include="app/common/messages.html"></div>
     </div>
   </div>
-  <div class="form-group" ng-class="{'has-error': register.family_name.$touched && register.family_name.$invalid}">
+  <div class="form-field" ng-class="{'has-error': register.family_name.$touched && register.family_name.$invalid}">
     <label for="family_name" translate>Last Name</label>
     <input type="text" name="family_name" class="form-control" id="family_name" placeholder="{{'Last name'|translate}}" ng-model="user.family_name" required>
     <div ng-messages="register.family_name.$error" ng-show="register.family_name.$touched" ng-messages-multiple="ng-messages-multiple">
       <div ng-messages-include="app/common/messages.html"></div>
     </div>
   </div>
-  <div class="form-group" ng-class="{'has-error': register.password.$touched && register.password.$invalid}" ng-if="currentPath === '/register'">
+  <div class="form-field" ng-class="{'has-error': register.password.$touched && register.password.$invalid}" ng-if="currentPath === '/register'">
     <label for="password" translate>Password</label>
     <input type="password" name="password" class="form-control" id="password" placeholder="" ng-model="user.password" required>
     <div ng-messages="register.password.$error" ng-show="register.password.$touched" ng-messages-multiple="ng-messages-multiple">
       <div ng-messages-include="app/common/messages.html"></div>
     </div>
   </div>
-  <div class="form-group" ng-class="{'has-error': register.password_confirm.$touched && register.password_confirm.$invalid}" ng-if="currentPath === '/register'">
+  <div class="form-field" ng-class="{'has-error': register.password_confirm.$touched && register.password_confirm.$invalid}" ng-if="currentPath === '/register'">
     <label for="password_confirm" translate>Password (confirm)</label>
     <input type="password" name="password_confirm" class="form-control" match-password="password" id="password_confirm" placeholder="" ng-model="user.confirm_password" required>
     <div ng-messages="register.password_confirm.$error" ng-show="register.password_confirm.$touched" ng-messages-multiple="ng-messages-multiple">

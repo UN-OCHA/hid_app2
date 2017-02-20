@@ -5,12 +5,12 @@
       <h1 class="page-header__heading" ng-if="list._id" translate>{{list.name}}</h1>
     </div>
     <form ng-submit="listSave()">
-      <div class="form-group">
+      <div class="form-field">
         <label for="name" translate>Name</label>
         <input type="text" id="name" ng-model="list.label" placeholder="{{'List name' | translate}}" required>
       </div>
 
-      <fieldset class="form-group">
+      <fieldset class="form-field">
         <legend translate>Who can view this list?</legend>
         <p ng-repeat="option in visibility">
           <input type="radio" id="visibility-{{option.value}}" name="visibility" ng-model="list.visibility" value="{{option.value}}" />
@@ -18,7 +18,7 @@
         </p>
       </fieldset>
 
-      <fieldset class="form-group">
+      <fieldset class="form-field">
         <legend translate>Who can join this list?</legend>
         <p ng-repeat="option in joinability">
           <input type="radio" id="joinability-{{option.value}}" name="joinability" ng-model="list.joinability" value="{{option.value}}" />
@@ -26,7 +26,7 @@
         </p>
       </fieldset>
 
-      <div class="form-group">
+      <div class="form-field">
         <label for="managers" translate>Managers</label>
         <ui-select ng-model="list.managers" multiple name="managers">
           <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
