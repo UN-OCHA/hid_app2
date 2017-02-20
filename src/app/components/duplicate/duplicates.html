@@ -16,7 +16,7 @@
   <tbody>
     <tr ng-repeat="duplicate in duplicates">
       <td>{{duplicate._id}}</td>
-      <td><ul><li ng-repeat="duped in duplicate.duplicates"><a ng-href="/users/{{duped}}">{{duped}}</a><a ng-click="deleteDuplicate(duplicate, duped)">Delete</a></li></ul></td>
+      <td><ul><li ng-repeat="duped in duplicate.duplicates"><a ng-href="/users/{{duped}}">{{duped}}</a> &nbsp; <a ng-click="deleteDuplicate(duplicate, duped)">Delete</a></li></ul></td>
     </tr>
   </tbody>
 </table>

@@ -5,9 +5,9 @@
     .module('app.duplicate')
     .factory('Duplicate', Duplicate);
 
-  Duplicate.$inject = ['$resource', 'config'];
+  Duplicate.$inject = ['$resource', '$http', 'config'];
 
-  function Duplicate ($resource, config) {
+  function Duplicate ($resource, $http, config) {
     var Duplicate = $resource(config.apiUrl + 'duplicate/:dupId', {dupId: '@_id'});
 
     // Delete user
