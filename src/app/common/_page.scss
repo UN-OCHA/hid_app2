@@ -39,7 +39,7 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
 }
 
 .page-header {
-  margin-top: $base-unit*2;
+  margin-top: $base-unit/2;
   margin-bottom:$base-unit;
 }
 
@@ -51,7 +51,7 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
   color: $dark-blue;
   display: inline-block;
 
-  .col-sm-6 &, .col-sm-8 &, .col-sm-10 &, .page-header--alert & {
+  .col-sm-6 &, .col-sm-8 &, .col-sm-10 &, .page-header--alert &, .page-header--no-actions & {
     margin-right: 0;
   }
 }

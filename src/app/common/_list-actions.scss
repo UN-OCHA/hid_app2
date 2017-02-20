@@ -11,7 +11,7 @@
 
 .btn-toggle-admin, .btn-toggle-filters {
   position: absolute;
-  top: $base-unit*2;
+  top: $base-unit/2;
   right: $base-unit;
 }
 
@@ -72,8 +72,15 @@
 
 @include media-query(xxl) {
   .btn-toggle-admin, .btn-toggle-filters {
+    right: 50%;
+    margin-right: -612px;
+
     .toggled & {
       transform: translateX(-$sidebar-width-xxl);
     }
+  }
+
+  .btn-toggle-admin {
+    margin-right: -660px;
   }
 }

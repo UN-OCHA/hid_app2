@@ -280,3 +280,11 @@
   }
 
 }
+
+@include media-query(xxl) {
+  .profile-header {
+    .btn-toggle-admin {
+      right: 50%;
+    }
+  }
+}

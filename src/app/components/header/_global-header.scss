@@ -8,7 +8,7 @@
     min-width: 106px;
     font-family: $heading-font-light;
 
-    a {
+    a, .btn-link {
       &:hover, &:focus {
         text-decoration: none;
         background: $primary-color;

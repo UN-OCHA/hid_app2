@@ -59,9 +59,14 @@
 
 .site-header__search {
   flex-grow: 1;
+  height: 100%;
 
   .no-flexbox & {
     float: left;
+  }
+
+  .search-form__input {
+    height: $site-header-height-xs;
   }
 }
 
@@ -128,6 +133,10 @@
 
   .dropdown-menu.site-header__nav {
     top: ($base-unit*6) + 4;
+  }
+
+  .site-header__search {
+    margin-right: $base-unit;
   }
 }
 
