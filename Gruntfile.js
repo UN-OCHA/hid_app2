@@ -63,6 +63,15 @@ module.exports = function(grunt) {
         files: {
           'src/assets/css/main.css': 'src/assets/css/main.scss'
         }
+      },
+      api: {
+        files: {
+          'src/assets/css/api.css': 'src/assets/css/api.scss'
+        },
+        options: {
+          sourcemap: 'none',
+          style: 'compressed'
+        }
       }
     },
     concat: {
@@ -226,7 +235,7 @@ module.exports = function(grunt) {
     'nggettext_compile',
     'sass_import',
     'concat:css',
-    'sass',
+    'sass:dist',
     'modernizr',
     'autoprefixer',
     'useminPrepare',
