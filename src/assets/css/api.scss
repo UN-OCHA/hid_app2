@@ -17,6 +17,7 @@
 @import '../../app/components/header/_site-header';
 @import '../../app/common/_blocks';
 @import '../../app/common/_tables';
+@import '../../app/common/_alerts';
 
 .api-page {
 	padding-top: $base-unit*2;
@@ -100,7 +101,6 @@
 
 @include media-query(sm) {
 	.api-page {
-		padding-top: $base-unit*5;
 		padding-bottom: $base-unit*5;
 	}
 }
