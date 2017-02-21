@@ -36,8 +36,9 @@ app.run(function ($rootScope, $window, $location, AuthService, alertService) {
   $rootScope.isAuthenticated = false;
   $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
     var user = JSON.parse($window.localStorage.getItem('currentUser'));
+    var isAuthenticated = AuthService.isAuthenticated();
 
-    if (nextRoute && nextRoute.authenticate && !AuthService.isAuthenticated()){
+    if (nextRoute && nextRoute.authenticate && !isAuthenticated){
       // User isn’t authenticated
       $location.path('/');
       event.preventDefault();
@@ -56,7 +57,7 @@ app.run(function ($rootScope, $window, $location, AuthService, alertService) {
         event.preventDefault();
       }
     }
-    $rootScope.isAuthenticated = AuthService.isAuthenticated();
+    $rootScope.isAuthenticated = isAuthenticated;
   });
 });
 

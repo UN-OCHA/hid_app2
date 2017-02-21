@@ -68,12 +68,6 @@
                 UserListsService.cacheListsForUser(response.data.user);
               }
             }, 600000);
-
-            if (("Notification" in window)) {
-              Notification.requestPermission(function (permission) {
-                that._notificationsHelper(permission, response.data.user._id);
-              });
-            }
           }
         });
         return promise;
@@ -102,7 +96,8 @@
           else {
             var that = this;
             if (!$rootScope.notificationPromise) {
-              if (("Notification" in window)) {
+              if (("Notification" in window) && Notification.permission !== 'granted') {
+
                 Notification.requestPermission(function (permission) {
                   that._notificationsHelper(permission, parsed.id);
                 });
