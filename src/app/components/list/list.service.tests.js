@@ -32,6 +32,7 @@
 	      User = mockUser;
 	      $localForage = mockLocalForage;
 
+	      $rootScope.canCache = true;
 	      mockList = new List();
 	  		mockList._id = '1234';
 	  		mockList.type = 'operation';
@@ -80,7 +81,8 @@
 	  	});
 
 	  	it('should get the first 50 list users', function () {
-	  		expect(mockUser.query).toHaveBeenCalledWith(initialParams);
+	  		$rootScope.$digest();
+	  		expect(mockUser.query).toHaveBeenCalled();
 	  	});
 
 	  	it('should store the users', function () {

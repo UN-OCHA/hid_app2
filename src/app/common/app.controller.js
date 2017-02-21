@@ -8,7 +8,7 @@
   AppCtrl.$inject = ['$rootScope', '$scope', '$location', '$window', 'gettextCatalog', 'User'];
 
   function AppCtrl($rootScope, $scope, $location, $window, gettextCatalog, User) {
-
+    $rootScope.canCache = true;
     $scope.currentUser = null;
     $scope.currentUserResource = null;
     $scope.filters = {};

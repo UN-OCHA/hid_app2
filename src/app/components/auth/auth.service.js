@@ -64,7 +64,9 @@
             UserListsService.cacheListsForUser(response.data.user);
             // Cache lists every 10 mins
             $rootScope.offlinePromise = $interval(function () {
-              UserListsService.cacheListsForUser(response.data.user);
+              if ($rootScope.canCache) {
+                UserListsService.cacheListsForUser(response.data.user);
+              }
             }, 600000);
 
             if (("Notification" in window)) {
@@ -111,7 +113,9 @@
               var user = JSON.parse($window.localStorage.getItem('currentUser'));
               UserListsService.cacheListsForUser(user);
               $rootScope.offlinePromise = $interval(function () {
-                UserListsService.cacheListsForUser(user);
+                if ($rootScope.canCache) {
+                  UserListsService.cacheListsForUser(user);
+                }
               }, 600000);
             }
             return true;

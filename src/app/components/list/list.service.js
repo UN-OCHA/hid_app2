@@ -5,9 +5,9 @@
     .module('app.list')
     .factory('List', List);
 
-  List.$inject = ['$resource', '$localForage', '$exceptionHandler', '$q', 'config', 'User'];
+  List.$inject = ['$resource', '$rootScope', '$localForage', '$exceptionHandler', '$q', 'config', 'User'];
 
-  function List ($resource, $localForage, $exceptionHandler, $q, config, User) {
+  function List ($resource, $rootScope, $localForage, $exceptionHandler, $q, config, User) {
     var List = $resource(config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
       'save': {
@@ -27,7 +27,7 @@
     // Is a user manager of a list ?
     List.prototype.isManager = function (user) {
       var out = false;
-      angular.forEach(this.managers, function (val, key) {
+      angular.forEach(this.managers, function (val) {
         if (angular.equals(user._id, val._id)) {
           out = true;
         }
@@ -35,26 +35,48 @@
       return out;
     };
 
-    function cacheUsers (users, lfusers, deferred) {
-      angular.forEach(users, function (user) {
-        lfusers.setItem(user._id, user).then(function () {})
-        .catch(function (err) {
-          $exceptionHandler(err, 'Failed to write to Indexeddb');
-          deferred.reject();
-        });
+    function cacheUsers (lfusers, users, count, total, callback) {
+      // if run out of users
+      if (!users[count]) {
+        return callback(true);
+      }
+       return lfusers.setItem(users[count]._id, users[count]).then(function () {
+        // if last user
+        if (count === total-1) {
+          return callback(true);
+        }
+
+        cacheUsers(lfusers, users, count+1, total, callback);
+      })
+      .catch(function (error) {
+        $exceptionHandler(error, 'Failed to write user to local db');
+        if (error.code === 4) {
+          //rejected as not enough space or user has declined;
+          $rootScope.canCache = false; // prevent retrying in x minutes
+        }
+        return callback(false); 
       });
     }
 
     function cacheListUsers (request, lfusers, deferred) {
       User.query(request).$promise.then(function (users) {
-        cacheUsers(users, lfusers, deferred);
-        //return if final / only page
-        if (users.length < 50) {
-          deferred.resolve();
-          return;
-        }
-        request.offset = request.offset + 50;
-        cacheListUsers(request, lfusers, deferred);
+        cacheUsers(lfusers, users, 0, 50, function (canCache) {
+          //return if caching failed
+          if (!canCache) {
+            deferred.reject();
+            return;
+          }
+          //return if final / only page
+          if (users.length < 50) {
+            deferred.resolve();
+            return;
+          }
+          request.offset = request.offset + 50;
+          cacheListUsers(request, lfusers, deferred);
+        });
+
+      }, function (error) {
+        $exceptionHandler(error, 'cacheListUsers - user.query');
       });
     }
 
@@ -63,15 +85,20 @@
       var lfusers = $localForage.instance('users');
       var lflists = $localForage.instance('lists');
       var request = {limit: 50, offset: 0, sort: 'name'};
+      request[this.type + 's.list'] = this._id;
+
+      if (!$rootScope.canCache) {
+        return;
+      }
 
       //cache the list
-      lflists.setItem(this._id, this).then(function () {}).catch(function(error) {
-        $exceptionHandler(error, 'Failed to write to Indexeddb');
+      lflists.setItem(this._id, this).then(function () {
+        cacheListUsers(request, lfusers, deferred);
+      }).catch(function(error) {
+        $exceptionHandler(error, 'Failed to write list to local db');
         deferred.reject();
       });
 
-      request[this.type + 's.list'] = this._id;
-      cacheListUsers(request, lfusers, deferred);
       return deferred.promise;
     };
 
