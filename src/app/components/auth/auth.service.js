@@ -62,12 +62,12 @@
           if (response.data && response.data.token) {
             storeUser(response);
             UserListsService.cacheListsForUser(response.data.user);
-            // Cache lists every 10 mins
+            // Cache lists every hour
             $rootScope.offlinePromise = $interval(function () {
               if ($rootScope.canCache) {
                 UserListsService.cacheListsForUser(response.data.user);
               }
-            }, 600000);
+            }, 3600000);
           }
         });
         return promise;
