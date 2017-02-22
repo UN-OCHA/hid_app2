@@ -8,7 +8,7 @@
   	listFixture = readJSON('app/test-fixtures/list.json');
 
   	beforeEach(function () {
-  		module('ngResource'); //need this?  		
+  		module('ngResource'); 	
   		mockConfig = {};
   		mockConfig.apiUrl = 'http://mock-url/';
   		mockUser = {};
@@ -71,8 +71,8 @@
 	  describe('Caching lists', function () {
 
 	  	beforeEach(function () {	  		
-	  		initialParams = { limit: 50, offset: 0, sort: 'name', 'operations.list': '1234'};
-	  		nextPageParams = { limit: 50, offset: 50, sort: 'name', 'operations.list': '1234'};
+	  		initialParams = { limit: 100, offset: 0, sort: 'name', 'operations.list': '1234'};
+	  		nextPageParams = { limit: 100, offset: 100, sort: 'name', 'operations.list': '1234'};
 	  		mockList.cache();
 	  	});
 
@@ -80,7 +80,7 @@
 	  		expect(mockLf.setItem).toHaveBeenCalledWith('1234', mockList);
 	  	});
 
-	  	it('should get the first 50 list users', function () {
+	  	it('should get the first 100 list users', function () {
 	  		$rootScope.$digest();
 	  		expect(mockUser.query).toHaveBeenCalled();
 	  	});
@@ -88,7 +88,7 @@
 	  	it('should store the users', function () {
 	  		$rootScope.$digest();
 	  		expect(mockLf.setItem).toHaveBeenCalledWith(listFixture.firstPageOfUsers[0]._id, listFixture.firstPageOfUsers[0]);
-	  		expect(mockLf.setItem).toHaveBeenCalledWith(listFixture.firstPageOfUsers[49]._id, listFixture.firstPageOfUsers[49]);
+	  		expect(mockLf.setItem).toHaveBeenCalledWith(listFixture.firstPageOfUsers[99]._id, listFixture.firstPageOfUsers[99]);
 	  	});
 
 	  	it('should get the second page of users', function () {
@@ -98,7 +98,7 @@
 
 	  	it('should store the second page of users', function () {
 	  		$rootScope.$digest();
-	  		expect(mockLf.setItem).toHaveBeenCalledWith(listFixture.secondPageOfUsers[0]._id, listFixture.secondPageOfUsers[0]); //isn't being called for users....
+	  		expect(mockLf.setItem).toHaveBeenCalledWith(listFixture.secondPageOfUsers[0]._id, listFixture.secondPageOfUsers[0]); 
 	  	});
 
 	  });

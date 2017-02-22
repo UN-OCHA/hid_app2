@@ -24,6 +24,8 @@
       }
     });
 
+    var numUsersToCache = 100;
+
     // Is a user manager of a list ?
     List.prototype.isManager = function (user) {
       var out = false;
@@ -60,18 +62,18 @@
 
     function cacheListUsers (request, lfusers, deferred) {
       User.query(request).$promise.then(function (users) {
-        cacheUsers(lfusers, users, 0, 100, function (canCache) {
+        cacheUsers(lfusers, users, 0, numUsersToCache, function (canCache) {
           //return if caching failed
           if (!canCache) {
             deferred.reject();
             return;
           }
           //return if final / only page
-          if (users.length < 100) {
+          if (users.length < numUsersToCache) {
             deferred.resolve();
             return;
           }
-          request.offset = request.offset + 100;
+          request.offset = request.offset + numUsersToCache;
           cacheListUsers(request, lfusers, deferred);
         });
 
@@ -84,7 +86,7 @@
       var deferred = $q.defer();
       var lfusers = $localForage.instance('users');
       var lflists = $localForage.instance('lists');
-      var request = {limit: 100, offset: 0, sort: 'name'};
+      var request = {limit: numUsersToCache, offset: 0, sort: 'name'};
       request[this.type + 's.list'] = this._id;
 
       if (!$rootScope.canCache) {
