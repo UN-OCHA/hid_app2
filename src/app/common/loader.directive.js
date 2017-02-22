@@ -1,5 +1,5 @@
 /**
- * Icons
+ * Loader
  * Usage: <loader type="" text=""></loader>
  * Type is optional, set to 'inline' to not have the loader cover the page
  * Text is optional, give a string to over-ride the default text 'Loading'. To have no text, give an empty string.

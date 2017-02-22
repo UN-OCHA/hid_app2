@@ -1,5 +1,5 @@
 /**
-  * Alert service for showing success, error and confirm modals
+  * Alert service for showing success, error and confirm modals. Plus in page alerts under the header.
   *
   * Usage: alertService.add(type, msg, confirm, callback)
   * type -  string, options: 'success', 'danger'. Sets the style of the modal.
@@ -7,6 +7,11 @@
   * confirm - boolean, if the modal is a confirm
   * callback - function, callback function that is called with the result of the confirm
   * displayTime - number, the length of time to display the modal for, if not set defaults to 3000
+  *
+  * alertService.pageAlert(type, message, icon)
+  * type -  string, options: 'success', 'warning', 'danger'. Sets the style of the modal.
+  * message - string, the message to display
+  * icon - string, name of the icon to show. Optional
   */
 
 (function () {
@@ -21,6 +26,7 @@
   function alertService($rootScope, $uibModal) {
 
     var alertService = {};
+    $rootScope.pageAlert = {};
 
     var defaultDisplayTime = 3000;
 
@@ -79,6 +85,19 @@
         return;
       });
 
+    };
+
+    alertService.pageAlert = function (type, message, icon) {
+      $rootScope.pageAlert = {
+        icon: icon,
+        show: true,
+        message: message,
+        type: type
+      };
+    };
+
+    alertService.resetPageAlert = function () {
+      $rootScope.pageAlert = {};
     };
 
     return alertService;

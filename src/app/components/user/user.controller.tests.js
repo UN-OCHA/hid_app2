@@ -1,11 +1,14 @@
 (function() {
   'use strict';
 
-  describe('User controller', function () {
-
+  	describe('User controller', function () {
   	var mockAlertService, mockConfig, mockmd5, mockUserDataService, scope, scopeUser, userFixture;
+  	var connectionRequiredMessage = 'Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking \'Connect\'.';
+    var connectionPendingMessage = 'Your connection request is pending';
+    var verifiedRequiredMessage = 'Please note that some of the information made available by this user is only available to verified users';
+    var connectionAndVerifiedMessage = 'Please note that some of the information made available by this user is private and some is available only to verified users. You can contact them with a request to see the private sections of their profile by clicking \'Connect\'.';
+    var pendingAndVerifiedMessage = 'Your connection request is pending. Please note that some of the information made available by this user is only available to verified users.';
 
-  	userFixture = readJSON('app/test-fixtures/user.json');
 
   	function setUpCtrl(user, currentUser, edit) {
   		inject(function($rootScope, $controller) {
@@ -30,7 +33,18 @@
 	      	callback();
 	      });
 	      spyOn(scopeUser, 'requestConnection').and.callFake(function (arg1, callback) {
-	      	callback();
+	      	var returnUser = userFixture.user2;
+	      	returnUser.connections = [
+				      	{
+							_id: 1,
+							pending: true,
+							user: {
+								_id: userFixture.user1._id,
+								name: 'connection1'
+							}
+						}
+	      	];
+	      	callback(returnUser);
 	      });
 	      spyOn(scopeUser, 'notify').and.callFake(function (arg1, callback) {
 	      	callback();
@@ -53,6 +67,7 @@
   	}
 
   	beforeEach(function() {
+  		userFixture = readJSON('app/test-fixtures/user.json');
   		mockAlertService = {};
   		mockmd5 = {};
   		mockUserDataService = {};
@@ -72,9 +87,13 @@
         $provide.value('md5', mockmd5);
       });
       mockAlertService.add = function () {};
+      mockAlertService.pageAlert = function () {};
+      mockAlertService.resetPageAlert = function () {};
       spyOn(mockAlertService, 'add').and.callFake(function (a1, a2, a3, callback) {
         callback();
       });
+      spyOn(mockAlertService, 'pageAlert').and.callThrough();
+      spyOn(mockAlertService, 'resetPageAlert').and.callThrough();
      
       mockmd5.createHash = function () {
       	return 'fake-hash';
@@ -280,7 +299,7 @@
 
 		describe('User contact information permissions', function () {
 
-			describe('Contact information can be viewed by anyone', function () {
+			describe('All contact information can be viewed by anyone', function () {
 				beforeEach(function () {
 					userFixture.user2.phone_number = '0114';
 					userFixture.user2.phonesVisibility = 'anyone';
@@ -302,9 +321,18 @@
 				it('should show the locations', function () {
 					expect(scope.connectionInfo.locationsPermission).toBe('view');
 				});
+
+				it('should not show the contact info hidden alert', function () {
+					expect(mockAlertService.pageAlert).not.toHaveBeenCalled();
+				});
+
+				it('should not show the connect button', function () {
+					expect(scope.connectionInfo.canRequestConnection).toBe(false);
+				});
+
 			});
 
-			describe('Contact information can only be viewed by verified users', function () {
+			describe('All contact information can only be viewed by verified users', function () {
 
 				describe('Viewing as a verified user', function () {
 					beforeEach(function () {
@@ -328,6 +356,14 @@
 
 					it('should show the locations', function () {
 						expect(scope.connectionInfo.locationsPermission).toBe('view');
+					});
+
+					it('should not show the contact info hidden alert', function () {
+						expect(mockAlertService.pageAlert).not.toHaveBeenCalled();
+					});
+
+					it('should not show the connect button', function () {
+						expect(scope.connectionInfo.canRequestConnection).toBe(false);
 					});
 
 				});
@@ -356,11 +392,19 @@
 						expect(scope.connectionInfo.locationsPermission).toBe('verified');
 					});
 
+					it('should show the contact info hidden alert with the correct message', function () {
+						expect(mockAlertService.pageAlert).toHaveBeenCalledWith('warning', verifiedRequiredMessage, 'caution');
+					});
+
+					it('should not show the connect button', function () {
+						expect(scope.connectionInfo.canRequestConnection).toBe(false);
+					});
+
 				});
 
 			});
 
-			describe('Contact information can only be viewed by connections', function () {
+			describe('All contact information can only be viewed by connections', function () {
 
 				describe('Not in the user\'s connections', function () {
 
@@ -386,6 +430,14 @@
 						expect(scope.connectionInfo.locationsPermission).toBe('connections');
 					});
 
+					it('should show the contact info hidden alert with the correct message', function () {
+						expect(mockAlertService.pageAlert).toHaveBeenCalledWith('warning', connectionRequiredMessage, 'caution');
+					});
+
+					it('should show the connect button', function () {
+						expect(scope.connectionInfo.canRequestConnection).toBe(true);
+					});
+
 				});
 
 				describe('Has sent a connection request', function () {
@@ -401,12 +453,16 @@
 							{
 								_id: '1234',
 								pending: true,
-								user: userFixture.user1._id
+								user: {
+									_id: userFixture.user1._id
+								}
 							},
 							{
 								_id: '12345',
 								pending: false,
-								user: '7897987'
+								user: {
+									_id: '7897987'
+								}
 							}
 						];
 						setUpCtrl(userFixture.user2, userFixture.user1);
@@ -422,6 +478,14 @@
 
 					it('should show the connection pending message for location', function () {
 						expect(scope.connectionInfo.locationsPermission).toBe('pending');
+					});
+
+					it('should show the contact info hidden alert with the correct message', function () {
+						expect(mockAlertService.pageAlert).toHaveBeenCalledWith('warning', connectionPendingMessage, 'caution');
+					});
+
+					it('should not show the connect button', function () {
+						expect(scope.connectionInfo.canRequestConnection).toBe(false);
 					});
 
 				});
@@ -450,8 +514,118 @@
 						expect(scope.connectionInfo.locationsPermission).toBe('view');
 					});
 
+					it('should not show the contact info hidden alert', function () {
+						expect(mockAlertService.pageAlert).not.toHaveBeenCalled();
+					});
+
+					it('should not show the connect button', function () {
+						expect(scope.connectionInfo.canRequestConnection).toBe(false);
+					});
+
 				});
 
+			});
+
+			describe('Mixture of permissions', function () {
+
+				describe('As an un-verified user', function () {
+
+					beforeEach(function () {
+						userFixture.user1.verified = false;
+						userFixture.user2.phone_number = null;
+						userFixture.user2.phonesVisibility = 'connections';
+						userFixture.user2.email = null;
+						userFixture.user2.emailsVisibility = 'verified';
+						userFixture.user2.location = {country: {name: 'uk'}};
+						userFixture.user2.locationsVisibility = 'anyone';
+						setUpCtrl(userFixture.user2, userFixture.user1);
+					});
+
+					it('should not show the phone numbers', function () {
+						expect(scope.connectionInfo.phonesPermission).toBe('connections');
+					});
+
+					it('should not show the emails', function () {
+						expect(scope.connectionInfo.emailsPermission).toBe('verified');
+					});
+
+					it('should show the locations', function () {
+						expect(scope.connectionInfo.locationsPermission).toBe('view');
+					});
+
+					it('should show the contact info hidden alert with the correct message', function () {
+						expect(mockAlertService.pageAlert).toHaveBeenCalledWith('warning', connectionAndVerifiedMessage, 'caution');
+					});
+
+					it('should show the connect button', function () {
+						expect(scope.connectionInfo.canRequestConnection).toBe(true);
+					});
+				});
+
+				describe('As a verified user', function () {
+					beforeEach(function () {
+						userFixture.user1.verified = true;
+						userFixture.user2.phone_number = null;
+						userFixture.user2.phonesVisibility = 'connections';
+						userFixture.user2.email = 'an@email.com';
+						userFixture.user2.emailsVisibility = 'verified';
+						userFixture.user2.location = {country: {name: 'uk'}};
+						userFixture.user2.locationsVisibility = 'anyone';
+						setUpCtrl(userFixture.user2, userFixture.user1);
+					});
+
+					it('should not show the phone numbers', function () {
+						expect(scope.connectionInfo.phonesPermission).toBe('connections');
+					});
+
+					it('should show the emails', function () {
+						expect(scope.connectionInfo.emailsPermission).toBe('view');
+					});
+
+					it('should show the locations', function () {
+						expect(scope.connectionInfo.locationsPermission).toBe('view');
+					});
+
+					it('should show the contact info hidden alert with the correct message', function () {
+						expect(mockAlertService.pageAlert).toHaveBeenCalledWith('warning', connectionRequiredMessage, 'caution');
+					});
+
+					it('should show the connect button', function () {
+						expect(scope.connectionInfo.canRequestConnection).toBe(true);
+					});
+				});
+
+				describe('As a verified, connected user', function () {
+					beforeEach(function () {
+						userFixture.user1.verified = true;
+						userFixture.user2.phone_number = '0114';
+						userFixture.user2.phonesVisibility = 'connections';
+						userFixture.user2.email = userFixture.user2.email = 'email@email.com';
+						userFixture.user2.emailsVisibility = 'verified';
+						userFixture.user2.location = {country: {name: 'uk'}};
+						userFixture.user2.locationsVisibility = 'anyone';
+						setUpCtrl(userFixture.user2, userFixture.user1);
+					});
+					it('should show the phone numbers', function () {
+						expect(scope.connectionInfo.phonesPermission).toBe('view');
+					});
+
+					it('should show the emails', function () {
+						expect(scope.connectionInfo.emailsPermission).toBe('view');
+					});
+
+					it('should show the locations', function () {
+						expect(scope.connectionInfo.locationsPermission).toBe('view');
+					});
+
+					it('should not show the contact info hidden alert', function () {
+						expect(mockAlertService.pageAlert).not.toHaveBeenCalled();
+					});
+
+					it('should not show the connect button', function () {
+						expect(scope.connectionInfo.canRequestConnection).toBe(false);
+					});
+				});
 			});
 
 			describe('Requesting to become a users connection so can view their contact details', function () {
@@ -460,77 +634,98 @@
 					userFixture.user2.phone_number = null;
 					userFixture.user2.phonesVisibility = 'connections';
 					setUpCtrl(userFixture.user2, userFixture.user1);
+					scope.requestConnection();
 				});
 				
 				it('should send a request to be added to the user\'s connections', function () {
-					scope.requestConnection();
 					expect(scopeUser.requestConnection).toHaveBeenCalledWith(userFixture.user2._id, jasmine.any(Function), jasmine.any(Function));
 				});
 
 				it('should show a confirmation that the request has been sent', function () {
-					scope.requestConnection();
 					expect(mockAlertService.add).toHaveBeenCalledWith('success', 'Connection request sent', false, jasmine.any(Function));
 				});
 
+				it('should reset the page alert', function () {
+					expect(mockAlertService.resetPageAlert).toHaveBeenCalled();
+				});
+
 				it('should show that the request has been sent on the profile', function () {
-					scope.requestConnection();
 					expect(scope.connectionInfo.phonesPermission).toBe('pending');
 				});
 
+				it('should show the contact info hidden alert with the correct message', function () {
+					expect(mockAlertService.pageAlert).toHaveBeenCalledWith('warning', connectionPendingMessage, 'caution');
+				});
+
+				it('should hide the connect button', function () {
+					expect(scope.connectionInfo.canRequestConnection).toBe(false);
+				});
+
 			});
 
-			describe('Reporting a problem', function () {
-
+			describe('Viewing own profile', function () {
 				beforeEach(function () {
-					setUpCtrl(userFixture.user2, userFixture.user1);
-					scope.notify();
+					userFixture.user2.phone_number = [];
+					userFixture.user2.phonesVisibility = 'connections';
+					userFixture.user2.email = userFixture.user2.email = [];
+					userFixture.user2.emailsVisibility = 'verified';
+					userFixture.user2.location = [];
+					userFixture.user2.locationsVisibility = 'anyone';
+					setUpCtrl(userFixture.user1, userFixture.user1);
 				});
+			});
+		});
 
-				it('should send a notification to the user', function () {
-					expect(scopeUser.notify).toHaveBeenCalled();
-				});
+		describe('Reporting a problem', function () {
 
-				it('should show the success message', function () {
-					expect(mockAlertService.add).toHaveBeenCalledWith('success', 'User was successfully notified', false, jasmine.any(Function));
-				});
-
+			beforeEach(function () {
+				setUpCtrl(userFixture.user2, userFixture.user1);
+				scope.notify();
 			});
 
-			describe('Claiming an orphan account', function () {
-
-				beforeEach(function () {
-					setUpCtrl(userFixture.orphanUser, userFixture.user1);
-					scope.sendClaimEmail();
-				});
-
-				it('should ask you to confirm', function () {
-					expect(mockAlertService.add).toHaveBeenCalledWith('warning', 'Are you sure?', true, jasmine.any(Function));
-				});
-
-				it('should claim the email', function () {
-					expect(scopeUser.claimEmail).toHaveBeenCalled();
-				});
-
-				it('should show the success message', function () {
-					expect(mockAlertService.add).toHaveBeenCalledWith('success', 'Claim email sent successfully', false, jasmine.any(Function));
-				});
-
+			it('should send a notification to the user', function () {
+				expect(scopeUser.notify).toHaveBeenCalled();
 			});
 
-			describe('Edit profile', function () {
+			it('should show the success message', function () {
+				expect(mockAlertService.add).toHaveBeenCalledWith('success', 'User was successfully notified', false, jasmine.any(Function));
+			});
 
-				it('should have the edit profile form open if user follows an edit link', function () {
-					setUpCtrl(userFixture.user1, userFixture.user1, true);
-					scope.sendClaimEmail();
-					expect(scope.showProfileForm).toBe(true);
-				});
+		});
 
-				it('should not have the edit profile form open if user follows an edit link to a profile they cannot edit', function () {
-					setUpCtrl(userFixture.user1, userFixture.user2, true);
-					scope.sendClaimEmail();
-					expect(scope.showProfileForm).toBe(false);
-				});
+		describe('Claiming an orphan account', function () {
 
+			beforeEach(function () {
+				setUpCtrl(userFixture.orphanUser, userFixture.user1);
+				scope.sendClaimEmail();
+			});
+
+			it('should ask you to confirm', function () {
+				expect(mockAlertService.add).toHaveBeenCalledWith('warning', 'Are you sure?', true, jasmine.any(Function));
+			});
+
+			it('should claim the email', function () {
+				expect(scopeUser.claimEmail).toHaveBeenCalled();
+			});
+
+			it('should show the success message', function () {
+				expect(mockAlertService.add).toHaveBeenCalledWith('success', 'Claim email sent successfully', false, jasmine.any(Function));
+			});
+
+		});
+
+		describe('Edit profile', function () {
+
+			it('should have the edit profile form open if user follows an edit link', function () {
+				setUpCtrl(userFixture.user1, userFixture.user1, true);
+				scope.sendClaimEmail();
+				expect(scope.showProfileForm).toBe(true);
+			});
+
+			it('should not have the edit profile form open if user follows an edit link to a profile they cannot edit', function () {
+				setUpCtrl(userFixture.user1, userFixture.user2, true);
+				scope.sendClaimEmail();
+				expect(scope.showProfileForm).toBe(false);
 			});
 
 		});

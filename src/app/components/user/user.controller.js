@@ -18,31 +18,67 @@
       show: false
     };
     $scope.apiUrl = config.apiUrl;
-    $scope.showRequestPhoneConnection = false;
     $scope.connectionInfo = {
+      canRequestConnection: false,
       phonesPermission: '',
       emailsPermission: '',
       locationsPermission: ''
-    }
-
+    };
     $scope.canViewInfo = true;
 
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
     };
 
-    function getPermission(value, pending, permission) {
+    var permissionsMessage;
+    var connectionRequired = false;
+    var verifiedRequired = false;
+    var connectionRequiredMessage = 'Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking \'Connect\'.';
+    var connectionPendingMessage = 'Your connection request is pending';
+    var verifiedRequiredMessage = 'Please note that some of the information made available by this user is only available to verified users';
+    var connectionAndVerifiedMessage = 'Please note that some of the information made available by this user is private and some is available only to verified users. You can contact them with a request to see the private sections of their profile by clicking \'Connect\'.';
+    var pendingAndVerifiedMessage = 'Your connection request is pending. Please note that some of the information made available by this user is only available to verified users.';
+
+    function getPermission (value, pending, permission) {
       if (value !== null) {
         return 'view';
+      }
+      if (permission === 'connections') {
+        connectionRequired = true;
+      }
+      if (permission === 'verified') {
+        verifiedRequired = true;
       }
       return (pending && permission === 'connections') ? 'pending' : permission;
     }
 
+    function getPermissionMessage (connectionPending, connectionRequired, verifiedRequired) {
+      if (connectionPending) {
+        if (verifiedRequired) {
+          return pendingAndVerifiedMessage;
+        }
+        return connectionPendingMessage;
+      }
+
+      if (connectionRequired) {
+        if (verifiedRequired) {
+          return connectionAndVerifiedMessage;
+        }
+        return connectionRequiredMessage;
+      }
+
+      if (verifiedRequired ) {
+        return verifiedRequiredMessage;
+      }
+    }
+
     function setConnectionInfo (user, currentUserId) {
      var connectionPending = false;
+     $scope.connectionInfo.canRequestConnection = false;
+
      if (user.connections) {
         angular.forEach(user.connections, function (connection) {
-          if (connection.user === currentUserId) {
+          if (connection.user._id === currentUserId) {
             if (connection.pending) {
               connectionPending = true;
             }
@@ -52,7 +88,13 @@
 
       $scope.connectionInfo.phonesPermission = getPermission(user.phone_number, connectionPending, user.phonesVisibility);
       $scope.connectionInfo.emailsPermission = getPermission(user.email, connectionPending, user.emailsVisibility);
-      $scope.connectionInfo.locationsPermission = getPermission(user.location, connectionPending, user.locationsVisibility);    
+      $scope.connectionInfo.locationsPermission = getPermission(user.location, connectionPending, user.locationsVisibility);  
+      $scope.connectionInfo.canRequestConnection = connectionRequired && !connectionPending;
+      permissionsMessage = getPermissionMessage(connectionPending, connectionRequired, verifiedRequired);
+
+      if (permissionsMessage) {
+        alertService.pageAlert('warning', permissionsMessage, 'caution');
+      }
     }
 
     function userPicture (picture, email) {
@@ -80,18 +122,22 @@
       }, 5000);
     }
 
-    UserDataService.getUser($routeParams.userId, function () {
-      $scope.user = UserDataService.user;
-      userPicture($scope.user.picture, $scope.user.email);
-      setConnectionInfo($scope.user, $scope.currentUser._id);
-      if (!$scope.currentUser.verified && $scope.user.is_orphan) {
-        $scope.canViewInfo = false
-      }
-      $scope.userLoaded = true;
-      $scope.$broadcast('userLoaded');
-    }, function (error) {
-      $exceptionHandler(error, 'getUser');
-    });
+    function getUser () {
+      UserDataService.getUser($routeParams.userId, function () {
+        $scope.user = UserDataService.user;
+        userPicture($scope.user.picture, $scope.user.email);
+        setConnectionInfo($scope.user, $scope.currentUser._id);
+        if (!$scope.currentUser.verified && $scope.user.is_orphan) {
+          $scope.canViewInfo = false;
+          alertService.pageAlert('warning', 'Your account must be verified to view this person\'s information');
+        }
+        $scope.userLoaded = true;
+        $scope.$broadcast('userLoaded');
+      }, function (error) {
+        $exceptionHandler(error, 'getUser');
+      });
+    }
+    getUser();
 
     //Listen for user edited event
     $scope.$on('editUser', function (event, data) {
@@ -202,10 +248,11 @@
     $scope.requestConnection = function () {
       $scope.user.requestConnection($scope.user._id, function () {
         alertService.add('success', 'Connection request sent', false, function () {});
-        $scope.connectionInfo.phonesPermission = 'pending';
+        alertService.resetPageAlert();
+        getUser();
       }, function (error) {
         $exceptionHandler(error, 'requestConnection');
-      })
-    }
+      });
+    };
   }
 })();

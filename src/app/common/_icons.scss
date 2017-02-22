@@ -26,6 +26,10 @@
   line-height: 1;
 }
 
+.icon-eye-hidden {
+  font-weight: normal;
+}
+
 /** Add / remove icons here - do not edit above this line */
 
 .icon-twitter:before {
@@ -133,4 +137,6 @@
 .icon-mail:before {
   content: "\e905";
 }
-
+.icon-eye-hidden:before {
+  content: "\e95c";
+}

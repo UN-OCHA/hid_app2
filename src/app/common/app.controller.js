@@ -5,15 +5,14 @@
     .module('app.common')
     .controller('AppCtrl', AppCtrl);
 
-  AppCtrl.$inject = ['$rootScope', '$scope', '$location', '$window', 'gettextCatalog', 'User'];
+  AppCtrl.$inject = ['$rootScope', '$scope', '$location', '$window', 'alertService', 'gettextCatalog', 'User'];
 
-  function AppCtrl($rootScope, $scope, $location, $window, gettextCatalog, User) {
+  function AppCtrl($rootScope, $scope, $location, $window, alertService, gettextCatalog, User) {
     $rootScope.canCache = true;
     $scope.currentUser = null;
     $scope.currentUserResource = null;
     $scope.filters = {};
     $scope.language = gettextCatalog.getCurrentLanguage();
-
     $scope.sidebar = {
       open: false,
       sidebars: {
@@ -125,6 +124,7 @@
     }
 
     var initView = function () {
+      alertService.resetPageAlert();
       $scope.closeSidebar();
       $scope.hideHeaderFooter = hideHeaderFooter();
     };

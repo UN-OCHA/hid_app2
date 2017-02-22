@@ -211,6 +211,11 @@ a.btn-icon {
   }
 }
 
+.btn-rounded {
+  height: $base-unit*5;
+  border-radius: $base-unit*2.5;
+}
+
 .btn-block {
   display: block;
   width: 100%;

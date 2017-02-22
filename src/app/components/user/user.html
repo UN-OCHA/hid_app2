@@ -122,14 +122,14 @@
       </div>
     </div>
 
+    <button type="button" class="btn-primary btn-rounded profile-header__connect-btn" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-if="connectionInfo.canRequestConnection === true" ng-click="requestConnection()">
+      <span translate>Connect</span>
+    </button>
+
     <button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')">
       <icon name="wheel" text="Actions"></icon>
     </button>
 
-  </div>
-
-  <div ng-if="!canViewInfo" class="alert alert-warning">
-    <p translate>Your account must be verified to view this person's information</p>
   </div>
 
   <div ng-if="canViewInfo" class="row">
@@ -139,13 +139,20 @@
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
 
         <h3 class="form-section__heading" translate>Phone numbers</h3>
-        <p class="list__item" ng-if="connectionInfo.phonesPermission === 'connections'">
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'connections'">
           <button type="button" class="btn-link" ng-click="requestConnection()" translate>
-            <em><span translate>Request</span> {{user.given_name}}'s <span translate>phone number</span></em>
+            <icon name="eye-hidden"></icon>
+            <span translate>Request</span> {{user.given_name}}'s <span translate>phone number</span>
           </button>
           </p>
-        <p class="list__item" ng-if="connectionInfo.phonesPermission === 'pending'"><em translate>Your connection request is pending</em></p>
-        <p class="list__item" ng-if="connectionInfo.phonesPermission === 'verified'"><em translate>{{user.given_name}}'s phone numbers can only be viewed by verified users.</em></p>
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'pending'">
+          <icon name="eye-hidden"></icon>
+          <span translate>Your connection request is pending</span>
+        </p>
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'verified'">
+          <icon name="eye-hidden"></icon>
+          <span translate>{{user.given_name}}'s phone numbers can only be viewed by verified users.</span>
+        </p>
 
         <ul class="list list--has-primary" ng-if="connectionInfo.phonesPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="phone in user.phone_numbers">
@@ -230,12 +237,19 @@
 
         <h3 class="form-section__heading" translate>Email</h3>
 
-        <p class="list__item" ng-if="connectionInfo.emailsPermission === 'connections'">
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.emailsPermission === 'connections'">
           <button type="button" class="btn-link" ng-click="requestConnection()">
-          <em><span translate>Request</span> {{user.given_name}}'s <span translate>email address</span></button></em>
+          <icon name="eye-hidden"></icon>
+          <span translate>Request</span> {{user.given_name}}'s <span translate>email address</span></button>
         </p>
-        <p class="list__item" ng-if="connectionInfo.emailsPermission === 'pending'"><em translate>Your connection request is pending</em></p>
-        <p class="list__item" ng-if="connectionInfo.emailsPermission === 'verified'"><em translate>{{user.given_name}}'s email addresses can only be viewed by verified users.</em></p>
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.emailsPermission === 'pending'">
+          <icon name="eye-hidden"></icon>
+          <span translate>Your connection request is pending</span>
+        </p>
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.emailsPermission === 'verified'">
+          <icon name="eye-hidden"></icon>
+          <span translate>{{user.given_name}}'s email addresses can only be viewed by verified users.</span>
+        </p>
 
         <ul class="list list--has-primary" ng-if="connectionInfo.emailsPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="email in user.emails">
@@ -481,13 +495,20 @@
       <div class="form-section form-section--compact" ng-class="{'form-section--editing' : showProfileForm}">
         <h3 class="form-section__heading" translate>Locations</h3>
 
-        <p class="list__item" ng-if="connectionInfo.locationsPermission === 'connections'">
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.locationsPermission === 'connections'">
           <button type="button" class="btn-link" ng-click="requestConnection()">
-            <em><span translate>Request</span> {{user.given_name}}'s <span translate>location</span></em>
+            <icon name="eye-hidden"></icon>
+            <span translate>Request</span> {{user.given_name}}'s <span translate>location</span><
           </button>
         </p>
-        <p class="list__item" ng-if="connectionInfo.locationsPermission === 'pending'"><em translate>Your connection request is pending</em></p>
-        <p class="list__item" ng-if="connectionInfo.locationsPermission === 'verified'"><em translate>{{user.given_name}}'s locations can only be viewed by verified users.</em></p>
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.locationsPermission === 'pending'">
+          <icon name="eye-hidden"></icon>
+          <span translate>Your connection request is pending</span>
+        </p>
+        <p class="list__item profile-permission-message" ng-if="connectionInfo.locationsPermission === 'verified'">
+          <icon name="eye-hidden"></icon>
+          <span translate>{{user.given_name}}'s locations can only be viewed by verified users.</span>
+        </p>
 
         <ul class="list list--has-primary" ng-if="connectionInfo.locationsPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
           <li class="list__item" ng-repeat="location in user.locations">

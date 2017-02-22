@@ -33,15 +33,19 @@
         <![endif]-->
 
         <ng-include src="'app/components/header/header.html'"></ng-include>
+
         <div class="page">
-            <div class="container breadcrumbs">
-                <a href back-button translate ng-if="isAuthenticated && !hideHeaderFooter">
-                    <icon name="arrow-left"></icon>
-                    <span translate>Back</span>
-                </a>
-            </div>
-            <div class="container" id="main" role="main" ng-view></div>
-            <ng-include ng-if="!hideHeaderFooter" src="'app/components/footer/footer.html'"></ng-include>
+
+	      	<page-alert ng-if="pageAlert.show" iconname="{{pageAlert.icon}}" message="{{pageAlert.message}}" type="{{pageAlert.type}}"></page-alert>
+
+          <div class="container breadcrumbs">
+              <a href back-button translate ng-if="isAuthenticated && !hideHeaderFooter">
+                  <icon name="arrow-left"></icon>
+                  <span translate>Back</span>
+              </a>
+          </div>
+          <div class="container" id="main" role="main" ng-view></div>
+          <ng-include ng-if="!hideHeaderFooter" src="'app/components/footer/footer.html'"></ng-include>
         </div>
 
 
@@ -81,6 +85,7 @@
         <script src="app/common/backButton.directive.js"></script>
         <script src="app/common/icon.directive.js"></script>
         <script src="app/common/loader.directive.js"></script>
+        <script src="app/common/pageAlert.directive.js"></script>
         <script src="app/common/translations.js"></script>
         <script src="app/components/start/start.module.js"></script>
         <script src="app/components/start/start.controller.js"></script>
