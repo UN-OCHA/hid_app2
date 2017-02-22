@@ -16,6 +16,17 @@
 .alert--danger {
   color: #474747;
   background-color: #F4AEB0;
+
+  .alert__icon {
+    color: #A42834;
+  }
+  svg.alert__icon {
+    fill: #A42834;
+  }
+
+  a {
+    color: #474747;
+  }
 }
 
 .alert--success {
