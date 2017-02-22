@@ -111,7 +111,7 @@
                 if ($rootScope.canCache) {
                   UserListsService.cacheListsForUser(user);
                 }
-              }, 600000);
+              }, 3600000);
             }
             return true;
           }

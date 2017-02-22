@@ -60,18 +60,18 @@
 
     function cacheListUsers (request, lfusers, deferred) {
       User.query(request).$promise.then(function (users) {
-        cacheUsers(lfusers, users, 0, 50, function (canCache) {
+        cacheUsers(lfusers, users, 0, 100, function (canCache) {
           //return if caching failed
           if (!canCache) {
             deferred.reject();
             return;
           }
           //return if final / only page
-          if (users.length < 50) {
+          if (users.length < 100) {
             deferred.resolve();
             return;
           }
-          request.offset = request.offset + 50;
+          request.offset = request.offset + 100;
           cacheListUsers(request, lfusers, deferred);
         });
 
@@ -84,7 +84,7 @@
       var deferred = $q.defer();
       var lfusers = $localForage.instance('users');
       var lflists = $localForage.instance('lists');
-      var request = {limit: 50, offset: 0, sort: 'name'};
+      var request = {limit: 100, offset: 0, sort: 'name'};
       request[this.type + 's.list'] = this._id;
 
       if (!$rootScope.canCache) {
