@@ -11,68 +11,83 @@
 
     <div ng-controller="SearchFormCtrl" class="block">
 
-      <h2 class="block-heading" translate>Search for contacts</h2>
-
-      <form ng-submit="fullSearch(searchUsersTerm)" role="search" class="block search-form">
-
-        <div uib-dropdown is-open="showUsersAutocomplete">
-          <label for="searchUsers" class="sr-only">{{'Search for contacts'|translate}}</label>
-          <input type="search" class="input-no-border search-form__input" placeholder="{{'Type a name'|translate}}" name="searchUsers" id="searchUsers" autocomplete="off" ng-model="searchUsersTerm" ng-model-options="{debounce: 200}" ng-change="searchUsersAutocomplete()">
-          <button type="submit" class="btn-transparent search-form__button">
-            <icon name="search" text="Search"></icon>
-          </button>
-
-          <ul class="dropdown-menu" uib-dropdown-menu>
-            <li ng-if="landingUsers.length">
-              <ul>
-                <li ng-repeat="result in landingUsers">
-                  <a ng-href="users/{{result._id}}" ng-click="saveSearch(result, 'user')">{{result.name}}</a>
-                </li>
-              </ul>
-            </li>
-            <li><button type="button" ng-click="fullSearch(searchUsersTerm)" class="btn-transparent" translate>View all</button></li>
-          </ul>
+      <div class="block-thumbnail">
+        <div class="block-thumbnail__image block-thumbnail__image--contacts">
         </div>
 
-        <p ng-if="recentUserSearches.length" class="recent-searches">
-          <span translate>Recent:&nbsp;</span>
-          <span ng-repeat="search in recentUserSearches track by $index">
-            <a ng-href="{{search.link}}">{{search.name}}</a><span ng-if="$index +1 < recentUserSearches.length">,&nbsp;</span>
-          </span>
-        </p>
+        <div class="block-thumbnail__inner">
+          <h2 class="block-heading" translate>Search for contacts</h2>
 
-      </form>
+          <form ng-submit="fullSearch(searchUsersTerm)" role="search" class="search-form">
 
-      <form ng-submit="fullSearch(searchListsTerm, 'lists')" role="search" class="search-form">
+            <div uib-dropdown is-open="showUsersAutocomplete">
+              <label for="searchUsers" class="sr-only">{{'Search for contacts'|translate}}</label>
+              <input type="search" class="input-no-border search-form__input" placeholder="{{'Type a name'|translate}}" name="searchUsers" id="searchUsers" autocomplete="off" ng-model="searchUsersTerm" ng-model-options="{debounce: 200}" ng-change="searchUsersAutocomplete()">
+              <button type="submit" class="btn-transparent search-form__button">
+                <icon name="search" text="Search"></icon>
+              </button>
 
-        <h2 class="block-heading" translate>Search for contact lists</h2>
-
-        <div class="search-form" uib-dropdown is-open="showListsAutocomplete">
-          <label for="searchLists" class="sr-only">{{'Search for lists'|translate}}</label>
-          <input type="search" class="input-no-border search-form__input" placeholder="{{'Type a list name'|translate}}" name="searchLists" id="searchLists" autocomplete="off" ng-model="searchListsTerm" ng-model-options="{debounce: 200}" ng-change="searchListsAutocomplete()">
-          <button type="submit" class="btn-transparent search-form__button">
-            <icon name="search" text="Search"></icon>
-          </button>
-
-          <ul class="dropdown-menu" uib-dropdown-menu>
-            <li ng-if="landingLists.length">
-              <ul>
-                <li ng-repeat="result in landingLists">
-                  <a ng-href="lists/{{result._id}}" ng-click="saveSearch(result, 'list')">{{result.name}}</a>
+              <ul class="dropdown-menu" uib-dropdown-menu>
+                <li ng-if="landingUsers.length">
+                  <ul>
+                    <li ng-repeat="result in landingUsers">
+                      <a ng-href="users/{{result._id}}" ng-click="saveSearch(result, 'user')">{{result.name}}</a>
+                    </li>
+                  </ul>
                 </li>
+                <li><button type="button" ng-click="fullSearch(searchUsersTerm)" class="btn-transparent" translate>View all</button></li>
               </ul>
-            </li>
-            <li><button type="button" ng-click="fullSearch(searchListsTerm, 'lists')" class="btn-transparent" translate>View all</button></li>
-          </ul>
+            </div>
+
+            <p ng-if="recentUserSearches.length" class="recent-searches">
+              <span translate>Recent:&nbsp;</span>
+              <span ng-repeat="search in recentUserSearches track by $index">
+                <a ng-href="{{search.link}}">{{search.name}}</a><span ng-if="$index +1 < recentUserSearches.length">,&nbsp;</span>
+              </span>
+            </p>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="block-thumbnail">
+      <div class="block-thumbnail__image block-thumbnail__image--lists">
         </div>
 
-        <p ng-if="recentListSearches.length" class="recent-searches">
-          <span translate>Recent:&nbsp;</span>
-          <span ng-repeat="search in recentListSearches track by $index">
-            <a ng-href="{{search.link}}">{{search.name}}</a><span ng-if="$index +1 < recentListSearches.length">,&nbsp;</span>
-          </span>
-        </p>
-      </form>
+        <div class="block-thumbnail__inner">
+
+          <form ng-submit="fullSearch(searchListsTerm, 'lists')" role="search" class="search-form">
+
+            <h2 class="block-heading" translate>Search for contact lists</h2>
+
+            <div class="search-form" uib-dropdown is-open="showListsAutocomplete">
+              <label for="searchLists" class="sr-only">{{'Search for lists'|translate}}</label>
+              <input type="search" class="input-no-border search-form__input" placeholder="{{'Type a list name'|translate}}" name="searchLists" id="searchLists" autocomplete="off" ng-model="searchListsTerm" ng-model-options="{debounce: 200}" ng-change="searchListsAutocomplete()">
+              <button type="submit" class="btn-transparent search-form__button">
+                <icon name="search" text="Search"></icon>
+              </button>
+
+              <ul class="dropdown-menu" uib-dropdown-menu>
+                <li ng-if="landingLists.length">
+                  <ul>
+                    <li ng-repeat="result in landingLists">
+                      <a ng-href="lists/{{result._id}}" ng-click="saveSearch(result, 'list')">{{result.name}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><button type="button" ng-click="fullSearch(searchListsTerm, 'lists')" class="btn-transparent" translate>View all</button></li>
+              </ul>
+            </div>
+
+            <p ng-if="recentListSearches.length" class="recent-searches">
+              <span translate>Recent:&nbsp;</span>
+              <span ng-repeat="search in recentListSearches track by $index">
+                <a ng-href="{{search.link}}">{{search.name}}</a><span ng-if="$index +1 < recentListSearches.length">,&nbsp;</span>
+              </span>
+            </p>
+          </form>
+        </div>
+      </div>
 
     </div>
 
