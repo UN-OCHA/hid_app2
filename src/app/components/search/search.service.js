@@ -14,7 +14,7 @@
     Search.UsersAndLists = function (searchTerm, limit) {
       return $q.all([
         List.query({name: searchTerm, limit: limit, sort: 'name'}).$promise,
-        User.query({name: searchTerm, limit: limit, sort: 'name'}).$promise
+        User.query({name: searchTerm, limit: limit, sort: 'name', 'appMetadata.hid.login': true}).$promise
       ]).then(function(data) {
         return data;
       }, function (error) {

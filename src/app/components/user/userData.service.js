@@ -38,6 +38,7 @@
     };
 
     UserDataService.getUsers = function (params, list, callback) {
+      params['appMetadata.hid.login'] = true;
       // cached resource is returned immediately
       return User.query(params, function (response, headers) {
         UserDataService.listUsers = list ? transformUsers(response, list) : response;
