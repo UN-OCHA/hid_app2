@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'alertService', 'AuthService', 'User'];
+  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'alertService', 'AuthService'];
 
-  function AuthCtrl ($exceptionHandler, $scope, $routeParams, $location, alertService, AuthService, User) {
+  function AuthCtrl ($exceptionHandler, $scope, $location, alertService, AuthService) {
     $scope.email = '';
     $scope.saving = false;
 
@@ -15,33 +15,30 @@
       $scope.saving = true;
       AuthService.login($scope.email, $scope.password).then(function () {
         $scope.initCurrentUser();
-
-        if (!$scope.currentUser.appMetadata || ($scope.currentUser.appMetadata && !$scope.currentUser.appMetadata.hid)) {
-          $scope.currentUser.setAppMetaData({hasLoggedIn: true});
-          $scope.currentUser.$update(function () {
-            $scope.setCurrentUser($scope.currentUser);
-            $scope.saving = false;
-            $location.path('/tutorial');
-          });
-          return;
-        }
-
-        if (!$scope.currentUser.appMetadata.hid.hasLoggedIn) {
-          $scope.currentUser.setAppMetaData({hasLoggedIn: true});
-          $scope.currentUser.$update(function () {
-            $scope.setCurrentUser($scope.currentUser);
-            $scope.saving = false;
-            $location.path('/start');
-          });
-          return;
-        }
-
-        if (!$scope.currentUser.appMetadata.hid.viewedTutorial) {
-          $scope.saving = false;
-          $location.path('/tutorial');
-          return;
-        }
         $scope.saving = false;
+
+        if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid) {
+
+          // New user first login
+          if (!$scope.currentUser.appMetadata.hid.login) {
+            $scope.currentUser.setAppMetaData({login: true});
+            $scope.currentUser.$update(function () {
+              $scope.setCurrentUser($scope.currentUser);
+              $location.path('/start');
+            });
+            return;
+          }
+
+          //HIDv1 user first login (login is already set to true)
+          if ($scope.currentUser.appMetadata.hid.login && !$scope.currentUser.appMetadata.hid.viewedTutorial) {
+            $location.path('/tutorial');
+            return;
+          }
+
+          $location.path('/landing');
+          return;
+        }
+
         $location.path('/landing');
 
       }, function (error) {

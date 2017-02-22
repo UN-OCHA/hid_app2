@@ -10,7 +10,7 @@
   function UserRegisterCtrl($scope, $location, alertService, User, gettextCatalog) {
 
     $scope.user = new User();
-    $scope.user.setAppMetaData({hasLoggedIn: false});
+    $scope.user.setAppMetaData({login: false});
     $scope.user.locale = gettextCatalog.getCurrentLanguage();
     $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/verify';
     $scope.currentPath = $location.path();
