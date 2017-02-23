@@ -21,20 +21,6 @@
       sort: '-createdAt'
     };
 
-    $scope.getLink = function (notification) {
-      if (notification.params && notification.params.list) {
-        var listId = typeof notification.params.list === 'string' ? notification.params.list : notification.params.list._id
-        return '/lists/' + listId;
-      }
-      if (notification.type === 'connection_request') {
-        return '/settings'
-      }
-      if (notification.type === 'connection_approved') {
-        return '/users/' + notification.createdBy;
-      }
-      return '/users/' + notification.user;
-    };
-
     $scope.getNotifications = function () {
       params.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
 

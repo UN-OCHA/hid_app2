@@ -22,6 +22,14 @@
 .secondary-block {
   border-bottom: 1px solid $primary-color;
   margin-bottom: $base-unit*2;
+
+  a {
+    text-decoration: none;
+
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
 }
 
 .secondary-block__heading {

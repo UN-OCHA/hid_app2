@@ -9,6 +9,9 @@
 
   function AuthService ($http, $window, $rootScope, $interval, $location, config, UserListsService, notificationsService) {
 
+    var checkingNotifications;
+    var cachingLists;
+
     function storeUser (response) {
       try {
         $window.localStorage.setItem('jwtToken', response.data.token);
@@ -19,55 +22,88 @@
       }
     }
 
-    var jwt = {
-      _notificationsHelper: function (permission, userId) {
-        if (!("Notification" in window)) {return;}
-        if (permission === 'granted' && !$rootScope.notificationPromise) {
-          $rootScope.notificationPromise = true;
-          $rootScope.notificationPromise = $interval(function () {
-            var display = function (index, items) {
-              setTimeout(function (index, items) {
-                if (items.length) {
-                  var notification = new Notification('',{
-                    body: items[index].text,
-                    icon: $location.protocol() + '://' + $location.host() + '/img/notification-icon.png',
-                    dir: 'auto'
-                  });
-                  items[index].read = true;
-                  items[index].$update();
-                }
-                if (items.length > index + 1) {
-                  display(index + 1, items);
-                }
-              }, 3000, index, items);
-            };
-            notificationsService.getUnread().then(function (items) {
-              display(0, items);
-            });
-          }, 60000);
+    function showNotification (item) {
+      if (item && !item.notified) {
+        var notification = new Notification('',{
+          body: item.text,
+          icon: $location.protocol() + '://' + $location.host() + '/img/notification-icon.png',
+          dir: 'auto'
+        });
+        item.notified = true;
+        item.read = false;
+        var link =item.link;
+        
+        notification.onclick = function () {
+          item.notified = true;
+          item.read = true;
+          notificationsService.update(item);
+          notification.close();
+          $location.path(link);
+        };
+        notificationsService.update(item);
+        setTimeout(notification.close.bind(notification), 5000);
+      }
+    }
 
-          //Check notifications when first open app
-          var checkedNotifications = false;
-          if (!checkedNotifications) {
-            notificationsService.getUnread().then(function (items) {
-              checkedNotifications = true;
-            });
-          }
+    function showNotifications (index, items) {
+      setTimeout(function (index, items) {
+        showNotification(items[index]);
+        if (items.length > index + 1) {
+          showNotifications(index + 1, items);
         }
-      },
+      }, 3000, index, items);
+    }
 
+    function notificationsPermitted () {
+      if (!("Notification" in window) || Notification.permission === 'declined') {
+        return false;
+      }
+
+      if (Notification.permission === 'granted') {
+        return true;
+      }
+
+      return Notification.requestPermission(function (permission) {
+        if (permission === 'granted') {
+          return true;
+        }
+        return false;
+      });
+    }
+
+    function getUnreadNotifications () {
+      notificationsService.getUnread().then(function (items) {
+        if (items && items.length && notificationsPermitted()) {
+          showNotification(items[0]); //show first notification
+          showNotifications(1, items); // show rest with delay between
+        }
+      });
+    }
+
+    function notificationsHelper () {
+      
+      getUnreadNotifications();
+      
+      checkingNotifications = $interval(function () {
+        getUnreadNotifications();
+      }, 60000); 
+    }
+
+    function cachingHelper () {
+      var user = JSON.parse($window.localStorage.getItem('currentUser'));
+      UserListsService.cacheListsForUser(user);
+      cachingLists = $interval(function () {
+        if ($rootScope.canCache) {
+          UserListsService.cacheListsForUser(user);
+        }
+      }, 3600000);
+    }
+
+    var jwt = {
       login: function(email, password) {
-        var that = this;
         var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password }).then(function (response) {
           if (response.data && response.data.token) {
             storeUser(response);
-            UserListsService.cacheListsForUser(response.data.user);
-            // Cache lists every hour
-            $rootScope.offlinePromise = $interval(function () {
-              if ($rootScope.canCache) {
-                UserListsService.cacheListsForUser(response.data.user);
-              }
-            }, 3600000);
           }
         });
         return promise;
@@ -76,8 +112,8 @@
       logout: function() {
         $window.localStorage.removeItem('jwtToken');
         $window.localStorage.removeItem('currentUser');
-        $interval.cancel($rootScope.offlinePromise);
-        $interval.cancel($rootScope.notificationPromise);
+        $interval.cancel(cachingLists);
+        $interval.cancel(checkingNotifications);
       },
 
       getToken: function() {
@@ -93,32 +129,17 @@
           if (parsed.exp <= current) {
             return false;
           }
-          else {
-            var that = this;
-            if (!$rootScope.notificationPromise) {
-              if (("Notification" in window) && Notification.permission !== 'granted') {
 
-                Notification.requestPermission(function (permission) {
-                  that._notificationsHelper(permission, parsed.id);
-                });
-              }
-            }
-            if (!$rootScope.offlinePromise) {
-              $rootScope.offlinePromise = true;
-              var user = JSON.parse($window.localStorage.getItem('currentUser'));
-              UserListsService.cacheListsForUser(user);
-              $rootScope.offlinePromise = $interval(function () {
-                if ($rootScope.canCache) {
-                  UserListsService.cacheListsForUser(user);
-                }
-              }, 3600000);
-            }
-            return true;
+          if (!checkingNotifications) {
+            notificationsHelper();
           }
+
+          if (!cachingLists) {
+            cachingHelper();
+          }
+          return true;
         }
-        else {
-          return false;
-        }
+        return false;
       },
 
       parseToken: function (token) {

@@ -7,7 +7,7 @@
 
     <ul class="block-list" ng-if="notificationsLoaded">
       <li ng-repeat="notification in notifications.all">
-        <a href="{{getLink(notification)}}" class="block-list__item">
+        <a href="{{notification.link}}" class="block-list__item">
           {{notification.text}}
           <span class="block-list__item-meta">
           {{notification.createdAt | date: 'HH:mm dd/MM/yyyy'}}

@@ -142,7 +142,9 @@
       <ul class="secondary-block__list">
         <li class="secondary-block__item" ng-repeat="notification in notifications.unread | limitTo: 5">
           <icon name="arrow-right"></icon>
-          {{notification.text}}
+          <a ng-href="{{notification.link}}" ng-click="readNotification(notification)">
+            {{notification.text}}
+          </a>
         </li>
         <li class="secondary-block__item">
           <icon name="arrow-right"></icon>
