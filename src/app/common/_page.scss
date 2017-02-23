@@ -69,6 +69,7 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
   display: inline-block;
   vertical-align: middle;
   color: $primary-color;
+  flex-shrink: 0;
 
   .no-flexbox & {
     float: left;

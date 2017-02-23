@@ -145,6 +145,8 @@
   	height: $footer-height-sm;
   }
 
+
+
 	.footer-platforms__item {
 		width: 20%;
 		padding: 0 $base-unit*3 0 0;
@@ -153,7 +155,6 @@
 	.footer-platforms__logo {
 		margin-right: $base-unit*2;
 		height: $base-unit*7;
-		// max-width: 120px;
 	}
 
 }
@@ -167,6 +168,10 @@
 
   .footer-social {
   	text-align: right;
+  }
+
+  .footer-platforms__list {
+  	flex-wrap: nowrap;
   }
 
 	.footer-platforms__item {
