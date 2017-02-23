@@ -4,44 +4,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: src/app/common/header.html:6
-msgid "&lt; Back"
-msgstr ""
-
-#: src/app/common/header.html:30
-msgid "Dashboard"
-msgstr ""
-
-#: src/app/common/header.html:34
-msgid "Log out"
-msgstr ""
-
-#: src/app/common/header.html:1
-msgid "No"
-msgstr ""
-
-#: src/app/common/header.html:32
-msgid "Preferences"
-msgstr ""
-
-#: src/app/common/header.html:31
-msgid "Profile"
-msgstr ""
-
-#: src/app/common/header.html:15
-msgid "Search for someone"
-msgstr ""
-
 #: src/app/common/messages.html:1
 msgid "This field is required"
 msgstr ""
 
 #: src/app/common/messages.html:3
 msgid "This field must be a valid email address"
-msgstr ""
-
-#: src/app/common/header.html:1
-msgid "Yes"
 msgstr ""
 
 #: src/app/common/messages.html:2
