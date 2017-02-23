@@ -216,9 +216,9 @@
         sort: 'name'
       };
       params.offset = offset || 0;
-      User.query(params, function (response) {
+      User.query(params, function (response, headers) {
         $scope.subscribers = response;
-        $scope.pagination.totalItems = response.headers['x-total-count'];
+        $scope.pagination.totalItems = headers()['x-total-count'];
         $scope.subscribersLoaded = true;
       });
     };
