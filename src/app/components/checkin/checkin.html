@@ -14,32 +14,7 @@
         <button type="button" class="btn-link btn-small" ng-click="openListTypesModal()" translate>What are these?</button>
       </div>
 
-      <div class="form-inline-fields form-inline-fields--clickies checkin-types">
-        <p><input type="radio" name="listTypes" id="all" ng-model="selectedTypes.name" value="all" checked="checked" />
-        <label for="all" class="clickie-label list-type list-type--all">All</label>
-        </p>
-
-        <p ng-repeat="type in listTypes">
-          <input type="radio" name="listTypes" id="{{type.name}}" ng-model="selectedTypes.name" value="{{type.name}}" />
-          <label for="{{type.name}}" class="clickie-label list-type list-type--{{type.name}}">{{type.label}}</label>
-        </p>
-      </div>
-
-      <ui-select ng-model="selectedList" on-select="selectList(selectedList)" class="ui-select--has-border">
-        <ui-select-match placeholder="{{'Select a list'|translate}}"><span translate>Select a list</span></ui-select-match>
-        <ui-select-choices refresh="getLists($select.search)" repeat="list in lists">
-          {{list.name}}
-        </ui-select-choices>
-      </ui-select>
-      <ul class="list list--has-buttons list--has-dividers">
-        <li ng-repeat="list in selectedLists" class="list__item">
-          <icon name="check"></icon>
-          {{list.name}}
-          <button type="button" class="btn-transparent list__button" ng-click="removeList(list)">
-            <icon name="cancel" text="Remove"></icon>
-          </button>
-        </li>
-      </ul>
+      <select-lists></select-lists>
 
       <div class="associated-lists" ng-if="associatedLists.length">
         <div class="associated-lists__header">

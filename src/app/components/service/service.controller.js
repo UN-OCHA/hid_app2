@@ -22,7 +22,6 @@
     $scope.credentials = [];
     $scope.newLists = [];
     $scope.newUsers = [];
-    $scope.selectList = {};
     $scope.isSubscribed = false;
     $scope.userSubscribed = {};
     $scope.userUnsubscribed = {};
@@ -33,13 +32,14 @@
       itemsPerPage: 50,
       totalItems: 0
     };
+    $scope.selectedLists = [];// used by nested select lists controller
 
     if ($routeParams.serviceId) {
       $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
+        $scope.selectedLists = $scope.service.lists;
         $scope.getSubscribers();
         $scope.getMailchimpLists();
         $scope.credentials = ServiceCredentials.query();
-        
         for (var i = 0; i < $scope.currentUser.subscriptions.length; i++) {
           if ($scope.currentUser.subscriptions[i]._id === $scope.service._id) {
             $scope.isSubscribed = true;
@@ -113,6 +113,7 @@
     };
 
     $scope.saveService = function() {
+      $scope.service.lists = $scope.selectedLists;
       var success = function (resp) {
         alertService.add('success', gettextCatalog.getString('Service saved successfully'));
         subscribeManagersAndOwners(resp);
@@ -156,22 +157,6 @@
         .then(function (result) {
           $scope.googleGroups = result.data;
         });
-    };
-
-    // Retrieve lists
-    $scope.getLists = function(search) {
-      $scope.newLists = List.query({'name': search});
-    };
-
-    $scope.removeList = function (list) {
-      $scope.service.lists.splice($scope.service.lists.indexOf(list), 1);
-    };
-
-    $scope.isSelected = function (list) {
-      var inLists = $scope.service.lists.filter(function (selectedList) {
-        return selectedList._id === list._id;
-      })[0];
-      return inLists ? true : false;
     };
 
     function filterUsers (users, subscribers) {

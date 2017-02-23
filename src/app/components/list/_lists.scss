@@ -1,3 +1,9 @@
+.list-types {
+  background: $light-grey;
+  padding: $base-unit/2;
+  margin-bottom: $base-unit*1.5;
+}
+
 .list-type {
 	text-transform: uppercase;
 	font-family: $heading-font-light;

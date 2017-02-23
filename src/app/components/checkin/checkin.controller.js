@@ -8,12 +8,7 @@
   CheckinCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$filter', '$q', '$location', '$uibModal', 'gettextCatalog', 'config', 'alertService', 'User', 'UserDataService', 'UserCheckInService', 'List', 'Service'];
 
   function CheckinCtrl ($exceptionHandler, $scope, $routeParams, $filter, $q, $location, $uibModal, gettextCatalog, config, alertService, User, UserDataService, UserCheckInService, List, Service) {
-    $scope.selectedLists = [];
     $scope.modifications = {};
-    $scope.listTypes = [];
-    $scope.selectedTypes = {
-      name: 'all'
-    };
     $scope.datePicker = {
       opened: false
     };
@@ -28,32 +23,8 @@
     $scope.associatedLists = [];
     $scope.showAllAssociated = false;
     $scope.saving = false;
-    var searchTerm = '';
-
-    function getListTypes () {
-      angular.forEach(config.listTypes, function (listType) {
-
-        var label = listType.charAt(0).toUpperCase() + listType.slice(1);
-        if (listType === 'bundle') {
-          label = 'Group';
-        }
-        if (listType === 'functional_role') {
-          label = 'Role';
-        }
-        if (listType === 'office') {
-          label = 'Co-ordination hub';
-        }
-        if (listType === 'list') {
-          return;
-        }
-        $scope.listTypes.push(
-          {
-            name: listType,
-            label: label
-          }
-        );
-      });
-    }
+    $scope.selectedLists = []; // used by nested select lists controller
+    $scope.filterListsMember = true; // used by nested select lists controller
 
     function isListMember (list, user) {
       var inList = false;
@@ -129,36 +100,14 @@
       });
     }
     
-    $scope.getLists = function(search) {
-      if (search === '') {
-        return;
-      }
-      searchTerm = search;
-      var params = {
-        name: search
-      };
-      if ($scope.selectedTypes.name !== 'all') {
-        params.type = $scope.selectedTypes.name;
-      }
-
-      List.query(params, function (lists) {
-        $scope.lists = filterLists(lists, $scope.selectedLists, $scope.user);
-      });
-    };
-
     $scope.addList = function (list) {
       $scope.selectedLists.push(list);
       $scope.associatedLists.splice($scope.associatedLists.indexOf(list), 1);
     };
 
-    $scope.selectList = function (list) {
-      $scope.selectedLists.push(list);
-      showAssociatedLists(list, searchTerm);
-    };
-
-    $scope.removeList = function (list) {
-      $scope.selectedLists.splice($scope.selectedLists.indexOf(list), 1);
-    };
+    $scope.$on('selectList', function (evt, data) {
+      showAssociatedLists(data.list, data.searchTerm);
+    });
 
     $scope.checkin = function () {
       var defer = $q.defer();
@@ -282,7 +231,6 @@
 
     function init() {
       getUser();
-      getListTypes();
     }
 
     init();
