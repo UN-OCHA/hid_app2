@@ -18,7 +18,7 @@
           class="tabs-nav__button" 
           ng-class="tabClass('favorites')"
           ng-click="toggleTabs('favorites')">
-          <span translate>My favorite lists</span>
+          <span translate>My favourite lists</span>
         </button>
 
         <button type="button" 
@@ -41,7 +41,7 @@
           class="tabs-nav__button" 
           ng-class="tabClass('favorites')"
           ng-click="toggleTabs('favorites')">
-          <span translate>My favorite lists</span>
+          <span translate>My favourite lists</span>
           <icon name="arrow-down"></icon>
         </button>
 
@@ -50,7 +50,7 @@
           >
           <ul class="list list--has-buttons list--has-dividers">
               <li class="list__item" ng-if="!favoriteLists.length" translate>
-                You don't have any favorite lists
+                You don't have any favourite lists
               </li>
               <li class="list__item" ng-repeat="list in favoriteLists track by $index">
                 <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
@@ -62,7 +62,7 @@
                     <icon name="dots" text="Options"></icon>
                   </button>
                   <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
-                    <li><button type="button" ng-click="removeFavorite(list)" class="btn-link" translate>Remove from favorites</button></li>
+                    <li><button type="button" ng-click="removeFavorite(list)" class="btn-link" translate>Remove from favourites</button></li>
                   </ul>
                 </div>
               </li>

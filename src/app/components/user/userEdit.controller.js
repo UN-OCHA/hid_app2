@@ -34,7 +34,21 @@
     $scope.addPrimaryLocation = addPrimaryLocation;
     $scope.nextStep = nextStep;
     $scope.currentStep = 1;
-    $scope.visibilityOptions = ['anyone', 'verified', 'connections'];
+    // $scope.visibilityOptions = ['anyone', 'verified', 'connections'];
+    $scope.visibilityOptions = [
+      {
+        value: 'anyone',
+        label: 'Anyone'
+      }, 
+      {
+        value: 'verified',
+        label: 'Verified users'
+      }, 
+      {
+        value: 'connections',
+        label: 'My connections'
+      } 
+    ];
     $scope.urlRegEx = RegExp('^((https?|ftp)://)?([a-z]+[.])?[a-z0-9-]+([.][a-z]{1,4}){1,2}(/.*[?].*)?$', 'i');
     var defaultSettings = {};
     var lastStep = 4;

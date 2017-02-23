@@ -12,19 +12,19 @@
     $scope.visibility = [
       {
         value: 'me',
-        label: 'List owner and editors only'
+        label: 'The list owner and editors of this list only'
       },
       {
         value: 'inlist',
         label: 'People on the list only'
       },
       {
-        value: 'all',
-        label: 'Anyone within Humanitarian ID'
-      },
-      {
         value: 'verified',
         label: 'Verified users only'
+      },
+      {
+        value: 'all',
+        label: 'Anyone within Humanitarian ID'
       }
     ];
 
@@ -35,11 +35,11 @@
       },
       {
         value: 'moderated',
-        label: 'Anyone within Humanitarian ID can ask to join'
+        label: 'Anyone within HID can ask to be checked in'
       },
       {
         value: 'private',
-        label: 'Only the owner and managers can add users'
+        label: 'Only the owner and managers of the list can add users'
       }
     ];
 

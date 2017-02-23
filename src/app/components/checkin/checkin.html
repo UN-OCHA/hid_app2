@@ -63,10 +63,10 @@
     </div>
 
     <div class="block">
-      <h2 class="block-heading" translate>Check out automatically?</h2>
+      <h2 class="block-heading" translate>Set a date here if you want to be checked out automatically</h2>
       <div class="form-field">
         <div class="form-field form-field--short">
-          <label for="departureDate" class="form-section__sub-heading" translate>Set a date to be automatically checked out:</label>
+          <label for="departureDate" class="sr-only" translate>Set a date to be automatically checked out:</label>
           <div class="form-inline-fields">
             <input type="text" id="departureDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="bottom-right" ng-model="departureDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
             <button type="button" class="btn-transparent" ng-click="showDatePicker()">

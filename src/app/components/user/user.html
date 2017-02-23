@@ -219,11 +219,11 @@
                   id="permission-phone-{{$index}}"
                   name="phonesVisibility"
                   ng-model="temp.phonesVisibility"
-                  ng-value="permission"
+                  ng-value="permission.value"
                   ng-change="changePermission('phonesVisibility')"
                   />
                   <label class="clickie-label" for="permission-phone-{{$index}}">
-                    {{permission}}
+                    {{permission.label}}
                   </label>
                 </li>
               </ul>
@@ -322,11 +322,11 @@
                   id="permission-email-{{$index}}"
                   name="emailsVisibility"
                   ng-model="temp.emailsVisibility"
-                  ng-value="permission"
+                  ng-value="permission.value"
                   ng-change="changePermission('emailsVisibility')"
                   />
                   <label class="clickie-label" for="permission-email-{{$index}}">
-                    {{permission}}
+                    {{permission.label}}
                   </label>
                 </li>
               </ul>
@@ -592,11 +592,11 @@
                   id="permission-locations-{{$index}}"
                   name="locationsVisibility"
                   ng-model="temp.locationsVisibility"
-                  ng-value="permission"
+                  ng-value="permission.value"
                   ng-change="changePermission('locationsVisibility')"
                   />
                   <label class="clickie-label" for="permission-locations-{{$index}}">
-                    {{permission}}
+                    {{permission.label}}
                   </label>
                 </li>
               </ul>

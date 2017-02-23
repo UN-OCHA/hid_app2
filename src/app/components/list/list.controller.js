@@ -201,7 +201,7 @@
       }
       $scope.currentUser.favoriteLists.push($scope.list);
       User.update($scope.currentUser, function (user) {
-        alertService.add('success', gettextCatalog.getString('This list was successfully added to your favorites.'));
+        alertService.add('success', gettextCatalog.getString('This list was successfully added to your favourites.'));
         $scope.isFavorite = true;
         $scope.setCurrentUser($scope.currentUser);
       });
@@ -213,7 +213,7 @@
         return elt._id != $scope.list._id;
       });
       User.update($scope.currentUser, function (user) {
-        alertService.add('success', gettextCatalog.getString('This list was successfully removed from your favorites.'));
+        alertService.add('success', gettextCatalog.getString('This list was successfully removed from your favourites.'));
         $scope.isFavorite = false;
         $scope.setCurrentUser($scope.currentUser);
       });

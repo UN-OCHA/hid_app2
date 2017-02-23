@@ -129,7 +129,7 @@
         setConnectionInfo($scope.user, $scope.currentUser._id);
         if (!$scope.currentUser.verified && $scope.user.is_orphan) {
           $scope.canViewInfo = false;
-          alertService.pageAlert('warning', 'Your account must be verified to view this person\'s information');
+          alertService.pageAlert('warning', 'In order to view this person’s profile, please contact info@humanitarian.id');
         }
         $scope.userLoaded = true;
         $scope.$broadcast('userLoaded');

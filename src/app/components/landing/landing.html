@@ -108,11 +108,11 @@
         </li>
         <li class="secondary-block__item">
           <icon name="arrow-right"></icon>
-          <span translate>Last update to your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
+          <span translate>Last update of your profile</span>: <span ng-bind="currentUser.updatedAt | date:'longDate'"></span></li>
           <li class="secondary-block__item">
             <icon name="arrow-right"></icon>
-            <span ng-if="currentUser.verified" translate>Your profile is verified</span>
-            <span ng-if="!currentUser.verified" translate>You're not verified yet</span>
+            <span ng-if="currentUser.verified" translate>Your profile has been verified.</span>
+            <span ng-if="!currentUser.verified" translate>You're not verified yet.</span>
           </li>
         </ul>
 

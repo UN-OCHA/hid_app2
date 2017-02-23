@@ -44,7 +44,7 @@
       $scope.currentUser.favoriteLists.splice($scope.currentUser.favoriteLists.indexOf(list), 1);
 
       User.update($scope.currentUser, function () {
-        alertService.add('success', gettextCatalog.getString('This list was removed from your favorites.'));
+        alertService.add('success', gettextCatalog.getString('This list was removed from your favourites.'));
         $scope.setCurrentUser($scope.currentUser);
       });
     };

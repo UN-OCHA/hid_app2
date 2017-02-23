@@ -2,8 +2,8 @@
 
   <form ng-submit="fullSearch(searchTerm)" role="search" >
     <div class="search-form" uib-dropdown is-open="showAutocomplete">
-      <label for="search" class="sr-only">{{'Search for contacts or lists'|translate}}</label>
-      <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for contacts or lists'|translate}}" name="search" id="search" autocomplete="off" ng-model="searchTerm" ng-value="searchTerm" ng-model-options="{debounce: 600}" ng-change="searchAutocomplete()" ng-disabled="!isOnline">
+      <label for="search" class="sr-only">{{'Search for contacts or contact lists'|translate}}</label>
+      <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for contacts or contact lists'|translate}}" name="search" id="search" autocomplete="off" ng-model="searchTerm" ng-value="searchTerm" ng-model-options="{debounce: 600}" ng-change="searchAutocomplete()" ng-disabled="!isOnline">
       <button type="submit" class="btn-transparent search-form__button" ng-disabled="!isOnline">
         <icon name="search" text="Search"></icon>
       </button>
