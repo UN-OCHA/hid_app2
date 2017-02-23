@@ -4,6 +4,1275 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: src/app/components/user/user.html:258
+#: src/app/components/user/user.html:305
+msgid "/ Unverified"
+msgstr ""
+
+#: src/app/components/user/preferences.html:137
+msgid "<em>No applications currently have access to your Humanitarian ID account.</em>"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:182
+msgid "<em>No email</em>"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:325
+msgid "<em>No job title</em>"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:251
+msgid "<em>No location</em>"
+msgstr ""
+
+#: src/app/components/service/service.html:20
+msgid "<em>No subscribers</em>"
+msgstr ""
+
+#: src/app/components/service/service-admin.html:28
+msgid ""
+"<icon name=\"edit\"></icon>\n"
+"          <span translate=\"\">Edit service</span>"
+msgstr ""
+
+#: src/app/components/user/user.html:143
+msgid ""
+"<icon name=\"eye-hidden\"></icon>\n"
+"            <span translate=\"\">Request</span> {{user.given_name}}'s <span translate=\"\">phone number</span>"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:359
+msgid "<icon name=\"plus\" text=\"Add\"></icon>"
+msgstr ""
+
+#: src/app/components/service/service-admin.html:33
+msgid ""
+"<icon name=\"trash\"></icon>\n"
+"          <span translate=\"\">Delete service</span>"
+msgstr ""
+
+#: src/app/components/user/users.html:46
+msgid "<span class=\"sr-only\">Info / actions</span>"
+msgstr ""
+
+#: src/app/components/user/userOptions.html:13
+msgid ""
+"<span ng-if=\"!user.verified\" translate=\"\">Verify account</span>\n"
+"        <span ng-if=\"user.verified\" translate=\"\">Un-verify account</span>"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:35
+msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
+msgstr ""
+
+#: src/app/components/footer/footer.html:8
+msgid "About"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:134
+msgid "Access settings"
+msgstr ""
+
+#: src/app/components/user/preferences.html:4
+msgid "Account preferences"
+msgstr ""
+
+#: src/app/components/client/clients.html:8
+msgid "Add Client"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:23
+msgid "Add Member"
+msgstr ""
+
+#: src/app/components/service/services-page.html:8
+msgid "Add Service"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:217
+msgid "Add a new email address:"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:353
+msgid "Add a new job title:"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:279
+msgid "Add a new location"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:99
+msgid "Add a new organisation"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:94
+msgid "Add a new organization:"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:155
+msgid "Add a new phone number:"
+msgstr ""
+
+#: src/app/components/user/user.html:398
+msgid "Add an organization:"
+msgstr ""
+
+#: src/app/components/user/user.html:266
+msgid "Add email:"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:311
+#: src/app/components/user/user.html:558
+msgid "Add location"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:12
+msgid "Add new Member"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:154
+msgid "Add new user"
+msgstr ""
+
+#: src/app/components/user/user.html:169
+msgid "Add phone number:"
+msgstr ""
+
+#: src/app/components/user/user.html:344
+msgid "Add social network:"
+msgstr ""
+
+#: src/app/components/user/user.html:707
+msgid "Add website:"
+msgstr ""
+
+#: src/app/components/user/user.html:611
+msgid "Additional Information"
+msgstr ""
+
+#: src/app/components/user/user.html:743
+#: src/app/components/user/user.html:754
+msgid "Administrator"
+msgstr ""
+
+#: src/app/components/checkin/all-check-ins.html:2
+msgid "All lists you are checked in to"
+msgstr ""
+
+#: src/app/components/service/all-subscriptions.html:2
+msgid "All subscriptions"
+msgstr ""
+
+#: src/app/components/user/preferences.html:56
+#: src/app/components/user/userOptions.html:7
+msgid "Approve"
+msgstr ""
+
+#: src/app/components/service/new-service.html:62
+msgid "Associated lists"
+msgstr ""
+
+#: src/app/components/user/preferences.html:136
+msgid "Authorized Applications"
+msgstr ""
+
+#: src/app/components/user/preferences.html:130
+#: src/app/components/user/preferences.html:29
+msgid "Authorized applications"
+msgstr ""
+
+#: src/app/components/footer/footer.html:14
+msgid "Blog"
+msgstr ""
+
+#: src/app/components/user/preferences.html:71
+msgid "Cancel"
+msgstr ""
+
+#: src/app/components/user/preferences.html:22
+#: src/app/components/user/preferences.html:85
+#: src/app/components/user/preferences.html:93
+msgid "Change password"
+msgstr ""
+
+#: src/app/components/user/preferences.html:163
+msgid "Change settings"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:411
+#: src/app/components/header/header.html:81
+#: src/app/components/list/list-admin.html:45
+#: src/app/components/list/list-admin.html:61
+#: src/app/components/list/list-admin.html:69
+msgid "Check in"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:375
+msgid "Check in modifications"
+msgstr ""
+
+#: src/app/components/user/user.html:31
+msgid "Check into List"
+msgstr ""
+
+#: src/app/components/user/userOptions.html:11
+msgid "Check into a list"
+msgstr ""
+
+#: src/app/components/user/checkInToListModal.html:2
+msgid "Check into a list {{user.name}}"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:410
+msgid "Check me in"
+msgstr ""
+
+#: src/app/components/checkin/checkout-page.html:4
+#: src/app/components/header/header.html:82
+#: src/app/components/list/list-admin.html:74
+#: src/app/components/list/list-admin.html:83
+msgid "Check out"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:98
+msgid "Check out of list"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:3
+#: src/app/components/user/checkInToListModal.html:28
+msgid "Check-in"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:48
+msgid "Checkout date"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:10
+msgid "Choose the list"
+msgstr ""
+
+#: src/app/components/client/new-client.html:23
+msgid "Client URL"
+msgstr ""
+
+#: src/app/components/client/new-client.html:27
+msgid "Client redirect URL"
+msgstr ""
+
+#: src/app/components/client/new-client.html:49
+msgid "Client secret"
+msgstr ""
+
+#: src/app/components/client/clients.html:3
+msgid "Clients"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:39
+msgid "Close"
+msgstr ""
+
+#: src/app/components/user/users.html:44
+msgid "Cluster"
+msgstr ""
+
+#: src/app/components/user/user.html:667
+msgid "Clusters / Working Groups"
+msgstr ""
+
+#: src/app/components/footer/footer.html:20
+#: src/app/components/user/users-export.html:9
+msgid "Code of conduct"
+msgstr ""
+
+#: src/app/components/auth/reset_password.html:20
+#: src/app/components/user/preferences.html:112
+msgid "Confirm new password"
+msgstr ""
+
+#: src/app/components/user/user.html:126
+msgid "Connect"
+msgstr ""
+
+#: src/app/components/footer/footer.html:23
+msgid "Contact"
+msgstr ""
+
+#: src/app/components/user/user.html:137
+msgid "Contact Information"
+msgstr ""
+
+#: src/app/components/search/search-form.html:15
+msgid "Contacts"
+msgstr ""
+
+#: src/app/components/search/search-results.html:8
+msgid "Contacts admin"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:33
+msgid "Coordination hub"
+msgstr ""
+
+#: src/app/components/user/users-export.html:4
+#: src/app/components/user/users-export.html:8
+msgid "Copy Email Addresses"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:76
+#: src/app/components/user/users.html:45
+msgid "Country"
+msgstr ""
+
+#: src/app/components/client/new-client.html:1
+msgid "Create a new client"
+msgstr ""
+
+#: src/app/components/list/new-list.html:4
+msgid "Create a new list"
+msgstr ""
+
+#: src/app/components/auth/reset_password.html:5
+msgid "Create a password"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:150
+msgid "Create new List"
+msgstr ""
+
+#: src/app/components/auth/reset_password.html:29
+msgid "Create password"
+msgstr ""
+
+#: src/app/components/user/user.html:771
+msgid "Created"
+msgstr ""
+
+#: src/app/components/list/all-lists.html:41
+msgid "Created by"
+msgstr ""
+
+#: src/app/components/user/preferences.html:66
+msgid "Current connections"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:178
+msgid "Current email address"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:322
+msgid "Current job title"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:248
+msgid "Current location"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:62
+msgid "Current organization"
+msgstr ""
+
+#: src/app/components/user/preferences.html:97
+msgid "Current password"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:121
+msgid "Current phone number"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:4
+#: src/app/components/header/header.html:79
+msgid "Dashboard"
+msgstr ""
+
+#: src/app/components/user/userOptions.html:18
+msgid "Delete Account"
+msgstr ""
+
+#: src/app/components/client/client.html:6
+msgid "Delete Client"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:39
+msgid "Delete List"
+msgstr ""
+
+#: src/app/components/user/user.html:51
+msgid "Delete User"
+msgstr ""
+
+#: src/app/components/user/preferences.html:190
+#: src/app/components/user/preferences.html:193
+msgid "Delete account"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:135
+msgid "Delete list"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:177
+#: src/app/components/service/service-admin.html:35
+msgid "Delete service"
+msgstr ""
+
+#: src/app/components/user/preferences.html:192
+msgid "Deleting your account means that you will lose your access to Humanitarian ID."
+msgstr ""
+
+#: src/app/components/user/preferences.html:59
+msgid "Deny"
+msgstr ""
+
+#: src/app/components/client/client.html:18
+#: src/app/components/client/new-client.html:44
+#: src/app/components/service/new-service.html:22
+msgid "Description"
+msgstr ""
+
+#: src/app/components/footer/footer.html:17
+msgid "Developers"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:21
+msgid "Disaster"
+msgstr ""
+
+#: src/app/components/user/user.html:679
+msgid "Disasters"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:23
+msgid "Disasters usually refer to sudden-onset emergencies in a country or region. The Nepal Earthquake, Hurricane Matthew in Haiti or the floods in the Balkans are just a few examples."
+msgstr ""
+
+#: src/app/components/service/new-service.html:44
+msgid "Domain"
+msgstr ""
+
+#: src/app/components/duplicate/duplicates.html:13
+#: src/app/components/duplicate/duplicates.html:3
+msgid "Duplicates"
+msgstr ""
+
+#: src/app/components/service/services.html:20
+#: src/app/components/user/userOptions.html:9
+msgid "Edit"
+msgstr ""
+
+#: src/app/components/client/client.html:3
+msgid "Edit Client"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:34
+msgid "Edit List Settings"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:174
+msgid "Edit Service"
+msgstr ""
+
+#: src/app/components/service/service-admin.html:30
+msgid "Edit service"
+msgstr ""
+
+#: src/app/components/auth/login.html:8
+#: src/app/components/auth/password_reset.html:7
+#: src/app/components/user/kiosk.html:27
+#: src/app/components/user/new-user.html:3
+#: src/app/components/user/user.html:238
+msgid "Email"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:232
+#: src/app/components/user/new-user.html:4
+#: src/app/components/user/user.html:276
+#: src/app/components/user/user.html:277
+msgid "Email address"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:218
+msgid "Email addresses must be verified before they can be set as primary."
+msgstr ""
+
+#: src/app/components/user/user.html:268
+msgid "Email type"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:39
+msgid "Enter your personal details"
+msgstr ""
+
+#: src/app/components/user/user.html:36
+msgid "Export Contact Info"
+msgstr ""
+
+#: src/app/components/user/users-export.html:37
+msgid "Export into CSV"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:90
+msgid "Export options"
+msgstr ""
+
+#: src/app/components/user/user.html:97
+msgid "Family name"
+msgstr ""
+
+#: src/app/components/header/header.html:55
+msgid "Feedback"
+msgstr ""
+
+#: src/app/components/start/tutorial.html:51
+msgid "Feel free to export your contact list into PDF or other available formats."
+msgstr ""
+
+#: src/app/components/user/user-filters.html:60
+msgid "Filter by co-ordination hub"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:39
+msgid "Filter by country"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:29
+msgid "Filter by disaster"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:83
+msgid "Filter by group"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:50
+msgid "Filter by operation"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:93
+msgid "Filter by organization"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:103
+msgid "Filter by role"
+msgstr ""
+
+#: src/app/components/list/lists-filters.html:12
+msgid "Filter by type"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:41
+#: src/app/components/user/new-user.html:10
+msgid "First Name"
+msgstr ""
+
+#: src/app/components/user/new-user.html:11
+msgid "First name"
+msgstr ""
+
+#: src/app/components/auth/login.html:27
+msgid "Forgot your password?"
+msgstr ""
+
+#: src/app/components/user/user.html:614
+msgid "Functional roles"
+msgstr ""
+
+#: src/app/components/start/tutorial.html:58
+msgid "Get started"
+msgstr ""
+
+#: src/app/components/user/user.html:94
+msgid "Given name"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:17
+#: src/app/components/service/new-service.html:52
+msgid "Group"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:19
+msgid "Groups can be clusters, sectors or simply working groups that are set up in a specific country to facilitate coordination among humanitarian partners."
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:25
+msgid "Hide"
+msgstr ""
+
+#: src/app/components/service/new-service.html:58
+msgid "Hide the service - HID users will not be able to search for it"
+msgstr ""
+
+#: src/app/components/header/header.html:80
+msgid "Humanitarian contacts"
+msgstr ""
+
+#: src/app/components/user/user.html:380
+msgid "Humanitarian details"
+msgstr ""
+
+#: src/app/components/client/client.html:13
+#: src/app/components/client/clients.html:15
+#: src/app/components/client/new-client.html:4
+#: src/app/components/duplicate/duplicates.html:12
+msgid "ID"
+msgstr ""
+
+#: src/app/components/auth/password_reset.html:4
+msgid "If you forget the password for your Humanitarian ID account, you can request a new password by entering your email address here and clicking on 'Reset Password'."
+msgstr ""
+
+#: src/app/components/start/tutorial.html:21
+msgid "If you get a lot of results, use this filter to fine-tune your search."
+msgstr ""
+
+#: src/app/components/start/tutorial.html:36
+#: src/app/components/start/tutorial.html:53
+msgid "If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date."
+msgstr ""
+
+#: src/app/components/start/tutorial.html:19
+msgid "In the navigation bar you will find a search box. Start typing your search item in the box and contacts and lists will immediately appear."
+msgstr ""
+
+#: src/app/components/user/users.html:42
+msgid "Job title"
+msgstr ""
+
+#: src/app/components/user/user.html:442
+msgid "Job titles"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:51
+#: src/app/components/user/new-user.html:17
+msgid "Last Name"
+msgstr ""
+
+#: src/app/components/user/user.html:770
+msgid "Last Updated"
+msgstr ""
+
+#: src/app/components/user/new-user.html:18
+msgid "Last name"
+msgstr ""
+
+#: src/app/components/landing/landing.html:111
+msgid "Last update of your profile"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:30
+msgid "List Settings"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:4
+msgid "List admin"
+msgstr ""
+
+#: src/app/components/list/new-list.html:10
+msgid "List name"
+msgstr ""
+
+#: src/app/components/list/lists.html:4
+#: src/app/components/search/search-form.html:26
+msgid "Lists"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:111
+#: src/app/components/dashboard/dashboard.html:35
+msgid "Lists I manage"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:28
+#: src/app/components/dashboard/dashboard.html:78
+msgid "Lists I'm part of"
+msgstr ""
+
+#: src/app/components/user/preferences.html:166
+msgid "Locale"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:305
+#: src/app/components/start/start.html:66
+#: src/app/components/user/user.html:548
+msgid "Locality"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:20
+msgid ""
+"Location filters\n"
+"          <icon name=\"plus\" text=\"Toggle location filters\"></icon>"
+msgstr ""
+
+#: src/app/components/user/user.html:496
+msgid "Locations"
+msgstr ""
+
+#: src/app/components/auth/login.html:4
+msgid "Log in to<br> Humanitarian ID."
+msgstr ""
+
+#: src/app/components/header/header.html:56
+msgid "Log out"
+msgstr ""
+
+#: src/app/components/auth/login.html:22
+msgid "Login"
+msgstr ""
+
+#: src/app/components/client/client.html:16
+#: src/app/components/client/new-client.html:35
+#: src/app/components/client/new-client.html:36
+msgid "Login URL"
+msgstr ""
+
+#: src/app/components/service/new-service.html:34
+msgid "Mailchimp API Key"
+msgstr ""
+
+#: src/app/components/service/new-service.html:33
+msgid "Mailchimp API key"
+msgstr ""
+
+#: src/app/components/service/new-service.html:37
+msgid "Mailchimp list"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:151
+msgid "Manage services"
+msgstr ""
+
+#: src/app/components/user/user.html:744
+#: src/app/components/user/user.html:763
+msgid "Manager"
+msgstr ""
+
+#: src/app/components/list/new-list.html:30
+msgid "Managers"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:95
+msgid "Mark as favourite"
+msgstr ""
+
+#: src/app/components/user/users-export.html:32
+msgid "Meeting attendance (comfortable View)"
+msgstr ""
+
+#: src/app/components/user/users-export.html:27
+msgid "Meeting attendance (compact View)"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:47
+msgid "Middle Name"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:21
+#: src/app/components/dashboard/dashboard.html:44
+msgid "My favourite lists"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:13
+msgid "My lists"
+msgstr ""
+
+#: src/app/components/client/clients.html:16
+#: src/app/components/client/new-client.html:13
+#: src/app/components/list/all-lists.html:39
+#: src/app/components/list/new-list.html:9
+#: src/app/components/service/new-service.html:13
+#: src/app/components/service/services.html:5
+#: src/app/components/user/users.html:41
+msgid "Name"
+msgstr ""
+
+#: src/app/components/auth/reset_password.html:10
+#: src/app/components/user/preferences.html:104
+msgid "New password"
+msgstr ""
+
+#: src/app/components/start/start.html:11
+#: src/app/components/start/start.html:33
+#: src/app/components/start/start.html:71
+#: src/app/components/start/start.html:83
+#: src/app/components/start/tutorial.html:57
+#: src/app/components/user/kiosk.html:22
+#: src/app/components/user/kiosk.html:34
+msgid "Next"
+msgstr ""
+
+#: src/app/components/user/preferences.html:68
+msgid "No approved connections"
+msgstr ""
+
+#: src/app/components/user/user.html:260
+msgid "No emails"
+msgstr ""
+
+#: src/app/components/user/user.html:449
+msgid "No job titles"
+msgstr ""
+
+#: src/app/components/checkin/all-check-ins.html:15
+msgid "No lists"
+msgstr ""
+
+#: src/app/components/user/checkInToListModal.html:19
+msgid "No lists available"
+msgstr ""
+
+#: src/app/components/user/user.html:519
+msgid "No locations"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:380
+msgid "No modifications"
+msgstr ""
+
+#: src/app/components/user/user.html:391
+msgid "No organizations"
+msgstr ""
+
+#: src/app/components/user/preferences.html:53
+msgid "No pending connections"
+msgstr ""
+
+#: src/app/components/user/user.html:745
+msgid "No permissions set"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:125
+msgid "No phone number"
+msgstr ""
+
+#: src/app/components/user/user.html:163
+msgid "No phone numbers"
+msgstr ""
+
+#: src/app/components/user/user.html:648
+msgid "No roles"
+msgstr ""
+
+#: src/app/components/user/user.html:372
+msgid "No social networks"
+msgstr ""
+
+#: src/app/components/service/all-subscriptions.html:14
+msgid "No subscriptions"
+msgstr ""
+
+#: src/app/components/user/user.html:728
+msgid "No websites"
+msgstr ""
+
+#: src/app/components/landing/landing.html:98
+#: src/app/components/notifications/notifications.html:5
+msgid "Notifications"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:74
+msgid ""
+"Occupation filters\n"
+"          <icon name=\"plus\" text=\"Toggle occupation filters\"></icon>"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:13
+msgid "Operation"
+msgstr ""
+
+#: src/app/components/user/user.html:655
+msgid "Operations"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:15
+msgid "Operations usually refer to single countries, like Afghanistan or Iraq. In some cases they also refer to a wider humanitarian response across borders, for example the Whole of Syria response."
+msgstr ""
+
+#: src/app/components/search/search-results.html:15
+msgid "Options"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:25
+#: src/app/components/user/kiosk.html:99
+#: src/app/components/user/users.html:43
+msgid "Organization"
+msgstr ""
+
+#: src/app/components/user/user.html:384
+msgid "Organizations"
+msgstr ""
+
+#: src/app/components/user/user.html:691
+msgid "Other lists"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:21
+msgid "Other lists you might be interested in"
+msgstr ""
+
+#: src/app/components/auth/login.html:12
+#: src/app/components/auth/reset_password.html:11
+#: src/app/components/user/new-user.html:24
+msgid "Password"
+msgstr ""
+
+#: src/app/components/user/new-user.html:31
+msgid "Password (confirm)"
+msgstr ""
+
+#: src/app/components/user/preferences.html:51
+msgid "Pending approval"
+msgstr ""
+
+#: src/app/components/user/user.html:741
+msgid "Permissions"
+msgstr ""
+
+#: src/app/components/user/user.html:141
+msgid "Phone numbers"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:158
+#: src/app/components/user/user.html:171
+msgid "Phone type:"
+msgstr ""
+
+#: src/app/components/user/users-export.html:9
+msgid "Please email responsibly. Follow our"
+msgstr ""
+
+#: src/app/components/header/header.html:53
+msgid "Preferences"
+msgstr ""
+
+#: src/app/components/header/header.html:52
+msgid "Profile"
+msgstr ""
+
+#: src/app/components/start/tutorial.html:13
+#: src/app/components/start/tutorial.html:28
+#: src/app/components/start/tutorial.html:43
+msgid "Read more"
+msgstr ""
+
+#: src/app/components/landing/landing.html:43
+#: src/app/components/landing/landing.html:83
+msgid "Recent:&nbsp;"
+msgstr ""
+
+#: src/app/components/client/client.html:15
+#: src/app/components/client/new-client.html:26
+msgid "Redirect URL"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:84
+msgid "Region"
+msgstr ""
+
+#: src/app/components/auth/login.html:17
+#: src/app/components/auth/register.html:3
+#: src/app/components/user/kiosk.html:131
+#: src/app/components/user/new-user.html:39
+msgid "Register"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:65
+msgid "Remove from favourites"
+msgstr ""
+
+#: src/app/components/user/userOptions.html:10
+msgid "Remove from list"
+msgstr ""
+
+#: src/app/components/user/user.html:46
+msgid "Report a Problem"
+msgstr ""
+
+#: src/app/components/user/user.html:145
+#: src/app/components/user/user.html:243
+#: src/app/components/user/user.html:501
+msgid "Request"
+msgstr ""
+
+#: src/app/components/auth/password_reset.html:13
+msgid "Reset Password"
+msgstr ""
+
+#: src/app/components/auth/password_reset.html:3
+#: src/app/components/auth/reset_password.html:28
+#: src/app/components/auth/reset_password.html:4
+msgid "Reset password"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:29
+msgid "Role"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:31
+msgid "Roles are closely related to your job title. Very common roles are those of Humanitarian Coordinator, Information Management Officer or UNDAC member. As with checking into organizational lists, role check-ins are moderated."
+msgstr ""
+
+#: src/app/components/client/new-client.html:56
+#: src/app/components/list/new-list.html:40
+#: src/app/components/service/new-service.html:84
+msgid "Save"
+msgstr ""
+
+#: src/app/components/user/preferences.html:185
+msgid "Save settings"
+msgstr ""
+
+#: src/app/components/user/user.html:6
+msgid "Saving"
+msgstr ""
+
+#: src/app/components/checkin/all-check-ins.html:4
+#: src/app/components/service/all-subscriptions.html:4
+msgid "Search"
+msgstr ""
+
+#: src/app/components/start/start.html:45
+msgid "Search for a country"
+msgstr ""
+
+#: src/app/components/checkin/all-check-ins.html:5
+msgid "Search for a list"
+msgstr ""
+
+#: src/app/components/service/all-subscriptions.html:5
+msgid "Search for a subscription"
+msgstr ""
+
+#: src/app/components/start/start.html:22
+msgid "Search for an organisation"
+msgstr ""
+
+#: src/app/components/landing/landing.html:61
+msgid "Search for contact lists"
+msgstr ""
+
+#: src/app/components/landing/landing.html:19
+#: src/app/components/landing/landing.html:24
+msgid "Search for contacts"
+msgstr ""
+
+#: src/app/components/search/search-form.html:5
+#: src/app/components/search/search-form.html:6
+msgid "Search for contacts or contact lists"
+msgstr ""
+
+#: src/app/components/landing/landing.html:64
+msgid "Search for lists"
+msgstr ""
+
+#: src/app/components/list/all-lists.html:7
+#: src/app/components/user/users.html:7
+msgid "Searching for"
+msgstr ""
+
+#: src/app/components/client/client.html:17
+#: src/app/components/client/new-client.html:48
+msgid "Secret"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:23
+#: src/app/components/search/search-form.html:16
+#: src/app/components/search/search-form.html:27
+msgid "See all"
+msgstr ""
+
+#: src/app/components/footer/footer.html:44
+msgid "See below for other platforms using Humanitarian ID login:"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:56
+msgid "Select a checkout date if you would like to be checked out automatically (you will receive emails from the system beforehand)"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:284
+#: src/app/components/user/user.html:528
+msgid "Select a country"
+msgstr ""
+
+#: src/app/components/selectLists/select-lists.html:13
+#: src/app/components/user/checkInToListModal.html:12
+msgid "Select a list"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:193
+msgid "Select a primary email address:"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:335
+msgid "Select a primary job title:"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:78
+msgid "Select a primary organization:"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:139
+msgid "Select a primary phone number:"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:295
+#: src/app/components/start/start.html:56
+#: src/app/components/user/user.html:538
+msgid "Select a region"
+msgstr ""
+
+#: src/app/components/user/user.html:621
+msgid "Select a role"
+msgstr ""
+
+#: src/app/components/user/user.html:402
+msgid "Select an organisation"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:261
+msgid "Select current location"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:13
+msgid "Select lists"
+msgstr ""
+
+#: src/app/components/service/new-service.html:69
+msgid "Select managers"
+msgstr ""
+
+#: src/app/components/user/user.html:41
+msgid "Send Claim Email"
+msgstr ""
+
+#: src/app/components/service/new-service.html:26
+msgid "Service Type"
+msgstr ""
+
+#: src/app/components/service/service-admin.html:4
+msgid "Service admin"
+msgstr ""
+
+#: src/app/components/service/new-service.html:67
+msgid "Service manager"
+msgstr ""
+
+#: src/app/components/service/service-admin.html:26
+msgid "Service settings"
+msgstr ""
+
+#: src/app/components/service/services-page.html:3
+msgid "Services"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:41
+msgid "Set a date here if you want to be checked out automatically"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:44
+msgid "Set a date to be automatically checked out:"
+msgstr ""
+
+#: src/app/components/user/user.html:290
+msgid "Set primary email:"
+msgstr ""
+
+#: src/app/components/user/user.html:470
+msgid "Set primary job title:"
+msgstr ""
+
+#: src/app/components/user/user.html:564
+msgid "Set primary location:"
+msgstr ""
+
+#: src/app/components/user/user.html:422
+msgid "Set primary organization:"
+msgstr ""
+
+#: src/app/components/user/user.html:192
+msgid "Set primary phone number:"
+msgstr ""
+
+#: src/app/components/user/preferences.html:156
+#: src/app/components/user/preferences.html:36
+msgid "Settings"
+msgstr ""
+
+#: src/app/components/search/search-results.html:26
+msgid "Showing contacts"
+msgstr ""
+
+#: src/app/components/search/search-results.html:30
+msgid "Showing lists"
+msgstr ""
+
+#: src/app/components/auth/register.html:5
+msgid "Sign up for a Humanitarian ID account. Doing so will give you access to Humanitarian ID as well as a growing number of related humanitarian community sites."
+msgstr ""
+
+#: src/app/components/service/suggestions.html:26
+msgid "Skip"
+msgstr ""
+
+#: src/app/components/header/header.html:1
+msgid "Skip to main content"
+msgstr ""
+
+#: src/app/components/user/user.html:340
+msgid "Social Networks"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:126
+msgid ""
+"Sort\n"
+"          <icon name=\"plus\" text=\"Toggle location filters\"></icon>"
+msgstr ""
+
+#: src/app/components/list/lists-filters.html:22
+#: src/app/components/user/user-filters.html:134
+msgid "Sort by"
+msgstr ""
+
+#: src/app/components/user/user.html:100
+msgid "Status"
+msgstr ""
+
+#: src/app/components/service/service-admin.html:21
+#: src/app/components/service/suggestions.html:31
+msgid "Subscribe"
+msgstr ""
+
+#: src/app/components/service/service-admin.html:13
+msgid "Subscribe user"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:159
+msgid "Subscriptions"
+msgstr ""
+
+#: src/app/components/service/suggestions.html:4
+msgid "Suggested services"
+msgstr ""
+
+#: src/app/components/footer/footer.html:11
+msgid "Support"
+msgstr ""
+
+#: src/app/components/start/start.html:8
+msgid "Thanks for registering"
+msgstr ""
+
+#: src/app/components/client/new-client.html:5
+msgid "The client ID"
+msgstr ""
+
+#: src/app/components/client/new-client.html:14
+msgid "The client name"
+msgstr ""
+
+#: src/app/components/service/new-service.html:14
+msgid "The service name"
+msgstr ""
+
+#: src/app/components/list/list.html:25
+msgid "This contact list can only be viewed by verified users. Please contact us at"
+msgstr ""
+
 #: src/app/common/messages.html:1
 msgid "This field is required"
 msgstr ""
@@ -12,6 +1281,359 @@ msgstr ""
 msgid "This field must be a valid email address"
 msgstr ""
 
+#: src/app/components/user/preferences.html:175
+#: src/app/components/user/preferences.html:177
+msgid "Timezone"
+msgstr ""
+
+#: src/app/components/start/start.html:10
+msgid "To get started, please give us some information about yourself."
+msgstr ""
+
+#: src/app/components/header/header.html:54
+msgid "Tutorial"
+msgstr ""
+
+#: src/app/components/list/all-lists.html:40
+#: src/app/components/service/service.html:12
+#: src/app/components/service/services.html:6
+msgid "Type"
+msgstr ""
+
+#: src/app/components/landing/landing.html:65
+msgid "Type a list name"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:306
+#: src/app/components/start/start.html:67
+#: src/app/components/user/user.html:549
+msgid "Type a locality"
+msgstr ""
+
+#: src/app/components/landing/landing.html:25
+msgid "Type a name"
+msgstr ""
+
+#: src/app/components/user/user-filters.html:112
+msgid "Type of user"
+msgstr ""
+
+#: src/app/components/client/client.html:14
+#: src/app/components/client/clients.html:17
+#: src/app/components/client/new-client.html:22
+msgid "URL"
+msgstr ""
+
+#: src/app/components/user/userOptions.html:15
+msgid "Un-verify account"
+msgstr ""
+
+#: src/app/components/user/user.html:26
+msgid "Un-verify user"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:99
+msgid "Unfavourite"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:171
+#: src/app/components/service/service.html:30
+msgid "Unsubscribe"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:207
+msgid "Unverified"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:58
+msgid "Update information"
+msgstr ""
+
+#: src/app/components/user/preferences.html:119
+msgid "Update password"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:57
+msgid "Update your information"
+msgstr ""
+
+#: src/app/components/user/user.html:72
+msgid "Upload"
+msgstr ""
+
+#: src/app/components/user/user.html:109
+#: src/app/components/user/user.html:74
+msgid "Use JPEG, up to 1 MB"
+msgstr ""
+
+#: src/app/components/user/user.html:16
+msgid "User admin"
+msgstr ""
+
+#: src/app/components/user/user.html:355
+msgid "Username"
+msgstr ""
+
+#: src/app/components/user/users-page.html:3
+msgid "Users"
+msgstr ""
+
+#: src/app/components/user/users.html:40
+msgid "Verified"
+msgstr ""
+
+#: src/app/components/user/user.html:735
+msgid "Verified by"
+msgstr ""
+
+#: src/app/components/user/userOptions.html:14
+msgid "Verify account"
+msgstr ""
+
+#: src/app/components/user/user.html:25
+msgid "Verify user"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:155
+msgid "View OAuth Clients"
+msgstr ""
+
+#: src/app/components/landing/landing.html:100
+#: src/app/components/landing/landing.html:38
+#: src/app/components/landing/landing.html:78
+msgid "View all"
+msgstr ""
+
+#: src/app/components/user/users-export.html:22
+msgid "View as PDF"
+msgstr ""
+
+#: src/app/components/user/user.html:704
+msgid "Websites"
+msgstr ""
+
+#: src/app/components/landing/landing.html:4
+msgid "Welcome to Humanitarian ID"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:14
+#: src/app/components/checkin/listTypesModal.html:2
+msgid "What are these?"
+msgstr ""
+
+#: src/app/components/start/start.html:43
+msgid "What is your primary location?"
+msgstr ""
+
+#: src/app/components/start/start.html:19
+msgid "What is your primary organization?"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:73
+msgid "Where are you currently ?"
+msgstr ""
+
+#: src/app/components/list/new-list.html:22
+msgid "Who can join this list?"
+msgstr ""
+
+#: src/app/components/list/new-list.html:14
+msgid "Who can view this list?"
+msgstr ""
+
+#: src/app/components/user/user.html:318
+msgid "Who should be able to see your email addresses?"
+msgstr ""
+
+#: src/app/components/user/user.html:588
+msgid "Who should be able to see your locations?"
+msgstr ""
+
+#: src/app/components/user/user.html:215
+msgid "Who should be able to see your phone numbers?"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:63
+msgid "Would you like to be checked out automatically ? If so, when ?"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:86
+msgid "You are not part of any lists"
+msgstr ""
+
+#: src/app/components/start/start.html:82
+msgid "You can add more information to your profile at any time via the 'Profile' link in your account menu on the top right"
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:11
+msgid "You can check into different types of contact list. First, choose which list or lists are most appropriate for you. Here are the different types:"
+msgstr ""
+
+#: src/app/components/start/tutorial.html:49
+msgid "You can create your own contact lists from the dashboard in the menu at the top of your screen. Once you’ve given your list a name and decided who can view and join it, you can start adding and removing contacts from your list."
+msgstr ""
+
+#: src/app/components/start/tutorial.html:34
+msgid "You can find the Check-in and Check-out buttons on the top-right of your screen. To get started, click on Check-in, then start typing the name of the country, disaster, or group in the box. Select your list and then look at the options for other suitable lists."
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:52
+msgid "You don't have any favourite lists"
+msgstr ""
+
+#: src/app/components/dashboard/dashboard.html:122
+msgid "You don't manage any lists"
+msgstr ""
+
+#: src/app/components/user/preferences.html:138
+msgid "You have granted the following applications access to your Humanitarian ID account."
+msgstr ""
+
+#: src/app/components/checkin/listTypesModal.html:27
+msgid "You should only check into an organization that you belong to. All organizational lists are moderated, i.e. your check-in will have to be approved by a Humanitarian ID manager."
+msgstr ""
+
+#: src/app/components/service/suggestions.html:5
+msgid "You were successfully checked in. Given the lists you checked into, we recommend that you subscribe to the following services:"
+msgstr ""
+
+#: src/app/components/list/list-admin.html:76
+msgid "You will be checked out of this list automatically on"
+msgstr ""
+
+#: src/app/components/landing/landing.html:115
+msgid "You're not verified yet."
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:374
+msgid "Your check in modifications"
+msgstr ""
+
+#: src/app/components/user/user.html:150
+#: src/app/components/user/user.html:247
+#: src/app/components/user/user.html:506
+msgid "Your connection request is pending"
+msgstr ""
+
+#: src/app/components/user/preferences.html:15
+#: src/app/components/user/preferences.html:45
+msgid "Your connections"
+msgstr ""
+
+#: src/app/components/auth/login.html:9
+#: src/app/components/auth/password_reset.html:8
+#: src/app/components/user/kiosk.html:28
+msgid "Your email address"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:42
+msgid "Your first name"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:52
+msgid "Your last name"
+msgstr ""
+
+#: src/app/components/user/kiosk.html:48
+msgid "Your middle name"
+msgstr ""
+
+#: src/app/components/auth/login.html:13
+msgid "Your password"
+msgstr ""
+
 #: src/app/common/messages.html:2
 msgid "Your passwords do not match"
+msgstr ""
+
+#: src/app/components/landing/landing.html:114
+msgid "Your profile has been verified."
+msgstr ""
+
+#: src/app/components/list/list-admin.html:70
+#: src/app/components/list/list.html:34
+msgid "Your request for check-in is pending. We will get back to you soon."
+msgstr ""
+
+#: src/app/components/start/tutorial.html:29
+msgid "about checking in"
+msgstr ""
+
+#: src/app/components/start/tutorial.html:14
+msgid "about finding others"
+msgstr ""
+
+#: src/app/components/start/tutorial.html:44
+msgid "about managing lists"
+msgstr ""
+
+#: src/app/components/user/users.html:10
+msgid "contacts found"
+msgstr ""
+
+#: src/app/components/user/user.html:243
+msgid "email address"
+msgstr ""
+
+#: src/app/components/list/list.html:27
+msgid "if you wish to access the list."
+msgstr ""
+
+#: src/app/components/list/all-lists.html:10
+msgid "lists found"
+msgstr ""
+
+#: src/app/components/user/user.html:501
+msgid "location"
+msgstr ""
+
+#: src/app/components/start/carousel.html:10
+msgid "next"
+msgstr ""
+
+#: src/app/components/user/user.html:145
+msgid "phone number"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:208
+#: src/app/components/user/user.html:306
+msgid "resend validation email"
+msgstr ""
+
+#: src/app/components/search/search-results.html:2
+msgid "{{heading}}"
+msgstr ""
+
+#: src/app/components/list/new-list.html:5
+msgid "{{list.name}}"
+msgstr ""
+
+#: src/app/components/list/new-list.html:17
+#: src/app/components/list/new-list.html:25
+#: src/app/components/service/new-service.html:29
+msgid "{{option.label}}"
+msgstr ""
+
+#: src/app/components/service/service.html:17
+msgid "{{pagination.totalItems}} Subscribers"
+msgstr ""
+
+#: src/app/components/start/tutorial.html:8
+msgid "{{slide.heading}}"
+msgstr ""
+
+#: src/app/components/start/tutorial.html:9
+msgid "{{slide.text}}"
+msgstr ""
+
+#: src/app/components/user/user.html:251
+msgid "{{user.given_name}}'s email addresses can only be viewed by verified users."
+msgstr ""
+
+#: src/app/components/user/user.html:510
+msgid "{{user.given_name}}'s locations can only be viewed by verified users."
+msgstr ""
+
+#: src/app/components/user/user.html:154
+msgid "{{user.given_name}}'s phone numbers can only be viewed by verified users."
 msgstr ""
