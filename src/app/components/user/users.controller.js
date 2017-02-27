@@ -295,10 +295,6 @@
         value: 431
       },
       {
-        label: 'Civilian',
-        value: 432
-      },
-      {
         label: 'Donor',
         value: 433
       },
@@ -309,10 +305,6 @@
       {
         label: 'Government',
         value: 435
-      },
-      {
-        label: 'International Military Force',
-        value: 436
       },
       {
         label: 'International NGO',
@@ -333,10 +325,6 @@
       {
         label: 'National NGO',
         value: 441
-      },
-      {
-        label: 'Non state armed groups',
-        value: 442
       },
       {
         label: 'Other',
