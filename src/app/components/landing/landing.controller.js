@@ -26,7 +26,6 @@
 
       if ($scope.currentUser.appMetadata.hid.recentSearches.operation) {
         $scope.recentOperationSearches = $scope.currentUser.appMetadata.hid.recentSearches.operation;
-        console.log($scope.recentOperationSearches, $scope.currentUser.appMetadata.hid.recentSearches.operation)
       }
 
     }
