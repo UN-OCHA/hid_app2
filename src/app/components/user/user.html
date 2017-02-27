@@ -21,32 +21,33 @@
 
     <div class="sidebar-section">
 
-      <button type="button" ng-click="verifyUser()" class="btn-primary btn-block" ng-if="currentUser.is_admin || currentUser.isManager">
+      <button type="button" ng-click="verifyUser()" class="btn-transparent sidebar-section__button" ng-if="currentUser.is_admin || currentUser.isManager">
+        <icon name="check-circle"></icon>
         <span ng-if="!user.verified" translate>Verify user</span>
         <span ng-if="user.verified" translate>Un-verify user</span>
       </button>
 
-      <a class="btn-primary btn-block" href="/checkin/{{user._id}}" ng-if="(currentUser.is_admin || currentUser.isManager || (currentUser._id == user._id)) && isOnline">
+      <a class="btn-transparent sidebar-section__button" href="/checkin/{{user._id}}" ng-if="(currentUser.is_admin || currentUser.isManager || (currentUser._id == user._id)) && isOnline">
         <icon name="check"></icon>
         <span translate>Check into List</span>
       </a>
 
-      <button class="btn-primary btn-block" ng-click="exportVcard();">
+      <button class="btn-transparent sidebar-section__button" ng-click="exportVcard();">
         <icon name="inbox-download"></icon>
         <span translate>Export Contact Info</span>
       </button>
 
-      <button class="btn-primary btn-block" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-if="user.is_orphan && (currentUser.is_admin || currentUser.isManager)">
+      <button class="btn-transparent sidebar-section__button" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-if="user.is_orphan && (currentUser.is_admin || currentUser.isManager)">
         <icon name="mail-envelope-closed"></icon>
         <span translate>Send Claim Email</span>
       </button>
 
-      <button class="btn-primary btn-block" ng-disabled="!isOnline" ng-click="notify()">
+      <button class="btn-transparent sidebar-section__button" ng-disabled="!isOnline" ng-click="notify()">
         <icon name="flag"></icon>
         <span translate>Report a Problem</span>
       </button>
 
-      <button class="btn-danger btn-block" ng-if="currentUser.is_admin || (currentUser.isManager && !user.email_verified && user.createdBy === currentUser._id)" ng-disabled="!isOnline" ng-click="deleteUser(user)">
+      <button class="btn-danger btn-transparent sidebar-section__button" ng-if="currentUser.is_admin || (currentUser.isManager && !user.email_verified && user.createdBy === currentUser._id)" ng-disabled="!isOnline" ng-click="deleteUser(user)">
         <icon name="trash"></icon>
         <span translate>Delete User</span>
       </button>
