@@ -90,6 +90,16 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         </div>
 
         <div class="filter" ng-if="!list || list.type !== 'organization'">
+          <label for="orgType" class="sr-only" translate>Filter by organization type</label>
+          <ui-select ng-model="selectedFilters['organizations.orgTypeId']" name="orgType">
+            <ui-select-match allow-clear="true" placeholder="Organization Type">{{$select.selected.label}}</ui-select-match>
+            <ui-select-choices repeat="orgType.value as orgType in orgTypes | filter: $select.search">
+              {{orgType.label}}
+            </ui-select-choices>
+          </ui-select>
+        </div>
+
+        <div class="filter" ng-if="!list || list.type !== 'organization'">
           <label for="organizations" class="sr-only" translate>Filter by organization</label>
           <ui-select ng-model="selectedFilters['organizations.list']" name="organizations">
             <ui-select-match allow-clear="true" placeholder="Organization">{{$select.selected.name}}</ui-select-match>

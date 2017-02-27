@@ -125,7 +125,7 @@
           $scope.selectedFilters.user_type = type.value;
           delete $scope.selectedFilters[type];
         }
-      }); 
+      });
       $scope.request.sort = currentSortOrder;
     });
 
@@ -134,7 +134,7 @@
         if ($scope.request.hasOwnProperty(type.value)) {
           delete $scope.request[type.value];
         }
-      }); 
+      });
       if ($scope.selectedFilters.user_type === undefined) {
         return;
       }
@@ -287,6 +287,80 @@
       {
         value: 'is_admin',
         name: 'Adminstrator'
+      }
+    ];
+    $scope.orgTypes = [
+      {
+        label: 'Academic / Research',
+        value: 431
+      },
+      {
+        label: 'Civilian',
+        value: 432
+      },
+      {
+        label: 'Donor',
+        value: 433
+      },
+      {
+        label: 'Embassy',
+        value: 434
+      },
+      {
+        label: 'Government',
+        value: 435
+      },
+      {
+        label: 'International Military Force',
+        value: 436
+      },
+      {
+        label: 'International NGO',
+        value: 437
+      },
+      {
+        label: 'International Organization',
+        value: 438
+      },
+      {
+        label: 'Media',
+        value: 439
+      },
+      {
+        label: 'Military',
+        value: 440
+      },
+      {
+        label: 'National NGO',
+        value: 441
+      },
+      {
+        label: 'Non state armed groups',
+        value: 442
+      },
+      {
+        label: 'Other',
+        value: 443
+      },
+      {
+        label: 'Private sector',
+        value: 444
+      },
+      {
+        label: 'Red Cross / Red Crescent',
+        value: 445
+      },
+      {
+        label: 'Religious',
+        value: 446
+      },
+      {
+        label: 'United Nations',
+        value: 447
+      },
+      {
+        label: 'Unknown',
+        value: 54593
       }
     ];
 
