@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('SelectListsCtrl', SelectListsCtrl);
 
-  SelectListsCtrl.$inject = ['$scope', 'config', 'List'];
+  SelectListsCtrl.$inject = ['$scope', 'config', 'List', 'gettextCatalog'];
 
-  function SelectListsCtrl ($scope, config, List) {
+  function SelectListsCtrl ($scope, config, List, gettextCatalog) {
   	// On parent controller:
   	// $scope.selectedLists = []; 
   	// $scope.filterListsMember = true; - if need to filter out lists user is a member of
@@ -25,13 +25,13 @@
 
         var label = listType.charAt(0).toUpperCase() + listType.slice(1);
         if (listType === 'bundle') {
-          label = 'Group';
+          label = gettextCatalog.getString('Group');
         }
         if (listType === 'functional_role') {
-          label = 'Role';
+          label = gettextCatalog.getString('Role');
         }
         if (listType === 'office') {
-          label = 'Co-ordination hub';
+          label = gettextCatalog.getString('Co-ordination hub');
         }
         if (listType === 'list') {
           return;

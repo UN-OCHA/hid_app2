@@ -3,7 +3,7 @@
 
   describe('Auth controller', function () {
 
-  	var hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, newUser, returnUser, scope;
+  	var hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, mockGetText, newUser, returnUser, scope;
 
   	newUser = {
   		_id: 1,
@@ -47,6 +47,14 @@
       mockAlertService.add = function () {};
       spyOn(mockAlertService, 'add').and.callFake(function (argument1, argument2, arg3, callback) {
          callback();
+      });
+
+      mockGetText = {};
+      mockGetText.getString = function (str) {
+        return str;
+      };
+      module('gettext', function($provide) {
+        $provide.value('gettextCatalog', mockGetText);
       });
     });
 

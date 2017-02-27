@@ -5,9 +5,9 @@
     .module('app.duplicate')
     .controller('DuplicatesCtrl', DuplicatesCtrl);
 
-  DuplicatesCtrl.$inject = ['$scope', '$routeParams', 'alertService', 'Duplicate'];
+  DuplicatesCtrl.$inject = ['$scope', '$routeParams', 'alertService', 'Duplicate', 'gettextCatalog'];
 
-  function DuplicatesCtrl ($scope, $routeParams, alertService, Duplicate) {
+  function DuplicatesCtrl ($scope, $routeParams, alertService, Duplicate, gettextCatalog) {
     $scope.request = $routeParams;
     $scope.totalItems = 0;
     $scope.itemsPerPage = 10;
@@ -24,9 +24,9 @@
 
     $scope.deleteDuplicate = function (duplicate, user) {
       duplicate.delete(user, function () {
-        alertService.add('success','Duplicate successfully removed');
+        alertService.add('success', gettextCatalog.getString('Duplicate successfully removed'));
       }, function (err) {
-        alertService.add('danger', 'There was an error removing this duplicate');
+        alertService.add('danger', gettextCatalog.getString('There was an error removing this duplicate'));
       });
     };
   }

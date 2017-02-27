@@ -64,14 +64,15 @@
         $provide.value('User', mockUser);
       });
 
-      mockGetText = {};
-      module('gettext', function($provide) {
-        $provide.value('gettextCatalog', mockGetText);
-      });
-
       mockSearchService = {};
       module('app.search', function($provide) {
         $provide.value('SearchService', mockSearchService);
+      });
+
+      mockGetText = {};
+      mockGetText.getString = function () {};
+      module('gettext', function($provide) {
+        $provide.value('gettextCatalog', mockGetText);
       });
 
       module('app.user', function($provide) {

@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserPrefsCtrl', UserPrefsCtrl);
 
-  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'AuthService', 'alertService', 'UserDataService'];
+  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog'];
 
-  function UserPrefsCtrl($exceptionHandler, $scope, $location, AuthService, alertService, UserDataService) {
+  function UserPrefsCtrl($exceptionHandler, $scope, $location, AuthService, alertService, UserDataService, gettextCatalog) {
     $scope.pendingConnections = [];
     $scope.approvedConnections = [];
     $scope.password = {
@@ -44,10 +44,10 @@
       $scope.user.old_password = $scope.password.old;
       $scope.user.new_password = $scope.password.new;
       $scope.user.$update(function () {
-        alertService.add('success', 'Your password was successfully changed.');
+        alertService.add('success', gettextCatalog.getString('Your password was successfully changed.'));
         form.$setPristine();
       }, function (error) {
-        alertService.add('danger', 'There was an error saving your password.');
+        alertService.add('danger', gettextCatalog.getString('There was an error saving your password.'));
         $exceptionHandler(error, 'savePassword');
         form.$setPristine();
       });
@@ -56,20 +56,20 @@
     // Set settings for the current user
     $scope.saveSettings = function () {
       $scope.user.$update(function () {
-        alertService.add('success', 'Your settings were successfully changed.');
+        alertService.add('success', gettextCatalog.getString('Your settings were successfully changed.'));
         $scope.setCurrentUser($scope.user);
         $scope.initLanguage();
       }, function (error) {
-        alertService.add('danger', 'There was an error saving your settings.');
+        alertService.add('danger', gettextCatalog.getString('There was an error saving your settings.'));
         $exceptionHandler(error, 'saveSettings');
       });
     };
 
     // Delete current user account
     $scope.deleteAccount = function () {
-      alertService.add('danger', 'Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore.', true, function() {
+      alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore.'), true, function() {
         $scope.user.$delete(function () {
-          alertService.add('success', 'Your account was successfully removed. You are now logged out. Sorry to have you go.', false, function () {});
+          alertService.add('success', gettextCatalog.getString('Your account was successfully removed. You are now logged out. Sorry to have you go.'), false, function () {});
           AuthService.logout();
           $scope.removeCurrentUser();
           $location.path('/');
@@ -79,7 +79,7 @@
 
     // Revoke client
     $scope.revokeClient = function (client) {
-      alertService.add('danger', 'Are you sure you want to do this ? You will need to authorize this application again to access it through Humanitarian ID.', true, function () {
+      alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this? You will need to authorize this application again to access it through Humanitarian ID.'), true, function () {
         var index = -1;
         for (var i = 0, len = $scope.user.authorizedClients.length; i < len; i++) {
           if ($scope.user.authorizedClients[i].id == client.id) {
@@ -89,9 +89,9 @@
         if (index != -1) {
           $scope.user.authorizedClients.splice(index, 1);
           $scope.user.$update(function () {
-            alertService.add('success', 'Application successfully revoked.');
+            alertService.add('success', gettextCatalog.getString('Application successfully revoked.'));
           }, function (error) {
-            alertService.add('danger', 'There was an error revoking this application.');
+            alertService.add('danger', gettextCatalog.getString('There was an error revoking this application.'));
             $exceptionHandler(error, 'revokeClient');
           });
         }
@@ -116,19 +116,19 @@
         getConnections($scope.user);
         $scope.setCurrentUser($scope.user);
       }, function (error) {
-        alertService.add('danger', 'Connection could not be approved');
+        alertService.add('danger', gettextCatalog.getString('Connection could not be approved'));
         $exceptionHandler(error, 'approveConnection');
       });
     };
 
     $scope.removeConnection = function (connection) {
       $scope.user.deleteConnection($scope.user._id, connection._id, function () {
-        alertService.add('success', 'Connection removed', false, function () {});
+        alertService.add('success', gettextCatalog.getString('Connection removed'), false, function () {});
         $scope.user.connections.splice($scope.user.connections.indexOf(connection), 1);
         getConnections($scope.user);
         $scope.setCurrentUser($scope.user);
       }, function (error) {
-        alertService.add('danger', 'Connection could not be removed');
+        alertService.add('danger', gettextCatalog.getString('Connection could not be removed'));
         $exceptionHandler(error, 'removeConnection');
       });
     } ;

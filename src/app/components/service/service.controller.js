@@ -145,7 +145,7 @@
         .then(function (result) {
           $scope.mailchimpLists = result.data.lists;          
         }, function () {
-          alertService.add('danger', 'Invalid API key');
+          alertService.add('danger', gettextCatalog.getString('Invalid API key'));
           $scope.service.mailchimp.apiKey = '';
           $scope.mailchimpLists = [];
         });

@@ -133,9 +133,9 @@
                 return;
               }
               
-              var message = 'You were successfully checked in.';
+              var message = gettextCatalog.getString('You were successfully checked in.');
               if (moderatedLists) {
-                message += ' Some of you check-ins are pending, we will get back to you soon.';
+                message += ' ' + gettextCatalog.getString('Some of you check-ins are pending, we will get back to you soon.');
               }
               alertService.add('success', message);
               $scope.saving = false;
@@ -163,7 +163,7 @@
       });
 
       $q.all(promises).then(lastTask, function (error) {
-        alertService.add('danger', 'Unable to check in');
+        alertService.add('danger', gettextCatalog.getString('Unable to check in'));
         $exceptionHandler(error, 'Checkin');
       });
     };
@@ -184,23 +184,23 @@
         UserDataService.formatUserLocations();
 
         if (data.type === 'primaryOrganization') {
-          $scope.modifications.organization = 'Changed primary organization to: ' + $scope.user.organization.name;
+          $scope.modifications.organization = gettextCatalog.getString('Changed primary organization to: ') + $scope.user.organization.name;
         }
 
         if (data.type === 'primaryPhone') {
-          $scope.modifications.phone = 'Changed primary phone number to: ' + $scope.user.phone_number;
+          $scope.modifications.phone = gettextCatalog.getString('Changed primary phone number to: ') + $scope.user.phone_number;
         }
 
         if (data.type === 'primaryEmail') {
-          $scope.modifications.email = 'Changed primary email to: ' + $scope.user.email;
+          $scope.modifications.email = gettextCatalog.getString('Changed primary email to: ') + $scope.user.email;
         }
 
         if (data.type === 'primaryLocation') {
-          $scope.modifications.location = 'Changed primary location to: ' + $scope.user.location.country.name;
+          $scope.modifications.location = gettextCatalog.getString('Changed primary location to: ') + $scope.user.location.country.name;
         }
 
         if (data.type === 'primaryJobTitle') {
-          $scope.modifications.job_title = 'Changed primary job title to: ' + $scope.user.job_title;
+          $scope.modifications.job_title = gettextCatalog.getString('Changed primary job title to: ') + $scope.user.job_title;
         }
 
         return;

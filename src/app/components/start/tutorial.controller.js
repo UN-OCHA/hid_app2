@@ -5,9 +5,9 @@
     .module('app.start')
     .controller('TutorialCtrl', TutorialCtrl);
 
-  TutorialCtrl.$inject = ['$location', '$scope', 'User'];
+  TutorialCtrl.$inject = ['$location', '$scope', 'User', 'gettextCatalog'];
 
-  function TutorialCtrl($location, $scope, User) {
+  function TutorialCtrl($location, $scope, User, gettextCatalog) {
     $scope.user = new User($scope.currentUser);
     $scope.activeSlide = 0;
     
@@ -28,20 +28,20 @@
       {
         id: 1,
         image: '/img/tutorial/slide-find-contacts.jpg',
-        heading: 'Find others',
-        text: 'No matter whether you are looking for an individual, a contact list or a specific role – all contacts are at your finger tips.',
+        heading: gettextCatalog.getString('Find others'),
+        text: gettextCatalog.getString('No matter whether you are looking for an individual, a contact list or a specific role – all contacts are at your finger tips.')
       },
       {
         id: 2,
         image: '/img/tutorial/slide-checkins.jpg',
-        heading: 'Check in and out',
-        text: 'Are you about to deploy to a new operation, join the response to a specific disaster or start working with a different sector or cluster? If so, check in to the relevant contact lists and don’t forget to check out when you leave the country.'
+        heading: gettextCatalog.getString('Check in and out'),
+        text: gettextCatalog.getString('Are you about to deploy to a new operation, join the response to a specific disaster or start working with a different sector or cluster? If so, check in to the relevant contact lists and don’t forget to check out when you leave the country.')
       },
       {
         id: 3,
         image: '/img/tutorial/slide-managing-lists.jpg',
-        heading: 'Manage your own lists',
-        text: 'Create your own contact lists and share them with others. Let others check in to your lists or decide for yourself who can join.'
+        heading: gettextCatalog.getString('Manage your own lists'),
+        text: gettextCatalog.getString('Create your own contact lists and share them with others. Let others check in to your lists or decide for yourself who can join.')
       }
     ];
 

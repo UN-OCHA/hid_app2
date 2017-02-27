@@ -21,14 +21,15 @@
   .module('app.common')
   .factory('alertService', alertService);
 
-  alertService.$inject = ['$rootScope', '$uibModal'];
+  alertService.$inject = ['$rootScope', '$uibModal', 'gettextCatalog'];
 
-  function alertService($rootScope, $uibModal) {
+  function alertService($rootScope, $uibModal, gettextCatalog) {
 
     var alertService = {};
     $rootScope.pageAlert = {};
-
     var defaultDisplayTime = 3000;
+    var closeText = gettextCatalog.getString('Close');
+    var cancelText = gettextCatalog.getString('Cancel')
 
     function buildModalTemplate (type, msg, confirm) {
       var iconName = '';
@@ -40,9 +41,9 @@
       }
 
       var body = '<div class="modal-body">' + icon + '<h2 translate>{{message}}</h2></div>';
-      var closeButton = '<button class="btn-primary" ng-click="modal.close()" translate>Close</button>';
+      var closeButton = '<button class="btn-primary" ng-click="modal.close()" translate>' + closeText +'</button>';
 
-      var confirmButtons = '<button class="btn-secondary" ng-click="modal.dismiss()" translate>Cancel</button>';
+      var confirmButtons = '<button class="btn-secondary" ng-click="modal.dismiss()" translate>' + cancelText + '</button>';
       confirmButtons += '<button class="btn-primary" ng-click="modal.close()" translate>OK</button>';
 
       var footer = '<div class="modal-footer">';

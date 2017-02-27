@@ -5,41 +5,41 @@
     .module('app.list')
     .controller('ListEditCtrl', ListEditCtrl);
 
-  ListEditCtrl.$inject = ['$scope', '$routeParams', '$location', 'List', 'User'];
+  ListEditCtrl.$inject = ['$scope', '$routeParams', '$location', 'List', 'User', 'gettextCatalog'];
 
-  function ListEditCtrl($scope, $routeParams, $location, List, User) {
+  function ListEditCtrl($scope, $routeParams, $location, List, User, gettextCatalog) {
     $scope.saving = false;
     $scope.visibility = [
       {
         value: 'me',
-        label: 'The list owner and editors of this list only'
+        label: gettextCatalog.getString('The list owner and editors of this list only')
       },
       {
         value: 'inlist',
-        label: 'People on the list only'
+        label: gettextCatalog.getString('People on the list only')
       },
       {
         value: 'verified',
-        label: 'Verified users only'
+        label: gettextCatalog.getString('Verified users only')
       },
       {
         value: 'all',
-        label: 'Anyone within Humanitarian ID'
+        label: gettextCatalog.getString('Anyone within Humanitarian ID')
       }
     ];
 
     $scope.joinability = [
       {
         value: 'public',
-        label: 'Anyone within Humanitarian ID'
+        label: gettextCatalog.getString('Anyone within Humanitarian ID')
       },
       {
         value: 'moderated',
-        label: 'Anyone within HID can ask to be checked in'
+        label: gettextCatalog.getString('Anyone within HID can ask to be checked in')
       },
       {
         value: 'private',
-        label: 'Only the owner and managers of the list can add users'
+        label: gettextCatalog.getString('Only the owner and managers of the list can add users')
       }
     ];
 

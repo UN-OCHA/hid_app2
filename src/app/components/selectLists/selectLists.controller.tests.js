@@ -3,7 +3,7 @@
 
   describe('Select Lists controller', function () {
 
-    var expectedLists, expectListTypes, expectedParams, listFixture, mockConfig, mockList, scope, userFixture;
+    var expectedLists, expectListTypes, expectedParams, listFixture, mockConfig, mockGetText, mockList, scope, userFixture;
 
     beforeEach(function() {
       listFixture = readJSON('app/test-fixtures/list.json');
@@ -23,6 +23,14 @@
 
       spyOn(mockList, 'query').and.callFake(function (arg, callback) {
         callback(listFixture.lists);
+      });
+
+      mockGetText = {};
+      mockGetText.getString = function (str) {
+        return str;
+      };
+      module('gettext', function($provide) {
+        $provide.value('gettextCatalog', mockGetText);
       });
 
       inject(function($rootScope, $controller) {

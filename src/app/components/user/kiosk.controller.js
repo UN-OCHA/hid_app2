@@ -85,7 +85,7 @@
         alertService.add('success', gettextCatalog.getString('Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap.'));
       }
       else {
-        alertService.add('success', gettextCatalog.getString('Thank you for checking in !'));
+        alertService.add('success', gettextCatalog.getString('Thank you for checking in'));
       }
       $scope.reinitialize();
     };

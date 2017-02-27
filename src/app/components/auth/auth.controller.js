@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'alertService', 'AuthService'];
+  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'alertService', 'AuthService', 'gettextCatalog'];
 
-  function AuthCtrl ($exceptionHandler, $scope, $location, alertService, AuthService) {
+  function AuthCtrl ($exceptionHandler, $scope, $location, alertService, AuthService, gettextCatalog) {
     $scope.email = '';
     $scope.saving = false;
 
@@ -44,14 +44,14 @@
       }, function (error) {
         $scope.saving = false;
         if (error.data.message === 'Please verify your email address') {
-          alertService.add('danger', 'We could not log you in because your email address is not verified yet.');
+          alertService.add('danger', gettextCatalog.getString('We could not log you in because your email address is not verified yet.'));
           return;
         }
         if (error.data.message === 'invalid email or password') {
-          alertService.add('danger', 'We could not log you in. Please verify your email and password.');
+          alertService.add('danger', gettextCatalog.getString('We could not log you in. Please verify your email and password.'));
           return;
         }
-        alertService.add('danger', 'There was an error logging in.');
+        alertService.add('danger', gettextCatalog.getString('There was an error logging in.'));
         $exceptionHandler(error, 'Log in fail');
       });
     };
@@ -60,7 +60,7 @@
       AuthService.logout();
       $scope.removeCurrentUser();
       $location.path('/');
-      alertService.add('success', 'You were successfully logged out.');
+      alertService.add('success', gettextCatalog.getString('You were successfully logged out.'));
     };
 
     if ($location.path() == '/logout') {

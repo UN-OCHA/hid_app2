@@ -5,9 +5,9 @@
   .module('app.service')
   .controller('SuggestionsCtrl', SuggestionsCtrl);
 
-  SuggestionsCtrl.$inject = ['$location', '$q', '$routeParams', '$scope', 'alertService', 'Service', 'User'];
+  SuggestionsCtrl.$inject = ['$location', '$q', '$routeParams', '$scope', 'alertService', 'Service', 'User', 'gettextCatalog'];
 
-  function SuggestionsCtrl ($location, $q, $routeParams, $scope, alertService, Service, User) {
+  function SuggestionsCtrl ($location, $q, $routeParams, $scope, alertService, Service, User, gettextCatalog) {
     $scope.services = [];    
     $scope.suggestions = {};
     $scope.subscribe = subscribe;
@@ -38,13 +38,13 @@
         User.get({userId: $scope.currentUser._id}, function (user) {
           $scope.setCurrentUser(user);
           Service.suggestions = [];
-          alertService.add('success', 'You were successfully subscribed');
+          alertService.add('success', gettextCatalog.getString('You were successfully subscribed'));
           $location.url('/dashboard');
           return;
         });
 
       }, function () {
-        alertService.add('danger', 'There was an error subscribing you');
+        alertService.add('danger', gettextCatalog.getString('There was an error subscribing you'));
       });
     }
 

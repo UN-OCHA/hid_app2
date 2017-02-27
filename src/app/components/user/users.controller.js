@@ -5,8 +5,8 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$log', '$q', '$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'SearchService', 'UserDataService', 'User', 'List'];
-  function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, SearchService, UserDataService, User, List) {
+  UsersCtrl.$inject = ['$log', '$q', '$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'SearchService', 'UserDataService', 'User', 'List', 'gettextCatalog'];
+  function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, SearchService, UserDataService, User, List, gettextCatalog) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -252,102 +252,102 @@
     $scope.sortBy = [
       {
         label: 'name',
-        name: 'Name'
+        name: gettextCatalog.getString('Name')
       },
       {
         label: 'job_title',
-        name: 'Job title'
+        name: gettextCatalog.getString('Job title')
       },
       {
         label: 'organization',
-        name: 'Organization'
+        name: gettextCatalog.getString('Organization')
       },
       {
         label: '-verified',
-        name: 'Verified'
+        name: gettextCatalog.getString('Verified')
       }
     ];
     $scope.userTypes = [
       {
         value: 'is_orphan',
-        name: 'Orphan'
+        name: gettextCatalog.getString('Orphan')
       },
       {
         value: 'is_ghost',
-        name: 'Ghost'
+        name: gettextCatalog.getString('Ghost')
       },
       {
         value: 'verified',
-        name: 'Verified'
+        name: gettextCatalog.getString('Verified')
       },
       {
         value: 'unverified',
-        name: 'Un-verified'
+        name: gettextCatalog.getString('Un-verified')
       },
       {
         value: 'is_admin',
-        name: 'Adminstrator'
+        name: gettextCatalog.getString('Adminstrator')
       }
     ];
     $scope.orgTypes = [
       {
-        label: 'Academic / Research',
+        label: gettextCatalog.getString('Academic / Research'),
         value: 431
       },
       {
-        label: 'Donor',
+        label: gettextCatalog.getString('Donor'),
         value: 433
       },
       {
-        label: 'Embassy',
+        label: gettextCatalog.getString('Embassy'),
         value: 434
       },
       {
-        label: 'Government',
+        label: gettextCatalog.getString('Government'),
         value: 435
       },
       {
-        label: 'International NGO',
+        label: gettextCatalog.getString('International NGO'),
         value: 437
       },
       {
-        label: 'International Organization',
+        label: gettextCatalog.getString('International Organization'),
         value: 438
       },
       {
-        label: 'Media',
+        label: gettextCatalog.getString('Media'),
         value: 439
       },
       {
-        label: 'Military',
+        label: gettextCatalog.getString('Military'),
         value: 440
       },
       {
-        label: 'National NGO',
+        label: gettextCatalog.getString('National NGO'),
         value: 441
       },
       {
-        label: 'Other',
+        label: gettextCatalog.getString('Other'),
         value: 443
       },
       {
-        label: 'Private sector',
+        label: gettextCatalog.getString('Private sector'),
         value: 444
       },
       {
-        label: 'Red Cross / Red Crescent',
+        label: gettextCatalog.getString('Red Cross / Red Crescent'),
         value: 445
       },
       {
-        label: 'Religious',
+        label: gettextCatalog.getString('Religious'),
         value: 446
       },
       {
-        label: 'United Nations',
+        label: gettextCatalog.getString('United Nations'),
         value: 447
       },
       {
-        label: 'Unknown',
+        label: gettextCatalog.getString('Unknown'),
         value: 54593
       }
     ];

@@ -17,7 +17,7 @@
 
     $scope.saveClient = function() {
       var success = function (resp, headers) {
-        alertService.add('success', gettextCatalog.getString('Client save successfully'));
+        alertService.add('success', gettextCatalog.getString('Client saved successfully'));
       };
       var error = function (err) {
         alertService.add('danger', gettextCatalog.getString('There was an error saving this client'));

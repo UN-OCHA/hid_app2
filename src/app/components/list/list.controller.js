@@ -137,11 +137,11 @@
       angular.forEach($scope.usersAdded.users, function (value, key) {
         UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
           UserDataService.notify();
-          alertService.add('success', 'Successfully added to list');
+          alertService.add('success', gettextCatalog.getString('Successfully added to list'));
           $scope.usersAdded.users = [];
           $scope.savingMembers = false;
         }, function (error) {
-          alertService.add('danger', 'There was an error adding members to the list');
+          alertService.add('danger', gettextCatalog.getString('There was an error adding members to the list'));
           $scope.savingMembers = false;
         });
       });
@@ -151,7 +151,7 @@
     $scope.checkIn = function () {
       $scope.savingCheckin = true;
       UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, $scope.checkinUser, function (user) {
-        var message = $scope.list.joinability === 'moderated' ? 'Your request for check-in is pending. We will get back to you soon.' : 'You were successfully checked in.';
+        var message = $scope.list.joinability === 'moderated' ? gettextCatalog.getString('Your request for check-in is pending. We will get back to you soon.') : gettextCatalog.getString('You were successfully checked in.');
 
         alertService.add('success', message);
         $scope.isMember = true;
@@ -186,7 +186,7 @@
 
     // Delete list
     $scope.deleteList = function() {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         $scope.list.$delete(function (out) {
           alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'));
           $location.path('/lists');
@@ -253,7 +253,7 @@
 
     // Demote a user from manager role
     $scope.demoteManager = function (user) {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         var mmanagers = $scope.list.managers.filter(function (elt) {
           return elt._id != user._id;
         });

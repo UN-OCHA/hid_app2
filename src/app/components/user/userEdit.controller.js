@@ -34,19 +34,18 @@
     $scope.addPrimaryLocation = addPrimaryLocation;
     $scope.nextStep = nextStep;
     $scope.currentStep = 1;
-    // $scope.visibilityOptions = ['anyone', 'verified', 'connections'];
     $scope.visibilityOptions = [
       {
         value: 'anyone',
-        label: 'Anyone'
+        label: gettextCatalog.getString('Anyone')
       }, 
       {
         value: 'verified',
-        label: 'Verified users'
+        label: gettextCatalog.getString('Verified users')
       }, 
       {
         value: 'connections',
-        label: 'My connections'
+        label: gettextCatalog.getString('My connections')
       } 
     ];
     $scope.urlRegEx = RegExp('^((https?|ftp)://)?([a-z]+[.])?[a-z0-9-]+([.][a-z]{1,4}){1,2}(/.*[?].*)?$', 'i');
@@ -61,14 +60,14 @@
 
     function setUpFields () {
       $scope.phoneNumberTypes = [
-        {value: 'Landline', name: 'Landline'},
-        {value: 'Mobile', name: 'Mobile'},
-        {value: 'Satellite', name: 'Satellite Phone'}
+        {value: 'Landline', name: gettextCatalog.getString('Landline')},
+        {value: 'Mobile', name: gettextCatalog.getString('Mobile')},
+        {value: 'Satellite', name: gettextCatalog.getString('Satellite Phone')}
       ];
 
       $scope.emailTypes = [
-        {value: 'Work', name: 'Work'},
-        {value: 'Personal', name: 'Personal'}
+        {value: 'Work', name: gettextCatalog.getString('Work')},
+        {value: 'Personal', name: gettextCatalog.getString('Personal')}
       ];
 
       $scope.voipTypes = [
@@ -254,7 +253,7 @@
       }
 
       if (hasDuplicates(key, $scope.user, $scope.temp)) {
-        alertService.add('danger', 'Already added');
+        alertService.add('danger', gettextCatalog.getString('Already added'));
         return;
       }
 
@@ -279,7 +278,7 @@
       }
       
       if (config.listTypes.indexOf(key) !== -1) {
-        alertService.add('danger', 'Are you sure you want to check out of this list', true, function () {
+        alertService.add('danger', gettextCatalog.getString('Are you sure you want to check out of this list?'), true, function () {
           removeList(key, value);
           $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
           return;
@@ -421,7 +420,7 @@
     $scope.changePermission = function (key) {
       $scope.user[key] = $scope.temp[key];
       saveUser(key);
-    }
+    };
    
     //Wait until user is loaded into scope by parent controller
     $scope.$on('userLoaded', function () {

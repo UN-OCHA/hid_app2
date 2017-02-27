@@ -67,7 +67,7 @@
     };
 
     $scope.deleteService = function (service) {
-      alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         service.$delete(function () {
           alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
         });

@@ -3,7 +3,7 @@
 
   describe('User options controller', function () {
 
-    var allLists, listFixture, ownedAndManagedLists, mockConfig, mockAlertService, mockList, mockListDataService, 
+    var allLists, listFixture, ownedAndManagedLists, mockConfig, mockAlertService, mockGetText, mockList, mockListDataService, 
     mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm, userFixture;    
     
     beforeEach(function() {
@@ -50,6 +50,14 @@
         $provide.value('UserCheckInService', mockUserCheckInService);
         $provide.value('UserDataService', mockUserDataService);
         $provide.constant('config', mockConfig);
+      });
+
+      mockGetText = {};
+      mockGetText.getString = function (str) {
+        return str;
+      };
+      module('gettext', function($provide) {
+        $provide.value('gettextCatalog', mockGetText);
       });
 
       inject(function($rootScope, $q, $injector, $controller) {

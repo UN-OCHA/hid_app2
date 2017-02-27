@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserOptionsCtrl', UserOptionsCtrl);
 
-  UserOptionsCtrl.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'UserCheckInService', 'UserDataService'];
+  UserOptionsCtrl.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'UserCheckInService', 'UserDataService', 'gettextCatalog'];
 
-  function UserOptionsCtrl($exceptionHandler, $scope, $uibModal, alertService, config, List, ListDataService, UserCheckInService, UserDataService) {
+  function UserOptionsCtrl($exceptionHandler, $scope, $uibModal, alertService, config, List, ListDataService, UserCheckInService, UserDataService, gettextCatalog) {
     var checkInModal;
     $scope.selectedLists = [];
     $scope.availableLists = [];
@@ -24,9 +24,9 @@
     $scope.getAvailableLists = getAvailableLists;
 
     function deleteUser (user) {
-      alertService.add('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, function() {
+      alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.'), true, function() {
         user.$delete(function () {
-          alertService.add('success', 'The user was successfully deleted.');
+          alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
           UserDataService.notify();
         });
       });
@@ -35,9 +35,9 @@
     function verifyUser (user) {
       user.verified = !user.verified;
       user.$update(function () {
-        alertService.add('success', 'User updated');
+        alertService.add('success', gettextCatalog.getString('User updated'));
       }, function () {
-        alertService.add('danger', 'There was an error updating this user');
+        alertService.add('danger', gettextCatalog.getString('There was an error updating this user'));
       });
     }
 
@@ -54,7 +54,7 @@
         });
         if (checkInId) {
           UserCheckInService.delete({userId: user._id, listType: listType, checkInId: checkInId}, {}, function () {
-            alertService.add('success', 'The user was successfully checked out.');
+            alertService.add('success', gettextCatalog.getString('The user was successfully checked out.'));
             UserDataService.notify();
           }, function (error) {
             $exceptionHandler(error, 'Remove from list fail');
@@ -125,10 +125,10 @@
       angular.forEach($scope.selectedLists, function (list) {
         checkInModal.close();
         UserCheckInService.save({userId: user._id, listType: list.type + 's'}, {list: list._id}, function () {
-          alertService.add('success', 'Successfully checked in to list');
+          alertService.add('success', gettextCatalog.getString('Successfully checked in to list'));
           UserDataService.notify();
         }, function () {
-          alertService.add('danger', 'There was an error checking in this user');
+          alertService.add('danger', gettextCatalog.getString('There was an error checking in this user'));
         });
       });
     }

@@ -2,7 +2,7 @@
   'use strict';
 
   	describe('User controller', function () {
-  	var mockAlertService, mockConfig, mockmd5, mockUserDataService, scope, scopeUser, userFixture;
+  	var mockAlertService, mockConfig, mockGetText, mockmd5, mockUserDataService, scope, scopeUser, userFixture;
   	var connectionRequiredMessage = 'Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking \'Connect\'.';
     var connectionPendingMessage = 'Your connection request is pending';
     var verifiedRequiredMessage = 'Please note that some of the information made available by this user is only available to verified users';
@@ -98,6 +98,14 @@
       mockmd5.createHash = function () {
       	return 'fake-hash';
       };
+
+      mockGetText = {};
+      mockGetText.getString = function (str) {
+      	return str;
+      };
+      module('gettext', function($provide) {
+        $provide.value('gettextCatalog', mockGetText);
+      });
   	});
 
   	describe('Profile permissions', function () {

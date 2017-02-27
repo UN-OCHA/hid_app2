@@ -3,7 +3,7 @@
 
   describe('User preferences controller', function () {
 
-  	var connection, mockAlertService, mockAuthService, mockUserDataService, scope, scopeUser, userFixture;
+  	var connection, mockAlertService, mockAuthService, mockGetText, mockUserDataService, scope, scopeUser, userFixture;
 
   	beforeEach(function() {
   		userFixture = readJSON('app/test-fixtures/user.json');
@@ -27,6 +27,14 @@
 	      $provide.value('UserDataService', mockUserDataService);
 	    });
 	    mockUserDataService.getUser = function () {};
+
+	    mockGetText = {};
+      mockGetText.getString = function (str) {
+      	return str;
+      };
+      module('gettext', function($provide) {
+        $provide.value('gettextCatalog', mockGetText);
+      });
 
 	    inject(function($rootScope, $controller) {
 	    	scope = $rootScope.$new();

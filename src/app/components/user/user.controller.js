@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config'];
+  UserCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config', 'gettextCatalog'];
 
-  function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config) {
+  function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config, gettextCatalog) {
     $scope.pictureUrl = '';
     $scope.userLoaded = false;
     $scope.canEditUser = ($routeParams.userId === $scope.currentUser._id) || $scope.currentUser.is_admin || $scope.currentUser.isManager;
@@ -33,11 +33,11 @@
     var permissionsMessage;
     var connectionRequired = false;
     var verifiedRequired = false;
-    var connectionRequiredMessage = 'Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking \'Connect\'.';
-    var connectionPendingMessage = 'Your connection request is pending';
-    var verifiedRequiredMessage = 'Please note that some of the information made available by this user is only available to verified users';
-    var connectionAndVerifiedMessage = 'Please note that some of the information made available by this user is private and some is available only to verified users. You can contact them with a request to see the private sections of their profile by clicking \'Connect\'.';
-    var pendingAndVerifiedMessage = 'Your connection request is pending. Please note that some of the information made available by this user is only available to verified users.';
+    var connectionRequiredMessage = gettextCatalog.getString('Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking \'Connect\'.');
+    var connectionPendingMessage = gettextCatalog.getString('Your connection request is pending');
+    var verifiedRequiredMessage = gettextCatalog.getString('Please note that some of the information made available by this user is only available to verified users');
+    var connectionAndVerifiedMessage = gettextCatalog.getString('Please note that some of the information made available by this user is private and some is available only to verified users. You can contact them with a request to see the private sections of their profile by clicking \'Connect\'.');
+    var pendingAndVerifiedMessage = gettextCatalog.getString('Your connection request is pending. Please note that some of the information made available by this user is only available to verified users.');
 
     function getPermission (value, pending, permission) {
       if (value !== null) {
@@ -129,7 +129,7 @@
         setConnectionInfo($scope.user, $scope.currentUser._id);
         if (!$scope.currentUser.verified && $scope.user.is_orphan) {
           $scope.canViewInfo = false;
-          alertService.pageAlert('warning', 'In order to view this person’s profile, please contact info@humanitarian.id');
+          alertService.pageAlert('warning', gettextCatalog.getString('In order to view this person’s profile, please contact info@humanitarian.id'));
         }
         $scope.userLoaded = true;
         $scope.$broadcast('userLoaded');
@@ -163,18 +163,18 @@
 
     $scope.notify = function () {
       $scope.user.notify('Test', function () {
-        alertService.add('success', 'User was successfully notified', false, function () {});
+        alertService.add('success', gettextCatalog.getString('User was successfully notified'), false, function () {});
       }, function () {
-        alertService.add('danger', 'There was an error notifying this user');
+        alertService.add('danger', gettextCatalog.getString('There was an error notifying this user'));
       });
     };
 
     $scope.sendClaimEmail = function () {
       alertService.add('warning', 'Are you sure?', true, function() {
         $scope.user.claimEmail(function () {
-          alertService.add('success', 'Claim email sent successfully', false, function () {});
+          alertService.add('success', gettextCatalog.getString('Claim email sent successfully'), false, function () {});
         }, function () {
-          alertService.add('danger', 'There was an error sending the claim email');
+          alertService.add('danger', gettextCatalog.getString('There was an error sending the claim email'));
         });
       });
     };
@@ -225,9 +225,9 @@
         if ($scope.user.id === $scope.currentUser.id) {
           $scope.setCurrentUser($scope.user);
         }
-        alertService.add('success', 'User updated', false, function () {});
+        alertService.add('success', gettextCatalog.getString('User updated'), false, function () {});
       }, function () {
-        alertService.add('danger', 'There was an error updating this user');
+        alertService.add('danger', gettextCatalog.getString('There was an error updating this user'));
       });
     };
 
@@ -237,9 +237,9 @@
     };
 
     $scope.deleteUser = function (user) {
-      alertService.add('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, function() {
+      alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.'), true, function() {
         user.$delete(function () {
-          alertService.add('success', 'The user was successfully deleted.', false, function () {});
+          alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'), false, function () {});
           $location.path('/landing');
         });
       });
@@ -247,7 +247,7 @@
 
     $scope.requestConnection = function () {
       $scope.user.requestConnection($scope.user._id, function () {
-        alertService.add('success', 'Connection request sent', false, function () {});
+        alertService.add('success', gettextCatalog.getString('Connection request sent'), false, function () {});
         alertService.resetPageAlert();
         getUser();
       }, function (error) {

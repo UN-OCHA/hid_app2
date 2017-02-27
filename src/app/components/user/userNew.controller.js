@@ -15,8 +15,8 @@
     $scope.currentPath = $location.path();
     $scope.saving = false;
     
-    var successMessage = 'The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information.';
-    var errorMessage = 'There was an error processing your registration.';
+    var successMessage = gettextCatalog.getString('The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information.');
+    var errorMessage = gettextCatalog.getString('There was an error processing your registration.');
 
     $scope.userCreate = function(registerForm) {
       $scope.saving = true;
