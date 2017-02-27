@@ -1,7 +1,7 @@
 <div class="sidebar collapse" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
   <div ng-if="sidebar.sidebars.admin" class="sidebar__inner">
 
-    <h2 class="sidebar__heading" translate>List admin</h2>
+    <!-- <h2 class="sidebar__heading" translate>List admin</h2> -->
 
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
       <icon name="cancel" text="close"></icon>
@@ -94,7 +94,7 @@
         <icon name="star"></icon>
         <span translate>Mark as favourite</span>
       </button>
-      <button type="button" class="btn-primary btn-block" ng-click="unstar()" ng-if="isFavorite">
+      <button type="button" class="btn-transparent sidebar-section__button" ng-click="unstar()" ng-if="isFavorite">
         <icon name="cancel"></icon>
         <span translate>Unfavourite</span>
       </button>
