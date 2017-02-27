@@ -14,6 +14,7 @@
     $scope.searchListsTerm = '';
     $scope.searchLists = [];
     $scope.searchPeople = [];
+    $scope.landingOperations = [];
     $scope.showAutocomplete = false;
     $scope.showUsersAutocomplete = false;
     $scope.showListsAutocomplete = false;
@@ -45,6 +46,37 @@
       $location.path('/search').search(params);
     };
 
+    function goToOperation (operation) {
+      var url = '/lists/' + operation._id;
+      $scope.saveSearch(operation, 'operation');
+      $location.path(url);
+    }
+
+    $scope.fullOperationsSearch = function (searchTerm) {
+
+      if (!$scope.landingOperations.length) {
+        List.query({name: $scope.searchOperationsTerm, limit: 5, sort: 'name', type: 'operation'}).$promise.then(function (data) {
+          $scope.landingOperations = data;
+          if ($scope.landingOperations.length === 1) {
+            goToOperation($scope.landingOperations[0]);
+            return;
+          }
+        });
+      }
+
+      if ($scope.landingOperations.length === 1) {
+        goToOperation($scope.landingOperations[0]);
+        return;
+      }
+
+      var params = {
+        q: searchTerm,
+        type: 'operation',
+        view: 'lists'
+      };
+      $location.path('/search').search(params);
+    };
+
     $scope.searchUsersAutocomplete = function () {
       if ($scope.searchUsersTerm.length < minSearchLength) {
         $scope.showUsersAutocomplete = false;
@@ -67,7 +99,7 @@
         $scope.landingOperations = data;
         $scope.showOperationsAutocomplete = true;
       });
-    }
+    };
 
     $scope.searchListsAutocomplete = function () {
       if ($scope.searchListsTerm.length < minSearchLength) {
@@ -85,7 +117,7 @@
       SearchService.saveSearch($scope.currentUser, result, type, function (user) {
         $scope.setCurrentUser(user);
       });
-    }
+    };
 
     $rootScope.$on('$routeChangeSuccess', function () {
       $scope.showAutocomplete = false;

@@ -87,29 +87,30 @@
 
     });
 
-    describe('Notifications links', function () {
+    // TO DO - move to service tests.
+    // describe('Notifications links', function () {
 
-      it('should create the create link url for list notifications', function () {
-        var listNotifcation = {
-          params: {
-            list: {
-              _id: '1234'
-            }
-          }
-        };
+    //   it('should create the create link url for list notifications', function () {
+    //     var listNotifcation = {
+    //       params: {
+    //         list: {
+    //           _id: '1234'
+    //         }
+    //       }
+    //     };
 
-        expect(scope.getLink(listNotifcation)).toBe('/lists/1234');
-      });
+    //     expect(scope.getLink(listNotifcation)).toBe('/lists/1234');
+    //   });
 
-      it('should create the create link url for profile notifications', function () {
-        var userNotification = {
-          user: '5678698'
-        };
+    //   it('should create the create link url for profile notifications', function () {
+    //     var userNotification = {
+    //       user: '5678698'
+    //     };
 
-        expect(scope.getLink(userNotification)).toBe('/users/5678698');
-      });
+    //     expect(scope.getLink(userNotification)).toBe('/users/5678698');
+    //   });
 
-    });
+    // });
 
   });
 })();
