@@ -9,6 +9,24 @@
 
   function SearchService($exceptionHandler, List, User, $q) {
 
+    function alreadySaved (searches, resultId) {
+      return searches.filter(function (search) {
+        return search.id === resultId;
+      })[0];
+    }
+
+    function populateSearches (user, params) {
+      var searchTypes = ['user', 'list', 'operation'];
+      angular.forEach(searchTypes, function (searchType) {
+        params.recentSearches[searchType] = [];
+
+        if (user.appMetadata.hid.recentSearches[searchType]) {
+          params.recentSearches[searchType] = user.appMetadata.hid.recentSearches[searchType]; 
+        }
+      });
+      return params;
+    }
+
     var Search = {};
 
     Search.UsersAndLists = function (searchTerm, limit) {
@@ -23,34 +41,30 @@
     };
 
     Search.saveSearch = function (user, searchResult, type, success) {
-      var searches = [];
       var savedSearchesLimit = 5;
-      var key = type === 'user' ? 'recentUserSearches' : 'recentListSearches';
-      var param = {};
+      var params = {};
+      params.recentSearches = {};
+
       var saveResult = {
         id: searchResult._id,
         name: searchResult.name,
         link: type === 'user' ? 'users/' + searchResult._id : 'lists/' + searchResult._id
       };
 
-      if (user.appMetadata && user.appMetadata.hid && user.appMetadata.hid[key]) {
-        searches = user.appMetadata.hid[key];
-      } 
+      if (user.appMetadata && user.appMetadata.hid && user.appMetadata.hid.recentSearches) {
+        params = populateSearches(user, params);
 
-      var searchSaved = searches.filter(function (search) {
-        return search.id === saveResult.id;
-      })[0];
+        if (alreadySaved(params.recentSearches[type], saveResult.id)) {
+          return;
+        }
 
-      if (searchSaved) {
-        return;
+        if (params.recentSearches[type].length >= savedSearchesLimit) {
+           params.recentSearches[type].pop();
+        }
+        params.recentSearches[type].unshift(saveResult);
       }
 
-      if (searches.length >= savedSearchesLimit) {
-        searches.pop();
-      }
-      searches.unshift(saveResult);
-      param[key] = searches;      
-      user.setAppMetaData(param);
+      user.setAppMetaData(params);
       user.$update(function () {
         success(user);
       }, function (error) {

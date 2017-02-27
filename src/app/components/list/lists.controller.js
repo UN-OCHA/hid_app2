@@ -16,13 +16,18 @@
     $scope.request.offset = 0;
     $scope.request.sort = 'name';
     $scope.listsLoaded = false;
-
+    $scope.selectedFilters = {};
     $scope.listFilters = {};
     if ($routeParams.q) {
       $scope.listFilters.name = $routeParams.q;
       $scope.request.name = $routeParams.q;
     }
-    $scope.selectedFilters = {};
+    if ($routeParams.type) {
+        $scope.selectedFilters.type = $routeParams.type;
+        $scope.listFilters.type = $routeParams.type;
+        $scope.request.type= $routeParams.type;
+      }
+    
     var currentSortOrder = $scope.request.name;
     ListDataService.setRequest($scope.request);
 
@@ -81,6 +86,8 @@
       $scope.listFilters = {};
       $scope.selectedFilters = {};
       $scope.currentPage = 1;
+      $location.search('type', null);
+      $location.search('q', null);
       $scope.pageChanged();
     };
 

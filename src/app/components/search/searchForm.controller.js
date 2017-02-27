@@ -34,10 +34,13 @@
       });
     };
 
-    $scope.fullSearch = function (searchTerm, view) {
+    $scope.fullSearch = function (searchTerm, view, filterType) {
       var params = {q: searchTerm};
       if (view) {
         params.view = view;
+      }
+      if (filterType) {
+        params.type = filterType;
       }
       $location.path('/search').search(params);
     };
@@ -53,6 +56,18 @@
         $scope.showUsersAutocomplete = true;
       });
     };
+
+    $scope.searchOperationsAutocomplete = function () {
+      if ($scope.searchOperationsTerm.length < minSearchLength) {
+        $scope.showOperationsAutocomplete = false;
+        return;
+      }
+
+      List.query({name: $scope.searchOperationsTerm, limit: 5, sort: 'name', type: 'operation'}).$promise.then(function (data) {
+        $scope.landingOperations = data;
+        $scope.showOperationsAutocomplete = true;
+      });
+    }
 
     $scope.searchListsAutocomplete = function () {
       if ($scope.searchListsTerm.length < minSearchLength) {

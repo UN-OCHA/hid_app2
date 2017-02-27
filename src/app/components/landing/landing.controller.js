@@ -12,15 +12,21 @@
 
     $scope.recentUserSearches = [];
     $scope.recentListSearches = [];
+    $scope.recentOperationSearches = [];
 
-    if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid) {
+    if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid && $scope.currentUser.appMetadata.hid.recentSearches) {
 
-      if ($scope.currentUser.appMetadata.hid.recentUserSearches) {
-        $scope.recentUserSearches = $scope.currentUser.appMetadata.hid.recentUserSearches;
+      if ($scope.currentUser.appMetadata.hid.recentSearches.user) {
+        $scope.recentUserSearches = $scope.currentUser.appMetadata.hid.recentSearches.user
       }
 
-      if ($scope.currentUser.appMetadata.hid.recentListSearches) {
-        $scope.recentListSearches = $scope.currentUser.appMetadata.hid.recentListSearches;
+      if ($scope.currentUser.appMetadata.hid.recentSearches.list) {
+        $scope.recentListSearches = $scope.currentUser.appMetadata.hid.recentSearches.list
+      }
+
+      if ($scope.currentUser.appMetadata.hid.recentSearches.operation) {
+        $scope.recentOperationSearches = $scope.currentUser.appMetadata.hid.recentSearches.operation;
+        console.log($scope.recentOperationSearches, $scope.currentUser.appMetadata.hid.recentSearches.operation)
       }
 
     }
