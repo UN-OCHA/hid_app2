@@ -39,10 +39,14 @@
 			}
 		],
 		"email": "kathleen@example.com",
+		"emails": [
+			{"_id": "email-1", "type": "Work", "email": "kathleen@example.com"}
+		],
 		"favoriteLists": [
 			{"_id": "fav-1"},
 			{"_id": "fav-2"}
 		],
+		"functional_roles": [],
 		"job_titles": [],
 		"lists": [
 			{
@@ -61,17 +65,24 @@
 				"name": "UK"
 			}
 		},
+		"locations": [],
 		"organization": [],
 		"organizations": [
 			{
-				"_id": "3456"
+				"_id": "3456",
+				"list": "list-id-1",
+				"name": "org1"
 			},
 			{
-				"_id": "7664"
+				"_id": "7664",
+				"list": "list-id-2",
+				"name": "org2"
 			}
 		],
+		"phone_numbers": [],
 		"picture": "my-picture.jpg",
 		"verified": false,
+		"voips": [],
 		"websites": []
 	},
 	"user2": {
