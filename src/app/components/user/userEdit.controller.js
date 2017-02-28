@@ -97,7 +97,7 @@
         website: {
           url: ''
         },
-        role: {}
+        functional_role: {}
       };
       $scope.temp = angular.copy(defaultSettings);
       angular.copy($scope.user.organization, $scope.organization);
@@ -117,8 +117,27 @@
 
     function addList (list, listType, callback) {
       $scope.$emit('editUser', {status: 'saving'});
-      UserCheckInService.save({userId: $scope.user._id, listType: listType}, {list: list.list._id}, function (response) {
+      var listId = list.list._id;
+
+      UserCheckInService.save({userId: $scope.user._id, listType: listType}, {list: listId}, function (response) {
         $scope.$parent.user[listType] = angular.copy(response[listType]);
+
+        var newList = $scope.$parent.user[listType].pop();
+        $scope.$parent.user[listType].unshift(newList);
+
+        if (listType === 'organizations') {
+          var primaryOrg = $scope.$parent.user.organizations.filter(function (org) {
+            return org.list === listId;
+          })[0];
+
+          setPrimaryOrganization(primaryOrg, function () {
+            if (callback) {
+              callback();
+            }
+          });
+          return;
+        }
+
         updateCurrentUser();
         var capitalized = listType.charAt(0).toUpperCase() + listType.slice(1);
         $scope.$emit('editUser', {
@@ -142,7 +161,7 @@
     }
 
     function saveUpdatedUser (type, callback) {
-      $scope.user.$update(function (user) {
+      $scope.user.$update(function () {
         updateCurrentUser();
         $scope.showRegion = false;
         $scope.$emit('editUser', {
@@ -171,7 +190,8 @@
       angular.forEach(config.listTypes, function (listType) {
         angular.forEach(user[listType + 's'], function (userList) {
           if (list._id === userList.list._id) {
-            return inList = true;
+            inList = true;
+            return inList;
           }
         });
       });
@@ -261,13 +281,42 @@
         $scope.temp.website.url = formatUrl($scope.temp.website.url);
       }
 
-      $scope.user[key + 's'].push($scope.temp[key]);
-
+      if (key === 'email') {
+        $scope.user[key + 's'].push($scope.temp[key]);
+      } else {
+        $scope.user[key + 's'].unshift($scope.temp[key]);
+      }
+      
       if (key === 'organization' || key === 'functional_role') {
         addList($scope.temp[key], key + 's', callback);
         $scope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
+
+      if (key === 'phone_number') {
+        saveUser('add' + key, function () {
+          setPrimaryPhone($scope.user[key + 's'][0]);
+        });
+        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        return;
+      }
+
+      if (key === 'job_title') {
+        saveUser('add' + key, function () {
+          setPrimaryJobTitle($scope.user[key + 's'][0]);
+        });
+        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        return;
+      }
+
+      if (key === 'location') {
+        saveUser('add' + key, function () {
+          setPrimaryLocation($scope.user[key + 's'][0], callback);
+        });
+        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        return;
+      }
+
       $scope.temp[key] = angular.copy(defaultSettings[key]);
       saveUser('add' + key, callback);
     }
@@ -383,17 +432,7 @@
         nextStep();
         return;
       }
-      var orgId = $scope.temp.organization.list._id;
-
-      addItem('organization', function () {
-        var primaryOrg = $scope.user.organizations.filter(function (org) {
-          return org.list === orgId;
-        })[0];
-
-        setPrimaryOrganization(primaryOrg, function () {
-          nextStep();
-        });
-      });
+      addItem('organization', nextStep);
     }    
 
     function addPrimaryLocation () {
@@ -401,12 +440,7 @@
         nextStep();
         return;
       }
-      var primaryLocation = $scope.temp.location;
-      addItem('location', function () {
-        setPrimaryLocation(primaryLocation, function () {
-          nextStep();
-        });
-      });
+      addItem('location', nextStep);
     }
 
     function nextStep () {

@@ -9,6 +9,7 @@
 
     beforeEach(function () {
       userFixture = readJSON('app/test-fixtures/user.json');
+      userFixture.user1.organizations = [];
       listFixture = readJSON('app/test-fixtures/list.json');
       mockConfig = {};
       mockConfig.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
