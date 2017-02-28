@@ -16,6 +16,7 @@
     }
 
     function populateSearches (user, params) {
+      console.log(populateSearches, user, params)
       var searchTypes = ['user', 'list', 'operation'];
       angular.forEach(searchTypes, function (searchType) {
         params.recentSearches[searchType] = [];
@@ -42,8 +43,10 @@
 
     Search.saveSearch = function (user, searchResult, type, success) {
       var savedSearchesLimit = 5;
-      var params = {};
-      params.recentSearches = {};
+      var params = {
+        recentSearches: {}
+      };
+      params.recentSearches[type] = [];
 
       var saveResult = {
         id: searchResult._id,
@@ -57,12 +60,12 @@
         if (alreadySaved(params.recentSearches[type], saveResult.id)) {
           return;
         }
-
-        if (params.recentSearches[type].length >= savedSearchesLimit) {
-           params.recentSearches[type].pop();
-        }
-        params.recentSearches[type].unshift(saveResult);
       }
+      
+      if (params.recentSearches[type].length >= savedSearchesLimit) {
+         params.recentSearches[type].pop();
+      }
+      params.recentSearches[type].unshift(saveResult);
 
       user.setAppMetaData(params);
       user.$update(function () {
