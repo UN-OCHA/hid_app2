@@ -201,7 +201,7 @@
     function getRoles () {
       List.query({'type': 'functional_role'}, function (roles) {
         $scope.roles = filterLists(roles, $scope.user);
-      })
+      });
     }
 
     function formatUrl (url) {
@@ -283,7 +283,7 @@
           $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
           return;
         });
-        return
+        return;
       }
       $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
       saveUser();

@@ -3,48 +3,29 @@
 
   describe('Users controller', function () {
 
-    var scope, mockhrinfoService, mockList, countries, listQueryResponse, roles, rootScope, mockUser, mockUserDataService, mockGetText, mockSearchService;
+    var countries, defaultParams, filteredUsers, initialUsers, listFixture, listInfo, listParams, listQueryResponse, mockGetText, 
+    mockhrinfoService, mockList, mockSearchService, mockUser, mockUserDataService, scope, searchParams, 
+    userFixture;
 
-    countries = ['france', 'uk'];
-    listQueryResponse = ['something'];
-
-    var initialUsers = [
-      {
-        "_id": "1",
-        "name": "Amy Benson",
-      },
-      {
-        "_id": "2",
-        "name": "Guillaume Viguier-Just",
-      },
-      {
-        "_id": "3",
-        "name": "Ignacio G Rebollo",
-      }
-    ];
-    initialUsers.headers = {
-      'x-total-count': 3
-    }
-    
-    var filteredUsers = [
-      {
-        "_id": "2",
-        "name": "Guillaume Viguier-Just",
-      },
-      {
-        "_id": "3",
-        "name": "Ignacio G Rebollo",
-      }
-    ];
-    filteredUsers.headers = {
-      'x-total-count': 2
-    }
-    var defaultParams = { limit: 50, offset: 0, sort: 'name' };
-    var listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234' };
-    var searchParams = { limit: 50, offset: 0, sort: 'name', name: 'find' };
+    defaultParams = { limit: 50, offset: 0, sort: 'name' };
+    listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234' };
+    searchParams = { limit: 50, offset: 0, sort: 'name', name: 'find' };
 
     beforeEach(function() {
       module('app.user');
+
+      userFixture = readJSON('app/test-fixtures/user.json');
+      listFixture = readJSON('app/test-fixtures/list.json');
+      initialUsers = [userFixture.user1, userFixture.user2, userFixture.adminUser];
+      initialUsers.headers = {
+        'x-total-count': 3
+      };
+      filteredUsers = [userFixture.user1, userFixture.adminUser];
+      filteredUsers.headers = {
+        'x-total-count': 2
+      };
+      countries = ['france', 'uk'];
+      listQueryResponse = listFixture.lists[0];
 
       mockhrinfoService = {};
       module('app.common', function($provide) {
@@ -83,11 +64,10 @@
         scope = $rootScope.$new();
 
         mockhrinfoService.getCountries = function () {
-
           var defer = $q.defer();
           defer.resolve(countries);
           return defer.promise;
-        }
+        };
 
         mockUserDataService.getUsers = function () {};
         mockUserDataService.listUsers = initialUsers;
@@ -95,22 +75,14 @@
 
         mockList.query = function () {
           return listQueryResponse;
-        }
+        };
 
-        mockUserDataService.subscribe = function () {
-          return;
-        }
+        mockUserDataService.subscribe = function () {};
 
-        var list = {
-        	_id: 2
-        }
-
-
-        spyOn(mockUserDataService, 'getUsers').and.callFake(function(arg1, list, callback){
+        spyOn(mockUserDataService, 'getUsers').and.callFake(function(arg1, arg2, callback){
           callback();
         });
        
-
         spyOn(mockhrinfoService, 'getCountries').and.callThrough();
         spyOn(mockList, 'query').and.callThrough();
       });
@@ -125,9 +97,9 @@
             $scope: scope,
             $routeParams: {}
           };
-          var listInfo = undefined;
+          listInfo = undefined;
           if (list) {
-            listInfo = []
+            listInfo = [];
             ctrlParams.$routeParams = {list: list};
             listInfo['lists.list'] = '1234';
           }
@@ -146,7 +118,7 @@
     }
 
     describe('Populating users', function () {
-      controllerSetup()
+      controllerSetup();
 
       it('should get the users and add them to the scope', function () {
         expect(mockUserDataService.getUsers).toHaveBeenCalledWith(defaultParams, undefined, jasmine.any(Function));

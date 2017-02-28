@@ -3,7 +3,8 @@
 
   describe('User edit controller', function () {
 
-  	var countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList, mockUserCheckInService, mockUserDataService, mockUser, scope, scopeUser, userFixture;
+  	var countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList, mockUserCheckInService, mockUserDataService, 
+    scope, scopeUser, userFixture;
 
   	countries = ['france', 'uk'];
 
@@ -78,7 +79,6 @@
       spyOn(mockAlertService, 'add').and.callFake(function (argument1, argument2, arg3, callback) {
         	callback([argument1, argument2, arg3]);
       });
-      // spyOn(mockAlertService, 'add').and.callThrough();
 
       mockGetText = {};
       module('gettext', function($provide) {

@@ -102,7 +102,7 @@
 	  		});
 
 	  		it('should show the approved connection in the approved connections list', function () {
-	  			expect(scope.approvedConnections.length).toBe(3)
+	  			expect(scope.approvedConnections.length).toBe(3);
 	  			expect(scope.approvedConnections[1]).toEqual(userFixture.user1.connections[1]);
 	  		});
 
