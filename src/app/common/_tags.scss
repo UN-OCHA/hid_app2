@@ -1,21 +1,42 @@
+.tag-list--sidebar {
+  @include font-size($small-font-size);
+  margin-bottom: $base-unit*1.5;
+}
+
+.tag-list__heading {
+  display: inline-block;
+  margin-right: $base-unit;
+}
+
 .tag-list__item {
   position: relative;
   display: inline-block;
-  margin: 0 $base-unit/2 $base-unit/2 0;
+  margin: $base-unit/4 $base-unit/2 $base-unit/4 0;
   background: $light-grey;
 
-  a {
+  a, .tag-list__text {
     display: block;
     color: $dark-blue;
     padding: $base-unit/4 $base-unit*2;
     border: 1px solid $light-grey;
     text-decoration: none;
     font-style: italic; 
+  }
 
+  a {
     &:hover, &:focus {
       background: $primary-color;
       color: $text-light;
       text-decoration: none;
+    }
+  }
+
+  .tag-list--sidebar & {
+    background: white;
+
+    a, .tag-list__text {
+      border-color: white;
+      padding: $base-unit/4 $base-unit/2;
     }
   }
 }
@@ -32,5 +53,16 @@
 
   .icon {
     margin: 0;
+  }
+
+  &:hover, &:focus {
+    background: $primary-color;
+    color: $text-light;
+  }
+}
+
+@include media-query(md) {
+  .tag-list--sidebar {
+    display: none;
   }
 }

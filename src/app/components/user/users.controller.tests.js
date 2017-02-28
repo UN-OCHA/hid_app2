@@ -24,7 +24,7 @@
       filteredUsers.headers = {
         'x-total-count': 2
       };
-      countries = ['france', 'uk'];
+      countries = [{id: '1', name: 'france'}, {id: 2, name: 'uk'}];
       listQueryResponse = listFixture.lists[0];
 
       mockhrinfoService = {};
@@ -202,6 +202,7 @@
       controllerSetup();
 
       it('should emit an event with the selected filters when the user filters', function () {
+        scope.countries = countries;
         scope.selectedFilters = {country: 'hrinfo_loc_416'};
         scope.filter();
         expect(mockUserDataService.getUsers).toHaveBeenCalledWith({limit: 50, offset: 0, sort: 'name', country: 'hrinfo_loc_416'}, undefined, jasmine.any(Function));

@@ -23,6 +23,7 @@
     var operationIds = [];
     var selectedSortBy;
     $scope.request = angular.copy(defaultRequest);
+    $scope.currentFilters = [];
 
     function getUsers () {
       $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
@@ -89,6 +90,7 @@
         $scope.request.name = $routeParams.q;
         $scope.userFilters.name = $routeParams.q;
         $scope.selectedFilters.name = $routeParams.q;
+        $scope.currentFilters.push({label: $routeParams.q, filterType: 'name', type: 'name'});
       }
       listInfo = listType;
       getUsers();
@@ -148,7 +150,80 @@
       $scope.userFilters[$scope.selectedFilters.user_type] = true;
     }
 
-    $scope.filter = function() {
+    function updateCurrent(selectedFilters, filter) {
+      var identifier = filter.identifier || '_id';
+      var label = filter.label || 'label';
+      var filterType = filter.filterType || filter.type + '.list';
+      var all = filter.all || $scope[filter.type];
+
+      if (selectedFilters[filterType]) {
+        var selected = all.filter(function (item) {
+          return item[identifier] === selectedFilters[filterType];
+        })[0];
+        if (selected) {
+          $scope.currentFilters.push({id: selected[identifier], label: selected[label], filterType: filterType});
+        }
+      }
+    }
+
+    function updateCurrentFilters (selectedFilters) {
+      $scope.currentFilters = [];
+
+      if (selectedFilters.name) {
+        $scope.currentFilters.push({label: selectedFilters.name, filterType: 'name'});
+      }
+
+      var filterTypes = [
+        {
+          type: 'disasters'
+        },
+        {
+          all: $scope.countries,
+          filterType: 'country',
+          identifier: 'id',
+          label: 'name'
+        },
+        {
+          type: 'operations'
+        },
+        {
+          type: 'offices'
+        },
+        {
+          type: 'bundles'
+        },
+        {
+          all: $scope.orgTypes,
+          filterType: 'organizations.orgTypeId',
+          identifier: 'value'
+        },
+        {
+          type: 'organizations'
+        },
+        {
+          all: $scope.roles,
+          type: 'functional_roles'
+        },
+        {
+          all: $scope.userTypes,
+          filterType: 'user_type',
+          identifier: 'value'
+        }
+      ];
+
+      angular.forEach(filterTypes, function (filter) {
+        updateCurrent(selectedFilters, filter);
+      });
+      
+    }
+
+    $scope.applyFilters = function () {
+      $scope.filter();
+      $scope.sidebar.open = false;
+      $rootScope.$emit('sidebar-closed');
+    };
+
+    $scope.filter = function () {
       $scope.usersLoaded = false;
       if ($scope.selectedFilters.name === '') {
         delete $scope.selectedFilters.name;
@@ -165,6 +240,7 @@
       }
       $scope.currentPage = 1;
       getUsers();
+      updateCurrentFilters($scope.selectedFilters);
     };
 
     $scope.resetFilters = function () {
@@ -175,7 +251,18 @@
       $scope.userFilters = {};
       $scope.selectedFilters = {};
       $scope.currentPage = 1;
+      $scope.currentFilters = [];
       getUsers();
+    };
+
+    $scope.removeFilter = function (filter) {
+      if ($scope.selectedFilters[filter.filterType]) {
+        delete $scope.selectedFilters[filter.filterType];
+      }
+      if ($scope.request[filter.filterType]) {
+        delete $scope.request[filter.filterType]; 
+      }
+      $scope.filter();
     };
 
     //TO DO order asc / desc ?
@@ -270,23 +357,23 @@
     $scope.userTypes = [
       {
         value: 'is_orphan',
-        name: gettextCatalog.getString('Orphan')
+        label: gettextCatalog.getString('Orphan')
       },
       {
         value: 'is_ghost',
-        name: gettextCatalog.getString('Ghost')
+        label: gettextCatalog.getString('Ghost')
       },
       {
         value: 'verified',
-        name: gettextCatalog.getString('Verified')
+        label: gettextCatalog.getString('Verified')
       },
       {
         value: 'unverified',
-        name: gettextCatalog.getString('Un-verified')
+        label: gettextCatalog.getString('Un-verified')
       },
       {
         value: 'is_admin',
-        name: gettextCatalog.getString('Adminstrator')
+        label: gettextCatalog.getString('Adminstrator')
       }
     ];
     $scope.orgTypes = [

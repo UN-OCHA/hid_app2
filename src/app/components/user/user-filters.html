@@ -5,6 +5,15 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
     <h2 class="sidebar__heading">Filter</h2>
 
+    <ul class="tag-list tag-list--sidebar" ng-if="currentFilters.length">     
+      <li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters">
+        <span class="tag-list__text">{{filter.label}}</span>
+        <button type="button" class="btn-transparent tag-list__button" ng-click="removeFilter(filter)">
+          <icon name="cancel" text="Remove {{filter.type}} filter"></icon>
+        </button>
+      </li>
+    </ul>
+
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
       <icon name="cancel" text="close"></icon>
     </button>
@@ -123,7 +132,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           <ui-select ng-model="selectedFilters.user_type" name="userTypes" id="userTypes">
             <ui-select-match allow-clear="true" placeholder="Type of user">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices repeat="type.value as type in userTypes | filter: $select.search">
-                {{type.name}}
+                {{type.label}}
             </ui-select-choices>
           </ui-select>
         </div>
@@ -157,7 +166,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <button type="button" class="btn btn-secondary" ng-click="resetFilters()">Clear</button>
       </div>
       <div class="col-xs-6">
-        <button type="button" class="btn btn-primary" ng-click="filter()">Apply</button>
+        <button type="button" class="btn btn-primary" ng-click="applyFilters()">Apply</button>
       </div>
     </div>
 

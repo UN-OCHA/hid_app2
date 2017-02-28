@@ -19,6 +19,10 @@
   right: $base-unit*6.5;
 }
 
+.list-actions__current-filters {
+  display: none;
+}
+
 @include media-query(sm) {
 
   .list-actions {
@@ -54,6 +58,31 @@
     .toggled & {
       transform: translateX(-$sidebar-width-md);
     }
+  }
+
+  .list-actions {
+    align-items: center;
+
+  }
+
+  .list-actions__current-filters {
+    display: inline-block;
+    margin-right: $base-unit*2;
+    @include font-size($small-font-size);
+
+    .tag-list {
+      display: inline-block;
+    }
+  }
+
+  .list-actions__count {
+    display: inline-block;
+    margin-right: $base-unit*2;
+    @include font-size($small-font-size);
+  }
+
+  .list-actions__pagination {
+    flex-shrink: 0;
   }
 
 }
