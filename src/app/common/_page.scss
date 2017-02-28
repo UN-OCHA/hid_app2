@@ -83,6 +83,10 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
 
 @include media-query(sm) {
 
+  .page-header {
+    margin-top: $base-unit*2;
+  }
+
   .page-header__heading {
     margin-right: 0;
   }
@@ -116,6 +120,10 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
         padding-left: $sidebar-width-md;
       }
     }
+  }
+
+  .page-header {
+    margin-top: $base-unit*3;
   }
 
   .page-header__heading {
