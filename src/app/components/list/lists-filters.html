@@ -4,9 +4,24 @@
 
     <h2 class="sidebar__heading">Filter</h2>
 
+    <ul class="tag-list tag-list--sidebar" ng-if="currentFilters.length">     
+      <li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters">
+        <span class="tag-list__text">{{filter.label}}</span>
+        <button type="button" class="btn-transparent tag-list__button" ng-click="removeFilter(filter)">
+          <icon name="cancel" text="Remove {{filter.type}} filter"></icon>
+        </button>
+      </li>
+    </ul>
+
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
       <icon name="cancel" text="close"></icon>
     </button>
+
+    <div class="filters-group filter__search">
+      <label for="name" class="sr-only">Search by name</label>
+      <input type="text" class="filter__search__input" ng-model="selectedFilters['name']" name="name" id="name" placeholder="Search by name">
+      <icon name="search"></icon>
+    </div>
 
     <div class="filter">
       <label for="type" class="sr-only" translate>Filter by type</label>
@@ -33,7 +48,7 @@
         <button type="button" class="btn btn-secondary" ng-click="resetFilters()">Clear</button>
       </div>
       <div class="col-xs-6">
-        <button type="button" class="btn btn-primary" ng-click="filter()">Apply</button>
+        <button type="button" class="btn btn-primary" ng-click="applyFilters()">Apply</button>
       </div>
     </div>
 

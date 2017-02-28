@@ -18,15 +18,18 @@
     $scope.listsLoaded = false;
     $scope.selectedFilters = {};
     $scope.listFilters = {};
+    $scope.currentFilters = [];
     if ($routeParams.q) {
       $scope.listFilters.name = $routeParams.q;
       $scope.request.name = $routeParams.q;
+      $scope.selectedFilters.name = $routeParams.q;
+      $scope.currentFilters.push({label: $routeParams.q, filterType: 'name', type: 'name'});
     }
     if ($routeParams.type) {
-        $scope.selectedFilters.type = $routeParams.type;
-        $scope.listFilters.type = $routeParams.type;
-        $scope.request.type= $routeParams.type;
-      }
+      $scope.selectedFilters.type = $routeParams.type;
+      $scope.listFilters.type = $routeParams.type;
+      $scope.request.type = $routeParams.type;
+    }
     
     var currentSortOrder = $scope.request.name;
     ListDataService.setRequest($scope.request);
@@ -45,8 +48,6 @@
     ];
 
     function formatTypes (lists) {
-      var listType;
-
       angular.forEach(lists, function (list) {
         ListDataService.setListTypeLabel(list);
       });
@@ -99,15 +100,51 @@
       $scope.lists = ListDataService.getLists();
     };
 
+    function updateCurrentFilters (selectedFilters) {
+      $scope.currentFilters = [];
+      if (selectedFilters.name) {
+        $scope.currentFilters.push({label: selectedFilters.name, filterType: 'name'});
+      }
+      
+      if (selectedFilters.type) {
+        var selected = $scope.listTypes.filter(function (item) {
+          return item.key === selectedFilters.type;
+        })[0];
+        $scope.currentFilters.push({label: selected.val, filterType: 'type'});
+      }
+    }
+
+    $scope.removeFilter = function (filter) {
+      if ($scope.selectedFilters[filter.filterType]) {
+        delete $scope.selectedFilters[filter.filterType];
+      }
+      if ($scope.request[filter.filterType]) {
+        delete $scope.request[filter.filterType]; 
+      }
+      $scope.filter();
+    };
+
     $scope.filter = function() {
       $scope.listsLoaded = false;
-      $scope.listFilters = angular.copy($scope.selectedFilters);
+      
+      if ($scope.selectedFilters.name === '') {
+        delete $scope.selectedFilters.name;
+        delete $scope.request.name;
+      }
       if ($routeParams.q) {
         $scope.listFilters.name = $routeParams.q;
       }
+      $scope.listFilters = angular.copy($scope.selectedFilters);
       ListDataService.setFilters($scope.listFilters);
       $scope.currentPage = 1;
       $scope.pageChanged();
+      updateCurrentFilters($scope.selectedFilters);
+    };
+
+    $scope.applyFilters = function () {
+      $scope.filter();
+      $scope.sidebar.open = false;
+      $rootScope.$emit('sidebar-closed');
     };
 
     $scope.saveSearch = function (searchList) {

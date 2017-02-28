@@ -2,13 +2,22 @@
   <loader ng-if="!listsLoaded"></loader>
   <div class="list-actions">
 
-    <p class="list-actions__count">
-      <span ng-if="listFilters.name">
-        <strong translate>Searching for</strong> "{{listFilters.name}}"
-        <br>
-      </span>
-      {{totalItems}} <span translate>lists found</span>
-    </p>
+    <div>
+      <div class="list-actions__current-filters" ng-if="currentFilters.length">
+        <ul class="tag-list ">   
+          <li class="tag-list__heading" translate>Filters applied:</li>
+          <li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters">
+            <span class="tag-list__text">{{filter.label}}</span>
+            <button type="button" class="btn-transparent tag-list__button" ng-click="removeFilter(filter)">
+              <icon name="cancel" text="Remove {{filter.type}} filter"></icon>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="list-actions__count">
+        {{totalItems}} <span translate>lists found</span>
+      </div>
+    </div>
 
     <ul class="pagination list-actions__pagination">
       <li class="pagination-page"><span>Show</span></li>
