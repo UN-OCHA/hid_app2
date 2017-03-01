@@ -3,7 +3,17 @@
 		{
 			"_id": "list-1-id",
 			"name": "list-1",
-			"type": "list"
+			"type": "list",
+			"labels": [
+        {
+          "text": "list-1",
+          "language": "en"
+        },
+        {
+          "text": "french list-1",
+          "language": "fr"
+        }
+      ]
 		},
 		{
 			"_id": "list-2-id",
