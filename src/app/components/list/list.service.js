@@ -28,6 +28,7 @@
 
     // Is a user manager of a list ?
     List.prototype.isManager = function (user) {
+      console.log('isManager')
       var out = false;
       angular.forEach(this.managers, function (val) {
         if (angular.equals(user._id, val._id)) {
