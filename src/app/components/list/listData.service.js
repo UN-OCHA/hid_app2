@@ -41,10 +41,10 @@
     ];
 
     return {
-      addFilter: function(key, val, notify) {
-        filters[key] = val;
-        if (notify) this.notify();
-      },
+      // addFilter: function(key, val, notify) {
+      //   filters[key] = val;
+      //   if (notify) this.notify();
+      // },
 
       setFilters: function(filters2, notify) {
         filters = filters2;
@@ -56,10 +56,10 @@
         if (notify) this.notify();
       },
 
-      removeFilter: function(key, notify) {
-        delete filters[key];
-        if (notify) this.notify();
-      },
+      // removeFilter: function(key, notify) {
+      //   delete filters[key];
+      //   if (notify) this.notify();
+      // },
 
       filter: function(cb) {
         var trequest = angular.copy(request);
