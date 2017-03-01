@@ -44,15 +44,15 @@
       $scope.currentUser.favoriteLists.splice($scope.currentUser.favoriteLists.indexOf(list), 1);
 
       User.update($scope.currentUser, function () {
-        alertService.add('success', gettextCatalog.getString('This list was removed from your favourites.'));
+        alertService.add('success', gettextCatalog.getString('This list was removed from your favourites.'), false, function () {});
         $scope.setCurrentUser($scope.currentUser);
       });
     };
 
     $scope.leaveList = function (list) {
-      alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         UserCheckInService.delete({userId: $scope.currentUser._id, listType: list.type + 's', checkInId: list.checkinId}, {}, function(user) {
-          alertService.add('success', gettextCatalog.getString('Successfully removed from list.'));
+          alertService.add('success', gettextCatalog.getString('Successfully removed from list.'), false, function () {});
           $scope.listsMember.splice($scope.listsMember.indexOf(list), 1);
           UserDataService.notify();
           $scope.setCurrentUser(user);
@@ -63,7 +63,7 @@
     $scope.deleteList = function (list) {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         list.$delete(function () {
-          alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'));
+          alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'), false, function () {});
           $scope.listsOwnedAndManaged.splice($scope.listsOwnedAndManaged.indexOf(list), 1);
         });
       });
@@ -91,10 +91,10 @@
         service.unsubscribe($scope.currentUser)
           .then(function (response) {
             $scope.setCurrentUser(response.data);
-            alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'));
+            alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'), false, function () {});
           })
           .catch(function () {
-            alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
+            alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'), false, function () {});
           });
       });
     };
@@ -103,7 +103,7 @@
       var service = new Service(subscription.service);
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         service.$delete(function () {
-          alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
+          alertService.add('success', gettextCatalog.getString('Service deleted successfully'), false, function () {});
         });
       });
     };

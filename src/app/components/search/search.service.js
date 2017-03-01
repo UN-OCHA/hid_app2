@@ -16,7 +16,6 @@
     }
 
     function populateSearches (user, params) {
-      console.log(populateSearches, user, params)
       var searchTypes = ['user', 'list', 'operation'];
       angular.forEach(searchTypes, function (searchType) {
         params.recentSearches[searchType] = [];

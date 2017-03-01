@@ -81,6 +81,29 @@
 		],
 		"phone_numbers": [],
 		"picture": "my-picture.jpg",
+		"subscriptions": [
+      {
+        "_id": "sub-1",
+        "service": {
+          "owner": "11111"
+        },
+        "managers": ["userid", "userid2"]
+      },
+      {
+        "_id": "sub-2",
+        "service": {
+          "owner": "userid"
+        },
+        "managers": ["userid", "11111"]
+      },
+      {
+        "_id": "sub-3",
+        "service": {
+          "owner": "userid"
+        },
+        "managers": ["userid"]
+      }
+    ],
 		"verified": false,
 		"voips": [],
 		"websites": []

@@ -89,6 +89,7 @@
       $scope.currentPage = 1;
       $location.search('type', null);
       $location.search('q', null);
+      $scope.currentFilters = [];
       $scope.pageChanged();
     };
 
