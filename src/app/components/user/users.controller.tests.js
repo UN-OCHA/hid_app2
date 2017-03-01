@@ -3,7 +3,7 @@
 
   describe('Users controller', function () {
 
-    var countries, defaultParams, filteredUsers, initialUsers, listFixture, listInfo, listParams, listQueryResponse, mockGetText, 
+    var countries, defaultParams, filteredUsers, filterTypes, initialUsers, listFixture, listInfo, listParams, listQueryResponse, mockGetText, 
     mockhrinfoService, mockList, mockSearchService, mockUser, mockUserDataService, scope, searchParams, 
     userFixture;
 
@@ -16,6 +16,7 @@
 
       userFixture = readJSON('app/test-fixtures/user.json');
       listFixture = readJSON('app/test-fixtures/list.json');
+      filterTypes = listFixture.filters;
       initialUsers = [userFixture.user1, userFixture.user2, userFixture.adminUser];
       initialUsers.headers = {
         'x-total-count': 3
@@ -210,7 +211,7 @@
 
     });
 
-    describe('Clear filters', function () {
+    describe('Clear all filters', function () {
       controllerSetup();
 
       it('should clear the filters', function () {
@@ -230,6 +231,107 @@
 
     });
 
+    describe('Displaying current filters', function () {
+      controllerSetup();
+
+      it('should show the current name filter', function () {
+        scope.selectedFilters = {name: 'bob'};
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{label: 'bob', filterType: 'name'}]);
+      });
+
+      it('should show the current disaster filter', function () {
+        scope.selectedFilters = {'disasters.list': filterTypes.disasters[0]._id};
+        scope.disasters = filterTypes.disasters;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.disasters[0]._id, label: filterTypes.disasters[0].label, filterType: 'disasters.list'}]);
+      });
+
+      it('should show the current country filter', function () {
+        scope.selectedFilters = {'country': filterTypes.countries[0].id};
+        scope.countries = filterTypes.countries;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.countries[0].id, label: filterTypes.countries[0].name, filterType: 'country'}]);
+      });
+
+      it('should show the current operation filter', function () {
+        scope.selectedFilters = {'operations.list': filterTypes.operations[1]._id};
+        scope.operations = filterTypes.operations;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.operations[1]._id, label: filterTypes.operations[1].label, filterType: 'operations.list'}]);
+      });
+
+      it('should show the current co-ordination hub filter', function () {
+        scope.selectedFilters = {'offices.list': filterTypes.offices[1]._id};
+        scope.offices = filterTypes.offices;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.offices[1]._id, label: filterTypes.offices[1].label, filterType: 'offices.list'}]);
+      });
+
+      it('should show the current group filter', function () {
+        scope.selectedFilters = {'bundles.list': filterTypes.bundles[1]._id};
+        scope.bundles = filterTypes.bundles;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.bundles[1]._id, label: filterTypes.bundles[1].label, filterType: 'bundles.list'}]);
+      });
+
+      it('should show the current organization type filter', function () {
+        scope.selectedFilters = {'organizations.orgTypeId': filterTypes.orgTypes[0].value};
+        scope.orgTypes = filterTypes.orgTypes;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.orgTypes[0].value, label: filterTypes.orgTypes[0].label, filterType: 'organizations.orgTypeId'}]);
+      });
+
+      it('should show the current organizations filter', function () {
+        scope.selectedFilters = {'organizations.list': filterTypes.organizations[1]._id};
+        scope.organizations = filterTypes.organizations;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.organizations[1]._id, label: filterTypes.organizations[1].label, filterType: 'organizations.list'}]);
+      });
+
+      it('should show the current roles filter', function () {
+        scope.selectedFilters = {'functional_roles.list': filterTypes.functional_roles[0]._id};
+        scope.roles = filterTypes.functional_roles;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.functional_roles[0]._id, label: filterTypes.functional_roles[0].label, filterType: 'functional_roles.list'}]);
+      });
+
+      it('should show the current user type filter', function () {
+        scope.selectedFilters = {'user_type': filterTypes.user_types[1].value};
+        scope.userTypes = filterTypes.user_types;
+        scope.filter();
+        expect(scope.currentFilters).toEqual([{id: filterTypes.user_types[1].value, label: filterTypes.user_types[1].label, filterType: 'user_type'}]);
+      });
+    });
+
+    describe('Removing a current filter', function () {
+      controllerSetup();
+
+      it('should remove the filter', function () {
+        scope.orgTypes = filterTypes.orgTypes;
+        scope.roles = filterTypes.functional_roles;
+        scope.selectedFilters = {
+          name: 'bob',
+          'organizations.orgTypeId': filterTypes.orgTypes[0].value,
+          'functional_roles.list': filterTypes.functional_roles[1]._id
+        };
+        scope.filter();
+        var expectedSelectedFilters = {
+          name: 'bob',
+          'functional_roles.list': filterTypes.functional_roles[1]._id
+        };
+        var expectedCurrentFilters = [
+          {label: 'bob', filterType: 'name'},
+          {id: filterTypes.functional_roles[1]._id, label: filterTypes.functional_roles[1].label, filterType: 'functional_roles.list'}
+        ];
+        var expectedRequest = {limit: 50, offset: 0, sort: 'name', name: 'bob', 'functional_roles.list': filterTypes.functional_roles[1]._id};
+        scope.removeFilter({name: filterTypes.orgTypes[0].label, filterType: 'organizations.orgTypeId'});
+
+        expect(scope.selectedFilters).toEqual(expectedSelectedFilters);
+        expect(scope.currentFilters).toEqual(expectedCurrentFilters);
+        expect(scope.request).toEqual(expectedRequest);
+      });
+    });
   });
 })();
 

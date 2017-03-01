@@ -43,5 +43,97 @@
 		{"_id": 81},{"_id": 82},{"_id": 83},{"_id": 84},{"_id": 85},{"_id": 86},{"_id": 87},{"_id": 88},{"_id": 89},{"_id": 90},
 		{"_id": 91},{"_id": 92},{"_id": 93},{"_id": 94},{"_id": 95},{"_id": 96},{"_id": 97},{"_id": 98},{"_id": 89},{"_id": 100}
 	],
-	"secondPageOfUsers": [{"_id": 101},{"_id": 102},{"_id": 103},{"_id": 104}]
+	"secondPageOfUsers": [{"_id": 101},{"_id": 102},{"_id": 103},{"_id": 104}],
+	"filters": {
+		"disasters": [
+			{
+				"_id": "dis-id-1",
+				"label": "dis-1"
+			},
+			{
+				"_id": "dis-id-2",
+				"label": "dis-2"
+			}
+		],
+		"countries": [
+			{
+				"id": "country-id-1",
+				"name": "country-1"
+			},
+			{
+				"id": "country-id-2",
+				"name": "country-2"
+			}
+		],
+		"operations": [
+			{
+				"_id": "op-id-1",
+				"label": "op-1"
+			},
+			{
+				"_id": "op-id-2",
+				"label": "op-2"
+			}
+		],
+		"offices": [
+			{
+				"_id": "office-id-1",
+				"label": "office-1"
+			},
+			{
+				"_id": "office-id-2",
+				"label": "office-2"
+			}
+		],
+		"bundles": [
+			{
+				"_id": "bundle-id-1",
+				"label": "bundle-1"
+			},
+			{
+				"_id": "bundle-id-2",
+				"label": "bundle-2"
+			}
+		],
+		"orgTypes": [
+			{
+				"value": "ot-id-1",
+				"label": "ot-1"
+			},
+			{
+				"value": "ot-id-2",
+				"label": "ot-2"
+			}
+		],
+		"organizations": [
+			{
+				"_id": "org-id-1",
+				"label": "org-1"
+			},
+			{
+				"_id": "org-id-2",
+				"label": "org-2"
+			}
+		],
+		"functional_roles": [
+			{
+				"_id": "role-id-1",
+				"label": "role-1"
+			},
+			{
+				"_id": "role-id-2",
+				"label": "role-2"
+			}
+		],
+		"user_types": [
+			{
+				"value": "ut-id-1",
+				"label": "ut-1"
+			},
+			{
+				"value": "ut-id-2",
+				"label": "ut-2"
+			}
+		]
+	}
 }
