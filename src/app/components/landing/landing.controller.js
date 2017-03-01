@@ -5,9 +5,9 @@
     .module('app.dashboard')
     .controller('LandingCtrl', LandingCtrl);
 
-  LandingCtrl.$inject = ['$location', '$scope', 'notificationsService', 'SearchService'];
+  LandingCtrl.$inject = ['$location', '$scope', 'notificationsService'];
 
-  function LandingCtrl($location, $scope, notificationsService, SearchService) {
+  function LandingCtrl($location, $scope, notificationsService) {
     $scope.notifications = notificationsService;
 
     $scope.recentUserSearches = [];
@@ -29,12 +29,6 @@
       }
 
     }
-
-    $scope.saveSearch = function (searchResult, type) {
-      SearchService.saveSearch($scope.currentUser, searchResult, type, function (user) {
-        $scope.setCurrentUser(user);
-      });
-    };
 
     $scope.readNotification = function (notification) {
       notification.notified = true;

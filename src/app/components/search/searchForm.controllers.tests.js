@@ -3,7 +3,8 @@
 
   describe('Search Form controller', function () {
 
-    var scope, mockSearchService, mockUser, mockList, searchResults, $location;
+    var scope, mockSearchService, mockUser, mockList, searchResults, $location, userFixture;
+    userFixture = readJSON('app/test-fixtures/user.json');
 
     searchResults = [
       [
@@ -25,6 +26,12 @@
       mockUser = jasmine.createSpyObj('User', ['query']);
 
       mockSearchService = {};
+      mockSearchService = {
+        saveSearch: function () {}
+      }
+      spyOn(mockSearchService, 'saveSearch').and.callFake(function (arg1, arg2, arg3, callback) {
+        callback(userFixture.user1);
+      });
       module('app.search', function($provide) {
         $provide.value('SearchService', mockSearchService);
       });
@@ -43,6 +50,9 @@
           defer.resolve(searchResults);
           return defer.promise;
         };
+
+        scope.setCurrentUser = function () {};
+        spyOn(scope, 'setCurrentUser').and.callThrough();
 
 
         spyOn(mockSearchService, 'UsersAndLists').and.callThrough();
@@ -107,6 +117,16 @@
         scope.fullSearch('Hanna');
         expect($location.search).toHaveBeenCalledWith({q: 'Hanna'});
       });
+
+    });
+
+    describe('Saving a search', function () {
+
+     it('should save the search when the user selects it', function () {
+       scope.saveSearch({_id: 1}, 'operation');
+       expect(mockSearchService.saveSearch).toHaveBeenCalledWith(scope.currentUser, {_id: 1}, 'operation', jasmine.any(Function));
+       expect(scope.setCurrentUser).toHaveBeenCalledWith(userFixture.user1);
+     });
 
     });
 
