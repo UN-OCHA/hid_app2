@@ -688,6 +688,18 @@
         </ul>
       </div>
 
+      <div class="form-section form-section--compact" ng-show="user.offices && user.offices.length">
+        <h3 class="form-section__heading" translate>Co-ordination Hubs</h3>
+        <ul class="tag-list">
+          <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm}" ng-repeat="(key, val) in user.offices">
+            <a href="/lists/{{val.list}}">{{val.name}}</a>
+            <button type="button" class="btn-transparent tag-list__button" ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="dropItem('office', val)">
+              <icon name="cancel" text="Check out"></icon>
+            </button>
+          </li>
+        </ul>
+      </div>
+
       <div class="form-section form-section--compact" ng-show="user.lists && user.lists.length">
         <h3 class="form-section__heading" translate>Other lists</h3>
         <ul class="tag-list">
