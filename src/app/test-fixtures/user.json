@@ -70,12 +70,12 @@
 		"organizations": [
 			{
 				"_id": "3456",
-				"list": "list-id-1",
+				"list": "org-id-1",
 				"name": "org1"
 			},
 			{
 				"_id": "7664",
-				"list": "list-id-2",
+				"list": "org-id-2",
 				"name": "org2"
 			}
 		],

@@ -17,14 +17,16 @@
     };
 
     function leaveList (checkin) {
-      alertService.add('warning', 'Are you sure?', true, function() {
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         UserCheckInService.delete({userId: $scope.currentUser._id, listType: checkin.type + 's', checkInId: checkin._id}, {}, function (user) {
-          alertService.add('success', gettextCatalog.getString('Successfully removed from list'));
-          $scope.listsMember.splice($scope.listsMember.indexOf(checkin), 1);
+          alertService.add('success', gettextCatalog.getString('Successfully removed from list'), false, function(){});
+          $scope.listsMember = $scope.listsMember.filter(function(list) {
+            return list._id !== checkin._id;    
+          });
           UserDataService.notify();
           $scope.setCurrentUser(user);
         }, function () {
-          alertService.add('danger', gettextCatalog.getString('There was an error checking out of this list'));
+          alertService.add('danger', gettextCatalog.getString('There was an error checking out of this list'), false, function(){});
         });
       });
     }

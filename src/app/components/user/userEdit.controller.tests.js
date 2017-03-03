@@ -543,7 +543,7 @@
       });
 
       it('should remove the item from the user', function () {
-        expect(scope.user.organizations).toEqual([{_id: '3456', list: 'list-id-1', name: 'org1'}]);
+        expect(scope.user.organizations).toEqual([{_id: '3456', list: 'org-id-1', name: 'org1'}]);
       });
 
       it('should update the user', function () {
