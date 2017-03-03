@@ -637,19 +637,17 @@
           </div>
         </form>
 
-        <div ng-class="{'form-section__edit' : showProfileForm && user.functional_roles.length}">
-          <ul class="list list--has-buttons" aria-hidden="{{showProfileForm}}">
-            <li class="list__item" ng-repeat="role in user.functional_roles">
-              <a href="lists/{{role.list}}">{{role.name}}</a>
-              <button type="button" class="btn-transparent list__button" ng-click="dropItem('functional_role', role)" ng-show="showProfileForm" aria-hidden="{{showProfileForm}}">
-                <icon name="cancel" text="Remove"></icon>
-              </button>
-            </li>
-            <li class="list__item" ng-if="!user.functional_roles.length" ng-show="!showProfileForm">
-              <em translate>No roles</em>
-            </li>
-          </ul>
-        </div>
+        <ul class="tag-list" aria-hidden="{{showProfileForm}}">
+          <li class="tag-list__item" ng-class="{'tag-list__item--has-button' : showProfileForm && currentUser.is_admin}" ng-repeat="role in user.functional_roles">
+            <a href="lists/{{role.list}}">{{role.name}}</a>
+            <button type="button" class="btn-transparent tag-list__button" ng-click="dropItem('functional_role', role)" ng-show="showProfileForm" ng-if="currentUser.is_admin" aria-hidden="{{showProfileForm}}">
+             <icon name="cancel" text="Check out"></icon>
+            </button>
+          </li>
+          <li class="list__item" ng-if="!user.functional_roles.length" ng-show="!showProfileForm">
+            <em translate>No roles</em>
+          </li>
+        </ul>
       </div>
 
       <div class="form-section form-section--compact" ng-show="user.operations && user.operations.length">
