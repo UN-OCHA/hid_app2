@@ -5,12 +5,13 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$http', '$window', '$rootScope', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
+  AuthService.$inject = ['$exceptionHandler', '$http', '$window', '$rootScope', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
 
-  function AuthService ($http, $window, $rootScope, $interval, $location, config, UserListsService, notificationsService) {
-
+  function AuthService ($exceptionHandler, $http, $window, $rootScope, $interval, $location, config, UserListsService, notificationsService) {
     var checkingNotifications;
     var cachingLists;
+    var swRegistration;
+    var notificationsPermitted = true;
 
     function storeUser (response) {
       try {
@@ -22,26 +23,57 @@
       }
     }
 
+    function serviceWorkerNotification (item, swReg) {
+       swReg.showNotification('', {
+        body: item.text,
+        icon: $location.protocol() + '://' + $location.host() + '/img/notification-icon.png',
+        dir: 'auto'
+      });
+    }
+
     function showNotification (item) {
       if (item && !item.notified) {
-        var notification = new Notification('',{
-          body: item.text,
-          icon: $location.protocol() + '://' + $location.host() + '/img/notification-icon.png',
-          dir: 'auto'
-        });
+        var notification; 
+        var link =item.link;
+
         item.notified = true;
         item.read = false;
-        var link =item.link;
-        
-        notification.onclick = function () {
-          item.notified = true;
-          item.read = true;
-          notificationsService.update(item);
-          notification.close();
-          $location.path(link);
-        };
         notificationsService.update(item);
-        setTimeout(notification.close.bind(notification), 5000);
+        
+        try {
+          notification = new Notification('',{
+            body: item.text,
+            icon: $location.protocol() + '://' + $location.host() + '/img/notification-icon.png',
+            dir: 'auto'
+          });
+          notification.onclick = function () {
+            item.notified = true;
+            item.read = true;
+            notificationsService.update(item);
+            notification.close();
+            $location.path(link);
+          };
+
+          setTimeout(notification.close.bind(notification), 5000);
+
+        } catch (e) {
+          if ('serviceWorker' in navigator && 'PushManager' in window) {
+
+            if (!swRegistration) {
+              navigator.serviceWorker.register('sw.js') 
+                .then(function(swReg) {
+                 swRegistration = swReg;
+                 navigator.serviceWorker.ready.then(function () {
+                  serviceWorkerNotification(item, swRegistration);
+                 });
+              }).catch(function(error) {
+                $exceptionHandler(error, 'Cannot register service worker');
+              });
+              return;
+            }
+            serviceWorkerNotification(item, swRegistration);
+          }
+        }
       }
     }
 
@@ -54,8 +86,8 @@
       }, 3000, index, items);
     }
 
-    function notificationsPermitted () {
-      if (!("Notification" in window) || Notification.permission === 'declined') {
+    function getNotificationsPermission () {
+      if (!("Notification" in window) || Notification.permission === 'denied') {
         return false;
       }
 
@@ -63,7 +95,7 @@
         return true;
       }
 
-      return Notification.requestPermission(function (permission) {
+      Notification.requestPermission(function (permission) {
         if (permission === 'granted') {
           return true;
         }
@@ -73,7 +105,7 @@
 
     function getUnreadNotifications () {
       notificationsService.getUnread().then(function (items) {
-        if (items && items.length && notificationsPermitted()) {
+        if (items && items.length && notificationsPermitted) {
           showNotification(items[0]); //show first notification
           showNotifications(1, items); // show rest with delay between
         }
@@ -81,12 +113,12 @@
     }
 
     function notificationsHelper () {
-      
+      notificationsPermitted = getNotificationsPermission();
       getUnreadNotifications();
       
       checkingNotifications = $interval(function () {
         getUnreadNotifications();
-      }, 60000); 
+      }, 60000);
     }
 
     function cachingHelper () {
@@ -114,6 +146,9 @@
         $window.localStorage.removeItem('currentUser');
         $interval.cancel(cachingLists);
         $interval.cancel(checkingNotifications);
+        if (swRegistration) {
+          swRegistration.unregister();
+        }
       },
 
       getToken: function() {
