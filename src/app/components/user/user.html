@@ -141,7 +141,7 @@
 
         <h3 class="form-section__heading" translate>Phone numbers</h3>
         <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'connections'">
-          <button type="button" class="btn-link" ng-click="requestConnection()" translate>
+          <button type="button" class="btn-link" ng-click="requestConnection()">
             <icon name="eye-hidden"></icon>
             <span translate>Request</span> {{user.given_name}}'s <span translate>phone number</span>
           </button>
@@ -152,7 +152,7 @@
         </p>
         <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'verified'">
           <icon name="eye-hidden"></icon>
-          <span translate>{{user.given_name}}'s phone numbers can only be viewed by verified users.</span>
+          {{user.given_name}}'s <span translate>phone numbers can only be viewed by verified users.</span>
         </p>
 
         <ul class="list list--has-primary" ng-if="connectionInfo.phonesPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
@@ -249,7 +249,7 @@
         </p>
         <p class="list__item profile-permission-message" ng-if="connectionInfo.emailsPermission === 'verified'">
           <icon name="eye-hidden"></icon>
-          <span translate>{{user.given_name}}'s email addresses can only be viewed by verified users.</span>
+          {{user.given_name}}'s <span translate>email addresses can only be viewed by verified users.</span>
         </p>
 
         <ul class="list list--has-primary" ng-if="connectionInfo.emailsPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">
@@ -453,9 +453,9 @@
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <form class="form-section__edit">
-            <label class="form-section__sub-heading" for="job_title">Add a job title:</label>
+            <label class="form-section__sub-heading" for="job_title" translate>Add a job title:</label>
             <div class="form-field form-field--compact form-inline-fields">
-              <input type="text" class="form-inline-fields__item" name="job_title" id="job_title" ng-model="temp.job_title" placeholder="Add a job title" />
+              <input type="text" class="form-inline-fields__item" name="job_title" id="job_title" ng-model="temp.job_title" placeholder="{{'Add a job title' | translate}}" />
               <button type="submit"
               class="btn-transparent"
               ng-class="{'active': temp.job_title}"
@@ -508,7 +508,7 @@
         </p>
         <p class="list__item profile-permission-message" ng-if="connectionInfo.locationsPermission === 'verified'">
           <icon name="eye-hidden"></icon>
-          <span translate>{{user.given_name}}'s locations can only be viewed by verified users.</span>
+          {{user.given_name}}'s <span translate>locations can only be viewed by verified users.</span>
         </p>
 
         <ul class="list list--has-primary" ng-if="connectionInfo.locationsPermission === 'view'" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}">

@@ -5,8 +5,8 @@
       <div uib-slide ng-repeat="slide in slides" index="$index">
         <img ng-src="{{slide.image}}">
         <div class="carousel-caption">
-          <h4 class="carousel-caption__heading" translate>{{slide.heading}}</h4>
-          <p class="carousel-caption__text" translate>{{slide.text}}</p>
+          <h4 class="carousel-caption__heading">{{slide.heading}}</h4>
+          <p class="carousel-caption__text">{{slide.text}}</p>
           
           <div ng-if="slide.id === 1">
 	          <button type="button" class="btn-transparent" ng-click="showSlideMore1 = !showSlideMore1" ng-show="!showSlideMore1">

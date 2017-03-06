@@ -7,7 +7,7 @@
 </div>
 
 <tabset responsive="true" vertical="true">
-  <tab heading="Your connections">
+  <tab heading="{{'Your connections' | translate}}">
     <div class="block">
         <h2 class="block-heading" translate>Pending approval</h2>
         <ul class="connections-list">
@@ -38,20 +38,20 @@
     </div>
   </tab>
 
-  <tab heading="Change password">
+  <tab heading="{{'Change password' | translate}}">
     <form name="changePassword" ng-submit="changePassword.$valid && savePassword(changePassword)" autocomplete="off" novalidate>
       <fieldset class="block">
         <legend class="block-heading" translate>Change password</legend>
         <div class="form-field" ng-class="{'has-error': changePassword.oldPassword.$touched && changePassword.oldPassword.$invalid}">
           <label for="oldPassword" translate>Current password</label>
-          <input name="oldPassword" id="oldPassword" type="password" class="form-control" placeholder="Your current password" ng-model="password.old" required>
+          <input name="oldPassword" id="oldPassword" type="password" class="form-control" placeholder="{{'Your current password' | translate}}" ng-model="password.old" required>
           <div ng-messages="changePassword.oldPassword.$error" ng-show="changePassword.oldPassword.$touched" ng-messages-multiple="ng-messages-multiple">
             <div ng-messages-include="app/common/messages.html"></div>
           </div>
         </div>
         <div class="form-field" ng-class="{'has-error': changePassword.newPassword.$touched && changePassword.newPassword.$invalid}">
           <label for="newPassword" translate>New password</label>
-          <input type="password" name="newPassword" id="newPassword" class="form-control" placeholder="Your new password" ng-model="password.new" required>
+          <input type="password" name="newPassword" id="newPassword" class="form-control" placeholder="{{'Your new password' | translate}}" ng-model="password.new" required>
           <div ng-messages="changePassword.newPassword.$error" ng-show="changePassword.newPassword.$touched" ng-messages-multiple="ng-messages-multiple">
             <div ng-messages-include="app/common/messages.html"></div>
           </div>
@@ -59,7 +59,7 @@
 
         <div class="form-field" ng-class="{'has-error': changePassword.confirmPassword.$touched && changePassword.confirmPassword.$invalid}">
           <label for="confirmPassword" translate>Confirm new password</label>
-          <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" match-password="newPassword" placeholder="Your new password" ng-model="confirmPassword" required>
+          <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" match-password="newPassword" placeholder="{{'Your new password' | translate}}" ng-model="confirmPassword" required>
           <div ng-messages="changePassword.confirmPassword.$error" ng-show="changePassword.confirmPassword.$touched" ng-messages-multiple="ng-messages-multiple">
             <div ng-messages-include="app/common/messages.html"></div>
           </div>
@@ -70,10 +70,10 @@
     </form>
   </tab>
 
-  <tab heading="Authorized applications">
+  <tab heading="{{'Authorized applications' | translate}}">
     <div class="block">
       <h2 class="block-heading" translate>Authorized Applications</h2>
-      <p class="form-section__info" ng-if="!user.authorizedClients.length" translate><em>No applications currently have access to your Humanitarian ID account.</em></p>
+      <p class="form-section__info" ng-if="!user.authorizedClients.length"><em translate>No applications currently have access to your Humanitarian ID account.</em></p>
       <p class="form-section__info" ng-if="user.authorizedClients.length" translate>You have granted the following applications access to your Humanitarian ID account.</p>
       <ul class="list list--has-buttons">
         <li class="list__item" ng-repeat="client in user.authorizedClients">

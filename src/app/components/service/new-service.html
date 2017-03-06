@@ -1,7 +1,10 @@
 <div class="row">
   <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <div class="page-header">
-      <h1 class="page-header__heading">{{service.name ? service.name : 'Create a new service'}}</h1>
+      <h1 class="page-header__heading">
+        <span ng-if="service.name">{{service.name}}</span>
+        <span ng-if="!service.name" translate>Create a new service</span>
+      </h1>
     </div>
   </div>
 </div>
@@ -26,7 +29,7 @@
         <legend translate>Service Type</legend>
         <p ng-repeat="option in serviceTypes">
           <input type="radio" id="service-type-{{option.value}}" name="visibility" ng-model="service.type" value="{{option.value}}" />
-          <label class="clickie-label" for="service-type-{{option.value}}" required translate>{{option.label}}</label>
+          <label class="clickie-label" for="service-type-{{option.value}}" required>{{option.label}}</label>
         </p>
       </fieldset>
       <div class="form-field" ng-show="service.type === 'mailchimp'">

@@ -10,7 +10,7 @@
     <li ng-if="list && (currentUser.is_admin || currentUser.isManager || isManager || isOwner)"><button type="button" class="btn-link" ng-click="removeFromList(user, list);" translate>Remove from list</button></li>
     <li><button type="button" class="btn-link" ng-click="openCheckInModal(user, currentUser)" translate>Check into a list</button></li>
     <li ng-if="currentUser.is_admin">
-      <button type="button" class="btn-link" ng-click="verifyUser(user)" translate>
+      <button type="button" class="btn-link" ng-click="verifyUser(user)">
         <span ng-if="!user.verified" translate>Verify account</span>
         <span ng-if="user.verified" translate>Un-verify account</span>
       </button>

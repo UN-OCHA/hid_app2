@@ -18,15 +18,15 @@
     </button>
 
     <div class="filters-group filter__search">
-      <label for="name" class="sr-only">Search by name</label>
-      <input type="text" class="filter__search__input" ng-model="selectedFilters['name']" name="name" id="name" placeholder="Search by name">
+      <label for="name" class="sr-only" translate>Search by name</label>
+      <input type="text" class="filter__search__input" ng-model="selectedFilters['name']" name="name" id="name" placeholder="{{'Search by name' | translate}}">
       <icon name="search"></icon>
     </div>
 
     <div class="filter">
       <label for="type" class="sr-only" translate>Filter by type</label>
       <ui-select ng-model="selectedFilters['type']" name="type">
-        <ui-select-match allow-clear="true" placeholder="Type">{{$select.selected.val}}</ui-select-match>
+        <ui-select-match allow-clear="true" placeholder="{{'Type' | translate}}">{{$select.selected.val}}</ui-select-match>
         <ui-select-choices repeat="type.key as type in listTypes">
           {{type.val}}
         </ui-select-choices>
@@ -36,7 +36,7 @@
     <div class="filter">
       <label for="sort" class="sr-only" translate>Sort by</label>
       <ui-select ng-model="request['sort']" name="sort" class="always-show-placeholder">
-        <ui-select-match placeholder="Sort by">{{$select.selected.name}}</ui-select-match>
+        <ui-select-match placeholder="{{'Sort by' | translate}}">{{$select.selected.name}}</ui-select-match>
         <ui-select-choices repeat="sort.label as sort in sortBy | filter: $select.search">
             {{sort.name}}
         </ui-select-choices>

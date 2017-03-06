@@ -14,7 +14,7 @@
 
     <tabset responsive="true">
 
-      <tab heading="My favourite lists">
+      <tab heading="{{'My favourite lists' | translate}}">
         <ul class="list list--has-buttons list--has-dividers">
           <li class="list__item" ng-if="!favoriteLists.length" translate>
             You don't have any favourite lists
@@ -36,7 +36,7 @@
         </ul>
       </tab>
 
-      <tab heading="Lists I'm part of" default="true">
+      <tab heading="{{'Lists I\'m part of' | translate}}" default="true">
         <ul class="list list--has-buttons list--has-dividers">
           <li class="list__item" ng-if="!listsMember.length" translate>
             You are not part of any lists
@@ -57,7 +57,7 @@
         </ul>
       </tab>
 
-      <tab heading="Lists I manage">
+      <tab heading="{{'Lists I manage' | translate}}">
         <ul class="list list--has-buttons list--has-dividers">
           <li class="list__item" ng-if="!listsOwnedAndManagedLoaded">
           <loader type="inline" text="Loading lists"></loader>

@@ -10,7 +10,7 @@
         <label for="member" class="sidebar-section__heading" translate>Add new Member</label>
         <div class="sidebar-section__form-field">
           <ui-select ng-model="usersAdded.users" multiple name="member">
-            <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
+            <ui-select-match placeholder="{{'Select some people' | translate}}">{{$item.name}}</ui-select-match>
             <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers" minimum-input-length="3">
               {{person.name}}
             </ui-select-choices>

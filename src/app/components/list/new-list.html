@@ -2,7 +2,7 @@
   <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <div class="page-header">
       <h1 class="page-header__heading" ng-if="!list._id" translate>Create a new list</h1>
-      <h1 class="page-header__heading" ng-if="list._id" translate>{{list.name}}</h1>
+      <h1 class="page-header__heading" ng-if="list._id">{{list.name}}</h1>
     </div>
     <form ng-submit="listSave()">
       <div class="form-field">
@@ -14,7 +14,7 @@
         <legend translate>Who can view this list?</legend>
         <p ng-repeat="option in visibility">
           <input type="radio" id="visibility-{{option.value}}" name="visibility" ng-model="list.visibility" value="{{option.value}}" />
-          <label class="clickie-label" for="visibility-{{option.value}}" required translate>{{option.label}}</label>
+          <label class="clickie-label" for="visibility-{{option.value}}" required>{{option.label}}</label>
         </p>
       </fieldset>
 
@@ -22,14 +22,14 @@
         <legend translate>Who can join this list?</legend>
         <p ng-repeat="option in joinability">
           <input type="radio" id="joinability-{{option.value}}" name="joinability" ng-model="list.joinability" value="{{option.value}}" />
-          <label class="clickie-label" for="joinability-{{option.value}}" required translate>{{option.label}}</label>
+          <label class="clickie-label" for="joinability-{{option.value}}" required>{{option.label}}</label>
         </p>
       </fieldset>
 
       <div class="form-field">
         <label for="managers" translate>Managers</label>
         <ui-select ng-model="list.managers" multiple name="managers">
-          <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
+          <ui-select-match placeholder="{{'Select some people' | translate}}">{{$item.name}}</ui-select-match>
           <ui-select-choices refresh="getManagers($select.search)" repeat="person.id as person in newManagers" minimum-input-length="3">
             {{person.name}}
           </ui-select-choices>

@@ -5,10 +5,10 @@
     .module('app.search')
     .controller('SearchCtrl', SearchCtrl);
 
-  SearchCtrl.$inject = ['$location', '$scope', '$routeParams'];
+  SearchCtrl.$inject = ['$location', '$scope', '$routeParams', 'gettextCatalog'];
 
-  function SearchCtrl($location, $scope, $routeParams) {
-    $scope.heading = $routeParams.q ? 'Search Results' : 'Humanitarian contacts';
+  function SearchCtrl($location, $scope, $routeParams, gettextCatalog) {
+    $scope.heading = $routeParams.q ? gettextCatalog.getString('Search Results') : gettextCatalog.getString('Humanitarian contacts');
     $scope.searchTerm = $routeParams.q;
 
     $scope.showLists = $routeParams.view === 'lists' ? true : false;

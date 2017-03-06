@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1 class="page-header__heading" translate>{{heading}}</h1>
+  <h1 class="page-header__heading">{{heading}}</h1>
 </div>
 
 <div class="sidebar collapse" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
@@ -23,10 +23,10 @@
 </button>
 
 <tabset>
-  <tab heading="Showing contacts">
+  <tab heading="{{'Showing contacts' | translate}}">
     <users-list></users-list>
   </tab>
-  <tab heading="Showing lists" default="showLists">
+  <tab heading="{{'Showing lists' | translate}}" default="showLists">
     <ng-include src="'app/components/list/all-lists.html'"></ng-include>
   </tab>
 </tabset>

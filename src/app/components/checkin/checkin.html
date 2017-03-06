@@ -179,7 +179,7 @@
 
         <p ng-show="!editEmailForm.$visible">
           <span ng-if="user.email">{{user.email}}</span>
-          <span ng-if="!user.email" translate><em>No email</em></span>
+          <span ng-if="!user.email"><em translate>No email</em></span>
         </p>
 
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editEmailForm.$show()" ng-show="!editEmailForm.$visible"><icon name="edit" text="Change email"></icon></button>
@@ -248,7 +248,7 @@
         <h3 class="form-section__heading" translate>Current location</h3>
         <p ng-show="!editLocationForm.$visible">
           <span ng-if="user.location.locality">{{user.location.locality}}, </span><span ng-if="user.location.region">{{user.location.region.name}}, </span>{{user.location.country.name}}
-          <span ng-if="!user.location.country && !user.location.locality" translate><em>No location</em></span>
+          <span ng-if="!user.location.country && !user.location.locality"><em translate>No location</em></span>
         </p>
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editLocationForm.$show()" ng-show="!editLocationForm.$visible"><icon name="edit" text="Change location"></icon></button>
         <button type="button" class="btn-icon form-section__edit-btn" ng-click="editLocationForm.$cancel()" ng-show="editLocationForm.$visible">
@@ -322,7 +322,7 @@
           <h3 class="form-section__heading" translate>Current job title</h3>
           <p ng-show="!editJobTitleForm.$visible">
             <span ng-if="user.job_title">{{user.job_title}}</span>
-            <span ng-if="!user.job_title" translate><em>No job title</em></span>
+            <span ng-if="!user.job_title"><em translate>No job title</em></span>
           </p>
           <button type="button" class="btn-icon form-section__edit-btn" ng-click="editJobTitleForm.$show()" ng-show="!editJobTitleForm.$visible"><icon name="edit" text="Change job title"></icon></button>
           <button type="button" class="btn-icon form-section__edit-btn" ng-click="editJobTitleForm.$cancel()" ng-show="editJobTitleForm.$visible">
@@ -354,9 +354,9 @@
 
                 <div class="form-field form-field--compact form-inline-fields">
                   <div class="form-inline-fields__item">
-                    <input type="text" ng-model="temp.job_title" placeholder="New job title" />
+                    <input type="text" ng-model="temp.job_title" placeholder="{{'New job title' | translate}}" />
                   </div>
-                  <button type="submit" class="btn-transparent" ng-disabled="!temp.job_title" ng-class="{'active': temp.job_title}" ng-click="addItem('job_title')" translate>
+                  <button type="submit" class="btn-transparent" ng-disabled="!temp.job_title" ng-class="{'active': temp.job_title}" ng-click="addItem('job_title')">
                     <icon name="plus" text="Add"></icon>
                   </button>
                 </div>
