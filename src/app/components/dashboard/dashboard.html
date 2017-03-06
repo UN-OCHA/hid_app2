@@ -8,139 +8,80 @@
 
 <div class="row">
 
-  <div class="col-md-8">
+  <div class="col-md-8 block">
 
-  <h2 class="block-heading" translate>My lists</h2>
+    <h2 class="block-heading" translate>My lists</h2>
 
-    <div class="block tabs tabs--responsive">
-      <nav class="tabs-nav">
-        <button type="button" 
-          class="tabs-nav__button" 
-          ng-class="tabClass('favorites')"
-          ng-click="toggleTabs('favorites')">
-          <span translate>My favourite lists</span>
-        </button>
+    <tabset responsive="true">
 
-        <button type="button" 
-          class="tabs-nav__button" 
-          ng-click="toggleTabs('partof')"
-          ng-class="tabClass('partof')">
-          <span translate>Lists I'm part of</span>
-        </button>
+      <tab heading="My favourite lists">
+        <ul class="list list--has-buttons list--has-dividers">
+          <li class="list__item" ng-if="!favoriteLists.length" translate>
+            You don't have any favourite lists
+          </li>
+          <li class="list__item" ng-repeat="list in favoriteLists track by $index">
+            <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
+            <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
+            <icon ng-if="list.cacheStatus === 'fail'" name="caution" class="dashboard-cache-icon" text="List saved" title="Could not cache list"></icon>
+            <a href="/lists/{{list._id}}">{{list.name}}</a>
+            <div uib-dropdown class="list__button">
+              <button type="button" class="btn-transparent" uib-dropdown-toggle>
+                <icon name="dots" text="Options"></icon>
+              </button>
+              <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+                <li><button type="button" ng-click="removeFavorite(list)" class="btn-link" translate>Remove from favourites</button></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </tab>
 
-        <button type="button" 
-          class="tabs-nav__button" 
-           ng-click="toggleTabs('manage')"
-           ng-class="tabClass('manage')">
-          <span translate>Lists I manage</span>
-        </button>
-      </nav>
+      <tab heading="Lists I'm part of" default="true">
+        <ul class="list list--has-buttons list--has-dividers">
+          <li class="list__item" ng-if="!listsMember.length" translate>
+            You are not part of any lists
+          </li>
+          <li class="list__item" ng-repeat="list in listsMember track by $index">
+            <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
+            <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved" ></icon>
+            <a href="/lists/{{list._id}}">{{list.name}}</a>
+            <div uib-dropdown class="list__button">
+              <button type="button" class="btn-transparent" uib-dropdown-toggle>
+                <icon name="dots" text="Options"></icon>
+              </button>
+              <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+                <li><button type="button" ng-click="leaveList(list)" class="btn-link" translate>Check out of list</button></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </tab>
 
-      <div class="tabs__section">
-        <button type="button" 
-          class="tabs-nav__button" 
-          ng-class="tabClass('favorites')"
-          ng-click="toggleTabs('favorites')">
-          <span translate>My favourite lists</span>
-          <icon name="arrow-down"></icon>
-        </button>
-
-        <div class="tabs__content"
-          ng-class="tabClass('favorites')"
-          >
-          <ul class="list list--has-buttons list--has-dividers">
-              <li class="list__item" ng-if="!favoriteLists.length" translate>
-                You don't have any favourite lists
-              </li>
-              <li class="list__item" ng-repeat="list in favoriteLists track by $index">
-                <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
-                <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
-                <icon ng-if="list.cacheStatus === 'fail'" name="caution" class="dashboard-cache-icon" text="List saved" title="Could not cache list"></icon>
-                <a href="/lists/{{list._id}}">{{list.name}}</a>
-                <div uib-dropdown class="list__button">
-                  <button type="button" class="btn-transparent" uib-dropdown-toggle>
-                    <icon name="dots" text="Options"></icon>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
-                    <li><button type="button" ng-click="removeFavorite(list)" class="btn-link" translate>Remove from favourites</button></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-        </div>
-      </div>
-
-      <div class="tabs__section">
-        <button type="button" 
-          class="tabs-nav__button" 
-          ng-click="toggleTabs('partof')"
-          ng-class="tabClass('partof')">
-          <span translate>Lists I'm part of</span>
-          <icon name="arrow-down"></icon>
-        </button>
-
-        <div class="tabs__content"
-          ng-class="tabClass('partof')"
-          >
-          <ul class="list list--has-buttons list--has-dividers">
-              <li class="list__item" ng-if="!listsMember.length" translate>
-                You are not part of any lists
-              </li>
-              <li class="list__item" ng-repeat="list in listsMember track by $index">
-                <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
-                <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved" ></icon>
-                <a href="/lists/{{list._id}}">{{list.name}}</a>
-                <div uib-dropdown class="list__button">
-                  <button type="button" class="btn-transparent" uib-dropdown-toggle>
-                    <icon name="dots" text="Options"></icon>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
-                    <li><button type="button" ng-click="leaveList(list)" class="btn-link" translate>Check out of list</button></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-        </div>
-      </div>
-
-      <div class="tabs__section">
-        <button type="button" 
-          class="tabs-nav__button" 
-           ng-click="toggleTabs('manage')"
-           ng-class="tabClass('manage')">
-          <span translate>Lists I manage</span>
-          <icon name="arrow-down"></icon>
-        </button>
-
-        <div class="tabs__content"
-          ng-class="tabClass('manage')"
-          >
-         <ul class="list list--has-buttons list--has-dividers">
-            <li class="list__item" ng-if="!listsOwnedAndManagedLoaded">
-            <loader type="inline" text="Loading lists"></loader>
-            </li>
-              <li class="list__item" ng-if="listsOwnedAndManagedLoaded && !listsOwnedAndManaged.length" translate>
-                You don't manage any lists
-              </li>
-              <li class="list__item" ng-repeat="list in listsOwnedAndManaged track by $index">
-                <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
-                <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
-                <a href="/lists/{{list._id}}">{{list.name}}</a>
-                <div uib-dropdown class="list__button">
-                  <button type="button" class="btn-transparent" uib-dropdown-toggle>
-                    <icon name="dots" text="Options"></icon>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
-                    <li><a href="/lists/{{list._id}}/edit" translate>Access settings</a></li>
-                    <li><button type="button" ng-click="deleteList(list)" class="btn-link" translate>Delete list</button></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-        </div>
-      </div>
-      
-    </div>
+      <tab heading="Lists I manage">
+        <ul class="list list--has-buttons list--has-dividers">
+          <li class="list__item" ng-if="!listsOwnedAndManagedLoaded">
+          <loader type="inline" text="Loading lists"></loader>
+          </li>
+          <li class="list__item" ng-if="listsOwnedAndManagedLoaded && !listsOwnedAndManaged.length" translate>
+            You don't manage any lists
+          </li>
+          <li class="list__item" ng-repeat="list in listsOwnedAndManaged track by $index">
+            <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
+            <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
+            <a href="/lists/{{list._id}}">{{list.name}}</a>
+            <div uib-dropdown class="list__button">
+              <button type="button" class="btn-transparent" uib-dropdown-toggle>
+                <icon name="dots" text="Options"></icon>
+              </button>
+              <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
+                <li><a href="/lists/{{list._id}}/edit" translate>Access settings</a></li>
+                <li><button type="button" ng-click="deleteList(list)" class="btn-link" translate>Delete list</button></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </tab>
+    </tabset>
 
   </div>
 

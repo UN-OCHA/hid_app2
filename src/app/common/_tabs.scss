@@ -82,6 +82,23 @@
   }
 }
 
+.tabs:not(.tabs--responsive) {
+
+  .tabs-nav__button.desktop-active {
+    color: $primary-color;
+    font-weight: bold;
+    box-shadow: none;
+    border: none;
+    border-bottom: 2px solid $primary-color;
+    background: $light-grey;
+  }
+
+  .tabs__content.desktop-active {
+    display: block;
+  }
+
+}
+
 @include media-query(sm) {
 
   .tabs:not(.tabs--responsive) {

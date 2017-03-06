@@ -1,0 +1,14 @@
+<div class="tabs__section" ng-class="{'col-md-9': vertical}">
+	<button type="button" 
+    class="tabs-nav__button" 
+    ng-if="responsive"
+    ng-class="{'desktop-active': desktopActive, 'mobile-active': mobileActive}"
+    ng-click="toggle(id)">
+    <span translate>{{heading}}</span>
+    <icon name="arrow-down"></icon>
+  </button>
+  <div class="tabs__content" ng-class="{'desktop-active': desktopActive, 'mobile-active': mobileActive}">
+		<ng-transclude>
+    </ng-transclude>
+  </div>
+</div>

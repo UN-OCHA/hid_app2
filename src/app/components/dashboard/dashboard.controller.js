@@ -8,8 +8,6 @@
   DashboardCtrl.$inject = ['$rootScope', '$scope', 'alertService', 'config', 'UserListsService', 'gettextCatalog', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
   function DashboardCtrl($rootScope, $scope, alertService, config, UserListsService, gettextCatalog, Service, User, UserCheckInService, UserDataService) {
-    $scope.tabs = {};
-    $scope.activeTab = 'favorites';
     $scope.subscriptions = [];
     $scope.itemsPerPage = 5;
     $scope.currentPage = 1;
@@ -67,22 +65,6 @@
           $scope.listsOwnedAndManaged.splice($scope.listsOwnedAndManaged.indexOf(list), 1);
         });
       });
-    };
-
-    $scope.toggleTabs = function(tabName) {
-      $scope.tabs[tabName] = !$scope.tabs[tabName];
-      $scope.activeTab = tabName;
-    };
-
-    $scope.tabClass = function (tabName) {
-      var classes = [];
-      if ($scope.tabs[tabName]) {
-        classes.push('mobile-active');
-      }
-      if ($scope.activeTab === tabName) {
-        classes.push('desktop-active');
-      }
-      return classes;
     };
 
     $scope.unsubscribe = function (subscription) {

@@ -1,0 +1,15 @@
+<div ng-class="{'row': tabset.vertical}">
+  <div class="tabs" ng-class="{'tabs--responsive': tabset.responsive, 'tabs--vertical': tabset.vertical}" role="tabpanel">
+    <nav class="tabs-nav" ng-class="{'col-md-3': tabset.vertical}" role="tablist">
+      <button type="button" 
+        ng-repeat="tab in tabset.tabs"
+        class="tabs-nav__button" 
+        ng-class="{'desktop-active': tab.desktopActive, 'mobile-active': tab.mobileActive}"
+        ng-click="tabset.toggle(tab)">
+        <span translate>{{tab.heading}}</span>
+      </button>
+    </nav>
+    <ng-transclude>
+    </ng-transclude>
+  </div>
+</div>

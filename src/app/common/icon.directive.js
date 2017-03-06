@@ -1,7 +1,7 @@
 /**
  * Icons
  * Usage: <icon name="wheel" text="Actions"></icon>
- * Name is the icon name, currently using FontAwesome
+ * Name is the icon name, see https://un-ocha.github.io/styleguide/hid/icons.html for available icons
  * Text is optional, it should be given if there is no visible text accompanying the icon
  */
 
