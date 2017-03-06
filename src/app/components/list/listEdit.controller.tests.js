@@ -22,6 +22,7 @@
         scope = $rootScope.$new();
         $location = _$location_;
 
+        scope.language = 'en';
         spyOn($location, 'path').and.callThrough();
 
         ctrlParams = {
@@ -114,7 +115,7 @@
 
     });
 
-    describe('Editing a new list', function () {
+    describe('Editing a list', function () {
 
       beforeEach(function () {
         setUpCtrl(true);
@@ -125,23 +126,45 @@
       });
 
       describe('Saving the list', function () {
-        beforeEach(function () {
-          scope.list.label = "Edited list";
-          scope.language = 'en';
-          scope.listSave();
-        });
-
-        it('should update the list label', function () {
-          expect(scope.list.labels).toEqual([{text: 'Edited list', language: 'en'}, {text: 'french list-1', language: 'fr'}]);
-        });
 
         it('should save the edited list', function () {
+          scope.listSave();
           expect(editList.$update).toHaveBeenCalled();
         });
 
         it('should go to the list', function () {
+          scope.listSave();
           scope.$digest();
           expect($location.path).toHaveBeenCalledWith('/lists/' + editList._id);
+        });
+
+        describe('Updating the list label', function () {
+
+          it('should update the list label', function () {
+            scope.list.label = "Edited list";
+            scope.language = 'en';
+            scope.listSave();
+            expect(scope.list.labels).toEqual([{text: 'Edited list', language: 'en'}, {text: 'french list-1', language: 'fr'}]);
+          });
+
+          it('should add the list label for the current language if it does not already exist', function () {
+            scope.list.labels = [{text: 'list-1', language: 'en'}, {text: 'french list-1', language: 'fr'}];
+            scope.list.label = "Edited list";
+            scope.language = 'es';
+            scope.listSave();
+            expect(scope.list.labels).toEqual([{text: 'list-1', language: 'en'}, {text: 'french list-1', language: 'fr'}, {text: 'Edited list', language: 'es'}]);
+          });
+
+        });
+
+        describe('Formatting managers', function () {
+
+          it('should only send the manager ids when save the list', function () {
+            scope.list.managers = [{_id: '123', name: 'Mary Anne'}, {_id: '567', name: 'Hobbs'}];
+            scope.listSave();
+            expect(scope.list.managers).toEqual(['123', '567']);
+          });
+
         });
         
       });

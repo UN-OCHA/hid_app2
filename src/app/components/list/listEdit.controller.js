@@ -33,9 +33,36 @@
       $scope.newManagers = User.query({name: search});
     }
 
+    function formatManagers (list) {
+      var managers = [];
+      angular.forEach(list.managers, function (manager) {
+        if (manager._id) {
+          managers.push(manager._id);
+          return;
+        }
+        managers.push(manager);
+      });
+      list.managers = managers;
+      return list;
+    }
+
+    function formatLabels (list, language) {
+      var index =list.labels.map(function(e) { return e.language; }).indexOf(language);
+      if (index !== -1) {
+       list.labels[index].text =list.label;
+       return list;
+      }
+     
+      list.labels.push({
+        text:list.label,
+        language: language
+      });
+      return list;
+    }
+
     function updateList () {
-      var index = $scope.list.labels.map(function(e) { return e.language; }).indexOf($scope.language);
-      $scope.list.labels[index].text = $scope.list.label;
+      formatLabels($scope.list, $scope.language);
+      formatManagers($scope.list);
 
       $scope.list.$update(function () {
         $scope.saving = false;
