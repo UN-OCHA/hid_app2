@@ -99,7 +99,7 @@
                     <ui-select-match placeholder="{{'Add a new organisation'|translate}}">
                       {{$select.selected.name}}
                     </ui-select-match>
-                    <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+                    <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index" minimum-input-length="3">
                       {{organization.name}}
                     </ui-select-choices>
                   </ui-select>
@@ -284,7 +284,7 @@
                       <ui-select-match placeholder="{{'Select a country' | translate}}">
                         {{$select.selected.name}}
                       </ui-select-match>
-                      <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
+                      <ui-select-choices repeat="country in countries | filter: $select.search track by $index" minimum-input-length="3">
                         {{country.name}}
                       </ui-select-choices>
                     </ui-select>
@@ -295,7 +295,7 @@
                       <ui-select-match placeholder="{{'Select a region' | translate}}">
                         {{$select.selected.name}}
                       </ui-select-match>
-                      <ui-select-choices repeat="region in regions | filter: $select.search track by $index">
+                      <ui-select-choices repeat="region in regions | filter: $select.search track by $index" minimum-input-length="3">
                         {{region.name}}
                       </ui-select-choices>
                     </ui-select>

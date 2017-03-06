@@ -30,7 +30,7 @@
         <label for="managers" translate>Managers</label>
         <ui-select ng-model="list.managers" multiple name="managers">
           <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
-          <ui-select-choices refresh="getManagers($select.search)" repeat="person.id as person in newManagers">
+          <ui-select-choices refresh="getManagers($select.search)" repeat="person.id as person in newManagers" minimum-input-length="3">
             {{person.name}}
           </ui-select-choices>
         </ui-select>

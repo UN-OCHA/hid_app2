@@ -13,7 +13,7 @@
           <label for="member" class="sidebar-section__form-label" translate>Subscribe user</label>
           <ui-select ng-model="userSubscribed.user" name="member">
             <ui-select-match placeholder="Select someone">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices refresh="getUsers($select.search)" repeat="person in newUsers">
+            <ui-select-choices refresh="getUsers($select.search)" repeat="person in newUsers" minimum-input-length="3">
               {{person.name}}
             </ui-select-choices>
           </ui-select>

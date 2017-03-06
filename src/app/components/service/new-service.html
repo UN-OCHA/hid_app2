@@ -67,7 +67,7 @@
         <legend translate>Service manager</legend>
         <ui-select ng-model="selectedManager" on-select="service.managers.push(selectedManager)" name="managers" class="ui-select--has-border">
           <ui-select-match placeholder="{{'Select managers'|translate}}"><span translate>Select managers</span></ui-select-match>
-          <ui-select-choices ui-disable-choice="isSelectedManager(user)" refresh="getUsers($select.search)" repeat="user in newUsers">
+          <ui-select-choices ui-disable-choice="isSelectedManager(user)" refresh="getUsers($select.search)" repeat="user in newUsers" minimum-input-length="3">
             {{user.name}}
           </ui-select-choices>
         </ui-select>

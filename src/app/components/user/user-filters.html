@@ -49,7 +49,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
           <ui-select ng-model="selectedFilters['country']" name="country">
             <ui-select-match allow-clear="true" placeholder="Country">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices refresh="getCountries($select.search)" repeat="country.id as country in countries | filter: $select.search" minimum-input-length="1">
+            <ui-select-choices refresh="getCountries($select.search)" repeat="country.id as country in countries | filter: $select.search" minimum-input-length="3">
               {{country.name}}
             </ui-select-choices>
           </ui-select>
@@ -59,7 +59,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           <label for="operations" class="sr-only" translate>Filter by operation</label>
           <ui-select ng-model="selectedFilters['operations.list']" name="operations">
             <ui-select-match allow-clear="true" placeholder="Operation">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices refresh="getOperations($select.search)" minimum-input-length="1" repeat="operation._id as operation in operations | filter: $select.search">
+            <ui-select-choices refresh="getOperations($select.search)" minimum-input-length="3" repeat="operation._id as operation in operations | filter: $select.search">
               {{operation.name}}
             </ui-select-choices>
           </ui-select>
@@ -122,7 +122,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           <label for="roles" class="sr-only" translate>Filter by role</label>
           <ui-select ng-model="selectedFilters['functional_roles.list']" name="roles">
             <ui-select-match allow-clear="true" placeholder="Role">{{$select.selected.label}}</ui-select-match>
-            <ui-select-choices refresh="getRoles($select.search)" minimum-input-length="1" repeat="role._id as role in roles | filter: $select.search">
+            <ui-select-choices refresh="getRoles($select.search)" minimum-input-length="3" repeat="role._id as role in roles | filter: $select.search">
               {{role.label}}
             </ui-select-choices>
           </ui-select>

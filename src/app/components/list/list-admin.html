@@ -1,8 +1,6 @@
 <div class="sidebar collapse" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
   <div ng-if="sidebar.sidebars.admin" class="sidebar__inner">
 
-    <!-- <h2 class="sidebar__heading" translate>List admin</h2> -->
-
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
       <icon name="cancel" text="close"></icon>
     </button>
@@ -13,7 +11,7 @@
         <div class="sidebar-section__form-field">
           <ui-select ng-model="usersAdded.users" multiple name="member">
             <ui-select-match placeholder="Select some people">{{$item.name}}</ui-select-match>
-            <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers">
+            <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers" minimum-input-length="3">
               {{person.name}}
             </ui-select-choices>
           </ui-select>
