@@ -43,11 +43,11 @@
 
       }, function (error) {
         $scope.saving = false;
-        if (error.data.message === 'Please verify your email address') {
+        if (error.data && error.data.message === 'Please verify your email address') {
           alertService.add('danger', gettextCatalog.getString('We could not log you in because your email address is not verified yet.'));
           return;
         }
-        if (error.data.message === 'invalid email or password') {
+        if (error.data && error.data.message === 'invalid email or password') {
           alertService.add('danger', gettextCatalog.getString('We could not log you in. Please verify your email and password.'));
           return;
         }
