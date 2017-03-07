@@ -30,6 +30,13 @@
       }
     }
 
+    $scope.sidebarSwipeLeft = function () {
+      if ($scope.sidebar.open) {
+        $scope.sidebar.open = false;
+        $rootScope.$emit('sidebar-closed');
+      }
+    }
+
     $scope.closeSidebar = function () {
       $scope.sidebar.open = false;
       $rootScope.$emit('sidebar-closed');
