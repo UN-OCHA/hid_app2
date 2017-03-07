@@ -113,7 +113,8 @@
 		"name": "Hanna",
 		"is_admin": false,
 		"isManager": false,
-		"email": "hanna@example.com"
+		"email": "hanna@example.com",
+		"subscriptions": []
 	},
 	"adminUser": {
 		"_id": "33333",

@@ -236,7 +236,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/services/new', {
         templateUrl: 'app/components/service/new-service.html',
-        controller: 'ServiceCtrl',
+        controller: 'ServiceEditCtrl',
         authenticate: true,
         adminOrManagerOnly: true,
         title: 'New service'
@@ -264,7 +264,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/services/:serviceId/edit', {
         templateUrl: 'app/components/service/new-service.html',
-        controller: 'ServiceCtrl',
+        controller: 'ServiceEditCtrl',
         authenticate: true,
         adminOnly: false,
         title: 'Edit service'
