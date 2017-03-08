@@ -84,7 +84,7 @@ module.exports = function(grunt) {
     watch: {
       sass: {
         files: ['src/app/common/**/*.scss', 'src/app/components/**/*.scss'],
-        tasks: ['sass_import', 'concat', 'sass:dist'],
+        tasks: ['sass_import', 'concat', 'sass:dist', 'autoprefixer'],
         options: {
           spawn: false,
         }
@@ -112,6 +112,9 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'src/assets/css/main.css': 'src/assets/css/main.css'
+        },
+        options: {
+          browsers: ['last 2 versions', 'iOS 8']
         }
       }
     },

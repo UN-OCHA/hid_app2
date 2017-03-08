@@ -63,7 +63,7 @@
 
 input[type="search"].search-form__input {
   padding-left: $base-unit*3.5;
-  @include font-size($small-font-size);
+  text-overflow: ellipsis;
 
   &:focus {
     box-shadow: none;
