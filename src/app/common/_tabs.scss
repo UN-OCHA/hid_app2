@@ -36,7 +36,8 @@
   border-bottom: 2px solid transparent;
   position: relative;
   width: auto;
-  padding: $base-unit*1.5 $base-unit $base-unit $base-unit;
+  // padding: $base-unit*2.5 $base-unit $base-unit*2 $base-unit;
+  padding: $base-unit*2 $base-unit $base-unit*1.5 $base-unit;
   margin-bottom: -2px;
   color: $text-dark;
   text-align: left;
@@ -61,7 +62,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: $base-unit*2 $base-unit $base-unit*1.5 $base-unit;
+    padding: $base-unit*2.5 $base-unit $base-unit*2 $base-unit;
   }
 
   .tabs--vertical & { 
@@ -84,17 +85,32 @@
 
 .tabs:not(.tabs--responsive) {
 
-  .tabs-nav__button.desktop-active {
-    color: $primary-color;
-    font-weight: bold;
-    box-shadow: none;
-    border: none;
-    border-bottom: 2px solid $primary-color;
-    background: $light-grey;
+  .tabs-nav {
+    padding-top: $base-unit/2;
+  }
+
+  .tabs-nav__button {
+    max-width: 50%;
+    flex-grow: 1;
+    text-align: center;
+
+
+    &.desktop-active {
+      color: $primary-color;
+      font-weight: bold;
+      box-shadow: none;
+      border: none;
+      border-bottom: 2px solid $primary-color;
+      background: $light-grey;
+    }
   }
 
   .tabs__content.desktop-active {
     display: block;
+  }
+
+  .tabs__section {
+    border: none;
   }
 
 }
@@ -175,6 +191,13 @@
         border-bottom-color: transparent;
         border-left: 2px solid $primary-color;
       }
+    }
+  }
+
+  .tabs:not(.tabs--responsive) {
+    .tabs-nav__button {
+      flex-grow: 0;
+      padding: $base-unit*1.5 $base-unit*5 $base-unit $base-unit*5;
     }
   }
 

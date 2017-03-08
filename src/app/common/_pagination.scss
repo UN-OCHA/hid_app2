@@ -23,11 +23,12 @@
     border: none;
     color: $primary-color;
     display: block;
-    padding: 0 $base-unit;
+    padding: $base-unit/2 $base-unit*1.5;
     text-decoration: none;
     border-right: 1px solid lighten($primary-color, 50%);
     min-width: $base-unit*4;
     font-family: $heading-font-light;
+    margin: $base-unit/2 0;
 
     &:hover, &:focus {
       outline: none;
@@ -59,6 +60,14 @@
 }
 
 @include media-query(sm) {
+
+  .pagination-page, .pagination-prev, .pagination-next, .pagination-first, .pagination-last {
+    a, button, span {
+      margin: 0;
+      padding: 0 $base-unit;
+    }
+  }
+
   .list-actions__pagination {
     margin: 0
   }

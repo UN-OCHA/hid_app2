@@ -9,11 +9,11 @@
 .list__item {
   list-style: none;
   position: relative;
-  padding: $base-unit 0;
+  padding: $base-unit*1.5 0;
 
   .list--has-dividers & {
     border-bottom: 1px solid $border-grey;
-    padding: $base-unit*1.5 0;
+    padding: $base-unit*2 0;
   }
 
   .list--has-buttons & {
@@ -41,7 +41,7 @@
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 0;
-    line-height: 1;
+    // line-height: 1;
   }
 
   a, .btn-link {
@@ -66,8 +66,14 @@
   line-height: $base-unit*4;
   padding: 0;
   position: absolute;
-  top: $base-unit;
+  top: 50%;
   right: 0;
+  margin-top: -$base-unit*2;
+
+  .icon {
+    @include font-size(24);
+    margin: -1px 0 0 0;
+  }
 
   .btn-transparent {
     width: $base-unit*4;
@@ -82,7 +88,21 @@
   }
 
   .list--small & {
-    top: 2px;
+    width: $base-unit*3.5;
+    height: $base-unit*3.5;
+    line-height: $base-unit*3.5;
+    margin-top: 0;
+    top: $base-unit*1.5;
+
+    .icon {
+      @include font-size($base-font-size);
+    }
+
+    .btn-transparent {
+      width: $base-unit*3.5;
+      height: $base-unit*3.5;
+      line-height: $base-unit*3.5;
+    }
   }
 }
 
@@ -102,6 +122,20 @@
 
     .list__item {
       width: 50%;
+    }
+  }
+
+  .list__item {
+    padding: $base-unit 0;
+
+    .list--has-dividers & {
+      padding: $base-unit*1.5 0;
+    }
+  }
+
+  .list__button {
+    .list--small & {
+      top: $base-unit;
     }
   }
 }

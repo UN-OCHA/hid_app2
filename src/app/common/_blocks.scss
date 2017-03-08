@@ -9,7 +9,6 @@
   padding: $base-unit;
   font-family: $heading-font;
   font-weight: normal;
-  display: block;
   margin-bottom: $base-unit/2;
   display: flex;
   justify-content: space-between;
@@ -17,6 +16,10 @@
   .tabs__section & {
     margin-bottom: $base-unit*2;
   }
+}
+
+.block-thumbnail {
+  margin-bottom: $base-unit;
 }
 
 .secondary-block {

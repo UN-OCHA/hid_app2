@@ -20,6 +20,14 @@
   font-weight: normal;
 }
 
+.associated-lists__button {
+  flex-shrink: 0;
+
+  .icon {
+    margin-top: 1px;
+  }
+}
+
 @include media-query(md) {
   .associated-lists {
     margin-top: $base-unit*3;

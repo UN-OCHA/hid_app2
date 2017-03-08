@@ -126,7 +126,7 @@ fieldset > legend {
 }
 
 .form-section {
-  padding: $base-unit 0;
+  padding: $base-unit*1.5 0;
   margin-bottom: $base-unit;
   border-bottom: 1px solid $light-blue;
   position: relative;
@@ -175,10 +175,6 @@ fieldset > legend {
   .list__item {
     @include font-size($small-font-size);
   }
-
-  .list__button {
-    top: 0;
-  }
 }
 
 .form-section__info {
@@ -187,7 +183,7 @@ fieldset > legend {
 
 .form-section__edit-btn, .form-section__close-btn  {
   position: absolute;
-  top: 0;
+  top: $base-unit/4;
   right: 0;
   min-width: $base-unit*5;
   height: $base-unit*5;
@@ -267,9 +263,15 @@ fieldset > legend {
 }
 
 @include media-query(sm) {
+
+  .form-section {
+    padding: $base-unit 0;
+  }
+
   .form-field--short {
     width: 50%;
   }
+
 }
 
 @include media-query(md) {

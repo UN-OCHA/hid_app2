@@ -29,7 +29,7 @@
     display: block;
     text-decoration: none;
     color: $text-dark;
-    padding: $base-unit;
+    padding: $base-unit*1.5;
 
     &:hover, &:focus {
       text-decoration: underline;

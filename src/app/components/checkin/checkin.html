@@ -28,7 +28,7 @@
         </div>
         <ul class="list list-2-cols list--small list--has-buttons list--has-buttons-left">
           <li ng-repeat="list in associatedLists" class="list__item" ng-show="$index < 4 || showAllAssociated">
-            <button type="button" class="btn-transparent list__button list__button" ng-click="addList(list)">
+            <button type="button" class="btn-transparent list__button" ng-click="addList(list)">
               <icon name="plus" text="Add list"></icon>
             </button>
             {{list.name}}

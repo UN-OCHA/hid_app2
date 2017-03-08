@@ -146,7 +146,7 @@
 
   .nav--secondary & {
     color: $text-light;
-    height: $base-unit*5;
+    height: $global-header-height;
     padding: $base-unit*1.5 $base-unit;
 
     &:before {

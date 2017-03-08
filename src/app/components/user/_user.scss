@@ -32,6 +32,7 @@
 .profile-header__primary {
   display: flex;
   padding-right: $base-unit*6;
+  min-height: $base-unit*12;
 }
 
 .profile-header__image {

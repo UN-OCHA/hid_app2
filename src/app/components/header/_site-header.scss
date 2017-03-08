@@ -74,8 +74,13 @@
   width: $base-unit*5;
   height: $base-unit*5;
   padding: $base-unit/2;
-  margin-right: -$base-unit;
+  margin-right: -$base-unit/2;
   position: relative;
+
+  .icon {
+    margin: 0;
+    @include font-size(28);
+  }
 
   &:focus {
     outline: none;
