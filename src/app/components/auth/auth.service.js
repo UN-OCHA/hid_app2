@@ -5,9 +5,9 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$exceptionHandler', '$http', '$window', '$rootScope', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
+  AuthService.$inject = ['$exceptionHandler', '$http', '$q', '$window', '$rootScope', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
 
-  function AuthService ($exceptionHandler, $http, $window, $rootScope, $interval, $location, config, UserListsService, notificationsService) {
+  function AuthService ($exceptionHandler, $http, $q, $window, $rootScope, $interval, $location, config, UserListsService, notificationsService) {
     var checkingNotifications;
     var cachingLists;
     var swRegistration;
@@ -131,9 +131,56 @@
       }, 3600000);
     }
 
+    function refreshToken (success, failure) {
+      var newExpiry = moment().add(7, 'days').unix();
+      $http.post(config.apiUrl + 'jsonwebtoken', {exp: newExpiry}).then(function (response) {
+        if (response.data && response.data.token) {
+          storeUser(response);
+          success();
+        }
+      }, function (error) {
+        $exceptionHandler(error, 'Refresh token');
+        failure();
+      });
+    }
+
+    function checkAuthentication (token) {
+      var deferred = $q.defer();
+      var parsedToken = jwt.parseToken(token);
+      var expiry = moment.unix(parsedToken.exp);
+      var current = moment();
+      var refreshPoint = moment(current).add(2, 'hours');
+
+      if (expiry.isBefore(current)) {
+        deferred.reject();
+        return deferred.promise; 
+      }
+
+      if (expiry.isAfter(refreshPoint)) {
+        if (!checkingNotifications) {
+          notificationsHelper();
+        }
+        if (!cachingLists) {
+          cachingHelper();
+        }
+        
+        deferred.resolve();
+        return deferred.promise; 
+      }
+
+      refreshToken(function () {
+        deferred.resolve();
+      }, function (){
+        deferred.reject();
+      });
+
+      return deferred.promise; 
+    }
+
     var jwt = {
       login: function(email, password) {
-        var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password }).then(function (response) {
+        var expiry = moment().add(7, 'days').unix();
+        var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password, exp: expiry }).then(function (response) {
           if (response.data && response.data.token) {
             storeUser(response);
           }
@@ -151,30 +198,18 @@
         }
       },
 
-      getToken: function() {
-        return $window.localStorage.getItem('jwtToken');
-      },
-
-      isAuthenticated: function() {
-        var token = jwt.getToken();
-        if (token) {
-          var parsed = this.parseToken(token);
-          var current = Date.now() / 1000;
-          current = parseInt(current);
-          if (parsed.exp <= current) {
-            return false;
-          }
-
-          if (!checkingNotifications) {
-            notificationsHelper();
-          }
-
-          if (!cachingLists) {
-            cachingHelper();
-          }
-          return true;
+      isAuthenticated: function(callback) {
+        var token = $window.localStorage.getItem('jwtToken');
+        if (!token) { 
+          callback(false);
+          return;
         }
-        return false;
+
+        checkAuthentication(token).then(function() {
+          callback(true);
+        }, function () {
+          callback(false);
+        });
       },
 
       parseToken: function (token) {

@@ -15,7 +15,7 @@ Offline.options = {
   interceptRequests: false,
   reconnect: false,
   requests: false //record ajax requests and re-make on connection restore
-}
+};
 
 // Configure Offlinejs
 app.run(function ($rootScope) {
@@ -32,32 +32,35 @@ app.run(function ($rootScope) {
 
 // Check if user is authenticated for paths which require it
 app.run(function ($rootScope, $window, $location, AuthService, alertService) {
-
   $rootScope.isAuthenticated = false;
   $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
     var user = JSON.parse($window.localStorage.getItem('currentUser'));
-    var isAuthenticated = AuthService.isAuthenticated();
+    var isAuthenticated;
+    AuthService.isAuthenticated(function (resp) {
+      isAuthenticated = resp;
 
-    if (nextRoute && nextRoute.authenticate && !isAuthenticated){
-      // User isn’t authenticated
-      $location.path('/');
-      event.preventDefault();
-    }
-
-    if (nextRoute && nextRoute.authenticate && nextRoute.adminOrManagerOnly) {
-      if (!user.is_admin && !user.isManager) {
+      if (nextRoute && nextRoute.authenticate && !isAuthenticated){
+        // User isn’t authenticated
         $location.path('/');
         event.preventDefault();
+        return;
       }
-    }
 
-    if (nextRoute && nextRoute.authenticate && nextRoute.adminOnly) {
-      if (!user.is_admin) {
-        $location.path('/');
-        event.preventDefault();
+      if (nextRoute && nextRoute.authenticate && nextRoute.adminOrManagerOnly) {
+        if (!user.is_admin && !user.isManager) {
+          $location.path('/');
+          event.preventDefault();
+        }
       }
-    }
-    $rootScope.isAuthenticated = isAuthenticated;
+
+      if (nextRoute && nextRoute.authenticate && nextRoute.adminOnly) {
+        if (!user.is_admin) {
+          $location.path('/');
+          event.preventDefault();
+        }
+      }
+      $rootScope.isAuthenticated = isAuthenticated;
+    });
   });
 });
 
@@ -84,7 +87,7 @@ app.run(function ($rootScope) {
 
   $rootScope.$on('$viewContentLoaded', function () {
     if (hasPrevious) {
-      var h1 = document.querySelector('h1')
+      var h1 = document.querySelector('h1');
       if (h1) {
         h1.setAttribute('tabIndex', -1);
         h1.focus();
@@ -339,7 +342,7 @@ app.config(["$httpProvider", function ($httpProvider) {
         var match;
         // Check for string properties which look like dates.
         if (typeof value === "string" && (match = value.match(regexIso8601))) {
-          var milliseconds = Date.parse(match[0])
+          var milliseconds = Date.parse(match[0]);
           if (!isNaN(milliseconds)) {
             input[key] = new Date(milliseconds);
           }
@@ -348,7 +351,7 @@ app.config(["$httpProvider", function ($httpProvider) {
           convertDateStringsToDates(value);
         }
       }
-    }
+    };
     convertDateStringsToDates(responseData);
     return responseData;
   });
