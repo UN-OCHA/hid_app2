@@ -1,9 +1,23 @@
 (function() {
   'use strict';
 
-  var $interval, $rootScope, AuthService, base64Url, httpBackend, mockConfig, mockNotificationsService, mockUserListsService, userFixture;
+  var $interval, $rootScope, AuthService, httpBackend, mockConfig, mockNotificationsService, mockUserListsService, userFixture;
 
   describe('Auth service', function () {
+
+    function setUpCtrl (token) {
+      inject(function(_AuthService_, _$httpBackend_,  _$interval_, _$rootScope_, config, $q) {
+        AuthService = _AuthService_;
+        httpBackend = _$httpBackend_;
+        config = mockConfig;
+        $interval =  _$interval_;
+        $rootScope = _$rootScope_;
+
+        spyOn(mockNotificationsService, 'getUnread').and.returnValue($q.when());
+        spyOn(AuthService, 'parseToken').and.returnValue(token);
+        spyOn($interval, 'cancel').and.callThrough();
+      });
+    }
 
   	beforeEach(function () {
   		userFixture = readJSON('app/test-fixtures/user.json');
@@ -23,23 +37,13 @@
 
   		spyOn(mockUserListsService, 'cacheListsForUser').and.callThrough();
 
-  		mockNotificationsService = {};
+  		mockNotificationsService = {
+        getUnread: function () {}
+      };
+       
   		module('app.notifications', function($provide) {
   			$provide.constant('notificationsService', mockNotificationsService);
   		});
-
-
-
-  		inject(function(_AuthService_, _$httpBackend_,  _$interval_, _$rootScope_, config) {
-  			AuthService = _AuthService_;
-  			httpBackend = _$httpBackend_;
-  			config = mockConfig;
-  			$interval =  _$interval_;
-  			$rootScope = _$rootScope_;
-
-  			spyOn(AuthService, 'parseToken').and.callThrough();
-  		});
-  		spyOn($interval, 'cancel').and.callThrough();
   	});
 
   	afterEach(function() {
@@ -51,16 +55,19 @@
   	describe('Login', function () {
 
   		beforeEach(function () {
+        setUpCtrl();
   			AuthService.login('test@example.com', 'my-password');
   		});
 
   		it('should log the user in', function () {
-  			httpBackend.expectPOST('http://mock-url/jsonwebtoken', {"email":"test@example.com","password":"my-password"}).respond({});
+        var expiry =  moment().add(7, 'days').unix();
+  			httpBackend.expectPOST('http://mock-url/jsonwebtoken', {"email":"test@example.com","password":"my-password", exp: expiry}).respond({});
 	      httpBackend.flush();
   		});
 
   		it('should store the token and the user', function () {
-  			httpBackend.whenPOST('http://mock-url/jsonwebtoken', {"email":"test@example.com","password":"my-password"}).respond({
+        var expiry =  moment().add(7, 'days').unix();
+  			httpBackend.whenPOST('http://mock-url/jsonwebtoken', {"email":"test@example.com","password":"my-password", exp: expiry}).respond({
   				token: 'a-token',
   				user: userFixture.user1
   			});
@@ -75,6 +82,7 @@
   	describe('Log out', function () {
 
   		beforeEach(function () {
+        setUpCtrl();
   			window.localStorage.setItem('jwtToken', 'a-token');
   			window.localStorage.setItem('currentUser', JSON.stringify(userFixture.user1));
   			AuthService.logout();
@@ -95,28 +103,86 @@
   	describe('Authenticate', function () {
 
   		it('should not authenticate if no token is present', function () {
-  			expect(AuthService.isAuthenticated()).toBe(false);
+        setUpCtrl();
+
+        AuthService.isAuthenticated(function (resp) {
+          expect(resp).toBe(false);
+        });
   		});
 
-  		// describe('token is present', function () {
+  		describe('token is present', function () {
 
-  		// 	beforeEach(function () {
-  		// 		window.localStorage.setItem('jwtToken', 'a-token');
-  		// 		window.localStorage.setItem('currentUser', JSON.stringify(userFixture.user1));
-  		// 		AuthService.isAuthenticated();
-  		// 	});
+  			beforeEach(function () {
+  				window.localStorage.setItem('jwtToken', 'a-token');
+  				window.localStorage.setItem('currentUser', JSON.stringify(userFixture.user1));
+  			});
 
-  			//check the toekn
+        describe('token is expired', function () {
 
-  			// check notifications and set up interval
+          beforeEach(function () {
+            setUpCtrl({exp: moment().subtract(1, 'day').unix()});
+          });
 
-  			// cache lists and start interval
+          it('should not authenticate', function () {
+            AuthService.isAuthenticated(function (resp) {
+              expect(resp).toBe(false);
+            });
+          });
 
-  		// 	it('should cache user lists', function () {
-  		// 		// expect(mockUserListsService.cacheListsForUser).toHaveBeenCalled();
-  		// 	})
+        });
 
-  		// });
+        describe('token is not expired and does not need to be refreshed', function () {
+
+          beforeEach(function () {
+            setUpCtrl({exp: moment().add(1, 'day').unix()});
+          });
+
+          it('should authenticate', function () {
+            AuthService.isAuthenticated(function (resp) {
+              expect(resp).toBe(true);
+            });
+          });
+
+          it('should get unread notifications', function () {
+            AuthService.isAuthenticated(function () {
+              expect(mockNotificationsService.getUnread).toHaveBeenCalled();
+            });
+          });
+
+          it('should cache the users lists', function () {
+            AuthService.isAuthenticated(function () {
+              expect(mockUserListsService.cacheListsForUser).toHaveBeenCalled();
+            });
+          });
+          
+        });
+
+        describe('token is nearly expired', function () {
+
+          beforeEach(function () {
+            setUpCtrl({exp: moment().add(1, 'hour').unix()});
+          });
+
+          it('should refresh the token', function () {
+            AuthService.isAuthenticated();
+            var expiry = moment().add(7, 'days').unix();
+
+            httpBackend.expectPOST('http://mock-url/jsonwebtoken', {exp: expiry}).respond({});
+            httpBackend.flush();
+          });
+
+          it('should authenticate', function () {
+            var expiry = moment().add(7, 'days').unix();
+            httpBackend.whenPOST('http://mock-url/jsonwebtoken', {exp: expiry}).respond({});
+            AuthService.isAuthenticated(function (resp) {
+              expect(resp).toBe(true);
+            });
+            httpBackend.flush();
+          });
+
+        });
+
+  		});
 
   	});
 

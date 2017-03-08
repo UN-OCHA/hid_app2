@@ -4,6 +4,9 @@
     // Angular
     "angular": false,
 
+    //Moment
+    "moment": false,
+
     // Angular mocks
     "module": false,
     "inject": false,
