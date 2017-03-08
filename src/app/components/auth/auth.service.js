@@ -201,6 +201,7 @@
       isAuthenticated: function(callback) {
         var token = $window.localStorage.getItem('jwtToken');
         if (!token) { 
+          jwt.logout();
           callback(false);
           return;
         }
@@ -208,6 +209,7 @@
         checkAuthentication(token).then(function() {
           callback(true);
         }, function () {
+          jwt.logout();
           callback(false);
         });
       },
