@@ -22,11 +22,17 @@
   <icon name="wheel" text="Actions"></icon>
 </button>
 
-<tabset>
-  <tab heading="{{'Showing contacts' | translate}}">
-    <users-list></users-list>
-  </tab>
-  <tab heading="{{'Showing lists' | translate}}" default="showLists">
-    <ng-include src="'app/components/list/all-lists.html'"></ng-include>
-  </tab>
-</tabset>
+<div class="tabs">
+  <div class="tabs-nav">
+    <button type="button" class="tabs-nav__button" ng-click="showLists = !showLists" ng-disabled="!showLists" translate>
+      Showing contacts
+    </button>
+
+    <button type="button" class="tabs-nav__button" ng-click="showLists = !showLists" ng-disabled="showLists" translate>
+      Showing lists
+    </button>
+  </div>
+
+  <users-list ng-show="!showLists"></users-list>
+  <ng-include ng-show="showLists" src="'app/components/list/all-lists.html'"></ng-include>
+</div>

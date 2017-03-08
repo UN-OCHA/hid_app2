@@ -9,17 +9,13 @@
   function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, SearchService, UserDataService, User, List, gettextCatalog) {
     $scope.request = {};
     $scope.totalItems = 0;
-    // $scope.pagination.itemsPerPage = 50;
-    // $scope.pagination.currentPage = 1;
     $scope.selectedFilters = {};
     $scope.usersLoaded = false;
 
     $scope.pagination = {
       currentPage: 1,
       itemsPerPage: 50
-      // totalItems: 0
     };
-
 
     var currentSortOrder = $scope.request.name;
     var defaultRequest = {
