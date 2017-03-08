@@ -19,18 +19,18 @@
     </div>
   </div>
 
-  <ul class="pagination list-actions__pagination">
+  <ul class="pagination list-actions__pagination" ng-if="totalItems > pagination.itemsPerPage">
     <li class="pagination-page"><span>Show</span></li>
-    <li class="pagination-page" ng-class="{'active' : itemsPerPage === 50}">
+    <li class="pagination-page" ng-class="{'active' : pagination.itemsPerPage === 50}">
       <button type="button" ng-click="setLimit(50)" ng-disabled="!isOnline">50</button>
     </li>
-    <li class="pagination-page" ng-class="{'active' : itemsPerPage === 100}">
+    <li class="pagination-page" ng-class="{'active' : pagination.itemsPerPage === 100}">
       <button type="button" ng-click="setLimit(100)" ng-disabled="!isOnline">100</button>
     </li>
-    <li class="pagination-page" ng-class="{'active' : itemsPerPage === 150}">
+    <li class="pagination-page" ng-class="{'active' : pagination.itemsPerPage === 150}">
       <button type="button" ng-click="setLimit(150)" ng-disabled="!isOnline">150</button>
     </li>
-    <li class="pagination-page" ng-class="{'active' : itemsPerPage === 200}">
+    <li class="pagination-page" ng-class="{'active' : pagination.itemsPerPage === 200}">
       <button type="button" ng-click="setLimit(200)" ng-disabled="!isOnline">200</button>
     </li>
   </ul>
@@ -81,4 +81,13 @@
     </tr>
   </tbody>
 </table>
-<ul uib-pagination boundary-link-numbers="true" total-items="totalItems" items-per-page="itemsPerPage" max-size="10" ng-model="currentPage" ng-change="pageChanged()" class="pagination" direction-links="false"></ul>
+<ul ng-if="totalItems > pagination.itemsPerPage" 
+  uib-pagination boundary-link-numbers="true" 
+  total-items="totalItems" 
+  items-per-page="pagination.itemsPerPage" 
+  max-size="10" 
+  ng-model="pagination.currentPage" 
+  ng-change="pageChanged()" 
+  class="pagination" 
+  direction-links="false">
+</ul>

@@ -9,13 +9,21 @@
   function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, SearchService, UserDataService, User, List, gettextCatalog) {
     $scope.request = {};
     $scope.totalItems = 0;
-    $scope.itemsPerPage = 50;
-    $scope.currentPage = 1;
+    // $scope.pagination.itemsPerPage = 50;
+    // $scope.pagination.currentPage = 1;
     $scope.selectedFilters = {};
     $scope.usersLoaded = false;
+
+    $scope.pagination = {
+      currentPage: 1,
+      itemsPerPage: 50
+      // totalItems: 0
+    };
+
+
     var currentSortOrder = $scope.request.name;
     var defaultRequest = {
-      limit: $scope.itemsPerPage,
+      limit: $scope.pagination.itemsPerPage,
       offset: 0,
       sort: 'name'
     };
@@ -26,7 +34,7 @@
     $scope.currentFilters = [];
 
     function getUsers () {
-      $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+      $scope.request.offset = ($scope.pagination.currentPage - 1) * $scope.pagination.itemsPerPage;
       var params = angular.extend($scope.request, $scope.userFilters);
       UserDataService.getUsers(params, $scope.list, function () {
         $scope.users = UserDataService.listUsers;
@@ -101,14 +109,15 @@
     });
 
     $scope.pageChanged = function () {
+      $scope.usersLoaded = false;
       currentSortOrder = $scope.request.sort;
-      $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+      $scope.request.offset = ($scope.pagination.currentPage - 1) * $scope.pagination.itemsPerPage;
       getUsers();
     };
 
     UserDataService.subscribe($scope, function (evt, request) {
       angular.merge($scope.request, request);
-      $scope.currentPage = 1;
+      $scope.pagination.currentPage = 1;
       getUsers();
     });
 
@@ -238,7 +247,7 @@
       if ($scope.selectedFilters.user_type || $scope.selectedFilters.user_type === undefined) {
         handleUserTypes();
       }
-      $scope.currentPage = 1;
+      $scope.pagination.currentPage = 1;
       getUsers();
       updateCurrentFilters($scope.selectedFilters);
     };
@@ -250,7 +259,7 @@
       }
       $scope.userFilters = {};
       $scope.selectedFilters = {};
-      $scope.currentPage = 1;
+      $scope.pagination.currentPage = 1;
       $scope.currentFilters = [];
       getUsers();
     };
@@ -268,12 +277,13 @@
     //TO DO order asc / desc ?
     $scope.sortList = function (sortby) {
       $scope.request.sort = sortby;
-      $scope.currentPage = 1;
+      $scope.pagination.currentPage = 1;
       getUsers();
     };
 
     $scope.setLimit = function (limit) {
-      $scope.itemsPerPage = limit;
+      $scope.usersLoaded = false;
+      $scope.pagination.itemsPerPage = limit;
       $scope.request.limit = limit;
       getUsers();
     };

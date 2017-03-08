@@ -81,7 +81,9 @@ $list-color-office: #777777;
 //z-index
 $zindex: (
   sidebar: 1,
-  dropdown: 9
+  dropdown: 9,
+  loader: 100,
+  header: 101,
 );
 
 //Border radius

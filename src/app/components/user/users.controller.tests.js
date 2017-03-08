@@ -3,8 +3,8 @@
 
   describe('Users controller', function () {
 
-    var countries, defaultParams, filteredUsers, filterTypes, initialUsers, listFixture, listInfo, listParams, listQueryResponse, mockGetText, 
-    mockhrinfoService, mockList, mockSearchService, mockUser, mockUserDataService, scope, searchParams, 
+    var countries, defaultParams, filteredUsers, filterTypes, initialUsers, listFixture, listInfo, listParams,
+    listQueryResponse, mockGetText, mockhrinfoService, mockList, mockSearchService, mockUser, mockUserDataService, scope, searchParams, 
     userFixture;
 
     defaultParams = { limit: 50, offset: 0, sort: 'name' };
@@ -140,6 +140,24 @@
 
     });
 
+    describe('Paginating and showing more users', function () {
+      controllerSetup('1234');
+
+      it('should get the second page of users', function () {
+        listParams = { limit: 50, offset: 50, sort: 'name', 'lists.list': '1234' };
+        scope.pagination.currentPage = 2;
+        scope.pageChanged();
+        expect(mockUserDataService.getUsers).toHaveBeenCalledWith(listParams, undefined, jasmine.any(Function));
+      });
+
+      it('should show more users per page', function () {
+        listParams = { limit: 100, offset: 0, sort: 'name', 'lists.list': '1234' };
+        scope.setLimit(100);
+        expect(mockUserDataService.getUsers).toHaveBeenCalledWith(listParams, undefined, jasmine.any(Function));
+      });
+
+    });
+
     describe('Searching for users', function () {
       controllerSetup(false, true);
 
@@ -224,7 +242,7 @@
 
         expect(scope.userFilters).toEqual({});
         expect(scope.selectedFilters).toEqual({});
-        expect(scope.currentPage).toEqual(1);
+        expect(scope.pagination.currentPage).toEqual(1);
         expect(scope.totalItems).toEqual(3);
         expect(scope.users).toEqual(initialUsers);
       });

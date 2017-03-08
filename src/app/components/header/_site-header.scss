@@ -1,3 +1,8 @@
+header {
+  z-index: map-get($zindex, header);
+  position: relative;
+}
+
 .site-header {
   border-bottom: 2px solid $border-grey;
 }
