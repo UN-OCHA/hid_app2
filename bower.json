@@ -42,6 +42,6 @@
     "karma-read-json": "^1.1.0"
   },
   "resolutions": {
-    "angular": "1.6.2"
+    "angular": "1.6.3"
   }
 }
