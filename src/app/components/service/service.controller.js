@@ -5,77 +5,47 @@
     .module('app.service')
     .controller('ServiceCtrl', ServiceCtrl);
 
-  ServiceCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$http', '$log', '$window', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'List', 'User'];
+  ServiceCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'Service', 'User'];
 
-  function ServiceCtrl ($exceptionHandler, $scope, $routeParams, $http, $log, $window, $location, gettextCatalog, alertService, Service, ServiceCredentials, List, User) {
-    $scope.serviceTypes = [
-      {
-        value: 'mailchimp',
-        label: 'Mailchimp'
-      },
-      {
-        value: 'googlegroup',
-        label: 'Google Group'
-      }
-    ];
-    $scope.mailchimpLists = [];
-    $scope.credentials = [];
-    $scope.newLists = [];
-    $scope.newUsers = [];
+  function ServiceCtrl ($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, Service, User) {
     $scope.isSubscribed = false;
     $scope.userSubscribed = {};
-    $scope.userUnsubscribed = {};
     $scope.subscribers = [];
     $scope.subscribersLoaded = false;
+    $scope.subscribe = subscribe;
+    $scope.unsubscribe = unsubscribe;
+    $scope.getUsers = getUsers;
+    $scope.deleteService = deleteService;
+    $scope.pageChanged = pageChanged;
     $scope.pagination = {
       currentPage: 1,
       itemsPerPage: 50,
       totalItems: 0
     };
-    $scope.selectedLists = [];// used by nested select lists controller
 
-    if ($routeParams.serviceId) {
-      $scope.service = Service.get({'serviceId': $routeParams.serviceId}, function() {
-        $scope.selectedLists = $scope.service.lists;
-        $scope.getSubscribers();
-        $scope.getMailchimpLists();
-        $scope.credentials = ServiceCredentials.query();
-        for (var i = 0; i < $scope.currentUser.subscriptions.length; i++) {
-          if ($scope.currentUser.subscriptions[i]._id === $scope.service._id) {
-            $scope.isSubscribed = true;
-          }
+    function isUserSubscribed (user, serviceId) {
+      for (var i = 0; i < user.subscriptions.length; i++) {
+        if (user.subscriptions[i]._id === serviceId) {
+          return true;
         }
+      }
+
+      return false;
+    }
+
+    function initService () {
+      Service.get({'serviceId': $routeParams.serviceId}, function(service) {
+        $scope.service = service;
+        getSubscribers();
+        $scope.isSubscribed = isUserSubscribed($scope.currentUser, $scope.service._id);
       });
     }
-    else {
-      $scope.service = new Service();
-      $scope.service.managers = [];
-      $scope.service.lists = [];
-      $scope.credentials = ServiceCredentials.query();
-    }
+    initService();
 
-    function subscribeManagersAndOwners (service) {
-      var ownerId = service.owner;
-      var userIds = angular.copy(service.managers);
-      userIds.push(ownerId);
-
-      angular.forEach(userIds, function(userId) {
-        var isSubscribed = $scope.subscribers.filter(function (subscriber) {
-          return subscriber._id === userId;
-        })[0];
-
-        if (!isSubscribed) {
-          service.subscribe({_id: userId}).then(function() {}).catch(function (err) {
-            $log.error(err);
-          });
-        }
-      });
-    }
-
-    $scope.subscribe = function (user) {
+    function subscribe (user) {
       $scope.service.subscribe(user)
         .then(function(response) {
-          if (user.id === $scope.currentUser.id) {
+          if (user._id === $scope.currentUser._id) {
             $scope.setCurrentUser(response.data);
             $scope.isSubscribed = true;
             alertService.add('success', gettextCatalog.getString('You were successfully subscribed to this service'));
@@ -90,12 +60,12 @@
           alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
           $exceptionHandler(error, 'Subscribe fail');
         });
-    };
+    }
 
-    $scope.unsubscribe = function (user) {
+    function unsubscribe (user) {
       $scope.service.unsubscribe(user)
         .then(function (response) {
-          if (user.id == $scope.currentUser.id) {
+          if (user._id == $scope.currentUser._id) {
             $scope.setCurrentUser(response.data);
             $scope.isSubscribed = false;
             alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'));
@@ -110,54 +80,16 @@
           alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
           $exceptionHandler(error, 'Unsubscribe fail');
         });
-    };
+    }
 
-    $scope.saveService = function() {
-      $scope.service.lists = $scope.selectedLists;
-      var success = function (resp) {
-        alertService.add('success', gettextCatalog.getString('Service saved successfully'));
-        subscribeManagersAndOwners(resp);
-        $location.path('/services');
-      };
-      var error = function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error saving this service'));
-        $exceptionHandler(error, 'Save service fail');
-      };
-      if ($scope.service._id) {
-        $scope.service.$update(success, error);
-      }
-      else {
-        $scope.service.$save(success, error);
-      }
-    };
-
-    $scope.deleteService = function () {
+    function deleteService () {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         $scope.service.$delete(function () {
           alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
+          $location.path('/services');
         });
       });
-    };
-
-    $scope.getMailchimpLists = function () {
-      Service
-        .getMailchimpLists($scope.service.mailchimp.apiKey)
-        .then(function (result) {
-          $scope.mailchimpLists = result.data.lists;          
-        }, function () {
-          alertService.add('danger', gettextCatalog.getString('Invalid API key'));
-          $scope.service.mailchimp.apiKey = '';
-          $scope.mailchimpLists = [];
-        });
-    };
-
-    $scope.getGoogleGroups = function () {
-      Service
-        .getGoogleGroups($scope.service.googlegroup.domain)
-        .then(function (result) {
-          $scope.googleGroups = result.data;
-        });
-    };
+    }
 
     function filterUsers (users, subscribers) {
       if (!subscribers.length) {
@@ -187,29 +119,19 @@
       return filteredUsers;
     }
 
-    $scope.getUsers = function(search) {
+    function getUsers (search) {
       User.query({'name': search}, function (users) {
         $scope.newUsers = filterUsers(users, $scope.subscribers);
       });
-    };
+    }
 
-    $scope.removeManager = function (list) {
-      $scope.service.managers.splice($scope.service.managers.indexOf(list), 1);
-    };
 
-    $scope.isSelectedManager = function (user) {
-      var inManagers = $scope.service.managers.filter(function (manager) {
-        return manager._id === user._id;
-      })[0];
-      return inManagers ? true : false;
-    };
-
-    $scope.pageChanged = function () {
+    function pageChanged () {
       var offset = $scope.pagination.itemsPerPage * ($scope.pagination.currentPage - 1);
-      $scope.getSubscribers(offset);
-    };
+      getSubscribers(offset);
+    }
 
-    $scope.getSubscribers = function (offset) {
+    function getSubscribers (offset) {
       var params = {
         'subscriptions.service': $scope.service._id,
         limit: $scope.pagination.itemsPerPage,
@@ -221,7 +143,7 @@
         $scope.pagination.totalItems = headers()['x-total-count'];
         $scope.subscribersLoaded = true;
       });
-    };
+    }
     
   }
 })();

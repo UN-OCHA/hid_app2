@@ -14,7 +14,7 @@
 
 <div class="row" ng-if="service.isOwner(currentUser) || service.isManager(currentUser) || currentUser.is_admin">
   <div class="col-xs-12">
-    <h2 class="block-heading">{{pagination.totalItems}} <span translate>subscribers</span></h2>
+    <h2 class="block-heading"><span>{{pagination.totalItems}} <span translate>subscribers</span></span></h2>
     
     <ul class="list list--has-dividers list--has-buttons">
       <li ng-if="!subscribers.length"><em translate>No subscribers</em></li>
