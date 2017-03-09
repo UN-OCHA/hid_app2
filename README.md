@@ -54,6 +54,10 @@ Watch for changes an re-run tests: `grunt test-watch`
 
 ## Front end
 
+### Styleguide and pattern library
+
+The styleguide and pattern library is available at https://un-ocha.github.io/styleguide/hid/
+
 ### CSS
 
 This project uses [Sass](http://sass-lang.com/)
@@ -77,11 +81,3 @@ As variables and mixins need to be imported before other Sass these are added to
 Component specific files should be added to that component's directory, e.g. `app/components/my-component/my-component.scss`.
 
 Any _*.scss file in `app/components` (including sub-directories) will be automatically added to the CSS build.
-
-#### Grid
-
-Uses a simplified [Bootstrap v4 grid](https://github.com/twbs/bootstrap).
-
-Uses `col-{breakpoint}-{number}` style classes as with standard Bootstrap grid. `push`, `pull` and `offset` also supported.
-
-See `app/common/_variables.scss` for available breakpoints.
