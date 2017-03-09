@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
+  ListCtrl.$inject = ['$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
   
-  function ListCtrl ($scope, $rootScope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
+  function ListCtrl ($scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -40,47 +40,56 @@
       $scope.isPending = pending ? true : false;
     }
 
-    $scope.$on('user-service-ready', function() {
-      // $scope.list = List.get({'listId': $routeParams.list});
-      var listCallback = function () {
-        $scope.listLoaded = true;
-
-        if (!$scope.list.visible) {
-          return;
+    function isMember (user, list) {
+      var isMember = false;
+      angular.forEach(user[list.type + 's'], function (val) {
+        var listId = typeof val.list === 'object' ? val.list._id : val.list;
+        if (listId === list._id) {
+          isMember = true;
         }
-        ListDataService.setListTypeLabel($scope.list);
-        populateList();
-        checkInStatus();
+      });
+      return isMember;
+    }
 
-        angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val, key) {
-          var listId = val.list;
-          if (typeof val.list === 'object') {
-            listId = val.list._id;
-          }
-          if (listId == $scope.list._id) {
-            $scope.isMember = true;
-          }
-        });
-        $scope.isManager = $scope.list.isManager($scope.currentUser);
-        $scope.checkinUser = {
-          list: $scope.list._id
-        };
-        $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
-        angular.forEach($scope.currentUser.favoriteLists, function (val, key) {
-          if (val._id == $scope.list._id) {
-            $scope.isFavorite = true;
-          }
-        });
+    function isFavorite (user, list) {
+      var isFavorite = false;
+      angular.forEach(user.favoriteLists, function (val) {
+        if (val._id == list._id) {
+          isFavorite = true;
+        }
+      });
+      return isFavorite;
+    }
+
+    var setUpList = function () {
+      $scope.listLoaded = true;
+
+      if (!$scope.list.visible) {
+        return;
+      }
+      ListDataService.setListTypeLabel($scope.list);
+      populateList();
+      checkInStatus();
+      $scope.isMember = isMember($scope.currentUser, $scope.list);
+      $scope.isManager = $scope.list.isManager($scope.currentUser);
+      $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
+      $scope.isFavorite = isFavorite($scope.currentUser, $scope.list);
+      $scope.checkinUser = {
+        list: $scope.list._id
       };
+    };
+
+    $scope.$on('user-service-ready', function() {
+      
       List.get({'listId': $routeParams.list}, function (list) {
         $scope.list = list;
-        listCallback();
-      }, function (resp) {
+        setUpList();
+      }, function () {
         // Offline fallback
         var lflists = $localForage.instance('lists');
         lflists.getItem($routeParams.list).then(function (list) {
           $scope.list = list;
-          listCallback();
+          setUpList();
         });
       });
       
@@ -88,7 +97,6 @@
 
     function isListMember (listId, user) {
       var inList = false;
-
       angular.forEach(config.listTypes, function (listType) {
         angular.forEach(user[listType + 's'], function (userList) {
           if (listId === userList.list) {
@@ -125,21 +133,20 @@
           if (users) {
             $scope.newMembers = filterUsers(users, $scope.usersAdded.users);
           }
-        })
+        });
       }
     };
 
     // Add users to a list
     $scope.addMemberToList = function() {
       $scope.savingMembers = true;
-      var promises = [];
-      angular.forEach($scope.usersAdded.users, function (value, key) {
+      angular.forEach($scope.usersAdded.users, function (value) {
         UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function () {
           UserDataService.notify();
           alertService.add('success', gettextCatalog.getString('Successfully added to list'));
           $scope.usersAdded.users = [];
           $scope.savingMembers = false;
-        }, function (error) {
+        }, function () {
           alertService.add('danger', gettextCatalog.getString('There was an error adding members to the list'));
           $scope.savingMembers = false;
         });
@@ -164,7 +171,7 @@
     // Check current user out of this list
     $scope.checkOut = function () {
       $scope.savingCheckin = true;
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         var checkInId = 0;
         for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {
           if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list)) {
@@ -185,8 +192,8 @@
 
     // Delete list
     $scope.deleteList = function() {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        $scope.list.$delete(function (out) {
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+        $scope.list.$delete(function () {
           alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'));
           $location.path('/lists');
         });
@@ -199,7 +206,7 @@
         $scope.currentUser.favoriteLists = [];
       }
       $scope.currentUser.favoriteLists.push($scope.list);
-      User.update($scope.currentUser, function (user) {
+      User.update($scope.currentUser, function () {
         alertService.add('success', gettextCatalog.getString('This list was successfully added to your favourites.'));
         $scope.isFavorite = true;
         $scope.setCurrentUser($scope.currentUser);
@@ -211,7 +218,7 @@
       $scope.currentUser.favoriteLists = $scope.currentUser.favoriteLists.filter(function (elt) {
         return elt._id != $scope.list._id;
       });
-      User.update($scope.currentUser, function (user) {
+      User.update($scope.currentUser, function () {
         alertService.add('success', gettextCatalog.getString('This list was successfully removed from your favourites.'));
         $scope.isFavorite = false;
         $scope.setCurrentUser($scope.currentUser);
@@ -222,7 +229,7 @@
     $scope.approveUser = function (user) {
       var checkInId;
 
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         angular.forEach(user[$scope.list.type + 's'], function (list) {
           if ($scope.list._id === list.list) {
             checkInId = list._id;
@@ -237,34 +244,6 @@
         }
       });
     };
-
-    // NOT USED?
-    // Promote a user to manager
-    // $scope.promoteManager = function (user) {
-    //   var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-    //     $scope.list.managers.push(user._id);
-    //     $scope.list.$update(function (list, response) {
-    //       $scope.list = list;
-    //       UserDataService.notify();
-    //       alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
-    //     });
-    //   });
-    // };
-
-    // // Demote a user from manager role
-    // $scope.demoteManager = function (user) {
-    //   var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-    //     var mmanagers = $scope.list.managers.filter(function (elt) {
-    //       return elt._id != user._id;
-    //     });
-    //     $scope.list.managers = mmanagers;
-    //     $scope.list.$update(function (list, response) {
-    //       $scope.list = list;
-    //       UserDataService.notify();
-    //       alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
-    //     });
-    //   });
-    // };
 
     $scope.showDatePicker = function() {
       $scope.datePicker.opened = true;

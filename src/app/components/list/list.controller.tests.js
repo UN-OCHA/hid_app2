@@ -3,8 +3,8 @@
 
   describe('List controller', function () {
 
-  	var ctrlParams, listFixture, mockAlertService, mockConfig, mockGetText, mockLf, mockList, mockListDataService, mockLocalForage, 
-  	mockUser, mockUserCheckInService, mockUserDataService, scope, testList, userFixture;
+  	var $location, ctrlParams, listFixture, mockAlertService, mockConfig, mockGetText, mockLf, mockList, mockListDataService, 
+  	mockLocalForage, mockUser, mockUserCheckInService, mockUserDataService, scope, testList, userFixture;
 
   	function setUpCtrl (list, currentUser, offline) {
   		testList = list;
@@ -25,9 +25,15 @@
 
       inject(function($rootScope, $controller, _$location_, $q) {
       	scope = $rootScope.$new();
+      	$location = _$location_;
+
       	scope.currentUser = currentUser;
+
       	scope.$broadcast = function () {};
       	spyOn(scope, '$broadcast');
+
+      	$location.path = function () {};
+      	spyOn($location, 'path');
 
       	mockLf = {
       		getItem: function () {}
@@ -522,6 +528,11 @@
 	    	it('should show the success message', function () {
 	    		scope.$digest();
 	    		expect(mockAlertService.add).toHaveBeenCalledWith('success', 'The list was successfully deleted.');
+	    	});
+
+	    	it('should go to lists page', function () {
+	    		scope.$digest();
+	    		expect($location.path).toHaveBeenCalledWith('/lists');
 	    	});
 	    });
 
