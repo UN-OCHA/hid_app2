@@ -108,7 +108,7 @@ header {
 .dropdown-menu.site-header__nav {
   top: ($base-unit*6) - 2;
   width: $base-unit*30;
-  right: -$base-unit*2;
+  right: -$base-unit;
 
   .no-flexbox {
     float: right;
