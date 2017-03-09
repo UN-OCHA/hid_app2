@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$uibModal', '$timeout', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
+  ListCtrl.$inject = ['$scope', '$rootScope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
   
-  function ListCtrl ($scope, $rootScope, $routeParams, $location, $uibModal, $timeout, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
+  function ListCtrl ($scope, $rootScope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -16,6 +16,7 @@
     $scope.listLoaded = false;
     $scope.savingCheckin = false;
     $scope.savingMembers = false;
+    $scope.usersAdded = {};
     $scope.datePicker = {
       opened: false
     };
@@ -25,7 +26,6 @@
       showWeeks: false,
       startingDay: 1
     };
-    var exportEmailModal;
 
     function populateList () {
       var listType = [];
@@ -41,8 +41,7 @@
     }
 
     $scope.$on('user-service-ready', function() {
-
-      $scope.list = List.get({'listId': $routeParams.list});
+      // $scope.list = List.get({'listId': $routeParams.list});
       var listCallback = function () {
         $scope.listLoaded = true;
 
@@ -84,7 +83,7 @@
           listCallback();
         });
       });
-      $scope.usersAdded = {};
+      
     });
 
     function isListMember (listId, user) {
@@ -135,7 +134,7 @@
       $scope.savingMembers = true;
       var promises = [];
       angular.forEach($scope.usersAdded.users, function (value, key) {
-        UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (out) {
+        UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function () {
           UserDataService.notify();
           alertService.add('success', gettextCatalog.getString('Successfully added to list'));
           $scope.usersAdded.users = [];
@@ -197,7 +196,7 @@
     // Star a list as favorite
     $scope.star = function() {
       if (!$scope.currentUser.favoriteLists) {
-        $scope.currentUser.favoriteLists = new Array();
+        $scope.currentUser.favoriteLists = [];
       }
       $scope.currentUser.favoriteLists.push($scope.list);
       User.update($scope.currentUser, function (user) {
@@ -239,32 +238,33 @@
       });
     };
 
+    // NOT USED?
     // Promote a user to manager
-    $scope.promoteManager = function (user) {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
-        $scope.list.managers.push(user._id);
-        $scope.list.$update(function (list, response) {
-          $scope.list = list;
-          UserDataService.notify();
-          alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
-        });
-      });
-    };
+    // $scope.promoteManager = function (user) {
+    //   var alert = alertService.add('warning', gettextCatalog.getString('Are you sure ?'), true, function() {
+    //     $scope.list.managers.push(user._id);
+    //     $scope.list.$update(function (list, response) {
+    //       $scope.list = list;
+    //       UserDataService.notify();
+    //       alertService.add('success', gettextCatalog.getString('The user was successfully promoted to manager.'));
+    //     });
+    //   });
+    // };
 
-    // Demote a user from manager role
-    $scope.demoteManager = function (user) {
-      var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        var mmanagers = $scope.list.managers.filter(function (elt) {
-          return elt._id != user._id;
-        });
-        $scope.list.managers = mmanagers;
-        $scope.list.$update(function (list, response) {
-          $scope.list = list;
-          UserDataService.notify();
-          alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
-        });
-      });
-    };
+    // // Demote a user from manager role
+    // $scope.demoteManager = function (user) {
+    //   var alert = alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+    //     var mmanagers = $scope.list.managers.filter(function (elt) {
+    //       return elt._id != user._id;
+    //     });
+    //     $scope.list.managers = mmanagers;
+    //     $scope.list.$update(function (list, response) {
+    //       $scope.list = list;
+    //       UserDataService.notify();
+    //       alertService.add('success', gettextCatalog.getString('The user is not a manager anymore.'));
+    //     });
+    //   });
+    // };
 
     $scope.showDatePicker = function() {
       $scope.datePicker.opened = true;
