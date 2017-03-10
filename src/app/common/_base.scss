@@ -106,8 +106,11 @@ body {
 }
 
 body.toggled {
-  overflow-x: hidden;
   width: 100%;
+
+  @include media-query(lg) {
+    overflow-x: hidden;
+  }
 }
 
 img {

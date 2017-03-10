@@ -18,24 +18,8 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
 
 .page {
   position: relative;
-  height: calc(100% - #{$header-height-xs});
-  transition: $sidebar-transition;
   width: 100%;
-
-  .toggled & {
-    transform: translateX($sidebar-width-xs);
-    position: fixed;
-  }
-
-  .no-calc & {
-    height: auto;
-  }
-
-  .no-csstransforms & {
-    .toggled & {
-      padding-left: $sidebar-width-xs;
-    }
-  }
+  height: calc(100% - #{$header-height-xs});
 }
 
 .page-header {
@@ -111,15 +95,6 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
 
   .page {
     height: calc(100% - #{$header-height-md});
-
-    .toggled & {
-      transform: translateX($sidebar-width-md);
-    }
-    .no-csstransforms & {
-      .toggled & {
-        padding-left: $sidebar-width-md;
-      }
-    }
   }
 
   .page-header {
@@ -128,11 +103,31 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
 
   .page-header__heading {
     margin-right: $base-unit*11;
+  }
+}
+
+@include media-query(lg) {
+
+  .page {
+    height: calc(100% - #{$header-height-md});
+    transition: $sidebar-transition;
 
     .toggled & {
-      margin-right: $sidebar-width-md + ($base-unit*11)
+      transform: translate3d($sidebar-width-md, 0, 0);
+      position: fixed;
+    }
+
+    .no-calc & {
+      height: auto;
+    }
+
+    .no-csstransforms & {
+      .toggled & {
+        padding-left: $sidebar-width-md;
+      }
     }
   }
+
 }
 
 @include media-query(xl) {
@@ -149,7 +144,7 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
 
   .page {
     .toggled & {
-      transform: translateX($sidebar-width-xxl);
+      transform: translate3d($sidebar-width-xxl, 0 ,0);
     }
     .no-csstransforms & {
       .toggled & {

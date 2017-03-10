@@ -44,7 +44,8 @@
                   <span translate>Back</span>
               </a>
           </div>
-          <div class="container" id="main" role="main" ng-view ng-swipe-left="sidebarSwipeLeft()"></div>
+          <div class="container" id="main" role="main" ng-view></div>
+          <div class="sidebar-overlay" ng-class="{'in' : sidebar.open}" ng-click="closeSidebar()" ng-swipe-left="closeSidebar()"></div>
           <ng-include ng-if="!hideHeaderFooter" src="'app/components/footer/footer.html'"></ng-include>
         </div>
 

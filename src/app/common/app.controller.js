@@ -30,16 +30,11 @@
       }
     }
 
-    $scope.sidebarSwipeLeft = function () {
+    $scope.closeSidebar = function () {
       if ($scope.sidebar.open) {
         $scope.sidebar.open = false;
         $rootScope.$emit('sidebar-closed');
       }
-    }
-
-    $scope.closeSidebar = function () {
-      $scope.sidebar.open = false;
-      $rootScope.$emit('sidebar-closed');
     };
 
     $scope.toggleSidebar = function (name) {

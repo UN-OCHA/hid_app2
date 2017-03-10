@@ -13,6 +13,7 @@
   position: absolute;
   top: $base-unit/2;
   right: $base-unit;
+   z-index: 2;
 }
 
 .btn-toggle-filters--has-admin {
@@ -54,9 +55,9 @@
 
   .btn-toggle-admin, .btn-toggle-filters {
     top: $base-unit*5 + 3;
-    transition: $sidebar-transition;
+    // transition: $sidebar-transition;
     .toggled & {
-      transform: translateX(-$sidebar-width-md);
+      // transform: translateX(-$sidebar-width-md);
     }
   }
 
@@ -83,6 +84,18 @@
 
   .list-actions__pagination {
     flex-shrink: 0;
+  }
+
+}
+
+@include media-query(lg) {
+
+  .btn-toggle-admin, .btn-toggle-filters {
+    transition: $sidebar-transition;
+    
+    .toggled & {
+      transform: translateX(-$sidebar-width-md);
+    }
   }
 
 }

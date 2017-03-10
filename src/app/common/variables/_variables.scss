@@ -18,7 +18,7 @@ $footer-height: $base-unit*48;
 $footer-height-sm: $base-unit*42;
 $footer-height-md: $base-unit*24;
 
-$breadcrumbs-height: $base-unit*3;
+ $breadcrumbs-height: $base-unit*3;
 
 $sidebar-width-xs: $base-unit*35;
 $sidebar-width-md: $base-unit*40;
@@ -31,7 +31,8 @@ $grid-breakpoints: (
   xs: 0,
   sm: 576px,
   md: 768px,
-  lg: 992px,
+  lg: 1025px,
+  // lg: 992px,
   xl: 1200px,
   xxl: 1400px
 ) !default;
@@ -80,10 +81,10 @@ $list-color-office: #777777;
 
 //z-index
 $zindex: (
-  sidebar: 1,
   dropdown: 9,
   loader: 100,
   header: 101,
+  sidebar: 102
 );
 
 //Border radius
