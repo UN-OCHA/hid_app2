@@ -1,7 +1,7 @@
 .uib-datepicker-popup {
   position: absolute;
   z-index: map-get($zindex, dropdown);
-  width: $base-unit*38;
+  width: $base-unit*33;
   box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.2);
   background: white;
 
@@ -17,7 +17,6 @@
   button {
     @include btn;
     padding: 0;
-    // padding: $base-unit;
     border: none;
     background: none;
     text-transform: none;
