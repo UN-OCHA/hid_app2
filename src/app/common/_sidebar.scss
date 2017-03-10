@@ -156,7 +156,7 @@
 @include media-query(lg) {
 
   .sidebar {
-    position: fixed;
+    position: absolute;
     left: -$sidebar-width-md;
     transform: none;
 
