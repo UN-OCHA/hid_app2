@@ -14,11 +14,9 @@ $site-header-height-md: $base-unit*7.5;
 $header-height-xs: $global-header-height + $site-header-height-xs;
 $header-height-md: $global-header-height + $site-header-height-md;
 
-$footer-height: $base-unit*48;
-$footer-height-sm: $base-unit*42;
-$footer-height-md: $base-unit*24;
+$footer-height-lg: $base-unit*24;
 
- $breadcrumbs-height: $base-unit*3;
+$breadcrumbs-height: $base-unit*3;
 
 $sidebar-width-xs: $base-unit*35;
 $sidebar-width-md: $base-unit*40;
@@ -32,7 +30,6 @@ $grid-breakpoints: (
   sm: 576px,
   md: 768px,
   lg: 1025px,
-  // lg: 992px,
   xl: 1200px,
   xxl: 1400px
 ) !default;

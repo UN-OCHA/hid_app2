@@ -1,25 +1,18 @@
 // necessary as can't have sum in calc
-$footer-plus-breadcrumbs: $footer-height + $breadcrumbs-height;
-$footer-plus-breadcrumbs-sm: $footer-height-sm + $breadcrumbs-height;
-$footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
+$footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
 .container[role="main"] {
-  min-height: calc(100% - #{$footer-plus-breadcrumbs});
+  min-height: 300px;
   padding-bottom: $base-unit*4;
 
-  @include media-query(sm) {
-    min-height: calc(100% - #{$footer-plus-breadcrumbs-sm});
-  }
-
-  @include media-query(md) {
-    min-height: calc(100% - #{$footer-plus-breadcrumbs-md});
+  @include media-query(lg) {
+    min-height: calc(100% - #{$footer-plus-breadcrumbs-lg});
   }
 }
 
 .page {
   position: relative;
   width: 100%;
-  height: calc(100% - #{$header-height-xs});
 }
 
 .page-header {
@@ -93,10 +86,6 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
 
 @include media-query(md) {
 
-  .page {
-    height: calc(100% - #{$header-height-md});
-  }
-
   .page-header {
     margin-top: $base-unit*3;
   }
@@ -128,9 +117,19 @@ $footer-plus-breadcrumbs-md: $footer-height-md + $breadcrumbs-height;
     }
   }
 
+  .page-header__heading {
+    .toggled & {
+      margin-right: $sidebar-width-md + ($base-unit*11)
+    }
+  }
+
 }
 
 @include media-query(xl) {
+
+  .page {
+    height: calc(100% - #{$header-height-md});
+  }
 
   .page-header__heading {
     .col-xl-4 & {

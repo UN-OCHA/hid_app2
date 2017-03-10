@@ -1,5 +1,4 @@
 .footer {
-  height: $footer-height;
   background: $primary-color;
   color: $text-light;
   padding-top: $base-unit*3;
@@ -141,12 +140,6 @@
 
 @include media-query(sm) {
 
-	.footer {
-  	height: $footer-height-sm;
-  }
-
-
-
 	.footer-platforms__item {
 		width: 20%;
 		padding: 0 $base-unit*3 0 0;
@@ -162,7 +155,6 @@
 @include media-query(md) {
 	
 	.footer {
-  	height: $footer-height-md;
   	padding-top: $base-unit*4;
   	padding-bottom: $base-unit*4;
   }
@@ -241,6 +233,10 @@
 }
 
 @include media-query(lg) {
+
+	.footer {
+  	height: $footer-height-lg;
+  }
 
 	.footer-links__item {
 		margin: 0 $base-unit*2 0 0;
