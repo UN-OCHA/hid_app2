@@ -25,6 +25,7 @@ header {
   height: $base-unit*5;
   width: $base-unit*5;
   background: url('../img/logo.svg') left center no-repeat;
+  background-size: auto 82%;
   position: relative;
 
   .no-svg & {
@@ -65,6 +66,7 @@ header {
 .site-header__search {
   flex-grow: 1;
   height: 100%;
+  position: relative;
 
   .no-flexbox & {
     float: left;
@@ -89,13 +91,14 @@ header {
 
   &:focus {
     outline: none;
-    background: $primary-color;
+    background: transparent;
+    color: $primary-color;
+  }
 
-    .site-header__nav-toggle-inner {
-      border-color: $text-light;
-
+  .open & {
+    .icon {
       &:before {
-        background: $text-light;
+        content: "\e94a";
       }
     }
   }
@@ -105,10 +108,16 @@ header {
   }
 }
 
+.site-header .dropdown {
+  position: static;
+}
+
 .dropdown-menu.site-header__nav {
   top: ($base-unit*6) - 2;
-  width: $base-unit*30;
-  right: -$base-unit;
+  width: 100%;
+  right: 0;
+  padding: 0 $base-unit*1.5;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.15);
 
   .no-flexbox {
     float: right;
@@ -127,6 +136,12 @@ header {
     margin-right: 0;
   }
 
+  .dropdown-menu.site-header__nav {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+    border-bottom: 0;
+    width: auto;
+    top: 50px;
+  }
 }
 
 @include media-query(md) {
@@ -142,7 +157,7 @@ header {
   }
 
   .dropdown-menu.site-header__nav {
-    top: ($base-unit*6) + 4;
+    top: ($base-unit*8) - 2;
   }
 
   .site-header__search {
