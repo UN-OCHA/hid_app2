@@ -48,8 +48,12 @@
 
 .global-header__sites {
   position: static;
-  margin-left: -$base-unit;
-  width: calc(25% + 8px);
+  margin-left: -$base-unit*1.5;
+  width: calc(25% + 12px);
+
+  &.global-header__sites--full {
+    width: auto;
+  }
 
   .no-flexbox & {
     float: left;
@@ -125,8 +129,8 @@
 }
 
 .global-header__nav {
-  margin-right: -$base-unit;
-  width: calc(75% + 8px);
+  margin-right: -$base-unit*1.5;
+  width: calc(75% + 12px);
 
   .no-flexbox & {
     float: right;
