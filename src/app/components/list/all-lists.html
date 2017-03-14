@@ -36,10 +36,6 @@
     </ul>
   </div>
 
-  <button class="btn-icon btn-toggle-filters" type="button" ng-click="toggleSidebar('listsFilters')" ng-class="{'active' : sidebar.sidebars.listsFilters && sidebar.open}" ng-disabled="!isOnline">
-      <icon name="filter" text="Filter"></icon>
-  </button>
-
   <ng-include src="'app/components/list/lists-filters.html'"></ng-include>
 
   <table class="table table-responsive">

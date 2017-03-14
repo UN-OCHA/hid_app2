@@ -16,25 +16,59 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 }
 
 .page-header {
-  margin-top: $base-unit/2;
+  margin-top: $base-unit*1.5;
   margin-bottom:$base-unit;
+  position: relative;
+  min-height: $base-unit*4.5;
+
+  &.page-header--no-actions {
+    min-height: 0;
+  }
 }
 
 .page-header__heading {
   line-height: 1.2;
   margin-bottom: 0;
   word-break: break-word;
-  margin-right: $base-unit*11;
   color: $dark-blue;
   display: inline-block;
-
-  .col-sm-6 &, .col-sm-8 &, .col-sm-10 &, .page-header--alert &, .page-header--no-actions & {
-    margin-right: 0;
-  }
 }
 
 .page-header__actions {
   margin-top: $base-unit;
+}
+
+.page-header__buttons {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+
+  button {
+    margin-left: $base-unit/2;
+  }
+
+  .toggled & {
+    display: none;
+  }
+}
+
+.page-header__buttons--list {
+  bottom: -$base-unit*4;
+}
+
+.page-header__buttons--profile {
+  bottom: auto;
+  top: 0;
+  width: $base-unit*5;
+
+  button {
+    margin-bottom: $base-unit/2;
+  }
+}
+
+.page-header__buttons--search-results {
+  bottom: -$base-unit*12;
 }
 
 .page-header--alert {
@@ -73,6 +107,19 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
     margin-top: 0;
   }
 
+  .page-header__buttons {
+    bottom: auto;
+    top: -$base-unit*5;
+
+    .toggled & {
+      display: block;
+    }
+  }
+
+  .page-header__buttons--profile {
+    width: auto;
+  }
+
   .page-header__alert-icon {
     @include font-size(88);
     margin-right: $base-unit;
@@ -92,6 +139,10 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
   .page-header__heading {
     margin-right: $base-unit*11;
+  }
+
+  .page-header__buttons {
+    top: 0;
   }
 }
 
@@ -122,6 +173,15 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
       margin-right: $sidebar-width-md + ($base-unit*11)
     }
   }
+
+  .page-header__buttons {
+    transition: $sidebar-transition;
+
+    .toggled & {
+      transform: translateX(-$sidebar-width-md);
+    }
+  }
+
 
 }
 
@@ -158,6 +218,12 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
     }
     .col-xl-4 & {
       margin-right: 0;
+    }
+  }
+
+  .page-header__buttons {
+    .toggled & {
+      transform: translateX(-$sidebar-width-xxl);
     }
   }
 }

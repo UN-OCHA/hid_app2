@@ -1,6 +1,6 @@
 .sidebar {
   position: absolute;
-  top: 0;
+  top: -$base-unit*1.5;
   transform: translate3d(-($sidebar-width-xs + $base-unit*1.5), 0, 0);
   height: 100%;
   width: $sidebar-width-xs;
@@ -129,6 +129,7 @@
 @include media-query(sm) {
   .sidebar {
     transform: translate3d(-($sidebar-width-xs + $base-unit*2), 0, 0);
+    top: 0;
 
     &.in {
       transform: translate3d(-$base-unit*2, 0, 0);

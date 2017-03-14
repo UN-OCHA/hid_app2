@@ -4,6 +4,13 @@
 
   <div class="global-header">
     <div class="container global-header__inner">
+
+      <div class="global-header__back" back-button translate ng-if="isAuthenticated && !hideHeaderFooter">
+        <button type="button" class="btn-transparent">
+          <icon name="arrow-left" text="back"></icon>
+        </button>
+      </div>
+
       <div class="global-header__sites" ng-class="{'global-header__sites--full': !isAuthenticated || hideHeaderFooter}" uib-dropdown>
         <button type="button" class="global-header__sites-btn btn btn-transparent" uib-dropdown-toggle>
           <icon name="sitemap" text="Related platforms"  class="global-header__sites-icon"></icon>

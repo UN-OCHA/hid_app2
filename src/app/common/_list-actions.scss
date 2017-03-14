@@ -1,20 +1,13 @@
 .list-actions {
-  padding: $base-unit/2 0;
+  padding: $base-unit/2 0 $base-unit 0;
+
+  .tabs & {
+    margin-top: $base-unit*3;
+  }
 }
 
 .list-actions__count {
   @include font-size($small-font-size);
-}
-
-.btn-toggle-admin, .btn-toggle-filters {
-  position: absolute;
-  top: $base-unit/2;
-  right: $base-unit;
-   z-index: 2;
-}
-
-.btn-toggle-filters--has-admin {
-  right: $base-unit*6.5;
 }
 
 .list-actions__current-filters {
@@ -28,6 +21,10 @@
     justify-content: space-between;
     align-items: flex-end;
     padding: $base-unit*2 0;
+
+    .tabs & {
+      margin-top: 0;
+    }
   }
 
   .list-actions__count {
@@ -37,29 +34,9 @@
     font-style: italic;
   }
 
-  .btn-toggle-admin, .btn-toggle-filters {
-    top: $base-unit/2;
-  }
-
-  .btn-toggle-admin, .btn-toggle-filters {
-    right: $base-unit*2;
-  }
-
-  .btn-toggle-filters--has-admin {
-    right: $base-unit*8;
-  }
-
 }
 
 @include media-query(md) {
-
-  .btn-toggle-admin, .btn-toggle-filters {
-    top: $base-unit*5 + 3;
-    // transition: $sidebar-transition;
-    .toggled & {
-      // transform: translateX(-$sidebar-width-md);
-    }
-  }
 
   .list-actions {
     align-items: center;
@@ -86,43 +63,4 @@
     flex-shrink: 0;
   }
 
-}
-
-@include media-query(lg) {
-
-  .btn-toggle-admin, .btn-toggle-filters {
-    transition: $sidebar-transition;
-    
-    .toggled & {
-      transform: translateX(-$sidebar-width-md);
-    }
-  }
-
-}
-
-@include media-query(xl) {
-
-  .btn-toggle-admin, .btn-toggle-filters {
-    right: $base-unit*5;
-  }
-
-  .btn-toggle-filters--has-admin {
-    right: $base-unit*11;
-  }
-
-}
-
-@include media-query(xxl) {
-  .btn-toggle-admin, .btn-toggle-filters {
-    right: 50%;
-    margin-right: -612px;
-
-    .toggled & {
-      transform: translateX(-$sidebar-width-xxl);
-    }
-  }
-
-  .btn-toggle-admin {
-    margin-right: -660px;
-  }
 }

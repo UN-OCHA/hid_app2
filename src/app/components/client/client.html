@@ -23,12 +23,14 @@
 
 </div>
 
-<button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
-  <icon name="wheel" text="Actions"></icon>
-</button>
-
 <div class="page-header">
   <h1 class="page-header__heading">{{client.name}}</h1>
+
+  <div class="page-header__buttons">
+    <button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
+      <icon name="wheel" text="Actions"></icon>
+    </button>
+  </div>
 </div>
 
 <div class="block">

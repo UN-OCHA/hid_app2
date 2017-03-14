@@ -11,6 +11,7 @@
     </div>
   </div>
 </div>
+
 <div class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
   <div class="sidebar__inner">
     <h2 class="sidebar__heading" translate>User admin</h2>
@@ -110,26 +111,31 @@
           <p class="form-hint profile-header__upload-info--mobile"><em translate>Use JPEG, up to 1 MB</em></p>
         </div>
 
-        <div class="profile-header__controls" ng-if="canEditUser">
-          <button type="button" class="btn-icon" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-disabled="!isOnline">
-            <icon name="edit" text="Edit"></icon>
-          </button>
-
-          <button type="button" class="btn-icon btn-secondary" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="toggleForm()">
-            <icon name="check" text="Close"></icon>
-          </button>
-        </div>
+        <button type="button" class="btn-primary btn-rounded profile-header__connect-btn profile-header__connect-btn--mobile" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-show="!showProfileForm" ng-if="connectionInfo.canRequestConnection === true" ng-click="requestConnection()">
+          <span translate>Connect</span>
+        </button>
 
       </div>
     </div>
 
-    <button type="button" class="btn-primary btn-rounded profile-header__connect-btn" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-if="connectionInfo.canRequestConnection === true" ng-click="requestConnection()">
-      <span translate>Connect</span>
-    </button>
+    <div class="page-header__buttons page-header__buttons--profile">
 
-    <button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')">
-      <icon name="wheel" text="Actions"></icon>
-    </button>
+      <button type="button" class="btn-primary btn-rounded profile-header__connect-btn" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-if="connectionInfo.canRequestConnection === true" ng-show="!showProfileForm" ng-click="requestConnection()">
+        <span translate>Connect</span>
+      </button>
+
+      <button type="button" class="btn-icon" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-disabled="!isOnline" ng-if="canEditUser">
+        <icon name="edit" text="Edit"></icon>
+      </button>
+
+      <button type="button" class="btn-icon btn-secondary" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="toggleForm()" ng-if="canEditUser">
+        <icon name="check" text="Close"></icon>
+      </button>
+
+      <button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')" ng-show="!showProfileForm">
+        <icon name="wheel" text="Actions"></icon>
+      </button>
+    </div> 
 
   </div>
 

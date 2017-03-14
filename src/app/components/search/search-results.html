@@ -1,5 +1,20 @@
 <div class="page-header">
   <h1 class="page-header__heading">{{heading}}</h1>
+
+  <div class="page-header__buttons page-header__buttons--search-results">
+    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-click="toggleSidebar('userFilters')" ng-if="!showLists">
+      <icon name="filter" text="Filter"></icon>
+    </button>
+
+    <button class="btn-icon btn-toggle-admin" type="button" ng-if="!showLists" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
+      <icon name="wheel" text="Actions"></icon>
+    </button>
+
+    <button class="btn-icon btn-toggle-filters" type="button" ng-if="showLists" ng-click="toggleSidebar('listsFilters')" ng-class="{'active' : sidebar.sidebars.listsFilters && sidebar.open}" ng-disabled="!isOnline">
+      <icon name="filter" text="Filter"></icon>
+    </button>
+  </div>
+
 </div>
 
 <div class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
@@ -17,10 +32,6 @@
 		</div>
 	</div>
 </div>
-
-<button class="btn-icon btn-toggle-admin" type="button" ng-if="!showLists" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
-  <icon name="wheel" text="Actions"></icon>
-</button>
 
 <div class="tabs">
   <div class="tabs-nav">
