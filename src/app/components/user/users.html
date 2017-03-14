@@ -43,7 +43,7 @@
 
 <ng-include src="'app/components/user/user-filters.html'"></ng-include>
 
-<table class="table table-responsive table-responsive--has-actions">
+<table class="table table-responsive table-responsive--has-actions table-responsive--has-icon">
   <thead>
     <tr>
       <th><span class="sr-only" translate>Verified</th>
@@ -57,13 +57,13 @@
   </thead>
   <tbody>
     <tr ng-repeat="user in users">
-      <td class="table-icon"><icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon></td>
-      <td><a ng-href="/users/{{user._id}}" ng-click="saveSearch(user)">{{user.name}}</a></td>
-      <td>
+      <td class="table__td-icon"><icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon></td>
+      <td class="table__td-primary"><a ng-href="/users/{{user._id}}" ng-click="saveSearch(user)">{{user.name}}</a></td>
+      <td class="table__td-secondary" ng-class="{'table__td-empty': !user.job_title}">
         {{user.job_title}}
       </td>
-      <td><a ng-href="/lists/{{user.organization.list}}" ng-if="user.organization.list">{{user.organization.acronym || user.organization.name}}</a></td>
-      <td>
+      <td ng-class="{'table__td-empty': !user.organization}"><a ng-href="/lists/{{user.organization.list}}" ng-if="user.organization.list">{{user.organization.acronym || user.organization.name}}</a></td>
+      <td ng-class="{'table__td-empty': !user.bundles.length && !user.operationBundles.length}">
         <span ng-if="list.type === 'operation'" ng-repeat="bundle in user.operationBundles">
           <a ng-href="/lists/{{bundle.list}}">{{bundle.displayName}}</a><span ng-if="$index +1 < user.operationBundles.length">,&nbsp;</span>
         </span>
@@ -72,10 +72,10 @@
         </span>
 
       </td>
-      <td>{{user.location.country.name}}</td>
+      <td ng-class="{'table__td-empty': !user.location.country.name}">{{user.location.country.name}}</td>
 
-      <td class="table-actions">
-        <icon name="caution" text="Pending" title="Pending" ng-if="user.pending"></icon>
+      <td class="table__td-actions">
+        <icon name="caution" text="Pending" title="Pending" class="table__td-icon-2" ng-if="user.pending"></icon>
         <ng-include src="'app/components/user/userOptions.html'"></ng-include>
       </td>
     </tr>

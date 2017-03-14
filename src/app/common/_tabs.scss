@@ -36,7 +36,6 @@
   border-bottom: 2px solid transparent;
   position: relative;
   width: auto;
-  // padding: $base-unit*2.5 $base-unit $base-unit*2 $base-unit;
   padding: $base-unit*2 $base-unit $base-unit*1.5 $base-unit;
   margin-bottom: -2px;
   color: $text-dark;
@@ -93,7 +92,7 @@
     max-width: 50%;
     flex-grow: 1;
     text-align: center;
-
+    padding: $base-unit*1.5 0 $base-unit 0;
 
     &.desktop-active {
       color: $primary-color;

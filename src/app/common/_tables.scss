@@ -34,6 +34,7 @@
 }
 
 .table-responsive {
+  table-layout: fixed;
 
   th {
     display: none;
@@ -41,87 +42,107 @@
 
   td {
     display: block;
-    padding: 0 0 $base-unit/4 0;
+    padding: 1px 0;
     @include font-size($small-font-size);
-
-    &:empty {
+    
+    &:empty, &.table__td-empty {
       display: none;
     }
-  }
 
-  td:first-child:not(.table-icon) {
-    @include font-size($base-font-size);
-  }
-
-  td:first-child.table-icon {
-    position: absolute;
-    padding-top: 2px;
-
-    &:empty {
-      display: none;
-
-      &+ td {
-        padding-left: 0;
-      }
-    }
-
-    &+ td {
-      padding-left: $base-unit*2.5;
-      @include font-size($base-font-size);
+    &:not(.table__td-actions) {
+      height: $base-unit*3;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
+
 
   tbody {
-    border-top: 2px solid $primary-color;
+    border-top: 1px solid $primary-color;
 
     tr {
       display: flex;
       flex-direction: column;
       position: relative;
       padding: $base-unit*1.5 0;
+      min-height: $base-unit*9;
     }
   }
+
+  .table__td-icon {
+    position: absolute;
+    padding: 0;
+    margin: $base-unit/4 0 0 $base-unit/2;
+  }
+
+  
 }
+
+.table-responsive--has-icon {
+  td:not(.table__td-icon) {
+    padding-left: $base-unit*3.5;
+  }
+}
+
+.table__td-primary {
+  @include font-size($base-font-size);
+  color: $dark-blue;
+  font-weight: bold;
+
+  a {
+    color: $dark-blue;
+  }
+}
+
+.table__td-secondary {
+  font-style: italic;
+}
+
 
 .table-responsive--has-actions {
-  td:first-child:not(.table-icon) {
-    padding-right: $base-unit*9;
+
+  td:not(.table__td-actions), td:not(.table__td-icon)  {
+    padding-right: $base-unit*5;
   }
 
-  td:first-child.table-icon {
-    &+ td {
-      padding-right: $base-unit*9;
-    }
-  }
 }
 
-td.table-actions {
-  text-align: right;
-  position: absolute;
-  top: $base-unit;
-  right: 0;
-  padding: 0;
-  white-space: nowrap;
+.table__td-actions {
 
   .dropdown {
     display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -$base-unit*2;
   }
 
   .btn-transparent {
     width: $base-unit*4;
     height: $base-unit*4;
     padding: 0;
+
+    .iconholder {
+      width: $base-unit*4;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .icon {
+      @include font-size(30);
+      margin: -1px 0 0 0;
+    }
   }
 
-  .iconholder {
-    width: $base-unit*4;
-    display: inline-block;
-    text-align: center;
-  }
+  .table__td-icon-2 {
+    position: absolute;
+    top: $base-unit*5;
+    left: $base-unit/2;
 
-  .icon {
-    @include font-size(24);
-    margin: -1px 0 0 0;
+    .icon {
+      @include font-size($small-font-size);
+    }
   }
 }
 
@@ -135,6 +156,8 @@ td.table-actions {
 
   .table-responsive {
 
+    table-layout: initial;
+
     th, td {
       max-width: 300px;
     }
@@ -146,33 +169,32 @@ td.table-actions {
     td {
       display: table-cell;
       padding: $base-unit*1.5 $base-unit;
+      height: auto;
 
-      &:empty {
+
+      &:empty, &.table__td-empty {
         display: table-cell;
         
       }
 
-      &:first-child {
-        padding-right: $base-unit;
-      }
-
     }
 
-    td:first-child.table-icon {
+    td:not(.table__td-actions) {
+      height: auto;
+      overflow: auto;
+      white-space: initial;
+      text-overflow: initial;
+      padding: $base-unit*1.5 $base-unit;
+    }
+
+    .table__td-icon {
       position: relative;
-      padding-top: $base-unit*1.5;
+      padding: $base-unit*1.5 0 0 0;
+      width: $base-unit*5;
+    }
 
-      &:empty {
-        display: table-cell;
-
-        &+ td {
-          padding-left: $base-unit;
-        }
-      }
-
-      &+ td {
-        padding-left: $base-unit;
-      }
+    .table__td-primary {
+      @include font-size($base-font-size);
     }
 
     tbody {
@@ -181,25 +203,68 @@ td.table-actions {
       tr {
         padding: 0;
         display: table-row;
+        min-height: 0;
       }
     }
   }
 
   .table-responsive--has-actions {
-    td:first-child:not(.table-icon) {
-      padding-right: $base-unit;
+    td:not(.table__td-icon) {
+      padding: $base-unit*1.5 $base-unit;
+    } 
+  }
+
+  .table__td-actions {
+    padding: 0;
+    vertical-align: middle;
+
+    .dropdown, .table__td-icon-2 {
+      position: relative;
+      margin: 0;
+      top: auto;
+      right: auto;
+      left: auto;
     }
 
-    td:first-child.table-icon {
-      &+ td {
-        padding-right: $base-unit;
-      }
+    .table__td-icon-2 {
+      width: $base-unit*4;
+      text-align: center;
+      display: inline-block;
+      margin: $base-unit/2 0;
+    }
+    
+  }
+
+  .table__td-primary {
+    font-weight: normal;
+    color: $primary-color;
+
+    a {
+      color: $primary-color;
     }
   }
 
-  td.table-actions {
-    position: static;
-    padding: 0;
-    vertical-align: middle;
+  .table__td-secondary {
+    font-style: normal;
+  }
+}
+
+@include media-query(lg) {
+
+  .table-responsive--has-actions {
+
+    td.table__td-actions {
+      white-space: nowrap;
+
+      .table__td-icon-2 {
+        width: auto;
+        margin: 0 $base-unit 0 0;
+        vertical-align: sub;
+
+        .icon {
+          @include font-size(18);
+        }
+      }
+    }
   }
 }

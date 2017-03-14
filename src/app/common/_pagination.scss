@@ -4,12 +4,7 @@
 }
 
 .list-actions__pagination {
-  margin: $base-unit 0 0 0;
-  text-align: left;
-
-  span {
-    margin-left: 0;
-  }
+  display: none;
 }
 
 .pagination-page, .pagination-prev, .pagination-next, .pagination-first, .pagination-last {
@@ -69,7 +64,12 @@
   }
 
   .list-actions__pagination {
-    margin: 0
+    display: block;
+    text-align: left;
+
+    span {
+      margin-left: 0;
+    }
   }
 }
 

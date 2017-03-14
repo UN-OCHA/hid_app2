@@ -8,6 +8,15 @@
   .search-actions & {
     border: 1px solid $primary-color;
   }
+
+}
+
+.site-header__search {
+  .search-form.open {
+    & > .dropdown-menu {
+      top: $base-unit*5;
+    }
+  }
 }
 
 .search-form__button {

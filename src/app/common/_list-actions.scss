@@ -1,12 +1,9 @@
 .list-actions {
-  padding: $base-unit 0;
+  padding: $base-unit/2 0;
 }
 
 .list-actions__count {
   @include font-size($small-font-size);
-  font-family: $heading-font-light;
-  color: $dark-blue;
-  font-style: italic;
 }
 
 .btn-toggle-admin, .btn-toggle-filters {
@@ -33,17 +30,20 @@
     padding: $base-unit*2 0;
   }
 
-    .list-actions__count {
-      @include font-size($base-font-size);
-    }
+  .list-actions__count {
+    @include font-size($base-font-size);
+    font-family: $heading-font-light;
+    color: $dark-blue;
+    font-style: italic;
+  }
 
-    .btn-toggle-admin, .btn-toggle-filters {
-      top: $base-unit/2;
-    }
+  .btn-toggle-admin, .btn-toggle-filters {
+    top: $base-unit/2;
+  }
 
-    .btn-toggle-admin, .btn-toggle-filters {
-      right: $base-unit*2;
-    }
+  .btn-toggle-admin, .btn-toggle-filters {
+    right: $base-unit*2;
+  }
 
   .btn-toggle-filters--has-admin {
     right: $base-unit*8;
