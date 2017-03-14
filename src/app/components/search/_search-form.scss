@@ -70,6 +70,21 @@
   transition: border-color 0.3s ease;
 }
 
+.search-form__label {
+  font-weight: normal;
+  color: $text-dark;
+  font-style: italic;
+  @include font-size(12);
+  position: absolute;
+  top: 15px;
+  left: $base-unit*3.5;
+  height: $base-unit*2;
+  width: 88%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 input[type="search"].search-form__input {
   padding-left: $base-unit*3.5;
   text-overflow: ellipsis;
@@ -81,8 +96,12 @@ input[type="search"].search-form__input {
       color: $primary-color;
     }
 
-    &+ * + .search-form__active {
+    &+ * + * + .search-form__active {
       border-color: $medium-blue;
+    }
+
+    &+ .search-form__label {
+      display: none;
     }
   }
 
@@ -92,6 +111,12 @@ input[type="search"].search-form__input {
 
   .site-header__search & {
     height: $site-header-height-xs;
+  }
+
+  &.ng-not-empty {
+    &+ .search-form__label {
+      display: none;
+    }
   }
 }
 
@@ -153,6 +178,13 @@ input[type="search"].search-form__input {
     min-width: $base-unit*40;
   }
 
+  .search-form__label {
+    @include font-size($small-font-size);
+    width: 84%;
+    height: $base-unit*3;
+    top: 14px;
+  }
+
 }
 
 @include media-query(md) {
@@ -184,6 +216,12 @@ input[type="search"].search-form__input {
 
   .search-actions__toggle-lists {
     margin: 2px $base-unit*6 0 $base-unit*2;
+  }
+
+  .search-form__label {
+    @include font-size($base-font-size);
+    top: $base-unit*2.25;
+
   }
 
 }

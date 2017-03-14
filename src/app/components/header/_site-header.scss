@@ -27,6 +27,7 @@ header {
   background: url('../img/logo.svg') left center no-repeat;
   background-size: auto 84%;
   position: relative;
+  flex-shrink: 0;
 
   .no-svg & {
     background-image: url('../img/logo.png');
@@ -65,6 +66,7 @@ header {
 
 .site-header__search {
   flex-grow: 1;
+  margin-right: $base-unit/2;
   height: 100%;
   position: relative;
 
