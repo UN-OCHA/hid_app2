@@ -24,13 +24,13 @@ header {
   display: block;
   height: $base-unit*5;
   width: $base-unit*5;
-  background: url('../img/logo.svg') left center no-repeat;
+  background: url('../img/logo-globe.svg') center no-repeat;
   background-size: auto 84%;
   position: relative;
   flex-shrink: 0;
 
   .no-svg & {
-    background-image: url('../img/logo.png');
+    background-image: url('../img/logo-globe.png');
   }
 
   &.site-header__logo--loggedout {
@@ -131,7 +131,11 @@ header {
   .site-header__logo {
     width: $base-unit*30;
     margin-right: $base-unit*3;
+    background: url('../img/logo.svg') left center no-repeat;
     background-size: 100%;
+    .no-svg & {
+      background-image: url('../img/logo.png');
+    }
   }
 
   .site-header__nav-toggle {
