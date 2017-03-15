@@ -15,6 +15,19 @@
     $scope.language = gettextCatalog.getCurrentLanguage();
     $scope.sidebar = SidebarService;
 
+    function isTextInput(node) {
+      return ['INPUT', 'TEXTAREA'].indexOf(node.nodeName) !== -1;
+    }
+    // Fix for iOS keyboard not closing when tap outside of an input
+    function closeIOSKeyboard () { 
+      document.addEventListener('touchstart', function(e) {
+        if (!isTextInput(e.target) && isTextInput(document.activeElement)) {
+          document.activeElement.blur();
+        }
+      }, false);
+    }
+    closeIOSKeyboard();
+
     $scope.keyupEvent = function (event) {
       if (event.key === 'Escape' || event.code === 'Escape' || event.keyCode === 27) {
         $scope.sidebar.close();
