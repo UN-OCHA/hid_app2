@@ -64,6 +64,18 @@
 
   .ui-select-multiple input.ui-select-search {
     width: 100%!important;
+
+    &:focus {
+      box-shadow: none;
+      background: white;
+    }
+  }
+
+  input[type="text"] {
+    &:focus {
+      box-shadow: none;
+      background: white;
+    }
   }
 }
 

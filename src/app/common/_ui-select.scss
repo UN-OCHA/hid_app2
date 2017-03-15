@@ -74,7 +74,7 @@
 }
 
 .ui-select-multiple input.ui-select-search {
-  background-color: transparent !important; /* To prevent double background when disabled */
+  background-color: transparent; /* To prevent double background when disabled */
 }
 
 .ui-select-multiple .ui-select-match-item {
@@ -168,7 +168,7 @@
 
 .ui-select-toggle {
   position: relative;
-  padding: $base-unit*1.5 $base-unit*2 $base-unit*1.5 0;
+  padding: $base-unit*2 $base-unit*2 $base-unit*2 0;
   display: block;
   min-height: $base-unit*5;
   font-style: italic;

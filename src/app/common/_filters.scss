@@ -45,8 +45,13 @@
     border-bottom: transparent;
 
     input[type="search"] {
+      margin-bottom: -1px;
+      padding-top: $base-unit*2;
+      padding-bottom: $base-unit*2;
+
       &:focus {
         @include filter-input-focus-style();
+        border: none;
       }
     }
   }
@@ -55,6 +60,7 @@
 
     &.btn-default-focus {
       @include filter-input-focus-style();
+      border: none;
     }
   }
 }
@@ -99,9 +105,11 @@
   .iconholder {
     position: absolute;
     left: $base-unit/2;
-    top: $base-unit*1.5;
+    top: 50%;
+    margin-top: -9px;
     color: $text-dark;
   }
+
 }
 
 .filter__search__input[type="text"] {
@@ -113,6 +121,8 @@
 
   &:focus {
     padding-left: $base-unit*4;
+    border: none;
+    background: white;
   }
 }
 
