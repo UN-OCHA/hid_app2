@@ -26,7 +26,7 @@
             <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
         <![endif]-->
     </head>
-    <body  ng-controller="AppCtrl" ng-class="{'toggled' : sidebar.open}" class="lang-{{language}}" ng-keyup="keyupEvent($event)">
+    <body  ng-controller="AppCtrl" ng-class="{'toggled' : sidebar.open, 'prevent-mobile-scroll': sidebar.underlay}" class="lang-{{language}}" ng-keyup="keyupEvent($event)">
 
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -45,7 +45,8 @@
               </a>
           </div>
           <div class="container" id="main" role="main" ng-view></div>
-          <div class="sidebar-overlay" ng-class="{'in' : sidebar.open}" ng-click="closeSidebar()" ng-swipe-left="closeSidebar()"></div>
+          <div class="sidebar-underlay" ng-class="{'in' : sidebar.underlay}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
+          <div class="sidebar-overlay" ng-class="{'in' : sidebar.open}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
           <ng-include ng-if="!hideHeaderFooter" src="'app/components/footer/footer.html'"></ng-include>
         </div>
 
@@ -88,6 +89,8 @@
         <script src="app/common/loader.directive.js"></script>
         <script src="app/common/pageAlert.directive.js"></script>
         <script src="app/common/translations.js"></script>
+        <script src="app/common/sticky.directive.js"></script>
+        <script src="app/common/tabs.directive.js"></script>
         <script src="app/components/start/start.module.js"></script>
         <script src="app/components/start/start.controller.js"></script>
         <script src="app/components/start/tutorial.controller.js"></script>
@@ -153,8 +156,9 @@
         <script src="app/components/service/servicesPage.controller.js"></script>
         <script src="app/components/service/allSubscriptions.controller.js"></script>
         <script src="app/components/landing/landing.controller.js"></script>
-        <script src="app/common/tabs.directive.js"></script>
-
+        <script src="app/components/sidebar/sidebar.module.js"></script>
+        <script src="app/components/sidebar/sidebar.service.js"></script>
+        <script src="app/components/sidebar/sidebar.directive.js"></script>
 
         <!-- endbuild -->
 

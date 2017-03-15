@@ -5,48 +5,20 @@
     .module('app.common')
     .controller('AppCtrl', AppCtrl);
 
-  AppCtrl.$inject = ['$rootScope', '$scope', '$location', '$window', 'alertService', 'gettextCatalog', 'User'];
+  AppCtrl.$inject = ['$rootScope', '$scope', '$location', '$window', 'alertService', 'gettextCatalog', 'SidebarService', 'User'];
 
-  function AppCtrl($rootScope, $scope, $location, $window, alertService, gettextCatalog, User) {
+  function AppCtrl($rootScope, $scope, $location, $window, alertService, gettextCatalog, SidebarService, User) {
     $rootScope.canCache = true;
     $scope.currentUser = null;
     $scope.currentUserResource = null;
     $scope.filters = {};
     $scope.language = gettextCatalog.getCurrentLanguage();
-    $scope.sidebar = {
-      open: false,
-      sidebars: {
-        admin: false,
-        listsFilters: false,
-        userFilters: false
-      }
-    };
+    $scope.sidebar = SidebarService;
+
     $scope.keyupEvent = function (event) {
-      if (!$scope.sidebar) {
-        return;
+      if (event.key === 'Escape' || event.code === 'Escape' || event.keyCode === 27) {
+        $scope.sidebar.close();
       }
-      if ($scope.sidebar.open && (event.key === 'Escape' || event.code === 'Escape' || event.keyCode === 27)) {
-        $scope.sidebar.open = false;
-      }
-    }
-
-    $scope.closeSidebar = function () {
-      if ($scope.sidebar.open) {
-        $scope.sidebar.open = false;
-        $rootScope.$emit('sidebar-closed');
-      }
-    };
-
-    $scope.toggleSidebar = function (name) {
-      if ($scope.sidebar.sidebars[name] && $scope.sidebar.open) {
-        $scope.sidebar.open = false;
-        $rootScope.$emit('sidebar-closed');
-        return;
-      }
-      $scope.sidebar.open = true;
-      angular.forEach($scope.sidebar.sidebars, function(value, key) {
-        $scope.sidebar.sidebars[key] = name === key ? true : false;
-      });
     };
 
     $scope.removeCurrentUser = function() {
@@ -84,8 +56,8 @@
     $rootScope.$on('updateCurrentUser', function () {
       User.get({userId: $scope.currentUser.id}, function (user) {
         $scope.setCurrentUser(user);
-      })
-    })
+      });
+    });
 
     $scope.activeNav = function (path) {
       return $location.path() === path;
@@ -109,7 +81,7 @@
         gettextCatalog.setCurrentLanguage(locale);
         $scope.language = locale;
       }
-    }
+    };
 
     $scope.changeLanguage = function (lang) {
       gettextCatalog.setCurrentLanguage(lang);
@@ -118,16 +90,16 @@
       User.update($scope.currentUser, function (user) {
         $scope.setCurrentUser(user);
       });
-    }
+    };
 
     $scope.getCurrentLanguage = function () {
       var lang = gettextCatalog.getCurrentLanguage();
       return lang.toUpperCase();
-    }
+    };
 
     var initView = function () {
       alertService.resetPageAlert();
-      $scope.closeSidebar();
+      $scope.sidebar.close();
       $scope.hideHeaderFooter = hideHeaderFooter();
     };
 

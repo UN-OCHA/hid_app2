@@ -8,7 +8,7 @@
   <p><span translate>Type</span>: {{service.type}}</p>
 
   <div class="page-header__buttons">
-    <button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
+    <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
       <icon name="wheel" text="Actions"></icon>
     </button>
   </div>

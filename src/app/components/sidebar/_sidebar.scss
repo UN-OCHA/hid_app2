@@ -128,6 +128,22 @@
   font-family: $heading-font-light;
 }
 
+.sidebar-underlay {
+  width: 0;
+  position: fixed;
+  top: $header-height-xs + 4px;
+  left: 0;
+  bottom: 0;
+  background: $light-grey;
+  height: 100%;
+  transition: width 0.3s ease;
+  z-index: 101;
+
+  &.in {
+    width: $sidebar-width-xs;
+  }
+}
+
 .sidebar-overlay.in {
   position: absolute;
   top: 0;
@@ -146,6 +162,10 @@
     &.in {
       transform: translate3d(-$base-unit*2, 0, 0);
     }
+  }
+
+  .sidebar-underlay {
+    display: none;
   }
 }
 
@@ -176,6 +196,10 @@
     &.in {
       transform: none;
     }
+  }
+
+  .sidebar-underlay {
+    display: none;
   }
 
 }

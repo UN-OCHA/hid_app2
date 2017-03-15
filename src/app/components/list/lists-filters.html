@@ -1,4 +1,4 @@
-<div class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.listsFilters}">
+<div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.listsFilters}">
 
   <div ng-if="sidebar.sidebars.listsFilters" class="sidebar__inner">
 
@@ -13,7 +13,7 @@
       </li>
     </ul>
 
-    <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
+    <button type="button" class="btn btn-transparent sidebar__close" ng-click="sidebar.close()">
       <icon name="cancel" text="close"></icon>
     </button>
 

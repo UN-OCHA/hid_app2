@@ -1,7 +1,7 @@
-<div class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
+<div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
   <div ng-if="sidebar.sidebars.admin" class="sidebar__inner">
 
-    <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
+    <button type="button" class="btn btn-transparent sidebar__close" ng-click="sidebar.close()">
       <icon name="cancel" text="close"></icon>
     </button>
 

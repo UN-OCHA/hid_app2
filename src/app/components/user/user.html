@@ -12,11 +12,11 @@
   </div>
 </div>
 
-<div class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
+<div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
   <div class="sidebar__inner">
     <h2 class="sidebar__heading" translate>User admin</h2>
 
-    <button type="button" class="btn btn-transparent sidebar__close" ng-click="closeSidebar()">
+    <button type="button" class="btn btn-transparent sidebar__close" ng-click="sidebar.close()">
       <icon name="cancel" text="close"></icon>
     </button>
 
@@ -132,7 +132,7 @@
         <icon name="check" text="Close"></icon>
       </button>
 
-      <button class="btn-icon btn-toggle-admin" type="button" ng-click="toggleSidebar('admin')" ng-show="!showProfileForm">
+      <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin')" ng-show="!showProfileForm">
         <icon name="wheel" text="Actions"></icon>
       </button>
     </div> 

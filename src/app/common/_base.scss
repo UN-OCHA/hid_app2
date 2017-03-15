@@ -113,6 +113,10 @@ body.toggled {
   }
 }
 
+body.prevent-mobile-scroll {
+  overflow: hidden;
+}
+
 img {
   max-width: 100%;
   display: inline-block;
