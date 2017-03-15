@@ -1,8 +1,8 @@
 .footer {
-  background: $primary-color;
-  color: $text-light;
-  padding-top: $base-unit*3;
-  padding-bottom: $base-unit*3;
+	background: $primary-color;
+	color: $text-light;
+	padding-top: $base-unit*3;
+	padding-bottom: $base-unit*3;
 }
 
 .footer-links {
@@ -60,82 +60,8 @@
 	margin: 0 $base-unit 0 0;
 }
 
-.footer-platforms__heading {
-	font-weight: normal;
-	@include font-size($small-font-size);
-}
-
-.footer-platforms__list {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.footer-platforms__item {
-	position: relative;
-	width: percentage(1/3);
-	margin-bottom: $base-unit*2;
-	padding: 0 $base-unit*3 0 0;
-	
-	.no-flexbox & {
-		display: inline-block;
-	}
-}
-
-.footer-platforms__logo {
-	display: block;
-	width: 100%;
-	max-width: 100px;
-	height: $base-unit*6;
-	text-decoration: none;
-	text-indent: -99999px;
-	transition: opacity 0.3s ease;
-	background-position: left bottom;
-	background-repeat: no-repeat;
-	background-size: contain;
-	color: $text-light;	
-
-	.no-svg & {
-		text-indent: 0;
-		width: auto;
-		height: auto;
-	}
-
-	&:hover, &:focus {
-		opacity: 0.6;
-	}
-
-}
-
-.footer-platforms__logo--humanitarian-response {
-	background-image: url('../img/platform-logos/humanitarian-response.svg');
-}
-
-.footer-platforms__logo--reliefweb {
-	background-image: url('../img/platform-logos/reliefweb.svg');
-}
-
-.footer-platforms__logo--iasc {
-	background-image: url('../img/platform-logos/iasc.svg');
-}
-
-.footer-platforms__logo--dart {
-	background-image: url('../img/platform-logos/dart.svg');
-}
-
-.footer-platforms__logo--acaps {
-	background-image: url('../img/platform-logos/acaps.svg');
-}
-
-.footer-platforms__logo--factr {
-	background-image: url('../img/platform-logos/factr.svg');
-}
-
-.footer-platforms__logo--hxl {
-	background-image: url('../img/platform-logos/hxl.svg');
-}
-
-.footer-platforms__logo--humanitarian-leadership {
-	background-image: url('../img/platform-logos/humanitarian-leadership-academy.svg');
+.footer-platforms {
+	display: none;
 }
 
 @include media-query(sm) {
@@ -155,17 +81,17 @@
 @include media-query(md) {
 	
 	.footer {
-  	padding-top: $base-unit*4;
-  	padding-bottom: $base-unit*4;
-  }
+		padding-top: $base-unit*4;
+		padding-bottom: $base-unit*4;
+	}
 
-  .footer-social {
-  	text-align: right;
-  }
+	.footer-social {
+		text-align: right;
+	}
 
-  .footer-platforms__list {
-  	flex-wrap: nowrap;
-  }
+	.footer-platforms__list {
+		flex-wrap: nowrap;
+	}
 
 	.footer-platforms__item {
 		width: auto;
@@ -235,8 +161,8 @@
 @include media-query(lg) {
 
 	.footer {
-  	height: $footer-height-lg;
-  }
+		height: $footer-height-lg;
+	}
 
 	.footer-links__item {
 		margin: 0 $base-unit*2 0 0;
@@ -252,6 +178,88 @@
 		&:after {
 			bottom: $base-unit*2;
 		}
+	}
+
+	.footer-platforms {
+		display: block;
+	}
+
+	.footer-platforms__heading {
+		font-weight: normal;
+		@include font-size($small-font-size);
+	}
+
+	.footer-platforms__list {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.footer-platforms__item {
+		position: relative;
+		width: percentage(1/3);
+		margin-bottom: $base-unit*2;
+		padding: 0 $base-unit*3 0 0;
+
+		.no-flexbox & {
+			display: inline-block;
+		}
+	}
+
+	.footer-platforms__logo {
+		display: block;
+		width: 100%;
+		max-width: 100px;
+		height: $base-unit*6;
+		text-decoration: none;
+		text-indent: -99999px;
+		transition: opacity 0.3s ease;
+		background-position: left bottom;
+		background-repeat: no-repeat;
+		background-size: contain;
+		color: $text-light;	
+
+		.no-svg & {
+			text-indent: 0;
+			width: auto;
+			height: auto;
+		}
+
+		&:hover, &:focus {
+			opacity: 0.6;
+		}
+
+	}
+
+	.footer-platforms__logo--humanitarian-response {
+		background-image: url('../img/platform-logos/humanitarian-response.svg');
+	}
+
+	.footer-platforms__logo--reliefweb {
+		background-image: url('../img/platform-logos/reliefweb.svg');
+	}
+
+	.footer-platforms__logo--iasc {
+		background-image: url('../img/platform-logos/iasc.svg');
+	}
+
+	.footer-platforms__logo--dart {
+		background-image: url('../img/platform-logos/dart.svg');
+	}
+
+	.footer-platforms__logo--acaps {
+		background-image: url('../img/platform-logos/acaps.svg');
+	}
+
+	.footer-platforms__logo--factr {
+		background-image: url('../img/platform-logos/factr.svg');
+	}
+
+	.footer-platforms__logo--hxl {
+		background-image: url('../img/platform-logos/hxl.svg');
+	}
+
+	.footer-platforms__logo--humanitarian-leadership {
+		background-image: url('../img/platform-logos/humanitarian-leadership-academy.svg');
 	}
 
 }
