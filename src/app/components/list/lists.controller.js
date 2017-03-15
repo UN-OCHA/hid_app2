@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListsCtrl', ListsCtrl);
 
-  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'SearchService'];
+  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'SearchService', 'SidebarService'];
 
-  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, SearchService) {
+  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, SearchService, SidebarService) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;
@@ -144,8 +144,7 @@
 
     $scope.applyFilters = function () {
       $scope.filter();
-      $scope.sidebar.open = false;
-      $rootScope.$emit('sidebar-closed');
+      SidebarService.close();
     };
 
     $scope.saveSearch = function (searchList) {

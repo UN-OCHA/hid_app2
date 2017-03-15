@@ -5,8 +5,8 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$log', '$q', '$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'SearchService', 'UserDataService', 'User', 'List', 'gettextCatalog'];
-  function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, SearchService, UserDataService, User, List, gettextCatalog) {
+  UsersCtrl.$inject = ['$log', '$q', '$scope', '$rootScope', '$routeParams', '$window', 'hrinfoService', 'SearchService', 'SidebarService', 'UserDataService', 'User', 'List', 'gettextCatalog'];
+  function UsersCtrl($log, $q, $scope, $rootScope, $routeParams, $window, hrinfoService, SearchService, SidebarService, UserDataService, User, List, gettextCatalog) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.selectedFilters = {};
@@ -224,8 +224,7 @@
 
     $scope.applyFilters = function () {
       $scope.filter();
-      $scope.sidebar.open = false;
-      $rootScope.$emit('sidebar-closed');
+      SidebarService.close();
     };
 
     $scope.filter = function () {
