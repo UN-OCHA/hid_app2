@@ -48,7 +48,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="list in lists">
-        <td><a ng-href="/lists/{{list._id}}" ng-click="saveSearch(list)">{{list.name}}</a></td>
+        <td class="table__td-primary"><a ng-href="/lists/{{list._id}}" ng-click="saveSearch(list)">{{list.name}}</a></td>
         <td>
           <span class="list-type list-type--{{list.type}}">
             {{list.displayType || list.type}}
