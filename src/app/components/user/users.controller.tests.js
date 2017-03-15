@@ -4,7 +4,7 @@
   describe('Users controller', function () {
 
     var countries, defaultParams, filteredUsers, filterTypes, initialUsers, listFixture, listInfo, listParams,
-    listQueryResponse, mockGetText, mockhrinfoService, mockList, mockSearchService, mockUser, mockUserDataService, scope, searchParams, 
+    listQueryResponse, mockGetText, mockhrinfoService, mockList, mockSearchService, mockSidebarService, mockUser, mockUserDataService, scope, searchParams, 
     userFixture;
 
     defaultParams = { limit: 50, offset: 0, sort: 'name' };
@@ -55,6 +55,10 @@
       mockGetText.getString = function () {};
       module('gettext', function($provide) {
         $provide.value('gettextCatalog', mockGetText);
+      });
+
+      module('app.sidebar', function($provide) {
+        $provide.value('SidebarService', mockSidebarService);
       });
 
       module('app.user', function($provide) {
