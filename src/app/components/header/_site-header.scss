@@ -35,6 +35,11 @@ header {
 
   &.site-header__logo--loggedout {
     width: $base-unit*32;
+    background: url('../img/logo.svg') center no-repeat;
+
+    .no-svg & {
+      background-image: url('../img/logo-globe.png');
+    }
   }
 
   .no-flexbox & {
