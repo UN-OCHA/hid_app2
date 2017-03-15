@@ -3,7 +3,7 @@
 }
 
 .modal {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -47,7 +47,7 @@
 }
 
 .modal-backdrop {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -181,5 +181,11 @@
   .modal-icon {
     @include font-size(40);
     margin-bottom: $base-unit*2;
+  }
+}
+
+@include media-query(lg) {
+  .modal, .modal-backdrop {
+    position: fixed;
   }
 }
