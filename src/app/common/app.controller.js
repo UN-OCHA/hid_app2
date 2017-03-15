@@ -13,6 +13,7 @@
     $scope.currentUserResource = null;
     $scope.filters = {};
     $scope.language = gettextCatalog.getCurrentLanguage();
+    $scope.isCordova = !!window.cordova;
     $scope.sidebar = {
       open: false,
       sidebars: {
