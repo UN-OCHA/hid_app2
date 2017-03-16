@@ -100,6 +100,12 @@ button[disabled], a.disabled {
   }
 }
 
+.btn-body-font {
+  font-family: $body-font;
+  font-weight: bold;
+  text-transform: none;
+}
+
 .btn-danger {
   @include btn();
   border: 1px solid $error-color;

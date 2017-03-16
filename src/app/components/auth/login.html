@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
-    <div class="page-header">
+    <div class="page-header page-header--login">
       <h1 class="page-header__heading" translate>Log in to<br> Humanitarian ID.</h1>
     </div>
     <form ng-submit="login()">
@@ -14,10 +14,10 @@
       </div>
       <div class="row form-field">
         <div class="col-xs-6">
-          <a href="/register" class="btn-secondary btn-block" translate>Register</a>
+          <a href="/register" class="btn-secondary btn-block btn-body-font" translate>Register</a>
         </div>
         <div class="col-xs-6">
-          <button type="submit" class="btn-primary btn-block" ng-class="{'saving' : saving}">
+          <button type="submit" class="btn-primary btn-block btn-body-font" ng-class="{'saving' : saving}">
             <loader type="inline" text="" ng-if="saving"></loader>
             <span ng-if="!saving" translate>Login</span>
           </button>
