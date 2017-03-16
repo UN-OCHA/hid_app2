@@ -1,0 +1,11 @@
+@mixin input-focus-style() {
+  background: lighten($light-blue, 5%);
+  outline: none;
+  box-shadow: inset 0px -1px 0px 0px $primary-color;
+}
+
+@mixin filter-input-focus-style() {
+  outline: none;
+  border-bottom: 1px solid $border-grey;
+  background: white;
+}

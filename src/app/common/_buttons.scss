@@ -27,35 +27,6 @@ button[disabled], a.disabled {
   }
 }
 
-@mixin btn() {
-  font-family: $heading-font-light;
-  text-transform: uppercase;
-  transition: background 0.3s ease;
-  padding: $base-unit*1.5 $base-unit*2;
-  text-decoration: none;
-  display: inline-block;
-  line-height: 1;
-  background: transparent;
-
-  .icon {
-    margin: -1px $base-unit/2 0 $base-unit/2;
-    @include font-size(18);    
-    display: inline-block;
-  }
-
-  &.active {
-    &:hover, &:focus {
-      background: $dark-blue;
-    }
-  }
-
-  &:focus {
-    border-color: black;
-    box-shadow: 0px 0px 0px 1px black;
-    outline: none;
-  }
-}
-
 .btn-primary {
   @include btn();
   border: 1px solid $primary-color;

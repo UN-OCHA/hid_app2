@@ -32,7 +32,7 @@
         heading: '@'
       },
       transclude: true,
-      templateUrl: 'app/common/tab.html',
+      templateUrl: 'app/components/tabs/tab.html',
       link: function(scope, elem, attr, tabsetCtrl) {
         scope.toggle = function () {
           tabsetCtrl.toggle(scope);
@@ -57,7 +57,7 @@
         vertical: '@',
         responsive: '@' 
       },
-      templateUrl: 'app/common/tabset.html',
+      templateUrl: 'app/components/tabs/tabset.html',
       bindToController: true,
       controllerAs: 'tabset',
       controller: function() {

@@ -3,6 +3,8 @@
 // Generate semantic grid columns with these mixins.
 //
 // Adapted from Bootstrap v4 https://github.com/twbs/bootstrap/tree/v4-dev/scss
+$grid-gutter: $base-unit*4 !default;
+$grid-columns: 12 !default;
 
 @mixin make-container() {
   margin-left: auto;

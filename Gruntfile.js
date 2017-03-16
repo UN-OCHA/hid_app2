@@ -53,8 +53,7 @@ module.exports = function(grunt) {
       options: {},
       dist: {
         files: {
-          'src/assets/css/common.scss': ['src/app/common/_setup.scss', 'src/app/common/*'],
-          'src/assets/css/components.scss': ['src/app/components/**/*']
+          'src/assets/css/main.scss': ['src/app/common/variables/*.scss', 'src/app/common/mixins/*.scss', 'src/app/common/base/*.scss', 'src/app/common/forms/*.scss', 'src/app/common/*.scss', 'src/app/components/**/*'],
         }
       }
     },
@@ -74,17 +73,10 @@ module.exports = function(grunt) {
         }
       }
     },
-    concat: {
-      css: {
-        files: {
-          'src/assets/css/main.scss': ['src/assets/css/common.scss', 'src/assets/css/components.scss']
-        }
-      }
-    },
     watch: {
       sass: {
         files: ['src/app/common/**/*.scss', 'src/app/components/**/*.scss'],
-        tasks: ['sass_import', 'concat', 'sass:dist', 'autoprefixer'],
+        tasks: ['sass_import', 'sass:dist', 'autoprefixer'],
         options: {
           spawn: false,
         }
@@ -250,7 +242,6 @@ module.exports = function(grunt) {
     'nggettext_extract',
     'nggettext_compile',
     'sass_import',
-    'concat:css',
     'sass:dist',
     'modernizr',
     'autoprefixer',

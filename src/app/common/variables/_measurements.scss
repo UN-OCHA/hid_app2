@@ -1,0 +1,19 @@
+$base-unit: 8px;
+
+$max-width: 1400px;
+
+$global-header-height: $base-unit*5;
+$site-header-height-xs: $base-unit*6;
+$site-header-height-md: $base-unit*7.5;
+$header-height-xs: $global-header-height + $site-header-height-xs;
+$header-height-md: $global-header-height + $site-header-height-md;
+
+$footer-height-lg: $base-unit*24;
+
+$breadcrumbs-height: $base-unit*3;
+
+$sidebar-width-xs: $base-unit*35;
+$sidebar-width-md: $base-unit*40;
+$sidebar-width-xxl: $base-unit*50;
+
+$base-border-radius: 4px;
