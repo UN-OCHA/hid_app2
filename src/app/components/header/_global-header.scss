@@ -48,97 +48,24 @@
 
 .global-header__back {
   margin-left: -$base-unit*1.5;
-  width: 14%;
+  width: calc(25% + 12px);
 
   .btn-transparent {
     color: $text-light;
-  }
-}
-
-.global-header__sites {
-  position: static;
-  width: 22%;
-
-  &.global-header__sites--full {
-    width: auto;
-  }
-
-  .no-flexbox & {
-    float: left;
   }
 
   .no-calc & {
     width: 25%;
   }
-
-  .dropdown-menu {
-    top: $base-unit*5;
-    left: 0;
-    right: auto;
-    width: 100%;
-    background: $primary-color;
-    padding: $base-unit;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.15);
-    
-    li {
-      border-color: rgba(255,255,255,0.5);
-    }
-
-    a {
-      color: $text-light;
-      @include font-size($base-font-size);
-      padding: $base-unit*1.5 $base-unit;
-
-      &:hover, &:focus {
-        background: $dark-blue;
-      }
-    }
-  }
 }
 
-.global-header__sites-btn {
-  color: $text-light;
-  text-transform: uppercase;
-  text-align: left;
-  padding: 0 $base-unit;
-  height: $global-header-height;
-  width: 100%;
-  text-align: center;
-
-  &:hover, &:focus {
-    background: darken($primary-color, 10%);
-    outline: none;
-    text-decoration: none;
-  }
-}
-
-.global-header__sites-arrow {
-  .icon {
-    @include font-size($small-font-size);
-    color: rgba(255,255,255,0.5);
-    margin: 2px 0 0 0;
-
-    .open & {
-      transform: rotate(180deg)
-    }
-  }
-}
-
-.global-header__sites-label {
+.global-header__sites {
   display: none;
-}
-
-.global-header__sites-icon {
-
-  .icon {
-    @include font-size(18);
-    margin: 0;
-  }
 }
 
 .global-header__nav {
   margin-right: -$base-unit*1.5;
-  width: 66%;
+  width: calc(75% + 12px);
 
   .no-flexbox & {
     float: right;
@@ -162,31 +89,80 @@
   }
 
   .global-header__sites {
+    display: block;
     margin-left: 0;
     width: auto;
     position: relative;
 
+    &.global-header__sites--full {
+      width: auto;
+    }
+
+    .no-flexbox & {
+      float: left;
+    }
+
+    .no-calc & {
+      width: 25%;
+    }
+
     .dropdown-menu {
-      padding: 0;
+      top: $base-unit*5;
+      left: 0;
+      right: auto;
+      width: 100%;
+      background: $primary-color;
+      padding: $base-unit;
       min-width: 230px;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+      
+      li {
+        border-color: rgba(255,255,255,0.5);
+      }
+
+      a {
+        color: $text-light;
+        @include font-size($base-font-size);
+        padding: $base-unit*1.5 $base-unit;
+
+        &:hover, &:focus {
+          background: $dark-blue;
+        }
+      }
     }
   }
 
   .global-header__sites-btn {
     @include font-size($global-nav-font-size);
+    color: $text-light;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0 $base-unit;
+    height: $global-header-height;
+    width: 100%;
+    text-align: center;
+
+    &:hover, &:focus {
+      background: darken($primary-color, 10%);
+      outline: none;
+      text-decoration: none;
+    }
 
     .icon {
       @include font-size($global-nav-font-size);
     }
   }
 
-  .global-header__sites-label {
-    display: inline-block;
-  }
+  .global-header__sites-arrow {
+    .icon {
+      @include font-size($small-font-size);
+      color: rgba(255,255,255,0.5);
+      margin: 2px 0 0 0;
 
-  .global-header__sites-icon {
-    display: none;
+      .open & {
+        transform: rotate(180deg)
+      }
+    }
   }
 
   .global-header__nav {
