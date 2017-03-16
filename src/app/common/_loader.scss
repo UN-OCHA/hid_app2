@@ -25,6 +25,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	.no-flexbox & {
+		display: block;
+	}
 }
 
 .loader {

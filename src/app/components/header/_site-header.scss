@@ -14,6 +14,7 @@ header {
   height: $site-header-height-xs;
 
   .no-flexbox & {
+    display: block;
     height: $site-header-height-md;
     padding-top: $base-unit;
     padding-bottom: 0;

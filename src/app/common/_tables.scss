@@ -182,7 +182,7 @@
     td:not(.table__td-actions) {
       height: auto;
       overflow: auto;
-      white-space: initial;
+      white-space: normal;
       text-overflow: initial;
       padding: $base-unit*1.5 $base-unit;
     }

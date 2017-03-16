@@ -38,6 +38,8 @@
   }
 
   .no-flexbox & {
+    display: block;
+    
     &:after {
       content: "";
       display: table;
