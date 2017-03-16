@@ -16,7 +16,7 @@
             </ui-select-choices>
           </ui-select>
         </div>
-        <button type="submit" class="btn-primary btn-block" ng-class="{'saving' : savingMembers}">
+        <button type="submit" class="btn-primary btn-block" ng-class="{'saving' : savingMembers}" ng-disabled="!usersAdded.users.length">
           <loader type="inline" text="" ng-if="savingMembers"></loader>
           <span ng-if="!savingMembers" translate>Add Member</span>
         </button>
