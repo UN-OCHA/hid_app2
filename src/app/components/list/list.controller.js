@@ -153,43 +153,6 @@
       });
     };
 
-    // Check current user in this list
-    $scope.checkIn = function () {
-      $scope.savingCheckin = true;
-      UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, $scope.checkinUser, function (user) {
-        var message = $scope.list.joinability === 'moderated' ? gettextCatalog.getString('Your request for check-in is pending. We will get back to you soon.') : gettextCatalog.getString('You were successfully checked in.');
-
-        alertService.add('success', message);
-        $scope.isMember = true;
-        $scope.setCurrentUser(user);
-        checkInStatus();
-        UserDataService.notify();
-        $scope.savingCheckin = false;
-      });
-    };
-
-    // Check current user out of this list
-    $scope.checkOut = function () {
-      $scope.savingCheckin = true;
-      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        var checkInId = 0;
-        for (var i = 0, len = $scope.currentUser[$scope.list.type + 's'].length; i < len; i++) {
-          if (angular.equals($scope.list._id, $scope.currentUser[$scope.list.type + 's'][i].list)) {
-            checkInId = $scope.currentUser[$scope.list.type + 's'][i]._id;
-          }
-        }
-        if (checkInId !== 0) {
-          UserCheckInService.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkInId}, {}, function (user) {
-            alertService.add('success', gettextCatalog.getString('You were successfully checked out.'));
-            $scope.isMember = false;
-            $scope.setCurrentUser(user);
-            UserDataService.notify();
-            $scope.savingCheckin = false;
-          });
-        }
-      });
-    };
-
     // Delete list
     $scope.deleteList = function() {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {

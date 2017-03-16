@@ -221,8 +221,7 @@
     	});
     });
 
-   describe('Check if the current user\'s check in for the list is pending', function () {
-
+    describe('Check if the current user\'s check in for the list is pending', function () {
 
     	describe('Current user\'s check in is pending', function () {
 
@@ -327,59 +326,6 @@
     		expect(scope.isFavorite).toBe(false);
     	});
 
-    });
-
-    describe('Checking in to the list', function () {
-
-    	beforeEach(function () {
-    		listFixture.lists[0].visible = true;
-    		setUpCtrl(listFixture.lists[0], userFixture.user1);
-    		scope.$emit('user-service-ready');
-    		scope.checkIn();
-    	});
-    	
-    	it('should check in to the list', function () {
-    		var checkinUser = {
-    			list: listFixture.lists[0]._id
-    		};
-    		var params = {userId: userFixture.user1._id, listType: listFixture.lists[0].type + 's'};
-    		expect(mockUserCheckInService.save).toHaveBeenCalledWith(params, checkinUser, jasmine.any(Function));
-    	});
-
-    	it('should show the success message', function () {
-    		expect(mockAlertService.add).toHaveBeenCalledWith('success', 'You were successfully checked in.');
-    	});
-
-    	it('should set isMember to true', function () {
-    		expect(scope.isMember).toBe(true);
-    	});
-
-    	it('should update the current User', function () {
-    		expect(scope.setCurrentUser).toHaveBeenCalled();
-    	});
-
-    	it('should notify the UserDataService', function () {
-    		expect(mockUserDataService.notify).toHaveBeenCalled();
-    	});
-    });
-
-    describe('Checking out from the list', function () {
-  
-    	beforeEach(function () {
-    		listFixture.lists[0].visible = true;
-    		setUpCtrl(listFixture.lists[0], userFixture.user1);
-    		scope.$emit('user-service-ready');
-    		scope.checkOut();
-    	});
-
-    	it('should ask the user to confirm', function () {
-    		expect(mockAlertService.add).toHaveBeenCalledWith('warning', 'Are you sure?', true, jasmine.any(Function));
-    	});
-
-    	it('should check out from the list', function () {
-    		var params = {userId: userFixture.user1._id, listType: listFixture.lists[0].type + 's', checkInId: userFixture.user1.lists[0]._id};
-    		expect(mockUserCheckInService.delete).toHaveBeenCalledWith(params, {}, jasmine.any(Function));
-    	});
     });
 
     describe('Favouriting the list', function () {

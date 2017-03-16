@@ -39,51 +39,6 @@
       </div>
     </div>
 
-    <div ng-if="(list.joinability == 'public' || list.joinability == 'moderated') && !isMember" class="sidebar-section">
-      <h2 class="sidebar-section__heading" translate>Check in</h2>
-      <form ng-submit="checkIn()">
-        <div class="sidebar-section__form-field">
-          <label for="checkoutDate" class="sidebar-section__form-label" translate>Checkout date</label>
-          <div class="form-inline-fields">
-            <input type="text" class="form-inline-fields__item" id="checkoutDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="bottom-left" ng-model="checkinUser.checkoutDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
-            <button type="button" class="btn-transparent" ng-click="showDatePicker()">
-              <icon name="calendar" text="Select a date"></icon>
-            </button>
-          </div>
-        </div>
-        <p class="sidebar-section__text" translate>Select a checkout date if you would like to be checked out automatically (you will receive emails from the system beforehand)</p>
-        <button type="submit" class="btn-primary btn-block" ng-class="{'saving' : savingCheckin}">
-          <loader type="inline" text="" ng-if="savingCheckin"></loader>
-          <span ng-if="!savingCheckin">
-            <icon name="check"></icon>
-            <span translate>Check in</span>
-          </span>
-        </button>
-      </form>
-    </div>
-
-    <div ng-if="isMember" >
-      <div ng-if="isPending" class="sidebar-section">
-        <h2 class="sidebar-section__heading" translate>Check in</h2>
-        <p class="sidebar-section__text" translate>Your request for check-in is pending. We will get back to you soon.</p>
-      </div>
-
-      <div ng-if="!isPending" class="sidebar-section">
-        <h2 class="sidebar-section__heading" translate>Check out</h2>
-        <p class="sidebar-section__text" ng-if="currentListUser && currentListUser.checkoutDate">
-          <span translate>You will be checked out of this list automatically on </span>
-          <span ng-bind="currentListUser.checkoutDate | date:'longDate'"></span>
-        </p>
-        <button type="submit" class="btn-primary btn-block" ng-click="checkOut();" ng-class="{'saving' : savingCheckin}">
-          <loader type="inline" text="" ng-if="savingCheckin"></loader>
-          <span ng-if="!savingCheckin">
-            <icon name="cancel"></icon>
-            <span translate>Check out</span>
-          </span>
-        </button>
-      </div>
-    </div>
-
     <div class="sidebar-section">
       <h2 class="sidebar-section__heading" translate>Export options</h2>
       <ng-include src="'app/components/user/users-export.html'"></ng-include>
