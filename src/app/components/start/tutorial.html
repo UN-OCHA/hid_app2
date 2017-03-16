@@ -3,7 +3,7 @@
 		
 		<div uib-carousel template-url="app/components/start/carousel.html" active="activeSlide" no-wrap="true" class="tutorial-carousel">
       <div uib-slide ng-repeat="slide in slides" index="$index">
-        <img ng-src="{{slide.image}}">
+        <img class="tutorial-carousel__image" ng-src="{{slide.image}}">
         <div class="carousel-caption">
           <h4 class="carousel-caption__heading">{{slide.heading}}</h4>
           <p class="carousel-caption__text">{{slide.text}}</p>
