@@ -167,6 +167,7 @@ module.exports = function(grunt) {
           basePath: 'dist/',
           cache: ['<%= cacheHash["js/app.min.js"] %>',
                   '<%= cacheHash["css/app.min.css"] %>',
+                  '<%= cacheHash["fonts/icons/*.*"] %>',
                   '/favicon.ico'],
           // network: ['*'],
           //fallback: ['/ partials/offline.html'],
