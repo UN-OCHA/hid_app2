@@ -11,11 +11,12 @@ app.constant('config', env);
 
 // TODO: do the offline checks on something other than favicon
 Offline.options = {
-  checkOnLoad: false,
-  interceptRequests: false,
+  checkOnLoad: true,
+  interceptRequests: true,
   reconnect: false,
   requests: false //record ajax requests and re-make on connection restore
 };
+
 
 // Configure Offlinejs
 app.run(function ($rootScope) {
