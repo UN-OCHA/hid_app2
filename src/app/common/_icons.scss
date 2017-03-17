@@ -26,10 +26,6 @@
   line-height: 1;
 }
 
-.icon-eye-hidden {
-  font-weight: normal;
-}
-
 /** Add / remove icons here - do not edit above this line */
 
 .icon-twitter:before {
@@ -69,10 +65,10 @@
   content: "\e94a";
 }
 .icon-map-pin:before {
-  content: "\e047";
+  content: "\e998";
 }
 .icon-clock:before {
-  content: "\e055";
+  content: "\e997";
 }
 .icon-flag:before {
   content: "\e906";
@@ -99,7 +95,7 @@
   content: "\e925";
 }
 .icon-caution:before {
-  content: "\e03d";
+  content: "\e996";
 }
 .icon-menu:before {
   content: "\e950";
@@ -123,7 +119,7 @@
   content: "\e956";
 }
 .icon-chat:before {
-  content: "\e049";
+  content: "\e995";
 }
 .icon-calendar:before {
   content: "\e946";
@@ -132,14 +128,11 @@
   content: "\e959";
 }
 .icon-refresh:before {
-  content: "\e05a";
+  content: "\e999";
 }
 .icon-mail:before {
   content: "\e905";
 }
 .icon-eye-hidden:before {
   content: "\e95c";
-}
-.icon-sitemap:before {
-  content: "\e901";
 }
