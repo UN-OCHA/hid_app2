@@ -40,48 +40,6 @@
       }
     ];
 
-    function queryLists (request, cb) {
-      List.query(request, function (lists, headers) {
-        var count = headers()['x-total-count'];
-        return cb(lists, count);
-      }, function () {
-        // Offline fallback
-        var lists = [];
-        var lflists = $localForage.instance('lists');
-        lflists.iterate(function (list, key, index) {
-          if (index > request.offset && index < request.offset + request.limit) {
-            lists.push(list);
-          }
-        })
-        .then(function () {
-          lflists.length().then(function (number) {
-            return cb(lists, number);
-          });
-        });
-      });
-    }
-
-    function addManagedLists (user, ownedLists, List, searchTerm, callback) {
-      var params = {'managers': user._id};
-      if (searchTerm) {
-        params.name = searchTerm;
-      }
-
-      queryLists(params, function (managedLists) {
-        var filteredManagedLists = managedLists.filter(function (list) {
-          var isOwned = false;
-          for(var i = 0; i < ownedLists.length; i++) {
-            if (ownedLists[i]._id === list._id) {
-              isOwned = true;
-            }
-          }
-          return !isOwned;
-        });
-        var lists = ownedLists.concat(filteredManagedLists);
-        return callback(lists);
-      });
-    }
-
     return {
 
       setFilters: function(filters2, notify) {
@@ -101,7 +59,26 @@
         lists = List.query(trequest, cb);
       },
 
-      queryLists: queryLists,
+      queryLists: function (request, cb) {
+        List.query(request, function (lists, headers) {
+          var count = headers()['x-total-count'];
+          return cb(lists, count);
+        }, function (resp) {
+          // Offline fallback
+          var lists = [];
+          var lflists = $localForage.instance('lists');
+          lflists.iterate(function (list, key, index) {
+            if (index > request.offset && index < request.offset + request.limit) {
+              lists.push(list);
+            }
+          })
+          .then(function () {
+            lflists.length().then(function (number) {
+              return cb(lists, number);
+            });
+          });
+        });
+      },
 
       getLists: function() {
         return lists;
@@ -112,11 +89,9 @@
         if (searchTerm) {
           params.name = searchTerm;
         }
-
-        queryLists(params, function (data) {
+        List.query(params, function (data) {
           addManagedLists(user, data, List, searchTerm, callback);
         });
-
       },
 
       subscribe: function(scope, callback) {
@@ -142,5 +117,25 @@
     };
   }
 
-  
+  function addManagedLists (user, ownedLists, List, searchTerm, callback) {
+    var params = {'managers': user._id};
+    if (searchTerm) {
+      params.name = searchTerm;
+    }
+    List.query(params, function (managedLists) {
+      //remove lists that are also owned before merging with owned lists
+      var filteredManagedLists = managedLists.filter(function (list) {
+        var isOwned = false;
+        for(var i = 0; i < ownedLists.length; i++) {
+          if (ownedLists[i]._id === list._id) {
+            isOwned = true;
+          }
+        }
+        return !isOwned;
+      });
+
+      var lists = ownedLists.concat(filteredManagedLists);
+      return callback(lists);
+    });
+  }
 })();

@@ -20,6 +20,16 @@
     
     $rootScope.$on('usersListsLoaded', function () {
       $scope.listsOwnedAndManagedLoaded = true;
+
+      var listIds = [];
+      angular.forEach($scope.listsOwnedAndManaged, function (list) {
+        listIds.push(list._id);
+      });
+
+      $scope.currentUser.setAppMetaData({listsOwnedAndManaged: listIds});
+      $scope.currentUser.$update(function () {
+        $scope.setCurrentUser($scope.currentUser);
+      });
     });
 
     function getSubscriptions () {

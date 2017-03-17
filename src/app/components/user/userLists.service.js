@@ -140,15 +140,34 @@
             });
           }
         });
-        
+
       });
     }
 
-    function getOwnedAndManagedLists (user) {
+    function getOwnedAndManagedLists (user) {      
+      userLists.listsOwnedAndManaged = [];
+
       if (Offline.state !== 'up') {
+
+        if (!user.appMetadata || !user.appMetadata.hid || !user.appMetadata.hid.listsOwnedAndManaged) {
+          return;
+        }
+
+        var listIds = user.appMetadata.hid.listsOwnedAndManaged;
+        var lflists = $localForage.instance('lists');
+        angular.forEach(listIds, function (listId) {
+
+          lflists.iterate(function (list, key, index) {
+            if (list._id === listId) {
+              userLists.listsOwnedAndManaged.push(list);
+            }
+          });
+
+        });
+
         return;
       }
-      userLists.listsOwnedAndManaged = [];
+
       return ListDataService.getManagedAndOwnedLists(user, '', function (lists) { 
         angular.forEach(lists, function (list) {
           if (list._id) {
