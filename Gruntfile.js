@@ -15,11 +15,11 @@ module.exports = function(grunt) {
         src: '**',
         dest: 'dist/fonts/exo'
       },
-      fonts_icons: {
+      icons: {
         expand: true,
-        cwd: 'src/assets/fonts/icons',
+        cwd: 'src/assets/icons',
         src: '**',
-        dest: 'dist/fonts/icons'
+        dest: 'dist/icons'
       },
       img: {
         expand: true,
@@ -167,7 +167,6 @@ module.exports = function(grunt) {
           basePath: 'dist/',
           cache: ['<%= cacheHash["js/app.min.js"] %>',
                   '<%= cacheHash["css/app.min.css"] %>',
-                  '<%= cacheHash["fonts/icons/*.*"] %>'
                   ],
           // network: ['*'],
           //fallback: ['/ partials/offline.html'],
@@ -182,7 +181,7 @@ module.exports = function(grunt) {
           // 'index.html',
           'img/*.png',
           'fonts/exo/*',
-          'fonts/icons/*'
+          'icons/*.svg'
         ],
         dest: 'dist/offline.appcache'
       }

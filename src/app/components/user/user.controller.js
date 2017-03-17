@@ -26,6 +26,8 @@
     };
     $scope.canViewInfo = true;
 
+    console.log(config)
+
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
     };

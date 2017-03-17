@@ -123,15 +123,10 @@
     height: $base-unit*4;
     padding: 0;
 
-    .iconholder {
-      width: $base-unit*4;
-      display: inline-block;
-      text-align: center;
-    }
-
     .icon {
-      @include font-size(30);
-      margin: -1px 0 0 0;
+      width: $base-unit*4;
+      height: $base-unit*4;
+      margin: 0;
     }
   }
 
@@ -141,7 +136,8 @@
     left: $base-unit/2;
 
     .icon {
-      @include font-size($small-font-size);
+      width: $base-unit*2;
+      height: $base-unit*2;
     }
   }
 }
@@ -262,7 +258,8 @@
         vertical-align: sub;
 
         .icon {
-          @include font-size(18);
+          width: $base-unit*2.25;
+          height: $base-unit*2.25;
         }
       }
     }

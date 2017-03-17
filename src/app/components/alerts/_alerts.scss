@@ -17,10 +17,7 @@
   color: #474747;
   background-color: #F4AEB0;
 
-  .alert__icon {
-    color: #A42834;
-  }
-  svg.alert__icon {
+  .icon {
     fill: #A42834;
   }
 
@@ -32,11 +29,19 @@
 .alert--success {
   background-color: $light-blue;
   color: $dark-blue;
+
+  .icon {
+    fill: $dark-blue;
+  }
 }
 
 .alert--warning {
   background-color: $light-blue;
   color: $dark-blue;
+
+  .icon {
+    fill: $dark-blue;
+  }
 }
 
 .alert__inner {
@@ -56,14 +61,13 @@
 
 .alert__icon {
   float: left;
-  @include font-size(20);
   flex-shrink: 0;
   margin-right: $base-unit;
-}
 
-svg.alert__icon {
-  width: $base-unit*3;
-  height: $base-unit*3;
+  .icon {
+    width: $base-unit*3;
+    height: $base-unit*3;
+  }
 }
 
 @include media-query(md) {

@@ -94,20 +94,21 @@ header {
 
   .icon {
     margin: 0;
-    @include font-size(28);
+    width: $base-unit*3.5;
+    height: $base-unit*3.5;
   }
 
   &:focus {
     outline: none;
     background: transparent;
-    color: $primary-color;
+    
+    .icon {
+      fill: $primary-color;
+    }
   }
 
   .open & {
     .icon {
-      &:before {
-        content: "\e94a";
-      }
     }
   }
 

@@ -21,16 +21,8 @@
         <link href="bower_components/angular-upload/src/directives/btnUpload.min.css" rel="stylesheet">
         <link href="assets/css/main.css" rel="stylesheet">
         <!-- endbuild -->
-        <!--[if lt IE 9]>
-            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
-        <![endif]-->
     </head>
     <body  ng-controller="AppCtrl" ng-class="{'toggled' : sidebar.open, 'prevent-mobile-scroll': sidebar.underlay}" class="lang-{{language}}" ng-keyup="keyupEvent($event)">
-
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
 
         <ng-include src="'app/components/header/header.html'"></ng-include>
 
@@ -159,8 +151,11 @@
         <script src="app/components/sidebar/sidebar.module.js"></script>
         <script src="app/components/sidebar/sidebar.service.js"></script>
         <script src="app/components/sidebar/sidebar.directive.js"></script>
-
+        <script src="assets/js/svg4everybody.js"></script>
         <!-- endbuild -->
+
+        
+				<script>svg4everybody();</script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

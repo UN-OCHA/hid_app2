@@ -102,12 +102,12 @@
 .filter__search {
   position: relative;
 
-  .iconholder {
+  .icon {
     position: absolute;
     left: $base-unit/2;
     top: 50%;
     margin-top: -9px;
-    color: $text-dark;
+    fill: $text-dark;
   }
 
 }

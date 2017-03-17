@@ -13,19 +13,19 @@
     padding-bottom: $base-unit;
     text-transform: uppercase;
 
-    a {
-    text-decoration: none;
+      a {
+      text-decoration: none;
 
-    &:hover, &:focus {
+      &:hover, &:focus {
 
-      span:not(.iconholder) {
-        text-decoration: underline;
+        span {
+          text-decoration: underline;
+        }
       }
     }
-  }
 
     .icon {
-      @include font-size($base-font-size);
+      fill: $primary-color;
     }
   }
 }

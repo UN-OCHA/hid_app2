@@ -55,18 +55,24 @@
   position: absolute;
   top: -$base-unit + 2;
   right: $base-unit/2;
-  color: $primary-color;
+  width: ($base-unit*2) - 2;
+  height: ($base-unit*2) - 2;
 
   .icon {
-    position: relative;
+    fill: $primary-color;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 1;
+    width: ($base-unit*2) - 2;
+    height: ($base-unit*2) - 2;
   }
 
   &:before {
     content: "";
     position: absolute;
-    top: 1px;
-    left: 1px;
+    top: 0;
+    left: 0;
     background: white;
     border-radius: 100%;
     width: ($base-unit*2) - 2;
@@ -95,22 +101,19 @@
     margin-bottom: $base-unit/2;
   }
 
-  .iconholder {
-    display: inline-block;
+  .icon {
     width: $base-unit*2;
-    margin-right: $base-unit/2;
-    text-align: center;
+    height: $base-unit*2;
   }
 }
 
 .profile-header__upload, .profile-header__upload--mobile {
   label {
     font-weight: normal;
-
-    .icon {
-      font-weight: normal;
-      position: relative;
-    }
+  }
+  
+  .icon {
+    position: relative;
   }
 }
 
@@ -265,9 +268,15 @@
   }
 
   .profile-header__verified {
-    @include font-size($large-font-size);
+    width: $base-unit*3.5;
+    height: $base-unit*3.5;
     top: -$base-unit*1.5;
     right: $base-unit*1.5;
+
+    .icon {
+      width: $base-unit*3.5;
+      height: $base-unit*3.5;
+    }
 
     &:before {
       width: $base-unit*3.5;
@@ -284,10 +293,10 @@
       text-align: center;
       padding: $base-unit/2 $base-unit $base-unit $base-unit;
       margin-bottom: $base-unit/2;
-
-      .iconholder {
-        display: block;
-      }
+    }
+    .icon {
+      display: block;
+      margin: 0 auto;
     }
   }
 

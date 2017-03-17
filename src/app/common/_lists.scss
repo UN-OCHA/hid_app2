@@ -33,7 +33,7 @@
     margin-bottom: $base-unit;
   }
 
-  > .iconholder {
+  > .icon {
     margin-right: $base-unit;
   }
 
@@ -71,8 +71,9 @@
   margin-top: -$base-unit*2;
 
   .icon {
-    @include font-size(24);
-    margin: -1px 0 0 0;
+    width: $base-unit*3;
+    height: $base-unit*3;
+    vertical-align: middle;
   }
 
   .btn-transparent {
@@ -95,7 +96,8 @@
     top: $base-unit*1.5;
 
     .icon {
-      @include font-size($base-font-size);
+      width: $base-unit*2;
+      height: $base-unit*2;
     }
 
     .btn-transparent {

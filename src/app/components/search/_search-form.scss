@@ -30,7 +30,9 @@
   line-height: $base-unit*3;
 
   .icon {
-    color: $medium-blue;
+    fill: $medium-blue;
+    width: $base-unit*2.25;
+    height: $base-unit*2.25;
     margin: 1px 0 0 0;
   }
 
@@ -40,7 +42,7 @@
     border: none;
 
     .icon {
-      color: $dark-blue;
+      fill: $dark-blue;
     }
   }
 

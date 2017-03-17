@@ -21,7 +21,10 @@
         name: '@',
         text: '@'
       },
-      template: '<span class="iconholder"><i class="icon icon-{{name}}" aria-hidden="true"></i><span ng-if="text" class="sr-only" translate>{{text}}</span></span>'
+      templateUrl: 'app/common/icon-template.html',
+      link: function (scope) {
+        scope.url = '../assets/icons/symbol-defs.svg#icon-' + scope.name;
+      }
     };
 
     return directive;

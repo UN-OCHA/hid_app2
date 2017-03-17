@@ -58,7 +58,10 @@
 
   &:hover, &:focus {
     background: $primary-color;
-    color: $text-light;
+    
+    .icon {
+      fill: $text-light;
+    }
   }
 }
 

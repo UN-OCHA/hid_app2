@@ -25,6 +25,21 @@
   .nav button, a {
     @include font-size($global-nav-font-size);
   }
+
+  .icon {
+    fill: white;
+  }
+
+  .icon--arrow-down {
+    margin-right: 0;
+    width: $base-unit*1.75;
+    height: $base-unit*1.75;
+    vertical-align: middle;
+
+    .open & {
+      transform: rotate(180deg)
+    }
+  }
 }
 
 .global-header__inner {
@@ -149,18 +164,12 @@
       outline: none;
       text-decoration: none;
     }
-
-    .icon {
-      @include font-size($global-nav-font-size);
-    }
   }
 
   .global-header__sites-arrow {
     .icon {
-      @include font-size($small-font-size);
-      color: rgba(255,255,255,0.5);
-      margin: 2px 0 0 0;
-
+      margin: 0;
+      
       .open & {
         transform: rotate(180deg)
       }

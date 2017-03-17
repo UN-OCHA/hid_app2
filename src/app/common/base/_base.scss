@@ -110,19 +110,12 @@ em {
   display: inline-block;
 
   &:before {
-    content: "\e958";
-    font-family: 'icomoon';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    vertical-align: text-top;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: $dark-blue;
-    line-height: 18px;
+    content: "";
+    display: block;
+    width: $base-unit*1.75;
+    height: $base-unit*1.75;
+    background: url('../img/arrow-down.svg') center no-repeat;
+    background-size: $base-unit*1.75;
   }
 }
 

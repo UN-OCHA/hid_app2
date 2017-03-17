@@ -9,9 +9,9 @@
   background: transparent;
 
   .icon {
-    margin: -1px $base-unit/2 0 $base-unit/2;
-    @include font-size(18);    
-    display: inline-block;
+    margin: 0 $base-unit/2;
+    // width: $base-unit*2.25;
+    // height: $base-unit*2.25;
   }
 
   &.active {

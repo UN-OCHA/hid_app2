@@ -55,10 +55,11 @@
     position: relative;
     padding-left: 40px;
 
-    .iconholder {
+    .icon {
       position: absolute;
       left: $base-unit;
       margin-top: -2px;
+      fill: $primary-color;
     }
   }
 
@@ -102,15 +103,20 @@
   border-bottom: 1px solid $border-grey;
   line-height: 1.2;
 
-  .iconholder {
+  .icon {
     position: absolute;
     left: $base-unit/2;
+    fill: $primary-color;
   }
 
   &:hover, &:focus {
     text-decoration: none;
     background: $primary-color;
     color: $text-light;
+
+    .icon {
+      fill: $text-light;
+    } 
   }
 }
 

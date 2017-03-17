@@ -72,7 +72,7 @@
 
   button:not(:disabled) {
     &:hover, &:focus {
-      background: $light-blue;
+      background-color: $light-blue;
     }
   }
 
@@ -82,23 +82,27 @@
   }
 
   button.uib-right, button.uib-left {
-    font-family: 'icomoon';
-    font-weight: bold;
 
     &:hover, &:focus {
-      background: $primary-color;
       border: none;
       box-shadow: none;
       color: $text-light;
     }
   }
 
+  .uib-right, .uib-left {
+    background: white url('../img/arrow-down.svg') center no-repeat;
+    background-size: $base-unit*1.75;
+    width: $base-unit*3;
+    height: $base-unit*3;
+  }
+
   .uib-right {
-    @extend .icon-arrow-right;
+    transform: rotate(-90deg);
   }
 
   .uib-left {
-    @extend .icon-arrow-left;
+    transform: rotate(90deg);
   }
 }
 

@@ -15,6 +15,10 @@ button[disabled], a.disabled {
   cursor: initial;
   opacity: 0.8;
 
+  .icon {
+    fill: $text-dark;
+  }
+
   &.btn-transparent {
     border: none;
     background: none;
@@ -24,6 +28,10 @@ button[disabled], a.disabled {
     background: $light-grey;
     border-color: $border-grey;
     color: $text-dark;
+
+    .icon {
+      fill: $text-dark;
+    }
   }
 }
 
@@ -32,19 +40,18 @@ button[disabled], a.disabled {
   border: 1px solid $primary-color;
   color: $primary-color;
 
-  .iconholder {
-    display: inline-block;
-    height: $base-unit*2;
-    vertical-align: bottom;
-  }
   .icon {
-    @include font-size($base-font-size);
-    margin-top: 0;
+    vertical-align: bottom;
+    fill: $primary-color;
   }
 
   &:hover, &:focus, &.active {
     background: $primary-color;
     color: white;
+
+    .icon {
+      fill: white;
+    }
   }
 
   &.saving {
@@ -68,6 +75,10 @@ button[disabled], a.disabled {
   &:hover, &:focus, &.active {
     background: $text-dark;
     color: white;
+
+    .icon {
+      fill: white;
+    }
   }
 }
 
@@ -89,13 +100,16 @@ button[disabled], a.disabled {
   &:hover, &:focus, &.active {
     background: $error-color;
     color: white;
+
+    .icon {
+      fill: white;
+    }
   }
 }
 
 .btn-icon {
   @include btn();
   border: 1px solid $primary-color;
-  color: $primary-color;
   border-radius: 100%;
   min-width: $base-unit*5;
   width: $base-unit*5;
@@ -105,23 +119,34 @@ button[disabled], a.disabled {
 
   &:hover, &:focus, &.active {
     background: $primary-color;
-    color: $text-light;
+
+    .icon {
+      fill: $text-light;
+    }
   }
 
   .icon {
-    margin: 0;
-    @include font-size(24);
     position: relative;
+    margin: 0;
+    width: $base-unit*3;
+    height: $base-unit*3;
+    fill: $primary-color;
   }
 
   &.btn-secondary {
     background: white;
     border: 1px solid $text-dark;
-    color: $text-dark;
+    
+    .icon {
+      fill: $text-dark;
+    }
 
     &:hover, &:focus, &.active {
       background: $text-dark;
-      color: white;
+
+      .icon {
+        fill: $text-light;
+      }
     }
   }
 }
@@ -138,6 +163,10 @@ a.btn-icon {
   &:hover, &:focus, &.active {
     background: $text-light;
     color: $primary-color;
+
+    .icon {
+      fill: white;
+    }
   }
 
 }
@@ -147,6 +176,10 @@ a.btn-icon {
   padding: $base-unit*1.5 $base-unit;
   border: none;
   color: $primary-color;
+
+  .icon {
+    fill: $primary-color;
+  }
 
   &:hover, &:focus {
     background: none;
@@ -163,11 +196,19 @@ a.btn-icon {
     background: $primary-color;
     color: $text-light;
     box-shadow: none;
+
+    .icon {
+      fill: white;
+    }
   }
 
   &.active {
     background: $primary-color;
     color: white;
+
+    .icon {
+      fill: white;
+    }
   }
 }
 
@@ -198,19 +239,21 @@ a.btn-icon {
 .btn-small {
   padding: $base-unit/2;
   @include font-size($small-font-size);
-  
+
+  .icon {
+    width: $base-unit*1.5;
+    height: $base-unit*1.5;
+    vertical-align: baseline;
+    fill: $primary-color;
+  }
 }
 
 a.btn-small {
   text-decoration: none;
   padding: 0;
 
-  .iconholder {
-    @include font-size(12);
-  }
-
   &:hover, &:focus {
-    span:not(.iconholder) {
+    span {
       text-decoration: underline;
     }
   }

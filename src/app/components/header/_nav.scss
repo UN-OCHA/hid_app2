@@ -81,7 +81,7 @@
 }
 
 .nav-item__notifications {
-  .iconholder {
+  .icon {
     margin-right: $base-unit;
   }
 }
@@ -105,21 +105,16 @@
   }
 
   .icon {
-    margin: 0;
+    width: $base-unit*2;
+    height: $base-unit*2;
   }
 
-  &.btn-transparent .icon:not(.icon-arrow-down) {
-    @include font-size($base-font-size);
-  }
-
-  .icon-arrow-down {
-    @include font-size($small-font-size);
-    margin-left: $base-unit/2;
-    padding-top: 2px;
-    color: rgba(255,255,255,0.5);
+  .icon--arrow-down {
+    width: $base-unit*1.75;
+    height: $base-unit*1.75;
 
     .open & {
-      transform: rotate(180deg)
+      transform: rotate(180deg);
     }
   }
 
@@ -238,7 +233,6 @@
     height: auto;
     width: auto;
     clip: auto;
-    margin: 0 0 0 $base-unit;
   }
 }
 

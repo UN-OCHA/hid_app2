@@ -134,13 +134,21 @@
 .modal-icon {
   display: inline-block;
   margin-bottom: $base-unit;
-  @include font-size(30);
+  
+  .icon {
+    width: $base-unit*4;
+    height: $base-unit*4;
+  }
 
   .modal-success & {
-    color: $primary-color;
+    .icon {
+      fill: $primary-color;
+    }
   }
   .modal-danger & {
-    color: $error-color;
+    .icon {
+      fill: $error-color;
+    }
   }
 }
 
@@ -179,8 +187,12 @@
   }
 
   .modal-icon {
-    @include font-size(40);
     margin-bottom: $base-unit*2;
+
+    .icon {
+      width: $base-unit*5;
+      height: $base-unit*5;
+    }
   }
 }
 
