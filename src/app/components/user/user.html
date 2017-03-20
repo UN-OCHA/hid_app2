@@ -69,9 +69,19 @@
         <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
-          <label class="btn-secondary btn-upload profile-header__upload" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
-            <icon name="cloud-upload"></icon>
-            <span translate>Upload</span>
+          <label class="btn-secondary btn-upload profile-header__upload" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-upload="onUploadStart()" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
+            <span ng-if="!uploadStatus">
+              <icon name="cloud-upload"></icon>
+              Upload
+            </span>
+            <span ng-if="uploadStatus === 'uploading'">
+              <icon class="rotate" name="refresh"></icon>
+              Uploading
+            </span>
+            <span ng-if="uploadStatus === 'success'">
+              <icon name="check"></icon>
+              Uploaded
+            </span>
           </label>
           <p class="form-hint"><em translate>Use JPEG, up to 1 MB</em></p>
         </div>
@@ -104,9 +114,19 @@
         </div>
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
-          <label class="btn-secondary btn-upload profile-header__upload--mobile" upload-button url="{{config.apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
-            <icon name="cloud-upload"></icon>
-            Upload
+          <label class="btn-secondary btn-upload profile-header__upload--mobile" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-upload="onUploadStart()"" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
+            <span ng-if="!uploadStatus">
+              <icon name="cloud-upload"></icon>
+              Upload
+            </span>
+            <span ng-if="uploadStatus === 'uploading'">
+              <icon class="rotate" name="refresh"></icon>
+              Uploading
+            </span>
+            <span ng-if="uploadStatus === 'success'">
+              <icon name="check"></icon>
+              Uploaded
+            </span>
           </label>
           <p class="form-hint profile-header__upload-info--mobile"><em translate>Use JPEG, up to 1 MB</em></p>
         </div>
@@ -124,7 +144,7 @@
         <span translate>Connect</span>
       </button>
 
-      <button type="button" class="btn-icon" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-disabled="!isOnline" ng-if="canEditUser">
+      <button type="button" class="btn-icon" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-if="canEditUser" ng-disabled="!isOnline">
         <icon name="edit" text="Edit"></icon>
       </button>
 

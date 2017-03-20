@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserEditCtrl', UserEditCtrl);
 
-  UserEditCtrl.$inject = ['$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'UserCheckInService'];
+  UserEditCtrl.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'UserCheckInService'];
 
-  function UserEditCtrl($location, $scope, alertService, config, gettextCatalog, hrinfoService, List, UserCheckInService) {
+  function UserEditCtrl($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, UserCheckInService) {
     $scope.phoneNumberTypes = [];
     $scope.emailTypes = [];
     $scope.voipTypes = [];
@@ -24,6 +24,8 @@
     $scope.setPrimaryOrganization = setPrimaryOrganization;
     $scope.setPrimaryLocation = setPrimaryLocation;
     $scope.setPrimaryJobTitle = setPrimaryJobTitle;
+    $scope.uploadStatus = '';
+    $scope.onUploadStart = onUploadStart;
     $scope.onUploadSuccess = onUploadSuccess;
     $scope.onUploadError = onUploadError;
     $scope.setPrimaryEmail = setPrimaryEmail;
@@ -367,14 +369,21 @@
       saveUser('primaryJobTitle');
     }
 
+    function onUploadStart () {
+      $scope.uploadStatus = 'uploading';
+    }
+
     function onUploadSuccess (resp) {
       $scope.user.picture = resp.data.picture;
+      $scope.uploadStatus = 'success';
       updateCurrentUser();
       $scope.$emit('editUser', {status: 'success', message: gettextCatalog.getString('Picture uploaded'), type: 'picture'});
     }
 
-    function onUploadError () {
+    function onUploadError (error) {
       alertService.add('danger', gettextCatalog.getString('There was an error uploading the picture'));
+      $scope.uploadStatus = '';
+      $exceptionHandler(error, 'Image upload fail');
       $scope.$emit('editUser', {status: 'fail'});
     }
 
