@@ -1,0 +1,15 @@
+<label class="btn-secondary btn-upload" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-upload="onUploadStart()"" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
+  <span ng-if="!uploadStatus">
+    <icon name="cloud-upload"></icon>
+    Upload
+  </span>
+  <span ng-if="uploadStatus === 'uploading'">
+    <icon class="rotate" name="refresh"></icon>
+    Uploading
+  </span>
+  <span ng-if="uploadStatus === 'success'">
+    <icon name="check"></icon>
+    Uploaded
+  </span>
+</label>
+<p class="form-hint"><em translate>Use JPEG, up to 1 MB</em></p>

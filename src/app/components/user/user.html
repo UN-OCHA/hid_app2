@@ -68,22 +68,8 @@
         <icon name="check-circle" text="Verfied" class="profile-header__verified" ng-show="user.verified"></icon>
         <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
 
-        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
-          <label class="btn-secondary btn-upload profile-header__upload" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-upload="onUploadStart()" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
-            <span ng-if="!uploadStatus">
-              <icon name="cloud-upload"></icon>
-              Upload
-            </span>
-            <span ng-if="uploadStatus === 'uploading'">
-              <icon class="rotate" name="refresh"></icon>
-              Uploading
-            </span>
-            <span ng-if="uploadStatus === 'success'">
-              <icon name="check"></icon>
-              Uploaded
-            </span>
-          </label>
-          <p class="form-hint"><em translate>Use JPEG, up to 1 MB</em></p>
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="profile-header__upload">
+          <ng-include src="'app/components/user/upload-button.html'"></ng-include>
         </div>
 
       </div>
@@ -113,22 +99,8 @@
           <textarea id="user_status" ng-model="user.status" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.status)"></textarea>
         </div>
 
-        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
-          <label class="btn-secondary btn-upload profile-header__upload--mobile" upload-button url="{{apiUrl}}user/{{user._id}}/picture" accept="image/jpeg" on-upload="onUploadStart()"" on-success="onUploadSuccess(response)" on-error="onUploadError(response)">
-            <span ng-if="!uploadStatus">
-              <icon name="cloud-upload"></icon>
-              Upload
-            </span>
-            <span ng-if="uploadStatus === 'uploading'">
-              <icon class="rotate" name="refresh"></icon>
-              Uploading
-            </span>
-            <span ng-if="uploadStatus === 'success'">
-              <icon name="check"></icon>
-              Uploaded
-            </span>
-          </label>
-          <p class="form-hint profile-header__upload-info--mobile"><em translate>Use JPEG, up to 1 MB</em></p>
+        <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="profile-header__upload--mobile">
+          <ng-include src="'app/components/user/upload-button.html'"></ng-include>
         </div>
 
         <button type="button" class="btn-primary btn-rounded profile-header__connect-btn profile-header__connect-btn--mobile" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-show="!showProfileForm" ng-if="connectionInfo.canRequestConnection === true" ng-click="requestConnection()">

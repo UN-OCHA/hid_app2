@@ -104,11 +104,13 @@
 }
 
 .profile-header__upload, .profile-header__upload--mobile {
-  font-weight: normal;
-
-  .icon {
+  label {
     font-weight: normal;
-    position: relative;
+
+    .icon {
+      font-weight: normal;
+      position: relative;
+    }
   }
 }
 
@@ -275,17 +277,21 @@
 
   .profile-header__upload {
     display: block;
-    @include font-size($small-font-size);
-    text-align: center;
-    padding: $base-unit/2 $base-unit $base-unit $base-unit;
-    margin-bottom: $base-unit/2;
 
-    .iconholder {
+    label {
       display: block;
+      @include font-size($small-font-size);
+      text-align: center;
+      padding: $base-unit/2 $base-unit $base-unit $base-unit;
+      margin-bottom: $base-unit/2;
+
+      .iconholder {
+        display: block;
+      }
     }
   }
 
-  .profile-header__upload--mobile, .profile-header__upload-info--mobile {
+  .profile-header__upload--mobile {
     display: none;
   }
 
