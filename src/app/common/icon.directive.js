@@ -23,7 +23,7 @@
       },
       templateUrl: 'app/common/icon-template.html',
       link: function (scope) {
-        scope.url = '#icon-' + scope.name;
+        scope.url = window.location.href + '#icon-' + scope.name;
       }
     };
 
