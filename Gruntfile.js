@@ -15,12 +15,6 @@ module.exports = function(grunt) {
         src: '**',
         dest: 'dist/fonts/exo'
       },
-      icons: {
-        expand: true,
-        cwd: 'src/assets/icons',
-        src: '**',
-        dest: 'dist/icons'
-      },
       img: {
         expand: true,
         cwd: 'src/assets/img',
@@ -203,8 +197,36 @@ module.exports = function(grunt) {
       watch: {
         configFile: 'src/karma.conf.js'
       }
-    }
+    },
 
+    svgmin: {
+      options: {
+        plugins: [
+          {
+            removeViewBox: false
+          },
+          {
+            cleanupIDs: false
+          }
+        ]
+      },
+      dist: {
+        files: {
+          'src/assets/icons/symbol-defs.svg' : 'src/assets/icons/symbol-defs.svg'
+        }
+      }
+    },
+
+    dom_munger: {
+      your_target: {
+        options: {
+          remove: '#svgSprite',
+          append: {selector:'body',html:'<div id="svgSprite">' + grunt.file.read("src/assets/icons/symbol-defs.svg") + '</div>'},
+        },
+        src: 'src/index.html'
+      },
+    }
+    
   });
 
   grunt.loadNpmTasks('grunt-angular-gettext');
@@ -224,6 +246,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-cache-bust");
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-dom-munger');
+  grunt.loadNpmTasks('grunt-svgmin');
 
   //load cache buster json and generate manifest
   grunt.registerTask('manifest-gen','Generate manifest from cache buster output', function(){
@@ -237,6 +261,8 @@ module.exports = function(grunt) {
 
   // Default task
   grunt.registerTask('default', [
+    'svgmin',
+    'dom_munger',
     'clean:dist',
     'copy',
     'nggettext_extract',
