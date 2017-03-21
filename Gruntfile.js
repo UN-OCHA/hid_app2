@@ -149,7 +149,6 @@ module.exports = function(grunt) {
           jsonOutputFilename: '../.tmp/cachebust.json',
           baseDir: 'dist/',
           assets: ['js/*', 'css/*']
-          //queryString: true
         },
         src: ['dist/index.html']
       }
@@ -162,20 +161,14 @@ module.exports = function(grunt) {
           cache: ['<%= cacheHash["js/app.min.js"] %>',
                   '<%= cacheHash["css/app.min.css"] %>',
                   ],
-          // network: ['*'],
-          //fallback: ['/ partials/offline.html'],
-          // exclude: ['']
           preferOnline: true,
           hash: true,
           verbose: false
         },
         src: [
-          // 'js/app.min.js',
-          // 'css/app.min.css',
-          // 'index.html',
           'img/*.png',
-          'fonts/exo/*',
-          'icons/*.svg'
+          'img/*.svg',
+          'fonts/exo/*'
         ],
         dest: 'dist/offline.appcache'
       }
