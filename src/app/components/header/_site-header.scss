@@ -92,24 +92,9 @@ header {
   margin-right: -$base-unit/2;
   position: relative;
 
-  .icon {
-    margin: 0;
-    width: $base-unit*3.5;
-    height: $base-unit*3.5;
-  }
-
   &:focus {
     outline: none;
     background: transparent;
-    
-    .icon {
-      fill: $primary-color;
-    }
-  }
-
-  .open & {
-    .icon {
-    }
   }
 
   .no-mediaqueries & {
