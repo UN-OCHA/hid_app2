@@ -23,7 +23,7 @@
       },
       templateUrl: 'app/common/icon-template.html',
       link: function (scope) {
-        scope.url = '../assets/icons/symbol-defs.svg#icon-' + scope.name;
+        scope.url = '#icon-' + scope.name;
       }
     };
 
