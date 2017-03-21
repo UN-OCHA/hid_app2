@@ -2,7 +2,7 @@
   <h1 class="page-header__heading">{{heading}}</h1>
 
   <div class="page-header__buttons page-header__buttons--search-results">
-    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-click="sidebar.toggle('userFilters')" ng-if="!showLists">
+    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-click="sidebar.toggle('userFilters')" ng-if="!showLists" ng-disabled="!isOnline">
       <icon name="filter" text="Filter"></icon>
     </button>
 

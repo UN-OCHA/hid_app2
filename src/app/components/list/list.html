@@ -22,7 +22,7 @@
 
 
   <div class="page-header__buttons page-header__buttons--list">
-    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-click="sidebar.toggle('userFilters', true)">
+    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-disabled="!isOnline" ng-click="sidebar.toggle('userFilters', true)">
       <icon name="filter" text="Filter"></icon>
     </button>
 

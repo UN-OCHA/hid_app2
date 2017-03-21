@@ -25,7 +25,7 @@
             <icon ng-if="list.cacheStatus === 'fail'" name="caution" class="dashboard-cache-icon" text="List saved" title="Could not cache list"></icon>
             <a href="/lists/{{list._id}}">{{list.name}}</a>
             <div uib-dropdown class="list__button">
-              <button type="button" class="btn-transparent" uib-dropdown-toggle>
+              <button type="button" class="btn-transparent" ng-disabled="!isOnline" uib-dropdown-toggle>
                 <icon name="dots" text="Options"></icon>
               </button>
               <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
@@ -46,7 +46,7 @@
             <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved" ></icon>
             <a href="/lists/{{list._id}}">{{list.name}}</a>
             <div uib-dropdown class="list__button">
-              <button type="button" class="btn-transparent" uib-dropdown-toggle>
+              <button type="button" class="btn-transparent" ng-disabled="!isOnline" uib-dropdown-toggle>
                 <icon name="dots" text="Options"></icon>
               </button>
               <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
@@ -70,7 +70,7 @@
             <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
             <a href="/lists/{{list._id}}">{{list.name}}</a>
             <div uib-dropdown class="list__button">
-              <button type="button" class="btn-transparent" uib-dropdown-toggle>
+              <button type="button" class="btn-transparent" ng-disabled="!isOnline" uib-dropdown-toggle>
                 <icon name="dots" text="Options"></icon>
               </button>
               <ul class="dropdown-menu dropdown-menu--small" role="menu" uib-dropdown-menu>
