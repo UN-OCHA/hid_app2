@@ -16,4 +16,11 @@
 .rotate {
 	display: inline-block;
 	animation: rotate 2s linear infinite;
+  position: relative;
+
+  .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
