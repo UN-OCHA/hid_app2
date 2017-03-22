@@ -10,5 +10,8 @@
   // List type
   window.__env.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
 
+  //Google Analytics tracking ID
+  window.__env.gaTrackingId = 'UA-60189654-1'
+
 }(this));
 

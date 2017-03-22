@@ -98,6 +98,15 @@ app.run(function ($rootScope) {
 
 });
 
+app.run(function ($rootScope, $window, $location, config) {
+  if ($window.ga) {
+    $window.ga('create', config.gaTrackingId, 'auto');
+    $rootScope.$on('$routeChangeSuccess', function () {
+      $window.ga('send', 'pageview', { page: $location.url() });
+    });
+  }
+});
+
 app.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
 

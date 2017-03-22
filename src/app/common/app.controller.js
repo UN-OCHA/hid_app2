@@ -119,7 +119,6 @@
     $scope.initCurrentUser();
 
     $scope.$on('$routeChangeSuccess', initView);
-
   }
 
 })();
