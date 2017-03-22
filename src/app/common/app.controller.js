@@ -15,8 +15,6 @@
     $scope.language = gettextCatalog.getCurrentLanguage();
     $scope.sidebar = SidebarService;
 
-    $scope.ua = window.navigator.userAgent; //for debugging.
-
     function isTextInput(node) {
       return ['INPUT', 'TEXTAREA'].indexOf(node.nodeName) !== -1;
     }
