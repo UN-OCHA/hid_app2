@@ -6,7 +6,7 @@
   <h1 class="page-header-mobile__heading">{{list.name}}</h1>
 
   <div class="page-header-mobile__buttons">
-    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-click="sidebar.toggle('userFilters', true)">
+    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-disabled="!isOnline" ng-click="sidebar.toggle('userFilters', true)">
       <icon name="filter" text="Filter"></icon>
     </button>
 
