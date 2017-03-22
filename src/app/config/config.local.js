@@ -10,7 +10,5 @@
   // List type
   window.__env.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
 
-  window.__env.assetsUrl = '../lcoal/'
-
 }(this));
 
