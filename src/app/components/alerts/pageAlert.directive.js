@@ -8,7 +8,7 @@
   function pageAlert() {
 
     var directive = {
-      restrict: 'E',
+      restrict: 'EA',
       replace: 'true',
       scope: {
         iconname: '@',
@@ -16,6 +16,12 @@
         message: '@'
       },
       templateUrl: 'app/components/alerts/page-alert.html',
+      controller: function ($scope, $sce) {
+        $scope.$watch('message', function(value) {
+          $scope.messageHtml = $sce.trustAsHtml($scope.message);
+        })
+
+      }
     };
 
     return directive;

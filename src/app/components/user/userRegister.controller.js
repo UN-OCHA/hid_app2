@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserRegisterCtrl', UserRegisterCtrl);
 
-  UserRegisterCtrl.$inject = ['$scope', '$location', 'alertService', 'User', 'gettextCatalog'];
+  UserRegisterCtrl.$inject = ['$scope', '$location', '$window', 'alertService', 'User', 'gettextCatalog'];
 
-  function UserRegisterCtrl($scope, $location, alertService, User, gettextCatalog) {
+  function UserRegisterCtrl($scope, $location, $window, alertService, User, gettextCatalog) {
 
     $scope.user = new User();
     $scope.user.setAppMetaData({login: false});
@@ -20,6 +20,7 @@
         registerForm.$setPristine();
         registerForm.$setUntouched();
         $scope.user = new User();
+        $window.localStorage.setItem('hidNewUser', true);
         $location.path('/');
       }, function (resp) {
         alertService.add('danger', gettextCatalog.getString('There was an error processing your registration.'));

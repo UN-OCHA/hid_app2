@@ -5,17 +5,31 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'alertService', 'AuthService', 'gettextCatalog'];
+  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$window', 'alertService', 'AuthService', 'gettextCatalog'];
 
-  function AuthCtrl ($exceptionHandler, $scope, $location, alertService, AuthService, gettextCatalog) {
+  function AuthCtrl ($exceptionHandler, $scope, $location, $window, alertService, AuthService, gettextCatalog) {
     $scope.email = '';
     $scope.saving = false;
+
+
+    function showHIDv2Banner () {
+      if ($window.localStorage.getItem('hidResetPassword') || $window.localStorage.getItem('hidNewUser')) {
+        return;
+      }
+      var loginBannerText = gettextCatalog.getString('Humanitarian ID version 2.0 is live! To log in for the first time, please reset your password by clicking on');
+      var loginBannerLinkText = gettextCatalog.getString('forgot your password');
+      var loginBannerLink = '/password_reset';
+      var loginBannerMessage = loginBannerText + ' <a href="' + loginBannerLink + '">' + loginBannerLinkText + '</a>';
+      alertService.pageAlert('danger', loginBannerMessage, 'caution');
+    }
+    showHIDv2Banner();
 
     $scope.login = function() {
       $scope.saving = true;
       AuthService.login($scope.email, $scope.password).then(function () {
         $scope.initCurrentUser();
         $scope.saving = false;
+        $window.localStorage.setItem('hidResetPassword', true);
 
         if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid) {
 
@@ -31,7 +45,7 @@
 
           //HIDv1 user first login (login is already set to true)
           if ($scope.currentUser.appMetadata.hid.login && !$scope.currentUser.appMetadata.hid.viewedTutorial) {
-            $location.path('/tutorial');
+            $location.path('/tutorial'); 
             return;
           }
 
