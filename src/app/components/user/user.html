@@ -63,17 +63,16 @@
 
     <div class="profile-header__primary" ng-class="{'active' : showProfileForm}">
 
+    <div class="profile-header__image-holder">
       <div class="profile-header__image">
-
         <icon name="check-circle" text="Verfied" class="profile-header__verified" ng-show="user.verified"></icon>
-        <img ng-src="{{pictureUrl}}" class="img-thumbnail" alt="">
-
+        <div class="profile-header__image-inner" style="background-image: url({{pictureUrl}})"></div>
+      </div>
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="profile-header__upload">
           <ng-include src="'app/components/user/upload-button.html'"></ng-include>
         </div>
-
       </div>
-
+      
       <div class="profile-header__content">
         <div ng-if="!showProfileForm">
           <h1 class="page-header__heading">
