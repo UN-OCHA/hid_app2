@@ -40,7 +40,9 @@
         $provide.value('AuthService', mockAuthService);
       });
 
-      mockAlertService = {};
+      mockAlertService = {
+        pageAlert: function () {}
+      };
       module('app.common', function($provide) {
         $provide.value('alertService', mockAlertService);
       });

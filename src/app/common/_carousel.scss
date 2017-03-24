@@ -71,7 +71,10 @@
   &:hover, &:focus {
   	opacity: 1;
   	background: transparent;
-  	color: $dark-blue;
+  	
+    .icon {
+      fill: $dark-blue;
+    }
   }
 
   &.disabled {

@@ -2,63 +2,91 @@
 	<div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
 		
 		<div uib-carousel template-url="app/components/start/carousel.html" active="activeSlide" no-wrap="true" class="tutorial-carousel">
-      <div uib-slide ng-repeat="slide in slides" index="$index">
-        <img class="tutorial-carousel__image" ng-src="{{slide.image}}">
-        <div class="carousel-caption">
-          <h4 class="carousel-caption__heading">{{slide.heading}}</h4>
-          <p class="carousel-caption__text">{{slide.text}}</p>
-          
-          <div ng-if="slide.id === 1">
-	          <button type="button" class="btn-transparent" ng-click="showSlideMore1 = !showSlideMore1" ng-show="!showSlideMore1">
-	          	<span translate>Read more</span>
-	          	<span class="sr-only" translate> about finding others</span>
-	          	<icon name="arrow-down"></icon>
-	          </button>
+			
+			<div uib-slide index="0">
+				<img class="tutorial-carousel__image" ng-src="/img/tutorial/slide-find-contacts.jpg" alt="">
+				<div class="carousel-caption">
+					<h4 class="carousel-caption__heading" translate>Find others</h4>
+					<p class="carousel-caption__text" translate>No matter whether you are looking for an individual, a contact list or a specific role – all contacts are at your finger tips.</p>
 
-	          <div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore1">
-		          <p translate>In the navigation bar you will find a search box. Start typing your search item in the box and contacts and lists will immediately appear.</p> 
-		          <img src="/img/tutorial/search.png" alt="Search box">
-		          <p translate>If you get a lot of results, use this filter to fine-tune your search.</p>
-		          <img src="/img/tutorial/filter-button.png" alt="Filter button">
-	          </div>
-	        </div>
+					<button type="button" class="btn-transparent" ng-click="showSlideMore1 = !showSlideMore1" ng-show="!showSlideMore1">
+						<span translate>Read more</span>
+						<span class="sr-only" translate> about finding others</span>
+						<icon name="arrow-down"></icon>
+					</button>
 
-	        <div ng-if="slide.id === 2">
-	          <button type="button" class="btn-transparent" ng-click="showSlideMore2 = !showSlideMore2" ng-show="!showSlideMore2">
-	          	<span translate>Read more</span>
-	          	<span class="sr-only" translate> about checking in</span>
-	          	<icon name="arrow-down"></icon>
-	          </button>
+					<div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore1">
+						<p translate>In the navigation bar you will find a search box. Start typing your search item in the box and contacts and lists will immediately appear.</p> 
+						<img src="/img/tutorial/search.png" alt="Search box">
+						<p translate>If you get a lot of results, use this filter to fine-tune your search.</p>
+						<img src="/img/tutorial/filter-button.png" alt="Filter button">
+					</div>
+				</div>
+			</div>
 
-	          <div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore2">
-		          <p translate>You can find the Check-in and Check-out buttons on the top-right of your screen. To get started, click on Check-in, then start typing the name of the country, disaster, or group in the box. Select your list and then look at the options for other suitable lists.</p> 
-		          <img src="/img/tutorial/checkin-suggestions.png" alt="Check in">
-		          <p translate>If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date.</p> 		         
-		          <img src="/img/tutorial/checkout-date.png" alt="Checkout date">
-	          </div>
-	        </div>
+			<div uib-slide index="1">
+				<img class="tutorial-carousel__image" ng-src="/img/tutorial/slide-checkins.jpg" alt="">
+				<div class="carousel-caption">
+					<h4 class="carousel-caption__heading" translate>Check in and out</h4>
+					<p class="carousel-caption__text" translate>Are you about to deploy to a new operation, join the response to a specific disaster or start working with a different sector or cluster? If so, check in to the relevant contact lists and don’t forget to check out when you leave the country.</p>
 
-	        <div ng-if="slide.id === 3">
-	          <button type="button" class="btn-transparent" ng-click="showSlideMore3 = !showSlideMore3" ng-show="!showSlideMore3">
-	          	<span translate>Read more</span>
-	          	<span class="sr-only" translate> about managing lists</span>
-	          	<icon name="arrow-down"></icon>
-	          </button>
+					<button type="button" class="btn-transparent" ng-click="showSlideMore2 = !showSlideMore2" ng-show="!showSlideMore2">
+						<span translate>Read more</span>
+						<span class="sr-only" translate> about checking in</span>
+						<icon name="arrow-down"></icon>
+					</button>
 
-	          <div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore3">
-		          <p translate>You can create your own contact lists from the dashboard in the menu at the top of your screen. Once you’ve given your list a name and decided who can view and join it, you can start adding and removing contacts from your list.</p>
-		          <img src="/img/tutorial/new-list.png" alt="Create list">
-		        	<p translate>Feel free to export your contact list into PDF or other available formats.</p>
-		          <img src="/img/tutorial/list-export.png" alt="Export options">
-		          <p translate>If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date.</p> 		          
-	          </div>
-	         </div>
+					<div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore2">
+						<p translate>You can find the Check-in and Check-out buttons on the top-right of your screen. To get started, click on Check-in, then start typing the name of the country, disaster, or group in the box. Select your list and then look at the options for other suitable lists.</p> 
+						<img src="/img/tutorial/checkin-suggestions.png" alt="Check in">
+						<p translate>If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date.</p> 		         
+						<img src="/img/tutorial/checkout-date.png" alt="Checkout date">
+					</div>
+				</div>
+			</div>
 
-          <button type="button" ng-if="$index + 1 < slides.length" class="btn-primary btn-block tutorial-carousel__button" ng-click="swipeLeft()" translate>Next</button>
-          <button type="button" ng-if="$index + 1 === slides.length" class="btn-primary btn-block tutorial-carousel__button" ng-click="finishTutorial()" translate>Get started</button>
-        </div>
-      </div>
-    </div>
+			<div uib-slide index="2">
+				<img class="tutorial-carousel__image" ng-src="/img/tutorial/slide-managing-lists.jpg" alt="">
+				<div class="carousel-caption">
+					<h4 class="carousel-caption__heading" translate>Manage your own lists</h4>
+					<p class="carousel-caption__text" translate>Create your own contact lists and share them with others. Let others check in to your lists or decide for yourself who can join.</p>
+
+					<button type="button" class="btn-transparent" ng-click="showSlideMore3 = !showSlideMore3" ng-show="!showSlideMore3">
+          	<span translate>Read more</span>
+          	<span class="sr-only" translate> about managing lists</span>
+          	<icon name="arrow-down"></icon>
+          </button>
+
+					<div class="collapse tutorial-carousel__more" uib-collapse="!showSlideMore3">
+						<p translate>You can create your own contact lists from the dashboard in the menu at the top of your screen. Once you’ve given your list a name and decided who can view and join it, you can start adding and removing contacts from your list.</p>
+						<img src="/img/tutorial/new-list.png" alt="Create list">
+						<p translate>Feel free to export your contact list into PDF or other available formats.</p>
+						<img src="/img/tutorial/list-export.png" alt="Export options">
+						<p translate>If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date.</p> 		          
+					</div>
+				</div>
+			</div>
+
+			<div uib-slide index="3" ng-if="!isApp">
+				<div class="carousel-caption tutorial-carousel__app-caption">
+					<h4 class="carousel-caption__heading" translate>Get the app</h4>
+					<p class="carousel-caption__text" translate>Humanitarian ID is also available as a mobile app for iOS and Android.</p>
+					<p>Don’t forget to update to the latest version of the app to make sure you get all the latest features.</p>
+				</div>
+				
+				<div class="tutorial-carousel__app-buttons">
+					<a href="https://play.google.com/store/apps/details?id=org.unocha.hid">
+						<img class="tutorial-carousel__download" ng-src="/img/google-play-badge.png" alt="Download the app on Google Play">
+					</a>
+					<a href="https://itunes.apple.com/us/app/humanitarian-id/id1060104956">
+						<img class="tutorial-carousel__download" ng-src="/img/app-store-badge.svg" alt="Download the app on the App Store">
+					</a>
+				</div>
+			</div>
+
+			<button type="button" ng-if="activeSlide + 1 < numSlides" class="btn-primary btn-block tutorial-carousel__button" ng-click="swipeLeft()" translate>Next</button>
+			<button type="button" ng-if="activeSlide + 1 === numSlides" class="btn-primary btn-block tutorial-carousel__button" ng-click="finishTutorial()" translate>Get started</button>
+		</div>
 
 	</div>
 </div>

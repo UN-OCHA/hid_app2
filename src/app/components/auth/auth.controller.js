@@ -11,7 +11,6 @@
     $scope.email = '';
     $scope.saving = false;
 
-
     function showHIDv2Banner () {
       if ($window.localStorage.getItem('hidResetPassword') || $window.localStorage.getItem('hidNewUser')) {
         return;

@@ -34,3 +34,22 @@
 		margin-top: $base-unit;
 	}
 }
+
+.tutorial-carousel__app-caption {
+	height: 288px;
+	padding-top: $base-unit*4;
+
+	p {
+		margin-bottom: $base-unit*2;
+	}
+}
+
+.tutorial-carousel__app-buttons {
+	padding-top: $base-unit*4;
+}
+
+.tutorial-carousel__download {
+	width: 200px;
+	margin: $base-unit auto;
+	display: block;
+}
