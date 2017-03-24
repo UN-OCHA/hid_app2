@@ -5,10 +5,12 @@
     .module('app.common')
     .directive('pageAlert', pageAlert);
 
-  function pageAlert() {
+  pageAlert.$inject = ['$sce'];
+
+  function pageAlert($sce) {
 
     var directive = {
-      restrict: 'EA',
+      restrict: 'E',
       replace: 'true',
       scope: {
         iconname: '@',
@@ -16,11 +18,10 @@
         message: '@'
       },
       templateUrl: 'app/components/alerts/page-alert.html',
-      controller: function ($scope, $sce) {
-        $scope.$watch('message', function(value) {
-          $scope.messageHtml = $sce.trustAsHtml($scope.message);
+      link: function (scope) {
+        scope.$watch('message', function(value) {
+          scope.messageHtml = $sce.trustAsHtml(scope.message);
         })
-
       }
     };
 
