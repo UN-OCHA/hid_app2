@@ -50,6 +50,17 @@
   padding: $base-unit*1.5 $base-unit*2;
 }
 
+.secondary-block__item--has-icon {
+  padding-left: $base-unit*3.5;
+  position: relative;
+
+  .icon {
+    position: absolute;
+    left: $base-unit;
+    margin-top: $base-unit/4;
+  }
+}
+
 @include media-query(md) {
 
   .block {
