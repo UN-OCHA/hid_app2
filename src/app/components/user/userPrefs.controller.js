@@ -130,14 +130,14 @@
         token.new = true;
         $scope.tokens.unshift(token);
       });
-    }
+    };
 
     $scope.deleteToken = function (token) {
       AuthService.deleteToken(token.token, function () {
         alertService.add('success', gettextCatalog.getString('API key deleted'), false, function () {});
         $scope.tokens.splice($scope.tokens.indexOf(token), 1);
       });
-    }
+    };
 
   }
 

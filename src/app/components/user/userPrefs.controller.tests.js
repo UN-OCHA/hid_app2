@@ -3,7 +3,12 @@
 
   describe('User preferences controller', function () {
 
-  	var connection, mockAlertService, mockAuthService, mockGetText, mockUserDataService, scope, scopeUser, userFixture;
+  	var connection, mockAlertService, mockAuthService, mockGetText, mockUserDataService, newToken, returnedTokens, scope, 
+  	scopeUser, showTokens, userFixture;
+  	
+  	newToken = {id: 4, blacklist: false, token: '124324'};
+  	returnedTokens = [{id: 1, blacklist: false}, {id: 2, blacklist: true}, {id: 3, blacklist: false}];
+  	showTokens = [{id: 1, blacklist: false}, {id: 3, blacklist: false}];
 
   	beforeEach(function() {
   		userFixture = readJSON('app/test-fixtures/user.json');
@@ -17,7 +22,20 @@
         callback();
       });
 
-      mockAuthService = {};
+      mockAuthService = {
+      	getUserTokens: function () {},
+      	generateAPIToken: function () {},
+      	deleteToken: function () {}
+      };
+      spyOn(mockAuthService, 'getUserTokens').and.callFake(function (callback) {
+      	callback(returnedTokens);
+      });
+      spyOn(mockAuthService, 'generateAPIToken').and.callFake(function (callback) {
+      	callback(newToken);
+      });
+      spyOn(mockAuthService, 'deleteToken').and.callFake(function (token, callback) {
+      	callback();
+      });
 	    module('app.common', function($provide) {
 	      $provide.value('AuthService', mockAuthService);
 	    });
@@ -136,6 +154,47 @@
 	  		});
 
 	  	});
+  	});
+
+  	describe('Managing API keys', function () {
+
+  		it('should get the users api keys', function () {
+  			expect(mockAuthService.getUserTokens).toHaveBeenCalled();
+  		});
+
+  		it('should add non-blacklisted api keys to the view', function () {
+  			expect(scope.tokens).toEqual(showTokens);
+  		});
+
+  		describe('Adding a new api key', function () {
+
+	  		it('should get a new key', function () {
+	  			scope.newToken();
+	  			expect(mockAuthService.generateAPIToken).toHaveBeenCalled();
+	  		});
+
+	  		it('should flag the new token as new and add it to the view', function () {
+	  			scope.newToken();
+	  			expect(scope.tokens).toContain(newToken);
+	  			expect(scope.tokens[0].new).toBe(true);
+	  		});
+
+  		});
+
+  		describe('Deleting an  api key', function () {
+
+  			it('should delete the key', function () {
+	  			scope.deleteToken(newToken);
+	  			expect(mockAuthService.deleteToken).toHaveBeenCalledWith(newToken.token, jasmine.any(Function));
+	  		});
+
+	  		it('should remove the key from thew view', function () {
+	  			scope.deleteToken(newToken);
+	  			expect(scope.tokens).not.toContain(newToken);
+	  		});
+
+  		});
+
   	});
 
   });
