@@ -219,6 +219,30 @@
         var base64 = base64Url.replace('-', '+').replace('_', '/');
         return JSON.parse($window.atob(base64));
       },
+
+      generateAPIToken: function (success) {
+        return $http.post(config.apiUrl + 'jsonwebtoken').then(function (response) {
+          success(response.data);
+        }, function (error) {
+           $exceptionHandler(error, 'generateAPIToken');
+        });
+      },
+
+      getUserTokens: function (success) {
+        return $http.get(config.apiUrl + 'jsonwebtoken').then(function (response) {
+          success(response.data);
+        }, function (error) {
+          $exceptionHandler(error, 'getUserTokens');
+        });
+      },
+
+      deleteToken: function (token, success) {
+        return $http.delete(config.apiUrl + 'jsonwebtoken', {token: token}).then(function (response) {
+          success(response.data);
+        }, function (error) {
+          $exceptionHandler(error, 'deleteToken');
+        });
+      }
     };
     return jwt;
   }

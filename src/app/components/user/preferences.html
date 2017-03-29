@@ -121,4 +121,27 @@
       <button type="button" class="btn-danger" ng-disabled="!isOnline" ng-click="deleteAccount()" translate>Delete account</button>
     </div>
   </tab>
+
+  <tab heading="API keys">
+    <div class="block">
+    <div class="block-heading">
+      <h2 translate>Your API keys</h2>
+      <button type="button" class="btn-primary btn-small" ng-click="newToken()">
+        <icon name="plus"></icon>
+        <span translate>Add new key</span>
+      </button>
+      </div>
+
+      <ul class="api-keys">
+        <li class="api-keys__item" ng-repeat="token in tokens" ng-class="{'api-keys__item--new': token.new}">
+          <textarea disabled="disabled" class="api-keys__textarea">{{token.token}}</textarea>
+          <button class="btn-primary btn-small" ng-disabled="!isOnline" ng-click="deleteToken(token)">
+            <icon name="cancel"></icon>
+            Delete key
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </tab>
 </tabset>

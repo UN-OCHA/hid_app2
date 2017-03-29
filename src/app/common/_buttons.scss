@@ -237,13 +237,13 @@ a.btn-icon {
 }
 
 .btn-small {
-  padding: $base-unit/2;
+  padding: $base-unit/2 $base-unit/2 3px $base-unit/2;
   @include font-size($small-font-size);
 
   .icon {
     width: $base-unit*1.5;
     height: $base-unit*1.5;
-    vertical-align: baseline;
+    vertical-align: top;
     fill: $primary-color;
   }
 }

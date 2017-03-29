@@ -114,7 +114,26 @@
         alertService.add('danger', gettextCatalog.getString('Connection could not be removed'));
         $exceptionHandler(error, 'removeConnection');
       });
-    } ;
+    };
+
+    $scope.tokens = [];
+    AuthService.getUserTokens(function (tokens) {
+      $scope.tokens = tokens;
+    });
+
+    $scope.newToken = function () {
+      AuthService.generateAPIToken(function (token) {
+        token.new = true;
+        $scope.tokens.unshift(token);
+      });
+    }
+
+    $scope.deleteToken = function (token) {
+      AuthService.deleteToken(token.token, function () {
+        alertService.add('success', gettextCatalog.getString('API key deleted'), false, function () {});
+        $scope.tokens.splice($scope.tokens.indexOf(token), 1);
+      });
+    }
 
   }
 

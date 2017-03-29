@@ -12,6 +12,10 @@
   100% {opacity:1;}
 }
 
+@keyframes fadeBg {
+  0% {background: $light-blue;}
+  100% {background: transparent;}
+}
 
 .rotate {
 	display: inline-block;

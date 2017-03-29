@@ -1,0 +1,15 @@
+.api-keys__item {
+	padding: $base-unit;
+}
+
+.api-keys__item--new {
+	animation: fadeBg 3s 1 forwards;
+}
+
+.api-keys__textarea {
+	@include font-size($small-font-size);
+	height: 120px;
+	border-bottom-color: $border-grey;
+	margin-bottom: $base-unit;
+	background: white;
+}
