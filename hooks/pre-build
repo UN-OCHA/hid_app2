@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Starting prebuild..."
+
+# make sure we got the latest builder
+docker pull unocha/alpine-nodejs-builder
+
+# build it
+docker run --privileged --rm \
+    -v $(pwd):/src \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    unocha/alpine-nodejs-builder \
+    sh -c "npm install && \
+        cd /src && bower --allow-root install && \
+        grunt --target=dev && \
+        mv /src/src/bin /src/html"
+
+echo "Prebuild complete."
