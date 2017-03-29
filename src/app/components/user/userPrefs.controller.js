@@ -118,7 +118,11 @@
 
     $scope.tokens = [];
     AuthService.getUserTokens(function (tokens) {
-      $scope.tokens = tokens;
+      angular.forEach(tokens, function (token) {
+        if (!token.blacklist) {
+          $scope.tokens.push(token);
+        }
+      });
     });
 
     $scope.newToken = function () {
