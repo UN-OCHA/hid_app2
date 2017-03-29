@@ -237,7 +237,7 @@
       },
 
       deleteToken: function (token, success) {
-        return $http.delete(config.apiUrl + 'jsonwebtoken', {token: token}).then(function (response) {
+        return $http.delete(config.apiUrl + 'jsonwebtoken', {data: {token: token}}).then(function (response) {
           success(response.data);
         }, function (error) {
           $exceptionHandler(error, 'deleteToken');
