@@ -1,7 +1,7 @@
 <div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.userFilters}"
 tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
-  <div ng-if="sidebar.sidebars.userFilters" class="sidebar__inner">
+  <form ng-if="sidebar.sidebars.userFilters" class="sidebar__inner">
 
     <h2 class="sidebar__heading">Filter</h2>
 
@@ -166,9 +166,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <button type="button" class="btn btn-secondary" ng-click="resetFilters()">Clear</button>
       </div>
       <div class="col-xs-6">
-        <button type="button" class="btn btn-primary" ng-click="applyFilters()">Apply</button>
+        <button type="submit" class="btn btn-primary" ng-click="applyFilters()">Apply</button>
       </div>
     </div>
 
-  </div>
+  </form>
 </div>
