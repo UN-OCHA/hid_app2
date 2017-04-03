@@ -1,6 +1,6 @@
 # Humanitarian ID Web App version 2
 
-## Running localy
+## Running locally
 
 ### Prerequisites:
 
@@ -28,6 +28,10 @@ Add `127.0.0.1   app.hid.vm`
 
 * `docker-compose up`
 * visit [http://app.hid.vm](http://app.hid.vm)
+
+## Deployment
+
+See https://github.com/UN-OCHA/hid-stack/blob/master/README.md
 
 ## Code style guide
 
