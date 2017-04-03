@@ -13,7 +13,7 @@ docker run --privileged --rm \
     sh -c "cd /src && \
         npm install && \
         bower --allow-root install && \
-        grunt --target=dev && \
+        grunt --target=production && \
         mv /src/dist /src/html"
 
 echo "Prebuild complete."
