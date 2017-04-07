@@ -15,7 +15,7 @@
     };
 
     var setTotalDuplicates = function (duplicates, headers) {
-      $scope.totalItems = headers()["x-total-count"];
+      $scope.pagination.totalItems = headers()["x-total-count"];
     };
 
     function getDuplicates (offset) {
