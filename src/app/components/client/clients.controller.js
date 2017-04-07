@@ -8,18 +8,35 @@
   ClientsCtrl.$inject = ['$scope', '$routeParams', 'Client'];
 
   function ClientsCtrl ($scope, $routeParams, Client) {
-    $scope.request = $routeParams;
-    $scope.totalItems = 0;
-    $scope.itemsPerPage = 10;
-    $scope.currentPage = 1;
-    $scope.request.limit = $scope.itemsPerPage;
-    $scope.request.offset = 0;
-    $scope.request.sort = 'name';
-
-    var setTotalClients = function (clients, headers) {
-      $scope.totalItems = headers()["x-total-count"];
+    $scope.pagination = {
+      currentPage: 1,
+      itemsPerPage: 10,
+      totalItems: 0
     };
 
-    $scope.clients = Client.query($scope.request, setTotalClients);
+    var setTotalClients = function (clients, headers) {
+      $scope.pagination.totalItems = headers()["x-total-count"];
+    };
+
+    function getClients (offset) {
+      var params = {
+        sort: 'name',
+        limit: $scope.pagination.itemsPerPage 
+      };
+      params.offset = offset || 0;
+
+      Client.query(params, function (clients, headers) {
+        setTotalClients(clients, headers);
+        $scope.clients = clients;
+      });
+    }
+
+    getClients();
+
+    $scope.pageChanged = function () {
+      var offset = $scope.pagination.itemsPerPage * ($scope.pagination.currentPage - 1);
+      getClients(offset);
+    };
+
   }
 })();
