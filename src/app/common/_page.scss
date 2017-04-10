@@ -81,11 +81,15 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 }
 
 .page-header__alert-icon {
-  @include font-size(56);
   display: inline-block;
   vertical-align: middle;
-  color: $primary-color;
   flex-shrink: 0;
+
+  svg {
+    fill: $primary-color;
+    width: $base-unit*7;
+    height: $base-unit*7;
+  }
 
   .no-flexbox & {
     float: left;
@@ -170,8 +174,12 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
   }
 
   .page-header__alert-icon {
-    @include font-size(88);
     margin-right: $base-unit;
+
+    svg {
+      width: $base-unit*11;
+      height: $base-unit*11;   
+    }
   }
 
   .page-header__alert-info {
