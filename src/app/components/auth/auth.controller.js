@@ -64,6 +64,10 @@
           alertService.add('danger', gettextCatalog.getString('We could not log you in. Please verify your email and password.'));
           return;
         }
+        if (error.data && error.data.message === 'Email address could not be found') {
+          alertService.add('danger', gettextCatalog.getString('We could not log you in, the email address does not exist.'));
+          return;
+        }
         alertService.add('danger', gettextCatalog.getString('There was an error logging in.'));
         $exceptionHandler(error, 'Log in fail');
       });

@@ -17,8 +17,12 @@
       User.passwordReset($scope.email, function (response) {
         alertService.add('success', gettextCatalog.getString('You will soon receive an email which will allow you to reset your password.'));
         $scope.reset.$setPristine();
-      }, function (response) {
-        alertService.add('danger', gettextCatalog.getString('There was an error resetting your password. Please try again or contact the HID team.'));
+      }, function (error) {
+        var msg = gettextCatalog.getString('There was an error resetting your password. Please try again or contact the HID team.');
+        if (error.data && error.data.message === 'Email could not be found') {
+          msg = gettextCatalog.getString('This email address does not exist.')
+        }
+        alertService.add('danger', msg);
         $scope.reset.$setPristine();
       });
     }
