@@ -50,7 +50,7 @@
         label: gettextCatalog.getString('My connections')
       } 
     ];
-    $scope.urlRegEx = RegExp('^((https?|ftp)://)?([a-z]+[.])?[a-z0-9-]+([.][a-z]{1,4}){1,2}(/.*[?].*)?$', 'i');
+    $scope.urlRegEx = /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/
     var defaultSettings = {};
     var lastStep = 4;
 
