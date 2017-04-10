@@ -217,7 +217,7 @@
     };
 
     $scope.verifyUser = function () {
-      if (!$scope.currentUser.is_admin || $scope.currentUser.isManager) {
+      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
         return;
       }
       $scope.user.verified = !$scope.user.verified;
