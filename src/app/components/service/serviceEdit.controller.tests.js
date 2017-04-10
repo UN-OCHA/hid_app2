@@ -38,6 +38,12 @@
 	  		};
 	  	}
 
+      if (type === 'google') {
+        service.googlegroup = {
+          domain: 'app.hid'
+        };
+      }
+
   		inject(function($rootScope, $controller, $q, _$location_) {
         scope = $rootScope.$new();
         $location = _$location_;
@@ -174,6 +180,16 @@
 				expect(mockService.getMailchimpLists).toHaveBeenCalledWith('327985y24uigh');
 			});
 		});
+
+    describe('Editing a Google group service', function () {
+      beforeEach(function () {
+        setUpCtrl(true, 'google');
+      });
+
+      it('should get the Google Groups from the domain', function () {
+        expect(mockService.getGoogleGroups).toHaveBeenCalledWith('app.hid');
+      });
+    });
 
 		describe('Get Google Groups', function () {
 			beforeEach(function () {

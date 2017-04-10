@@ -39,13 +39,16 @@
           $scope.managers = angular.copy($scope.service.managers);
           if ($scope.service.mailchimp) {
             getMailchimpLists();
+            return;
+          }
+          if ($scope.service.googlegroup && $scope.service.googlegroup.domain) {
+            getGoogleGroups();
           }
         });
         return;
       }
     
       $scope.service = new Service();
-      // $scope.service.managers = [];
       $scope.service.lists = [];    
     }
 
