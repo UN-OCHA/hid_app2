@@ -132,7 +132,7 @@
     }
 
     function getUsers (search) {
-      User.query({'name': search}, function (users) {
+      User.query({'name': search, 'appMetadata.hid.login': true}, function (users) {
         $scope.newUsers = filterManagers(users);
       });
     }

@@ -30,7 +30,8 @@
       if (search === '') {
         return;
       }
-      $scope.newManagers = User.query({name: search});
+
+      $scope.newManagers = User.query({name: search,  'appMetadata.hid.login': true});
     }
 
     function formatManagers (list) {

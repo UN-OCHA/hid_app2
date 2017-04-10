@@ -214,7 +214,7 @@
 			});
 
 			it('should get users from the search term', function () {
-				expect(mockUser.query).toHaveBeenCalledWith({'name': 'findme'}, jasmine.any(Function));
+				expect(mockUser.query).toHaveBeenCalledWith({'name': 'findme', 'appMetadata.hid.login': true}, jasmine.any(Function));
 			});
 
 			it('should filter out users who are already managers', function () {

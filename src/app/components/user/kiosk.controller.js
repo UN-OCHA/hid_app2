@@ -50,7 +50,7 @@
         $scope.title = "Check into " + $scope.list.list.name;
       }
       if (step === 3) {
-        $scope.users = User.query({email: $scope.user.email}, function () {
+        $scope.users = User.query({email: $scope.user.email, 'appMetadata.hid.login': true}, function () {
           if ($scope.users.length) {
             $scope.user = $scope.users[0];
           }

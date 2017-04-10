@@ -129,7 +129,7 @@
     // Retrieve users
     $scope.getUsers = function(search) {
       if (search) {
-        User.query({'name': search}, function (users) {
+        User.query({'name': search, 'appMetadata.hid.login': true}, function (users) {
           if (users) {
             $scope.newMembers = filterUsers(users, $scope.usersAdded.users);
           }

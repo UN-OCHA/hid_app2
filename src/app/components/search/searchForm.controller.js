@@ -83,7 +83,7 @@
         return;
       }
 
-      User.query({name: $scope.searchUsersTerm, limit: 5, sort: 'name'}).$promise.then(function (data) {
+      User.query({name: $scope.searchUsersTerm, limit: 5, sort: 'name', 'appMetadata.hid.login': true}).$promise.then(function (data) {
         $scope.landingUsers = data;
         $scope.showUsersAutocomplete = true;
       });

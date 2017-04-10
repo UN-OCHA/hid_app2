@@ -178,7 +178,7 @@
 
       it('should get users that match the search term', function () {
         scope.getManagers('findme');
-        expect(mockUser.query).toHaveBeenCalledWith({name: 'findme'});
+        expect(mockUser.query).toHaveBeenCalledWith({name: 'findme', 'appMetadata.hid.login': true});
         expect(scope.newManagers).toEqual(managers);
       });
 

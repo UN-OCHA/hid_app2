@@ -129,7 +129,7 @@
       });
 
       it('should get the first page of subscribers', function () {
-        expect(mockUser.query).toHaveBeenCalledWith({'subscriptions.service': 'sub-1', limit: 50, sort: 'name', offset: 0 }, jasmine.any(Function));
+        expect(mockUser.query).toHaveBeenCalledWith({'subscriptions.service': 'sub-1', limit: 50, sort: 'name', offset: 0, 'appMetadata.hid.login': true}, jasmine.any(Function));
         expect(scope.subscribers).toEqual([userFixture.user1]);
         expect(scope.subscribersLoaded).toBe(true);
         expect(scope.pagination.totalItems).toEqual(1);
@@ -138,7 +138,7 @@
       it('should get the next page of subscribers', function () {
         scope.pagination.currentPage = 2;
         scope.pageChanged();
-        expect(mockUser.query).toHaveBeenCalledWith({'subscriptions.service': 'sub-1', limit: 50, sort: 'name', offset: 50 }, jasmine.any(Function));
+        expect(mockUser.query).toHaveBeenCalledWith({'subscriptions.service': 'sub-1', limit: 50, sort: 'name', offset: 50, 'appMetadata.hid.login': true}, jasmine.any(Function));
       });
 
   	});
@@ -151,7 +151,7 @@
 
       it('should search for the user', function () {
         scope.getUsers('findme');
-        expect(mockUser.query).toHaveBeenCalledWith({name: 'findme'}, jasmine.any(Function))
+        expect(mockUser.query).toHaveBeenCalledWith({name: 'findme', 'appMetadata.hid.login': true}, jasmine.any(Function))
       });
 
       it('should filter out users who are already subscribed', function () {
