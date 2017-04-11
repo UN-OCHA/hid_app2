@@ -26,6 +26,11 @@ Add `127.0.0.1   app.hid.vm`
 
 ### Running the app
 
+* If you are using Docker for Mac you will need to add ports to docker-compose.yml
+	```
+	ports:
+   	- 80:80
+  ```
 * `docker-compose up`
 * visit [http://app.hid.vm](http://app.hid.vm)
 
