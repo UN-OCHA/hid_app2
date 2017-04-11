@@ -52,6 +52,16 @@
           return;
         }
 
+        // Users registering via auth dont have metadata set
+        if (!$scope.currentUser.appMetadata || !$scope.currentUser.appMetadata.hid) {
+          $scope.currentUser.setAppMetaData({login: true});
+          $scope.currentUser.$update(function () {
+            $scope.setCurrentUser($scope.currentUser);
+            $location.path('/start');
+          });
+          return;
+        }
+
         $location.path('/landing');
 
       }, function (error) {
