@@ -3,7 +3,7 @@
 
   describe('Auth controller', function () {
 
-  	var hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, mockGetText, newUser, returnUser, scope;
+  	var authUser, hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, mockGetText, newUser, returnUser, scope;
 
   	newUser = {
   		_id: 1,
@@ -32,6 +32,10 @@
   			}
   		}
   	};
+
+    authUser = {
+      _id: 4
+    };
 
   	beforeEach(function() {
 
@@ -138,6 +142,30 @@
     				expect($location.path).toHaveBeenCalledWith('/tutorial');
     			});
     		});
+
+        describe('A user who registered using auth on their first login', function () {
+          beforeEach(function () {
+            setUpController(authUser);
+            scope.login();
+            scope.$digest();
+          });
+
+          it('should set appMetadata login to true', function () {
+            expect(scope.currentUser.setAppMetaData).toHaveBeenCalledWith({login: true});
+          });
+
+          it('should update the user', function () {
+            expect(scope.currentUser.$update).toHaveBeenCalled();
+          });
+
+          it('should set the current user', function () {
+            expect(scope.setCurrentUser).toHaveBeenCalled();
+          });
+
+          it('should go to the start page', function () {
+            expect($location.path).toHaveBeenCalledWith('/start');
+          });
+        });
 
     		describe('A user on subsequent logins', function () {
     			beforeEach(function () {
