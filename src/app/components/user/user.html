@@ -43,7 +43,7 @@
         <span translate>Send Claim Email</span>
       </button>
 
-      <button class="btn-transparent sidebar-section__button" ng-disabled="!isOnline" ng-click="notify()">
+      <button class="btn-transparent sidebar-section__button" ng-if="currentUser._id !== user._id" ng-disabled="!isOnline" ng-click="notify()">
         <icon name="flag"></icon>
         <span translate>Report a Problem</span>
       </button>
