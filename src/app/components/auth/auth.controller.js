@@ -23,6 +23,14 @@
     }
     showHIDv2Banner();
 
+    function onFirstLogin () {
+      $scope.currentUser.setAppMetaData({login: true});
+      $scope.currentUser.$update(function () {
+        $scope.setCurrentUser($scope.currentUser);
+        $location.path('/start');
+      });
+    }
+
     $scope.login = function() {
       $scope.saving = true;
       AuthService.login($scope.email, $scope.password).then(function () {
@@ -32,13 +40,9 @@
 
         if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid) {
 
-          // New user first login
+          // New user first login (login is set to false in registration)
           if (!$scope.currentUser.appMetadata.hid.login) {
-            $scope.currentUser.setAppMetaData({login: true});
-            $scope.currentUser.$update(function () {
-              $scope.setCurrentUser($scope.currentUser);
-              $location.path('/start');
-            });
+            onFirstLogin();
             return;
           }
 
@@ -48,21 +52,13 @@
             return;
           }
 
+          // User has logged in previously
           $location.path('/landing');
           return;
         }
 
-        // Users registering via auth dont have metadata set
-        if (!$scope.currentUser.appMetadata || !$scope.currentUser.appMetadata.hid) {
-          $scope.currentUser.setAppMetaData({login: true});
-          $scope.currentUser.$update(function () {
-            $scope.setCurrentUser($scope.currentUser);
-            $location.path('/start');
-          });
-          return;
-        }
-
-        $location.path('/landing');
+        // Users registering via auth dont have metadata set until first login
+        onFirstLogin();
 
       }, function (error) {
         $scope.saving = false;
