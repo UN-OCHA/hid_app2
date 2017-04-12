@@ -87,6 +87,14 @@
         });
       })
       .catch(function (responseError) {
+        // Don't try to get from cache if the user doesn't exist
+        if (responseError && responseError.status === 404) {
+          if (errorCallback) {
+            return errorCallback(responseError);
+          }
+          return callback(); 
+        }
+
         var lfusers = $localForage.instance('users');
         lfusers.getItem(userId).then(function (user) {
           UserDataService.user = transformUser(user);
