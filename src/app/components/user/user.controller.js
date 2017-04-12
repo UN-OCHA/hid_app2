@@ -25,6 +25,7 @@
       locationsPermission: ''
     };
     $scope.canViewInfo = true;
+    $scope.userExists = true;
 
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
@@ -134,6 +135,8 @@
         $scope.userLoaded = true;
         $scope.$broadcast('userLoaded');
       }, function (error) {
+        $scope.userLoaded = true;
+        $scope.userExists = false;
         $exceptionHandler(error, 'getUser');
       });
     }

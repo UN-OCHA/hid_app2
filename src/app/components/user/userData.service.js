@@ -75,7 +75,7 @@
       });
     };
 
-    UserDataService.getUser = function (userId, callback) {
+    UserDataService.getUser = function (userId, callback, errorCallback) {
       User.get({userId: userId}).$promise.then(function (user) {
         var lfusers = $localForage.instance('users');
         lfusers.setItem(user.id, user).then(function () {
@@ -86,14 +86,17 @@
           $exceptionHandler(err, 'Failed to write to Indexeddb');
         });
       })
-      .catch(function (err) {
+      .catch(function (responseError) {
         var lfusers = $localForage.instance('users');
         lfusers.getItem(userId).then(function (user) {
           UserDataService.user = transformUser(user);
           return callback();
         })
-        .catch(function (err) {
-          return callback();
+        .catch(function () {
+          if (errorCallback) {
+            return errorCallback(responseError);
+          }
+          return callback();  
         });
       });
     };

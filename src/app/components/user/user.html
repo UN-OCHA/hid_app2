@@ -57,7 +57,40 @@
   </div>
 </div>
 
-<div ng-controller="UserEditCtrl">
+<div ng-if="!userExists">
+  <div class="page-header">
+    <h1 class="page-header__heading" translate>User not found</h1>
+    <p translate>Sorry, this user was not found. Try searching for Humanitarian Contacts:</p>
+  </div> 
+  <div class="row">
+    <div class="col-md-6">
+      <div ng-controller="SearchFormCtrl" class="block">
+        <form ng-submit="fullSearch(searchUsersTerm)" role="search" class="search-form">
+          <div uib-dropdown is-open="showUsersAutocomplete">
+            <label for="searchUsers" class="sr-only">{{'Search for a name'|translate}}</label>
+            <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for a name'|translate}}" name="searchUsers" id="searchUsers" autocomplete="off" ng-model="searchUsersTerm" ng-model-options="{debounce: 200}" ng-change="searchUsersAutocomplete()">
+            <button type="submit" class="btn-transparent search-form__button">
+              <icon name="search" text="Search"></icon>
+            </button>
+
+            <ul class="dropdown-menu" uib-dropdown-menu>
+              <li ng-if="landingUsers.length">
+                <ul>
+                  <li ng-repeat="result in landingUsers">
+                    <a ng-href="users/{{result._id}}" ng-click="saveSearch(result, 'user')">{{result.name}}</a>
+                  </li>
+                </ul>
+              </li>
+              <li><button type="button" ng-click="fullSearch(searchUsersTerm)" class="btn-transparent" translate>View all</button></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-controller="UserEditCtrl" ng-if="userExists">
 
   <div class="page-header profile-header" ng-class="{'profile-header--admin' : currentUser.is_admin || user.is_admin}">
 
