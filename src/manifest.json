@@ -1,0 +1,17 @@
+{
+  "short_name": "HID",
+  "name": "Humanitarian ID",
+  "icons": [
+    {
+      "src": "icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
+  ],
+  "related_applications": [
+	  {
+	  "platform": "play",
+	  "id": "com.google.org.unocha.hid"
+	  }
+	]
+}
