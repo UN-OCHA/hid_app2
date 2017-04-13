@@ -9,11 +9,13 @@
       "sizes": "144x144"
     }
   ],
+  "prefer_related_applications": true,
   "related_applications": [
 	  {
 		  "platform": "play",
 		  "url": "https://play.google.com/store/apps/details?id=org.unocha.hid",
 		  "id": "org.unocha.hid"
 	  }
-	]
+	],
+	"display": "standalone"
 }
