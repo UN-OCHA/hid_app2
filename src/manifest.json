@@ -10,8 +10,9 @@
   ],
   "related_applications": [
 	  {
-	  "platform": "play",
-	  "id": "com.google.org.unocha.hid"
+		  "platform": "play",
+		  "url": "https://play.google.com/store/apps/details?id=org.unocha.hid",
+		  "id": "org.unocha.hid"
 	  }
 	]
 }
