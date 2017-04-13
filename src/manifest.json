@@ -1,6 +1,7 @@
 {
   "short_name": "HID",
   "name": "Humanitarian ID",
+  "start_url": "/",
   "icons": [
     {
       "src": "icon-144x144.png",
