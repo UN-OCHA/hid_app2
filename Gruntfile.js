@@ -27,6 +27,12 @@ module.exports = function(grunt) {
         src: '*',
         dest: 'dist/',
         filter: 'isFile'
+      },
+      assetjson: {
+        expand: true,
+        cwd: 'src/.well-known/',
+        src: '**',
+        dest: 'dist/.well-known'
       }
     },
     nggettext_extract: {
@@ -219,7 +225,7 @@ module.exports = function(grunt) {
         src: 'src/index.html'
       },
     }
-    
+
   });
 
   grunt.loadNpmTasks('grunt-angular-gettext');

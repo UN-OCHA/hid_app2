@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "org.unocha.hid",
+    "sha256_cert_fingerprints": ["ED:75:B1:D5:47:1C:6B:10:10:EA:E4:F2:12:D2:07:FF:92:18:3C:7D:2D:32:EF:CC:E0:09:E2:3A:5B:01:90:40"]
+  }
+}]
