@@ -84,7 +84,7 @@
     $scope.$on('users-export-pdf', function (evt, format) {
       var params = angular.extend($scope.request, $scope.filters);
       var url = User.getPDFUrl(params, format);
-      $window.open(url, 'system');
+      $window.open(url);
     });
 
     $scope.$on('populate-list', function (event, listType) {
