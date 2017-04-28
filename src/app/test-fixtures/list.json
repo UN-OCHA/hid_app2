@@ -143,7 +143,15 @@
 			{
 				"value": "ut-id-2",
 				"label": "ut-2"
-			}
+			},
+			{
+        "value": "verified",
+        "label": "Verified"
+      },
+      {
+        "value": "unverified",
+        "label": "Un-verified"
+      }
 		]
 	}
 }

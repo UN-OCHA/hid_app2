@@ -259,17 +259,34 @@
       getUsers();
     };
 
-    $scope.removeFilter = function (filter) {
-      if ($scope.selectedFilters[filter.filterType]) {
-        delete $scope.selectedFilters[filter.filterType];
+    function removeSelectedFilter (selectedFilters, filter) {
+      if (selectedFilters[filter.filterType]) {
+        if (filter.filterType === 'user_type') {
+
+          if (filter.id === 'unverified') {
+            delete selectedFilters.verified;
+          }
+
+          if (selectedFilters[filter.id]) {
+            delete selectedFilters[filter.id];
+          }
+        }
+
+        delete selectedFilters[filter.filterType];
       }
+
+      return selectedFilters;
+    }
+
+    $scope.removeFilter = function (filter) {
+      removeSelectedFilter($scope.selectedFilters, filter);
+
       if ($scope.request[filter.filterType]) {
         delete $scope.request[filter.filterType];
       }
       $scope.filter();
     };
 
-    //TO DO order asc / desc ?
     $scope.sortList = function (sortby) {
       $scope.request.sort = sortby;
       $scope.pagination.currentPage = 1;

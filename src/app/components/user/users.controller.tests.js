@@ -4,7 +4,7 @@
   describe('Users controller', function () {
 
     var countries, defaultParams, filteredUsers, filterTypes, initialUsers, listFixture, listInfo, listParams,
-    listQueryResponse, mockGetText, mockhrinfoService, mockList, mockSearchService, mockSidebarService, mockUser, mockUserDataService, scope, searchParams, 
+    listQueryResponse, mockGetText, mockhrinfoService, mockList, mockSearchService, mockSidebarService, mockUser, mockUserDataService, scope, searchParams,
     userFixture;
 
     defaultParams = { limit: 50, offset: 0, sort: 'name' };
@@ -87,7 +87,7 @@
         spyOn(mockUserDataService, 'getUsers').and.callFake(function(arg1, arg2, callback){
           callback();
         });
-       
+
         spyOn(mockhrinfoService, 'getCountries').and.callThrough();
         spyOn(mockList, 'query').and.callThrough();
       });
@@ -353,6 +353,49 @@
         expect(scope.currentFilters).toEqual(expectedCurrentFilters);
         expect(scope.request).toEqual(expectedRequest);
       });
+
+      it('should remove the user type filter', function () {
+        scope.userTypes = filterTypes.user_types;
+        scope.selectedFilters = {
+          user_type: filterTypes.user_types[0].value,
+        };
+        scope.selectedFilters[filterTypes.user_types[0].value] = true;
+
+        var filterToRemove = {
+          id: filterTypes.user_types[0].value,
+          label: filterTypes.user_types[0].label,
+          filterType: 'user_type'
+        };
+
+        scope.filter();
+        scope.removeFilter(filterToRemove);
+
+        expect(scope.selectedFilters).toEqual({});
+        expect(scope.currentFilters).toEqual([]);
+        expect(scope.request).toEqual({ limit: 50, offset: 0, sort: 'name' });
+      });
+
+      it('should remove the unverified user type filter', function () {
+        scope.userTypes = filterTypes.user_types;
+        scope.selectedFilters = {
+          user_type: filterTypes.user_types[3].value,
+        };
+        scope.selectedFilters.verified = false;
+
+        var filterToRemove = {
+          id: filterTypes.user_types[3].value,
+          label: filterTypes.user_types[3].label,
+          filterType: 'user_type'
+        };
+
+        scope.filter();
+        scope.removeFilter(filterToRemove);
+
+        expect(scope.selectedFilters).toEqual({});
+        expect(scope.currentFilters).toEqual([]);
+        expect(scope.request).toEqual({ limit: 50, offset: 0, sort: 'name' });
+      });
+
     });
   });
 })();
