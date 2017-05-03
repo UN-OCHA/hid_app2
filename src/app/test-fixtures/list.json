@@ -4,6 +4,7 @@
 			"_id": "list-1-id",
 			"name": "list-1",
 			"type": "list",
+			"label": "list1",
 			"labels": [
         {
           "text": "list-1",

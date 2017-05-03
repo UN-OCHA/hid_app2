@@ -1,0 +1,9 @@
+<ul class="tag-list">
+	<li class="tag-list__heading" translate>Filters applied:</li>
+	<li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters.all">
+		<span class="tag-list__text">{{filter.label}}</span>
+		<button type="button" class="btn-transparent tag-list__button" ng-click="currentFilters.remove(filter)">
+			<icon name="cancel" text="Remove {{filter.type}} filter"></icon>
+		</button>
+	</li>
+</ul>

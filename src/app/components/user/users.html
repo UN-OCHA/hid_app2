@@ -1,18 +1,9 @@
 <loader ng-if="!usersLoaded"></loader>
 
 <div class="list-actions">
-
   <div>
-    <div class="list-actions__current-filters" ng-if="currentFilters.length">
-      <ul class="tag-list ">   
-        <li class="tag-list__heading" translate>Filters applied:</li>
-        <li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters">
-          <span class="tag-list__text">{{filter.label}}</span>
-          <button type="button" class="btn-transparent tag-list__button" ng-click="removeFilter(filter)">
-            <icon name="cancel" text="Remove {{filter.type}} filter"></icon>
-          </button>
-        </li>
-      </ul>
+    <div class="list-actions__current-filters" ng-if="currentFilters.all.length">
+      <ng-include src="'app/components/user/current-filters.html'"></ng-include>
     </div>
     <div class="list-actions__count">
       {{totalItems}} <span translate>contacts found</span>
@@ -77,13 +68,13 @@
     </tr>
   </tbody>
 </table>
-<ul ng-if="totalItems > pagination.itemsPerPage" 
-  uib-pagination boundary-link-numbers="true" 
-  total-items="totalItems" 
-  items-per-page="pagination.itemsPerPage" 
-  max-size="10" 
-  ng-model="pagination.currentPage" 
-  ng-change="pageChanged()" 
-  class="pagination" 
+<ul ng-if="totalItems > pagination.itemsPerPage"
+  uib-pagination boundary-link-numbers="true"
+  total-items="totalItems"
+  items-per-page="pagination.itemsPerPage"
+  max-size="10"
+  ng-model="pagination.currentPage"
+  ng-change="pageChanged()"
+  class="pagination"
   direction-links="false">
 </ul>
