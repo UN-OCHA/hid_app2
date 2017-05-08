@@ -145,7 +145,7 @@
       var urlp = Object.keys(par).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');
-      var pdfViewer = 'http://mozilla.github.io/pdf.js/web/viewer.html?file=';
+      var pdfViewer = 'https://mozilla.github.io/pdf.js/web/viewer.html?file=';
       var url = config.apiUrl + 'user.pdf?';
       if (format) {
         url += 'format=' + format + '&';
