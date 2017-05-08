@@ -32,9 +32,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <div class="filter" ng-if="!list || list.type !== 'disaster'">
           <label for="disasters" class="sr-only" translate>Filter by disaster</label>
           <ui-select ng-model="selectedFilters['disasters.list']" name="disasters">
-            <ui-select-match allow-clear="true" placeholder="{{'Disaster' | translate}}">{{$select.selected.label}}</ui-select-match>
+            <ui-select-match allow-clear="true" placeholder="{{'Disaster' | translate}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices refresh="getDisasters($select.search)" repeat="disaster._id as disaster in disasters | filter: $select.search" minimum-input-length="3">
-              {{disaster.label}}
+              {{disaster.name}}
             </ui-select-choices>
           </ui-select>
         </div>
@@ -53,9 +53,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <div class="filter" ng-if="!list || list.type !== 'operation'">
           <label for="operations" class="sr-only" translate>Filter by operation</label>
           <ui-select ng-model="selectedFilters['operations.list']" name="operations">
-            <ui-select-match allow-clear="true" placeholder="{{'Operation' | translate}}">{{$select.selected.label}}</ui-select-match>
+            <ui-select-match allow-clear="true" placeholder="{{'Operation' | translate}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices refresh="getOperations($select.search)" minimum-input-length="3" repeat="operation._id as operation in operations | filter: $select.search">
-              {{operation.label}}
+              {{operation.name}}
             </ui-select-choices>
           </ui-select>
         </div>
@@ -63,9 +63,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <div class="filter" ng-if="!list || list.type !== 'office'">
           <label for="office" class="sr-only" translate>Filter by co-ordination hub</label>
            <ui-select ng-model="selectedFilters['offices.list']" name="offices">
-            <ui-select-match allow-clear="true" placeholder="{{'Co-ordination hub' | translate}}">{{$select.selected.label}}</ui-select-match>
+            <ui-select-match allow-clear="true" placeholder="{{'Co-ordination hub' | translate}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices refresh="getOffices($select.search)" repeat="office._id as office in offices | filter: $select.search" minimum-input-length="3">
-              {{office.label}}
+              {{office.name}}
             </ui-select-choices>
           </ui-select>
         </div>
@@ -86,9 +86,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <div class="filter" ng-if="!list || list.type !== 'bundle'">
           <label for="bundles" class="sr-only" translate>Filter by group</label>
           <ui-select ng-model="selectedFilters['bundles.list']" name="bundles">
-            <ui-select-match allow-clear="true" placeholder="{{'Group' | translate}}">{{$select.selected.label}}</ui-select-match>
+            <ui-select-match allow-clear="true" placeholder="{{'Group' | translate}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices refresh="getBundles($select.search)" repeat="bundle._id as bundle in bundles | filter: $select.search" minimum-input-length="3">
-              {{bundle.label}}
+              {{bundle.name}}
             </ui-select-choices>
           </ui-select>
         </div>
@@ -106,9 +106,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <div class="filter" ng-if="!list || list.type !== 'organization'">
           <label for="organizations" class="sr-only" translate>Filter by organization</label>
           <ui-select ng-model="selectedFilters['organizations.list']" name="organizations">
-            <ui-select-match allow-clear="true" placeholder="{{'Organization' | translate}}">{{$select.selected.label}}</ui-select-match>
+            <ui-select-match allow-clear="true" placeholder="{{'Organization' | translate}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization._id as organization in organizations | filter: $select.search" minimum-input-length="3">
-              {{organization.label}}
+              {{organization.name}}
             </ui-select-choices>
           </ui-select>
         </div>
@@ -116,9 +116,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <div class="filter" ng-if="!list || list.type !== 'role'">
           <label for="roles" class="sr-only" translate>Filter by role</label>
           <ui-select ng-model="selectedFilters['functional_roles.list']" name="roles">
-            <ui-select-match allow-clear="true" placeholder="{{'Role' | translate}}">{{$select.selected.label}}</ui-select-match>
+            <ui-select-match allow-clear="true" placeholder="{{'Role' | translate}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices refresh="getRoles($select.search)" minimum-input-length="3" repeat="role._id as role in roles | filter: $select.search">
-              {{role.label}}
+              {{role.name}}
             </ui-select-choices>
           </ui-select>
         </div>
