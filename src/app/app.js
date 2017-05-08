@@ -198,7 +198,8 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/components/list/list.html',
         controller: 'ListCtrl',
         authenticate: true,
-        title: 'List'
+        title: 'List',
+        reloadOnSearch: false
       }).
       when('/lists/:list/edit', {
         templateUrl: 'app/components/list/new-list.html',
@@ -310,7 +311,8 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/components/search/search-results.html',
         controller: 'SearchCtrl',
         authenticate: true,
-        title: 'Search results'
+        title: 'Search results',
+        reloadOnSearch: false
       })
       .when('/notifications', {
         templateUrl: 'app/components/notifications/notifications.html',

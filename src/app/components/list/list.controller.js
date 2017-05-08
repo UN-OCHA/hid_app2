@@ -6,7 +6,7 @@
     .controller('ListCtrl', ListCtrl);
 
   ListCtrl.$inject = ['$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
-  
+
   function ListCtrl ($scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
@@ -80,7 +80,7 @@
     };
 
     $scope.$on('user-service-ready', function() {
-      
+
       List.get({'listId': $routeParams.list}, function (list) {
         $scope.list = list;
         setUpList();
@@ -92,7 +92,7 @@
           setUpList();
         });
       });
-      
+
     });
 
     function isListMember (listId, user) {

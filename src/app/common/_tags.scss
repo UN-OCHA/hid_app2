@@ -1,11 +1,17 @@
-.tag-list--sidebar {
-  @include font-size($small-font-size);
-  margin-bottom: $base-unit*1.5;
+.tag-list {
+  .sidebar__current-filters & {
+    @include font-size($small-font-size);
+    margin-bottom: $base-unit*1.5;
+  }
 }
 
 .tag-list__heading {
   display: inline-block;
   margin-right: $base-unit;
+
+  .sidebar__current-filters & {
+    display: none;
+  }
 }
 
 .tag-list__item {
@@ -20,7 +26,7 @@
     padding: $base-unit/4 $base-unit*2;
     border: 1px solid $light-grey;
     text-decoration: none;
-    font-style: italic; 
+    font-style: italic;
   }
 
   a {
@@ -31,7 +37,7 @@
     }
   }
 
-  .tag-list--sidebar & {
+  .sidebar__current-filters & {
     background: white;
 
     a, .tag-list__text {
@@ -58,7 +64,7 @@
 
   &:hover, &:focus {
     background: $primary-color;
-    
+
     .icon {
       fill: $text-light;
     }
@@ -66,7 +72,7 @@
 }
 
 @include media-query(md) {
-  .tag-list--sidebar {
+  .sidebar__current-filters {
     display: none;
   }
 }

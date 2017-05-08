@@ -1,18 +1,13 @@
 <div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.userFilters}"
 tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
+
   <form ng-if="sidebar.sidebars.userFilters" class="sidebar__inner">
 
     <h2 class="sidebar__heading">Filter</h2>
-
-    <ul class="tag-list tag-list--sidebar" ng-if="currentFilters.length">
-      <li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters">
-        <span class="tag-list__text">{{filter.label}}</span>
-        <button type="button" class="btn-transparent tag-list__button" ng-click="removeFilter(filter)">
-          <icon name="cancel" text="Remove {{filter.type}} filter"></icon>
-        </button>
-      </li>
-    </ul>
+    <div class="sidebar__current-filters" ng-if="currentFilters.all.length">
+      <ng-include src="'app/components/user/current-filters.html'"></ng-include>
+    </div>
 
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="sidebar.close()">
       <icon name="cancel" text="close"></icon>
@@ -121,9 +116,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
         <div class="filter" ng-if="!list || list.type !== 'role'">
           <label for="roles" class="sr-only" translate>Filter by role</label>
           <ui-select ng-model="selectedFilters['functional_roles.list']" name="roles">
-            <ui-select-match allow-clear="true" placeholder="{{'Role' | translate}}">{{$select.selected.label}}</ui-select-match>
+            <ui-select-match allow-clear="true" placeholder="{{'Role' | translate}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices refresh="getRoles($select.search)" minimum-input-length="3" repeat="role._id as role in roles | filter: $select.search">
-              {{role.label}}
+              {{role.name}}
             </ui-select-choices>
           </ui-select>
         </div>
@@ -151,9 +146,9 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
       <div uib-collapse="!filterGroup3" class="filters-group__inner">
         <div class="filter">
           <label for="sort" class="sr-only" translate>Sort by</label>
-          <ui-select ng-model="request['sort']" name="sort">
+          <ui-select ng-model="selectedFilters['sort']" name="sort">
             <ui-select-match placeholder="{{'Sort by' | translate}}">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices repeat="sort.label as sort in sortBy | filter: $select.search">
+            <ui-select-choices repeat="sort.value as sort in sortBy | filter: $select.search">
                 {{sort.name}}
             </ui-select-choices>
           </ui-select>
