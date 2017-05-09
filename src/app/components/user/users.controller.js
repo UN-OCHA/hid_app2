@@ -382,7 +382,7 @@
         if (!selected) {
           return;
         }
-        label = selected.label;
+        label = selected.name;
       }
 
       if (type === 'country') {

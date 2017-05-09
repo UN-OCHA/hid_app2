@@ -439,7 +439,7 @@
         });
 
         it ('should add selected disaster to current filters', function () {
-          scope.disasters = [{_id: 'disasters-id', label: 'pick me!'}, {_id: '6969', label: 'not me'}];
+          scope.disasters = [{_id: 'disasters-id', name: 'pick me!'}, {_id: '6969', label: 'not me'}];
           scope.selectedFilters = {'disasters.list': 'disasters-id'};
           scope.applyFilters();
           expect(scope.currentFilters.all).toEqual([{_id: 'disasters-id', label: 'pick me!', type: 'disasters.list'}]);
@@ -453,14 +453,14 @@
         });
 
         it ('should add selected office (co-ordination hub) to current filters', function () {
-          scope.offices = [{_id: 'offices-id', label: 'pick me!'}, {_id: '6969', label: 'not me'}];
+          scope.offices = [{_id: 'offices-id', name: 'pick me!'}, {_id: '6969', label: 'not me'}];
           scope.selectedFilters = {'offices.list': 'offices-id'};
           scope.applyFilters();
           expect(scope.currentFilters.all).toEqual([{_id: 'offices-id', label: 'pick me!', type: 'offices.list'}]);
         });
 
         it ('should add selected bundle (group/cluster) to current filters', function () {
-          scope.bundles = [{_id: 'bundles-id', label: 'pick me!'}, {_id: '6969', label: 'not me'}];
+          scope.bundles = [{_id: 'bundles-id', name: 'pick me!'}, {_id: '6969', label: 'not me'}];
           scope.selectedFilters = {'bundles.list': 'bundles-id'};
           scope.applyFilters();
           expect(scope.currentFilters.all).toEqual([{_id: 'bundles-id', label: 'pick me!', type: 'bundles.list'}]);
@@ -473,14 +473,14 @@
         });
 
         it ('should add selected organization to current filters', function () {
-          scope.organizations = [{_id: 'organizations-id', label: 'pick me!'}, {_id: '6969', label: 'not me'}];
+          scope.organizations = [{_id: 'organizations-id', name: 'pick me!'}, {_id: '6969', label: 'not me'}];
           scope.selectedFilters = {'organizations.list': 'organizations-id'};
           scope.applyFilters();
           expect(scope.currentFilters.all).toEqual([{_id: 'organizations-id', label: 'pick me!', type: 'organizations.list'}]);
         });
 
         it ('should add selected role to current filters', function () {
-          scope.roles = [{_id: 'roles-id', label: 'pick me!'}, {_id: '6969', label: 'not me'}];
+          scope.roles = [{_id: 'roles-id', name: 'pick me!'}, {_id: '6969', label: 'not me'}];
           scope.selectedFilters = {'functional_roles.list': 'roles-id'};
           scope.applyFilters();
           expect(scope.currentFilters.all).toEqual([{_id: 'roles-id', label: 'pick me!', type: 'functional_roles.list'}]);
@@ -494,7 +494,7 @@
         });
 
         it ('should add multiple filters at once to the current filters', function () {
-          scope.organizations = [{_id: 'organizations-id', label: 'pick me!'}, {_id: '6969', label: 'not me'}];
+          scope.organizations = [{_id: 'organizations-id', name: 'pick me!'}, {_id: '6969', label: 'not me'}];
           scope.selectedFilters = {'organizations.orgTypeId': 433, 'organizations.list': 'organizations-id', 'user_type': 'is_ghost'};
           scope.applyFilters();
           expect(scope.currentFilters.all).toEqual([
@@ -592,7 +592,7 @@ describe('Getting the filters from the query string', function () {
       });
 
       it('should populate the disaster current filter', function () {
-        expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].label, type: 'disasters.list'}]);
+        expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].name, type: 'disasters.list'}]);
       });
 
     });
@@ -620,7 +620,7 @@ describe('Getting the filters from the query string', function () {
       });
 
       it('should populate the office (co-ordination hub) current filter', function () {
-        expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].label, type: 'offices.list'}]);
+        expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].name, type: 'offices.list'}]);
       });
     });
 
@@ -633,7 +633,7 @@ describe('Getting the filters from the query string', function () {
       });
 
       it('should populate the bundle (group/cluster) current filter', function () {
-        expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].label, type: 'bundles.list'}]);
+        expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].name, type: 'bundles.list'}]);
       });
     });
 
@@ -657,7 +657,7 @@ describe('Getting the filters from the query string', function () {
     });
 
      it('should populate the organization current filter', function () {
-      expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].label, type: 'organizations.list'}]);
+      expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].name, type: 'organizations.list'}]);
     });
    });
 
@@ -669,7 +669,7 @@ describe('Getting the filters from the query string', function () {
       });
 
       it('should populate the role current filter', function () {
-        expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].label, type: 'functional_roles.list'}]);
+        expect(scope.currentFilters.all).toEqual([{_id: listFixture.lists[0]._id, label: listFixture.lists[0].name, type: 'functional_roles.list'}]);
       });
     });
 
