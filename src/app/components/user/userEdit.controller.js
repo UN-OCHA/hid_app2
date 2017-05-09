@@ -40,15 +40,15 @@
       {
         value: 'anyone',
         label: gettextCatalog.getString('Anyone')
-      }, 
+      },
       {
         value: 'verified',
         label: gettextCatalog.getString('Verified users')
-      }, 
+      },
       {
         value: 'connections',
         label: gettextCatalog.getString('My connections')
-      } 
+      }
     ];
     $scope.urlRegEx = /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/
     var defaultSettings = {};
@@ -165,7 +165,9 @@
     function saveUpdatedUser (type, callback) {
       $scope.user.$update(function () {
         updateCurrentUser();
-        $scope.showRegion = false;
+        if (type === 'addlocation') {
+          $scope.showRegion = false;
+        }
         $scope.$emit('editUser', {
           status: 'success',
           type: type,
@@ -214,6 +216,13 @@
     }
 
     function setRegions ($item) {
+      if ($scope.temp.location && $scope.temp.location.region) {
+        delete $scope.temp.location.region;
+      }
+      if ($scope.temp.location && $scope.temp.location.locality) {
+        delete $scope.temp.location.locality;
+      }
+
       hrinfoService.getRegions($item.id).then(function (regions) {
         $scope.showRegion = regions.length ? true : false;
         $scope.regions = regions;
@@ -288,7 +297,7 @@
       } else {
         $scope.user[key + 's'].unshift($scope.temp[key]);
       }
-      
+
       if (key === 'organization' || key === 'functional_role') {
         addList($scope.temp[key], key + 's', callback);
         $scope.temp[key] = angular.copy(defaultSettings[key]);
@@ -327,7 +336,7 @@
       if (!$scope.user[key + 's']) {
         return;
       }
-      
+
       if (config.listTypes.indexOf(key) !== -1) {
         alertService.add('danger', gettextCatalog.getString('Are you sure you want to check out of this list?'), true, function () {
           removeList(key, value);
@@ -442,7 +451,7 @@
         return;
       }
       addItem('organization', nextStep);
-    }    
+    }
 
     function addPrimaryLocation () {
       if (!Object.keys($scope.temp.location).length) {
@@ -464,7 +473,7 @@
       $scope.user[key] = $scope.temp[key];
       saveUser(key);
     };
-   
+
     //Wait until user is loaded into scope by parent controller
     $scope.$on('userLoaded', function () {
       setUpFields();
