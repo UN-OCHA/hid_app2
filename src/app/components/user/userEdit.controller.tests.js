@@ -3,8 +3,9 @@
 
   describe('User edit controller', function () {
 
-  	var checkinResponseUser, countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList, mockUserCheckInService, mockUserDataService, 
-    newEmail, newJobTitle, newLocation, newOrganization, newOrgCheckIn, newPhoneNumber, newRole, newVoip, newWebsite, scope, scopeUser, userFixture;
+  	var checkinResponseUser, countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList,
+    mockUserCheckInService, mockUserDataService, newEmail, newJobTitle, newLocation, newOrganization, newOrgCheckIn,
+    newPhoneNumber, newRole, newVoip, newWebsite, regions, scope, scopeUser, userFixture;
 
     countries = ['france', 'uk'];
     newOrganization = {list: {_id: '999', name: 'My new org'}};
@@ -26,6 +27,7 @@
     };
     newWebsite = {url: 'http://bbc.co.uk'};
     newRole = {_id: '12', list: {_id: 'role-id'}};
+    regions = [{id: '1', name: 'region 1'}, {id: '2', name: 'region 2'}];
 
     function setUpCtrl(user, currentUser) {
       inject(function($rootScope, $controller, $injector, $q) {
@@ -52,6 +54,14 @@
         defer.resolve();
         return defer.promise;
       };
+
+      mockhrinfoService.getRegions = function () {
+        var defer = $q.defer();
+        defer.resolve(regions);
+        return defer.promise;
+      };
+
+      spyOn(mockhrinfoService, 'getRegions').and.callThrough();
 
       spyOn(scopeUser, '$update').and.callFake(function (callback) {
         callback();
@@ -141,7 +151,7 @@
       module('app.list', function($provide) {
         $provide.value('List', mockList);
       });
-      mockList.query = function () {};    
+      mockList.query = function () {};
     });
 
     describe('Adding a new phone number', function () {
@@ -378,6 +388,36 @@
 
     });
 
+    describe('Selecting a country', function () {
+
+      beforeEach(function () {
+        setUpCtrl(userFixture.user1, userFixture.user1);
+        scope.$emit('userLoaded');
+        scope.temp.location.region = {id: 'old-region'};
+        scope.temp.location.locality = 'old locality';
+        scope.setRegions({id: 'country-id'});
+        scope.$digest();
+      });
+
+      it('should remove any already selected region or locality', function () {
+        expect(scope.temp.location.region).toBeUndefined();
+        expect(scope.temp.location.locality).toBeUndefined();
+      });
+
+      it('should check for regions for the country', function () {
+        expect(mockhrinfoService.getRegions).toHaveBeenCalledWith('country-id');
+      });
+
+      it('should show the regions selecter if regions are returned', function () {
+        expect(scope.showRegion).toBe(true);
+      });
+
+      it('should populate the regions selecter with the returned regions', function () {
+        expect(scope.regions).toEqual(regions);
+      });
+
+    });
+
     describe('Adding a new location', function () {
 
       beforeEach(function () {
@@ -481,13 +521,13 @@
           scope.temp.website.url = 'http://www.my-url2.com';
           scope.addItem('website');
           expect(scope.user.websites[0]).toEqual({url: 'http://www.my-url2.com'});
-        }); 
+        });
 
         it('should not add http if the url starts with https', function () {
           scope.temp.website.url = 'https://www.my-url3.com';
           scope.addItem('website');
           expect(scope.user.websites[0]).toEqual({url: 'https://www.my-url3.com'});
-        }); 
+        });
       });
     });
 
@@ -654,7 +694,7 @@
           expect(scopeUser.$update).toHaveBeenCalled();
         });
       });
-      
+
     });
 
   });
