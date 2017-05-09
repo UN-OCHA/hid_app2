@@ -173,7 +173,6 @@
 
     $scope.$on('populate-list', function (event, listType) {
 
-
       if ($scope.list) {
         defaultRequest = angular.extend(defaultRequest, listType);
         $scope.operationIds = $scope.list.associatedOperations();
@@ -530,7 +529,9 @@
     });
 
     function init () {
-      UserDataService.subscribe($scope, function () {});
+      UserDataService.subscribe($scope, function () {
+        getUsers(currentRequest);
+      });
     }
 
     init();
