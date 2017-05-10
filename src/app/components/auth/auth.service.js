@@ -5,9 +5,9 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$exceptionHandler', '$http', '$q', '$window', '$rootScope', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
+  AuthService.$inject = ['$exceptionHandler', '$http', '$q', '$window', '$rootScope', '$timeout', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
 
-  function AuthService ($exceptionHandler, $http, $q, $window, $rootScope, $interval, $location, config, UserListsService, notificationsService) {
+  function AuthService ($exceptionHandler, $http, $q, $window, $rootScope, $timeout, $interval, $location, config, UserListsService, notificationsService) {
     var checkingNotifications;
     var cachingLists;
     var swRegistration;
@@ -33,13 +33,13 @@
 
     function showNotification (item) {
       if (item && !item.notified) {
-        var notification; 
+        var notification;
         var link =item.link;
 
         item.notified = true;
         item.read = false;
         notificationsService.update(item);
-        
+
         try {
           notification = new Notification('',{
             body: item.text,
@@ -60,7 +60,7 @@
           if ('serviceWorker' in navigator && 'PushManager' in window) {
 
             if (!swRegistration) {
-              navigator.serviceWorker.register('sw.js') 
+              navigator.serviceWorker.register('sw.js')
                 .then(function(swReg) {
                  swRegistration = swReg;
                  navigator.serviceWorker.ready.then(function () {
@@ -115,7 +115,7 @@
     function notificationsHelper () {
       notificationsPermitted = getNotificationsPermission();
       getUnreadNotifications();
-      
+
       checkingNotifications = $interval(function () {
         getUnreadNotifications();
       }, 60000);
@@ -123,7 +123,12 @@
 
     function cachingHelper () {
       var user = JSON.parse($window.localStorage.getItem('currentUser'));
-      UserListsService.cacheListsForUser(user);
+
+      // Cache after 2 mins on site
+      $timeout(function () {
+        UserListsService.cacheListsForUser(user);
+      }, 120000);
+      // then every hour after that
       cachingLists = $interval(function () {
         if ($rootScope.canCache) {
           UserListsService.cacheListsForUser(user);
@@ -153,7 +158,7 @@
 
       if (expiry.isBefore(current)) {
         deferred.reject();
-        return deferred.promise; 
+        return deferred.promise;
       }
 
       if (expiry.isAfter(refreshPoint)) {
@@ -163,9 +168,9 @@
         if (!cachingLists) {
           cachingHelper();
         }
-        
+
         deferred.resolve();
-        return deferred.promise; 
+        return deferred.promise;
       }
 
       refreshToken(function () {
@@ -174,7 +179,7 @@
         deferred.reject();
       });
 
-      return deferred.promise; 
+      return deferred.promise;
     }
 
     var jwt = {
@@ -200,7 +205,7 @@
 
       isAuthenticated: function(callback) {
         var token = $window.localStorage.getItem('jwtToken');
-        if (!token) { 
+        if (!token) {
           jwt.logout();
           callback(false);
           return;

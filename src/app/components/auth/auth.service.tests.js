@@ -1,17 +1,18 @@
 (function() {
   'use strict';
 
-  var $interval, $rootScope, AuthService, httpBackend, mockConfig, mockNotificationsService, mockUserListsService, userFixture;
+  var $interval, $rootScope, $timeout, AuthService, httpBackend, mockConfig, mockNotificationsService, mockUserListsService, userFixture;
 
   describe('Auth service', function () {
 
     function setUpCtrl (token) {
-      inject(function(_AuthService_, _$httpBackend_,  _$interval_, _$rootScope_, config, $q) {
+      inject(function(_AuthService_, _$httpBackend_,  _$interval_, _$rootScope_, config, $q, _$timeout_) {
         AuthService = _AuthService_;
         httpBackend = _$httpBackend_;
         config = mockConfig;
         $interval =  _$interval_;
         $rootScope = _$rootScope_;
+        $timeout = _$timeout_;
 
         spyOn(mockNotificationsService, 'getUnread').and.returnValue($q.when());
         spyOn(AuthService, 'parseToken').and.returnValue(token);
@@ -40,7 +41,7 @@
   		mockNotificationsService = {
         getUnread: function () {}
       };
-       
+
   		module('app.notifications', function($provide) {
   			$provide.constant('notificationsService', mockNotificationsService);
   		});
@@ -71,10 +72,10 @@
   				token: 'a-token',
   				user: userFixture.user1
   			});
-				httpBackend.flush();  			
+				httpBackend.flush();
   			expect(window.localStorage.getItem('jwtToken')).toEqual('a-token');
   			expect(window.localStorage.getItem('currentUser')).toEqual(JSON.stringify(userFixture.user1));
-  			
+
   		});
 
   	});
@@ -150,11 +151,11 @@
           });
 
           it('should cache the users lists', function () {
-            AuthService.isAuthenticated(function () {
-              expect(mockUserListsService.cacheListsForUser).toHaveBeenCalled();
-            });
+            AuthService.isAuthenticated(function () {});
+            $timeout.flush()
+            expect(mockUserListsService.cacheListsForUser).toHaveBeenCalled();
           });
-          
+
         });
 
         describe('token is nearly expired', function () {
