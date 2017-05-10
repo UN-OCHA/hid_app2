@@ -8,20 +8,27 @@
   <ul class="list list--has-buttons list--has-dividers">
     <li class="list__item" ng-repeat="list in filterData = (listsMember | filter : listSearchTerm) | limitTo:itemsPerPage:itemsPerPage*(page-1) | orderBy: 'createdAt' : true">
       <a href="/lists/{{list.list}}">{{list.name}}</a>
-      <button type="button" class="btn-transparent list__button" ng-click="leaveList(list)">
+
+      <div class="list__button">
+      <button type="button" class="btn-transparent" ng-click="editCheckIn(list)">
+        <icon name="edit-calendar" text="Edit checkout date"></icon>
+      </button>
+
+      <button type="button" class="btn-transparent" ng-click="leaveList(list)">
         <icon name="cancel" text="Check out"></icon>
       </button>
+      </div>
     </li>
     <li class="list__item" ng-if="!listsMember.length"><em translate>No lists</em></li>
   </ul>
 
-  <uib-pagination 
+  <uib-pagination
     ng-show="filterData.length > itemsPerPage"
-    total-items="filterData.length" 
+    total-items="filterData.length"
     ng-model="page"
-    ng-change="pageChanged()" 
-    direction-links="false" 
+    ng-change="pageChanged()"
+    direction-links="false"
     items-per-page=itemsPerPage
-    class="pagination" >    
+    class="pagination" >
   </uib-pagination>
 </div>

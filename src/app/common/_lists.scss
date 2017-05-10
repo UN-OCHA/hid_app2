@@ -41,7 +41,6 @@
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 0;
-    // line-height: 1;
   }
 
   a, .btn-link {
@@ -106,6 +105,16 @@
       line-height: $base-unit*3.5;
     }
   }
+}
+
+div.list__button {
+  width: auto;
+  background: white;
+  height: 100%;
+  top: 0;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
 }
 
 .list__meta {
