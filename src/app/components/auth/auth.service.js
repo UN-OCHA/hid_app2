@@ -123,7 +123,6 @@
 
     function cachingHelper () {
       var user = JSON.parse($window.localStorage.getItem('currentUser'));
-      var cacheThreshold;
 
       // Check if has been cached in last hour, cache if not
       var lfcacheInfo = $localForage.instance('cacheInfo');
@@ -133,7 +132,7 @@
         }
         UserListsService.cacheListsForUser(user);
 
-      }, function (error) {
+      }).catch(function () {
         UserListsService.cacheListsForUser(user);
       });
 
