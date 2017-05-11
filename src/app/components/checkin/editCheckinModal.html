@@ -1,0 +1,40 @@
+<h2 class="sr-only" id="modal-title" translate>
+  Update check out date
+</h2>
+<div class="modal-body" id="modal-body">
+
+    <div class="form-field">
+      <h3>Current automatic check out date</h3>
+      <ul class="list list--has-buttons">
+        <li class="list__item">
+          <span ng-if="currentCheckoutDate">{{currentCheckoutDate}}</span>
+          <span ng-if="!currentCheckoutDate"><em translate>None set</em></span>
+          <button type="button" class="btn-transparent list__button" ng-if="currentCheckoutDate" ng-click="removeCheckOutDate(editingCheckIn)">
+            <icon name="cancel" text="Remove date"></icon>
+          </button>
+        </li>
+      </ul>
+      </div>
+    <form>
+
+    <div class="form-field">
+      <h3><label for="departureDate">New automatic check out date</label></h3>
+      <div class="form-inline-fields">
+        <input type="text" id="departureDate" uib-datepicker-popup="dd/MM/yyyy" popup-placement="bottom-right" ng-model="editingCheckIn.departureDate" is-open="datePicker.opened" datepicker-options="dateOptions" close-text="Close" placeholder="dd/mm/yyyy" />
+        <button type="button" class="btn-transparent" ng-click="showDatePicker()">
+          <icon name="calendar" text="Select a date"></icon>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <button type="submit" class="btn-primary btn-block" ng-click="updateCheckIn(editingCheckIn)">Save</button>
+      </div>
+      <div class="col-xs-6">
+        <button type="button" class="btn-secondary btn-block" ng-click="closeEditModal()" translate="">Cancel</button>
+      </div>
+    </div>
+
+    </form>
+
+</div>
