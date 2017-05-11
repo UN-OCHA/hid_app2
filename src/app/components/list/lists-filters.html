@@ -4,14 +4,16 @@
 
     <h2 class="sidebar__heading">Filter</h2>
 
-    <ul class="tag-list tag-list--sidebar" ng-if="currentFilters.length">     
-      <li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters">
-        <span class="tag-list__text">{{filter.label}}</span>
-        <button type="button" class="btn-transparent tag-list__button" ng-click="removeFilter(filter)">
-          <icon name="cancel" text="Remove {{filter.type}} filter"></icon>
-        </button>
-      </li>
-    </ul>
+    <div class="sidebar__current-filters" ng-if="currentFilters.length">
+      <ul class="tag-list tag-list--sidebar">
+        <li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters">
+          <span class="tag-list__text">{{filter.label}}</span>
+          <button type="button" class="btn-transparent tag-list__button" ng-click="removeFilter(filter)">
+            <icon name="cancel" text="Remove {{filter.type}} filter"></icon>
+          </button>
+        </li>
+      </ul>
+    </div>
 
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="sidebar.close()">
       <icon name="cancel" text="close"></icon>

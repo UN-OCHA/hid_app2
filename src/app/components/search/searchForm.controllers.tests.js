@@ -3,7 +3,7 @@
 
   describe('Search Form controller', function () {
 
-    var scope, mockSearchService, mockUser, mockList, searchResults, $location, userFixture;
+    var scope, mockSearchService, mockUser, mockList, mockRoute, searchResults, $location, userFixture;
     userFixture = readJSON('app/test-fixtures/user.json');
 
     searchResults = [
@@ -24,7 +24,9 @@
       module('app.search');
 
       mockUser = jasmine.createSpyObj('User', ['query']);
-
+      mockRoute = {
+        reload: function () {}
+      };
       mockSearchService = {};
       mockSearchService = {
         saveSearch: function () {}
@@ -34,6 +36,7 @@
       });
       module('app.search', function($provide) {
         $provide.value('SearchService', mockSearchService);
+        $provide.value('$route', mockRoute);
       });
 
       mockList = {};
