@@ -5,9 +5,9 @@
     .module('app.search')
     .controller('SearchFormCtrl', SearchFormCtrl);
 
-  SearchFormCtrl.$inject = ['$rootScope', '$scope', '$location', 'SearchService', 'User', 'List'];
+  SearchFormCtrl.$inject = ['$rootScope', '$route', '$scope', '$location', 'SearchService', 'User', 'List'];
 
-  function SearchFormCtrl($rootScope, $scope, $location, SearchService, User, List) {
+  function SearchFormCtrl($rootScope, $route, $scope, $location, SearchService, User, List) {
 
     $scope.searchTerm = '';
     $scope.searchUsersTerm = '';
@@ -44,6 +44,7 @@
         params.type = filterType;
       }
       $location.path('/search').search(params);
+      $route.reload();
     };
 
     function goToOperation (operation) {

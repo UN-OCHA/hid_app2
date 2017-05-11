@@ -19,18 +19,21 @@
     $scope.selectedFilters = {};
     $scope.listFilters = {};
     $scope.currentFilters = [];
-    if ($routeParams.q) {
-      $scope.listFilters.name = $routeParams.q;
-      $scope.request.name = $routeParams.q;
-      $scope.selectedFilters.name = $routeParams.q;
-      $scope.currentFilters.push({label: $routeParams.q, filterType: 'name', type: 'name'});
+
+    var searchValue = $routeParams.q || $routeParams.name;
+
+    if (searchValue) {
+      $scope.listFilters.name = searchValue;
+      $scope.request.name = searchValue;
+      $scope.selectedFilters.name = searchValue;
+      $scope.currentFilters.push({label: searchValue, filterType: 'name', type: 'name'});
     }
     if ($routeParams.type) {
       $scope.selectedFilters.type = $routeParams.type;
       $scope.listFilters.type = $routeParams.type;
       $scope.request.type = $routeParams.type;
     }
-    
+
     var currentSortOrder = $scope.request.name;
     ListDataService.setRequest($scope.request);
 
@@ -63,7 +66,6 @@
       $scope.currentPage = 1;
       $scope.pageChanged();
     });
-
     ListDataService.queryLists($scope.request, function (lists, number) {
       $scope.lists = lists;
       $scope.totalItems = number;
@@ -106,7 +108,7 @@
       if (selectedFilters.name) {
         $scope.currentFilters.push({label: selectedFilters.name, filterType: 'name'});
       }
-      
+
       if (selectedFilters.type) {
         var selected = $scope.listTypes.filter(function (item) {
           return item.key === selectedFilters.type;
@@ -120,20 +122,20 @@
         delete $scope.selectedFilters[filter.filterType];
       }
       if ($scope.request[filter.filterType]) {
-        delete $scope.request[filter.filterType]; 
+        delete $scope.request[filter.filterType];
       }
       $scope.filter();
     };
 
     $scope.filter = function() {
       $scope.listsLoaded = false;
-      
+
       if ($scope.selectedFilters.name === '') {
         delete $scope.selectedFilters.name;
         delete $scope.request.name;
       }
-      if ($routeParams.q) {
-        $scope.listFilters.name = $routeParams.q;
+      if (searchValue) {
+        $scope.listFilters.name = searchValue;
       }
       $scope.listFilters = angular.copy($scope.selectedFilters);
       ListDataService.setFilters($scope.listFilters);
