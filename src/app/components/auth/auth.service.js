@@ -5,9 +5,9 @@
     .module('app.auth')
     .factory('AuthService', AuthService);
 
-  AuthService.$inject = ['$exceptionHandler', '$http', '$q', '$window', '$rootScope', '$timeout', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
+  AuthService.$inject = ['$exceptionHandler', '$http', '$localForage', '$q', '$window', '$rootScope', '$timeout', '$interval', '$location', 'config', 'UserListsService', 'notificationsService'];
 
-  function AuthService ($exceptionHandler, $http, $q, $window, $rootScope, $timeout, $interval, $location, config, UserListsService, notificationsService) {
+  function AuthService ($exceptionHandler, $http, $localForage, $q, $window, $rootScope, $timeout, $interval, $location, config, UserListsService, notificationsService) {
     var checkingNotifications;
     var cachingLists;
     var swRegistration;
@@ -123,12 +123,20 @@
 
     function cachingHelper () {
       var user = JSON.parse($window.localStorage.getItem('currentUser'));
+      var cacheThreshold;
 
-      // Cache after 2 mins on site
-      $timeout(function () {
+      // Check if has been cached in last hour, cache if not
+      var lfcacheInfo = $localForage.instance('cacheInfo');
+      lfcacheInfo.getItem('cachedAt').then(function(cacheDate) {
+        if (cacheDate && moment(cacheDate).add(1, 'hour').isAfter()) {
+          return;
+        }
         UserListsService.cacheListsForUser(user);
-      }, 120000);
-      // then every hour after that
+
+      }, function (error) {
+        UserListsService.cacheListsForUser(user);
+      });
+
       cachingLists = $interval(function () {
         if ($rootScope.canCache) {
           UserListsService.cacheListsForUser(user);

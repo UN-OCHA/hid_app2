@@ -3,19 +3,19 @@
 
   describe('List service', function () {
 
-  	var $rootScope, httpBackend, List, listFixture, mockConfig, mockList, mockLocalForage, mockUser, initialParams, mockLf, 
+  	var $rootScope, httpBackend, List, listFixture, mockConfig, mockList, mockLocalForage, mockUser, initialParams, mockLf,
   	nextPageParams, userFixture;
-  	
+
   	listFixture = readJSON('app/test-fixtures/list.json');
   	userFixture = readJSON('app/test-fixtures/user.json');
 
   	beforeEach(function () {
-  		module('ngResource'); 	
+  		module('ngResource');
   		mockConfig = {};
   		mockConfig.apiUrl = 'http://mock-url/';
   		mockUser = {};
   		mockLocalForage = {};
-  		
+
   		module('app.list', function($provide) {
   			$provide.constant('config', mockConfig);
   			$provide.constant('$localForage', mockLocalForage);
@@ -72,7 +72,7 @@
 
 	  describe('Caching lists', function () {
 
-	  	beforeEach(function () {	  		
+	  	beforeEach(function () {
 	  		initialParams = { limit: 100, offset: 0, sort: 'name', 'operations.list': '1234', 'appMetadata.hid.login': true};
 	  		nextPageParams = { limit: 100, offset: 100, sort: 'name', 'operations.list': '1234', 'appMetadata.hid.login': true};
 	  		mockList.cache();
@@ -98,10 +98,11 @@
 	  		expect(mockUser.query).toHaveBeenCalledWith(nextPageParams);
 	  	});
 
-	  	it('should store the second page of users', function () {
+	  	it('should store the second page of users', inject(function($timeout) {
 	  		$rootScope.$digest();
-	  		expect(mockLf.setItem).toHaveBeenCalledWith(listFixture.secondPageOfUsers[0]._id, listFixture.secondPageOfUsers[0]); 
-	  	});
+	  		$timeout.flush();
+	  		expect(mockLf.setItem).toHaveBeenCalledWith(listFixture.secondPageOfUsers[0]._id, listFixture.secondPageOfUsers[0]);
+	  	}));
 
 	  });
 

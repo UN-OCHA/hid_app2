@@ -1,7 +1,8 @@
 (function() {
   'use strict';
 
-  var $interval, $rootScope, $timeout, AuthService, httpBackend, mockConfig, mockNotificationsService, mockUserListsService, userFixture;
+  var $interval, $localForage, $rootScope, $timeout, AuthService, httpBackend, mockConfig, mockLf, mockLocalForage, mockNotificationsService,
+  mockUserListsService, userFixture;
 
   describe('Auth service', function () {
 
@@ -13,10 +14,18 @@
         $interval =  _$interval_;
         $rootScope = _$rootScope_;
         $timeout = _$timeout_;
+        $localForage = mockLocalForage;
 
         spyOn(mockNotificationsService, 'getUnread').and.returnValue($q.when());
         spyOn(AuthService, 'parseToken').and.returnValue(token);
         spyOn($interval, 'cancel').and.callThrough();
+
+        mockLf = {
+          getItem: function () {}
+        };
+        spyOn(mockLf, 'getItem').and.returnValue($q.when());
+        spyOn(mockLocalForage, 'instance').and.returnValue(mockLf);
+
       });
     }
 
@@ -26,8 +35,12 @@
   		mockConfig = {
   			apiUrl: 'http://mock-url/'
   		};
+      mockLocalForage = {
+        instance: function () {}
+      };
   		module('app.auth', function($provide) {
   			$provide.constant('config', mockConfig);
+        $provide.constant('$localForage', mockLocalForage);
   		});
 
   		mockUserListsService = {};
@@ -45,6 +58,7 @@
   		module('app.notifications', function($provide) {
   			$provide.constant('notificationsService', mockNotificationsService);
   		});
+
   	});
 
   	afterEach(function() {

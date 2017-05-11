@@ -5,9 +5,9 @@
     .module('app.list')
     .factory('List', List);
 
-  List.$inject = ['$resource', '$rootScope', '$localForage', '$exceptionHandler', '$q', 'config', 'User'];
+  List.$inject = ['$resource', '$rootScope', '$localForage', '$exceptionHandler', '$q', '$timeout', 'config', 'User'];
 
-  function List ($resource, $rootScope, $localForage, $exceptionHandler, $q, config, User) {
+  function List ($resource, $rootScope, $localForage, $exceptionHandler, $q, $timeout, config, User) {
     var List = $resource(config.apiUrl + 'list/:listId', {listId: '@_id'},
     {
       'save': {
@@ -56,7 +56,7 @@
           //rejected as not enough space or user has declined;
           $rootScope.canCache = false; // prevent retrying in x minutes
         }
-        return callback(false); 
+        return callback(false);
       });
     }
 
@@ -75,7 +75,11 @@
             return;
           }
           request.offset = request.offset + numUsersToCache;
-          cacheListUsers(request, lfusers, deferred);
+          // Short delay between requests for pages of users
+          $timeout(function () {
+          // setTimeout(function () {
+            cacheListUsers(request, lfusers, deferred);
+          }, 2000);
         });
 
       }, function (error) {
