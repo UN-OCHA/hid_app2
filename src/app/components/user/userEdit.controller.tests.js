@@ -5,7 +5,7 @@
 
   	var checkinResponseUser, countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList,
     mockUserCheckInService, mockUserDataService, newEmail, newJobTitle, newLocation, newOrganization, newOrgCheckIn,
-    newPhoneNumber, newRole, newVoip, newWebsite, regions, scope, scopeUser, userFixture;
+    newPhoneNumber, newRole, newVoip, newWebsite, regions, scope, scopeUser, userFixture, mockUpload;
 
     countries = ['france', 'uk'];
     newOrganization = {list: {_id: '999', name: 'My new org'}};
@@ -93,6 +93,9 @@
 
       spyOn(scope, '$emit').and.callThrough();
 
+      var deferred = $q.defer();
+      mockUpload = jasmine.createSpy('uploadSpy').and.returnValue(deferred.promise)
+
       $controller('UserEditCtrl', {
         $scope: scope
       });
@@ -118,6 +121,7 @@
         $provide.constant('config', mockConfig);
         $provide.constant('UserDataService', mockUserDataService);
         $provide.value('UserCheckInService', mockUserCheckInService);
+        $provide.value('upload', mockUpload);
       });
       mockUserDataService.getUser = function () {};
       mockUserDataService.formatUserLocations = function () {};
@@ -136,7 +140,9 @@
       });
       mockAlertService.add = function () {};
       spyOn(mockAlertService, 'add').and.callFake(function (argument1, argument2, arg3, callback) {
-       callback([argument1, argument2, arg3]);
+        if (callback) {
+          callback([argument1, argument2, arg3]);
+        }
      });
 
       mockGetText = {};
@@ -693,6 +699,32 @@
           scope.updateUser(scope.user.isManager);
           expect(scopeUser.$update).toHaveBeenCalled();
         });
+      });
+
+      describe('Uploading an image', function () {
+
+        beforeEach(function () {
+          userFixture.user1.is_admin = false;
+          setUpCtrl(userFixture.user2, userFixture.user3);
+          scope.$emit('userLoaded');
+        });
+
+        it('should not permit file types that are not jpeg or png to be uploaded', function () {
+          scope.doUpload([{name:'myfile.pdf', type: 'application/pdf'}]);
+          expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Error - only jpg and png files are permitted');
+
+          scope.doUpload([{name:'myfile.php', type: 'application/php'}]);
+          expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Error - only jpg and png files are permitted');
+        });
+
+        it('should permit jpg and png files to be uploaded', function () {
+          scope.doUpload([{name:'myfile.jpg', type: 'image/jpeg'}]);
+          expect(mockAlertService.add).not.toHaveBeenCalledWith('danger', 'Error - only jpg and png files are permitted');
+
+          scope.doUpload([{name:'myfile.png', type: 'image/png'}]);
+          expect(mockAlertService.add).not.toHaveBeenCalledWith('danger', 'Error - only jpg and png files are permitted');
+        });
+
       });
 
     });
