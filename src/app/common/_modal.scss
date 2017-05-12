@@ -85,7 +85,7 @@
 .modal-body {
   position: relative;
   padding: 0 0 $base-unit 0;
-  
+
   .alert-modal & {
     @include font-size($medium-font-size);
     text-align: center;
@@ -93,6 +93,13 @@
 
   h2 {
     line-height: 1.2;
+  }
+
+  h3 {
+    color: $dark-blue;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    font-family: $heading-font-light;
   }
 }
 
@@ -134,7 +141,7 @@
 .modal-icon {
   display: inline-block;
   margin-bottom: $base-unit;
-  
+
   .icon {
     width: $base-unit*4;
     height: $base-unit*4;

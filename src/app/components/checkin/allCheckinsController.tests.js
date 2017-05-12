@@ -3,7 +3,8 @@
 
   describe('All Check-ins controller', function () {
 
-  	var mockAlertService, mockConfig, mockGetText, mockUserCheckInService, mockUserDataService, scope, userFixture;
+  	var checkinToEdit, checkinToRemove, mockAlertService, mockConfig, mockGetText, mockUibModal, mockUserCheckInService, mockUserDataService,
+    scope, userFixture;
 
   	var expectedLists = [{ _id: '3456', list: 'org-id-1', name: 'org1', type: 'organization' },
 		{ _id: '7664', list: 'org-id-2', name: 'org2', type: 'organization' },
@@ -37,7 +38,8 @@
       	notify: function () {}
       };
       mockUserCheckInService = {
-      	delete: function () {}
+      	delete: function () {},
+        update: function () {}
       };
       module('app.user', function($provide) {
         $provide.value('UserDataService', mockUserDataService);
@@ -58,11 +60,28 @@
       	callback(userFixture.user1);
       });
 
+      spyOn(mockUserCheckInService, 'update').and.callFake(function (arg1, arg2, callback) {
+        callback();
+      });
+
       spyOn(mockAlertService, 'add').and.callFake(function (arg1, arg2, arg3, callback) {
       	callback();
       });
 
       spyOn(mockUserDataService, 'notify');
+
+      mockUibModal = {
+        open: function () {
+          return {
+            close: function () {},
+            result: {
+              then: function(){}
+            }
+          }
+        }
+      };
+
+      spyOn(mockUibModal, 'open').and.callThrough();
 
   		inject(function ($controller, $rootScope) {
   			scope = $rootScope.$new();
@@ -72,7 +91,8 @@
   			spyOn(scope, 'setCurrentUser');
 
   			$controller('AllCheckInsCtrl', {
-        	$scope: scope
+        	$scope: scope,
+          $uibModal: mockUibModal
       	});
       	scope.$digest();
   		});
@@ -130,6 +150,52 @@
   			expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'There was an error checking out of this list', false, jasmine.any(Function));
   		});
   	});
+
+    describe('Edit checkout date', function () {
+
+      beforeEach(function () {
+        checkinToEdit = { _id: 'checkin-id-1', list: 'list-1-id', name: 'list-1', type: 'disaster', checkoutDate: 'date' };
+        scope.editCheckIn(checkinToEdit);
+      });
+
+      it('should open the edit checkout date modal', function () {
+        expect(mockUibModal.open).toHaveBeenCalledWith({scope: scope, size: 'sm', templateUrl: 'app/components/checkin/editCheckinModal.html'});
+      });
+
+      it('should assign the checkin to a scope variable so can be accessed in the modal', function () {
+        expect(scope.editingCheckIn).toEqual(checkinToEdit);
+      });
+
+      it('should update the check in with the new check out date', function () {
+        checkinToEdit.departureDate = 'date-edited';
+
+        scope.updateCheckIn(checkinToEdit);
+        expect(mockUserCheckInService.update).toHaveBeenCalledWith(
+          {userId: userFixture.user1._id, listType: 'disasters', checkInId: 'checkin-id-1'},
+          {list: 'checkin-id-1', checkoutDate: 'date-edited'},
+          jasmine.any(Function), jasmine.any(Function)
+        );
+      });
+
+    });
+
+    describe('Remove checkout date', function () {
+
+      beforeEach(function () {
+        scope.editCheckIn(checkinToEdit);
+        checkinToRemove = { _id: 'checkin-id-1', list: 'list-1-id', name: 'list-1', type: 'disaster', checkoutDate: 'date' };
+        scope.removeCheckOutDate(checkinToEdit);
+      });
+
+      it ('should remove the check out date', function () {
+        expect(mockUserCheckInService.update).toHaveBeenCalledWith(
+          {userId: userFixture.user1._id, listType: 'disasters', checkInId: 'checkin-id-1'},
+          {list: 'checkin-id-1', checkoutDate: null},
+          jasmine.any(Function), jasmine.any(Function)
+        );
+      });
+
+    });
 
   });
 
