@@ -175,7 +175,7 @@
 
       if ($scope.list) {
         defaultRequest = angular.extend(defaultRequest, listType);
-        $scope.operationIds = $scope.list.associatedOperations();
+        $scope.operationIds = $scope.list.fromCache ? [] : $scope.list.associatedOperations();
       }
 
       currentRequest = angular.copy(defaultRequest);
