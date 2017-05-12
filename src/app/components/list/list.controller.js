@@ -16,6 +16,8 @@
     $scope.listLoaded = false;
     $scope.savingCheckin = false;
     $scope.savingMembers = false;
+    $scope.listUnavailable = false;
+    $scope.offline = false;
     $scope.usersAdded = {};
     $scope.datePicker = {
       opened: false
@@ -71,7 +73,7 @@
       populateList();
       checkInStatus();
       $scope.isMember = isMember($scope.currentUser, $scope.list);
-      $scope.isManager = $scope.list.isManager($scope.currentUser);
+      $scope.isManager = $scope.list.fromCache ? false : $scope.list.isManager($scope.currentUser);
       $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
       $scope.isFavorite = isFavorite($scope.currentUser, $scope.list);
       $scope.checkinUser = {
@@ -89,7 +91,12 @@
         var lflists = $localForage.instance('lists');
         lflists.getItem($routeParams.list).then(function (list) {
           $scope.list = list;
+          $scope.list.fromCache = true;
           setUpList();
+        }).catch(function () {
+          $scope.listLoaded = true;
+          $scope.listUnavailable = true;
+          $scope.offline = Offline.state === 'up' ? false : true;
         });
       });
 

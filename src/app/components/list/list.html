@@ -33,7 +33,7 @@
 
 </div>
 
-<div class="row" ng-if="listLoaded && !list.visible">
+<div class="row" ng-if="listLoaded && !list.visible && !listUnavailable">
   <div class="page-header page-header--alert col-md-8" >
 
     <icon name="lock" class="page-header__alert-icon"></icon>
@@ -42,7 +42,6 @@
       <h1 class="page-header__heading">
         {{list.name}}
       </h1>
-
 
       <p class="page-header__alert-info" ng-if="list.visibility === 'inlist' || list.visibility === 'me'">
         <span translate>This list has been set to private by the list owner. Unfortunately you do not have the rights to access it.</span>
@@ -53,6 +52,26 @@
         <a href="mailto:info@humanitarian.id">info@humanitarian.id</a>
         <span translate>if you wish to access the list.</span>
       </p>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="listLoaded && listUnavailable">
+  <div class="page-header page-header--alert col-md-8" >
+
+    <div class="page-header__content">
+      <h1 class="page-header__heading">
+        <span ng-if="!offline" translate>List not found</span>
+        <span ng-if="offline" translate>List not available offline</span>
+      </h1>
+
+       <p class="page-header__alert-info" ng-if="!offline">
+         <span translate>List not found, try </span>
+         <a ng-href="/search?view=lists" translate>searching for the list</a>
+         <span translate>or return to the </span>
+         <a ng-href="/landing" translate>landing page</a>.
+       </p>
+
     </div>
   </div>
 </div>
