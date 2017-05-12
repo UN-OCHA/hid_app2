@@ -70,21 +70,21 @@
 
     function cacheFavoriteLists (user) {
       var lists = user.favoriteLists;
-      angular.forEach(lists, function (list) {        
+      angular.forEach(lists, function (list) {
         if (list._id) {
-          cacheList(list._id);  
+          cacheList(list._id);
         }
       });
     }
 
     function getFavoriteLists (user) {
       var lists = user.favoriteLists;
-      angular.forEach(lists, function (list) {        
+      angular.forEach(lists, function (list) {
         if (list._id) {
           updateListCacheStatus(list);
 
           if (!getCachedList(list._id)) {
-            cacheList(list._id); 
+            cacheList(list._id);
           }
 
         }
@@ -117,11 +117,11 @@
           lists.push(list);
 
           if (!getCachedList(checkin.list)) {
-            cacheList(checkin.list); 
+            cacheList(checkin.list);
           }
         });
       });
-      
+
       userLists.listsMember = lists;
     }
 
@@ -144,7 +144,7 @@
       });
     }
 
-    function getOwnedAndManagedLists (user) {      
+    function getOwnedAndManagedLists (user) {
       userLists.listsOwnedAndManaged = [];
 
       if (Offline.state !== 'up') {
@@ -168,7 +168,7 @@
         return;
       }
 
-      return ListDataService.getManagedAndOwnedLists(user, '', function (lists) { 
+      return ListDataService.getManagedAndOwnedLists(user, '', function (lists) {
         angular.forEach(lists, function (list) {
           if (list._id) {
             updateListCacheStatus(list);
@@ -209,6 +209,10 @@
 
     function cacheListsForUser (user) {
       if (!user || Offline.state !== 'up') { return; }
+      var lfcacheInfo = $localForage.instance('cacheInfo');
+      lfcacheInfo.setItem('cachedAt', new Date()).then(function () {
+      }).catch(function () {});
+
       cacheFavoriteLists(user);
       cacheListsMember(user);
       cacheOwnedAndManagedLists(user);

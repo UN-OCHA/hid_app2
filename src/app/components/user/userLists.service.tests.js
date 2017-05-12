@@ -3,8 +3,8 @@
 
   describe('User Lists service', function () {
 
-    var $localForage, $rootScope, expectedFavouriteLists, expectedListsMember, List, ListDataService, 
-    listFixture, mockConfig, mockList, mockList1, mockListDataService, mockLocalForage, mockOwnedManagedLists, mockReturnedList, 
+    var $localForage, $rootScope, expectedFavouriteLists, expectedListsMember, List, ListDataService,
+    listFixture, mockConfig, mockLf, mockList, mockList1, mockListDataService, mockLocalForage, mockOwnedManagedLists, mockReturnedList,
     userFixture, UserListsService;
 
     beforeEach(function () {
@@ -16,7 +16,6 @@
       mockList = {};
       mockList.get = function () {};
       mockList.cache = function () {};
-      mockLocalForage = {};
       mockReturnedList = {};
       mockListDataService = {};
       mockList1 = listFixture.lists[5];
@@ -24,11 +23,11 @@
 
       expectedFavouriteLists = [
         {
-          _id: userFixture.user1.favoriteLists[0]._id, 
+          _id: userFixture.user1.favoriteLists[0]._id,
           cacheStatus: 'caching'
         },
         {
-          _id: userFixture.user1.favoriteLists[1]._id,  
+          _id: userFixture.user1.favoriteLists[1]._id,
           cacheStatus: 'caching'
         }
       ];
@@ -45,10 +44,14 @@
           _id: userFixture.user1.lists[1].list,
           checkinId: userFixture.user1.lists[1]._id,
           name: userFixture.user1.lists[1].name,
-          type: 'list', 
+          type: 'list',
           cacheStatus: 'caching'
         }
       ];
+
+      mockLocalForage = {
+        instance: function () {}
+      };
 
       module('app.user', function($provide) {
         $provide.constant('config', mockConfig);
@@ -59,7 +62,7 @@
         $provide.constant('List', mockList);
         $provide.constant('ListDataService', mockListDataService);
       });
-      
+
       mockListDataService.getManagedAndOwnedLists = function () {};
 
       inject(function(_UserListsService_, _List_, config, $q, _$rootScope_) {
@@ -69,7 +72,12 @@
         config = mockConfig;
         $localForage = mockLocalForage;
         ListDataService = mockListDataService;
-        
+
+        mockLf = {
+          setItem: function () {}
+        };
+        spyOn(mockLf, 'setItem').and.returnValue($q.when());
+
         mockReturnedList.cache = function() {
           var deferred = $q.defer();
           deferred.resolve();
@@ -81,6 +89,9 @@
           deferred.resolve();
           return deferred.promise;
         };
+
+
+        spyOn(mockLocalForage, 'instance').and.returnValue(mockLf);
 
         spyOn(mockReturnedList, 'cache').and.callThrough();
         spyOn(mockList1, 'cache').and.callThrough();
@@ -98,6 +109,10 @@
 
       beforeEach(function () {
         UserListsService.cacheListsForUser(userFixture.user1);
+      });
+
+      it('should store the cached at date', function () {
+        expect(mockLf.setItem).toHaveBeenCalledWith('cachedAt', jasmine.any(Date));
       });
 
       describe('Favourite lists', function () {
@@ -148,16 +163,16 @@
 
         it('should cache the lists', function () {
           $rootScope.$digest();
-          expect(mockList1.cache).toHaveBeenCalled(); 
+          expect(mockList1.cache).toHaveBeenCalled();
         });
 
         it('should store that the list has been cached', function () {
           expect(UserListsService.cachedLists).toContain({_id: listFixture.lists[0]._id, status: 'caching'});
         });
-        
+
       });
 
-    });  
+    });
 
     describe('Get user lists', function () {
 
@@ -175,7 +190,7 @@
         describe('cache un-cached lists', function () {
 
           it('should get the list', function () {
-            expect(mockList.get).toHaveBeenCalledWith({listId: 'fav-2'}); 
+            expect(mockList.get).toHaveBeenCalledWith({listId: 'fav-2'});
           });
 
           it('should cache the list', function () {
@@ -200,7 +215,7 @@
         describe('cache un-cached lists', function () {
 
           it('should get the list', function () {
-            expect(mockList.get).toHaveBeenCalledWith({listId: userFixture.user1.lists[0].list}); 
+            expect(mockList.get).toHaveBeenCalledWith({listId: userFixture.user1.lists[0].list});
           });
 
           it('should cache the list', function () {
@@ -233,7 +248,7 @@
 
           it('should cache the lists', function () {
             $rootScope.$digest();
-            expect(mockList1.cache).toHaveBeenCalled(); 
+            expect(mockList1.cache).toHaveBeenCalled();
           });
 
           it('should update the cached status on the stored list', function () {

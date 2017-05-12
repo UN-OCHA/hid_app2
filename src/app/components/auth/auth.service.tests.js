@@ -1,21 +1,31 @@
 (function() {
   'use strict';
 
-  var $interval, $rootScope, AuthService, httpBackend, mockConfig, mockNotificationsService, mockUserListsService, userFixture;
+  var $interval, $localForage, $rootScope, $timeout, AuthService, httpBackend, mockConfig, mockLf, mockLocalForage, mockNotificationsService,
+  mockUserListsService, userFixture;
 
   describe('Auth service', function () {
 
     function setUpCtrl (token) {
-      inject(function(_AuthService_, _$httpBackend_,  _$interval_, _$rootScope_, config, $q) {
+      inject(function(_AuthService_, _$httpBackend_,  _$interval_, _$rootScope_, config, $q, _$timeout_) {
         AuthService = _AuthService_;
         httpBackend = _$httpBackend_;
         config = mockConfig;
         $interval =  _$interval_;
         $rootScope = _$rootScope_;
+        $timeout = _$timeout_;
+        $localForage = mockLocalForage;
 
         spyOn(mockNotificationsService, 'getUnread').and.returnValue($q.when());
         spyOn(AuthService, 'parseToken').and.returnValue(token);
         spyOn($interval, 'cancel').and.callThrough();
+
+        mockLf = {
+          getItem: function () {}
+        };
+        spyOn(mockLf, 'getItem').and.returnValue($q.when());
+        spyOn(mockLocalForage, 'instance').and.returnValue(mockLf);
+
       });
     }
 
@@ -25,8 +35,12 @@
   		mockConfig = {
   			apiUrl: 'http://mock-url/'
   		};
+      mockLocalForage = {
+        instance: function () {}
+      };
   		module('app.auth', function($provide) {
   			$provide.constant('config', mockConfig);
+        $provide.constant('$localForage', mockLocalForage);
   		});
 
   		mockUserListsService = {};
@@ -40,10 +54,11 @@
   		mockNotificationsService = {
         getUnread: function () {}
       };
-       
+
   		module('app.notifications', function($provide) {
   			$provide.constant('notificationsService', mockNotificationsService);
   		});
+
   	});
 
   	afterEach(function() {
@@ -71,10 +86,10 @@
   				token: 'a-token',
   				user: userFixture.user1
   			});
-				httpBackend.flush();  			
+				httpBackend.flush();
   			expect(window.localStorage.getItem('jwtToken')).toEqual('a-token');
   			expect(window.localStorage.getItem('currentUser')).toEqual(JSON.stringify(userFixture.user1));
-  			
+
   		});
 
   	});
@@ -150,11 +165,11 @@
           });
 
           it('should cache the users lists', function () {
-            AuthService.isAuthenticated(function () {
-              expect(mockUserListsService.cacheListsForUser).toHaveBeenCalled();
-            });
+            AuthService.isAuthenticated(function () {});
+            $timeout.flush()
+            expect(mockUserListsService.cacheListsForUser).toHaveBeenCalled();
           });
-          
+
         });
 
         describe('token is nearly expired', function () {

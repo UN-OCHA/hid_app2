@@ -404,6 +404,10 @@ app.run(function ($localForage) {
     name: 'lists',
     storeName: 'lists'
   });
+  $localForage.createInstance({
+    name: 'cacheInfo',
+    storeName: 'cacheInfo'
+  });
 });
 
 // Configure xeditable
