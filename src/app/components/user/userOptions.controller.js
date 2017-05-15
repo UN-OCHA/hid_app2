@@ -43,7 +43,7 @@
 
     function removeFromList (user, list) {
       var listType = list.type + 's';
-      
+
       alertService.add('warning', 'Are you sure?', true, function () {
         var checkInId;
 
@@ -70,7 +70,7 @@
     function removeSelectedList (list) {
       $scope.selectedLists.splice($scope.selectedLists.indexOf(list), 1);
     }
-    
+
     function updateSelectedLists (list) {
       $scope.selectedLists.push(list);
     }
@@ -154,4 +154,4 @@
   }
 
 })();
-   
+

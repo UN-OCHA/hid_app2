@@ -3,7 +3,7 @@
 
   describe('List controller', function () {
 
-  	var $location, ctrlParams, listFixture, mockAlertService, mockConfig, mockGetText, mockLf, mockList, mockListDataService, 
+  	var $location, ctrlParams, listFixture, mockAlertService, mockConfig, mockGetText, mockLf, mockList, mockListDataService,
   	mockLocalForage, mockUser, mockUserCheckInService, mockUserDataService, scope, testList, userFixture;
 
   	function setUpCtrl (list, currentUser, offline) {
@@ -56,7 +56,7 @@
        $localForage: mockLocalForage
      };
 
-     $controller('ListCtrl', ctrlParams);      	
+     $controller('ListCtrl', ctrlParams);
      scope.$digest();
    });
    }
@@ -82,14 +82,18 @@
     });
 
     mockUser = {
-     query: function () {},
-     update: function () {}
+      get: function () {},
+      query: function () {},
+      update: function () {}
    };
    spyOn(mockUser, 'query').and.callFake(function(arg, callback) {
      callback([userFixture.user1, userFixture.user2, userFixture.adminUser, userFixture.globalManagerUser]);
    });
    spyOn(mockUser, 'update').and.callFake(function(arg, callback) {
      callback();
+   });
+   spyOn(mockUser, 'get').and.callFake(function(arg, callback) {
+     callback(userFixture.user1);
    });
 
    mockUserCheckInService = {
@@ -205,7 +209,7 @@ module('gettext', function($provide) {
 
      it('should get the list from localForage', function () {
       expect(mockLocalForage.instance).toHaveBeenCalledWith('lists');
-      expect(mockLf.getItem).toHaveBeenCalledWith(listFixture.lists[0]._id);	
+      expect(mockLf.getItem).toHaveBeenCalledWith(listFixture.lists[0]._id);
     });
 
      it('should populate the list details', function () {
@@ -247,7 +251,7 @@ module('gettext', function($provide) {
      });
 
       it('should show that the checkin is not pending', function () {
-       expect(scope.isPending).toBe(false);	
+       expect(scope.isPending).toBe(false);
      });
 
     });
@@ -262,7 +266,7 @@ module('gettext', function($provide) {
      });
 
       it('should show that the checkin is not pending', function () {
-       expect(scope.isPending).toBe(false);	
+       expect(scope.isPending).toBe(false);
      });
 
     });
@@ -337,12 +341,16 @@ module('gettext', function($provide) {
       scope.star();
     });
 
-     it('should add the list to the user\'s favourites', function () {
+    it('should add the list to the user\'s favourites', function () {
       expect(scope.currentUser.favoriteLists).toContain(listFixture.lists[0]);
     });
 
-     it('should favourite the list', function () {
-      expect(mockUser.update).toHaveBeenCalledWith(userFixture.user1, jasmine.any(Function));
+    it('should get the user before updating it', function () {
+      expect(mockUser.get).toHaveBeenCalledWith({userId: userFixture.user1._id}, jasmine.any(Function), jasmine.any(Function));
+    });
+
+    it('should favourite the list', function () {
+      expect(mockUser.update).toHaveBeenCalledWith(userFixture.user1, jasmine.any(Function), jasmine.any(Function));
     });
 
      it('should show the success message', function () {
@@ -369,23 +377,27 @@ module('gettext', function($provide) {
       scope.unstar();
     });
 
-     it('should remove the list from the user\'s favourites', function () {
+    it('should remove the list from the user\'s favourites', function () {
       expect(scope.currentUser.favoriteLists).not.toContain(listFixture.lists[0]);
     });
 
-     it('should unfavourite the list', function () {
-      expect(mockUser.update).toHaveBeenCalledWith(userFixture.user1, jasmine.any(Function));
+    it('should get the user before updating it', function () {
+      expect(mockUser.get).toHaveBeenCalledWith({userId: userFixture.user1._id}, jasmine.any(Function), jasmine.any(Function));
     });
 
-     it('should show the success message', function () {
+    it('should unfavourite the list', function () {
+      expect(mockUser.update).toHaveBeenCalledWith(userFixture.user1, jasmine.any(Function), jasmine.any(Function));
+    });
+
+    it('should show the success message', function () {
       expect(mockAlertService.add).toHaveBeenCalledWith('success', 'This list was successfully removed from your favourites.');
     });
 
-     it('should set isFavorite to true', function () {
+    it('should set isFavorite to true', function () {
       expect(scope.isFavorite).toBe(false);
     });
 
-     it('should update the current User', function () {
+    it('should update the current User', function () {
       expect(scope.setCurrentUser).toHaveBeenCalled();
     });
 

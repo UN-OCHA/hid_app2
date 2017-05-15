@@ -5,9 +5,9 @@
     .module('app.dashboard')
     .controller('DashboardCtrl', DashboardCtrl);
 
-  DashboardCtrl.$inject = ['$rootScope', '$scope', 'alertService', 'config', 'UserListsService', 'gettextCatalog', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
+  DashboardCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', 'alertService', 'config', 'UserListsService', 'gettextCatalog', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
-  function DashboardCtrl($rootScope, $scope, alertService, config, UserListsService, gettextCatalog, Service, User, UserCheckInService, UserDataService) {
+  function DashboardCtrl($exceptionHandler, $rootScope, $scope, alertService, config, UserListsService, gettextCatalog, Service, User, UserCheckInService, UserDataService) {
     $scope.subscriptions = [];
     $scope.itemsPerPage = 5;
     $scope.currentPage = 1;
@@ -25,9 +25,18 @@
 
       if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid && $scope.currentUser.appMetadata.hid.listsOwnedAndManaged) {
         if (!angular.equals($scope.currentUser.appMetadata.hid.listsOwnedAndManaged, listIds)) {
-          $scope.currentUser.setAppMetaData({listsOwnedAndManaged: listIds});
-          $scope.currentUser.$update(function () {
+          // Get the user first to ensure no problems on update
+          User.get({userId: $scope.currentUser._id}, function (user) {
+            $scope.currentUser = user;
             $scope.setCurrentUser($scope.currentUser);
+            $scope.currentUser.setAppMetaData({listsOwnedAndManaged: listIds});
+            $scope.currentUser.$update(function () {
+              $scope.setCurrentUser($scope.currentUser);
+            }, function (error) {
+              $exceptionHandler(error, 'Save lists owned and managed - update user');
+            });
+          }, function (error) {
+            $exceptionHandler(error, 'Save lists owned and managed - get user');
           });
         }
       }

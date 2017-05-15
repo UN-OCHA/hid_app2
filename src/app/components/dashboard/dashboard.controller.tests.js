@@ -3,8 +3,9 @@
 
   describe('DashboardCtrl controller', function () {
 
-  	var deleteServiceSpy, favoriteLists, listFixture, listsMember, listsOwnedAndManaged, mockAlertService, mockConfig, mockGetText, mockList, mockService, mockUser,
-    mockUserCheckInService, mockUserDataService, mockUserListsService, scope, unsubscribeServiceSpy, userFixture;
+  	var deleteServiceSpy, favoriteLists, listFixture, listsMember, listsOwnedAndManaged, mockAlertService, mockConfig,
+    mockGetText, mockList, mockService, mockUser, mockUserCheckInService, mockUserDataService, mockUserListsService,
+    returnedUser, scope, unsubscribeServiceSpy, userFixture;
 
   	beforeEach(function() {
       module('app.dashboard');
@@ -25,6 +26,7 @@
         listsOwnedAndManaged: listsOwnedAndManaged
       };
       mockUser = {
+        get: function () {},
         update: function () {}
       };
       mockUserCheckInService = {
@@ -36,6 +38,19 @@
       spyOn(mockUserListsService, 'getListsForUser');
       spyOn(mockUser, 'update').and.callFake(function(arg, callback) {
         callback();
+      });
+
+      returnedUser = {
+        setAppMetaData: function () {},
+        $update: function () {}
+      };
+      spyOn(returnedUser, 'setAppMetaData');
+      spyOn(returnedUser, '$update').and.callFake(function (callback) {
+        callback();
+      });
+
+      spyOn(mockUser, 'get').and.callFake(function(arg, callback) {
+        callback(returnedUser);
       });
       spyOn(mockUserCheckInService, 'delete').and.callFake(function(arg1, arg2, callback) {
         callback(userFixture.user1);
@@ -145,10 +160,12 @@
           scope.currentUser.appMetadata.hid.listsOwnedAndManaged = [1,4];
           scope.$emit('usersListsLoaded');
 
+          expect(mockUser.get).toHaveBeenCalled();
+          scope.$digest();
           expect(scope.currentUser.setAppMetaData).toHaveBeenCalledWith({ listsOwnedAndManaged: [ 1, 4, 6 ] });
           expect(scope.currentUser.$update).toHaveBeenCalled();
           scope.$digest();
-          expect(scope.setCurrentUser).toHaveBeenCalledWith(scope.currentUser);
+          expect(scope.setCurrentUser.calls.count()).toBe(2);
         });
 
       });

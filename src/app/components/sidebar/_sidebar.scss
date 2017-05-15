@@ -114,6 +114,10 @@
     background: $primary-color;
     color: $text-light;
 
+    .loader {
+      color: $text-light;
+    }
+
     .icon {
       fill: $text-light;
     }
