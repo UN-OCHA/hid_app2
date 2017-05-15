@@ -11,26 +11,32 @@
     $scope.subscriptions = [];
     $scope.itemsPerPage = 5;
     $scope.currentPage = 1;
-
-    UserListsService.getListsForUser($scope.currentUser);
-    $scope.favoriteLists = UserListsService.favoriteLists;
-    $scope.listsMember = UserListsService.listsMember;
-    $scope.listsOwnedAndManaged = UserListsService.listsOwnedAndManaged;
+    $scope.userLists = UserListsService;
     $scope.listsOwnedAndManagedLoaded = Offline.state === 'up' ? false : true;
-    
-    $rootScope.$on('usersListsLoaded', function () {
+    UserListsService.getListsForUser($scope.currentUser);
+
+    var usersListsLoaded =  $rootScope.$on('usersListsLoaded', function () {
       $scope.listsOwnedAndManagedLoaded = true;
 
       var listIds = [];
-      angular.forEach($scope.listsOwnedAndManaged, function (list) {
+      angular.forEach(UserListsService.listsOwnedAndManaged, function (list) {
         listIds.push(list._id);
       });
 
-      $scope.currentUser.setAppMetaData({listsOwnedAndManaged: listIds});
-      $scope.currentUser.$update(function () {
-        $scope.setCurrentUser($scope.currentUser);
-      });
+      if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid && $scope.currentUser.appMetadata.hid.listsOwnedAndManaged) {
+        if (!angular.equals($scope.currentUser.appMetadata.hid.listsOwnedAndManaged, listIds)) {
+          $scope.currentUser.setAppMetaData({listsOwnedAndManaged: listIds});
+          $scope.currentUser.$update(function () {
+            $scope.setCurrentUser($scope.currentUser);
+          });
+        }
+      }
     });
+
+    $scope.$on('$destroy', function() {
+      usersListsLoaded();
+    });
+
 
     function getSubscriptions () {
       $scope.subscriptions = $scope.currentUser.subscriptions;
@@ -61,7 +67,7 @@
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         UserCheckInService.delete({userId: $scope.currentUser._id, listType: list.type + 's', checkInId: list.checkinId}, {}, function(user) {
           alertService.add('success', gettextCatalog.getString('Successfully removed from list.'), false, function () {});
-          $scope.listsMember.splice($scope.listsMember.indexOf(list), 1);
+          UserListsService.listsMember.splice(UserListsService.listsMember.indexOf(list), 1);
           UserDataService.notify();
           $scope.setCurrentUser(user);
         });
@@ -72,7 +78,7 @@
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         list.$delete(function () {
           alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'), false, function () {});
-          $scope.listsOwnedAndManaged.splice($scope.listsOwnedAndManaged.indexOf(list), 1);
+          UserListsService.listsOwnedAndManaged.splice(UserListsService.listsOwnedAndManaged.indexOf(list), 1);
         });
       });
     };

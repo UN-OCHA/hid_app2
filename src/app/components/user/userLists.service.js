@@ -16,6 +16,7 @@
       listsMember: [],
       listsOwnedAndManaged: []
     };
+    var lflists;
 
     function getCachedList (listId) {
       return userLists.cachedLists.filter(function(cachedList) {
@@ -123,6 +124,7 @@
       });
 
       userLists.listsMember = lists;
+      return userLists.listsMember;
     }
 
     function cacheOwnedAndManagedLists (user) {
@@ -154,10 +156,9 @@
         }
 
         var listIds = user.appMetadata.hid.listsOwnedAndManaged;
-        var lflists = $localForage.instance('lists');
         angular.forEach(listIds, function (listId) {
 
-          lflists.iterate(function (list, key, index) {
+          lflists.iterate(function (list) {
             if (list._id === listId) {
               userLists.listsOwnedAndManaged.push(list);
             }
@@ -173,13 +174,8 @@
           if (list._id) {
             updateListCacheStatus(list);
 
-            var inArray = userLists.listsOwnedAndManaged.filter(function(l) {
-              return l._id === list._id;
-            })[0];
+            userLists.listsOwnedAndManaged.push(list);
 
-            if (!inArray) {
-              userLists.listsOwnedAndManaged.push(list);
-            }
             if (!getCachedList(list._id)) {
               updateCachedLists(list._id, 'caching');
               list.cache().then(function () {
@@ -191,7 +187,6 @@
           }
         });
         $rootScope.$emit('usersListsLoaded');
-
       });
     }
 
@@ -219,6 +214,25 @@
     }
 
     function getListsForUser (user) {
+      lflists = $localForage.instance('lists');
+
+      //populate cached lists array
+      if (!userLists.cachedLists.length) {
+
+        lflists.iterate(function (value) {
+          value.status = 'success';
+          userLists.cachedLists.push(value);
+        }).then(function() {
+          getFavoriteLists(user);
+          getListsMember(user);
+          getOwnedAndManagedLists(user);
+        }).catch(function(error) {
+          $exceptionHandler(error, 'Cannot get lists from lf cache');
+        });
+
+        return;
+      }
+
       getFavoriteLists(user);
       getListsMember(user);
       getOwnedAndManagedLists(user);

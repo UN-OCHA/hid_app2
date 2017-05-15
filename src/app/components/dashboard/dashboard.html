@@ -16,10 +16,10 @@
 
       <tab heading="{{'My favourite lists' | translate}}">
         <ul class="list list--has-buttons list--has-dividers">
-          <li class="list__item" ng-if="!favoriteLists.length" translate>
+          <li class="list__item" ng-if="!userLists.favoriteLists.length" translate>
             You don't have any favourite lists
           </li>
-          <li class="list__item" ng-repeat="list in favoriteLists track by $index">
+          <li class="list__item" ng-repeat="list in userLists.favoriteLists track by $index">
             <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
             <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
             <icon ng-if="list.cacheStatus === 'fail'" name="caution" class="dashboard-cache-icon" text="List saved" title="Could not cache list"></icon>
@@ -38,10 +38,10 @@
 
       <tab heading="{{'Lists I\'m part of' | translate}}" default="true">
         <ul class="list list--has-buttons list--has-dividers">
-          <li class="list__item" ng-if="!listsMember.length" translate>
+          <li class="list__item" ng-if="!userLists.listsMember.length" translate>
             You are not part of any lists
           </li>
-          <li class="list__item" ng-repeat="list in listsMember track by $index">
+          <li class="list__item" ng-repeat="list in userLists.listsMember track by $index">
             <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
             <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved" ></icon>
             <a href="/lists/{{list._id}}">{{list.name}}</a>
@@ -62,10 +62,10 @@
           <li class="list__item" ng-if="!listsOwnedAndManagedLoaded">
           <loader type="inline" text="Loading lists"></loader>
           </li>
-          <li class="list__item" ng-if="listsOwnedAndManagedLoaded && !listsOwnedAndManaged.length" translate>
+          <li class="list__item" ng-if="listsOwnedAndManagedLoaded && !userLists.listsOwnedAndManaged.length" translate>
             You don't manage any lists
           </li>
-          <li class="list__item" ng-repeat="list in listsOwnedAndManaged track by $index">
+          <li class="list__item" ng-repeat="list in userLists.listsOwnedAndManaged track by $index">
             <icon ng-if="list.cacheStatus === 'caching'" name="refresh" class="rotate dashboard-cache-icon" text="Saving list" title="Saving list"></icon>
             <icon ng-if="list.cacheStatus === 'success'" name="inbox-download" class="dashboard-cache-icon" text="List saved" title="List saved"></icon>
             <a href="/lists/{{list._id}}">{{list.name}}</a>
@@ -119,19 +119,19 @@
               </li>
             </ul>
           </div>
-        </li>  
+        </li>
       </ul>
 
     </div>
 
-    <uib-pagination 
+    <uib-pagination
       ng-show="subscriptions.length > itemsPerPage"
-      total-items="subscriptions.length" 
+      total-items="subscriptions.length"
       ng-model="currentPage"
-      ng-change="pageChanged()" 
-      direction-links="false" 
+      ng-change="pageChanged()"
+      direction-links="false"
       items-per-page="itemsPerPage"
-      class="pagination" >    
+      class="pagination" >
     </uib-pagination>
 
   </div>

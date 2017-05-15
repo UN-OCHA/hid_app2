@@ -3,9 +3,9 @@
 
   describe('DashboardCtrl controller', function () {
 
-  	var deleteServiceSpy, favoriteLists, listFixture, listsMember, listsOwnedAndManaged, mockAlertService, mockConfig, mockGetText, mockList, mockService, mockUser, 
+  	var deleteServiceSpy, favoriteLists, listFixture, listsMember, listsOwnedAndManaged, mockAlertService, mockConfig, mockGetText, mockList, mockService, mockUser,
     mockUserCheckInService, mockUserDataService, mockUserListsService, scope, unsubscribeServiceSpy, userFixture;
-	
+
   	beforeEach(function() {
       module('app.dashboard');
 
@@ -13,7 +13,7 @@
       listFixture = readJSON('app/test-fixtures/list.json');
       favoriteLists = userFixture.user1.favoriteLists;
       listsMember = [listFixture.lists[2], listFixture.lists[3]];
-      
+
       mockList = listFixture.lists[4];
       mockList.$delete = function () {};
       listsOwnedAndManaged = [mockList, listFixture.lists[5]];
@@ -81,8 +81,17 @@
 
 			inject(function($rootScope, $controller) {
         scope = $rootScope.$new();
-				
+
         scope.currentUser = userFixture.user1;
+        scope.currentUser.setAppMetaData = function () {};
+        scope.currentUser.$update = function () {};
+        scope.currentUser.appMetadata = {
+          hid: {}
+        };
+        spyOn(scope.currentUser, 'setAppMetaData');
+        spyOn(scope.currentUser, '$update').and.callFake(function (callback) {
+          callback();
+        });
         scope.setCurrentUser = function () {};
         spyOn(scope, 'setCurrentUser');
         spyOn(mockList, '$delete').and.callFake(function (callback) {
@@ -92,7 +101,7 @@
         $controller('DashboardCtrl', {
           $scope: scope
         });
-        
+
         scope.$digest();
 
       });
@@ -104,16 +113,44 @@
         expect(mockUserListsService.getListsForUser).toHaveBeenCalledWith(userFixture.user1);
       });
 
-      it('should populate the favorite lists', function () {
-        scope.favoriteLists = favoriteLists;
+      it('should populate the user lists', function () {
+        expect(scope.userLists).toEqual(mockUserListsService);
+        expect(scope.userLists.favoriteLists).toEqual(favoriteLists);
+        expect(scope.userLists.listsMember).toEqual(listsMember);
+        expect(scope.userLists.listsOwnedAndManaged).toEqual(listsOwnedAndManaged);
       });
 
-      it('should populate the lists the user is a part of', function () {
-        scope.listsMember = listsMember;
+    });
+
+    describe('Saving lists owned and managed', function () {
+
+      describe('lists are already saved in the users metadata', function () {
+
+        it('should not update the user', function () {
+          mockUserListsService.listsOwnedAndManaged = [{_id: 1}, {_id:4}];
+          scope.currentUser.appMetadata.hid.listsOwnedAndManaged = [1,4];
+          scope.$emit('usersListsLoaded');
+
+          expect(scope.currentUser.setAppMetaData).not.toHaveBeenCalled();
+          expect(scope.currentUser.$update).not.toHaveBeenCalled();
+          expect(scope.setCurrentUser).not.toHaveBeenCalled();
+        });
+
       });
 
-      it('should populate the lists the user owns or manages', function () {
-        scope.listsOwnedAndManaged = listsOwnedAndManaged;
+      describe('lists are not already saved in the users metadata', function () {
+
+        it('should update the user', function () {
+          mockUserListsService.listsOwnedAndManaged = [{_id: 1}, {_id:4}, {_id: 6}];
+          scope.currentUser.appMetadata.hid.listsOwnedAndManaged = [1,4];
+          scope.$emit('usersListsLoaded');
+
+          expect(scope.currentUser.setAppMetaData).toHaveBeenCalledWith({ listsOwnedAndManaged: [ 1, 4, 6 ] });
+          expect(scope.currentUser.$update).toHaveBeenCalled();
+          scope.$digest();
+          expect(scope.setCurrentUser).toHaveBeenCalledWith(scope.currentUser);
+        });
+
       });
 
     });
@@ -146,6 +183,7 @@
 
       it('should remove the list from the displayed favourites', function () {
         expect(scope.currentUser.favoriteLists).toEqual([{_id: 'fav-2'}]);
+        expect(scope.userLists.favoriteLists).toEqual([{_id: 'fav-2'}]);
       });
 
       it('should update the user', function () {
@@ -175,7 +213,7 @@
 
       it('should remove the list from the displayed lists they are a member of', function () {
         scope.$digest();
-        expect(scope.listsMember).toEqual([listFixture.lists[2]]);
+        expect(scope.userLists.listsMember).toEqual([listFixture.lists[2]]);
       });
 
       it('should update the current user', function () {
@@ -193,7 +231,7 @@
 
     describe('Delete a list', function () {
 
-      beforeEach(function () { 
+      beforeEach(function () {
         scope.deleteList(mockList);
       });
 
@@ -208,7 +246,7 @@
 
       it('should remove the list from the displayed lists they own and manage', function () {
         scope.$digest();
-        expect(scope.listsOwnedAndManaged).toEqual([listFixture.lists[5]]);
+        expect(scope.userLists.listsOwnedAndManaged).toEqual([listFixture.lists[5]]);
       });
 
       it('should show the success message', function () {
@@ -220,7 +258,7 @@
 
     describe('Deleting a service', function () {
 
-      beforeEach(function () { 
+      beforeEach(function () {
         var sub = scope.subscriptions[0];
         scope.deleteService(sub);
       });
@@ -238,15 +276,15 @@
     //TO DO
     // fdescribe('Unsubscribing from a service', function () {
 
-    //   beforeEach(function () { 
-        
+    //   beforeEach(function () {
+
     //   });
 
     //   it('should ask the user to confirm', function () {
     //   });
 
     //   it('should unsbscribe from the service', function () {
-        
+
     //   });
 
     // });
