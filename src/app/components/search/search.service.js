@@ -21,7 +21,7 @@
         params.recentSearches[searchType] = [];
 
         if (user.appMetadata.hid.recentSearches[searchType]) {
-          params.recentSearches[searchType] = user.appMetadata.hid.recentSearches[searchType]; 
+          params.recentSearches[searchType] = user.appMetadata.hid.recentSearches[searchType];
         }
       });
       return params;
@@ -60,17 +60,22 @@
           return;
         }
       }
-      
+
       if (params.recentSearches[type].length >= savedSearchesLimit) {
          params.recentSearches[type].pop();
       }
       params.recentSearches[type].unshift(saveResult);
 
-      user.setAppMetaData(params);
-      user.$update(function () {
-        success(user);
-      }, function (error) {
-        $exceptionHandler(error, 'Update user recent searches fail');
+      User.get({userId: user._id}, function (response) {
+        user = response;
+        user.setAppMetaData(params);
+        user.$update(function () {
+          success(user);
+        }, function (error) {
+          $exceptionHandler(error, 'Save search - update user');
+        });
+      },function (error) {
+        $exceptionHandler(error, 'Save search - get user');
       });
     };
 

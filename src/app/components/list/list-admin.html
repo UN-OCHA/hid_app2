@@ -42,14 +42,16 @@
     <div class="sidebar-section">
       <h2 class="sidebar-section__heading" translate>Export options</h2>
       <ng-include src="'app/components/user/users-export.html'"></ng-include>
-   
+
       <button type="button" class="btn-transparent sidebar-section__button" ng-click="star()" ng-if="!isFavorite">
-        <icon name="star"></icon>
-        <span translate>Mark as favourite</span>
+        <loader type="inline" text="Saving" ng-if="favSaving"></loader>
+        <icon ng-if="!favSaving" name="star"></icon>
+        <span ng-if="!favSaving" translate>Mark as favourite</span>
       </button>
       <button type="button" class="btn-transparent sidebar-section__button" ng-click="unstar()" ng-if="isFavorite">
-        <icon name="cancel"></icon>
-        <span translate>Unfavourite</span>
+        <loader type="inline" text="Saving" ng-if="favSaving"></loader>
+        <icon ng-if="!favSaving" name="cancel"></icon>
+        <span ng-if="!favSaving" translate>Unfavourite</span>
       </button>
     </div>
   </div>

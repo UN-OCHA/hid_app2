@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
+  ListCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
 
-  function ListCtrl ($scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
+  function ListCtrl ($exceptionHandler, $scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -18,6 +18,7 @@
     $scope.savingMembers = false;
     $scope.listUnavailable = false;
     $scope.offline = false;
+    $scope.favSaving = false;
     $scope.usersAdded = {};
     $scope.datePicker = {
       opened: false
@@ -170,8 +171,7 @@
       });
     };
 
-    // Star a list as favorite
-    $scope.star = function() {
+    function favoriteList () {
       if (!$scope.currentUser.favoriteLists) {
         $scope.currentUser.favoriteLists = [];
       }
@@ -180,11 +180,15 @@
         alertService.add('success', gettextCatalog.getString('This list was successfully added to your favourites.'));
         $scope.isFavorite = true;
         $scope.setCurrentUser($scope.currentUser);
+        $scope.favSaving = false;
+      }, function (error) {
+        $scope.favSaving = false;
+        alertService.add('danger', gettextCatalog.getString('There was an error updating your favourites.'));
+        $exceptionHandler(error, 'Favourite list - update user');
       });
-    };
+    }
 
-    // Remove a list from favorites
-    $scope.unstar = function() {
+    function unfavoriteList () {
       $scope.currentUser.favoriteLists = $scope.currentUser.favoriteLists.filter(function (elt) {
         return elt._id != $scope.list._id;
       });
@@ -192,6 +196,39 @@
         alertService.add('success', gettextCatalog.getString('This list was successfully removed from your favourites.'));
         $scope.isFavorite = false;
         $scope.setCurrentUser($scope.currentUser);
+        $scope.favSaving = false;
+      }, function (error) {
+        $scope.favSaving = false;
+        alertService.add('danger', gettextCatalog.getString('There was an error updating your favourites.'));
+        $exceptionHandler(error, 'Unfavourite list - update user');
+      });
+    }
+
+    // Star a list as favorite
+    $scope.star = function() {
+      $scope.favSaving = true;
+      User.get({userId: $scope.currentUser._id}, function (user) {
+        $scope.currentUser = user;
+        $scope.setCurrentUser($scope.currentUser);
+        favoriteList();
+      }, function (error) {
+        $scope.favSaving = false;
+        alertService.add('danger', gettextCatalog.getString('There was an error updating your favourites.'));
+        $exceptionHandler(error, 'Favourite list - get user');
+      });
+    };
+
+    // Remove a list from favorites
+    $scope.unstar = function() {
+      $scope.favSaving = true;
+      User.get({userId: $scope.currentUser._id}, function (user) {
+        $scope.currentUser = user;
+        $scope.setCurrentUser($scope.currentUser);
+        unfavoriteList();
+      }, function (error) {
+        $scope.favSaving = false;
+        alertService.add('danger', gettextCatalog.getString('There was an error updating your favourites.'));
+        $exceptionHandler(error, 'Unfavourite list - get user');
       });
     };
 
