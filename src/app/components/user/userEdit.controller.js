@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserEditCtrl', UserEditCtrl);
 
-  UserEditCtrl.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'upload', 'UserCheckInService'];
+  UserEditCtrl.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'UserCheckInService'];
 
-  function UserEditCtrl($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, upload, UserCheckInService) {
+  function UserEditCtrl($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, UserCheckInService) {
     $scope.phoneNumberTypes = [];
     $scope.emailTypes = [];
     $scope.voipTypes = [];
@@ -25,7 +25,6 @@
     $scope.setPrimaryLocation = setPrimaryLocation;
     $scope.setPrimaryJobTitle = setPrimaryJobTitle;
     $scope.uploadStatus = '';
-    $scope.doUpload = doUpload;
     $scope.onUploadSuccess = onUploadSuccess;
     $scope.onUploadError = onUploadError;
     $scope.setPrimaryEmail = setPrimaryEmail;
@@ -378,35 +377,8 @@
       saveUser('primaryJobTitle');
     }
 
-    function doUpload (files) {
-      var file = files[0]; // multiple files aren't permitted, so just use first item in files array
+    function onUploadStart () {
       $scope.uploadStatus = 'uploading';
-
-      if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
-        $scope.uploadStatus = '';
-        alertService.add('danger', gettextCatalog.getString('Error - only jpg and png files are permitted'));
-        return;
-      }
-
-      uploadImage(file);
-    }
-
-    function uploadImage (file) {
-      var url = $scope.apiUrl + 'user/' + $scope.user._id + '/picture';
-      upload({
-        url: url,
-        method: 'POST',
-        data: {
-          aFile: file
-        }
-      }).then(
-        function (response) {
-          onUploadSuccess(response);
-        },
-        function (error) {
-          onUploadError(error);
-        }
-      );
     }
 
     function onUploadSuccess (response) {
