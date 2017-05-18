@@ -22,13 +22,12 @@
     var searchLimit = 3;
 
     $scope.searchAutocomplete = function() {
-
       if ($scope.searchTerm.length < minSearchLength) {
         $scope.showAutocomplete = false;
         return;
       }
-
-      SearchService.UsersAndLists($scope.searchTerm, searchLimit).then(function(data) {
+      var searchTerm = $scope.searchTerm.trim();
+      SearchService.UsersAndLists(searchTerm, searchLimit).then(function(data) {
         $scope.searchLists = data[0];
         $scope.searchPeople = data[1];
         $scope.showAutocomplete = data[0].length || data[1].length ? true : false;
@@ -83,8 +82,8 @@
         $scope.showUsersAutocomplete = false;
         return;
       }
-
-      User.query({name: $scope.searchUsersTerm, limit: 5, sort: 'name', 'appMetadata.hid.login': true}).$promise.then(function (data) {
+      var searchTerm = $scope.searchUsersTerm.trim();
+      User.query({name: searchTerm, limit: 5, sort: 'name', 'appMetadata.hid.login': true}).$promise.then(function (data) {
         $scope.landingUsers = data;
         $scope.showUsersAutocomplete = true;
       });
@@ -95,8 +94,8 @@
         $scope.showOperationsAutocomplete = false;
         return;
       }
-
-      List.query({name: $scope.searchOperationsTerm, limit: 5, sort: 'name', type: 'operation'}).$promise.then(function (data) {
+      var searchTerm = $scope.searchOperationsTerm.trim();
+      List.query({name: searchTerm, limit: 5, sort: 'name', type: 'operation'}).$promise.then(function (data) {
         $scope.landingOperations = data;
         $scope.showOperationsAutocomplete = true;
       });
@@ -107,8 +106,8 @@
         $scope.showListsAutocomplete = false;
         return;
       }
-
-      List.query({name: $scope.searchListsTerm, limit: 5, sort: 'name'}).$promise.then(function (data) {
+      var searchTerm = $scope.searchListsTerm.trim();
+      List.query({name: searchTerm, limit: 5, sort: 'name'}).$promise.then(function (data) {
         $scope.landingLists = data;
         $scope.showListsAutocomplete = true;
       });

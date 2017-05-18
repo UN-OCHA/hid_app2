@@ -22,7 +22,7 @@
 
             <div uib-dropdown is-open="showUsersAutocomplete">
               <label for="searchUsers" class="sr-only">{{'Search for a name'|translate}}</label>
-              <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for a name'|translate}}" name="searchUsers" id="searchUsers" autocomplete="off" ng-model="searchUsersTerm" ng-model-options="{debounce: 200}" ng-change="searchUsersAutocomplete()">
+              <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for a name'|translate}}" name="searchUsers" id="searchUsers" autocomplete="off" ng-model="searchUsersTerm" ng-model-options="{debounce: 200}" ng-change="searchUsersAutocomplete()" ng-trim="false">
               <button type="submit" class="btn-transparent search-form__button">
                 <icon name="search" text="Search"></icon>
               </button>
@@ -62,7 +62,7 @@
 
             <div class="search-form" uib-dropdown is-open="showOperationsAutocomplete">
               <label for="searchOperations" class="sr-only">{{'Search for a country / region'|translate}}</label>
-              <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for a country / region'|translate}}" name="searchOperations" id="searchOperations" autocomplete="off" ng-model="searchOperationsTerm" ng-model-options="{debounce: 200}" ng-change="searchOperationsAutocomplete()">
+              <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for a country / region'|translate}}" name="searchOperations" id="searchOperations" autocomplete="off" ng-model="searchOperationsTerm" ng-model-options="{debounce: 200}" ng-change="searchOperationsAutocomplete()" ng-trim="false">
               <button type="submit" class="btn-transparent search-form__button">
                 <icon name="search" text="Search"></icon>
               </button>
@@ -100,7 +100,7 @@
 
             <div class="search-form" uib-dropdown is-open="showListsAutocomplete">
               <label for="searchLists" class="sr-only">{{'Search for a list name'|translate}}</label>
-              <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for a list name'|translate}}" name="searchLists" id="searchLists" autocomplete="off" ng-model="searchListsTerm" ng-model-options="{debounce: 200}" ng-change="searchListsAutocomplete()">
+              <input type="search" class="input-no-border search-form__input" placeholder="{{'Search for a list name'|translate}}" name="searchLists" id="searchLists" autocomplete="off" ng-model="searchListsTerm" ng-model-options="{debounce: 200}" ng-change="searchListsAutocomplete()" ng-trim="false">
               <button type="submit" class="btn-transparent search-form__button">
                 <icon name="search" text="Search"></icon>
               </button>
