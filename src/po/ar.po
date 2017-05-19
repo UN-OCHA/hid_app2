@@ -1,0 +1,2506 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.8.12\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Language: ar\n"
+
+#: src/app/components/user/user.html:289 src/app/components/user/user.html:336
+msgid "/ Unverified"
+msgstr "غير محقق"
+
+#: src/app/components/header/header.html:8
+msgid ""
+"<button type=\"button\" class=\"btn-transparent\">\n"
+"          <icon name=\"arrow-left\" text=\"back\"></icon>\n"
+"        </button>"
+msgstr ""
+"<button type=\"button\" class=\"btn-transparent\">\n"
+"          <icon name=\"arrow-left\" text=\"back\"></icon>\n"
+"        </button>"
+
+#: src/app/components/checkin/listTypesModal.html:35
+msgid ""
+"A coordination hub is a location where coordination takes place, usually in "
+"or outside a large city. For instance, more often than not an OSOCC set up "
+"in a sudden-onset disaster becomes a coordination hub for a few weeks after "
+"a disaster strikes."
+msgstr ""
+"مركز التنسيق هو المكان الذي يتم فيه التنسيق، وعادة داخل أو خارج مدينة كبيرة. "
+"على سبيل المثال، في كثير من الأحيان تكون OSOCC التي أنشئت في كارثة مفاجئة هي "
+"محور التنسيق لبضعة أسابيع بعد وقوع الكارثة."
+
+#: src/app/components/user/userPrefs.controller.js:137
+msgid "API key deleted"
+msgstr "تم حذف مفتاح API  بنجاح"
+
+#: src/app/components/footer/footer.html:8
+msgid "About"
+msgstr "النبذة"
+
+#: src/app/components/user/users.controller.js:75
+msgid "Academic / Research"
+msgstr "أكاديمي/بحث"
+
+#: src/app/components/dashboard/dashboard.html:77
+msgid "Access settings"
+msgstr "إعدادات التحكم بالوصول"
+
+#: src/app/components/user/preferences.html:4
+msgid "Account preferences"
+msgstr "تفضيلات الحساب"
+
+#: src/app/components/client/clients.html:8
+msgid "Add Client"
+msgstr "إضافة عميل"
+
+#: src/app/components/list/list-admin.html:21
+msgid "Add Member"
+msgstr "إضافة عضو"
+
+#: src/app/components/service/services-page.html:8
+msgid "Add Service"
+msgstr "إضافة خدمة"
+
+#: src/app/components/user/user.html:488
+msgid "Add a job title"
+msgstr "إضافة عنوان وظيفة"
+
+#: src/app/components/user/user.html:486
+msgid "Add a job title:"
+msgstr "إضافة عنوان وظيفة:"
+
+#: src/app/components/checkin/checkin.html:217
+msgid "Add a new email address:"
+msgstr "إضافة عنوان بريد إلكتروني جديد:"
+
+#: src/app/components/checkin/checkin.html:353
+msgid "Add a new job title:"
+msgstr "إضافة عنوان وظيفة جديدة:"
+
+#: src/app/components/checkin/checkin.html:279
+msgid "Add a new location"
+msgstr "إضافة موقع جديد"
+
+#: src/app/components/checkin/checkin.html:99
+msgid "Add a new organisation"
+msgstr "إضافة منظمة جديدة"
+
+#: src/app/components/checkin/checkin.html:94
+msgid "Add a new organization:"
+msgstr "إضافة منظمة جديدة:"
+
+#: src/app/components/checkin/checkin.html:155
+msgid "Add a new phone number:"
+msgstr "إضافة رقم هاتف جديد:"
+
+#: src/app/components/user/user.html:429
+msgid "Add an organization:"
+msgstr "إضافة منظمة:"
+
+#: src/app/components/user/user.html:297
+msgid "Add email:"
+msgstr "إضافة بريد إلكتروني:"
+
+#: src/app/components/checkin/checkin.html:311
+#: src/app/components/user/user.html:589
+msgid "Add location"
+msgstr "إضافة موقع"
+
+#: src/app/components/list/list-admin.html:10
+msgid "Add new Member"
+msgstr "إضافة عضو جديد"
+
+#: src/app/components/user/preferences.html:131
+msgid "Add new key"
+msgstr "إضافة مفتاح"
+
+#: src/app/components/dashboard/dashboard.html:95
+msgid "Add new user"
+msgstr "إضافة مستخدم جديد"
+
+#: src/app/components/user/user.html:200
+msgid "Add phone number:"
+msgstr "إضافة رقم هاتف:"
+
+#: src/app/components/user/user.html:375
+msgid "Add social network:"
+msgstr "إضافة شبكة اجتماعية:"
+
+#: src/app/components/user/user.html:736
+msgid "Add website:"
+msgstr "إضافة موقع الكتروني:"
+
+#: src/app/components/user/user.html:642
+msgid "Additional Information"
+msgstr "معلومات إضافية"
+
+#: src/app/components/user/user.html:772 src/app/components/user/user.html:783
+msgid "Administrator"
+msgstr "مشرف"
+
+#: src/app/components/user/users.controller.js:70
+msgid "Adminstrator"
+msgstr "مشرف"
+
+#: src/app/components/checkin/all-check-ins.html:2
+msgid "All lists you are checked in to"
+msgstr "كل القوائم التي سجلت الوصول فيها"
+
+#: src/app/components/service/all-subscriptions.html:2
+msgid "All subscriptions"
+msgstr "كل الإشتراكات"
+
+#: src/app/components/user/userEdit.controller.js:286
+msgid "Already added"
+msgstr "مضافة أصلا."
+
+#: src/app/components/user/userEdit.controller.js:41
+msgid "Anyone"
+msgstr "أي شخص"
+
+#: src/app/components/list/listEdit.controller.js:123
+msgid "Anyone within HID can ask to be checked in"
+msgstr "أي شخص مع HID يستطيع أن يطلب بأن يتم تسجيل وصوله"
+
+#: src/app/components/list/listEdit.controller.js:112
+#: src/app/components/list/listEdit.controller.js:119
+msgid "Anyone within Humanitarian ID"
+msgstr "أي شخص يملك Humanitarian ID"
+
+#: src/app/components/user/userPrefs.controller.js:75
+msgid "Application successfully revoked."
+msgstr "تم إلغاء الطلب بنجاح"
+
+#: src/app/components/user/preferences.html:17
+#: src/app/components/user/userOptions.html:7
+msgid "Approve"
+msgstr "الموافقة"
+
+#: src/app/components/start/tutorial.html:31
+msgid ""
+"Are you about to deploy to a new operation, join the response to a specific "
+"disaster or start working with a different sector or cluster? If so, check "
+"in to the relevant contact lists and don’t forget to check out when you "
+"leave the country."
+msgstr ""
+"هل أنت على وشك توزيع عملية جديدة، الانضمام إلى خطة استجابة لكارثة معينة أو "
+"البدء بالعمل مع قطاع استجابة مختلف  أو مجموعة قطاعية جديدة؟ إذا كان الأمر "
+"كذلك، قم بتسجيل الوصول في قائمة التواصل المناسبة ولا تنسَ تسجيل الخروج منها "
+"عند مغادرتك الدولة."
+
+#: src/app/components/user/userEdit.controller.js:340
+msgid "Are you sure you want to check out of this list?"
+msgstr "هل أنت متأكد أنك تريد أن تسجل المغادرة من هذه القائمة؟"
+
+#: src/app/components/user/userPrefs.controller.js:53
+msgid ""
+"Are you sure you want to do this ? You will not be able to access "
+"Humanitarian ID anymore."
+msgstr ""
+"هل انت متأكد من رغبتك بالقيام بهذا؟ لن يكون بإمكانك الدخول على Humanitarian "
+"ID بعد ذلك."
+
+#: src/app/components/user/user.controller.js:243
+#: src/app/components/user/userOptions.controller.js:27
+msgid ""
+"Are you sure you want to do this? This user will not be able to access "
+"Humanitarian ID anymore."
+msgstr ""
+"هل انت متأكد من رغبتك بالقيام بهذا؟ لن يكون بإمكان هذا المستخدم الدخول على "
+"Humanitarian ID بعد ذلك."
+
+#: src/app/components/user/userPrefs.controller.js:65
+msgid ""
+"Are you sure you want to do this? You will need to authorize this "
+"application again to access it through Humanitarian ID."
+msgstr ""
+"هل أنت متأكد من رغبتك بالقيام بهذا؟ سوف يكون عليك القيام بالسماح لهذا الطلب "
+"مرة أخرى ليمكنه الدخول عبر Humanitarian ID"
+
+#: src/app/components/checkin/allCheckIns.controller.js:100
+#: src/app/components/dashboard/dashboard.controller.js:111
+#: src/app/components/dashboard/dashboard.controller.js:76
+#: src/app/components/dashboard/dashboard.controller.js:87
+#: src/app/components/dashboard/dashboard.controller.js:97
+#: src/app/components/list/list.controller.js:166
+#: src/app/components/list/list.controller.js:239
+#: src/app/components/service/allSubscriptions.controller.js:22
+#: src/app/components/service/service.controller.js:86
+#: src/app/components/service/services.controller.js:70
+msgid "Are you sure?"
+msgstr "هل أنت متأكد؟"
+
+#: src/app/components/service/new-service.html:65
+msgid "Associated lists"
+msgstr "قوائم مرتبطة"
+
+#: src/app/components/user/preferences.html:75
+msgid "Authorized Applications"
+msgstr "طلبات مسموح لها"
+
+#: src/app/components/user/preferences.html:73
+msgid "Authorized applications"
+msgstr "طلبات مسموح لها"
+
+#: src/app/components/footer/footer.html:14
+msgid "Blog"
+msgstr "مدونة"
+
+#: src/app/components/alerts/alert.service.js:32
+#: src/app/components/checkin/editCheckinModal.html:34
+#: src/app/components/user/preferences.html:32
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: src/app/components/user/preferences.html:41
+#: src/app/components/user/preferences.html:44
+msgid "Change password"
+msgstr "تغيير كلمة المرور"
+
+#: src/app/components/user/preferences.html:92
+msgid "Change settings"
+msgstr "تغيير الإعدادات"
+
+#: src/app/components/checkin/checkin.controller.js:195
+msgid "Changed primary email to:"
+msgstr "تغيير البريد الإلكتروني الرئيسي إلى:"
+
+#: src/app/components/checkin/checkin.controller.js:203
+msgid "Changed primary job title to:"
+msgstr "تغيير عنوان الوظيفة الرئيسي إلى:"
+
+#: src/app/components/checkin/checkin.controller.js:199
+msgid "Changed primary location to:"
+msgstr "تغيير الموقع الرئيسي إلى:"
+
+#: src/app/components/checkin/checkin.controller.js:187
+msgid "Changed primary organization to:"
+msgstr "تغيير المنظمة الرئيسية إلى:"
+
+#: src/app/components/checkin/checkin.controller.js:191
+msgid "Changed primary phone number to:"
+msgstr "تغيير رقم الهاتف الرئيسي إلى"
+
+#: src/app/components/checkin/checkin.html:411
+#: src/app/components/header/header.html:90
+msgid "Check in"
+msgstr "تسجيل الوصول"
+
+#: src/app/components/start/tutorial.html:30
+msgid "Check in and out"
+msgstr "تسجيل الوصول وتسجيل المغادرة"
+
+#: src/app/components/checkin/checkin.html:375
+msgid "Check in modifications"
+msgstr " تعديلات تسجيل الوصول"
+
+#: src/app/components/user/user.html:33
+msgid "Check into List"
+msgstr "تسجيل الوصول إلى قائمة"
+
+#: src/app/components/user/checkInToListModal.html:3
+#: src/app/components/user/userOptions.html:11
+msgid "Check into a list"
+msgstr "تسجيل الوصول إلى قائمة"
+
+#: src/app/components/checkin/checkin.html:410
+msgid "Check me in"
+msgstr "سجل وصولي"
+
+#: src/app/components/checkin/checkout-page.html:4
+#: src/app/components/header/header.html:91
+msgid "Check out"
+msgstr "تسجيل المغادرة"
+
+#: src/app/components/dashboard/dashboard.html:53
+msgid "Check out of list"
+msgstr "تسجيل المغادرة من قائمة"
+
+#: src/app/components/checkin/checkin.html:3
+#: src/app/components/user/checkInToListModal.html:28
+msgid "Check-in"
+msgstr "تسجيل الوصول"
+
+#: src/app/components/user/kiosk.html:10
+msgid "Choose the list"
+msgstr "اختَر القائمة"
+
+#: src/app/components/user/user.controller.js:178
+msgid "Claim email sent successfully"
+msgstr "أكد أنه تم إرسال البريد الإلكتروني بنجاح"
+
+#: src/app/components/client/new-client.html:32
+msgid "Client URL"
+msgstr "عنوان الموقع الإلكتروني للعميل"
+
+#: src/app/components/client/client.html:4
+msgid "Client admin"
+msgstr "مدير صفحة العميل"
+
+#: src/app/components/client/client.controller.js:35
+msgid "Client deleted successfully"
+msgstr "تم حذف العميل بنجاح"
+
+#: src/app/components/client/new-client.html:36
+msgid "Client redirect URL"
+msgstr "إعادة التوجيه إلى عنوان الموقع الإلكتروني للعميل"
+
+#: src/app/components/client/client.controller.js:20
+msgid "Client saved successfully"
+msgstr "تم حفظ العميل بنجاح"
+
+#: src/app/components/client/new-client.html:58
+msgid "Client secret"
+msgstr "سر العميل"
+
+#: src/app/components/client/clients.html:3
+msgid "Clients"
+msgstr "عملاء"
+
+#: src/app/components/alerts/alert.service.js:31
+#: src/app/components/checkin/listTypesModal.html:39
+msgid "Close"
+msgstr "إغلاق"
+
+#: src/app/components/user/users.html:40
+msgid "Cluster"
+msgstr "مجموعة قطاعية"
+
+#: src/app/components/user/user.html:696
+msgid "Clusters / Working Groups"
+msgstr "مجموعات قطاعية/ مجموعات عمل"
+
+#: src/app/components/user/user.html:720
+msgid "Co-ordination Hubs"
+msgstr "مراكز التنسيق"
+
+#: src/app/components/selectLists/selectLists.controller.js:34
+#: src/app/components/user/user-filters.html:66
+msgid "Co-ordination hub"
+msgstr "مركز التنسيق"
+
+#: src/app/components/footer/footer.html:20
+#: src/app/components/user/users-export.html:9
+msgid "Code of conduct"
+msgstr "قواعد السلوك"
+
+#: src/app/components/auth/reset_password.html:20
+#: src/app/components/user/preferences.html:61
+msgid "Confirm new password"
+msgstr "تأكيد كلمة المرور الجديدة"
+
+#: src/app/components/user/user.html:139 src/app/components/user/user.html:148
+msgid "Connect"
+msgstr "توصيل"
+
+#: src/app/components/user/userPrefs.controller.js:102
+msgid "Connection could not be approved"
+msgstr "لم يتم الموافقة على التوصيل"
+
+#: src/app/components/user/userPrefs.controller.js:114
+msgid "Connection could not be removed"
+msgstr "لم تتم إزالة التوصيل"
+
+#: src/app/components/user/userPrefs.controller.js:109
+msgid "Connection removed"
+msgstr "تمت إزالة التوصيل"
+
+#: src/app/components/user/user.controller.js:253
+msgid "Connection request sent"
+msgstr "تم إرسال طلب التوصيل"
+
+#: src/app/components/footer/footer.html:23
+msgid "Contact"
+msgstr "جهة اتصال"
+
+#: src/app/components/user/user.html:168
+msgid "Contact Information"
+msgstr "معلومات جهة الإتصال"
+
+#: src/app/components/search/search-form.html:16
+msgid "Contacts"
+msgstr "جهات اتصال"
+
+#: src/app/components/search/search-results.html:23
+msgid "Contacts admin"
+msgstr "مشرف جهات الأتصال"
+
+#: src/app/components/checkin/listTypesModal.html:33
+msgid "Coordination hub"
+msgstr "مركز تنسيق"
+
+#: src/app/components/user/users-export.html:4
+#: src/app/components/user/users-export.html:8
+msgid "Copy Email Addresses"
+msgstr "نسخ عنوان البريد الإلكتروني"
+
+#: src/app/components/user/kiosk.html:76
+#: src/app/components/user/user-filters.html:46
+#: src/app/components/user/users.html:41
+msgid "Country"
+msgstr "الدولة"
+
+#: src/app/components/client/new-client.html:4
+msgid "Create a new client"
+msgstr "إدخال عميل جديد"
+
+#: src/app/components/list/new-list.html:4
+msgid "Create a new list"
+msgstr "إدخال قائمة جديدة"
+
+#: src/app/components/service/new-service.html:6
+msgid "Create a new service"
+msgstr "إدخال خدمة جديدة"
+
+#: src/app/components/auth/reset_password.html:5
+msgid "Create a password"
+msgstr "إدخال كلمة سر جديدة"
+
+#: src/app/components/dashboard/dashboard.html:91
+msgid "Create new List"
+msgstr "إدخال قائمة جديدة"
+
+#: src/app/components/auth/reset_password.html:29
+msgid "Create password"
+msgstr "إدخال كلمة سر جديدة"
+
+#: src/app/components/start/tutorial.html:52
+msgid ""
+"Create your own contact lists and share them with others. Let others check "
+"in to your lists or decide for yourself who can join."
+msgstr ""
+"أدخل قوائم الإتصال الخاصة بك وشاركها مع الآخرين. دع الآخرين يسجلون الدخول "
+"إلى قوائمك ويقرروا بأنفسهم إن كانوا يريدون الانضمام."
+
+#: src/app/components/user/user.html:800
+msgid "Created"
+msgstr "تم الانشاء."
+
+#: src/app/components/list/all-lists.html:46
+msgid "Created by"
+msgstr "تم الانشاء بواسطة."
+
+#: src/app/components/user/preferences.html:27
+msgid "Current connections"
+msgstr "الاتصالات الحالية."
+
+#: src/app/components/checkin/checkin.html:178
+msgid "Current email address"
+msgstr "عنوان البريد الإلكتروني الحالي"
+
+#: src/app/components/checkin/checkin.html:322
+msgid "Current job title"
+msgstr "المسمى الوظيفي الحالي"
+
+#: src/app/components/checkin/checkin.html:248
+msgid "Current location"
+msgstr "الموقع الحالي"
+
+#: src/app/components/checkin/checkin.html:62
+msgid "Current organization"
+msgstr "المنظمة الحالية"
+
+#: src/app/components/user/preferences.html:46
+msgid "Current password"
+msgstr "كلمة المرور الحالية"
+
+#: src/app/components/checkin/checkin.html:121
+msgid "Current phone number"
+msgstr "رقم الهاتف الحالي"
+
+#: src/app/components/dashboard/dashboard.html:4
+#: src/app/components/header/header.html:88
+msgid "Dashboard"
+msgstr "لوحة المعلومات"
+
+#: src/app/components/user/userOptions.html:18
+msgid "Delete Account"
+msgstr "حذف حساب"
+
+#: src/app/components/list/list-admin.html:37
+msgid "Delete List"
+msgstr "حذف قائمة"
+
+#: src/app/components/user/user.html:53
+msgid "Delete User"
+msgstr "حذف مستخدم"
+
+#: src/app/components/user/preferences.html:119
+#: src/app/components/user/preferences.html:121
+msgid "Delete account"
+msgstr "حذف حساب"
+
+#: src/app/components/client/client.html:18
+msgid "Delete client"
+msgstr "حذف عميل"
+
+#: src/app/components/dashboard/dashboard.html:78
+msgid "Delete list"
+msgstr "حذف قائمة"
+
+#: src/app/components/dashboard/dashboard.html:118
+#: src/app/components/service/service-admin.html:35
+msgid "Delete service"
+msgstr "حذف خدمة"
+
+#: src/app/components/user/preferences.html:120
+msgid ""
+"Deleting your account means that you will lose your access to Humanitarian "
+"ID."
+msgstr "حذف حسابك يعني أنك ستفقد إمكانية الدخول إلى Humanitarian ID."
+
+#: src/app/components/user/preferences.html:20
+msgid "Deny"
+msgstr "رفض"
+
+#: src/app/components/client/client.html:44
+#: src/app/components/client/new-client.html:53
+#: src/app/components/service/new-service.html:25
+msgid "Description"
+msgstr "وصف"
+
+#: src/app/components/client/client.html:37
+msgid "Details"
+msgstr "تفاصيل"
+
+#: src/app/components/footer/footer.html:17
+msgid "Developers"
+msgstr "مطورون"
+
+#: src/app/components/checkin/listTypesModal.html:21
+#: src/app/components/user/user-filters.html:35
+msgid "Disaster"
+msgstr "كارثة"
+
+#: src/app/components/user/user.html:708
+msgid "Disasters"
+msgstr "كوارث"
+
+#: src/app/components/checkin/listTypesModal.html:23
+msgid ""
+"Disasters usually refer to sudden-onset emergencies in a country or region. "
+"The Nepal Earthquake, Hurricane Matthew in Haiti or the floods in the "
+"Balkans are just a few examples."
+msgstr ""
+"الكوارث تعني بالعادة حالات طوارئ مفاجئة في دولة ما أو إقليم. زلزال النيبال، "
+"إعصار ماثيو في هاييتي أو الفيضانات في البلقان أمثلة على ذلك."
+
+#: src/app/components/service/new-service.html:47
+msgid "Domain"
+msgstr "مجال"
+
+#: src/app/components/user/users.controller.js:79
+msgid "Donor"
+msgstr "متبرع"
+
+#: src/app/components/duplicate/duplicates.controller.js:43
+msgid "Duplicate successfully removed"
+msgstr "عملية التكرار  تمت بنجاح"
+
+#: src/app/components/duplicate/duplicates.html:13
+#: src/app/components/duplicate/duplicates.html:3
+msgid "Duplicates"
+msgstr "تكرار"
+
+#: src/app/components/service/services.html:20
+#: src/app/components/user/userOptions.html:9
+msgid "Edit"
+msgstr "تحرير"
+
+#: src/app/components/list/list-admin.html:32
+msgid "Edit List Settings"
+msgstr "تحرير خيارات القوائم"
+
+#: src/app/components/dashboard/dashboard.html:115
+msgid "Edit Service"
+msgstr "تحرير خدمة"
+
+#: src/app/components/client/client.html:13
+msgid "Edit client"
+msgstr "تحرير عميل"
+
+#: src/app/components/service/service-admin.html:30
+msgid "Edit service"
+msgstr "تحرير خدمة"
+
+#: src/app/components/auth/login.html:8
+#: src/app/components/auth/password_reset.html:9
+#: src/app/components/user/kiosk.html:127 src/app/components/user/kiosk.html:27
+#: src/app/components/user/new-user.html:3
+#: src/app/components/user/user.html:269
+msgid "Email"
+msgstr "بريد إلكتروني"
+
+#: src/app/components/checkin/checkin.html:232
+#: src/app/components/user/new-user.html:4
+#: src/app/components/user/user.html:307 src/app/components/user/user.html:308
+msgid "Email address"
+msgstr "عنوان بريد إلكتروني"
+
+#: src/app/components/checkin/checkin.html:218
+msgid "Email addresses must be verified before they can be set as primary."
+msgstr ""
+"يجب تحقيق عنوان البريد الإلكتروني حتى يتم تعيينه كعنوان بريد إلكتروني رئيسي"
+
+#: src/app/components/user/user.html:299
+msgid "Email type"
+msgstr "نوع البريد الإلكتروني"
+
+#: src/app/components/user/users.controller.js:83
+msgid "Embassy"
+msgstr "سفارة"
+
+#: src/app/components/user/kiosk.html:39
+msgid "Enter your personal details"
+msgstr "أدخل معلوماتك الشخصية"
+
+#: src/app/components/user/user.html:38
+msgid "Export Contact Info"
+msgstr "تصدير معلومات جهة الاتصال"
+
+#: src/app/components/user/users-export.html:37
+msgid "Export into CSV"
+msgstr "تصدير إلى CSV"
+
+#: src/app/components/list/list-admin.html:43
+msgid "Export options"
+msgstr "خيارات التصدير"
+
+#: src/app/components/user/user.html:127
+msgid "Family name"
+msgstr "اسم العائلة"
+
+#: src/app/components/header/header.html:64
+msgid "Feedback"
+msgstr "تعليقات وآراء"
+
+#: src/app/components/start/tutorial.html:63
+msgid ""
+"Feel free to export your contact list into PDF or other available formats."
+msgstr "يمكن تصدير معلومات جهة الاتصال الخاصة بك إلى صيغة PDF أو أي صيغ أخرى."
+
+#: src/app/components/user/user-filters.html:64
+msgid "Filter by co-ordination hub"
+msgstr "تصفية حسب مركز التنسيق"
+
+#: src/app/components/user/user-filters.html:43
+msgid "Filter by country"
+msgstr "تصفية حسب الدولة"
+
+#: src/app/components/user/user-filters.html:33
+msgid "Filter by disaster"
+msgstr "تصفية حسب الكارثة"
+
+#: src/app/components/user/user-filters.html:87
+msgid "Filter by group"
+msgstr "تصفية حسب المجموعة"
+
+#: src/app/components/user/user-filters.html:54
+msgid "Filter by operation"
+msgstr "تصفية حسب العملية"
+
+#: src/app/components/user/user-filters.html:107
+msgid "Filter by organization"
+msgstr "تصفية حسب المنظمة"
+
+#: src/app/components/user/user-filters.html:97
+msgid "Filter by organization type"
+msgstr "تصفية حسب نوع المنظمة"
+
+#: src/app/components/user/user-filters.html:117
+msgid "Filter by role"
+msgstr "تصفية حسب الدور"
+
+#: src/app/components/list/lists-filters.html:29
+msgid "Filter by type"
+msgstr "تصفية حسب النوع"
+
+#: src/app/components/list/all-lists.html:8
+#: src/app/components/user/current-filters.html:2
+msgid "Filters applied:"
+msgstr "التصفيات المطبقة:"
+
+#: src/app/components/start/tutorial.html:9
+msgid "Find others"
+msgstr "ابحث عن غيرها"
+
+#: src/app/components/user/kiosk.html:41
+#: src/app/components/user/new-user.html:10
+msgid "First Name"
+msgstr "الاسم الأول "
+
+#: src/app/components/user/new-user.html:11
+msgid "First name"
+msgstr "الاسم الأول "
+
+#: src/app/components/auth/login.html:27
+msgid "Forgot your password?"
+msgstr "هل نسيت كلمة المرور؟"
+
+#: src/app/components/user/user.html:645
+msgid "Functional roles"
+msgstr "أدوار وظيفية"
+
+#: src/app/components/start/tutorial.html:88
+msgid "Get started"
+msgstr "للبدء"
+
+#: src/app/components/start/tutorial.html:72
+msgid "Get the app"
+msgstr "جد التطبيق"
+
+#: src/app/components/user/users.controller.js:58
+msgid "Ghost"
+msgstr "شبح"
+
+#: src/app/components/user/user.html:124
+msgid "Given name"
+msgstr "الاسم الأول "
+
+#: src/app/components/user/users.controller.js:87
+msgid "Government"
+msgstr "الحكومة"
+
+#: src/app/components/checkin/listTypesModal.html:17
+#: src/app/components/selectLists/selectLists.controller.js:28
+#: src/app/components/service/new-service.html:55
+#: src/app/components/user/user-filters.html:89
+msgid "Group"
+msgstr "المجموعة"
+
+#: src/app/components/checkin/listTypesModal.html:19
+msgid ""
+"Groups can be clusters, sectors or simply working groups that are set up in "
+"a specific country to facilitate coordination among humanitarian partners."
+msgstr ""
+"يمكن للمجموعات أن تكون مجموعات قطاعية،  أو قطاعات استجابة أو ببساطة مجموعات "
+"عمل تم إنشاؤها في بلد معين للقيام بالتنسيق بين الشركاء الإنسانيين"
+
+#: src/app/components/checkin/checkin.html:25
+msgid "Hide"
+msgstr "إخفاء "
+
+#: src/app/components/service/new-service.html:61
+msgid "Hide the service - HID users will not be able to search for it"
+msgstr "إخفاء الخدمة- لن يتمكن مستخدمو HID من البحث عنها."
+
+#: src/app/components/start/tutorial.html:73
+msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
+msgstr "Humanitarian ID موجودة كتطبيق على الهاتف كذلك لأجهزة IOS و Android."
+
+#: src/app/components/auth/auth.controller.js:18
+msgid ""
+"Humanitarian ID version 2.0 is live! To log in for the first time, please "
+"reset your password by clicking on"
+msgstr ""
+"Humanitarian ID نسخة 2.0 متوفرة! لتسجيل الدخول في المرة الأولى، الرجاء  "
+"استعادة كلمة المرور بالضغط على"
+
+#: src/app/components/header/header.html:89
+#: src/app/components/search/search.controller.js:11
+msgid "Humanitarian contacts"
+msgstr "جهات اتصال انسانية"
+
+#: src/app/components/user/user.html:411
+msgid "Humanitarian details"
+msgstr "تفاصيل انسانية"
+
+#: src/app/components/client/client.html:39
+#: src/app/components/client/clients.html:15
+#: src/app/components/client/new-client.html:13
+#: src/app/components/duplicate/duplicates.html:12
+msgid "ID"
+msgstr "ID"
+
+#: src/app/components/auth/password_reset.html:6
+msgid ""
+"If you forget the password for your Humanitarian ID account, you can request "
+"a new password by entering your email address here and clicking on 'Reset "
+"Password'."
+msgstr ""
+"لو نسيت كلمة المرور الخاصة بحساب Humanitarian ID الخاص بك، يمكنك طلب كلمة "
+"مرور جديدة من خلال إدخال عنوان بريدك الإلكتروني هنا وضغط \" استعادة كلمة "
+"المرور\"."
+
+#: src/app/components/start/tutorial.html:21
+msgid "If you get a lot of results, use this filter to fine-tune your search."
+msgstr "لو واجهت الكثير من النتائج، استعمل هذه التصفية لتحسين عملية بحثك."
+
+#: src/app/components/start/tutorial.html:42
+#: src/app/components/start/tutorial.html:65
+msgid ""
+"If you want to join a list temporarily, add a check-out date. We’ll send you "
+"a reminder shortly before the given date and we’ll check you out "
+"automatically two weeks after the end-date."
+msgstr ""
+"لو أردت الانضمام إلى قائمة مؤقتا، أضف موعدا لتسجيل الخروج. سوف نرسل لك "
+"تذكيرا قبيل الموعد المختار وسنسجل خروجك تلقائيا بعد أسبوعين من التاريخ "
+"المحدد."
+
+#: src/app/components/user/user.controller.js:133
+msgid ""
+"In order to view this person’s profile, please contact info@humanitarian.id"
+msgstr "لاستعراض ملف هذا الشخص، الرجاء التواصل مع info@humanitarian.id"
+
+#: src/app/components/start/tutorial.html:19
+msgid ""
+"In the navigation bar you will find a search box. Start typing your search "
+"item in the box and contacts and lists will immediately appear."
+msgstr ""
+"في شريط التنقل هذا ستجد مكانا للبحث. ابدأ بكتابة ما تود البحث عنه في المساحة "
+"المعطاة وستظهر جهات الاتصال والقوائم فوراً."
+
+#: src/app/components/user/users.html:42
+msgid "Info / actions"
+msgstr "معلومات/ إجراءات"
+
+#: src/app/components/user/users.controller.js:91
+msgid "International NGO"
+msgstr "منظمة غير حكومية دولية"
+
+#: src/app/components/user/users.controller.js:95
+msgid "International Organization"
+msgstr "منظمة دولية"
+
+#: src/app/components/service/serviceEdit.controller.js:120
+msgid "Invalid API key"
+msgstr "مفتاح API غير صالح"
+
+#: src/app/components/user/kiosk.html:109
+msgid "Job Title"
+msgstr "مسمى وظيفي"
+
+#: src/app/components/user/users.controller.js:40
+#: src/app/components/user/users.html:38
+msgid "Job title"
+msgstr "مسمى وظيفي"
+
+#: src/app/components/user/user.html:473
+msgid "Job titles"
+msgstr "مسميات وظيفية"
+
+#: src/app/components/user/userEdit.controller.js:64
+msgid "Landline"
+msgstr "رقم هاتف أرضي"
+
+#: src/app/components/user/kiosk.html:51
+#: src/app/components/user/new-user.html:17
+msgid "Last Name"
+msgstr "اسم العائلة"
+
+#: src/app/components/user/user.html:799
+msgid "Last Updated"
+msgstr "تم التعديل لآخر مرة"
+
+#: src/app/components/user/new-user.html:18
+msgid "Last name"
+msgstr "اسم العائلة"
+
+#: src/app/components/landing/landing.html:151
+msgid "Last update of your profile"
+msgstr "آخر مرة تم تعديل ملفك فيها"
+
+#: src/app/components/list/list-admin.html:28
+msgid "List Settings"
+msgstr "اعدادات القائمة"
+
+#: src/app/components/list/new-list.html:10
+msgid "List name"
+msgstr "اسم القائمة"
+
+#: src/app/components/list/list.html:65
+msgid "List not available offline"
+msgstr "القائمة غير متوفرة بدون اتصال"
+
+#: src/app/components/list/list.html:64
+msgid "List not found"
+msgstr "لم يتم العثور على القائمة"
+
+#: src/app/components/list/list.html:69
+msgid "List not found, try"
+msgstr "لم يتم العثور على القائمة، حاول"
+
+#: src/app/components/list/lists.html:4
+#: src/app/components/search/search-form.html:27
+msgid "Lists"
+msgstr "القوائم"
+
+#: src/app/components/dashboard/dashboard.html:60
+msgid "Lists I manage"
+msgstr "القوائم التي أديرها"
+
+#: src/app/components/dashboard/dashboard.html:39
+msgid "Lists I'm part of"
+msgstr "القوام التي أنا جزء منها"
+
+#: src/app/components/user/preferences.html:95
+msgid "Locale"
+msgstr "مكان"
+
+#: src/app/components/checkin/checkin.html:305
+#: src/app/components/start/start.html:66 src/app/components/user/user.html:579
+msgid "Locality"
+msgstr "المنطقة المحلية"
+
+#: src/app/components/user/user-filters.html:25
+msgid "Location filters"
+msgstr "تصفيات الموقع"
+
+#: src/app/components/user/user.html:527
+msgid "Locations"
+msgstr "المواقع"
+
+#: src/app/components/auth/login.html:4
+msgid "Log in to<br> Humanitarian ID."
+msgstr "Log in to<br> Humanitarian ID."
+
+#: src/app/components/header/header.html:65
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+#: src/app/components/auth/login.html:22
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: src/app/components/client/client.html:42
+#: src/app/components/client/new-client.html:44
+#: src/app/components/client/new-client.html:45
+msgid "Login URL"
+msgstr "تسجيل عنوان الموقع الإلكتروني"
+
+#: src/app/components/service/new-service.html:37
+msgid "Mailchimp API Key"
+msgstr "Mailchimp API Key"
+
+#: src/app/components/service/new-service.html:36
+msgid "Mailchimp API key"
+msgstr "Mailchimp API Key"
+
+#: src/app/components/service/new-service.html:40
+msgid "Mailchimp list"
+msgstr "Mailchimp list"
+
+#: src/app/components/dashboard/dashboard.html:92
+msgid "Manage services"
+msgstr "إدارة الخدمات"
+
+#: src/app/components/start/tutorial.html:51
+msgid "Manage your own lists"
+msgstr "إدارة قوائمك"
+
+#: src/app/components/user/user.html:773 src/app/components/user/user.html:792
+msgid "Manager"
+msgstr "مدير"
+
+#: src/app/components/list/new-list.html:30
+msgid "Managers"
+msgstr "مدراء"
+
+#: src/app/components/list/list-admin.html:49
+msgid "Mark as favourite"
+msgstr "اختيار كمفضلة"
+
+#: src/app/components/user/users.controller.js:99
+msgid "Media"
+msgstr "إعلام"
+
+#: src/app/components/user/users-export.html:32
+msgid "Meeting attendance (comfortable View)"
+msgstr "حضور الاجتماع ( العرض المريح)"
+
+#: src/app/components/user/users-export.html:27
+msgid "Meeting attendance (compact View)"
+msgstr "حضور الاجتماع ( العرض الموجز)"
+
+#: src/app/components/user/kiosk.html:47
+msgid "Middle Name"
+msgstr "الاسم الأوسط"
+
+#: src/app/components/user/users.controller.js:103
+msgid "Military"
+msgstr "العسكرية"
+
+#: src/app/components/user/userEdit.controller.js:65
+msgid "Mobile"
+msgstr "المتنقل"
+
+#: src/app/components/user/userEdit.controller.js:49
+msgid "My connections"
+msgstr "اتصالاتي"
+
+#: src/app/components/dashboard/dashboard.html:17
+msgid "My favourite lists"
+msgstr "قوائمي المفضلة"
+
+#: src/app/components/dashboard/dashboard.html:13
+msgid "My lists"
+msgstr "قوائمي"
+
+#: src/app/components/client/clients.html:16
+#: src/app/components/client/new-client.html:22
+#: src/app/components/list/all-lists.html:44
+#: src/app/components/list/new-list.html:9
+#: src/app/components/service/new-service.html:16
+#: src/app/components/service/services.html:5
+#: src/app/components/user/users.controller.js:36
+#: src/app/components/user/users.html:37
+msgid "Name"
+msgstr "الاسم"
+
+#: src/app/components/user/users.controller.js:107
+msgid "National NGO"
+msgstr "منظمة غير حكومية محلية"
+
+#: src/app/components/checkin/checkin.html:357
+msgid "New job title"
+msgstr "مسمى وظيفي جديد"
+
+#: src/app/components/auth/reset_password.html:10
+#: src/app/components/auth/reset_password.html:13
+#: src/app/components/user/preferences.html:53
+msgid "New password"
+msgstr "كلمة مرور جديدة"
+
+#: src/app/components/start/start.html:11
+#: src/app/components/start/start.html:33
+#: src/app/components/start/start.html:71
+#: src/app/components/start/start.html:83
+#: src/app/components/start/tutorial.html:87
+#: src/app/components/user/kiosk.html:22 src/app/components/user/kiosk.html:34
+msgid "Next"
+msgstr "التالي"
+
+#: src/app/components/user/preferences.html:76
+msgid "No applications currently have access to your Humanitarian ID account."
+msgstr "لا نماذج حاليا تستطيع الدخول على حساب Humanitarian ID الخاص بك."
+
+#: src/app/components/user/preferences.html:29
+msgid "No approved connections"
+msgstr "لا توجد اتصالات معتمدة."
+
+#: src/app/components/checkin/checkin.html:182
+msgid "No email"
+msgstr "لا يوجد بريد إلكتروني"
+
+#: src/app/components/user/user.html:291
+msgid "No emails"
+msgstr "لا يوجد بريد إلكتروني"
+
+#: src/app/components/checkin/checkin.html:325
+msgid "No job title"
+msgstr "لا يوجد مسمى وظيفي"
+
+#: src/app/components/user/user.html:480
+msgid "No job titles"
+msgstr "لا توجد مسميات وظيفية"
+
+#: src/app/components/checkin/all-check-ins.html:22
+msgid "No lists"
+msgstr "لا توجد قوائم"
+
+#: src/app/components/user/checkInToListModal.html:19
+msgid "No lists available"
+msgstr "لا توجد قوائم متوفرة"
+
+#: src/app/components/checkin/checkin.html:251
+msgid "No location"
+msgstr "لا يوجد موقع"
+
+#: src/app/components/user/user.html:550
+msgid "No locations"
+msgstr "لا توجد مواقع"
+
+#: src/app/components/start/tutorial.html:10
+msgid ""
+"No matter whether you are looking for an individual, a contact list or a "
+"specific role – all contacts are at your finger tips."
+msgstr ""
+"لا يهم إن كنتَ تبحث عن شخص، جهة اتصال او دور محدد- كل معلومات الاتصال بين "
+"يديك."
+
+#: src/app/components/checkin/checkin.html:380
+msgid "No modifications"
+msgstr "لا توجد تعديلات"
+
+#: src/app/components/user/user.html:422
+msgid "No organizations"
+msgstr "لا توجد منظمات"
+
+#: src/app/components/user/preferences.html:14
+msgid "No pending connections"
+msgstr "لا توجد اتصالات في الانتظار"
+
+#: src/app/components/user/user.html:774
+msgid "No permissions set"
+msgstr "لم يتم إعطاء الإذن "
+
+#: src/app/components/checkin/checkin.html:125
+msgid "No phone number"
+msgstr "لا يوجد رقم هاتف"
+
+#: src/app/components/user/user.html:194
+msgid "No phone numbers"
+msgstr "لا توجد أرقام هاتف"
+
+#: src/app/components/user/user.html:678
+msgid "No roles"
+msgstr "لا توجد أدوار"
+
+#: src/app/components/user/user.html:403
+msgid "No social networks"
+msgstr "لا توجد شبكات اجتماعية"
+
+#: src/app/components/service/service.html:22
+msgid "No subscribers"
+msgstr "لا يوجد مشتركين"
+
+#: src/app/components/service/all-subscriptions.html:14
+msgid "No subscriptions"
+msgstr "لا توجد اشتراكات"
+
+#: src/app/components/user/user.html:757
+msgid "No websites"
+msgstr "لا توجد مواقع"
+
+#: src/app/components/checkin/editCheckinModal.html:11
+msgid "None set"
+msgstr "لم يتم تحديد شيء"
+
+#: src/app/components/landing/landing.html:136
+#: src/app/components/notifications/notifications.html:5
+msgid "Notifications"
+msgstr "تنبيهات"
+
+#: src/app/components/user/user-filters.html:79
+msgid "Occupation filters"
+msgstr "تصفيات الوظيفة"
+
+#: src/app/components/list/listEdit.controller.js:127
+msgid "Only the owner and managers of the list can add users"
+msgstr "فقط مالك القائمة ومدراءها يمكنهم إضافة مستخدمين"
+
+#: src/app/components/checkin/listTypesModal.html:13
+#: src/app/components/user/user-filters.html:56
+msgid "Operation"
+msgstr "عملية"
+
+#: src/app/components/user/user.html:684
+msgid "Operations"
+msgstr "عمليات"
+
+#: src/app/components/checkin/listTypesModal.html:15
+msgid ""
+"Operations usually refer to single countries, like Afghanistan or Iraq. In "
+"some cases they also refer to a wider humanitarian response across borders, "
+"for example the Whole of Syria response."
+msgstr ""
+"العمليات غالبا ما تشير إلى دول معينة، كالعراق أو أفغانستان. في بعض الحالات "
+"تشير إلى استجابة إنسانية عابرة للحدود، كجميع سوريا على سبيل المثال."
+
+#: src/app/components/search/search-results.html:30
+msgid "Options"
+msgstr "خيارات"
+
+#: src/app/components/checkin/listTypesModal.html:25
+#: src/app/components/user/kiosk.html:99
+#: src/app/components/user/user-filters.html:109
+#: src/app/components/user/users.controller.js:44
+#: src/app/components/user/users.html:39
+msgid "Organization"
+msgstr "منظمة"
+
+#: src/app/components/user/user-filters.html:99
+msgid "Organization Type"
+msgstr "نوع المنظمة"
+
+#: src/app/components/user/user.html:415
+msgid "Organizations"
+msgstr "منظمات"
+
+#: src/app/components/user/users.controller.js:54
+msgid "Orphan"
+msgstr "يتيم"
+
+#: src/app/components/user/users.controller.js:111
+msgid "Other"
+msgstr "أخرى"
+
+#: src/app/components/checkin/checkin.html:21
+msgid "Other lists you might be interested in"
+msgstr "قوائم أخرى قد تكون مهتماً بها"
+
+#: src/app/components/auth/login.html:12
+#: src/app/components/auth/reset_password.html:11
+#: src/app/components/user/new-user.html:24
+msgid "Password"
+msgstr "كلمة مرور"
+
+#: src/app/components/user/new-user.html:31
+msgid "Password (confirm)"
+msgstr "كلمة المرور (تأكيد)"
+
+#: src/app/components/user/preferences.html:12
+msgid "Pending approval"
+msgstr "في انتظار الموافقة"
+
+#: src/app/components/list/listEdit.controller.js:104
+msgid "People on the list only"
+msgstr "الأشخاص على القائمة فقط"
+
+#: src/app/components/user/user.html:770
+msgid "Permissions"
+msgstr "أذونات"
+
+#: src/app/components/user/userEdit.controller.js:71
+msgid "Personal"
+msgstr "شخصي"
+
+#: src/app/components/user/user.html:172
+msgid "Phone numbers"
+msgstr "أرقام هاتف"
+
+#: src/app/components/checkin/checkin.html:158
+#: src/app/components/user/user.html:202
+msgid "Phone type:"
+msgstr "نوع الهاتف:"
+
+#: src/app/components/user/userEdit.controller.js:388
+msgid "Picture uploaded"
+msgstr "الصورة المرفوعة"
+
+#: src/app/components/user/users-export.html:9
+msgid "Please email responsibly. Follow our"
+msgstr "الرجاء إرسال البريد الإلكتروني بمسؤولية. تابع "
+
+#: src/app/components/user/user.controller.js:39
+msgid ""
+"Please note that some of the information made available by this user is only "
+"available to verified users"
+msgstr ""
+"الرجاء ملاحظة أن بعض المعلومات المتوفرة من قبل هذا المستخدم متوفرة فقط "
+"للمستخدمين المحققين."
+
+#: src/app/components/user/user.controller.js:40
+msgid ""
+"Please note that some of the information made available by this user is "
+"private and some is available only to verified users. You can contact them "
+"with a request to see the private sections of their profile by clicking "
+"'Connect'."
+msgstr ""
+"الرجاء ملاحظة أن بعض المعلومات المتوفرة من قبل هذا المستخدم خاصة وبعضها "
+"متوفرة فقط للمستخدمين المحققين فقط. يمكنك التواصل معهم وطلب رؤية الأجزاء "
+"الخاصة من ملفاتهم بضغط \"اتصال\"."
+
+#: src/app/components/user/user.controller.js:37
+msgid ""
+"Please note that some of the information made available by this user is "
+"private. You can contact them with a request to see their whole profile by "
+"clicking 'Connect'."
+msgstr ""
+"الرجاء ملاحظة أن بعض المعلومات المتوفرة من قبل هذا المستخدم خاصة. تستطيع "
+"التواصل معهم بطلب لرؤية الملف كاملا بضغط \"اتصال\"."
+
+#: src/app/components/header/header.html:62
+msgid "Preferences"
+msgstr "تفضيلات"
+
+#: src/app/components/user/userEdit.controller.js:406
+msgid "Primary email updated"
+msgstr "تم تعديل البريد الإلكتروني الرئيسي"
+
+#: src/app/components/user/userEdit.controller.js:359
+msgid "Primary organization updated"
+msgstr "تم تعديل المنظمة الرئيسية"
+
+#: src/app/components/user/userEdit.controller.js:432
+msgid "Primary phone number updated"
+msgstr "تم تعديل رقم الهاتف الرئيسي"
+
+#: src/app/components/user/users.controller.js:115
+msgid "Private sector"
+msgstr "القطاع الخاص"
+
+#: src/app/components/header/header.html:61
+msgid "Profile"
+msgstr "ملف"
+
+#: src/app/components/user/userEdit.controller.js:173
+msgid "Profile updated"
+msgstr "تم تعديل الملف"
+
+#: src/app/components/start/tutorial.html:13
+#: src/app/components/start/tutorial.html:34
+#: src/app/components/start/tutorial.html:55
+msgid "Read more"
+msgstr "اقرأ المزيد"
+
+#: src/app/components/landing/landing.html:121
+#: src/app/components/landing/landing.html:43
+#: src/app/components/landing/landing.html:82
+msgid "Recent:&nbsp;"
+msgstr "Recent:&nbsp;"
+
+#: src/app/components/user/users.controller.js:119
+msgid "Red Cross / Red Crescent"
+msgstr "الصليب الأحمر/ الهلال الأحمر"
+
+#: src/app/components/client/client.html:41
+#: src/app/components/client/new-client.html:35
+msgid "Redirect URL"
+msgstr "إعادة توجيه عنوان الموقع الإلكتروني"
+
+#: src/app/components/user/kiosk.html:84
+msgid "Region"
+msgstr "إقليم"
+
+#: src/app/components/auth/login.html:17
+#: src/app/components/auth/register.html:4
+#: src/app/components/user/kiosk.html:131
+#: src/app/components/user/new-user.html:39
+msgid "Register"
+msgstr "تسجيل"
+
+#: src/app/components/header/header.html:16
+msgid "Related platforms"
+msgstr "منصات مقاربة"
+
+#: src/app/components/user/users.controller.js:123
+msgid "Religious"
+msgstr "متدين"
+
+#: src/app/components/dashboard/dashboard.html:32
+msgid "Remove from favourites"
+msgstr "إزالة من المفضلة"
+
+#: src/app/components/user/userOptions.html:10
+msgid "Remove from list"
+msgstr "إزالة من القائمة"
+
+#: src/app/components/user/user.html:48
+msgid "Report a Problem"
+msgstr "التبليغ عن مشكلة"
+
+#: src/app/components/user/user.html:176 src/app/components/user/user.html:274
+#: src/app/components/user/user.html:532
+msgid "Request"
+msgstr "طلب"
+
+#: src/app/components/auth/password_reset.html:15
+msgid "Reset Password"
+msgstr "إعادة تعيين كلمة المرور"
+
+#: src/app/components/auth/password_reset.html:4
+#: src/app/components/auth/reset_password.html:28
+#: src/app/components/auth/reset_password.html:4
+msgid "Reset password"
+msgstr "إعادة تعيين كلمة المرور"
+
+#: src/app/components/checkin/listTypesModal.html:29
+#: src/app/components/selectLists/selectLists.controller.js:31
+#: src/app/components/user/user-filters.html:119
+msgid "Role"
+msgstr "دور"
+
+#: src/app/components/checkin/listTypesModal.html:31
+msgid ""
+"Roles are closely related to your job title. Very common roles are those of "
+"Humanitarian Coordinator, Information Management Officer or UNDAC member. As "
+"with checking into organizational lists, role check-ins are moderated."
+msgstr ""
+"الأدوار تكون قريبة من مسماك الوظيفي. الأدوار الشائعة دائما تكون منسق إنساني، "
+"مسؤول أدارة المعلومات أو عضو UNDAC. وكالتسجيل في قوائم المنظمات، يتم إدارة "
+"تسجيل الأدوار."
+
+#: src/app/components/user/userEdit.controller.js:66
+msgid "Satellite Phone"
+msgstr "هاتف متصل بالقمر الصناعي"
+
+#: src/app/components/client/new-client.html:65
+#: src/app/components/list/new-list.html:40
+#: src/app/components/service/new-service.html:87
+msgid "Save"
+msgstr "حفظ"
+
+#: src/app/components/user/preferences.html:114
+msgid "Save settings"
+msgstr "حفظ الإعدادات"
+
+#: src/app/components/user/user.html:6
+msgid "Saving"
+msgstr "يتم الحفظ"
+
+#: src/app/components/checkin/all-check-ins.html:4
+#: src/app/components/service/all-subscriptions.html:4
+msgid "Search"
+msgstr "بحث"
+
+#: src/app/components/search/search.controller.js:11
+msgid "Search Results"
+msgstr "نتائج البحث"
+
+#: src/app/components/list/lists-filters.html:23
+#: src/app/components/list/lists-filters.html:24
+#: src/app/components/user/user-filters.html:17
+#: src/app/components/user/user-filters.html:18
+msgid "Search by name"
+msgstr "البحث حسب الاسم "
+
+#: src/app/components/start/start.html:45
+msgid "Search for a country"
+msgstr "البحث عن دولة"
+
+#: src/app/components/landing/landing.html:64
+#: src/app/components/landing/landing.html:65
+msgid "Search for a country / region"
+msgstr "البحث عن دولة/ إقليم"
+
+#: src/app/components/checkin/all-check-ins.html:5
+msgid "Search for a list"
+msgstr "البحث عن قائمة"
+
+#: src/app/components/landing/landing.html:102
+#: src/app/components/landing/landing.html:103
+msgid "Search for a list name"
+msgstr "البحث عن اسم قائمة"
+
+#: src/app/components/landing/landing.html:24
+#: src/app/components/landing/landing.html:25
+#: src/app/components/user/user.html:70 src/app/components/user/user.html:71
+msgid "Search for a name"
+msgstr "البحث عن اسم"
+
+#: src/app/components/service/all-subscriptions.html:5
+msgid "Search for a subscription"
+msgstr "البحث عن اشتراك"
+
+#: src/app/components/start/start.html:22
+msgid "Search for an organisation"
+msgstr "البحث عن منظمة"
+
+#: src/app/components/landing/landing.html:19
+msgid "Search for contacts"
+msgstr "البحث عن جهات اتصال"
+
+#: src/app/components/search/search-form.html:7
+msgid "Search for contacts or contact lists"
+msgstr "البحث عن جهات اتصال أو قوائم تواصل"
+
+#: src/app/components/landing/landing.html:61
+msgid "Search for operation lists"
+msgstr "البحث عن قوائم عمليات"
+
+#: src/app/components/landing/landing.html:99
+msgid "Search for other contact lists"
+msgstr "البحث عن قوائم تواصل أخرى"
+
+#: src/app/components/client/client.html:43
+#: src/app/components/client/new-client.html:57
+msgid "Secret"
+msgstr "سري"
+
+#: src/app/components/checkin/checkin.html:23
+#: src/app/components/search/search-form.html:17
+#: src/app/components/search/search-form.html:28
+msgid "See all"
+msgstr "انظر  الكل"
+
+#: src/app/components/footer/footer.html:44
+msgid "See below for other platforms using Humanitarian ID login:"
+msgstr "انظر إلى الأسفل من أجل منصات أخرى باستخدام تسجيل دخول Humanitarian ID:"
+
+#: src/app/components/checkin/checkin.html:284
+#: src/app/components/user/user.html:559
+msgid "Select a country"
+msgstr "اختيار دولة"
+
+#: src/app/components/selectLists/select-lists.html:13
+#: src/app/components/user/checkInToListModal.html:12
+#: src/app/components/user/kiosk.html:12
+msgid "Select a list"
+msgstr "اختيار قائمة"
+
+#: src/app/components/checkin/checkin.html:193
+msgid "Select a primary email address:"
+msgstr "اختيار عنوان بريد إلكتروني رئيسي:"
+
+#: src/app/components/checkin/checkin.html:335
+msgid "Select a primary job title:"
+msgstr "اختيار مسمى وظيفي رئيسي:"
+
+#: src/app/components/checkin/checkin.html:78
+msgid "Select a primary organization:"
+msgstr "اختيار منظمة رئيسية:"
+
+#: src/app/components/checkin/checkin.html:139
+msgid "Select a primary phone number:"
+msgstr "اختيار رقم هاتف رئيسي:"
+
+#: src/app/components/checkin/checkin.html:295
+#: src/app/components/start/start.html:56 src/app/components/user/user.html:569
+msgid "Select a region"
+msgstr "اختيار إقليم"
+
+#: src/app/components/user/user.html:652
+msgid "Select a role"
+msgstr "اختيار دور"
+
+#: src/app/components/user/user.html:433
+msgid "Select an organisation"
+msgstr "اختيار منظمة"
+
+#: src/app/components/checkin/checkin.html:261
+msgid "Select current location"
+msgstr "اختيار الموقع الحالي"
+
+#: src/app/components/checkin/checkin.html:13
+msgid "Select lists"
+msgstr "اختيار قوائم"
+
+#: src/app/components/service/new-service.html:72
+msgid "Select managers"
+msgstr "اختيار مدراء"
+
+#: src/app/components/list/list-admin.html:13
+#: src/app/components/list/new-list.html:32
+msgid "Select some people"
+msgstr "اختر بعض الأشخاص"
+
+#: src/app/components/service/service-admin.html:15
+msgid "Select someone"
+msgstr "اختر شخصا "
+
+#: src/app/components/user/user.html:43
+msgid "Send Claim Email"
+msgstr "أرسل بريدا إلكترونيا مطالبا"
+
+#: src/app/components/service/new-service.html:29
+msgid "Service Type"
+msgstr "نوع الخدمة"
+
+#: src/app/components/service/service-admin.html:4
+msgid "Service admin"
+msgstr "مشرف الخدمة"
+
+#: src/app/components/dashboard/dashboard.controller.js:113
+#: src/app/components/service/service.controller.js:88
+#: src/app/components/service/services.controller.js:72
+msgid "Service deleted successfully"
+msgstr "تم حذف الخدمة بنجاح"
+
+#: src/app/components/service/new-service.html:70
+msgid "Service manager"
+msgstr "مدير الخدمة"
+
+#: src/app/components/service/serviceEdit.controller.js:82
+msgid "Service saved successfully"
+msgstr "تم حفظ الخدمة بنجاح"
+
+#: src/app/components/service/service-admin.html:26
+msgid "Service settings"
+msgstr "إعدادات الخدمة"
+
+#: src/app/components/service/services-page.html:3
+msgid "Services"
+msgstr "خدمات"
+
+#: src/app/components/checkin/checkin.html:41
+msgid "Set a date here if you want to be checked out automatically"
+msgstr "حدد تاريخا إذا أردت تسجيل الخروج تلقائيا"
+
+#: src/app/components/checkin/checkin.html:44
+msgid "Set a date to be automatically checked out:"
+msgstr "حدد تاريخا لتسجيل الخروج تلقائيا:"
+
+#: src/app/components/user/user.html:321
+msgid "Set primary email:"
+msgstr "حدد بريدا إلكترونيا رئيسيا:"
+
+#: src/app/components/user/user.html:501
+msgid "Set primary job title:"
+msgstr "حدد مسمىَ وظيفياَ رئيسيا:"
+
+#: src/app/components/user/user.html:595
+msgid "Set primary location:"
+msgstr "حدد موقعا رئيسيا:"
+
+#: src/app/components/user/user.html:453
+msgid "Set primary organization:"
+msgstr "حدد منظمةَ رئيسية:"
+
+#: src/app/components/user/user.html:223
+msgid "Set primary phone number:"
+msgstr "حدد رقم هاتف رئيسيا:"
+
+#: src/app/components/search/search-results.html:38
+msgid "Showing contacts"
+msgstr "إظهار جهات الاتصال"
+
+#: src/app/components/search/search-results.html:42
+msgid "Showing lists"
+msgstr "إظهار القوائم"
+
+#: src/app/components/auth/register.html:6
+msgid ""
+"Sign up for a Humanitarian ID account. Doing so will give you access to "
+"Humanitarian ID as well as a growing number of related humanitarian "
+"community sites."
+msgstr ""
+"قم بالتسجيل بحساب Humanitarian ID. هكذا يمكنك الدخول على Humanitarian ID "
+"وعلى عدد كبير من مواقع المجتمع الإنساني كذلك."
+
+#: src/app/components/service/suggestions.html:26
+msgid "Skip"
+msgstr "تجاوز"
+
+#: src/app/components/header/header.html:1
+msgid "Skip to main content"
+msgstr "تجاوز إلى المحتوى الرئيسي"
+
+#: src/app/components/user/user.html:371
+msgid "Social Networks"
+msgstr "شبكات اجتماعية"
+
+#: src/app/components/checkin/checkin.controller.js:138
+msgid "Some of you check-ins are pending, we will get back to you soon."
+msgstr ""
+"بعض تسجيلات الدخول الخاصة بك ما زالت في حالة انتظار، سنقوم بالعودة إليك "
+"قريبا."
+
+#: src/app/components/user/user.html:63
+msgid ""
+"Sorry, this user was not found. Try searching for Humanitarian Contacts:"
+msgstr ""
+"للأسف، لم يتم العثور على هذا المستخدم. حاول البحث عن جهات اتصال إنسانية:"
+
+#: src/app/components/user/user-filters.html:141
+msgid "Sort"
+msgstr "توزيع"
+
+#: src/app/components/list/lists-filters.html:39
+#: src/app/components/list/lists-filters.html:41
+#: src/app/components/user/user-filters.html:148
+#: src/app/components/user/user-filters.html:150
+msgid "Sort by"
+msgstr "توزيع حسب"
+
+#: src/app/components/user/user.html:130
+msgid "Status"
+msgstr "حالة"
+
+#: src/app/components/service/service-admin.html:21
+#: src/app/components/service/suggestions.html:31
+msgid "Subscribe"
+msgstr "اشترك"
+
+#: src/app/components/service/service-admin.html:13
+msgid "Subscribe user"
+msgstr "اشترك مع المستخدم"
+
+#: src/app/components/dashboard/dashboard.html:100
+msgid "Subscriptions"
+msgstr "اشتراكات"
+
+#: src/app/components/list/list.controller.js:154
+msgid "Successfully added to list"
+msgstr "تم الإضافة إلى القائمة بنجاح"
+
+#: src/app/components/user/userOptions.controller.js:128
+msgid "Successfully checked in to list"
+msgstr "تم التسجيل في القائمة بنجاح"
+
+#: src/app/components/checkin/allCheckIns.controller.js:102
+msgid "Successfully removed from list"
+msgstr "تمت الإزالة من القائمة بنجاح"
+
+#: src/app/components/dashboard/dashboard.controller.js:78
+msgid "Successfully removed from list."
+msgstr "تمت الإزالة من القائمة بنجاح."
+
+#: src/app/components/service/suggestions.html:4
+msgid "Suggested services"
+msgstr "خدمات مقترحة"
+
+#: src/app/components/footer/footer.html:11
+msgid "Support"
+msgstr "دعم"
+
+#: src/app/components/user/kiosk.controller.js:88
+msgid "Thank you for checking in"
+msgstr "شكرا لك على التسجيل"
+
+#: src/app/components/user/kiosk.controller.js:85
+msgid ""
+"Thank you for checking in. You will soon receive an email address which will "
+"allow you to confirm your account. Please confirm it asap."
+msgstr ""
+"شكرا لك على التسجيل. قريبا ستتلقى بريدا إلكترونيا يمكنك من خلاله تأكيد "
+"حسابك. فضلا أكده في أقرب وقت ممكن."
+
+#: src/app/components/user/userRegister.controller.js:19
+msgid ""
+"Thank you for creating an account. You will soon receive a confirmation "
+"email to confirm your account."
+msgstr "شكرا لإنشائك حسابا. قريبا ستتلقى بريدا إلكترونيا لتأكيد حسابك."
+
+#: src/app/components/auth/verify.controller.js:13
+msgid ""
+"Thank you for verifying your email. You can now login through our "
+"application, or through any other application using Humanitarian ID"
+msgstr ""
+"شكرا لك للتحقق من بريدك الإلكتروني. تستطيع الآن الدخول عبر تطبيقنا أو عبر "
+"تطبيقات أخرى باستخدام Humanitarian ID."
+
+#: src/app/components/start/start.html:8
+msgid "Thanks for registering"
+msgstr "شكرا لتسجيلك."
+
+#: src/app/components/client/new-client.html:14
+msgid "The client ID"
+msgstr " ID الخاص بالعميل"
+
+#: src/app/components/client/new-client.html:23
+msgid "The client name"
+msgstr "اسم العميل"
+
+#: src/app/components/list/listEdit.controller.js:100
+msgid "The list owner and editors of this list only"
+msgstr "مالك القائمة ومحرروها فقط"
+
+#: src/app/components/dashboard/dashboard.controller.js:89
+#: src/app/components/list/list.controller.js:168
+msgid "The list was successfully deleted."
+msgstr "تم حذف القائمة بنجاح."
+
+#: src/app/components/service/new-service.html:17
+msgid "The service name"
+msgstr "اسم الخدمة"
+
+#: src/app/components/list/list.controller.js:248
+msgid "The user was successfully approved."
+msgstr "تم اعتماد المستخدم بنجاح."
+
+#: src/app/components/user/userOptions.controller.js:57
+msgid "The user was successfully checked out."
+msgstr "تم تسجيل خروج المستخدم بنجاح."
+
+#: src/app/components/user/userNew.controller.js:18
+msgid ""
+"The user was successfully created. If you inserted an email address, they "
+"will receive an email to claim their account. You can now edit the user "
+"profile to add more information."
+msgstr ""
+"تم إنشاء المستخدم بنجاح. لو قمت بإدخال بريد إلكتروني، سيقومون بتلقي بريد "
+"إلكتروني لطلب حسابهم. تستطيع الآن تحرير ملف المستخدم لإضافة معلومات أخرى."
+
+#: src/app/components/user/user.controller.js:245
+#: src/app/components/user/userOptions.controller.js:29
+msgid "The user was successfully deleted."
+msgstr "تم حذف هذا المستخدم بنجاح."
+
+#: src/app/components/service/service.controller.js:54
+#: src/app/components/service/services.controller.js:43
+msgid "The user was successfully subscribed to this service"
+msgstr "تم اشتراك هذا المستخدم في هذه الخدمة بنجاح."
+
+#: src/app/components/service/service.controller.js:74
+#: src/app/components/service/services.controller.js:60
+msgid "The user was successfully unsubscribed from this service"
+msgstr "تم إلغاء اشتراك هذا الحساب في هذه الخدمة بنجاح"
+
+#: src/app/components/auth/verify.controller.js:16
+msgid "The verification link did not work"
+msgstr "رابط التحقق لم يعمل"
+
+#: src/app/components/list/list.controller.js:158
+msgid "There was an error adding members to the list"
+msgstr "حصل خطأ  أثناء إضافة أعضاء لهذه القائمة"
+
+#: src/app/components/user/userOptions.controller.js:131
+msgid "There was an error checking in this user"
+msgstr "حصل خطأ أثناء تسجيل هذا المستخدم"
+
+#: src/app/components/checkin/allCheckIns.controller.js:109
+msgid "There was an error checking out of this list"
+msgstr "حصل خطأ أثناء تسجيل الخروج من هذه القائمة"
+
+#: src/app/components/user/kiosk.controller.js:130
+msgid "There was an error checking you in."
+msgstr "حصل خطأ أثناء تسجيلك."
+
+#: src/app/components/auth/auth.controller.js:77
+msgid "There was an error logging in."
+msgstr "حصل خطأ أثناء تسجيل دخولك."
+
+#: src/app/components/user/user.controller.js:171
+msgid "There was an error notifying this user"
+msgstr "حصل خطأ أثناء ارسال تنبيه لهذا المستخدم"
+
+#: src/app/components/user/userNew.controller.js:19
+#: src/app/components/user/userRegister.controller.js:26
+msgid "There was an error processing your registration."
+msgstr "حصل خطأ أثناء المضي قدما بعملية تسجيلك."
+
+#: src/app/components/user/kiosk.controller.js:146
+msgid "There was an error registering your account."
+msgstr "حصل خطأ أثناء تسجيل حسابك"
+
+#: src/app/components/duplicate/duplicates.controller.js:45
+msgid "There was an error removing this duplicate"
+msgstr "حصل خطأ أثناء أثناء إزالة هذا التكرار"
+
+#: src/app/components/auth/resetPassword.controller.js:21
+#: src/app/components/auth/resetPassword.controller.js:35
+msgid ""
+"There was an error resetting your password. Please try again or contact the "
+"HID team."
+msgstr "حصل خطأ أثناء استعادة كلمة المرور. فضلا حاول التواصل مع فريق HID."
+
+#: src/app/components/user/userPrefs.controller.js:77
+msgid "There was an error revoking this application."
+msgstr "حصل خطأ أثناء إبطال هذا النموذج"
+
+#: src/app/components/checkin/allCheckIns.controller.js:48
+msgid "There was an error saving"
+msgstr "حصل خطأ أثناء الحفظ"
+
+#: src/app/components/user/userEdit.controller.js:181
+msgid "There was an error saving the profile"
+msgstr "حصل خطأ أثناء حفظ هذا الملف"
+
+#: src/app/components/client/client.controller.js:23
+msgid "There was an error saving this client"
+msgstr "حصل خطأ أثناء حفظ هذا العميل"
+
+#: src/app/components/service/serviceEdit.controller.js:95
+msgid "There was an error saving this service"
+msgstr "حصل خطأ أثناء حفظ هذه الخدمة"
+
+#: src/app/components/user/userPrefs.controller.js:33
+msgid "There was an error saving your password."
+msgstr "حصل خطأ أثناء حفظ كلمة المرور هذه."
+
+#: src/app/components/user/userPrefs.controller.js:46
+msgid "There was an error saving your settings."
+msgstr "حصل خطأ أثناء حفظ إعداداتك."
+
+#: src/app/components/user/user.controller.js:180
+msgid "There was an error sending the claim email"
+msgstr "حصل خطأ أثناء إرسال البريد الإلكتروني الخاص بالتأكيد"
+
+#: src/app/components/user/userEdit.controller.js:418
+msgid "There was an error sending the validation email."
+msgstr "حصل خطأ أثناء إرسال البريد الإلكتروني الخاص بالتفعيل"
+
+#: src/app/components/user/userEdit.controller.js:365
+msgid "There was an error setting the primary organization."
+msgstr "حصل خطأ أثناء تحديد المنظمة الرئيسية."
+
+#: src/app/components/user/userEdit.controller.js:435
+msgid "There was an error setting the primary phone number."
+msgstr "حصل خطأ أثناء تحديد رقم الهاتف الرئيسي."
+
+#: src/app/components/user/userEdit.controller.js:409
+msgid "There was an error setting your primary email."
+msgstr "حصل خطأ أثناء تحديد البريد الإلكتروني الرئيسي."
+
+#: src/app/components/service/suggestions.controller.js:47
+msgid "There was an error subscribing you"
+msgstr "حصل خطأ أثناء الاشتراك"
+
+#: src/app/components/user/user.controller.js:233
+#: src/app/components/user/userOptions.controller.js:40
+msgid "There was an error updating this user"
+msgstr "حصل خطأ أثناء تعديل هذا المستخدم"
+
+#: src/app/components/user/kiosk.controller.js:155
+msgid "There was an error updating your account."
+msgstr "حصل خطأ أثناء تعديل حسابك."
+
+#: src/app/components/list/list.controller.js:186
+#: src/app/components/list/list.controller.js:202
+#: src/app/components/list/list.controller.js:216
+#: src/app/components/list/list.controller.js:230
+msgid "There was an error updating your favourites."
+msgstr "حصل خطأ أثناء تعديل مفضلتك."
+
+#: src/app/components/user/userEdit.controller.js:392
+msgid "There was an error uploading the picture"
+msgstr "حصل خطأ أثناء تحميل صورتك"
+
+#: src/app/components/list/list.html:51
+msgid ""
+"This contact list can only be viewed by verified users. Please contact us at"
+msgstr ""
+"يمكن رؤية قائمة التواصل فقط من قبل المستخدمين المحققين . فضلا تواصل معنا على"
+
+#: src/app/components/auth/resetPassword.controller.js:23
+msgid "This email address does not exist."
+msgstr "البريد الإلكتروني هذا غير موجود."
+
+#: src/app/common/messages.html:1
+msgid "This field is required"
+msgstr "هذا الحقل مطلوب"
+
+#: src/app/common/messages.html:3
+msgid "This field must be a valid email address"
+msgstr "هذا الحقل يجب أن يكون بريدا إلكترونيا فعالا"
+
+#: src/app/components/list/list.html:47
+msgid ""
+"This list has been set to private by the list owner. Unfortunately you do "
+"not have the rights to access it."
+msgstr ""
+"هذه القائمة تم تحديدها لتكون خاصة من قبل المالك. للأسف لا تمتلك حق الدخول "
+"إليها. "
+
+#: src/app/components/dashboard/dashboard.controller.js:70
+msgid "This list was removed from your favourites."
+msgstr "تمت إزالة هذه القائمة من مفضلتك."
+
+#: src/app/components/list/list.controller.js:180
+msgid "This list was successfully added to your favourites."
+msgstr "تمت إضافة هذه القائمة إلى مفضلتك بنجاح."
+
+#: src/app/components/list/list.controller.js:196
+msgid "This list was successfully removed from your favourites."
+msgstr "تمت إزالة هذه القائمة من مفضلتك بنجاح."
+
+#: src/app/components/user/preferences.html:104
+#: src/app/components/user/preferences.html:106
+msgid "Timezone"
+msgstr "توقيت"
+
+#: src/app/components/start/start.html:10
+msgid "To get started, please give us some information about yourself."
+msgstr "للبدء، فضلا أعطنا بعض المعلومات عنك."
+
+#: src/app/components/header/header.html:63
+msgid "Tutorial"
+msgstr "درس تدريبي"
+
+#: src/app/components/list/all-lists.html:45
+#: src/app/components/list/lists-filters.html:31
+#: src/app/components/service/service.html:8
+#: src/app/components/service/services.html:6
+msgid "Type"
+msgstr "نوع"
+
+#: src/app/components/checkin/checkin.html:306
+#: src/app/components/start/start.html:67 src/app/components/user/user.html:580
+msgid "Type a locality"
+msgstr "نوع المكان"
+
+#: src/app/components/user/user-filters.html:126
+#: src/app/components/user/user-filters.html:128
+msgid "Type of user"
+msgstr "نوع المستخدم"
+
+#: src/app/components/client/client.html:40
+#: src/app/components/client/clients.html:17
+#: src/app/components/client/new-client.html:31
+msgid "URL"
+msgstr "عنوان الموقع الإلكتروني"
+
+#: src/app/components/user/users.controller.js:66
+msgid "Un-verified"
+msgstr "غير محقق "
+
+#: src/app/components/user/userOptions.html:15
+msgid "Un-verify account"
+msgstr "إلغاء التحقق من الحساب"
+
+#: src/app/components/user/user.html:28
+msgid "Un-verify user"
+msgstr "إلغاء التحقق من المستخدم"
+
+#: src/app/components/checkin/checkin.controller.js:166
+msgid "Unable to check in"
+msgstr "غير  قادر على التسجيل"
+
+#: src/app/components/list/list-admin.html:54
+msgid "Unfavourite"
+msgstr "غير مفضل"
+
+#: src/app/components/user/users.controller.js:127
+msgid "United Nations"
+msgstr "الأمم المتحدة"
+
+#: src/app/components/user/users.controller.js:131
+msgid "Unknown"
+msgstr "مجهول"
+
+#: src/app/components/dashboard/dashboard.html:112
+#: src/app/components/service/service.html:32
+msgid "Unsubscribe"
+msgstr "إلغاء الاشتراك "
+
+#: src/app/components/checkin/checkin.html:207
+msgid "Unverified"
+msgstr "غير محقق"
+
+#: src/app/components/checkin/editCheckinModal.html:1
+msgid "Update check out date"
+msgstr "تعديل تاريخ تسجيل المغادرة"
+
+#: src/app/components/checkin/checkin.html:58
+msgid "Update information"
+msgstr "تعديل المعلومات"
+
+#: src/app/components/user/preferences.html:68
+msgid "Update password"
+msgstr "تعديل كلمة المرور"
+
+#: src/app/components/checkin/checkin.html:57
+msgid "Update your information"
+msgstr "تعديل معلوماتك"
+
+#: src/app/components/user/upload-button.html:15
+msgid "Use JPEG, up to 5 MB"
+msgstr "استخدم صيغة JPEG، أقل من 5 MB"
+
+#: src/app/components/user/user.html:17
+msgid "User admin"
+msgstr "مشرف المستخدم"
+
+#: src/app/components/user/user.html:62
+msgid "User not found"
+msgstr "لم يتم العثور على المستخدم"
+
+#: src/app/components/user/user.controller.js:231
+#: src/app/components/user/userOptions.controller.js:38
+msgid "User updated"
+msgstr "تم تعديل المستخدم"
+
+#: src/app/components/user/user.controller.js:169
+msgid "User was successfully notified"
+msgstr "تم تنبيه المستخدم بنجاح"
+
+#: src/app/components/user/user.html:386
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: src/app/components/user/users-page.html:3
+msgid "Users"
+msgstr "المستخدمون"
+
+#: src/app/components/user/userEdit.controller.js:416
+msgid "Validation email sent successfully."
+msgstr "تم إرسال بريد التفعيل الإلكتروني بنجاح."
+
+#: src/app/components/user/users.controller.js:48
+#: src/app/components/user/users.controller.js:62
+#: src/app/components/user/users.html:36
+msgid "Verified"
+msgstr "محقق"
+
+#: src/app/components/user/user.html:764
+msgid "Verified by"
+msgstr "محقق من قبل"
+
+#: src/app/components/user/userEdit.controller.js:45
+msgid "Verified users"
+msgstr "المستخدمون المحققون"
+
+#: src/app/components/list/listEdit.controller.js:108
+msgid "Verified users only"
+msgstr "المستخدمون المحققون فقط"
+
+#: src/app/components/user/userOptions.html:14
+msgid "Verify account"
+msgstr "التحقق من الحساب"
+
+#: src/app/components/user/user.html:27
+msgid "Verify user"
+msgstr "التحقق من المستخدم"
+
+#: src/app/components/dashboard/dashboard.html:96
+msgid "View OAuth Clients"
+msgstr "عرض عملاء OAuth "
+
+#: src/app/components/landing/landing.html:116
+#: src/app/components/landing/landing.html:138
+#: src/app/components/landing/landing.html:38
+#: src/app/components/landing/landing.html:78
+#: src/app/components/user/user.html:84
+msgid "View all"
+msgstr "عرض الكل"
+
+#: src/app/components/user/users-export.html:22
+msgid "View as PDF"
+msgstr "عرض بصيغة PDF"
+
+#: src/app/components/auth/auth.controller.js:66
+msgid "We could not log you in because your email address is not verified yet."
+msgstr ""
+"لم نستطع تسجيل دخولك لآن عنوان البريد الإلكتروني الخاص بك غير محقق بعد."
+
+#: src/app/components/auth/auth.controller.js:74
+msgid "We could not log you in, the email address does not exist."
+msgstr "لم نستطع تسجيل دخولك. البريد الإلكتروني هذا لا يوجد."
+
+#: src/app/components/auth/auth.controller.js:70
+msgid "We could not log you in. Please verify your email and password."
+msgstr "لم نستطع تسجيل دخولك. فضلا تحقق من بريد الإلكتروني وكلمة مرورك."
+
+#: src/app/components/service/service.controller.js:60
+#: src/app/components/service/services.controller.js:47
+msgid "We could not subscribe you to this service"
+msgstr "لم نستطع تسجيل اشتراكك في هذه الخدمة"
+
+#: src/app/components/dashboard/dashboard.controller.js:104
+#: src/app/components/service/allSubscriptions.controller.js:29
+#: src/app/components/service/service.controller.js:80
+#: src/app/components/service/services.controller.js:64
+msgid "We could not unsubscribe you from this service"
+msgstr "لم نستطع إلغاء اشتراكك في هذه الخدمة"
+
+#: src/app/components/user/user.html:733
+msgid "Websites"
+msgstr "المواقع الالكترونية"
+
+#: src/app/components/landing/landing.html:4
+msgid "Welcome to Humanitarian ID"
+msgstr "مرحبا بك في Humanitarian ID"
+
+#: src/app/components/checkin/checkin.html:14
+#: src/app/components/checkin/listTypesModal.html:2
+msgid "What are these?"
+msgstr "ما هذه؟"
+
+#: src/app/components/start/start.html:43
+msgid "What is your primary location?"
+msgstr "ما هو موقعك الرئيسي؟"
+
+#: src/app/components/start/start.html:19
+msgid "What is your primary organization?"
+msgstr "ما هي منظمتك الرئيسية؟"
+
+#: src/app/components/user/kiosk.html:73
+msgid "Where are you currently ?"
+msgstr "أين أنت الآن؟"
+
+#: src/app/components/list/new-list.html:22
+msgid "Who can join this list?"
+msgstr "من يستطيع الانضمام إلى هذه القائمة؟"
+
+#: src/app/components/list/new-list.html:14
+msgid "Who can view this list?"
+msgstr "من يستطيع رؤية هذه القائمة؟"
+
+#: src/app/components/user/user.html:349
+msgid "Who should be able to see your email addresses?"
+msgstr "من يمكنه أن يرى بريدك الإلكتروني؟"
+
+#: src/app/components/user/user.html:619
+msgid "Who should be able to see your locations?"
+msgstr "من يمكنه أن يرى موقعك؟"
+
+#: src/app/components/user/user.html:246
+msgid "Who should be able to see your phone numbers?"
+msgstr "من يمكنه أن يرى أرقام الهاتف الخاصة بك؟"
+
+#: src/app/components/user/userEdit.controller.js:70
+msgid "Work"
+msgstr "العمل"
+
+#: src/app/components/user/kiosk.html:63
+msgid "Would you like to be checked out automatically ? If so, when ?"
+msgstr "هل تريد تسجيل المغادرة تلقائيا؟ لو كانت الإجابة بنعم، متى تريد ذلك؟"
+
+#: src/app/components/dashboard/dashboard.html:41
+msgid "You are not part of any lists"
+msgstr "أنت لست عضوا في أي قائمة"
+
+#: src/app/components/start/start.html:82
+msgid ""
+"You can add more information to your profile at any time via the 'Profile' "
+"link in your account menu on the top right"
+msgstr ""
+"تستطيع إضافة معلومات أخرى لحسابك في أي وقت عبر رابط \"ملف\" في قائمة الحساب "
+"الخاص بك في الركن الأيمن الأعلى"
+
+#: src/app/components/checkin/listTypesModal.html:11
+msgid ""
+"You can check into different types of contact list. First, choose which list "
+"or lists are most appropriate for you. Here are the different types:"
+msgstr ""
+"تستطيع أن تسجل الوصول في أنواع مختلفة من قوائم التواصل. أولا: اختر أي قائمة "
+"أو أي قوائم تناسبك. هنا الأنواع المختلفة:"
+
+#: src/app/components/start/tutorial.html:61
+msgid ""
+"You can create your own contact lists from the dashboard in the menu at the "
+"top of your screen. Once you’ve given your list a name and decided who can "
+"view and join it, you can start adding and removing contacts from your list."
+msgstr ""
+"تستطيع انشاء قوام التواصل الخاصة بك من لوحة المعلومات في القائمة على أعلى "
+"شاشتك. بعد أن تعطي هذه القائمة اسما وتحدد من يستطيع أن يراها ومن يستطيع "
+"الانضمام إليها, يمكن أن تبدأ بإضافة وحذف جهات الاتصال من القائمة الخاصة بك."
+
+#: src/app/components/start/tutorial.html:40
+msgid ""
+"You can find the Check-in and Check-out buttons on the top-right of your "
+"screen. To get started, click on Check-in, then start typing the name of the "
+"country, disaster, or group in the box. Select your list and then look at "
+"the options for other suitable lists."
+msgstr ""
+"تستطيع أن ترى مفتاحي تسجيل الوصول وتسجيل المغادرة في يمين وأعلى الشاشة. "
+"للبدء، اختر تسجيل الوصول، ثم ابدأ بكتابة اسم الدولة، الكارثة، أو المجموعة في "
+"صندوق البحث. اختر قائمتك ثم انظر الخيارات لتجد قوائم أخرى مناسبة."
+
+#: src/app/components/dashboard/dashboard.html:19
+msgid "You don't have any favourite lists"
+msgstr "لا تملك أي قوائم مفضلة"
+
+#: src/app/components/dashboard/dashboard.html:65
+msgid "You don't manage any lists"
+msgstr "لا تدير أي قوائم"
+
+#: src/app/components/user/preferences.html:77
+msgid ""
+"You have granted the following applications access to your Humanitarian ID "
+"account."
+msgstr ""
+"قمت بمنح التطبيقات التالية الإذن بالدخول إلى حساب الـ Humanitarian ID الخاص "
+"بك."
+
+#: src/app/components/checkin/listTypesModal.html:27
+msgid ""
+"You should only check into an organization that you belong to. All "
+"organizational lists are moderated, i.e. your check-in will have to be "
+"approved by a Humanitarian ID manager."
+msgstr ""
+"عليك فقط تسجيل الوصول الى منظمة تنتمي إليها. كل قوائم المنظمات مدارة. مثلا: "
+"تسجيل وصولك يجب أن يعتمد من مدير الـ Humanitarian ID."
+
+#: src/app/components/checkin/checkin.controller.js:136
+msgid "You were successfully checked in."
+msgstr "قمت بتسجيل الوصول بنجاح."
+
+#: src/app/components/service/suggestions.html:5
+msgid ""
+"You were successfully checked in. Given the lists you checked into, we "
+"recommend that you subscribe to the following services:"
+msgstr ""
+"قمت بتسجيل الوصول بنجاح. نظرا للقوائم التي قمت بتسجيل الوصول إليها، ننصح بأن "
+"تقوم بالاشتراك في الخدمات التالية:"
+
+#: src/app/components/auth/auth.controller.js:86
+msgid "You were successfully logged out."
+msgstr "قمت بتسجيل الخروج بنجاح."
+
+#: src/app/components/service/suggestions.controller.js:41
+msgid "You were successfully subscribed"
+msgstr "قمت بالاشتراك بنجاح."
+
+#: src/app/components/service/service.controller.js:51
+#: src/app/components/service/services.controller.js:40
+msgid "You were successfully subscribed to this service"
+msgstr "قمت بالاشتراك في هذه الخدمة بنجاح"
+
+#: src/app/components/dashboard/dashboard.controller.js:101
+#: src/app/components/service/allSubscriptions.controller.js:26
+#: src/app/components/service/service.controller.js:71
+#: src/app/components/service/services.controller.js:57
+msgid "You were successfully unsubscribed from this service"
+msgstr "قمت بإلغاء الاشتراك في هذه الخدمة بنجاح"
+
+#: src/app/components/auth/resetPassword.controller.js:18
+msgid ""
+"You will soon receive an email which will allow you to reset your password."
+msgstr "ستقوم قريبا بتلقي بريد الكتروني يسمح لك بتعديل كلمة المرور."
+
+#: src/app/components/landing/landing.html:156
+msgid "You're not verified yet."
+msgstr "لم تقم بالتحقيق بعد"
+
+#: src/app/components/user/preferences.html:128
+msgid "Your API keys"
+msgstr "مفتاح API الخاص بك."
+
+#: src/app/components/user/userPrefs.controller.js:55
+msgid ""
+"Your account was successfully removed. You are now logged out. Sorry to have "
+"you go."
+msgstr "تم حذف حسابك بنجاح. وتم تسجيل خروجك. نأسف لذهابك. "
+
+#: src/app/components/checkin/checkin.html:374
+msgid "Your check in modifications"
+msgstr "تعديلات تسجيل الوصول الخاص بك"
+
+#: src/app/components/user/user.controller.js:38
+#: src/app/components/user/user.html:181 src/app/components/user/user.html:278
+#: src/app/components/user/user.html:537
+msgid "Your connection request is pending"
+msgstr "طلب الاتصال الخاص بك ما زال في الانتظار"
+
+#: src/app/components/user/user.controller.js:41
+msgid ""
+"Your connection request is pending. Please note that some of the information "
+"made available by this user is only available to verified users."
+msgstr ""
+"طلب الاتصال الخاص بك ما زال في الانتظار. فضلا ملاحظة أن المعلومات المتوفرة "
+"من هذا المستخدم متوفرة فقط للمستخدمين المحققين."
+
+#: src/app/components/user/preferences.html:10
+msgid "Your connections"
+msgstr "اتصالاتك"
+
+#: src/app/components/user/preferences.html:47
+msgid "Your current password"
+msgstr "كلمة مرورك الحالية"
+
+#: src/app/components/auth/login.html:9
+#: src/app/components/auth/password_reset.html:10
+#: src/app/components/user/kiosk.html:28
+msgid "Your email address"
+msgstr "بريدك الالكتروني"
+
+#: src/app/components/user/kiosk.html:42
+msgid "Your first name"
+msgstr "اسمك الأول"
+
+#: src/app/components/user/kiosk.html:52
+msgid "Your last name"
+msgstr "اسم العائلة"
+
+#: src/app/components/user/kiosk.html:48
+msgid "Your middle name"
+msgstr "اسمك الأوسط"
+
+#: src/app/components/user/preferences.html:54
+#: src/app/components/user/preferences.html:62
+msgid "Your new password"
+msgstr "كلمة مرورك الجديدة"
+
+#: src/app/components/auth/login.html:13
+msgid "Your password"
+msgstr "كلمة مرورك"
+
+#: src/app/components/user/userPrefs.controller.js:30
+msgid "Your password was successfully changed."
+msgstr "تم تغيير كلمة مرورك بنجاح."
+
+#: src/app/components/auth/resetPassword.controller.js:32
+msgid "Your password was successfully changed. You can now login."
+msgstr "تم تغيير كلمة مرورك بنجاح. يمكنك الآن تسجيل الدخول."
+
+#: src/app/common/messages.html:2
+msgid "Your passwords do not match"
+msgstr "كلمتا المرور غير متطابقتان."
+
+#: src/app/components/landing/landing.html:155
+msgid "Your profile has been verified."
+msgstr "تم تحقيق من ملفك."
+
+#: src/app/components/list/list.html:80
+msgid "Your request for check-in is pending. We will get back to you soon."
+msgstr "طلبك بتسجيل الوصول ما زال في الانتظار. سنعود لك قريبا."
+
+#: src/app/components/user/userPrefs.controller.js:42
+msgid "Your settings were successfully changed."
+msgstr "تم تغيير إعداداتك بنجاح."
+
+#: src/app/components/start/tutorial.html:35
+msgid "about checking in"
+msgstr "عن تسجيل الوصول"
+
+#: src/app/components/start/tutorial.html:14
+msgid "about finding others"
+msgstr "عن إيجاد الآخرين"
+
+#: src/app/components/start/tutorial.html:56
+msgid "about managing lists"
+msgstr "عن إدارة القوائم"
+
+#: src/app/components/user/userEdit.controller.js:147
+msgid "added"
+msgstr "تمت الإضافة "
+
+#: src/app/components/user/users.html:9
+msgid "contacts found"
+msgstr "جهات الاتصال المعثور عليها"
+
+#: src/app/components/user/user.html:274
+msgid "email address"
+msgstr "عنوان بريد إلكتروني"
+
+#: src/app/components/user/user.html:282
+msgid "email addresses can only be viewed by verified users."
+msgstr ""
+"عناوين البريد الإلكتروني الخاصة بك يمكن فقط رؤيتها من قبل المستخدمين "
+"المحققين."
+
+#: src/app/components/auth/auth.controller.js:19
+msgid "forgot your password"
+msgstr "نسيت كلمة المرور"
+
+#: src/app/components/list/list.html:53
+msgid "if you wish to access the list."
+msgstr "لو أردت الدخول إلى القائمة."
+
+#: src/app/components/list/list.html:72
+msgid "landing page"
+msgstr "صفحة الوصول"
+
+#: src/app/components/list/all-lists.html:18
+msgid "lists found"
+msgstr "القوائم المعثور عليها"
+
+#: src/app/components/user/user.html:532
+msgid "location"
+msgstr "الموقع"
+
+#: src/app/components/user/user.html:541
+msgid "locations can only be viewed by verified users."
+msgstr "المواقع يمكن رؤيتها فقط من قبل المستخدمين المحققين."
+
+#: src/app/components/start/carousel.html:10
+msgid "next"
+msgstr "التالي"
+
+#: src/app/components/list/list.html:71
+msgid "or return to the"
+msgstr "أو العودة إلى"
+
+#: src/app/components/user/user.html:176
+msgid "phone number"
+msgstr "رقم الهاتف"
+
+#: src/app/components/user/user.html:185
+msgid "phone numbers can only be viewed by verified users."
+msgstr "أرقام الهاتف يمكن فقط رؤيتها من قبل المستخدمين المحققين"
+
+#: src/app/components/user/userEdit.controller.js:160
+msgid "removed"
+msgstr "تمت الإزالة"
+
+#: src/app/components/checkin/checkin.html:208
+#: src/app/components/user/user.html:337
+msgid "resend validation email"
+msgstr "أعد أرسال بريد التفعيل الإلكتروني"
+
+#: src/app/components/list/list.html:70
+msgid "searching for the list"
+msgstr "البحث عن القائمة"
+
+#: src/app/components/service/service.html:19
+msgid "subscribers"
+msgstr "المشتركون"
+
+#: src/app/components/checkin/checkin.controller.js:147
+msgid "was successfully checked in"
+msgstr "تم تسجيل الوصول بنجاح"
+
+#: src/app/common/icon-template.html:5
+msgid "{{text}}"
+msgstr "{{text}}"
