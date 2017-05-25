@@ -28,7 +28,7 @@
 
         <ul class="nav nav--secondary">
           <li class="nav__item nav-item__notifications" ng-if="isAuthenticated && !hideHeaderFooter">
-            <a href="/notifications" class="nav__link">
+            <a href="/notifications" class="nav__link t-notifications-link">
               <icon name="notifications" text="Notifications"></icon>
               <span class="nav__label nav__label--mobile">
                 <notifications-count></notifications-count>
@@ -51,7 +51,7 @@
           </li>
 
           <li class="nav__item" uib-dropdown>
-            <button type="button" class="nav__link btn btn-transparent" uib-dropdown-toggle ng-if="isAuthenticated && !hideHeaderFooter">
+            <button type="button" class="nav__link t-user-dropdown-btn btn btn-transparent" uib-dropdown-toggle ng-if="isAuthenticated && !hideHeaderFooter">
               <icon name="user"></icon>
               <span class="nav__label">{{currentUser.name}}</span>
 
@@ -59,11 +59,11 @@
             </button>
 
             <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-              <li><a href="/users/{{currentUser.id}}" translate>Profile</a></li>
-              <li><a href="/settings" translate>Preferences</a></li>
+              <li><a href="/users/{{currentUser.id}}" class="t-profile-link" translate>Profile</a></li>
+              <li><a href="/settings" class="t-preferences-link" translate>Preferences</a></li>
               <li><a href="/tutorial" translate>Tutorial</a></li>
               <li><button type="button" class="btn-link" id="feedback-button" translate>Feedback</button></li>
-              <li><a href="/logout" translate>Log out</a></li>
+              <li><a href="/logout" class="t-logout-link" translate>Log out</a></li>
             </ul>
           </li>
         </ul>
@@ -86,10 +86,10 @@
 
         <nav role="navigation" id="nav" class="site-header__nav dropdown-menu" uib-dropdown-menu aria-labelledby="navToggle" >
           <ul class="nav nav--primary">
-            <li class="nav__item" ng-class="{'active' : activeNav('/dashboard')}"><a href="/dashboard" class="nav__link" translate>Dashboard</a></li>
-            <li class="nav__item" ng-class="{'active' : activeNav('/search')}"><a href="/search" class="nav__link" translate>Humanitarian contacts</a></li>
-            <li class="nav__item" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}" ng-if="isOnline"><a href="/checkin/{{currentUser.id}}" class="nav__link" translate>Check in</a></li>
-            <li class="nav__item" ng-class="{'active' : activeNav('/checkout')}"><a href="/checkout" class="nav__link" translate>Check out</a></li>
+            <li class="nav__item" ng-class="{'active' : activeNav('/dashboard')}"><a href="/dashboard" class="nav__link t-dashboard-link" translate>Dashboard</a></li>
+            <li class="nav__item" ng-class="{'active' : activeNav('/search')}"><a href="/search" class="nav__link t-hc-link" translate>Humanitarian contacts</a></li>
+            <li class="nav__item" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}" ng-if="isOnline"><a href="/checkin/{{currentUser.id}}" class="nav__link t-checkin-link" translate>Check in</a></li>
+            <li class="nav__item" ng-class="{'active' : activeNav('/checkout')}"><a href="/checkout" class="nav__link t-checkout-link" translate>Check out</a></li>
           </ul>
         </nav>
 

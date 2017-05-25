@@ -1,4 +1,4 @@
-<div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
+<div sidebar class="sidebar t-list-admin" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
   <div ng-if="sidebar.sidebars.admin" class="sidebar__inner">
 
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="sidebar.close()">
@@ -9,14 +9,14 @@
       <form class="sidebar-section"  ng-submit="addMemberToList()">
         <label for="member" class="sidebar-section__heading" translate>Add new Member</label>
         <div class="sidebar-section__form-field">
-          <ui-select ng-model="usersAdded.users" multiple name="member">
+          <ui-select ng-model="usersAdded.users" multiple name="member" class="t-add-member">
             <ui-select-match placeholder="{{'Select some people' | translate}}">{{$item.name}}</ui-select-match>
             <ui-select-choices refresh="getUsers($select.search)" repeat="person.id as person in newMembers" minimum-input-length="3">
               {{person.name}}
             </ui-select-choices>
           </ui-select>
         </div>
-        <button type="submit" class="btn-primary btn-block" ng-class="{'saving' : savingMembers}" ng-disabled="!usersAdded.users.length">
+        <button type="submit" class="btn-primary btn-block t-add-member-btn" ng-class="{'saving' : savingMembers}" ng-disabled="!usersAdded.users.length">
           <loader type="inline" text="" ng-if="savingMembers"></loader>
           <span ng-if="!savingMembers" translate>Add Member</span>
         </button>
@@ -32,7 +32,7 @@
           <span translate>Edit List Settings</span>
         </a>
 
-        <button type="button" class="btn-transparent sidebar-section__button" ng-click="deleteList();">
+        <button type="button" class="btn-transparent sidebar-section__button t-delete-list-btn" ng-click="deleteList();">
           <icon name="trash"></icon>
           <span translate>Delete List</span>
         </button>
@@ -43,12 +43,12 @@
       <h2 class="sidebar-section__heading" translate>Export options</h2>
       <ng-include src="'app/components/user/users-export.html'"></ng-include>
 
-      <button type="button" class="btn-transparent sidebar-section__button" ng-click="star()" ng-if="!isFavorite">
+      <button type="button" class="btn-transparent sidebar-section__button t-fav-btn" ng-click="star()" ng-if="!isFavorite">
         <loader type="inline" text="Saving" ng-if="favSaving"></loader>
         <icon ng-if="!favSaving" name="star"></icon>
         <span ng-if="!favSaving" translate>Mark as favourite</span>
       </button>
-      <button type="button" class="btn-transparent sidebar-section__button" ng-click="unstar()" ng-if="isFavorite">
+      <button type="button" class="btn-transparent sidebar-section__button t-unfav-btn" ng-click="unstar()" ng-if="isFavorite">
         <loader type="inline" text="Saving" ng-if="favSaving"></loader>
         <icon ng-if="!favSaving" name="cancel"></icon>
         <span ng-if="!favSaving" translate>Unfavourite</span>

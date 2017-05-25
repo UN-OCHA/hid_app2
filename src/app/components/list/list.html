@@ -22,11 +22,11 @@
 
 
   <div class="page-header__buttons page-header__buttons--list">
-    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-disabled="!isOnline" ng-click="sidebar.toggle('userFilters', true)">
+    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin t-filter-list" type="button" ng-disabled="!isOnline" ng-click="sidebar.toggle('userFilters', true)">
       <icon name="filter" text="Filter"></icon>
     </button>
 
-    <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin', true)" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline" ng-if="list.visible">
+    <button class="btn-icon btn-toggle-admin t-list-admin-btn" type="button" ng-click="sidebar.toggle('admin', true)" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline" ng-if="list.visible">
       <icon name="wheel" text="Actions"></icon>
     </button>
   </div>

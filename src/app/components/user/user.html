@@ -148,11 +148,11 @@
         <span translate>Connect</span>
       </button>
 
-      <button type="button" class="btn-icon" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-if="canEditUser" ng-disabled="!isOnline">
+      <button type="button" class="btn-icon t-user-edit-btn" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-if="canEditUser" ng-disabled="!isOnline">
         <icon name="edit" text="Edit"></icon>
       </button>
 
-      <button type="button" class="btn-icon btn-secondary" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="toggleForm()" ng-if="canEditUser">
+      <button type="button" class="btn-icon btn-secondary t-close-edit-btn" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="toggleForm()" ng-if="canEditUser">
         <icon name="check" text="Close"></icon>
       </button>
 

@@ -1,5 +1,5 @@
 <div ng-controller="UserOptionsCtrl" uib-dropdown>
-  <button type="button" class="btn-transparent" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit" ng-disabled="!isOnline">
+  <button type="button" class="btn-transparent t-user-options-btn" uib-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="Edit" ng-disabled="!isOnline">
     <icon name="dots" text="User options"></icon>
   </button>
   <ul class="dropdown-menu dropdown-menu--small" uib-dropdown-menu>
@@ -7,7 +7,7 @@
       <button type="button" class="btn-link" ng-click="approveUser(user)" translate>Approve</button>
     </li>
     <li ng-if="currentUser.is_admin || currentUser.isManager"><a href="/users/{{user._id}}/edit" translate>Edit</a></li>
-    <li ng-if="list && (currentUser.is_admin || currentUser.isManager || isManager || isOwner)"><button type="button" class="btn-link" ng-click="removeFromList(user, list);" translate>Remove from list</button></li>
+    <li ng-if="list && (currentUser.is_admin || currentUser.isManager || isManager || isOwner)"><button type="button" class="btn-link t-remove-from-list-btn" ng-click="removeFromList(user, list);" translate>Remove from list</button></li>
     <li><button type="button" class="btn-link" ng-click="openCheckInModal(user, currentUser)" translate>Check into a list</button></li>
     <li ng-if="currentUser.is_admin">
       <button type="button" class="btn-link" ng-click="verifyUser(user)">

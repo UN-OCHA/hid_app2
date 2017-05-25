@@ -9,3 +9,4 @@ src/assets/css/*.css
 src/assets/css/*.css.map
 !src/assets/css/api.scss
 src/app/config/config.js
+src/e2e-tests/environment.js
