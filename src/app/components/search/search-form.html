@@ -2,7 +2,7 @@
 
   <form ng-submit="fullSearch(searchTerm)" role="search" >
     <div class="search-form" uib-dropdown is-open="showAutocomplete">
-      
+
       <input type="search" class="input-no-border search-form__input" name="search" id="search" autocomplete="off" ng-model="searchTerm" ng-value="searchTerm" ng-model-options="{debounce: 600}" ng-change="searchAutocomplete()" ng-disabled="!isOnline">
       <label for="search" class="search-form__label">{{'Search for contacts or contact lists'|translate}}</label>
       <button type="submit" class="btn-transparent search-form__button" ng-disabled="!isOnline">
@@ -14,7 +14,7 @@
         <li ng-if="searchPeople.length">
           <span class="search-autocomplete__heading">
             <span translate>Contacts</span>
-            <button type="button" ng-click="fullSearch(searchTerm)" class="btn-transparent" translate>See all</button>
+            <button type="button" ng-click="fullSearch(searchTerm)" class="btn-transparent t-see-all-users" translate>See all</button>
           </span>
           <ul>
             <li class="search-autocomplete__item" ng-repeat="result in searchPeople">
@@ -25,7 +25,7 @@
         <li ng-if="searchLists.length">
           <span class="search-autocomplete__heading">
             <span translate>Lists</span>
-            <button type="button" ng-click="fullSearch(searchTerm, 'lists')" class="btn-transparent" translate>See all</button>
+            <button type="button" ng-click="fullSearch(searchTerm, 'lists')" class="btn-transparent t-see-all-lists" translate>See all</button>
           </span>
           <ul>
             <li class="search-autocomplete__item" ng-repeat="result in searchLists">

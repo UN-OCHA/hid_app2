@@ -256,7 +256,11 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('test-watch', ['karma:watch']);
-  grunt.registerTask('test', ['karma:unit'])
+  grunt.registerTask('test', ['karma:unit']);
+
+  grunt.registerTask('test-config', [
+    'copy:config'
+  ]);
 
   // Default task
   grunt.registerTask('default', [

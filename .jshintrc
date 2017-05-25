@@ -3,6 +3,7 @@
   "globals": {
     // Angular
     "angular": false,
+    "require": false,
 
     //Moment
     "moment": false,
@@ -23,6 +24,9 @@
     // Protractor
     "browser": false,
     "element": false,
-    "by": false
+    "by": false,
+    "protractor": false,
+    "beforeAll": false,
+    "afterAll": false
   }
 }

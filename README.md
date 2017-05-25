@@ -21,7 +21,7 @@
 * Add the local url to your hosts file:
 on Mac: `sudo vi /etc/hosts`
 Add `127.0.0.1   app.hid.vm`
-* Run the Grunt tasks `grunt` 
+* Run the Grunt tasks `grunt`
 (Note to set you local environment to use the staging api use `grunt --target="dev"`)
 
 ### Running the app
@@ -60,6 +60,36 @@ npm install -g karma-cli
 Single run: `grunt test`
 
 Watch for changes an re-run tests: `grunt test-watch`
+
+## E2E tests
+
+### Pre-requisites
+
+Protractor:
+
+```
+npm install -g protractor
+```
+
+webdriver-manager
+
+```
+webdriver-manager update
+```
+
+Java Development Kit (JDK) http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+### Running the tests
+
+```
+npm run protractor
+```
+
+Running a single test suite
+
+```
+protractor --suite="my-suite-name" src/e2e-tests/conf.js
+```
 
 ## Front end
 
