@@ -9,8 +9,6 @@ describe('Favourite Lists', function () {
 	var dashboardPage = new DashboardPage();
 	var listPage = new ListPage();
 	var navObject = new NavObject();
-	var listSearchText = 'climb for haiti';
-	var listSearchResult = 'CLIMB for Haiti (CLIMB)';
 
 	beforeAll(function () {
 		loginPage.get();
@@ -20,7 +18,7 @@ describe('Favourite Lists', function () {
 	describe('Favouriting and unfavouriting a list', function () {
 
 		beforeAll(function () {
-			listPage.goToList(listSearchText, listSearchResult);
+			listPage.goToList(browser.params.standardTestList);
 		});
 
 		describe('Favouriting', function () {
@@ -40,14 +38,14 @@ describe('Favourite Lists', function () {
 				browser.wait(navObject.dashboardLink.isDisplayed(), 10000);
 				navObject.dashboardLink.click();
 				dashboardPage.favouritesTabBtn.click();
-				expect(dashboardPage.favourites.getText()).toContain(listSearchResult);
+				expect(dashboardPage.favourites.getText()).toContain(browser.params.standardTestList);
 			});
 		});
 
 		describe('Unfavouriting', function () {
 
 			beforeAll(function () {
-				listPage.goToList(listSearchText, listSearchResult);
+				listPage.goToList(browser.params.standardTestList);
 				listPage.openListAdmin();
 				listPage.unFavButton.click();
 			});
@@ -62,7 +60,7 @@ describe('Favourite Lists', function () {
 				browser.wait(navObject.dashboardLink.isDisplayed(), 10000);
 				navObject.dashboardLink.click();
 				dashboardPage.favouritesTabBtn.click();
-				expect(dashboardPage.favourites.getText()).not.toContain(listSearchResult);
+				expect(dashboardPage.favourites.getText()).not.toContain(browser.params.standardTestList);
 			});
 
 		});

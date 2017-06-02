@@ -37,8 +37,8 @@ var ListPage = function() {
 
 	this.removeSuccessModalText = element(by.cssContainingText('div .modal-body', 'The user was successfully checked out.'));
 
-	this.goToList = function (listSearchText, listName) {
-		navObject.searchInput.sendKeys(listSearchText);
+	this.goToList = function (listName) {
+		navObject.searchInput.sendKeys(listName);
 		var el = element(by.cssContainingText('.search-autocomplete__item a', listName));
 		el.click();
 		browser.wait(this.adminButton.isDisplayed(), 5000);

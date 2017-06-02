@@ -6,7 +6,7 @@
   </div>
 
   <ul class="list list--has-buttons list--has-dividers">
-    <li class="list__item" ng-repeat="list in filterData = (listsMember | filter : listSearchTerm) | limitTo:itemsPerPage:itemsPerPage*(page-1) | orderBy: 'createdAt' : true">
+    <li class="list__item t-list" ng-repeat="list in filterData = (listsMember | filter : listSearchTerm) | limitTo:itemsPerPage:itemsPerPage*(page-1) | orderBy: 'createdAt' : true">
       <a href="/lists/{{list.list}}">{{list.name}}</a>
 
       <div class="list__button">
@@ -14,7 +14,7 @@
         <icon name="edit-calendar" text="Edit checkout date"></icon>
       </button>
 
-      <button type="button" class="btn-transparent" ng-click="leaveList(list)">
+      <button type="button" class="btn-transparent t-checkout-btn" ng-click="leaveList(list)">
         <icon name="cancel" text="Check out"></icon>
       </button>
       </div>

@@ -47,7 +47,6 @@ describe('List members', function () {
 		describe('Remove a person from the list', function () {
 
 			beforeAll(function() {
-				// browser.sleep(1000);
 				browser.wait(listPage.userOptionsButton.isDisplayed(), 5000);
 				listPage.userOptionsButton.click();
 				browser.wait(listPage.removeFromListButton.isDisplayed(), 5000);
