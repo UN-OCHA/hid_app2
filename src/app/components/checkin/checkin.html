@@ -104,7 +104,7 @@
                     </ui-select-choices>
                   </ui-select>
                 </div>
-                <button type="submit" class="btn-transparent" 
+                <button type="submit" class="btn-transparent"
                   ng-class="{'active': temp.organization.list}"
                   ng-disabled="!temp.organization.list"
                   ng-click="addItem('organization')">
@@ -404,7 +404,7 @@
         </ul>
       </div>
 
-      <button type="button" class="btn-primary btn-block" ng-class="{'saving' : saving}" ng-click="checkin()" ng-disabled="!selectedLists.length">
+      <button type="button" class="btn-primary btn-block t-checkin-btn" ng-class="{'saving' : saving}" ng-click="checkin()" ng-disabled="!selectedLists.length">
         <loader type="inline" text="" ng-if="saving"></loader>
         <span ng-if="!saving">
           <span ng-if="isCurrentUser" translate>Check me in</span>

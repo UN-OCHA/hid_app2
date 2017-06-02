@@ -1,9 +1,11 @@
 /* jshint module: true */
+var DashboardPage = require('../pages/dashboard-page');
 var LoginPage = require('../pages/login-page');
 var ProfilePage = require('../pages/profile-page');
 var NavObject = require('../pages/nav-object');
 
 describe('Profile', function () {
+	var dashboardPage = new DashboardPage();
 	var loginPage = new LoginPage();
 	var profilePage = new ProfilePage();
 	var navObject = new NavObject();
@@ -21,6 +23,7 @@ describe('Profile', function () {
 	  loginPage.login();
 	  navObject.openUserDropdown();
 		navObject.profileLink.click();
+		browser.wait(element(by.cssContainingText('.page-header__heading', browser.params.userName)).isDisplayed(), 10000);
 	});
 
 	describe('Viewing own profile', function () {
@@ -72,10 +75,13 @@ describe('Profile', function () {
 	describe('Viewing another users profile', function () {
 
 		beforeAll(function () {
+			navObject.dashboardLink.click();
+			browser.wait(dashboardPage.pageHeading.isDisplayed(), 10000);
+			navObject.searchInput.clear();
 			navObject.searchInput.sendKeys(browser.params.adminUserName);
 			browser.wait(navObject.searchAutocomplete.isDisplayed(), 1000);
-			var result = element(by.repeater('result in searchPeople').row(0));
-			result.click();
+			var el = element(by.cssContainingText('.search-autocomplete__item a', browser.params.adminUserName));
+			el.click();
 			browser.wait(profilePage.userName.isDisplayed(), 10000);
 		});
 

@@ -24,7 +24,8 @@ exports.config = {
   	nav: 'specs/navigation-spec.js',
   	profile: 'specs/profile-spec.js',
     list: 'specs/lists/*-spec.js',
-  	search: 'specs/search-spec.js'
+  	search: 'specs/search-spec.js',
+    checkin: 'specs/checkin-spec.js',
   }
 };
 
@@ -39,4 +40,6 @@ exports.config.params = {
   adminEmail: process.env.TRAVIS ? process.env.testAdminUserEmail : env.params.testAdminUserEmail,
   adminPassword: process.env.TRAVIS ? process.env.testAdminUserPassword : env.params.testAdminUserPassword,
   adminUserId: process.env.TRAVIS ? process.env.testAdminUserId : env.params.testAdminUserId,
+
+  standardTestList: 'E2e test list - standard'
 }

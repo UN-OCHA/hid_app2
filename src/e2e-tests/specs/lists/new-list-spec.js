@@ -21,7 +21,9 @@ describe('New Lists', function () {
 
 		beforeAll(function () {
 			navObject.dashboardLink.click();
+			browser.wait(dashboardPage.pageHeading.isDisplayed(), 10000);
 	  	dashboardPage.createListButton.click();
+	  	browser.wait(newListPage.pageHeading.isDisplayed(), 10000);
 		});
 
 		describe('Creating a new list', function () {
@@ -56,7 +58,7 @@ describe('New Lists', function () {
 			});
 
 			it('should show the success message', function () {
-				browser.wait(listPage.deleteSuccessModal.isDisplayed(), 10000);
+				browser.wait(listPage.deleteSuccessModalText.isDisplayed(), 10000);
 				expect(listPage.deleteSuccessModalText.isPresent()).toBeTruthy();
 			});
 		});

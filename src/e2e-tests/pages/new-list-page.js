@@ -11,6 +11,8 @@ var NewListPage = function() {
 	var joinabilityPublicCheckbox = element(by.css('.t-joinability-public'));
 	var saveButton = element(by.css('.t-save-list-btn'));
 
+	this.pageHeading = element(by.cssContainingText('.page-header__heading', 'Create a new list'));
+
  	this.populateNewListForm = function (name) {
  		var listName = name || 'Test E2E user list';
  		nameInput.sendKeys(listName);
