@@ -24,7 +24,7 @@ describe('Check in and out of a list', function () {
 
 		it('should find the list', function () {
 			browser.wait(checkinPage.pageHeading.isDisplayed(), 10000);
-			checkinPage.selectList.click();
+			checkinPage.selectListToggle.click();
 			browser.wait(checkinPage.selectListInput.isDisplayed(), 10000);
 			checkinPage.selectListInput.sendKeys(browser.params.standardTestList);
 			browser.wait(checkinPage.selectListResults.isDisplayed(), 5000);
