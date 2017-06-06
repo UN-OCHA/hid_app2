@@ -18,13 +18,14 @@ describe('Check in and out of a list', function () {
 		loginPage.get();
 	  loginPage.login();
 	  navObject.checkinLink.click();
-	  browser.wait(checkinPage.pageHeading.isDisplayed(), 10000);
 	});
 
 	describe('Checking in to a list', function () {
 
 		it('should find the list', function () {
+			browser.wait(checkinPage.pageHeading.isDisplayed(), 10000);
 			checkinPage.selectList.click();
+			browser.wait(checkinPage.selectListInput.isDisplayed(), 10000);
 			checkinPage.selectListInput.sendKeys(browser.params.standardTestList);
 			browser.wait(checkinPage.selectListResults.isDisplayed(), 5000);
 			expect(checkinPage.selectListResults.getText()).toContain(browser.params.standardTestList);
