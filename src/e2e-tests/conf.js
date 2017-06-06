@@ -41,5 +41,6 @@ exports.config.params = {
   adminPassword: process.env.TRAVIS ? process.env.testAdminUserPassword : env.params.testAdminUserPassword,
   adminUserId: process.env.TRAVIS ? process.env.testAdminUserId : env.params.testAdminUserId,
 
-  standardTestList: 'E2e test list - standard'
+  standardTestList: 'E2e test list - standard',
+  tempList: 'E2e temp list'
 }
