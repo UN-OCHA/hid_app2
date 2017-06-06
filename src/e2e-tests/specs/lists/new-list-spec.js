@@ -34,7 +34,14 @@ describe('New Lists', function () {
 
 			it('should save and go to the new list', function () {
 				newListPage.populateNewListForm();
-				expect(listPage.listTitle.getText()).toBe('Test E2E user list');
+				expect(listPage.listTitle.getText()).toBe(browser.params.tempList);
+			});
+
+			it('should show on the dashboard', function () {
+				navObject.dashboardLink.click();
+				browser.wait(dashboardPage.pageHeading.isDisplayed(), 10000);
+				dashboardPage.listsManageTabBtn.click();
+				expect(dashboardPage.listsManage.getText()).toContain(browser.params.tempList);
 			});
 
 		});
@@ -42,6 +49,7 @@ describe('New Lists', function () {
 		describe('Deleting the list', function () {
 
 			beforeAll(function () {
+				listPage.goToList(browser.params.tempList);
 				listPage.openListAdmin();
 				browser.wait(listPage.deleteButton.isDisplayed(), 10000);
 				listPage.deleteButton.click();

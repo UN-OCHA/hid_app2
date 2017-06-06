@@ -14,7 +14,7 @@ var NewListPage = function() {
 	this.pageHeading = element(by.cssContainingText('.page-header__heading', 'Create a new list'));
 
  	this.populateNewListForm = function (name) {
- 		var listName = name || 'Test E2E user list';
+ 		var listName = name || browser.params.tempList;
  		nameInput.sendKeys(listName);
  		visibilityAllCheckbox.click();
  		joinabilityPublicCheckbox.click();
