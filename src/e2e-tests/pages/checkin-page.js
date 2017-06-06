@@ -2,6 +2,7 @@
 var CheckinPage = function() {
 	this.pageHeading = element(by.cssContainingText('.page-header__heading', 'Check-in'));
 	this.selectList = element(by.css('.t-select-list'));
+	this.selectListToggle = this.selectList.element(by.css('.ui-select-toggle'));
 	this.selectListInput = element(by.css('.t-select-list input[type="search"]'));
 	this.selectListResults = element(by.css('.t-select-list .ui-select-choices'));
 	this.selectListResult = element.all(by.cssContainingText('a.ui-select-choices-row-inner', browser.params.standardTestList)).first();
