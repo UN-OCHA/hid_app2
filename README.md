@@ -1,5 +1,7 @@
 # Humanitarian ID Web App version 2
 
+[![Build Status](https://travis-ci.org/UN-OCHA/hid_app2.svg?branch=master)](https://travis-ci.org/UN-OCHA/hid_app2)
+
 ## Running locally
 
 ### Prerequisites:
