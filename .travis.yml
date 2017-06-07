@@ -14,15 +14,15 @@ cache:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm install
-  - npm install -g grunt-cli
-  - npm install -g bower
-  - npm install -g protractor
-  - bower install
-  - webdriver-manager update
+  - npm install || exit 1
+  - npm install -g grunt-cli || exit 1
+  - npm install -g bower || exit 1
+  - npm install -g protractor || exit 1
+  - bower install || exit 1
+  - webdriver-manager update --gecko false || exit 1
   - npm start &
   - sleep 3
-  - grunt test-config --target="test"
+  - grunt test-config --target="test" || exit 1
   - sleep 3
 script:
   - npm run ci
