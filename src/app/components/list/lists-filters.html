@@ -1,6 +1,6 @@
 <div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.listsFilters}">
 
-  <form ng-if="sidebar.sidebars.listsFilters" class="sidebar__inner">
+  <form ng-if="sidebar.sidebars.listsFilters" class="sidebar__inner t-list-filters">
 
     <h2 class="sidebar__heading">Filter</h2>
 
@@ -21,7 +21,7 @@
 
     <div class="filters-group filter__search">
       <label for="name" class="sr-only" translate>Search by name</label>
-      <input type="text" class="filter__search__input" ng-model="selectedFilters['name']" name="name" id="name" placeholder="{{'Search by name' | translate}}">
+      <input type="text" class="filter__search__input t-filter-name" ng-model="selectedFilters['name']" name="name" id="name" placeholder="{{'Search by name' | translate}}">
       <icon name="search"></icon>
     </div>
 
@@ -47,10 +47,10 @@
 
     <div class="row filter__buttons">
       <div class="col-xs-6">
-        <button type="button" class="btn btn-secondary" ng-click="resetFilters()">Clear</button>
+        <button type="button" class="btn btn-secondary t-clear-filters" ng-click="resetFilters()">Clear</button>
       </div>
       <div class="col-xs-6">
-        <button type="submit" class="btn btn-primary" ng-click="applyFilters()">Apply</button>
+        <button type="submit" class="btn btn-primary t-apply-filters" ng-click="applyFilters()">Apply</button>
       </div>
     </div>
 

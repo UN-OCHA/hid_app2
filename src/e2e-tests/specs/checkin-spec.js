@@ -27,7 +27,7 @@ describe('Check in and out of a list', function () {
 			checkinPage.selectListToggle.click();
 			browser.wait(checkinPage.selectListInput.isDisplayed(), 10000);
 			checkinPage.selectListInput.sendKeys(browser.params.standardTestList);
-			browser.wait(checkinPage.selectListResults.isDisplayed(), 5000);
+			browser.wait(checkinPage.selectListResults.isDisplayed(), 10000);
 			expect(checkinPage.selectListResults.getText()).toContain(browser.params.standardTestList);
 		});
 
@@ -38,7 +38,7 @@ describe('Check in and out of a list', function () {
 
 		it('should check in to the list', function () {
 			checkinPage.checkinButton.click();
-			browser.wait(checkinPage.checkinModal.isDisplayed(), 10000);
+			browser.wait(checkinPage.checkinModal.isDisplayed(), 15000);
 			expect(checkinPage.checkinModalText.isPresent()).toBeTruthy();
 		});
 
