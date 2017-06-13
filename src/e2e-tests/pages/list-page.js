@@ -94,36 +94,6 @@ var ListPage = function() {
 		browser.wait(this.selectGroupToggle.isDisplayed(), 10000);
 	};
 
-	this.filterByCountry = function (country) {
-		this.selectCountryToggle.click();
-		browser.wait(this.selectCountryInput.isDisplayed(), 10000);
-		this.selectCountryInput.sendKeys(country);
-		browser.wait(this.selectCountryResults.isDisplayed(), 10000);
-		// var selectCountryResult = element.all(by.css('.t-country-filter a.ui-select-choices-row-inner')).first();
-		// var selectCountryResult = element.all(by.cssContainingText('a.ui-select-choices-row-inner', country)).first();
-		// browser.wait(selectCountryResult.isDisplayed, 10000);
-		// selectCountryResult.getText().then(console.log);
-		this.selectCountryResult = element.all(by.css('.t-country-filter a.ui-select-choices-row-inner')).first();
-
-		browser.wait(function() {
-        console.log('1 - WAIT');
-
-        return this.selectCountryResult.isDisplayed();
-        // return true;
-    }).then(function () {
-        console.log('2 - after wait');
-        this.selectCountryResult.click();
-				browser.wait(this.applyFiltersButton.isDisplayed(), 10000);
-				this.applyFiltersButton.click();
-				browser.wait(this.listTitle.isDisplayed(), 10000);
-    });
-
-		// selectCountryResult.click();
-		// browser.wait(this.applyFiltersButton.isDisplayed(), 10000);
-		// this.applyFiltersButton.click();
-		// browser.wait(this.listTitle.isDisplayed(), 10000);
-	};
-
 	this.filterByDisaster = function (disaster) {
 		this.selectDisasterToggle.click();
 		browser.wait(this.selectDisasterInput.isDisplayed(), 10000);

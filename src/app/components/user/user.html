@@ -144,7 +144,7 @@
 
     <div class="page-header__buttons page-header__buttons--profile">
 
-      <button type="button" class="btn-primary btn-rounded profile-header__connect-btn" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-if="connectionInfo.canRequestConnection === true" ng-show="!showProfileForm" ng-click="requestConnection()">
+      <button type="button" class="btn-primary btn-rounded profile-header__connect-btn t-connect-btn" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-if="connectionInfo.canRequestConnection === true" ng-show="!showProfileForm" ng-click="requestConnection()">
         <span translate>Connect</span>
       </button>
 
@@ -171,12 +171,12 @@
 
         <h3 class="form-section__heading" translate>Phone numbers</h3>
         <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'connections'">
-          <button type="button" class="btn-link" ng-click="requestConnection()">
+          <button type="button" class="btn-link t-request-phone" ng-click="requestConnection()">
             <icon name="eye-hidden"></icon>
             <span translate>Request</span> {{user.given_name}}'s <span translate>phone number</span>
           </button>
           </p>
-        <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'pending'">
+        <p class="list__item profile-permission-message t-phone-permission-message" ng-if="connectionInfo.phonesPermission === 'pending'">
           <icon name="eye-hidden"></icon>
           <span translate>Your connection request is pending</span>
         </p>

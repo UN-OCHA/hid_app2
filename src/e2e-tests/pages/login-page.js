@@ -14,6 +14,12 @@ var LoginPage = function() {
     loginButton.click();
   };
 
+  this.loginAdmin = function () {
+    emailInput.sendKeys(browser.params.adminEmail);
+    passwordInput.sendKeys(browser.params.adminPassword);
+    loginButton.click();
+  };
+
   this.badLogin = function () {
   	emailInput.sendKeys('testuser@example.com');
     passwordInput.sendKeys('notthepassword');

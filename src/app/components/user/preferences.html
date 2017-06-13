@@ -11,10 +11,10 @@
     <div class="block">
         <h2 class="block-heading" translate>Pending approval</h2>
         <ul class="connections-list">
-          <li class="" ng-if="!pendingConnections.length"><em translate>No pending connections</em></li>
+          <li class="t-no-pending-connections" ng-if="!pendingConnections.length"><em translate>No pending connections</em></li>
           <li class="connection" ng-repeat="connection in pendingConnections">
             <a ng-href="/users/{{connection.user._id}}" class="connection__name">{{connection.user.name}}</a>
-            <button class="btn-transparent connection__btn" ng-disabled="!isOnline" ng-click="approveConnection(connection)" translate>
+            <button class="btn-transparent connection__btn t-approve-connection" ng-disabled="!isOnline" ng-click="approveConnection(connection)" translate>
               Approve
             </button>
             <button class="btn-transparent connection__btn" ng-disabled="!isOnline" ng-click="removeConnection(connection)" translate>
@@ -29,7 +29,7 @@
           <li class="" ng-if="!approvedConnections.length"><em translate>No approved connections</em></li>
           <li class="connection" ng-repeat="connection in approvedConnections">
             <a ng-href="/users/{{connection.user._id}}" class="connection__name">{{connection.user.name}}</a>
-            <button class="btn-transparent connection__btn" ng-disabled="!isOnline" ng-click="removeConnection(connection)" translate>
+            <button class="btn-transparent connection__btn t-remove-connection" ng-disabled="!isOnline" ng-click="removeConnection(connection)" translate>
               Cancel
             </button>
           </li>

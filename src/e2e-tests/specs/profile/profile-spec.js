@@ -1,8 +1,8 @@
 /* jshint module: true */
-var DashboardPage = require('../pages/dashboard-page');
-var LoginPage = require('../pages/login-page');
-var ProfilePage = require('../pages/profile-page');
-var NavObject = require('../pages/nav-object');
+var DashboardPage = require('../../pages/dashboard-page');
+var LoginPage = require('../../pages/login-page');
+var ProfilePage = require('../../pages/profile-page');
+var NavObject = require('../../pages/nav-object');
 
 describe('Profile', function () {
 	var dashboardPage = new DashboardPage();

@@ -7,6 +7,13 @@ var ProfilePage = function() {
   this.newEmailInput = element(by.id('new_email'));
   this.statusInput = element(by.id('user_status'));
   this.profileAlert = element(by.css('.profile-alert'));
+  this.connectButton = element(by.css('.t-connect-btn'));
+  this.connectMessage = element(by.css('.alert__inner'));
+  this.modalOverlay = element(by.css('.modal'));
+  this.connectModalText = element(by.cssContainingText('div .modal-body', 'Connection request sent'));
+  this.phonePermissionButton = element(by.css('.t-request-phone'));
+  this.phonePermissionMessage = element(by.css('.t-phone-permission-message'));
+  this.phoneNumbers = element(by.repeater('phone in user.phone_numbers'));
 };
 
 module.exports = ProfilePage;
