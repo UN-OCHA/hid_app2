@@ -92,7 +92,7 @@
       <a class="btn-block btn-primary" ng-if="currentUser.is_admin || currentUser.isManager" href="/services" translate>Manage services</a>
     </div>
     <div class="dashboard-ctas">
-      <a class="btn-block btn-primary" href="/users/new"  ng-if="currentUser.is_admin || currentUser.isManager" translate>Add new user</a>
+      <a class="btn-block btn-primary t-new-user-btn" href="/users/new"  ng-if="currentUser.is_admin || currentUser.isManager" translate>Add new user</a>
       <a class="btn-block btn-primary" href="/clients"  ng-if="currentUser.is_admin" translate>View OAuth Clients</a>
     </div>
 

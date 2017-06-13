@@ -8,6 +8,7 @@ var DashboardPage = function() {
   this.listMemberLink = element(by.cssContainingText('.list__item a', browser.params.standardTestList));
   this.listsManage = element.all(by.repeater('list in userLists.listsOwnedAndManaged').column('list.name'));
   this.listsManageTabBtn = element.all(by.cssContainingText('.tabs-nav__button', 'Lists I manage')).first();
+  this.newUserButton = element(by.css('.t-new-user-btn'));
 };
 
 module.exports = DashboardPage;

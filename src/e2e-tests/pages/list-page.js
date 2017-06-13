@@ -80,6 +80,9 @@ var ListPage = function() {
 	this.selectTypeInput = this.selectType.element(by.css('input[type="search"]'));
 	this.selectTypeResults = this.selectType.element(by.css('.ui-select-choices'));
 
+	this.lockedListMessage = element(by.css('.t-locked-list-msg'));
+	this.usersTable = element(by.css('.t-users-table'));
+
 	this.openLocationFilters = function () {
 		this.openListFilters();
 		browser.wait(this.locationFiltersButton.isDisplayed(), 10000);
@@ -158,7 +161,8 @@ var ListPage = function() {
 		navObject.searchInput.sendKeys(listName);
 		var el = element(by.cssContainingText('.search-autocomplete__item a', listName));
 		el.click();
-		browser.wait(this.adminButton.isDisplayed(), 5000);
+		browser.wait(element(by.cssContainingText('.page-header__heading', listName)), 10000);
+		// browser.wait(this.adminButton.isDisplayed(), 5000);
 	};
 
 	this.openListFilters = function () {

@@ -41,5 +41,9 @@ exports.config.params = {
   adminUserId: process.env.TRAVIS ? process.env.testAdminUserId : env.params.testAdminUserId,
   adminUserPhoneNumber: '+44 114 139 3939',
   standardTestList: 'E2e test list - standard',
-  tempList: 'E2e temp list'
+  tempList: 'E2e temp list',
+  tempUserEmail: 'e2etemp@example.com',
+  tempUserFirstName: 'E2e temp',
+  tempUserLastName: 'user',
+  lockedTestList: 'E2e test list - verified only'
 }
