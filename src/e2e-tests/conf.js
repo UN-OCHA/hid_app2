@@ -26,6 +26,7 @@ exports.config = {
     list: 'specs/lists/*-spec.js',
   	search: 'specs/search-spec.js',
     checkin: 'specs/checkin-spec.js',
+    lang: 'specs/language-spec.js',
   }
 };
 

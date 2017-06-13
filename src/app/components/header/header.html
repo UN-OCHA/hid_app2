@@ -37,14 +37,14 @@
           </li>
 
           <li class="nav__item" uib-dropdown ng-if="isAuthenticated && !hideHeaderFooter">
-            <button type="button" class="nav__link btn btn-transparent" uib-dropdown-toggle>
+            <button type="button" class="nav__link btn btn-transparent t-lang-dropdown-btn" uib-dropdown-toggle>
               <span class="nav__label nav__label--mobile">{{getCurrentLanguage()}}</span>
               <icon name="arrow-down" text="Change language"></icon>
             </button>
 
             <ul class="dropdown-menu dropdown-menu--lang" role="menu" uib-dropdown-menu>
-              <li><a href="#" ng-click="changeLanguage('en')">EN</a></li>
-              <li><a href="#" ng-click="changeLanguage('fr')">FR</a></li>
+              <li><a href="#" ng-click="changeLanguage('en')" class="t-lang-en">EN</a></li>
+              <li><a href="#" ng-click="changeLanguage('fr')" class="t-lang-fr">FR</a></li>
               <li><a href="#" ng-click="changeLanguage('es')">ES</a></li>
               <li><a href="#" ng-click="changeLanguage('ar')">AR</a></li>
             </ul>
