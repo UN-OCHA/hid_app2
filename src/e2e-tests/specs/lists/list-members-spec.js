@@ -25,17 +25,17 @@ describe('List members', function () {
 			});
 
 			it('should search for the user', function () {
-				browser.wait(listPage.addMemberInput.isDisplayed(), 5000);
+				browser.wait(listPage.addMemberInput.isDisplayed(), 10000);
 				listPage.addMemberInput.sendKeys(browser.params.adminUserName);
 				var results = element(by.css('.ui-select-choices'));
-				browser.wait(results.isDisplayed(), 5000);
+				browser.wait(results.isDisplayed(), 10000);
 				expect(results.getText()).toContain(browser.params.adminUserName);
 			});
 
 			it('should add the user to the list', function () {
 				listPage.addMemberResult.click();
 				listPage.addMemberButton.click();
-				browser.wait(listPage.successModal.isDisplayed(), 5000);
+				browser.wait(listPage.successModal.isDisplayed(), 10000);
 				expect(listPage.addMemberSuccessModalText.isPresent()).toBeTruthy();
 				listPage.modalOverlay.click();
 				listPage.adminButton.click();
@@ -47,20 +47,20 @@ describe('List members', function () {
 		describe('Remove a person from the list', function () {
 
 			beforeAll(function() {
-				browser.wait(listPage.userOptionsButton.isDisplayed(), 5000);
+				browser.wait(listPage.userOptionsButton.isDisplayed(), 10000);
 				listPage.userOptionsButton.click();
-				browser.wait(listPage.removeFromListButton.isDisplayed(), 5000);
+				browser.wait(listPage.removeFromListButton.isDisplayed(), 10000);
 				listPage.removeFromListButton.click();
 			});
 
 			it('should ask for confirmation', function () {
-				browser.wait(listPage.confirmModal.isDisplayed(), 5000);
+				browser.wait(listPage.confirmModal.isDisplayed(), 10000);
 				expect(listPage.confirmModal.isPresent()).toBeTruthy();
 				listPage.confirmModalButton.click();
 			});
 
 			it('should show the success message', function () {
-				browser.wait(listPage.successModal.isDisplayed(), 5000);
+				browser.wait(listPage.successModal.isDisplayed(), 10000);
 				expect(listPage.removeSuccessModalText.isPresent()).toBeTruthy();
 			});
 

@@ -27,6 +27,7 @@ var NavObject = function() {
   this.logOut = function () {
   	this.openUserDropdown();
   	this.logoutLink.click();
+    browser.sleep(3000);
   };
 };
 

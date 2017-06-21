@@ -1,6 +1,7 @@
 /* jshint module: true */
 var ProfilePage = function() {
-  this.userName = element(by.css('.page-header__heading'));
+  this.userName = element(by.cssContainingText('.page-header__heading', browser.params.userName));
+  this.adminUserName = element(by.cssContainingText('.page-header__heading', browser.params.adminUserName));
   this.userStatus = element(by.css('.profile-header__status'));
   this.editButton = element(by.css('.t-user-edit-btn'));
   this.closeEditButton = element(by.css('.t-close-edit-btn'));

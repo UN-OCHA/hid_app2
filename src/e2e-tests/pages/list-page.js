@@ -162,13 +162,12 @@ var ListPage = function() {
 		var el = element(by.cssContainingText('.search-autocomplete__item a', listName));
 		el.click();
 		browser.wait(element(by.cssContainingText('.page-header__heading', listName)), 10000);
-		// browser.wait(this.adminButton.isDisplayed(), 5000);
 	};
 
 	this.openListFilters = function () {
-		browser.wait(this.filtersButton.isDisplayed(), 5000);
+		browser.wait(this.filtersButton.isDisplayed(), 10000);
 		this.filtersButton.click();
-		browser.wait(this.filtersSidebar.isDisplayed(), 5000);
+		browser.wait(this.filtersSidebar.isDisplayed(), 10000);
 	};
 
 	this.clearFilters = function () {
@@ -179,20 +178,20 @@ var ListPage = function() {
 	};
 
 	this.openListAdmin = function () {
-		browser.wait(this.adminButton.isDisplayed(), 5000);
+		browser.wait(this.adminButton.isDisplayed(), 10000);
 		this.adminButton.click();
-		browser.wait(this.adminSidebar.isDisplayed(), 5000);
+		browser.wait(this.adminSidebar.isDisplayed(), 10000);
 	};
 
 	this.deleteList = function () {
-		browser.wait(this.adminButton.isDisplayed(), 5000);
+		browser.wait(this.adminButton.isDisplayed(), 10000);
 		this.adminButton.click();
-		browser.wait(this.adminSidebar.isDisplayed(), 5000);
+		browser.wait(this.adminSidebar.isDisplayed(), 10000);
 		this.deleteButton.click();
 
-		browser.wait(this.confirmModal.isDisplayed(), 5000);
+		browser.wait(this.confirmModal.isDisplayed(), 10000);
 		this.confirmModalButton.click();
-		browser.wait(this.deleteSuccessModalText.isDisplayed(), 5000);
+		browser.wait(this.deleteSuccessModalText.isDisplayed(), 10000);
 	};
 
 };

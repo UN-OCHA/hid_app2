@@ -42,6 +42,7 @@ describe('Filtering a List', function () {
 	describe('Filtering by location', function () {
 
 		it('should filter by country', function () {
+			browser.sleep(3000);
 			// open filters side bar
 			browser.wait(listPage.filtersButton.isDisplayed, 5000);
 			listPage.filtersButton.click();
@@ -73,18 +74,21 @@ describe('Filtering a List', function () {
 		});
 
 		it('should filter users by disaster', function () {
+			browser.sleep(3000);
 			listPage.openListFilters();
 			listPage.filterByDisaster('Haiti: Earthquakes - Jan 2010');
 			expect(listPage.currentFilters.getText()).toContain('Haiti: Earthquakes - Jan 2010');
 		});
 
 		it('should filter users by Coordination Hub', function () {
+			browser.sleep(3000);
 			listPage.openListFilters();
 			listPage.filterByOffice('Haiti: Jeremie');
 			expect(listPage.currentFilters.getText()).toContain('Haiti: Jeremie');
 		});
 
 		it('should filter users by Operation', function () {
+			browser.sleep(3000);
 			listPage.openListFilters();
 			listPage.filterByOperation('Haiti');
 			expect(listPage.currentFilters.getText()).toContain('Haiti');
@@ -94,15 +98,18 @@ describe('Filtering a List', function () {
 
 	describe('Filtering by occupation', function () {
 		beforeAll(function () {
+			browser.sleep(3000);
 			listPage.openOccupationFilters();
 		});
 
 		it('should filter users by Group', function () {
+			browser.sleep(3000);
 			listPage.filterByGroup('Haiti: Assessment Working Group');
 			expect(listPage.currentFilters.getText()).toContain('Haiti: Assessment Working Group');
 		});
 
 		it('should filter users by Role', function () {
+			browser.sleep(3000);
 			listPage.openListFilters();
 			listPage.filterByRole('Administrative Officer');
 			expect(listPage.currentFilters.getText()).toContain('Administrative Officer');

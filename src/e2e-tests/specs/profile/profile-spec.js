@@ -82,11 +82,11 @@ describe('Profile', function () {
 			browser.wait(navObject.searchAutocomplete.isDisplayed(), 1000);
 			var el = element(by.cssContainingText('.search-autocomplete__item a', browser.params.adminUserName));
 			el.click();
-			browser.wait(profilePage.userName.isDisplayed(), 10000);
+			browser.wait(profilePage.adminUserName.isDisplayed(), 10000);
 		});
 
 		it('should show the user name', function () {
-			expect(profilePage.userName.getText()).toBe(browser.params.adminUserName);
+			expect(profilePage.adminUserName.getText()).toBe(browser.params.adminUserName);
 		});
 
 		it('should not show the edit profile button', function () {

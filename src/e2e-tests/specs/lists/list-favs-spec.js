@@ -37,6 +37,7 @@ describe('Favourite Lists', function () {
 				listPage.modalOverlay.click();
 				browser.wait(navObject.dashboardLink.isDisplayed(), 10000);
 				navObject.dashboardLink.click();
+				browser.wait(dashboardPage.favouritesTabBtn.isDisplayed(), 10000);
 				dashboardPage.favouritesTabBtn.click();
 				expect(dashboardPage.favourites.getText()).toContain(browser.params.standardTestList);
 			});

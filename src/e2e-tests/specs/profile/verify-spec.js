@@ -20,17 +20,26 @@ describe('User verification', function () {
 
 	describe('Verifying a user', function () {
 
-		it('should verify the user', function () {
+		beforeAll(function () {
 			browser.wait(profilePage.adminButton.isDisplayed, 10000);
 			profilePage.adminButton.click();
 			browser.wait(profilePage.adminSidebar.isDisplayed, 10000);
 			profilePage.verifyButton.click();
+		});
+
+		it('should show the success message', function () {
 			browser.wait(profilePage.modalOverlay.isDisplayed, 10000);
 			expect(profilePage.verifyModalText.isPresent()).toBeTruthy();
 			profilePage.modalOverlay.click();
+		});
+
+		it('should change the button to "un-verify"', function () {
 			profilePage.verifyButton.getText().then(function(str) {
 				expect(str.toLowerCase()).toBe('un-verify user');
 			});
+		});
+
+		it('should show verified tick on their profile', function () {
 			profilePage.adminButton.click();
 			expect(profilePage.verifiedTick.isDisplayed()).toBeTruthy();
 		});
@@ -39,16 +48,25 @@ describe('User verification', function () {
 
 	describe('Un-verifying a user', function () {
 
-		it('should show in approved connections', function () {
+		beforeAll(function () {
 			profilePage.adminButton.click();
 			browser.wait(profilePage.adminSidebar.isDisplayed, 10000);
 			profilePage.verifyButton.click();
+		});
+
+		it('should show the success message', function () {
 			browser.wait(profilePage.modalOverlay.isDisplayed, 10000);
 			expect(profilePage.verifyModalText.isPresent()).toBeTruthy();
 			profilePage.modalOverlay.click();
+		});
+
+		it('should change the button to "verify"', function () {
 			profilePage.verifyButton.getText().then(function(str) {
 				expect(str.toLowerCase()).toBe('verify user');
 			});
+		});
+
+		it('should not show verified tick on their profile', function () {
 			profilePage.adminButton.click();
 			expect(profilePage.verifiedTick.isDisplayed()).toBeFalsy();
 		});

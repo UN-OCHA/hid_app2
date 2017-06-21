@@ -9,7 +9,8 @@ exports.config = {
 	baseUrl:  process.env.TRAVIS ? process.env.baseUrl : env.baseUrl,
 	directConnect: true,
 	jasmineNodeOpts: {
-		print: function() {}
+		print: function() {},
+    defaultTimeoutInterval: 100000
 	},
 	onPrepare: function () {
     jasmine.getEnv().addReporter(new SpecReporter({
@@ -26,7 +27,8 @@ exports.config = {
     list: 'specs/lists/*-spec.js',
   	search: 'specs/search-spec.js',
     checkin: 'specs/checkin-spec.js',
-    // lang: 'specs/language-spec.js',
+    services: 'specs/service-spec.js',
+    dashboard: 'specs/dashboard-spec.js',
   }
 };
 
@@ -45,5 +47,8 @@ exports.config.params = {
   tempUserEmail: 'e2etemp@example.com',
   tempUserFirstName: 'E2e temp',
   tempUserLastName: 'user',
-  lockedTestList: 'E2e test list - verified only'
+  lockedTestList: 'E2e test list - verified only',
+  tempMailChimpService: 'E2e temp mailchimp service',
+  tempGoogleService: 'E2e temp google service',
+  mailChimpApiKey: process.env.TRAVIS ? process.env.testMailChimpApiKey : env.params.testMailChimpApiKey,
 }

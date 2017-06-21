@@ -17,7 +17,7 @@ describe('Connections', function () {
 		browser.wait(navObject.searchAutocomplete.isDisplayed, 1000);
 		var el = element(by.cssContainingText('.search-autocomplete__item a', browser.params.adminUserName));
 		el.click();
-		browser.wait(profilePage.userName.isDisplayed(), 10000);
+		browser.wait(profilePage.adminUserName.isDisplayed(), 10000);
 	});
 
 	describe('Request to view a user\'s phone number', function () {
@@ -79,7 +79,7 @@ describe('Connections', function () {
 			browser.wait(navObject.searchAutocomplete.isDisplayed, 1000);
 			var el = element(by.cssContainingText('.search-autocomplete__item a', browser.params.adminUserName));
 			el.click();
-			browser.wait(profilePage.userName.isDisplayed(), 10000);
+			browser.wait(profilePage.adminUserName.isDisplayed(), 10000);
 		});
 
 		it('should show the phone number', function () {

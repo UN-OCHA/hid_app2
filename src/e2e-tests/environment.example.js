@@ -10,6 +10,7 @@ module.exports = {
     testAdminUserName: '',
     testAdminUserEmail: '',
     testAdminUserPassword: '',
-    testAdminUserId: ''
+    testAdminUserId: '',
+    testMailChimpApiKey: ''
   }
 }

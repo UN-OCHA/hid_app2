@@ -9,6 +9,8 @@ var DashboardPage = function() {
   this.listsManage = element.all(by.repeater('list in userLists.listsOwnedAndManaged').column('list.name'));
   this.listsManageTabBtn = element.all(by.cssContainingText('.tabs-nav__button', 'Lists I manage')).first();
   this.newUserButton = element(by.css('.t-new-user-btn'));
+  this.manageServicesButton = element(by.css('.t-manage-services-btn'));
+  this.oauthButton = element(by.css('.t-oauth-btn'));
 };
 
 module.exports = DashboardPage;

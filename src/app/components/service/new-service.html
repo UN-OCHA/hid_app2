@@ -29,7 +29,7 @@
         <legend translate>Service Type</legend>
         <p ng-repeat="option in serviceTypes">
           <input type="radio" id="service-type-{{option.value}}" name="visibility" ng-model="service.type" value="{{option.value}}" />
-          <label class="clickie-label" for="service-type-{{option.value}}" required>{{option.label}}</label>
+          <label class="clickie-label t-type-{{option.value}}" for="service-type-{{option.value}}" required>{{option.label}}</label>
         </p>
       </fieldset>
       <div class="form-field" ng-show="service.type === 'mailchimp'">
@@ -37,23 +37,23 @@
         <input type="text" name="name" class="form-control" id="mailchimp-api-key" placeholder="{{'Mailchimp API Key'|translate}}" ng-model="service.mailchimp.apiKey" ng-required="service.type === 'mailchimp'" ng-blur="getMailchimpLists()">
       </div>
       <div class="form-field" ng-if="service.type === 'mailchimp' && service.mailchimp.apiKey" ng-init>
-        <label for="mailchimpList" translate>Mailchimp list</label>
+        <label for="mailchimpList" class="t-mailchimp" translate>Mailchimp list</label>
         <div class="styled-select">
-          <select name="mailchimpList" ng-model="service.mailchimp.list" ng-options="list.name for list in mailchimpLists track by list.id">
+          <select name="mailchimpList" ng-model="service.mailchimp.list" ng-options="list.name for list in mailchimpLists track by list.id" class="t-mailchimp-select">
           </select>
         </div>
       </div>
       <div class="form-field" ng-if="service.type === 'googlegroup'" ng-init>
         <label for="ggDomain" translate>Domain</label>
         <div class="styled-select">
-          <select name="ggDomain" ng-model="service.googlegroup.domain" ng-blur="getGoogleGroups()">
+          <select name="ggDomain" ng-model="service.googlegroup.domain" ng-blur="getGoogleGroups()" class="t-gg-domain">
             <option ng-repeat="cred in credentials" ng-value="cred.googlegroup.domain">{{cred.googlegroup.domain}}</option>
           </select>
         </div>
       </div>
       <div class="form-field" ng-if="service.type === 'googlegroup' && service.googlegroup.domain" ng-init>
         <label for="googleGroup" translate>Group</label>
-        <select name="googleGroup" ng-model="service.googlegroup.group" ng-options="group.name for group in googleGroups track by group.id">
+        <select name="googleGroup" ng-model="service.googlegroup.group" ng-options="group.name for group in googleGroups track by group.id" class="t-gg">
         </select>
       </div>
       <div class="form-field">
@@ -84,7 +84,7 @@
           </li>
         </ul>
       </fieldset>
-      <button type="submit" class="btn btn-primary" ng-disabled="editService.$invalid || editService.$submitted" translate>Save</button>
+      <button type="submit" class="btn btn-primary t-save-service-btn" ng-disabled="editService.$invalid || editService.$submitted" translate>Save</button>
     </form>
 
   </div>
