@@ -1,9 +1,10 @@
-<div class="row">
-  <div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
+<div class="row" class="login">
+  <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-0">
     <div class="page-header page-header--login">
-      <h1 class="page-header__heading" translate>Log in to<br> Humanitarian ID.</h1>
+      <h1 class="page-header__heading login__heading" translate>Log in to Humanitarian ID.</h1>
     </div>
-    <form ng-submit="login()">
+
+    <form ng-submit="login()" class="login__form">
       <div class="form-field">
         <label for="email" translate>Email</label>
         <input type="email" id="email" ng-model="email" placeholder="{{'Your email address' |  translate }}">
@@ -23,7 +24,16 @@
           </button>
         </div>
       </div>
+      <p><a href="/password_reset" translate>Forgot your password?</a></p>
     </form>
-    <p><a href="/password_reset" translate>Forgot your password?</a></p>
+  </div>
+  <div class="col-lg-6 login__video">
+    <video-player
+      default="60dKwkaq_Sw"
+      ar="35xf6ljcWnE"
+      en="60dKwkaq_Sw"
+      es="78Rav6I8F80"
+      fr="niGYi77tJQM"
+    ></video-player>
   </div>
 </div>
