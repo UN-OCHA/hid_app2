@@ -1,0 +1,4 @@
+<div ng-show="offline.showStatus" aria-hidden="{{!offline.showStatus}}" class="offline-status offline-status--{{offline.status}}">
+	<p>{{offline.message}}</p>
+	<button type="button" class="btn btn-transparent offline-status__close" ng-click="closeStatus()"><icon name="cancel" text="Close"></icon></button>
+</div>

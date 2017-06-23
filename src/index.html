@@ -43,6 +43,7 @@
           <ng-include ng-if="!hideHeaderFooter" src="&apos;app/components/footer/footer.html&apos;"></ng-include>
         </div>
 
+        <offline-status></offline-status>
 
         <!-- build:js /js/app.min.js -->
         <script src="bower_components/angular/angular.min.js"></script>
@@ -152,6 +153,7 @@
         <script src="app/components/sidebar/sidebar.module.js"></script>
         <script src="app/components/sidebar/sidebar.service.js"></script>
         <script src="app/components/sidebar/sidebar.directive.js"></script>
+        <script src="app/components/offlineStatus/offline.directive.js"></script>
         <!-- endbuild -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
