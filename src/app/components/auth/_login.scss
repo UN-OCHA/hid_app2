@@ -1,0 +1,37 @@
+
+.login__heading {
+	max-width: 200px;
+}
+
+.login__video {
+	display: none;
+}
+
+@include media-query(sm) {
+
+	.login__heading {
+		max-width: 240px;
+	}
+
+	.login__form {
+		margin-bottom: $base-unit*5;
+	}
+
+}
+
+@include media-query(lg) {
+
+	.login__heading {
+		max-width: none;
+	}
+
+	.login__form {
+		max-width: 500px;
+		margin-bottom: $base-unit*10;
+	}
+
+	.login__video {
+		display: block;
+		padding-top: $base-unit*3;
+	}
+}
