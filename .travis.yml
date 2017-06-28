@@ -22,7 +22,7 @@ before_script:
   - bower install || exit 1
   - webdriver-manager update --gecko false || exit 1
   - npm start &
-  - sleep 3
+  - until netstat -an 2>/dev/null | grep ‘3000.*LISTEN'; do true; done
   - grunt test-config --target="test" || exit 1
   - sleep 3
 script:
