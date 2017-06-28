@@ -79,7 +79,7 @@ describe('Profile', function () {
 			browser.wait(dashboardPage.pageHeading.isDisplayed(), 10000);
 			navObject.searchInput.clear();
 			navObject.searchInput.sendKeys(browser.params.adminUserName);
-			browser.wait(navObject.searchAutocomplete.isDisplayed(), 1000);
+			browser.wait(navObject.searchAutocomplete.isDisplayed(), 10000);
 			var el = element(by.cssContainingText('.search-autocomplete__item a', browser.params.adminUserName));
 			el.click();
 			browser.wait(profilePage.adminUserName.isDisplayed(), 10000);
