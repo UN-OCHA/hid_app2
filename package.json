@@ -4,7 +4,10 @@
   "description": "HID Client application",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "protractor": "protractor src/e2e-tests/conf.js",
+    "ci": "npm test && npm run protractor",
+    "start": "http-server ./src -a localhost -p 3000 -c-1"
   },
   "repository": {
     "type": "git",
@@ -37,14 +40,15 @@
     "grunt-sass-import": "^0.2.2",
     "grunt-svgmin": "^4.0.0",
     "grunt-usemin": "^3.1.1",
+    "http-server": "^0.10.0",
     "jasmine": "^2.5.2",
     "jasmine-core": "^2.5.2",
+    "jasmine-spec-reporter": "^4.1.0",
     "karma": "^1.5.0",
-    "karma-chrome-launcher": "^2.0.0",
+    "karma-chrome-launcher": "^2.1.1",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.0.2",
     "karma-ng-html2js-preprocessor": "^1.0.0",
-    "karma-phantomjs-launcher": "^1.0.2",
     "phantomjs-polyfill-object-assign": "0.0.2"
   }
 }

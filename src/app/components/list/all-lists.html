@@ -1,10 +1,10 @@
-<div ng-controller="ListsCtrl">
+<div ng-controller="ListsCtrl" class="t-all-lists">
   <loader ng-if="!listsLoaded"></loader>
   <div class="list-actions">
 
     <div>
-      <div class="list-actions__current-filters" ng-if="currentFilters.length">
-        <ul class="tag-list ">   
+      <div class="list-actions__current-filters t-list-current-filters" ng-if="currentFilters.length">
+        <ul class="tag-list ">
           <li class="tag-list__heading" translate>Filters applied:</li>
           <li class="tag-list__item tag-list__item--has-button" ng-repeat="filter in currentFilters">
             <span class="tag-list__text">{{filter.label}}</span>

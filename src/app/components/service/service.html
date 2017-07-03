@@ -8,7 +8,7 @@
   <p><span translate>Type</span>: {{service.type}}</p>
 
   <div class="page-header__buttons">
-    <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
+    <button class="btn-icon btn-toggle-admin t-service-admin-btn" type="button" ng-click="sidebar.toggle('admin')" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
       <icon name="wheel" text="Actions"></icon>
     </button>
   </div>
@@ -17,7 +17,7 @@
 <div class="row" ng-if="service.isOwner(currentUser) || service.isManager(currentUser) || currentUser.is_admin">
   <div class="col-xs-12">
     <h2 class="block-heading"><span>{{pagination.totalItems}} <span translate>subscribers</span></span></h2>
-    
+
     <ul class="list list--has-dividers list--has-buttons">
       <li ng-if="!subscribers.length"><em translate>No subscribers</em></li>
       <li class="list__item" ng-repeat="subscriber in subscribers">
@@ -33,16 +33,16 @@
             </li>
           </ul>
         </div>
-      </li>  
+      </li>
     </ul>
 
-    <uib-pagination 
-      total-items="pagination.totalItems" 
+    <uib-pagination
+      total-items="pagination.totalItems"
       ng-model="pagination.currentPage"
-      ng-change="pageChanged()" 
-      direction-links="false" 
+      ng-change="pageChanged()"
+      direction-links="false"
       items-per-page=pagination.itemsPerPage
-      class="pagination" >    
+      class="pagination" >
     </uib-pagination>
   </div>
 </div>

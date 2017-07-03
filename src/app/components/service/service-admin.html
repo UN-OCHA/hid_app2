@@ -1,5 +1,5 @@
 <div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
-  <div ng-if="sidebar.sidebars.admin" class="sidebar__inner">
+  <div ng-if="sidebar.sidebars.admin" class="sidebar__inner t-service-admin">
 
     <h2 class="sidebar__heading" translate>Service admin</h2>
 
@@ -30,7 +30,7 @@
           <span translate>Edit service</span>
         </a>
 
-        <button type="button" class="btn-transparent sidebar-section__button" ng-click="deleteService();" ng-if="service.isOwner(currentUser) || currentUser.is_admin">
+        <button type="button" class="btn-transparent sidebar-section__button t-delete-service-btn" ng-click="deleteService();" ng-if="service.isOwner(currentUser) || currentUser.is_admin">
           <icon name="trash"></icon>
           <span translate>Delete service</span>
         </button>

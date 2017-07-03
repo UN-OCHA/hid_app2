@@ -1,27 +1,26 @@
 <div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.userFilters}"
 tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
-
-  <form ng-if="sidebar.sidebars.userFilters" class="sidebar__inner">
+  <form ng-if="sidebar.sidebars.userFilters" class="sidebar__inner t-user-filters">
 
     <h2 class="sidebar__heading">Filter</h2>
     <div class="sidebar__current-filters" ng-if="currentFilters.all.length">
       <ng-include src="'app/components/user/current-filters.html'"></ng-include>
     </div>
 
-    <button type="button" class="btn btn-transparent sidebar__close" ng-click="sidebar.close()">
+    <button type="button" class="btn btn-transparent sidebar__close t-close-user-filters" ng-click="sidebar.close()">
       <icon name="cancel" text="close"></icon>
     </button>
 
     <div class="filters-group filter__search">
       <label for="name" class="sr-only" translate>Search by name</label>
-      <input type="text" class="filter__search__input" ng-model="selectedFilters['name']" name="name" id="name" placeholder="{{'Search by name'| translate}}">
+      <input type="text" class="filter__search__input t-filter-name" ng-model="selectedFilters['name']" name="name" id="name" placeholder="{{'Search by name'| translate}}">
       <icon name="search"></icon>
     </div>
 
     <div class="filters-group">
       <h3>
-        <button type="button" class="filters-group__heading" ng-click="filterGroup1 = !filterGroup1" ng-class="{'active' : filterGroup1}">
+        <button type="button" class="filters-group__heading t-toggle-location-filters" ng-click="filterGroup1 = !filterGroup1" ng-class="{'active' : filterGroup1}">
           <span translate>Location filters</span>
           <icon name="plus" text="Toggle location filters"></icon>
         </button>
@@ -29,7 +28,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
       <div uib-collapse="!filterGroup1" class="filters-group__inner">
 
-        <div class="filter" ng-if="!list || list.type !== 'disaster'">
+        <div class="filter t-disaster-filter" ng-if="!list || list.type !== 'disaster'">
           <label for="disasters" class="sr-only" translate>Filter by disaster</label>
           <ui-select ng-model="selectedFilters['disasters.list']" name="disasters">
             <ui-select-match allow-clear="true" placeholder="{{'Disaster' | translate}}">{{$select.selected.name}}</ui-select-match>
@@ -39,7 +38,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           </ui-select>
         </div>
 
-        <div class="filter">
+        <div class="filter t-country-filter">
           <label for="country" class="sr-only" translate>Filter by country</label>
 
           <ui-select ng-model="selectedFilters['country']" name="country">
@@ -50,7 +49,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           </ui-select>
         </div>
 
-        <div class="filter" ng-if="!list || list.type !== 'operation'">
+        <div class="filter t-operation-filter" ng-if="!list || list.type !== 'operation'">
           <label for="operations" class="sr-only" translate>Filter by operation</label>
           <ui-select ng-model="selectedFilters['operations.list']" name="operations">
             <ui-select-match allow-clear="true" placeholder="{{'Operation' | translate}}">{{$select.selected.name}}</ui-select-match>
@@ -60,7 +59,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           </ui-select>
         </div>
 
-        <div class="filter" ng-if="!list || list.type !== 'office'">
+        <div class="filter t-office-filter" ng-if="!list || list.type !== 'office'">
           <label for="office" class="sr-only" translate>Filter by co-ordination hub</label>
            <ui-select ng-model="selectedFilters['offices.list']" name="offices">
             <ui-select-match allow-clear="true" placeholder="{{'Co-ordination hub' | translate}}">{{$select.selected.name}}</ui-select-match>
@@ -75,7 +74,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
     <div class="filters-group">
       <h3>
-        <button type="button" class="filters-group__heading" ng-click="filterGroup2 = !filterGroup2" ng-class="{'active' : filterGroup2}">
+        <button type="button" class="filters-group__heading t-toggle-occupation-filters" ng-click="filterGroup2 = !filterGroup2" ng-class="{'active' : filterGroup2}">
           <span translate>Occupation filters</span>
           <icon name="plus" text="Toggle occupation filters"></icon>
         </button>
@@ -83,7 +82,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
       <div uib-collapse="!filterGroup2" class="filters-group__inner">
 
-        <div class="filter" ng-if="!list || list.type !== 'bundle'">
+        <div class="filter t-group-filter" ng-if="!list || list.type !== 'bundle'">
           <label for="bundles" class="sr-only" translate>Filter by group</label>
           <ui-select ng-model="selectedFilters['bundles.list']" name="bundles">
             <ui-select-match allow-clear="true" placeholder="{{'Group' | translate}}">{{$select.selected.name}}</ui-select-match>
@@ -113,7 +112,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           </ui-select>
         </div>
 
-        <div class="filter" ng-if="!list || list.type !== 'role'">
+        <div class="filter t-role-filter" ng-if="!list || list.type !== 'role'">
           <label for="roles" class="sr-only" translate>Filter by role</label>
           <ui-select ng-model="selectedFilters['functional_roles.list']" name="roles">
             <ui-select-match allow-clear="true" placeholder="{{'Role' | translate}}">{{$select.selected.name}}</ui-select-match>
@@ -122,7 +121,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
             </ui-select-choices>
           </ui-select>
         </div>
-        <div class="filter" ng-if="currentUser.is_admin || currentUser.isManager">
+        <div class="filter t-type-filter" ng-if="currentUser.is_admin || currentUser.isManager">
           <label for="userTypes" class="sr-only" translate>Type of user</label>
           <ui-select ng-model="selectedFilters.user_type" name="userTypes" id="userTypes">
             <ui-select-match allow-clear="true" placeholder="{{'Type of user' | translate}}">{{$select.selected.label}}</ui-select-match>
@@ -158,10 +157,10 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
 
     <div class="row filter__buttons">
       <div class="col-xs-6">
-        <button type="button" class="btn btn-secondary" ng-click="resetFilters()">Clear</button>
+        <button type="button" class="btn btn-secondary t-clear-filters" ng-click="resetFilters()">Clear</button>
       </div>
       <div class="col-xs-6">
-        <button type="submit" class="btn btn-primary" ng-click="applyFilters()">Apply</button>
+        <button type="submit" class="btn btn-primary t-apply-filters" ng-click="applyFilters()">Apply</button>
       </div>
     </div>
 

@@ -22,11 +22,11 @@
 
 
   <div class="page-header__buttons page-header__buttons--list">
-    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin" type="button" ng-disabled="!isOnline" ng-click="sidebar.toggle('userFilters', true)">
+    <button class="btn-icon btn-toggle-filters btn-toggle-filters--has-admin t-list-filters-btn" type="button" ng-disabled="!isOnline" ng-click="sidebar.toggle('userFilters', true)">
       <icon name="filter" text="Filter"></icon>
     </button>
 
-    <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin', true)" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline" ng-if="list.visible">
+    <button class="btn-icon btn-toggle-admin t-list-admin-btn" type="button" ng-click="sidebar.toggle('admin', true)" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline" ng-if="list.visible">
       <icon name="wheel" text="Actions"></icon>
     </button>
   </div>
@@ -47,7 +47,7 @@
         <span translate>This list has been set to private by the list owner. Unfortunately you do not have the rights to access it.</span>
       </p>
 
-      <p class="page-header__alert-info" ng-if="list.visibility === 'verified'">
+      <p class="page-header__alert-info t-locked-list-msg" ng-if="list.visibility === 'verified'">
         <span translate>This contact list can only be viewed by verified users. Please contact us at</span>
         <a href="mailto:info@humanitarian.id">info@humanitarian.id</a>
         <span translate>if you wish to access the list.</span>

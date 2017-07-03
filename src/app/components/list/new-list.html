@@ -14,7 +14,7 @@
         <legend translate>Who can view this list?</legend>
         <p ng-repeat="option in visibility">
           <input type="radio" id="visibility-{{option.value}}" name="visibility" ng-model="list.visibility" value="{{option.value}}" />
-          <label class="clickie-label" for="visibility-{{option.value}}" required>{{option.label}}</label>
+          <label class="clickie-label t-visibility-{{option.value}}" for="visibility-{{option.value}}" required>{{option.label}}</label>
         </p>
       </fieldset>
 
@@ -22,7 +22,7 @@
         <legend translate>Who can join this list?</legend>
         <p ng-repeat="option in joinability">
           <input type="radio" id="joinability-{{option.value}}" name="joinability" ng-model="list.joinability" value="{{option.value}}" />
-          <label class="clickie-label" for="joinability-{{option.value}}" required>{{option.label}}</label>
+          <label class="clickie-label t-joinability-{{option.value}}" for="joinability-{{option.value}}" required>{{option.label}}</label>
         </p>
       </fieldset>
 
@@ -35,7 +35,7 @@
           </ui-select-choices>
         </ui-select>
       </div>
-      <button type="submit" class="btn-primary" ng-class="{'saving' : saving}">
+      <button type="submit" class="btn-primary t-save-list-btn" ng-class="{'saving' : saving}">
         <loader type="inline" text="" ng-if="saving"></loader>
         <span ng-if="!saving" translate>Save</span>
       </button>

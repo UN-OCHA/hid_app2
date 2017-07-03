@@ -44,7 +44,7 @@
       var closeButton = '<button class="btn-primary" ng-click="modal.close()" translate>' + closeText +'</button>';
 
       var confirmButtons = '<button class="btn-secondary" ng-click="modal.dismiss()" translate>' + cancelText + '</button>';
-      confirmButtons += '<button class="btn-primary" ng-click="modal.close()" translate>OK</button>';
+      confirmButtons += '<button class="btn-primary t-confirm-btn" ng-click="modal.close()" translate>OK</button>';
 
       var footer = '<div class="modal-footer">';
       footer += confirm ? confirmButtons : closeButton;

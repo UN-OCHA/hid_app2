@@ -13,7 +13,7 @@
 </div>
 
 <div sidebar class="sidebar" ng-class="{'in' : sidebar.open, 'active' : sidebar.sidebars.admin}">
-  <div class="sidebar__inner">
+  <div class="sidebar__inner t-user-admin">
     <h2 class="sidebar__heading" translate>User admin</h2>
 
     <button type="button" class="btn btn-transparent sidebar__close" ng-click="sidebar.close()">
@@ -22,7 +22,7 @@
 
     <div class="sidebar-section">
 
-      <button type="button" ng-click="verifyUser()" class="btn-transparent sidebar-section__button" ng-if="currentUser.is_admin || currentUser.isManager">
+      <button type="button" ng-click="verifyUser()" class="btn-transparent sidebar-section__button t-verify-btn" ng-if="currentUser.is_admin || currentUser.isManager">
         <icon name="check-circle"></icon>
         <span ng-if="!user.verified" translate>Verify user</span>
         <span ng-if="user.verified" translate>Un-verify user</span>
@@ -98,7 +98,7 @@
 
     <div class="profile-header__image-holder">
       <div class="profile-header__image">
-        <icon name="check-circle" text="Verfied" class="profile-header__verified" ng-show="user.verified"></icon>
+        <icon name="check-circle" text="Verfied" class="profile-header__verified t-verified-tick" ng-show="user.verified"></icon>
         <div class="profile-header__image-inner" style="background-image: url({{pictureUrl}})"></div>
       </div>
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="profile-header__upload">
@@ -144,19 +144,19 @@
 
     <div class="page-header__buttons page-header__buttons--profile">
 
-      <button type="button" class="btn-primary btn-rounded profile-header__connect-btn" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-if="connectionInfo.canRequestConnection === true" ng-show="!showProfileForm" ng-click="requestConnection()">
+      <button type="button" class="btn-primary btn-rounded profile-header__connect-btn t-connect-btn" ng-class="{'profile-header__connect-btn--with-edit': canEditUser}" ng-if="connectionInfo.canRequestConnection === true" ng-show="!showProfileForm" ng-click="requestConnection()">
         <span translate>Connect</span>
       </button>
 
-      <button type="button" class="btn-icon" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-if="canEditUser" ng-disabled="!isOnline">
+      <button type="button" class="btn-icon t-user-edit-btn" ng-click="toggleForm()" ng-show="!showProfileForm" aria-hidden="{{showProfileForm}}" ng-if="canEditUser" ng-disabled="!isOnline">
         <icon name="edit" text="Edit"></icon>
       </button>
 
-      <button type="button" class="btn-icon btn-secondary" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="toggleForm()" ng-if="canEditUser">
+      <button type="button" class="btn-icon btn-secondary t-close-edit-btn" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" ng-click="toggleForm()" ng-if="canEditUser">
         <icon name="check" text="Close"></icon>
       </button>
 
-      <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin')" ng-show="!showProfileForm">
+      <button class="btn-icon btn-toggle-admin t-toggle-admin" type="button" ng-click="sidebar.toggle('admin')" ng-show="!showProfileForm">
         <icon name="wheel" text="Actions"></icon>
       </button>
     </div>
@@ -171,12 +171,12 @@
 
         <h3 class="form-section__heading" translate>Phone numbers</h3>
         <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'connections'">
-          <button type="button" class="btn-link" ng-click="requestConnection()">
+          <button type="button" class="btn-link t-request-phone" ng-click="requestConnection()">
             <icon name="eye-hidden"></icon>
             <span translate>Request</span> {{user.given_name}}'s <span translate>phone number</span>
           </button>
           </p>
-        <p class="list__item profile-permission-message" ng-if="connectionInfo.phonesPermission === 'pending'">
+        <p class="list__item profile-permission-message t-phone-permission-message" ng-if="connectionInfo.phonesPermission === 'pending'">
           <icon name="eye-hidden"></icon>
           <span translate>Your connection request is pending</span>
         </p>

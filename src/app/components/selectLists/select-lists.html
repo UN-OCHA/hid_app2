@@ -9,7 +9,7 @@
   </p>
 </div>
 
-<ui-select ng-model="selectedList" on-select="selectList(selectedList)" class="ui-select--has-border">
+<ui-select ng-model="selectedList" on-select="selectList(selectedList)" class="ui-select--has-border t-select-list">
   <ui-select-match placeholder="{{'Select a list'|translate}}"><span translate>Select a list</span></ui-select-match>
   <ui-select-choices refresh="getLists($select.search)" repeat="list in lists" minimum-input-length="3">
     {{list.name}}
