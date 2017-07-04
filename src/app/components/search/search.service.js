@@ -29,10 +29,15 @@
 
     var Search = {};
 
-    Search.UsersAndLists = function (searchTerm, limit) {
+    Search.UsersAndLists = function (searchTerm, limit, currentUser) {
+      var userParams = {name: searchTerm, limit: limit, sort: 'name'};
+      if (currentUser && !currentUser.is_admin && !currentUser.isManager) {
+        userParams['appMetadata.hid.login'] = true;
+      }
+
       return $q.all([
         List.query({name: searchTerm, limit: limit, sort: 'name'}).$promise,
-        User.query({name: searchTerm, limit: limit, sort: 'name', 'appMetadata.hid.login': true}).$promise
+        User.query(userParams).$promise
       ]).then(function(data) {
         return data;
       }, function (error) {

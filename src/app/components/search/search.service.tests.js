@@ -83,7 +83,7 @@
 
   	describe('Searching users and lists', function () {
   		beforeEach(function () {
-  			SearchService.UsersAndLists('findme', 10).then(function (r) {
+  			SearchService.UsersAndLists('findme', 10, {_id: 1}).then(function (r) {
   				returnedSearches = r;
   			});
   		});

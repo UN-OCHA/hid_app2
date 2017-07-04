@@ -38,14 +38,9 @@
     };
 
     UserDataService.getUsers = function (params, list, callback) {
-      params['appMetadata.hid.login'] = true;
-      // cached resource is returned immediately
       return User.query(params, function (response, headers) {
         UserDataService.listUsers = list ? transformUsers(response, list) : response;
         UserDataService.listUsersTotal = headers()["x-total-count"];
-
-        // transform users again when the http response resolves so don't lose changes
-        // otherwise it overwrites them
         return callback();
       }, function (response) {
         // Indexeddb fallback
@@ -92,7 +87,7 @@
           if (errorCallback) {
             return errorCallback(responseError);
           }
-          return callback(); 
+          return callback();
         }
 
         var lfusers = $localForage.instance('users');
@@ -104,7 +99,7 @@
           if (errorCallback) {
             return errorCallback(responseError);
           }
-          return callback();  
+          return callback();
         });
       });
     };

@@ -46,6 +46,7 @@
 
       inject(function($rootScope, $q, $controller, _$location_) {
         scope = $rootScope.$new();
+        scope.currentUser = {_id: 1}
         $location = _$location_;
 
         mockSearchService.UsersAndLists = function () {
@@ -98,7 +99,7 @@
           scope.searchTerm = 'Kathleen';
           scope.searchAutocomplete();
           scope.$digest();
-          expect(mockSearchService.UsersAndLists).toHaveBeenCalledWith('Kathleen', 3);
+          expect(mockSearchService.UsersAndLists).toHaveBeenCalledWith('Kathleen', 3, scope.currentUser);
         });
 
         it('should add the returned users and lists to the scope and show the autocomplete dropdown', function () {

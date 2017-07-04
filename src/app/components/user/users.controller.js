@@ -151,6 +151,10 @@
     var currentRequest = angular.copy(defaultRequest);
 
     function getUsers(params) {
+      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
+        params['appMetadata.hid.login'] = true;
+      }
+
       UserDataService.getUsers(params, $scope.list, function () {
         $scope.users = UserDataService.listUsers;
         $scope.totalItems = UserDataService.listUsersTotal;
