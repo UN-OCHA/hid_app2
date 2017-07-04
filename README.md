@@ -81,6 +81,14 @@ webdriver-manager update
 
 Java Development Kit (JDK) http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
+### Environment variables
+
+You will need to add the environment variables to run the tests locally.
+
+* Ask Ops to share 'HID E2E test environment vars' with you on LastPass.
+* Rename e2e-tests/enviroment.example.js to environment.js
+* Replace the file's content with the variables from LastPass
+
 ### Running the tests
 
 ```
@@ -92,6 +100,30 @@ Running a single test suite
 ```
 protractor --suite="my-suite-name" src/e2e-tests/conf.js
 ```
+
+### What to do if it fails on TravisCI
+
+The tests are prone to random failures on Travis. If this happens:
+
+* manually check on staging to see if you can recreate the problem
+* if you can, fix your code!
+* if you can't, try re-running the tests in Travis and if possible alter the failing test to make it more robust
+
+### Issues
+
+If the tests fail you may need to log in and reset some things required for the tests manually.
+
+As Test E2E User:
+
+* Unfavourite 'E2e test list - standard'
+* Delete 'E2e temp list'
+
+As Test Admin E2E User:
+
+* Delete 'E2e temp mailchimp service' and 'E2e temp google service'
+* Delete 'E2e temp' user
+* Un-verify 'Test E2E user'
+* Cancel pending connection with 'Test E2E user'
 
 ## Front end
 

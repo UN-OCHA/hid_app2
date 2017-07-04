@@ -14,7 +14,7 @@ describe('Connections', function () {
 		loginPage.get();
 	  loginPage.login();
 	  navObject.searchInput.sendKeys(browser.params.adminUserName);
-		browser.wait(navObject.searchAutocomplete.isDisplayed, 1000);
+		browser.wait(navObject.searchAutocomplete.isDisplayed, 10000);
 		var el = element(by.cssContainingText('.search-autocomplete__item a', browser.params.adminUserName));
 		el.click();
 		browser.wait(profilePage.adminUserName.isDisplayed(), 10000);
@@ -76,7 +76,7 @@ describe('Connections', function () {
 			loginPage.get();
 	  	loginPage.login();
 	  	navObject.searchInput.sendKeys(browser.params.adminUserName);
-			browser.wait(navObject.searchAutocomplete.isDisplayed, 1000);
+			browser.wait(navObject.searchAutocomplete.isDisplayed, 10000);
 			var el = element(by.cssContainingText('.search-autocomplete__item a', browser.params.adminUserName));
 			el.click();
 			browser.wait(profilePage.adminUserName.isDisplayed(), 10000);
