@@ -61,17 +61,20 @@
 
     function setUpFields () {
       $scope.phoneNumberTypes = [
+        {value: '', name: gettextCatalog.getString('Select phone number type')},
         {value: 'Landline', name: gettextCatalog.getString('Landline')},
         {value: 'Mobile', name: gettextCatalog.getString('Mobile')},
         {value: 'Satellite', name: gettextCatalog.getString('Satellite Phone')}
       ];
 
       $scope.emailTypes = [
+        {value: '', name: gettextCatalog.getString('Select email type')},
         {value: 'Work', name: gettextCatalog.getString('Work')},
         {value: 'Personal', name: gettextCatalog.getString('Personal')}
       ];
 
       $scope.voipTypes = [
+        {value: '', name: gettextCatalog.getString('Select social network type')},
         {value: 'Skype', name: 'Skype'},
         {value: 'Google', name: 'Google'}
       ];

@@ -10,7 +10,7 @@ exports.config = {
 	directConnect: true,
 	jasmineNodeOpts: {
 		print: function() {},
-    defaultTimeoutInterval: 100000
+    defaultTimeoutInterval: 150000
 	},
 	onPrepare: function () {
     jasmine.getEnv().addReporter(new SpecReporter({
