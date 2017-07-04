@@ -35,13 +35,15 @@
     "angular-xeditable": "~0.2.0",
     "bc-phone-number": "~5.1.0",
     "components-font-awesome": "~4.7.0",
+    "google-libphonenumber": "~2.0.19",
+    "karma-read-json": "^1.1.0",
     "moment-timezone": "~0.5.9",
-    "offline": "~0.7.18",
     "angular-mocks": "~1.6.1",
-    "angular-touch": "^1.6.1",
-    "karma-read-json": "^1.1.0"
+-   "angular-touch": "^1.6.1",
+    "offline": "~0.7.18"
   },
   "resolutions": {
-    "angular": "1.6.4"
+    "angular": "1.6.4",
+    "google-libphonenumber": "~2.0.19"
   }
 }
