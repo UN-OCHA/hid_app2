@@ -46,10 +46,10 @@ describe('Profile', function () {
 
 		it('should show the edit profile fields when click the edit button', function () {
 			expect(profilePage.statusInput.isDisplayed()).toBeFalsy();
-			expect(profilePage.newEmailInput.isDisplayed()).toBeFalsy();
+			expect(profilePage.newEmailType.isDisplayed()).toBeFalsy();
 			profilePage.editButton.click();
 			expect(profilePage.statusInput.isDisplayed()).toBeTruthy();
-			expect(profilePage.newEmailInput.isDisplayed()).toBeTruthy();
+			expect(profilePage.newEmailType.isDisplayed()).toBeTruthy();
 		});
 
 		describe('Editing your status', function () {

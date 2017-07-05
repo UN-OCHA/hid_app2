@@ -157,12 +157,11 @@
                 <div class="form-inline-fields__item form-inline-fields__item--short">
                   <label for="new_phone_number" class="sr-only" translate="">Phone type:</label>
                   <div class="styled-select">
-                    <select ng-model="temp.phone_number.type" ng-options="t.value as t.name for t in phoneNumberTypes" id="new_phone_number">
-                      <option value="" disabled selected>Type</option></select>
+                    <select ng-model="temp.phone_number.type" ng-options="t.value as t.name disable when t.value === '' for t in phoneNumberTypes" id="new_phone_number">
                     </select>
                   </div>
                 </div>
-                <div class="form-inline-fields__item">
+                <div class="form-inline-fields__item" ng-show="temp.phone_number.type">
                   <bc-phone-number name="phone_number" label="Phone number" ng-model="temp.phone_number.number" is-valid="isValidPhoneNumber" ng-class="{'has-error': temp.phone_number.number && !isValidPhoneNumber, 'has-success': temp.phone_number.number && isValidPhoneNumber}"></bc-phone-number>
                 </div>
                 <button type="submit" class="btn-transparent" ng-class="{'active': temp.phone_number.type && temp.phone_number.number && isValidPhoneNumber}" ng-disabled="!temp.phone_number.type || !temp.phone_number.number || !isValidPhoneNumber" ng-click="addItem('phone_number')">
@@ -222,12 +221,11 @@
                 <div class="form-inline-fields__item form-inline-fields__item--short">
                   <label for="new_email_type" class="sr-only">Email type</label>
                   <div class="styled-select">
-                    <select id="new_email_type" ng-model="temp.email.type" ng-options="t.value as t.name for t in emailTypes" class="form-control">
-                      <option value="" disabled selected>Type</option>
+                    <select id="new_email_type" ng-model="temp.email.type" ng-options="t.value as t.name disable when t.value === '' for t in emailTypes" class="form-control">
                     </select>
                   </div>
                 </div>
-                <div class="form-inline-fields__item">
+                <div class="form-inline-fields__item" ng-show="temp.email.type">
                   <label for="new_email" class="sr-only">Email address</label>
                   <input type="email" id="new_email" ng-model="temp.email.email" class="form-control" placeholder="{{'Email address' | translate}}" />
                 </div>
