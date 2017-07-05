@@ -12,8 +12,8 @@
     beforeEach(function() {
       module('app.user');
 
-      defaultParams = { limit: 50, offset: 0, sort: 'name' };
-      listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234' };
+      defaultParams = { limit: 50, offset: 0, sort: 'name', 'appMetadata.hid.login': true };
+      listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234', 'appMetadata.hid.login': true };
       filterRouteParams = {
         'organizations.orgTypeId': '437',
         'organizations.list': '58b44a313d0ba000db413996'
@@ -95,6 +95,7 @@
       beforeEach (function () {
         inject(function($controller, $rootScope, $q) {
           scope = $rootScope.$new();
+          scope.currentUser = {_id:1};
 
           var ctrlParams = {
             $scope: scope,
@@ -761,7 +762,7 @@ describe ('Searching all users by name', function () {
 describe ('Saving searched for user', function () {
   controllerSetup(false, {q: 'perkins'});
   it('should save the user', function () {
-    scope.currentUser = {_id:1};
+    // scope.currentUser = {_id:1};/
     scope.saveSearch({_id:2});
     expect(mockSearchService.saveSearch).toHaveBeenCalledWith({_id:1}, {_id:2}, 'user', jasmine.any(Function));
   });

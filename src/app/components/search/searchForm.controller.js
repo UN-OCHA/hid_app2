@@ -27,7 +27,7 @@
         return;
       }
       var searchTerm = $scope.searchTerm.trim();
-      SearchService.UsersAndLists(searchTerm, searchLimit).then(function(data) {
+      SearchService.UsersAndLists(searchTerm, searchLimit, $scope.currentUser).then(function(data) {
         $scope.searchLists = data[0];
         $scope.searchPeople = data[1];
         $scope.showAutocomplete = data[0].length || data[1].length ? true : false;
@@ -83,7 +83,12 @@
         return;
       }
       var searchTerm = $scope.searchUsersTerm.trim();
-      User.query({name: searchTerm, limit: 5, sort: 'name', 'appMetadata.hid.login': true}).$promise.then(function (data) {
+      var params = {name: searchTerm, limit: 5, sort: 'name'};
+      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
+        params['appMetadata.hid.login'] = true;
+      }
+
+      User.query(params).$promise.then(function (data) {
         $scope.landingUsers = data;
         $scope.showUsersAutocomplete = true;
       });
