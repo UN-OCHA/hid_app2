@@ -85,8 +85,9 @@
       var searchTerm = $scope.searchUsersTerm.trim();
       var params = {name: searchTerm, limit: 5, sort: 'name'};
       if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
-        params['appMetadata.hid.login'] = true;
+        params.authOnly = false;
       }
+
 
       User.query(params).$promise.then(function (data) {
         $scope.landingUsers = data;

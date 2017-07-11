@@ -4,6 +4,7 @@
 		"name": "Kathleen",
 		"is_admin": false,
 		"isManager": false,
+		"authOnly": false,
 		"connections": [
 			{
 				"_id": "1",
@@ -134,5 +135,13 @@
 		"_id": "555",
 		"name": "black",
 		"is_orphan": "true"
+	},
+	"authUser": {
+		"_id": "56879",
+		"name": "I am auth user",
+		"is_admin": false,
+		"isManager": false,
+		"email": "authuser@example.com",
+		"authOnly": true
 	}
 }

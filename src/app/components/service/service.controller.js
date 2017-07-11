@@ -120,7 +120,7 @@
     }
 
     function getUsers (search) {
-      User.query({'name': search, 'appMetadata.hid.login': true}, function (users) {
+      User.query({'name': search, authOnly: false}, function (users) {
         $scope.newUsers = filterUsers(users, $scope.subscribers);
       });
     }
@@ -136,7 +136,7 @@
         'subscriptions.service': $scope.service._id,
         limit: $scope.pagination.itemsPerPage,
         sort: 'name',
-        'appMetadata.hid.login': true
+        authOnly: false
       };
       params.offset = offset || 0;
       User.query(params, function (response, headers) {
@@ -145,6 +145,6 @@
         $scope.subscribersLoaded = true;
       });
     }
-    
+
   }
 })();

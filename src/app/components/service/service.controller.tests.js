@@ -3,7 +3,7 @@
 
   describe('Service controller', function () {
 
-  	var $location, ctrlParams, listFixture, mockAlertService, mockGetText, mockService, mockUser, returnedUsersHeaders, 
+  	var $location, ctrlParams, listFixture, mockAlertService, mockGetText, mockService, mockUser, returnedUsersHeaders,
     returnSearchUsers, returnedUsers, savedService, scope, service, userFixture;
 
   	function setUpCtrl () {
@@ -11,7 +11,7 @@
   		service = {
 	  		_id: 'sub-1',
 	  		name: 'My name',
-	  		lists: [listFixture.lists[0], listFixture.lists[1]],	  		
+	  		lists: [listFixture.lists[0], listFixture.lists[1]],
 	  	};
 
   		inject(function($rootScope, $controller, $q, _$location_) {
@@ -89,9 +89,9 @@
       mockService = {};
 	  	mockService.get = function () {};
 	  	spyOn(mockService, 'get').and.callFake(function (params, callback) {
-      	callback(service);	
+      	callback(service);
       });
-      
+
       module('app.service', function($provide) {
         $provide.value('Service', mockService);
       });
@@ -101,16 +101,16 @@
   		};
   		spyOn(mockUser, 'query').and.callFake(function (params, callback) {
         if (params['subscriptions.service']) {//subscribers
-          callback(returnedUsers, returnedUsersHeaders); 
+          callback(returnedUsers, returnedUsersHeaders);
           return;
         }
         callback(returnSearchUsers);
-  			
+
   		});
       module('app.user', function($provide) {
         $provide.value('User', mockUser);
       });
-  		
+
   	});
 
   	describe('Viewing a service', function () {
@@ -118,7 +118,7 @@
   		beforeEach(function () {
   			setUpCtrl();
   		});
-  		
+
   		it('should get the service details', function () {
   			expect(mockService.get).toHaveBeenCalledWith({'serviceId': service._id}, jasmine.any(Function));
   			expect(scope.service._id).toEqual(service._id);
@@ -129,7 +129,7 @@
       });
 
       it('should get the first page of subscribers', function () {
-        expect(mockUser.query).toHaveBeenCalledWith({'subscriptions.service': 'sub-1', limit: 50, sort: 'name', offset: 0, 'appMetadata.hid.login': true}, jasmine.any(Function));
+        expect(mockUser.query).toHaveBeenCalledWith({'subscriptions.service': 'sub-1', limit: 50, sort: 'name', offset: 0, authOnly: false}, jasmine.any(Function));
         expect(scope.subscribers).toEqual([userFixture.user1]);
         expect(scope.subscribersLoaded).toBe(true);
         expect(scope.pagination.totalItems).toEqual(1);
@@ -138,7 +138,7 @@
       it('should get the next page of subscribers', function () {
         scope.pagination.currentPage = 2;
         scope.pageChanged();
-        expect(mockUser.query).toHaveBeenCalledWith({'subscriptions.service': 'sub-1', limit: 50, sort: 'name', offset: 50, 'appMetadata.hid.login': true}, jasmine.any(Function));
+        expect(mockUser.query).toHaveBeenCalledWith({'subscriptions.service': 'sub-1', limit: 50, sort: 'name', offset: 50, authOnly: false}, jasmine.any(Function));
       });
 
   	});
@@ -151,7 +151,7 @@
 
       it('should search for the user', function () {
         scope.getUsers('findme');
-        expect(mockUser.query).toHaveBeenCalledWith({name: 'findme', 'appMetadata.hid.login': true}, jasmine.any(Function))
+        expect(mockUser.query).toHaveBeenCalledWith({name: 'findme', authOnly: false}, jasmine.any(Function))
       });
 
       it('should filter out users who are already subscribed', function () {

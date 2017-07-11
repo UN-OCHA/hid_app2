@@ -93,7 +93,7 @@
   		});
 
   		it('should get the users that match the search term', function () {
-  			expect(User.query).toHaveBeenCalledWith({name: 'findme', limit: 10, sort: 'name', 'appMetadata.hid.login': true});
+  			expect(User.query).toHaveBeenCalledWith({name: 'findme', limit: 10, sort: 'name', authOnly: false});
   		});
 
   		it('should return the matching users and lsits', function () {

@@ -89,7 +89,7 @@
 
       $scope.connectionInfo.phonesPermission = getPermission(user.phone_number, connectionPending, user.phonesVisibility);
       $scope.connectionInfo.emailsPermission = getPermission(user.email, connectionPending, user.emailsVisibility);
-      $scope.connectionInfo.locationsPermission = getPermission(user.location, connectionPending, user.locationsVisibility);  
+      $scope.connectionInfo.locationsPermission = getPermission(user.location, connectionPending, user.locationsVisibility);
       $scope.connectionInfo.canRequestConnection = connectionRequired && !connectionPending;
       permissionsMessage = getPermissionMessage(connectionPending, connectionRequired, verifiedRequired);
 
@@ -123,11 +123,19 @@
       }, 5000);
     }
 
+    function authUserAlert (user, currentUser) {
+      if (user.authOnly && (currentUser.is_admin || currentUser.isManager)) {
+        var authMessage = gettextCatalog.getString('This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID.');
+        alertService.pageAlert('warning', authMessage, 'caution');
+      }
+    }
+
     function getUser () {
       UserDataService.getUser($routeParams.userId, function () {
         $scope.user = UserDataService.user;
         userPicture($scope.user.picture, $scope.user.email);
         setConnectionInfo($scope.user, $scope.currentUser._id);
+        authUserAlert($scope.user, $scope.currentUser);
         if (!$scope.currentUser.verified && $scope.user.is_orphan) {
           $scope.canViewInfo = false;
           alertService.pageAlert('warning', gettextCatalog.getString('In order to view this person’s profile, please contact info@humanitarian.id'));

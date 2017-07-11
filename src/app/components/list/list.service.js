@@ -61,7 +61,7 @@
     }
 
     function cacheListUsers (request, lfusers, deferred) {
-      request['appMetadata.hid.login'] = true;
+      request.authOnly = false;
       User.query(request).$promise.then(function (users) {
         cacheUsers(lfusers, users, 0, numUsersToCache, function (canCache) {
           //return if caching failed

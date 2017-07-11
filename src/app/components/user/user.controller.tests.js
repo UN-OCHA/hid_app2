@@ -57,7 +57,7 @@
 	      if (edit) {
 	      	routeParams.edit = 'edit';
 	      }
-	      
+
   			$controller('UserCtrl', {
           $scope: scope,
           $routeParams: routeParams
@@ -94,7 +94,7 @@
       });
       spyOn(mockAlertService, 'pageAlert').and.callThrough();
       spyOn(mockAlertService, 'resetPageAlert').and.callThrough();
-     
+
       mockmd5.createHash = function () {
       	return 'fake-hash';
       };
@@ -271,7 +271,7 @@
 
 			it('should show the confirmation message', function () {
 				expect(mockAlertService.add).toHaveBeenCalled();
-			});			
+			});
 
   	});
 
@@ -644,7 +644,7 @@
 					setUpCtrl(userFixture.user2, userFixture.user1);
 					scope.requestConnection();
 				});
-				
+
 				it('should send a request to be added to the user\'s connections', function () {
 					expect(scopeUser.requestConnection).toHaveBeenCalledWith(userFixture.user2._id, jasmine.any(Function), jasmine.any(Function));
 				});
@@ -737,6 +737,57 @@
 			});
 
 		});
+
+    describe('Showing auth account banner', function () {
+
+      describe('Viewing an auth user\'s profile as an admin', function () {
+
+        beforeEach(function () {
+          setUpCtrl(userFixture.authUser, userFixture.adminUser);
+        });
+
+        it('should show the auth account banner', function () {
+          expect(mockAlertService.pageAlert).toHaveBeenCalledWith('warning', 'This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID.', 'caution');
+        });
+
+      });
+
+      describe('Viewing an auth user\'s profile as a global manager', function () {
+
+        beforeEach(function () {
+          setUpCtrl(userFixture.authUser, userFixture.globalManagerUser);
+        });
+
+        it('should show the auth account banner', function () {
+          expect(mockAlertService.pageAlert).toHaveBeenCalledWith('warning', 'This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID.', 'caution');
+        });
+
+      });
+
+      describe('Viewing an non-auth user\'s profile as an admin', function () {
+
+        beforeEach(function () {
+          setUpCtrl(userFixture.user1, userFixture.adminUser);
+        });
+
+        it('should not show the auth account banner', function () {
+          expect(mockAlertService.pageAlert).not.toHaveBeenCalledWith('warning', 'This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID.', 'caution');
+        });
+
+      });
+
+      describe('Viewing an non-auth user\'s profile as a global manager', function () {
+
+        beforeEach(function () {
+          setUpCtrl(userFixture.user1, userFixture.globalManagerUser);
+        });
+
+        it('should not show the auth account banner', function () {
+          expect(mockAlertService.pageAlert).not.toHaveBeenCalledWith('warning', 'This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID.', 'caution');
+        });
+
+      });
+    });
 
   });
 

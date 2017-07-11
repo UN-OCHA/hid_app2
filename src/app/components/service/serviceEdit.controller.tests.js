@@ -16,21 +16,21 @@
   		service = {
 	  		_id: '12435',
 	  		name: 'My name',
-	  		lists: [listFixture.lists[0], listFixture.lists[1]],	  		
+	  		lists: [listFixture.lists[0], listFixture.lists[1]],
 	  	};
 
 	  	savedService = Object.assign({}, service);
 	  	savedService.owner = userFixture.user1._id;
 	  	savedService.managers = [userFixture.user2._id];
 
-      
+
 	  	service.$save = function () {};
 	  	service.$update = function () {};
-	  	
+
 	  	spyOn(service, '$update').and.callFake(function (callback) {
 	  		callback(savedService);
 	  	});
-	  	
+
 
 	  	if (type === 'mailchimp') {
 	  		service.mailchimp = {
@@ -110,9 +110,9 @@
      		};
      	};
 	  	mockService.get = function () {};
-	  	
+
 	  	spyOn(mockService, 'get').and.callFake(function (arg, callback) {
-      	callback(service);	
+      	callback(service);
       });
       mockServiceCredentials = {
       	query: function () {}
@@ -132,7 +132,7 @@
       module('app.user', function($provide) {
         $provide.value('User', mockUser);
       });
-  		
+
   	});
 
   	describe('Adding a new service', function () {
@@ -155,7 +155,7 @@
   		beforeEach(function () {
   			setUpCtrl(true);
   		});
-  		
+
   		it('should get the service details', function () {
   			expect(mockService.get).toHaveBeenCalledWith({'serviceId': service._id}, jasmine.any(Function));
   			expect(scope.service._id).toEqual(service._id);
@@ -214,7 +214,7 @@
 			});
 
 			it('should get users from the search term', function () {
-				expect(mockUser.query).toHaveBeenCalledWith({'name': 'findme', 'appMetadata.hid.login': true}, jasmine.any(Function));
+				expect(mockUser.query).toHaveBeenCalledWith({'name': 'findme', authOnly: false}, jasmine.any(Function));
 			});
 
 			it('should filter out users who are already managers', function () {

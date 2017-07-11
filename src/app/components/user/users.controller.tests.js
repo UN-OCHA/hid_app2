@@ -3,7 +3,7 @@
 
   describe('Users controller', function () {
 
-    var countries, defaultParams, filterParams, filterRouteParams, initialUsers, listFixture, listInfo, listParams, listQueryResponse,
+    var adminDefaultParams, countries, defaultParams, filterParams, filterRouteParams, initialUsers, listFixture, listInfo, listParams, listQueryResponse,
     mockGetText, mockhrinfoService, mockList, mockLocation, mockSearchService, mockSidebarService, mockUser,
     mockUserDataService, scope, userFixture;
 
@@ -12,8 +12,9 @@
     beforeEach(function() {
       module('app.user');
 
-      defaultParams = { limit: 50, offset: 0, sort: 'name', 'appMetadata.hid.login': true };
-      listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234', 'appMetadata.hid.login': true };
+      defaultParams = { limit: 50, offset: 0, sort: 'name', authOnly: false };
+      adminDefaultParams = { limit: 50, offset: 0, sort: 'name'};
+      listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234', authOnly: false };
       filterRouteParams = {
         'organizations.orgTypeId': '437',
         'organizations.list': '58b44a313d0ba000db413996'
@@ -91,11 +92,18 @@
 
     });
 
-    function controllerSetup (listId, filters) {
+    function controllerSetup (listId, filters, userType) {
       beforeEach (function () {
         inject(function($controller, $rootScope, $q) {
           scope = $rootScope.$new();
           scope.currentUser = {_id:1};
+
+          if (userType === 'admin') {
+            scope.currentUser.is_admin = true;
+          }
+          if (userType === 'manager') {
+            scope.currentUser.isManager = true;
+          }
 
           var ctrlParams = {
             $scope: scope,
@@ -201,6 +209,40 @@
           expect(mockUserDataService.getUsers).toHaveBeenCalledWith(defaultParams, undefined, jasmine.any(Function));
         });
 
+
+      });
+
+    });
+
+    describe('Viewing Auth users', function () {
+
+      describe('as a standard user', function () {
+
+        controllerSetup();
+
+        it('should not request auth users', function () {
+          expect(mockUserDataService.getUsers).toHaveBeenCalledWith(defaultParams, undefined, jasmine.any(Function));
+        });
+
+      });
+
+      describe('as an admin user', function () {
+
+        controllerSetup(null, null, 'admin');
+
+        it('should request auth users', function () {
+          expect(mockUserDataService.getUsers).toHaveBeenCalledWith(adminDefaultParams, undefined, jasmine.any(Function));
+        });
+
+      });
+
+      describe('as a global manager', function () {
+
+        controllerSetup(null, null, 'manager');
+
+        it('should request auth users', function () {
+          expect(mockUserDataService.getUsers).toHaveBeenCalledWith(adminDefaultParams, undefined, jasmine.any(Function));
+        });
 
       });
 
@@ -370,7 +412,7 @@
         expect(scope.pagination.currentPage).toEqual(1);
       });
 
-      it('should get the second page of filteres users', function () {
+      it('should get the second page of filtered users', function () {
         scope.selectedFilters = {'organizations.orgTypeId': 435};
         filterParams = defaultParams;
         filterParams['organizations.orgTypeId'] = 435;
@@ -413,7 +455,7 @@
           expect(mockUserDataService.getUsers).toHaveBeenCalledWith(filterParams, undefined, jasmine.any(Function));
         });
 
-        it('should format the is verified user type', function () {
+        it('should format the verified user type', function () {
           scope.selectedFilters = {user_type: 'verified'};
           filterParams = defaultParams;
           filterParams.verified = true;
@@ -421,7 +463,7 @@
           expect(mockUserDataService.getUsers).toHaveBeenCalledWith(filterParams, undefined, jasmine.any(Function));
         });
 
-        it('should format the is unverified user type', function () {
+        it('should format the unverified user type', function () {
           scope.selectedFilters = {user_type: 'unverified'};
           filterParams = defaultParams;
           filterParams.verified = false;

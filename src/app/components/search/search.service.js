@@ -32,7 +32,7 @@
     Search.UsersAndLists = function (searchTerm, limit, currentUser) {
       var userParams = {name: searchTerm, limit: limit, sort: 'name'};
       if (currentUser && !currentUser.is_admin && !currentUser.isManager) {
-        userParams['appMetadata.hid.login'] = true;
+        userParams.authOnly = false;
       }
 
       return $q.all([
