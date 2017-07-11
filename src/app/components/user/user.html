@@ -122,13 +122,13 @@
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
           <label for="given_name" class="sr-only" translate>Given name</label>
-          <input type="text" id="given_name" ng-model="user.given_name" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.given_name)" />
+          <input type="text" id="given_name" ng-model="user.given_name" ng-blur="updateUser(user.given_name)" />
 
           <label for="family_name" class="sr-only" translate>Family name</label>
-          <input type="text" id="family_name" ng-model="user.family_name" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.family_name)" />
+          <input type="text" id="family_name" ng-model="user.family_name" ng-blur="updateUser(user.family_name)" />
 
           <label for="user_status" class="sr-only" translate>Status</label>
-          <textarea id="user_status" ng-model="user.status" ng-model-options="{debounce: 1000}" ng-change="updateUser(user.status)"></textarea>
+          <textarea id="user_status" ng-model="user.status" ng-blur="updateUser(user.status)"></textarea>
         </div>
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="profile-header__upload--mobile">
