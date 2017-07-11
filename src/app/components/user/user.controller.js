@@ -124,8 +124,7 @@
     }
 
     function authUserAlert (user, currentUser) {
-      if ((!user.appMetadata || !user.appMetadata.hid || !user.appMetadata.hid.login)
-           && (currentUser.is_admin || currentUser.isManager)) {
+      if (user.authOnly && (currentUser.is_admin || currentUser.isManager)) {
         var authMessage = gettextCatalog.getString('This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID.');
         alertService.pageAlert('warning', authMessage, 'caution');
       }

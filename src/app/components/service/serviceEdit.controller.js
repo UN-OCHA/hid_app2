@@ -47,9 +47,9 @@
         });
         return;
       }
-    
+
       $scope.service = new Service();
-      $scope.service.lists = [];    
+      $scope.service.lists = [];
     }
 
     initService();
@@ -99,12 +99,12 @@
     function saveService () {
       $scope.service.lists = $scope.selectedLists;
       $scope.service.managers = $scope.managers;
-     
+
       if ($scope.service._id) {
         $scope.service.$update(saveSuccess, saveError);
         return;
       }
-     
+
       $scope.service.$save(saveSuccess, saveError);
     }
 
@@ -115,7 +115,7 @@
       Service
         .getMailchimpLists($scope.service.mailchimp.apiKey)
         .then(function (result) {
-          $scope.mailchimpLists = result.data.lists;          
+          $scope.mailchimpLists = result.data.lists;
         }, function () {
           alertService.add('danger', gettextCatalog.getString('Invalid API key'));
           $scope.service.mailchimp.apiKey = '';
@@ -132,7 +132,7 @@
     }
 
     function getUsers (search) {
-      User.query({'name': search, 'appMetadata.hid.login': true}, function (users) {
+      User.query({'name': search, authOnly: false}, function (users) {
         $scope.newUsers = filterManagers(users);
       });
     }
@@ -152,7 +152,7 @@
         })[0];
         return inManagers ? false : true;
       });
-      
+
       return filteredUsers;
     }
 

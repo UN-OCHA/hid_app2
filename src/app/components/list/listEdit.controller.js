@@ -31,7 +31,7 @@
         return;
       }
 
-      $scope.newManagers = User.query({name: search,  'appMetadata.hid.login': true});
+      $scope.newManagers = User.query({name: search,  authOnly: false});
     }
 
     function formatManagers (list) {
@@ -53,7 +53,7 @@
        list.labels[index].text =list.label;
        return list;
       }
-     
+
       list.labels.push({
         text:list.label,
         language: language
@@ -77,7 +77,7 @@
           text: $scope.list.label,
           language: $scope.language
         }
-      ]; 
+      ];
       List.save($scope.list, function (list) {
         $scope.saving = false;
         $location.path('/lists/' + list._id);

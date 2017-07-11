@@ -73,8 +73,8 @@
 	  describe('Caching lists', function () {
 
 	  	beforeEach(function () {
-	  		initialParams = { limit: 100, offset: 0, sort: 'name', 'operations.list': '1234', 'appMetadata.hid.login': true};
-	  		nextPageParams = { limit: 100, offset: 100, sort: 'name', 'operations.list': '1234', 'appMetadata.hid.login': true};
+	  		initialParams = { limit: 100, offset: 0, sort: 'name', 'operations.list': '1234', authOnly: false};
+	  		nextPageParams = { limit: 100, offset: 100, sort: 'name', 'operations.list': '1234', authOnly: false};
 	  		mockList.cache();
 	  	});
 

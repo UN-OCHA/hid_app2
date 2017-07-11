@@ -12,9 +12,9 @@
     beforeEach(function() {
       module('app.user');
 
-      defaultParams = { limit: 50, offset: 0, sort: 'name', 'appMetadata.hid.login': true };
+      defaultParams = { limit: 50, offset: 0, sort: 'name', authOnly: false };
       adminDefaultParams = { limit: 50, offset: 0, sort: 'name'};
-      listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234', 'appMetadata.hid.login': true };
+      listParams = { limit: 50, offset: 0, sort: 'name', 'lists.list': '1234', authOnly: false };
       filterRouteParams = {
         'organizations.orgTypeId': '437',
         'organizations.list': '58b44a313d0ba000db413996'

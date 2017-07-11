@@ -419,7 +419,7 @@ module('gettext', function($provide) {
     });
 
       it('should search for users', function () {
-       expect(mockUser.query).toHaveBeenCalledWith({name: 'findme', 'appMetadata.hid.login': true}, jasmine.any(Function));
+       expect(mockUser.query).toHaveBeenCalledWith({name: 'findme', authOnly: false}, jasmine.any(Function));
      });
 
       it('should filter out users who are already checked in and who have already been selected', function () {

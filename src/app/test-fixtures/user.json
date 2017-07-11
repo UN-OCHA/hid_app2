@@ -4,11 +4,7 @@
 		"name": "Kathleen",
 		"is_admin": false,
 		"isManager": false,
-		"appMetadata": {
-			"hid": {
-				"login": true
-			}
-		},
+		"authOnly": false,
 		"connections": [
 			{
 				"_id": "1",
@@ -145,6 +141,7 @@
 		"name": "I am auth user",
 		"is_admin": false,
 		"isManager": false,
-		"email": "authuser@example.com"
+		"email": "authuser@example.com",
+		"authOnly": true
 	}
 }

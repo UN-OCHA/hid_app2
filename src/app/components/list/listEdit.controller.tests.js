@@ -10,7 +10,7 @@
       name: 'My new list'
     };
     editList = listFixture.lists[0];
-    editList.$update = function () {};      
+    editList.$update = function () {};
     managers = [
       {
         _id: 'found'
@@ -32,7 +32,7 @@
         if (editing) {
           ctrlParams.$routeParams.list = editList._id;
         }
-        
+
 
         $controller('ListEditCtrl', ctrlParams);
         scope.$digest();
@@ -40,14 +40,14 @@
     }
 
     beforeEach(function() {
-      
+
       mockList = function () {};
-      
+
       mockList.get = function () {
         return editList;
       };
       mockList.save = function () {};
-      mockList.$update = function () {};      
+      mockList.$update = function () {};
       spyOn(mockList, 'get').and.callThrough();
       spyOn(mockList, 'save').and.callFake(function (arg, callback) {
         callback(newList);
@@ -77,8 +77,8 @@
         $provide.value('gettextCatalog', mockGetText);
       });
 
-      
-    	
+
+
     });
 
     describe('Adding a new list', function () {
@@ -166,7 +166,7 @@
           });
 
         });
-        
+
       });
 
     });
@@ -178,7 +178,7 @@
 
       it('should get users that match the search term', function () {
         scope.getManagers('findme');
-        expect(mockUser.query).toHaveBeenCalledWith({name: 'findme', 'appMetadata.hid.login': true});
+        expect(mockUser.query).toHaveBeenCalledWith({name: 'findme', authOnly: false});
         expect(scope.newManagers).toEqual(managers);
       });
 
