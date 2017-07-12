@@ -30,7 +30,7 @@
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
     };
-
+    var showingAuthBanner = false;
     var permissionsMessage;
     var connectionRequired = false;
     var verifiedRequired = false;
@@ -127,6 +127,7 @@
       if (user.authOnly && (currentUser.is_admin || currentUser.isManager)) {
         var authMessage = gettextCatalog.getString('This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID.');
         alertService.pageAlert('warning', authMessage, 'caution');
+        showingAuthBanner = true;
       }
     }
 
@@ -170,6 +171,11 @@
       $scope.saving.status = data.status;
       showSavedMessage(data.message);
       UserDataService.formatUserLocations();
+
+      if (showingAuthBanner && !$scope.user.authOnly) {
+        showingAuthBanner = false;
+        alertService.resetPageAlert();
+      }
     });
 
     $scope.notify = function () {
