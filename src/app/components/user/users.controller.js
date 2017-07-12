@@ -68,6 +68,10 @@
       {
         value: 'is_admin',
         label: gettextCatalog.getString('Adminstrator')
+      },
+      {
+        value: 'authOnly',
+        label: gettextCatalog.getString('Auth user')
       }
     ];
     $scope.orgTypes = [
