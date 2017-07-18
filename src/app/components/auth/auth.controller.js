@@ -25,6 +25,7 @@
 
     function onFirstLogin () {
       $scope.currentUser.setAppMetaData({login: true});
+      $scope.currentUser.authOnly = false;
       $scope.currentUser.$update(function () {
         $scope.setCurrentUser($scope.currentUser);
         $location.path('/start');
@@ -48,7 +49,7 @@
 
           //HIDv1 user first login (login is already set to true)
           if ($scope.currentUser.appMetadata.hid.login && !$scope.currentUser.appMetadata.hid.viewedTutorial) {
-            $location.path('/tutorial'); 
+            $location.path('/tutorial');
             return;
           }
 
