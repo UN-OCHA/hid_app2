@@ -154,6 +154,10 @@
             expect(scope.currentUser.setAppMetaData).toHaveBeenCalledWith({login: true});
           });
 
+          it('should set authOnly to false', function () {
+            expect(scope.currentUser.authOnly).toBe(false);
+          });
+
           it('should update the user', function () {
             expect(scope.currentUser.$update).toHaveBeenCalled();
           });
