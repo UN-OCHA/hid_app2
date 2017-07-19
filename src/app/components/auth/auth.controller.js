@@ -75,6 +75,10 @@
           alertService.add('danger', gettextCatalog.getString('We could not log you in, the email address does not exist.'));
           return;
         }
+        if (error.status === 429) {
+          alertService.add('danger', gettextCatalog.getString('Your account has been locked for 5 minutes due to too many unsuccessful login attempts'));
+          return;
+        }
         alertService.add('danger', gettextCatalog.getString('There was an error logging in.'));
         $exceptionHandler(error, 'Log in fail');
       });
