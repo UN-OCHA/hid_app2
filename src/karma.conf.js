@@ -49,6 +49,8 @@ module.exports = function(config) {
         'app/components/**/*.service.js',
         'app/components/**/*.directive.js',
         'app/components/**/*.tests.js',
+        'app/common/validators.directive.js',
+        'app/common/validators.directive.tests.js',
         {pattern: 'app/test-fixtures/**/*.json', included: false},
     ],
 
@@ -62,7 +64,8 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
         'app/components/**/*.controller.js': 'coverage',
-        'app/components/**/*.service.js': 'coverage'
+        'app/components/**/*.service.js': 'coverage',
+        'app/common/validators.directive.js': 'coverage'
     },
 
 

@@ -285,7 +285,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/register', {
         templateUrl: 'app/components/auth/register.html',
-        controller: 'UserRegisterCtrl',
+        controller: 'UserNewCtrl',
         title: 'Register'
       })
       .when('/password_reset', {
