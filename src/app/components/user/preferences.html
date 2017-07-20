@@ -42,6 +42,7 @@
     <form name="changePassword" ng-submit="changePassword.$valid && savePassword(changePassword)" autocomplete="off" novalidate>
       <fieldset class="block">
         <legend class="block-heading" translate>Change password</legend>
+        <p class="form-field" translate>Passwords must be at least <strong>8 characters</strong> long, contain at least one <strong>number</strong>, one <strong>uppercase character</strong> and one <strong>lowercase character</strong>.</p>
         <div class="form-field" ng-class="{'has-error': changePassword.oldPassword.$touched && changePassword.oldPassword.$invalid}">
           <label for="oldPassword" translate>Current password</label>
           <input name="oldPassword" id="oldPassword" type="password" class="form-control" placeholder="{{'Your current password' | translate}}" ng-model="password.old" required>

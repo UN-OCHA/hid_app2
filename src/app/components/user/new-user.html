@@ -22,15 +22,15 @@
   </div>
   <div class="form-field" ng-class="{'has-error': register.password.$touched && register.password.$invalid}" ng-if="isRegistration">
     <label for="password" translate>Password</label>
-    <p>Passwords must be at least <strong>8 characters</strong> long, contain at least one <strong>number</strong>, one <strong>uppercase character</strong> and one <strong>lowercase character</strong>.</p>
-    <input type="password" name="password" class="form-control" id="password" placeholder="" ng-model="user.password" validate-password required>
+    <p class="form-hint" translate>Passwords must be at least <strong>8 characters</strong> long, contain at least one <strong>number</strong>, one <strong>uppercase character</strong> and one <strong>lowercase character</strong>.</p>
+    <input type="password" name="password" class="form-control" id="password" placeholder="{{'Your password' | translate}}" ng-model="user.password" validate-password required>
     <div ng-messages="register.password.$error" ng-show="register.password.$touched" ng-messages-multiple="ng-messages-multiple">
       <div ng-messages-include="app/common/messages.html"></div>
     </div>
   </div>
   <div class="form-field" ng-class="{'has-error': register.password_confirm.$touched && register.password_confirm.$invalid}" ng-if="isRegistration">
     <label for="password_confirm" translate>Password (confirm)</label>
-    <input type="password" name="password_confirm" class="form-control" match-password="password" id="password_confirm" placeholder="" ng-model="user.confirm_password" required>
+    <input type="password" name="password_confirm" class="form-control" match-password="password" id="password_confirm" placeholder="{{'Your password' | translate}}" ng-model="user.confirm_password" required>
     <div ng-messages="register.password_confirm.$error" ng-show="register.password_confirm.$touched" ng-messages-multiple="ng-messages-multiple">
       <div ng-messages-include="app/common/messages.html"></div>
     </div>
