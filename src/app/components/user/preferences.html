@@ -51,7 +51,7 @@
         </div>
         <div class="form-field" ng-class="{'has-error': changePassword.newPassword.$touched && changePassword.newPassword.$invalid}">
           <label for="newPassword" translate>New password</label>
-          <input type="password" name="newPassword" id="newPassword" class="form-control" placeholder="{{'Your new password' | translate}}" ng-model="password.new" required>
+          <input type="password" name="newPassword" id="newPassword" class="form-control" placeholder="{{'Your new password' | translate}}" ng-model="password.new" validate-password required>
           <div ng-messages="changePassword.newPassword.$error" ng-show="changePassword.newPassword.$touched" ng-messages-multiple="ng-messages-multiple">
             <div ng-messages-include="app/common/messages.html"></div>
           </div>
