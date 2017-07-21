@@ -45,7 +45,7 @@
 .global-header__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: $global-header-height;
 
   &:after {
@@ -54,7 +54,7 @@
 
   .no-flexbox & {
     display: block;
-    
+
     &:after {
       content: "";
       display: table;
@@ -101,6 +101,10 @@
     }
   }
 
+  .global-header__inner {
+    justify-content: space-between;
+  }
+
   .global-header__back {
     display: none;
   }
@@ -132,7 +136,7 @@
       padding: $base-unit;
       min-width: 230px;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-      
+
       li {
         border-color: rgba(255,255,255,0.5);
       }
@@ -169,7 +173,7 @@
   .global-header__sites-arrow {
     .icon {
       margin: 0;
-      
+
       .open & {
         transform: rotate(180deg)
       }

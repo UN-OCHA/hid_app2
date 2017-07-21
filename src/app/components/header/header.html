@@ -24,6 +24,22 @@
         </ul>
       </div>
 
+      <div class="global-header__nav" ng-if="isAuthenticated && hideHeaderFooter">
+        <ul class="nav nav--secondary">
+          <li class="nav__item" uib-dropdown>
+            <button type="button" class="nav__link nav__link--solo t-user-dropdown-btn btn btn-transparent" uib-dropdown-toggle>
+              <icon name="user"></icon>
+              <span class="nav__label">{{currentUser.name}}</span>
+              <icon name="arrow-down" text="Open user menu"></icon>
+            </button>
+
+            <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+              <li><a href="/logout" class="t-logout-link" translate>Log out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
       <div class="global-header__nav" ng-show="isAuthenticated && !hideHeaderFooter">
 
         <ul class="nav nav--secondary">
