@@ -4,6 +4,7 @@
 
 .nav--secondary {
   display: flex;
+  justify-content: flex-end;
 
   button {
     text-transform: none;
@@ -77,7 +78,7 @@
     }
   }
 
-  
+
 }
 
 .nav-item__notifications {
@@ -102,6 +103,12 @@
     top: 2px;
     height: $base-unit*1.5;
     z-index: 1;
+  }
+
+  &.nav__link--solo {
+    &:before {
+      content: none;
+    }
   }
 
   .icon {
