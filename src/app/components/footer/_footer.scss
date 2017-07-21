@@ -74,22 +74,8 @@
 	display: none;
 }
 
-@include media-query(sm) {
-
-	.footer-platforms__item {
-		width: 20%;
-		padding: 0 $base-unit*3 0 0;
-	}
-
-	.footer-platforms__logo {
-		margin-right: $base-unit*2;
-		height: $base-unit*7;
-	}
-
-}
-
 @include media-query(md) {
-	
+
 	.footer {
 		padding-top: $base-unit*4;
 		padding-bottom: $base-unit*4;
@@ -97,73 +83,6 @@
 
 	.footer-social {
 		text-align: right;
-	}
-
-	.footer-platforms__list {
-		flex-wrap: nowrap;
-	}
-
-	.footer-platforms__item {
-		width: auto;
-		max-width: 12.5%;
-		margin: 0 $base-unit*2 0 0;
-		padding: 0 $base-unit*2;
-
-		&:after {
-			content: "";
-			width: 1px;
-			height: $base-unit*1.5;
-			background: rgba(255,255,255,0.6);
-			position: absolute;
-			right: 0;
-			bottom: $base-unit*.75;
-		}
-
-		&:first-child {
-			padding: 0 $base-unit*2 0 0;
-		}
-
-		&:last-child {
-			&:after {
-				content: none;
-			}
-		}
-	}
-
-	.footer-platforms__logo {
-		max-width: 100%;
-	}
-
-	.footer-platforms__logo--humanitarian-response {
-		width: 108px;
-	}
-
-	.footer-platforms__logo--reliefweb {
-		width: 130px;
-	}
-
-	.footer-platforms__logo--iasc {
-		width: 96px;
-	}
-
-	.footer-platforms__logo--dart {
-		width: 94px;
-	}
-
-	.footer-platforms__logo--acaps {
-		width: 89px;
-	}
-
-	.footer-platforms__logo--factr {
-		width: 46px;
-	}
-
-	.footer-platforms__logo--hxl {
-		width: 115px;
-	}
-
-	.footer-platforms__logo--humanitarian-leadership {
-		width: 102px;
 	}
 
 }
@@ -182,14 +101,6 @@
 		margin-right: $base-unit*2;
 	}
 
-	.footer-platforms__item {
-		max-width: 9%;
-
-		&:after {
-			bottom: $base-unit*2;
-		}
-	}
-
 	.footer-platforms {
 		display: block;
 	}
@@ -206,12 +117,32 @@
 
 	.footer-platforms__item {
 		position: relative;
-		width: percentage(1/3);
-		margin-bottom: $base-unit*2;
+		width: 9%;
+		margin: 0 $base-unit*2 $base-unit*2 0;
 		padding: 0 $base-unit*3 0 0;
 
 		.no-flexbox & {
 			display: inline-block;
+		}
+
+		&:after {
+			content: "";
+			width: 1px;
+			height: $base-unit*1.5;
+			background: rgba(255,255,255,0.6);
+			position: absolute;
+			right: 0;
+			bottom: $base-unit*2;
+		}
+
+		&:first-child {
+			padding: 0 $base-unit*2 0 0;
+		}
+
+		&:last-child {
+			&:after {
+				content: none;
+			}
 		}
 	}
 
@@ -226,7 +157,7 @@
 		background-position: left bottom;
 		background-repeat: no-repeat;
 		background-size: contain;
-		color: $text-light;	
+		color: $text-light;
 
 		.no-svg & {
 			text-indent: 0;
