@@ -4,7 +4,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: src/app/components/user/user.html:289
+#: src/app/components/user/user.html:290
 #: src/app/components/user/user.html:336
 msgid "/ Unverified"
 msgstr ""
@@ -28,7 +28,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:75
+#: src/app/components/user/users.controller.js:79
 msgid "Academic / Research"
 msgstr ""
 
@@ -52,23 +52,23 @@ msgstr ""
 msgid "Add Service"
 msgstr ""
 
-#: src/app/components/user/user.html:488
+#: src/app/components/user/user.html:487
 msgid "Add a job title"
 msgstr ""
 
-#: src/app/components/user/user.html:486
+#: src/app/components/user/user.html:485
 msgid "Add a job title:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:217
+#: src/app/components/checkin/checkin.html:216
 msgid "Add a new email address:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:353
+#: src/app/components/checkin/checkin.html:351
 msgid "Add a new job title:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:279
+#: src/app/components/checkin/checkin.html:277
 msgid "Add a new location"
 msgstr ""
 
@@ -84,16 +84,16 @@ msgstr ""
 msgid "Add a new phone number:"
 msgstr ""
 
-#: src/app/components/user/user.html:429
+#: src/app/components/user/user.html:428
 msgid "Add an organization:"
 msgstr ""
 
-#: src/app/components/user/user.html:297
+#: src/app/components/user/user.html:298
 msgid "Add email:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:311
-#: src/app/components/user/user.html:589
+#: src/app/components/checkin/checkin.html:309
+#: src/app/components/user/user.html:588
 msgid "Add location"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgstr ""
 msgid "Add new Member"
 msgstr ""
 
-#: src/app/components/user/preferences.html:131
+#: src/app/components/user/preferences.html:134
 msgid "Add new key"
 msgstr ""
 
@@ -117,16 +117,16 @@ msgstr ""
 msgid "Add social network:"
 msgstr ""
 
-#: src/app/components/user/user.html:736
+#: src/app/components/user/user.html:735
 msgid "Add website:"
 msgstr ""
 
-#: src/app/components/user/user.html:642
+#: src/app/components/user/user.html:641
 msgid "Additional Information"
 msgstr ""
 
-#: src/app/components/user/user.html:772
-#: src/app/components/user/user.html:783
+#: src/app/components/user/user.html:771
+#: src/app/components/user/user.html:782
 msgid "Administrator"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 msgid "All subscriptions"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:286
+#: src/app/components/user/userEdit.controller.js:289
 msgid "Already added"
 msgstr ""
 
@@ -172,7 +172,7 @@ msgstr ""
 msgid "Are you about to deploy to a new operation, join the response to a specific disaster or start working with a different sector or cluster? If so, check in to the relevant contact lists and don’t forget to check out when you leave the country."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:340
+#: src/app/components/user/userEdit.controller.js:343
 msgid "Are you sure you want to check out of this list?"
 msgstr ""
 
@@ -180,7 +180,7 @@ msgstr ""
 msgid "Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:243
+#: src/app/components/user/user.controller.js:257
 #: src/app/components/user/userOptions.controller.js:27
 msgid "Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore."
 msgstr ""
@@ -206,11 +206,15 @@ msgstr ""
 msgid "Associated lists"
 msgstr ""
 
-#: src/app/components/user/preferences.html:75
+#: src/app/components/user/users.controller.js:74
+msgid "Auth user"
+msgstr ""
+
+#: src/app/components/user/preferences.html:76
 msgid "Authorized Applications"
 msgstr ""
 
-#: src/app/components/user/preferences.html:73
+#: src/app/components/user/preferences.html:74
 msgid "Authorized applications"
 msgstr ""
 
@@ -229,7 +233,7 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: src/app/components/user/preferences.html:92
+#: src/app/components/user/preferences.html:93
 msgid "Change settings"
 msgstr ""
 
@@ -253,8 +257,8 @@ msgstr ""
 msgid "Changed primary phone number to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:411
-#: src/app/components/header/header.html:90
+#: src/app/components/checkin/checkin.html:409
+#: src/app/components/header/header.html:107
 msgid "Check in"
 msgstr ""
 
@@ -262,7 +266,7 @@ msgstr ""
 msgid "Check in and out"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:375
+#: src/app/components/checkin/checkin.html:373
 msgid "Check in modifications"
 msgstr ""
 
@@ -275,12 +279,12 @@ msgstr ""
 msgid "Check into a list"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:410
+#: src/app/components/checkin/checkin.html:408
 msgid "Check me in"
 msgstr ""
 
 #: src/app/components/checkin/checkout-page.html:4
-#: src/app/components/header/header.html:91
+#: src/app/components/header/header.html:108
 msgid "Check out"
 msgstr ""
 
@@ -297,7 +301,7 @@ msgstr ""
 msgid "Choose the list"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:178
+#: src/app/components/user/user.controller.js:192
 msgid "Claim email sent successfully"
 msgstr ""
 
@@ -338,16 +342,16 @@ msgstr ""
 msgid "Cluster"
 msgstr ""
 
-#: src/app/components/user/user.html:696
+#: src/app/components/user/user.html:695
 msgid "Clusters / Working Groups"
 msgstr ""
 
-#: src/app/components/user/user.html:720
+#: src/app/components/user/user.html:719
 msgid "Co-ordination Hubs"
 msgstr ""
 
 #: src/app/components/selectLists/selectLists.controller.js:34
-#: src/app/components/user/user-filters.html:66
+#: src/app/components/user/user-filters.html:65
 msgid "Co-ordination hub"
 msgstr ""
 
@@ -356,8 +360,8 @@ msgstr ""
 msgid "Code of conduct"
 msgstr ""
 
-#: src/app/components/auth/reset_password.html:20
-#: src/app/components/user/preferences.html:61
+#: src/app/components/auth/reset_password.html:23
+#: src/app/components/user/preferences.html:62
 msgid "Confirm new password"
 msgstr ""
 
@@ -378,7 +382,7 @@ msgstr ""
 msgid "Connection removed"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:253
+#: src/app/components/user/user.controller.js:267
 msgid "Connection request sent"
 msgstr ""
 
@@ -408,7 +412,7 @@ msgid "Copy Email Addresses"
 msgstr ""
 
 #: src/app/components/user/kiosk.html:76
-#: src/app/components/user/user-filters.html:46
+#: src/app/components/user/user-filters.html:45
 #: src/app/components/user/users.html:41
 msgid "Country"
 msgstr ""
@@ -425,7 +429,7 @@ msgstr ""
 msgid "Create a new service"
 msgstr ""
 
-#: src/app/components/auth/reset_password.html:5
+#: src/app/components/auth/reset_password.html:6
 msgid "Create a password"
 msgstr ""
 
@@ -433,7 +437,7 @@ msgstr ""
 msgid "Create new List"
 msgstr ""
 
-#: src/app/components/auth/reset_password.html:29
+#: src/app/components/auth/reset_password.html:32
 msgid "Create password"
 msgstr ""
 
@@ -441,7 +445,7 @@ msgstr ""
 msgid "Create your own contact lists and share them with others. Let others check in to your lists or decide for yourself who can join."
 msgstr ""
 
-#: src/app/components/user/user.html:800
+#: src/app/components/user/user.html:799
 msgid "Created"
 msgstr ""
 
@@ -453,15 +457,15 @@ msgstr ""
 msgid "Current connections"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:178
+#: src/app/components/checkin/checkin.html:177
 msgid "Current email address"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:322
+#: src/app/components/checkin/checkin.html:320
 msgid "Current job title"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:248
+#: src/app/components/checkin/checkin.html:246
 msgid "Current location"
 msgstr ""
 
@@ -469,7 +473,7 @@ msgstr ""
 msgid "Current organization"
 msgstr ""
 
-#: src/app/components/user/preferences.html:46
+#: src/app/components/user/preferences.html:47
 msgid "Current password"
 msgstr ""
 
@@ -478,7 +482,7 @@ msgid "Current phone number"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.html:4
-#: src/app/components/header/header.html:88
+#: src/app/components/header/header.html:105
 msgid "Dashboard"
 msgstr ""
 
@@ -494,8 +498,8 @@ msgstr ""
 msgid "Delete User"
 msgstr ""
 
-#: src/app/components/user/preferences.html:119
-#: src/app/components/user/preferences.html:121
+#: src/app/components/user/preferences.html:122
+#: src/app/components/user/preferences.html:124
 msgid "Delete account"
 msgstr ""
 
@@ -512,7 +516,7 @@ msgstr ""
 msgid "Delete service"
 msgstr ""
 
-#: src/app/components/user/preferences.html:120
+#: src/app/components/user/preferences.html:123
 msgid "Deleting your account means that you will lose your access to Humanitarian ID."
 msgstr ""
 
@@ -535,11 +539,11 @@ msgid "Developers"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:21
-#: src/app/components/user/user-filters.html:35
+#: src/app/components/user/user-filters.html:34
 msgid "Disaster"
 msgstr ""
 
-#: src/app/components/user/user.html:708
+#: src/app/components/user/user.html:707
 msgid "Disasters"
 msgstr ""
 
@@ -551,7 +555,7 @@ msgstr ""
 msgid "Domain"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:79
+#: src/app/components/user/users.controller.js:83
 msgid "Donor"
 msgstr ""
 
@@ -585,31 +589,31 @@ msgstr ""
 msgid "Edit service"
 msgstr ""
 
-#: src/app/components/auth/login.html:8
+#: src/app/components/auth/login.html:9
 #: src/app/components/auth/password_reset.html:9
 #: src/app/components/user/kiosk.html:127
 #: src/app/components/user/kiosk.html:27
 #: src/app/components/user/new-user.html:3
-#: src/app/components/user/user.html:269
+#: src/app/components/user/user.html:270
 msgid "Email"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:232
+#: src/app/components/checkin/checkin.html:230
 #: src/app/components/user/new-user.html:4
 #: src/app/components/user/user.html:307
 #: src/app/components/user/user.html:308
 msgid "Email address"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:218
+#: src/app/components/checkin/checkin.html:217
 msgid "Email addresses must be verified before they can be set as primary."
 msgstr ""
 
-#: src/app/components/user/user.html:299
+#: src/app/components/user/user.html:300
 msgid "Email type"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:83
+#: src/app/components/user/users.controller.js:87
 msgid "Embassy"
 msgstr ""
 
@@ -633,7 +637,7 @@ msgstr ""
 msgid "Family name"
 msgstr ""
 
-#: src/app/components/header/header.html:64
+#: src/app/components/header/header.html:81
 msgid "Feedback"
 msgstr ""
 
@@ -641,35 +645,35 @@ msgstr ""
 msgid "Feel free to export your contact list into PDF or other available formats."
 msgstr ""
 
-#: src/app/components/user/user-filters.html:64
+#: src/app/components/user/user-filters.html:63
 msgid "Filter by co-ordination hub"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:43
+#: src/app/components/user/user-filters.html:42
 msgid "Filter by country"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:33
+#: src/app/components/user/user-filters.html:32
 msgid "Filter by disaster"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:87
+#: src/app/components/user/user-filters.html:86
 msgid "Filter by group"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:54
+#: src/app/components/user/user-filters.html:53
 msgid "Filter by operation"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:107
+#: src/app/components/user/user-filters.html:106
 msgid "Filter by organization"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:97
+#: src/app/components/user/user-filters.html:96
 msgid "Filter by organization type"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:117
+#: src/app/components/user/user-filters.html:116
 msgid "Filter by role"
 msgstr ""
 
@@ -699,7 +703,7 @@ msgstr ""
 msgid "Forgot your password?"
 msgstr ""
 
-#: src/app/components/user/user.html:645
+#: src/app/components/user/user.html:644
 msgid "Functional roles"
 msgstr ""
 
@@ -719,14 +723,14 @@ msgstr ""
 msgid "Given name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:87
+#: src/app/components/user/users.controller.js:91
 msgid "Government"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:17
 #: src/app/components/selectLists/selectLists.controller.js:28
 #: src/app/components/service/new-service.html:55
-#: src/app/components/user/user-filters.html:89
+#: src/app/components/user/user-filters.html:88
 msgid "Group"
 msgstr ""
 
@@ -746,16 +750,12 @@ msgstr ""
 msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
 msgstr ""
 
-#: src/app/components/auth/auth.controller.js:18
-msgid "Humanitarian ID version 2.0 is live! To log in for the first time, please reset your password by clicking on"
-msgstr ""
-
-#: src/app/components/header/header.html:89
+#: src/app/components/header/header.html:106
 #: src/app/components/search/search.controller.js:11
 msgid "Humanitarian contacts"
 msgstr ""
 
-#: src/app/components/user/user.html:411
+#: src/app/components/user/user.html:410
 msgid "Humanitarian details"
 msgstr ""
 
@@ -779,7 +779,7 @@ msgstr ""
 msgid "If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:133
+#: src/app/components/user/user.controller.js:142
 msgid "In order to view this person’s profile, please contact info@humanitarian.id"
 msgstr ""
 
@@ -791,11 +791,11 @@ msgstr ""
 msgid "Info / actions"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:91
+#: src/app/components/user/users.controller.js:95
 msgid "International NGO"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:95
+#: src/app/components/user/users.controller.js:99
 msgid "International Organization"
 msgstr ""
 
@@ -812,11 +812,11 @@ msgstr ""
 msgid "Job title"
 msgstr ""
 
-#: src/app/components/user/user.html:473
+#: src/app/components/user/user.html:472
 msgid "Job titles"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:64
+#: src/app/components/user/userEdit.controller.js:65
 msgid "Landline"
 msgstr ""
 
@@ -825,7 +825,7 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: src/app/components/user/user.html:799
+#: src/app/components/user/user.html:798
 msgid "Last Updated"
 msgstr ""
 
@@ -870,33 +870,34 @@ msgstr ""
 msgid "Lists I'm part of"
 msgstr ""
 
-#: src/app/components/user/preferences.html:95
+#: src/app/components/user/preferences.html:96
 msgid "Locale"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:305
+#: src/app/components/checkin/checkin.html:303
 #: src/app/components/start/start.html:66
-#: src/app/components/user/user.html:579
+#: src/app/components/user/user.html:578
 msgid "Locality"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:25
+#: src/app/components/user/user-filters.html:24
 msgid "Location filters"
 msgstr ""
 
-#: src/app/components/user/user.html:527
+#: src/app/components/user/user.html:526
 msgid "Locations"
 msgstr ""
 
 #: src/app/components/auth/login.html:4
-msgid "Log in to<br> Humanitarian ID."
+msgid "Log in to Humanitarian ID."
 msgstr ""
 
-#: src/app/components/header/header.html:65
+#: src/app/components/header/header.html:37
+#: src/app/components/header/header.html:82
 msgid "Log out"
 msgstr ""
 
-#: src/app/components/auth/login.html:22
+#: src/app/components/auth/login.html:23
 msgid "Login"
 msgstr ""
 
@@ -926,8 +927,8 @@ msgstr ""
 msgid "Manage your own lists"
 msgstr ""
 
-#: src/app/components/user/user.html:773
-#: src/app/components/user/user.html:792
+#: src/app/components/user/user.html:772
+#: src/app/components/user/user.html:791
 msgid "Manager"
 msgstr ""
 
@@ -939,7 +940,7 @@ msgstr ""
 msgid "Mark as favourite"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:99
+#: src/app/components/user/users.controller.js:103
 msgid "Media"
 msgstr ""
 
@@ -955,11 +956,11 @@ msgstr ""
 msgid "Middle Name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:103
+#: src/app/components/user/users.controller.js:107
 msgid "Military"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:65
+#: src/app/components/user/userEdit.controller.js:66
 msgid "Mobile"
 msgstr ""
 
@@ -986,17 +987,18 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:107
+#: src/app/components/user/users.controller.js:111
 msgid "National NGO"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:357
+#: src/app/components/checkin/checkin.html:355
 msgid "New job title"
 msgstr ""
 
-#: src/app/components/auth/reset_password.html:10
 #: src/app/components/auth/reset_password.html:13
-#: src/app/components/user/preferences.html:53
+#: src/app/components/auth/reset_password.html:16
+#: src/app/components/auth/reset_password.html:24
+#: src/app/components/user/preferences.html:54
 msgid "New password"
 msgstr ""
 
@@ -1010,7 +1012,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/app/components/user/preferences.html:76
+#: src/app/components/user/preferences.html:77
 msgid "No applications currently have access to your Humanitarian ID account."
 msgstr ""
 
@@ -1018,19 +1020,19 @@ msgstr ""
 msgid "No approved connections"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:182
+#: src/app/components/checkin/checkin.html:181
 msgid "No email"
 msgstr ""
 
-#: src/app/components/user/user.html:291
+#: src/app/components/user/user.html:292
 msgid "No emails"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:325
+#: src/app/components/checkin/checkin.html:323
 msgid "No job title"
 msgstr ""
 
-#: src/app/components/user/user.html:480
+#: src/app/components/user/user.html:479
 msgid "No job titles"
 msgstr ""
 
@@ -1042,11 +1044,11 @@ msgstr ""
 msgid "No lists available"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:251
+#: src/app/components/checkin/checkin.html:249
 msgid "No location"
 msgstr ""
 
-#: src/app/components/user/user.html:550
+#: src/app/components/user/user.html:549
 msgid "No locations"
 msgstr ""
 
@@ -1054,11 +1056,11 @@ msgstr ""
 msgid "No matter whether you are looking for an individual, a contact list or a specific role – all contacts are at your finger tips."
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:380
+#: src/app/components/checkin/checkin.html:378
 msgid "No modifications"
 msgstr ""
 
-#: src/app/components/user/user.html:422
+#: src/app/components/user/user.html:421
 msgid "No organizations"
 msgstr ""
 
@@ -1066,7 +1068,7 @@ msgstr ""
 msgid "No pending connections"
 msgstr ""
 
-#: src/app/components/user/user.html:774
+#: src/app/components/user/user.html:773
 msgid "No permissions set"
 msgstr ""
 
@@ -1078,11 +1080,11 @@ msgstr ""
 msgid "No phone numbers"
 msgstr ""
 
-#: src/app/components/user/user.html:678
+#: src/app/components/user/user.html:677
 msgid "No roles"
 msgstr ""
 
-#: src/app/components/user/user.html:403
+#: src/app/components/user/user.html:402
 msgid "No social networks"
 msgstr ""
 
@@ -1094,7 +1096,7 @@ msgstr ""
 msgid "No subscriptions"
 msgstr ""
 
-#: src/app/components/user/user.html:757
+#: src/app/components/user/user.html:756
 msgid "No websites"
 msgstr ""
 
@@ -1107,7 +1109,7 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:79
+#: src/app/components/user/user-filters.html:78
 msgid "Occupation filters"
 msgstr ""
 
@@ -1116,11 +1118,11 @@ msgid "Only the owner and managers of the list can add users"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:13
-#: src/app/components/user/user-filters.html:56
+#: src/app/components/user/user-filters.html:55
 msgid "Operation"
 msgstr ""
 
-#: src/app/components/user/user.html:684
+#: src/app/components/user/user.html:683
 msgid "Operations"
 msgstr ""
 
@@ -1134,17 +1136,17 @@ msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:25
 #: src/app/components/user/kiosk.html:99
-#: src/app/components/user/user-filters.html:109
+#: src/app/components/user/user-filters.html:108
 #: src/app/components/user/users.controller.js:44
 #: src/app/components/user/users.html:39
 msgid "Organization"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:99
+#: src/app/components/user/user-filters.html:98
 msgid "Organization Type"
 msgstr ""
 
-#: src/app/components/user/user.html:415
+#: src/app/components/user/user.html:414
 msgid "Organizations"
 msgstr ""
 
@@ -1152,7 +1154,7 @@ msgstr ""
 msgid "Orphan"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:111
+#: src/app/components/user/users.controller.js:115
 msgid "Other"
 msgstr ""
 
@@ -1160,14 +1162,20 @@ msgstr ""
 msgid "Other lists you might be interested in"
 msgstr ""
 
-#: src/app/components/auth/login.html:12
-#: src/app/components/auth/reset_password.html:11
+#: src/app/components/auth/login.html:13
+#: src/app/components/auth/reset_password.html:14
 #: src/app/components/user/new-user.html:24
 msgid "Password"
 msgstr ""
 
-#: src/app/components/user/new-user.html:31
+#: src/app/components/user/new-user.html:32
 msgid "Password (confirm)"
+msgstr ""
+
+#: src/app/components/auth/reset_password.html:10
+#: src/app/components/user/new-user.html:25
+#: src/app/components/user/preferences.html:45
+msgid "Passwords must be at least <strong>8 characters</strong> long, contain at least one <strong>number</strong>, one <strong>uppercase character</strong> and one <strong>lowercase character</strong>."
 msgstr ""
 
 #: src/app/components/user/preferences.html:12
@@ -1178,11 +1186,11 @@ msgstr ""
 msgid "People on the list only"
 msgstr ""
 
-#: src/app/components/user/user.html:770
+#: src/app/components/user/user.html:769
 msgid "Permissions"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:71
+#: src/app/components/user/userEdit.controller.js:73
 msgid "Personal"
 msgstr ""
 
@@ -1195,7 +1203,7 @@ msgstr ""
 msgid "Phone type:"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:388
+#: src/app/components/user/userEdit.controller.js:391
 msgid "Picture uploaded"
 msgstr ""
 
@@ -1215,31 +1223,31 @@ msgstr ""
 msgid "Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking 'Connect'."
 msgstr ""
 
-#: src/app/components/header/header.html:62
+#: src/app/components/header/header.html:79
 msgid "Preferences"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:406
+#: src/app/components/user/userEdit.controller.js:409
 msgid "Primary email updated"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:359
+#: src/app/components/user/userEdit.controller.js:362
 msgid "Primary organization updated"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:432
+#: src/app/components/user/userEdit.controller.js:435
 msgid "Primary phone number updated"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:115
+#: src/app/components/user/users.controller.js:119
 msgid "Private sector"
 msgstr ""
 
-#: src/app/components/header/header.html:61
+#: src/app/components/header/header.html:78
 msgid "Profile"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:173
+#: src/app/components/user/userEdit.controller.js:176
 msgid "Profile updated"
 msgstr ""
 
@@ -1255,7 +1263,7 @@ msgstr ""
 msgid "Recent:&nbsp;"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:119
+#: src/app/components/user/users.controller.js:123
 msgid "Red Cross / Red Crescent"
 msgstr ""
 
@@ -1268,10 +1276,10 @@ msgstr ""
 msgid "Region"
 msgstr ""
 
-#: src/app/components/auth/login.html:17
+#: src/app/components/auth/login.html:18
 #: src/app/components/auth/register.html:4
 #: src/app/components/user/kiosk.html:131
-#: src/app/components/user/new-user.html:39
+#: src/app/components/user/new-user.html:40
 msgid "Register"
 msgstr ""
 
@@ -1279,7 +1287,7 @@ msgstr ""
 msgid "Related platforms"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:123
+#: src/app/components/user/users.controller.js:127
 msgid "Religious"
 msgstr ""
 
@@ -1296,8 +1304,8 @@ msgid "Report a Problem"
 msgstr ""
 
 #: src/app/components/user/user.html:176
-#: src/app/components/user/user.html:274
-#: src/app/components/user/user.html:532
+#: src/app/components/user/user.html:275
+#: src/app/components/user/user.html:531
 msgid "Request"
 msgstr ""
 
@@ -1306,14 +1314,14 @@ msgid "Reset Password"
 msgstr ""
 
 #: src/app/components/auth/password_reset.html:4
-#: src/app/components/auth/reset_password.html:28
-#: src/app/components/auth/reset_password.html:4
+#: src/app/components/auth/reset_password.html:31
+#: src/app/components/auth/reset_password.html:5
 msgid "Reset password"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:29
 #: src/app/components/selectLists/selectLists.controller.js:31
-#: src/app/components/user/user-filters.html:119
+#: src/app/components/user/user-filters.html:118
 msgid "Role"
 msgstr ""
 
@@ -1321,7 +1329,7 @@ msgstr ""
 msgid "Roles are closely related to your job title. Very common roles are those of Humanitarian Coordinator, Information Management Officer or UNDAC member. As with checking into organizational lists, role check-ins are moderated."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:66
+#: src/app/components/user/userEdit.controller.js:67
 msgid "Satellite Phone"
 msgstr ""
 
@@ -1331,7 +1339,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/app/components/user/preferences.html:114
+#: src/app/components/user/preferences.html:117
 msgid "Save settings"
 msgstr ""
 
@@ -1350,8 +1358,8 @@ msgstr ""
 
 #: src/app/components/list/lists-filters.html:23
 #: src/app/components/list/lists-filters.html:24
+#: src/app/components/user/user-filters.html:16
 #: src/app/components/user/user-filters.html:17
-#: src/app/components/user/user-filters.html:18
 msgid "Search by name"
 msgstr ""
 
@@ -1419,8 +1427,8 @@ msgstr ""
 msgid "See below for other platforms using Humanitarian ID login:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:284
-#: src/app/components/user/user.html:559
+#: src/app/components/checkin/checkin.html:282
+#: src/app/components/user/user.html:558
 msgid "Select a country"
 msgstr ""
 
@@ -1430,11 +1438,11 @@ msgstr ""
 msgid "Select a list"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:193
+#: src/app/components/checkin/checkin.html:192
 msgid "Select a primary email address:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:335
+#: src/app/components/checkin/checkin.html:333
 msgid "Select a primary job title:"
 msgstr ""
 
@@ -1446,22 +1454,26 @@ msgstr ""
 msgid "Select a primary phone number:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:295
+#: src/app/components/checkin/checkin.html:293
 #: src/app/components/start/start.html:56
-#: src/app/components/user/user.html:569
+#: src/app/components/user/user.html:568
 msgid "Select a region"
 msgstr ""
 
-#: src/app/components/user/user.html:652
+#: src/app/components/user/user.html:651
 msgid "Select a role"
 msgstr ""
 
-#: src/app/components/user/user.html:433
+#: src/app/components/user/user.html:432
 msgid "Select an organisation"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:261
+#: src/app/components/checkin/checkin.html:259
 msgid "Select current location"
+msgstr ""
+
+#: src/app/components/user/userEdit.controller.js:71
+msgid "Select email type"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:13
@@ -1470,6 +1482,14 @@ msgstr ""
 
 #: src/app/components/service/new-service.html:72
 msgid "Select managers"
+msgstr ""
+
+#: src/app/components/user/userEdit.controller.js:64
+msgid "Select phone number type"
+msgstr ""
+
+#: src/app/components/user/userEdit.controller.js:77
+msgid "Select social network type"
 msgstr ""
 
 #: src/app/components/list/list-admin.html:13
@@ -1527,19 +1547,19 @@ msgstr ""
 msgid "Set primary email:"
 msgstr ""
 
-#: src/app/components/user/user.html:501
+#: src/app/components/user/user.html:500
 msgid "Set primary job title:"
 msgstr ""
 
-#: src/app/components/user/user.html:595
+#: src/app/components/user/user.html:594
 msgid "Set primary location:"
 msgstr ""
 
-#: src/app/components/user/user.html:453
+#: src/app/components/user/user.html:452
 msgid "Set primary organization:"
 msgstr ""
 
-#: src/app/components/user/user.html:223
+#: src/app/components/user/user.html:224
 msgid "Set primary phone number:"
 msgstr ""
 
@@ -1575,14 +1595,14 @@ msgstr ""
 msgid "Sorry, this user was not found. Try searching for Humanitarian Contacts:"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:141
+#: src/app/components/user/user-filters.html:140
 msgid "Sort"
 msgstr ""
 
 #: src/app/components/list/lists-filters.html:39
 #: src/app/components/list/lists-filters.html:41
-#: src/app/components/user/user-filters.html:148
-#: src/app/components/user/user-filters.html:150
+#: src/app/components/user/user-filters.html:147
+#: src/app/components/user/user-filters.html:149
 msgid "Sort by"
 msgstr ""
 
@@ -1635,7 +1655,7 @@ msgstr ""
 msgid "Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap."
 msgstr ""
 
-#: src/app/components/user/userRegister.controller.js:19
+#: src/app/components/user/userNew.controller.js:24
 msgid "Thank you for creating an account. You will soon receive a confirmation email to confirm your account."
 msgstr ""
 
@@ -1676,11 +1696,11 @@ msgstr ""
 msgid "The user was successfully checked out."
 msgstr ""
 
-#: src/app/components/user/userNew.controller.js:18
+#: src/app/components/user/userNew.controller.js:22
 msgid "The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:245
+#: src/app/components/user/user.controller.js:259
 #: src/app/components/user/userOptions.controller.js:29
 msgid "The user was successfully deleted."
 msgstr ""
@@ -1715,16 +1735,16 @@ msgstr ""
 msgid "There was an error checking you in."
 msgstr ""
 
-#: src/app/components/auth/auth.controller.js:77
+#: src/app/components/auth/auth.controller.js:70
 msgid "There was an error logging in."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:171
+#: src/app/components/user/user.controller.js:185
 msgid "There was an error notifying this user"
 msgstr ""
 
-#: src/app/components/user/userNew.controller.js:19
-#: src/app/components/user/userRegister.controller.js:26
+#: src/app/components/user/userNew.controller.js:23
+#: src/app/components/user/userNew.controller.js:25
 msgid "There was an error processing your registration."
 msgstr ""
 
@@ -1749,7 +1769,7 @@ msgstr ""
 msgid "There was an error saving"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:181
+#: src/app/components/user/userEdit.controller.js:184
 msgid "There was an error saving the profile"
 msgstr ""
 
@@ -1769,23 +1789,23 @@ msgstr ""
 msgid "There was an error saving your settings."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:180
+#: src/app/components/user/user.controller.js:194
 msgid "There was an error sending the claim email"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:418
+#: src/app/components/user/userEdit.controller.js:421
 msgid "There was an error sending the validation email."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:365
+#: src/app/components/user/userEdit.controller.js:368
 msgid "There was an error setting the primary organization."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:435
+#: src/app/components/user/userEdit.controller.js:438
 msgid "There was an error setting the primary phone number."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:409
+#: src/app/components/user/userEdit.controller.js:412
 msgid "There was an error setting your primary email."
 msgstr ""
 
@@ -1793,7 +1813,7 @@ msgstr ""
 msgid "There was an error subscribing you"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:233
+#: src/app/components/user/user.controller.js:247
 #: src/app/components/user/userOptions.controller.js:40
 msgid "There was an error updating this user"
 msgstr ""
@@ -1809,8 +1829,12 @@ msgstr ""
 msgid "There was an error updating your favourites."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:392
+#: src/app/components/user/userEdit.controller.js:395
 msgid "There was an error uploading the picture"
+msgstr ""
+
+#: src/app/components/user/user.controller.js:128
+msgid "This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID."
 msgstr ""
 
 #: src/app/components/list/list.html:51
@@ -1845,8 +1869,8 @@ msgstr ""
 msgid "This list was successfully removed from your favourites."
 msgstr ""
 
-#: src/app/components/user/preferences.html:104
-#: src/app/components/user/preferences.html:106
+#: src/app/components/user/preferences.html:107
+#: src/app/components/user/preferences.html:109
 msgid "Timezone"
 msgstr ""
 
@@ -1854,7 +1878,7 @@ msgstr ""
 msgid "To get started, please give us some information about yourself."
 msgstr ""
 
-#: src/app/components/header/header.html:63
+#: src/app/components/header/header.html:80
 msgid "Tutorial"
 msgstr ""
 
@@ -1865,14 +1889,14 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:306
+#: src/app/components/checkin/checkin.html:304
 #: src/app/components/start/start.html:67
-#: src/app/components/user/user.html:580
+#: src/app/components/user/user.html:579
 msgid "Type a locality"
 msgstr ""
 
-#: src/app/components/user/user-filters.html:126
-#: src/app/components/user/user-filters.html:128
+#: src/app/components/user/user-filters.html:125
+#: src/app/components/user/user-filters.html:127
 msgid "Type of user"
 msgstr ""
 
@@ -1902,11 +1926,11 @@ msgstr ""
 msgid "Unfavourite"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:127
+#: src/app/components/user/users.controller.js:131
 msgid "United Nations"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:131
+#: src/app/components/user/users.controller.js:135
 msgid "Unknown"
 msgstr ""
 
@@ -1915,7 +1939,7 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:207
+#: src/app/components/checkin/checkin.html:206
 msgid "Unverified"
 msgstr ""
 
@@ -1927,7 +1951,7 @@ msgstr ""
 msgid "Update information"
 msgstr ""
 
-#: src/app/components/user/preferences.html:68
+#: src/app/components/user/preferences.html:69
 msgid "Update password"
 msgstr ""
 
@@ -1947,16 +1971,16 @@ msgstr ""
 msgid "User not found"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:231
+#: src/app/components/user/user.controller.js:245
 #: src/app/components/user/userOptions.controller.js:38
 msgid "User updated"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:169
+#: src/app/components/user/user.controller.js:183
 msgid "User was successfully notified"
 msgstr ""
 
-#: src/app/components/user/user.html:386
+#: src/app/components/user/user.html:385
 msgid "Username"
 msgstr ""
 
@@ -1964,7 +1988,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:416
+#: src/app/components/user/userEdit.controller.js:419
 msgid "Validation email sent successfully."
 msgstr ""
 
@@ -1974,7 +1998,7 @@ msgstr ""
 msgid "Verified"
 msgstr ""
 
-#: src/app/components/user/user.html:764
+#: src/app/components/user/user.html:763
 msgid "Verified by"
 msgstr ""
 
@@ -2010,15 +2034,15 @@ msgstr ""
 msgid "View as PDF"
 msgstr ""
 
-#: src/app/components/auth/auth.controller.js:66
+#: src/app/components/auth/auth.controller.js:55
 msgid "We could not log you in because your email address is not verified yet."
 msgstr ""
 
-#: src/app/components/auth/auth.controller.js:74
+#: src/app/components/auth/auth.controller.js:63
 msgid "We could not log you in, the email address does not exist."
 msgstr ""
 
-#: src/app/components/auth/auth.controller.js:70
+#: src/app/components/auth/auth.controller.js:59
 msgid "We could not log you in. Please verify your email and password."
 msgstr ""
 
@@ -2034,7 +2058,7 @@ msgstr ""
 msgid "We could not unsubscribe you from this service"
 msgstr ""
 
-#: src/app/components/user/user.html:733
+#: src/app/components/user/user.html:732
 msgid "Websites"
 msgstr ""
 
@@ -2071,15 +2095,15 @@ msgstr ""
 msgid "Who should be able to see your email addresses?"
 msgstr ""
 
-#: src/app/components/user/user.html:619
+#: src/app/components/user/user.html:618
 msgid "Who should be able to see your locations?"
 msgstr ""
 
-#: src/app/components/user/user.html:246
+#: src/app/components/user/user.html:247
 msgid "Who should be able to see your phone numbers?"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:70
+#: src/app/components/user/userEdit.controller.js:72
 msgid "Work"
 msgstr ""
 
@@ -2115,7 +2139,7 @@ msgstr ""
 msgid "You don't manage any lists"
 msgstr ""
 
-#: src/app/components/user/preferences.html:77
+#: src/app/components/user/preferences.html:78
 msgid "You have granted the following applications access to your Humanitarian ID account."
 msgstr ""
 
@@ -2131,7 +2155,7 @@ msgstr ""
 msgid "You were successfully checked in. Given the lists you checked into, we recommend that you subscribe to the following services:"
 msgstr ""
 
-#: src/app/components/auth/auth.controller.js:86
+#: src/app/components/auth/auth.controller.js:79
 msgid "You were successfully logged out."
 msgstr ""
 
@@ -2159,22 +2183,26 @@ msgstr ""
 msgid "You're not verified yet."
 msgstr ""
 
-#: src/app/components/user/preferences.html:128
+#: src/app/components/user/preferences.html:131
 msgid "Your API keys"
+msgstr ""
+
+#: src/app/components/auth/auth.controller.js:67
+msgid "Your account has been locked for 5 minutes due to too many unsuccessful login attempts"
 msgstr ""
 
 #: src/app/components/user/userPrefs.controller.js:55
 msgid "Your account was successfully removed. You are now logged out. Sorry to have you go."
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:374
+#: src/app/components/checkin/checkin.html:372
 msgid "Your check in modifications"
 msgstr ""
 
 #: src/app/components/user/user.controller.js:38
 #: src/app/components/user/user.html:181
-#: src/app/components/user/user.html:278
-#: src/app/components/user/user.html:537
+#: src/app/components/user/user.html:279
+#: src/app/components/user/user.html:536
 msgid "Your connection request is pending"
 msgstr ""
 
@@ -2186,11 +2214,19 @@ msgstr ""
 msgid "Your connections"
 msgstr ""
 
-#: src/app/components/user/preferences.html:47
+#: src/app/components/user/preferences.html:48
 msgid "Your current password"
 msgstr ""
 
-#: src/app/components/auth/login.html:9
+#: src/app/components/offlineStatus/offline.directive.js:20
+msgid "Your device is connected to the internet"
+msgstr ""
+
+#: src/app/components/offlineStatus/offline.directive.js:19
+msgid "Your device lost its internet connection."
+msgstr ""
+
+#: src/app/components/auth/login.html:10
 #: src/app/components/auth/password_reset.html:10
 #: src/app/components/user/kiosk.html:28
 msgid "Your email address"
@@ -2208,13 +2244,19 @@ msgstr ""
 msgid "Your middle name"
 msgstr ""
 
-#: src/app/components/user/preferences.html:54
-#: src/app/components/user/preferences.html:62
+#: src/app/components/user/preferences.html:55
+#: src/app/components/user/preferences.html:63
 msgid "Your new password"
 msgstr ""
 
-#: src/app/components/auth/login.html:13
+#: src/app/components/auth/login.html:14
+#: src/app/components/user/new-user.html:26
+#: src/app/components/user/new-user.html:33
 msgid "Your password"
+msgstr ""
+
+#: src/app/common/messages.html:4
+msgid "Your password is not valid"
 msgstr ""
 
 #: src/app/components/user/userPrefs.controller.js:30
@@ -2253,7 +2295,7 @@ msgstr ""
 msgid "about managing lists"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:147
+#: src/app/components/user/userEdit.controller.js:150
 msgid "added"
 msgstr ""
 
@@ -2261,16 +2303,12 @@ msgstr ""
 msgid "contacts found"
 msgstr ""
 
-#: src/app/components/user/user.html:274
+#: src/app/components/user/user.html:275
 msgid "email address"
 msgstr ""
 
-#: src/app/components/user/user.html:282
+#: src/app/components/user/user.html:283
 msgid "email addresses can only be viewed by verified users."
-msgstr ""
-
-#: src/app/components/auth/auth.controller.js:19
-msgid "forgot your password"
 msgstr ""
 
 #: src/app/components/list/list.html:53
@@ -2285,11 +2323,11 @@ msgstr ""
 msgid "lists found"
 msgstr ""
 
-#: src/app/components/user/user.html:532
+#: src/app/components/user/user.html:531
 msgid "location"
 msgstr ""
 
-#: src/app/components/user/user.html:541
+#: src/app/components/user/user.html:540
 msgid "locations can only be viewed by verified users."
 msgstr ""
 
@@ -2309,11 +2347,11 @@ msgstr ""
 msgid "phone numbers can only be viewed by verified users."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:160
+#: src/app/components/user/userEdit.controller.js:163
 msgid "removed"
 msgstr ""
 
-#: src/app/components/checkin/checkin.html:208
+#: src/app/components/checkin/checkin.html:207
 #: src/app/components/user/user.html:337
 msgid "resend validation email"
 msgstr ""
