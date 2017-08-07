@@ -11,18 +11,6 @@
     $scope.email = '';
     $scope.saving = false;
 
-    function showHIDv2Banner () {
-      if ($window.localStorage.getItem('hidResetPassword') || $window.localStorage.getItem('hidNewUser')) {
-        return;
-      }
-      var loginBannerText = gettextCatalog.getString('Humanitarian ID version 2.0 is live! To log in for the first time, please reset your password by clicking on');
-      var loginBannerLinkText = gettextCatalog.getString('forgot your password');
-      var loginBannerLink = '/password_reset';
-      var loginBannerMessage = loginBannerText + ' <a href="' + loginBannerLink + '">' + loginBannerLinkText + '</a>';
-      alertService.pageAlert('danger', loginBannerMessage, 'caution');
-    }
-    showHIDv2Banner();
-
     function onFirstLogin () {
       $scope.currentUser.setAppMetaData({login: true});
       $scope.currentUser.authOnly = false;
