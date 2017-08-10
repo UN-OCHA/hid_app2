@@ -191,6 +191,25 @@
       saveUpdatedUser(type, callback);
     }
 
+    function savePhoneNumber (number, callback) {
+      $scope.$emit('editUser', {status: 'saving'});
+      $scope.user.addPhone(number, function () {
+        updateCurrentUser();
+        $scope.$emit('editUser', {
+          status: 'success',
+          type: 'addphone_number',
+          message: gettextCatalog.getString('Profile updated')
+        });
+
+        if (callback) {
+          callback();
+        }
+      }, function () {
+        alertService.add('danger', gettextCatalog.getString('There was an error saving the phone number'));
+        $scope.$emit('editUser', {status: 'fail'});
+      });
+    }
+
     function isListMember (list, user) {
       var inList = false;
       angular.forEach(config.listTypes, function (listType) {
@@ -307,7 +326,7 @@
       }
 
       if (key === 'phone_number') {
-        saveUser('add' + key, function () {
+        savePhoneNumber($scope.user[key + 's'][0], function () {
           setPrimaryPhone($scope.user[key + 's'][0]);
         });
         $scope.temp[key] = angular.copy(defaultSettings[key]);

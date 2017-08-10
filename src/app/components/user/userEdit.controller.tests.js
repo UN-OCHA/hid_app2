@@ -39,6 +39,7 @@
        scopeUser.$update = function () {};
        scopeUser.$delete = function () {};
        scopeUser.setPrimaryOrganization = function () {};
+       scopeUser.addPhone = function () {};
        scopeUser.setPrimaryPhone = function () {};
        scopeUser.setPrimaryEmail = function () {};
        scope.user = scopeUser;
@@ -75,6 +76,9 @@
             organization: newOrganization
           }
         });
+      });
+      spyOn(scopeUser, 'addPhone').and.callFake(function (arg, callback) {
+        callback();
       });
       spyOn(scopeUser, 'setPrimaryPhone').and.callFake(function (arg1, callback) {
         callback({
@@ -195,8 +199,8 @@
         expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
       });
 
-      it('should update the user', function () {
-        expect(scopeUser.$update).toHaveBeenCalled();
+      it('should save the phone numer', function () {
+        expect(scopeUser.addPhone).toHaveBeenCalledWith(newPhoneNumber, jasmine.any(Function), jasmine.any(Function));
       });
 
       it('should emit the success event', function () {
