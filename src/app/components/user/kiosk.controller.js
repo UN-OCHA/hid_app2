@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('KioskCtrl', KioskCtrl);
 
-  KioskCtrl.$inject = ['$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'UserCheckInService', 'List'];
+  KioskCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'UserCheckInService', 'List'];
 
-  function KioskCtrl($scope, $routeParams, $location, gettextCatalog, alertService, hrinfoService, User, UserCheckInService, List) {
+  function KioskCtrl($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, hrinfoService, User, UserCheckInService, List) {
 
     $scope.step = 1;
     $scope.user = new User();
@@ -126,8 +126,8 @@
       // Then do the checkin
       UserCheckInService.save({userId: user._id, listType: $scope.list.list.type + 's'}, checkinUser, function (out) {
         $scope.checkInSuccess();
-      }, function (resp) {
-        alertService.add('danger', gettextCatalog.getString('There was an error checking you in.'));
+      }, function (error) {
+        $exceptionHandler(error, 'Kiosk checkin error');
         $scope.reinitialize();
       });
     };
@@ -143,7 +143,7 @@
         $scope.user.$save(function(user) {
           $scope.checkin(user);
         }, function (resp) {
-          alertService.add('danger', gettextCatalog.getString('There was an error registering your account.'));
+          $exceptionHandler(error, 'Kiosk registration error');
           $scope.reinitialize();
         });
       }
@@ -152,7 +152,7 @@
         $scope.user.$update(function (user) {
           $scope.checkin($scope.user);
         }, function (resp) {
-          alertService.add('danger', gettextCatalog.getString('There was an error updating your account.'));
+          $exceptionHandler(error, 'Kiosk update account error');
           $scope.reinitialize();
         });
       }

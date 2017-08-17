@@ -154,8 +154,8 @@
           alertService.add('success', gettextCatalog.getString('Successfully added to list'));
           $scope.usersAdded.users = [];
           $scope.savingMembers = false;
-        }, function () {
-          alertService.add('danger', gettextCatalog.getString('There was an error adding members to the list'));
+        }, function (error) {
+          $exceptionHandler(error, 'Removing duplicate');
           $scope.savingMembers = false;
         });
       });
@@ -183,7 +183,6 @@
         $scope.favSaving = false;
       }, function (error) {
         $scope.favSaving = false;
-        alertService.add('danger', gettextCatalog.getString('There was an error updating your favourites.'));
         $exceptionHandler(error, 'Favourite list - update user');
       });
     }
@@ -199,7 +198,6 @@
         $scope.favSaving = false;
       }, function (error) {
         $scope.favSaving = false;
-        alertService.add('danger', gettextCatalog.getString('There was an error updating your favourites.'));
         $exceptionHandler(error, 'Unfavourite list - update user');
       });
     }
@@ -213,7 +211,6 @@
         favoriteList();
       }, function (error) {
         $scope.favSaving = false;
-        alertService.add('danger', gettextCatalog.getString('There was an error updating your favourites.'));
         $exceptionHandler(error, 'Favourite list - get user');
       });
     };
@@ -227,7 +224,6 @@
         unfavoriteList();
       }, function (error) {
         $scope.favSaving = false;
-        alertService.add('danger', gettextCatalog.getString('There was an error updating your favourites.'));
         $exceptionHandler(error, 'Unfavourite list - get user');
       });
     };

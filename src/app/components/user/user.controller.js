@@ -182,7 +182,7 @@
       $scope.user.notify('Test', function () {
         alertService.add('success', gettextCatalog.getString('User was successfully notified'), false, function () {});
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error notifying this user'));
+        $exceptionHandler(error, 'User notification error');
       });
     };
 
@@ -191,7 +191,7 @@
         $scope.user.claimEmail(function () {
           alertService.add('success', gettextCatalog.getString('Claim email sent successfully'), false, function () {});
         }, function () {
-          alertService.add('danger', gettextCatalog.getString('There was an error sending the claim email'));
+          $exceptionHandler(error, 'Claim email error');
         });
       });
     };
@@ -244,7 +244,7 @@
         }
         alertService.add('success', gettextCatalog.getString('User updated'), false, function () {});
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error updating this user'));
+        $exceptionHandler(error, 'Verify user error');
       });
     };
 

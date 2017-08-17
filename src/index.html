@@ -42,6 +42,7 @@
           <div class="sidebar-overlay" ng-class="{&apos;in&apos; : sidebar.open}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
           <ng-include ng-if="!hideHeaderFooter" src="&apos;app/components/footer/footer.html&apos;"></ng-include>
         </div>
+        <div ng-controller="ErrorsCtrl"></div>
 
         <offline-status></offline-status>
 
@@ -75,6 +76,7 @@
         <script src="app/app.js"></script>
         <script src="app/common/common.module.js"></script>
         <script src="app/common/app.controller.js"></script>
+        <script src="app/common/errors.controller.js"></script>
         <script src="app/common/hrInfo.service.js"></script>
         <script src="app/common/hrInfoTypeahead.directive.js"></script>
         <script src="app/common/backButton.directive.js"></script>

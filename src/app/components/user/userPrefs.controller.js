@@ -16,7 +16,7 @@
     };
 
     $scope.timezones = moment.tz.names();
-  
+
     UserDataService.getUser($scope.currentUser.id, function () {
       $scope.user = UserDataService.user;
       getConnections($scope.user);
@@ -30,7 +30,6 @@
         alertService.add('success', gettextCatalog.getString('Your password was successfully changed.'));
         form.$setPristine();
       }, function (error) {
-        alertService.add('danger', gettextCatalog.getString('There was an error saving your password.'));
         $exceptionHandler(error, 'savePassword');
         form.$setPristine();
       });
@@ -43,7 +42,6 @@
         $scope.setCurrentUser($scope.user);
         $scope.initLanguage();
       }, function (error) {
-        alertService.add('danger', gettextCatalog.getString('There was an error saving your settings.'));
         $exceptionHandler(error, 'saveSettings');
       });
     };
@@ -74,7 +72,6 @@
           $scope.user.$update(function () {
             alertService.add('success', gettextCatalog.getString('Application successfully revoked.'));
           }, function (error) {
-            alertService.add('danger', gettextCatalog.getString('There was an error revoking this application.'));
             $exceptionHandler(error, 'revokeClient');
           });
         }
@@ -99,7 +96,6 @@
         getConnections($scope.user);
         $scope.setCurrentUser($scope.user);
       }, function (error) {
-        alertService.add('danger', gettextCatalog.getString('Connection could not be approved'));
         $exceptionHandler(error, 'approveConnection');
       });
     };
@@ -111,7 +107,6 @@
         getConnections($scope.user);
         $scope.setCurrentUser($scope.user);
       }, function (error) {
-        alertService.add('danger', gettextCatalog.getString('Connection could not be removed'));
         $exceptionHandler(error, 'removeConnection');
       });
     };

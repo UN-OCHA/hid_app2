@@ -57,7 +57,6 @@
           $scope.subscribers.push(user);
         })
         .catch(function (error) {
-          alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
           $exceptionHandler(error, 'Subscribe fail');
         });
     }
@@ -77,7 +76,6 @@
           $scope.subscribers.splice($scope.subscribers.indexOf(user), 1);
         })
         .catch(function (error) {
-          alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
           $exceptionHandler(error, 'Unsubscribe fail');
         });
     }

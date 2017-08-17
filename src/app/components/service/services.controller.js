@@ -19,7 +19,7 @@
     function getServices (offset) {
       var params = {
         sort: 'name',
-        limit: $scope.pagination.itemsPerPage 
+        limit: $scope.pagination.itemsPerPage
       };
       params.offset = offset || 0;
 
@@ -44,7 +44,6 @@
           }
         })
         .catch(function (error) {
-          alertService.add('danger', gettextCatalog.getString('We could not subscribe you to this service'));
           $exceptionHandler(error, 'Subscribe fail');
         });
     };
@@ -61,7 +60,6 @@
           }
         })
         .catch(function (error) {
-          alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
           $exceptionHandler(error, 'Unsubscribe fail');
         });
     };

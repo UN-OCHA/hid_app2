@@ -127,13 +127,6 @@
     $scope.initCurrentUser();
 
     $scope.$on('$routeChangeSuccess', initView);
-
-    $rootScope.$on('apiRejection', function (event, status) {
-      if (status === '429') {
-        var msg = gettextCatalog.getString('You\'ve reached the API request limit, please try again in 10 minutes');
-        alertService.add('danger', msg)
-      }
-    });
   }
 
 })();

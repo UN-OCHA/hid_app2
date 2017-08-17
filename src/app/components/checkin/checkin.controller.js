@@ -83,7 +83,7 @@
       }
 
       //Otherwise user the associated operations
-      getAssociatedLists(list.associatedOperations()).then(function (listsArray) {          
+      getAssociatedLists(list.associatedOperations()).then(function (listsArray) {
         var mergedLists = Array.prototype.concat.apply([], listsArray);
         $scope.associatedLists = filterLists(mergedLists, $scope.selectedLists, $scope.user);
       });
@@ -94,12 +94,12 @@
       UserDataService.getUser(userId, function () {
         $scope.user = UserDataService.user;
         $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
-        $scope.$broadcast('userLoaded'); 
+        $scope.$broadcast('userLoaded');
       }, function (error) {
         $exceptionHandler(error, 'getUser');
       });
     }
-    
+
     $scope.addList = function (list) {
       $scope.selectedLists.push(list);
       $scope.associatedLists.splice($scope.associatedLists.indexOf(list), 1);
@@ -132,7 +132,7 @@
                 $location.path('services/suggestions').search({lists: listIds.join(',') });
                 return;
               }
-              
+
               var message = gettextCatalog.getString('You were successfully checked in.');
               if (moderatedLists) {
                 message += ' ' + gettextCatalog.getString('Some of you check-ins are pending, we will get back to you soon.');
@@ -163,7 +163,6 @@
       });
 
       $q.all(promises).then(lastTask, function (error) {
-        alertService.add('danger', gettextCatalog.getString('Unable to check in'));
         $exceptionHandler(error, 'Checkin');
       });
     };
@@ -209,7 +208,7 @@
     });
     var listTypesModal;
 
-    
+
     $scope.openListTypesModal = function () {
      listTypesModal = $uibModal.open({
         animation: false,

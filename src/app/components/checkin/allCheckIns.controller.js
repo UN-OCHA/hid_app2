@@ -45,7 +45,6 @@
         });
         editModal.close();
       }, function (error) {
-        alertService.add('danger', gettextCatalog.getString('There was an error saving'));
         $exceptionHandler(error, 'Update checkout date');
       });
     }
@@ -105,8 +104,8 @@
           });
           UserDataService.notify();
           $scope.setCurrentUser(user);
-        }, function () {
-          alertService.add('danger', gettextCatalog.getString('There was an error checking out of this list'), false, function(){});
+        }, function (error) {
+          $exceptionHandler(error, 'Leaving list');
         });
       });
     }

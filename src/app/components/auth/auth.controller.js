@@ -51,23 +51,6 @@
 
       }, function (error) {
         $scope.saving = false;
-        if (error.data && error.data.message === 'Please verify your email address') {
-          alertService.add('danger', gettextCatalog.getString('We could not log you in because your email address is not verified yet.'));
-          return;
-        }
-        if (error.data && error.data.message === 'invalid email or password') {
-          alertService.add('danger', gettextCatalog.getString('We could not log you in. Please verify your email and password.'));
-          return;
-        }
-        if (error.data && error.data.message === 'Email address could not be found') {
-          alertService.add('danger', gettextCatalog.getString('We could not log you in, the email address does not exist.'));
-          return;
-        }
-        if (error.status === 429) {
-          alertService.add('danger', gettextCatalog.getString('Your account has been locked for 5 minutes due to too many unsuccessful login attempts'));
-          return;
-        }
-        alertService.add('danger', gettextCatalog.getString('There was an error logging in.'));
         $exceptionHandler(error, 'Log in fail');
       });
     };

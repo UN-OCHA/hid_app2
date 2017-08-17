@@ -141,16 +141,6 @@
 
   	});
 
-  	describe('If check out fails', function () {
-  		beforeEach(function () {
-  			scope.leaveList({type: 'reject'});
-  		});
-
-  		it('should show the error message', function () {
-  			expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'There was an error checking out of this list', false, jasmine.any(Function));
-  		});
-  	});
-
     describe('Edit checkout date', function () {
 
       beforeEach(function () {

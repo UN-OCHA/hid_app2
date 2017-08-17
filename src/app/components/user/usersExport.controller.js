@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserExportCtrl', UserExportCtrl);
 
-  UserExportCtrl.$inject = ['$log', '$rootScope', '$scope', '$uibModal'];
+  UserExportCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$uibModal'];
 
-  function UserExportCtrl($log, $rootScope, $scope, $uibModal) {
+  function UserExportCtrl($exceptionHandler, $rootScope, $scope, $uibModal) {
     $scope.exportEmails = exportEmails;
     $scope.closeExportEmailslModal = closeExportEmailslModal;
     $scope.exportCSV = exportCSV;
@@ -32,7 +32,7 @@
       $rootScope.$broadcast('users-export-txt', function (resp) {
         showExportEmailsModal(resp);
       }, function (error) {
-        $log.error('Export emails error', error);
+        $exceptionHandler(error, 'Export emails error');
       });
     }
 
