@@ -370,6 +370,19 @@ app.config(["$httpProvider", function ($httpProvider) {
   $httpProvider.interceptors.push('APIInterceptor');
 }]);
 
+app.config(['$httpProvider', function ($httpProvider) {
+  $httpProvider.interceptors.push(function ($q, $rootScope) {
+    return {
+      'responseError': function (rejection) {
+        if (rejection.status === '429') {
+          $rootScope.$broadcast('apiRejection', rejection.status);
+        }
+        return $q.reject(rejection);
+      }
+    }
+  });
+}]);
+
 app.config(function ($provide) {
     $provide.decorator('$exceptionHandler', function ($delegate, $injector, $log) {
       return function (exception, cause) {

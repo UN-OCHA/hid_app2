@@ -22,12 +22,12 @@
       return ua.indexOf('Cordova') > 0;
     }
     $scope.isApp = detectApp();
- 
+
     function isTextInput(node) {
       return ['INPUT', 'TEXTAREA'].indexOf(node.nodeName) !== -1;
     }
     // Fix for iOS keyboard not closing when tap outside of an input
-    function closeIOSKeyboard () { 
+    function closeIOSKeyboard () {
       document.addEventListener('touchstart', function(e) {
         if (!isTextInput(e.target) && isTextInput(document.activeElement)) {
           document.activeElement.blur();
@@ -127,6 +127,13 @@
     $scope.initCurrentUser();
 
     $scope.$on('$routeChangeSuccess', initView);
+
+    $rootScope.$on('apiRejection', function (event, status) {
+      if (status === '429') {
+        var msg = gettextCatalog.getString('You\'ve reached the API request limit, please try again in 10 minutes');
+        alertService.add('danger', msg)
+      }
+    });
   }
 
 })();
