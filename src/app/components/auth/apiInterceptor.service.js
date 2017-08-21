@@ -27,7 +27,9 @@
       },
 
       'responseError': function(rejection) {
-        $rootScope.$broadcast('apiRejection', rejection);
+        if (Offline.state === 'up') {
+          $rootScope.$broadcast('apiRejection', rejection);
+        }
         return $q.reject(rejection);
       }
     };
