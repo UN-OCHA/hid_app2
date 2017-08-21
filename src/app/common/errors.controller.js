@@ -12,7 +12,7 @@
     function getErrorMessage (rejection) {
 
       // Too many API requests
-      if (rejection.status === 429 && rejection.data.error === 'Too many requests') {
+      if (rejection.status === 429 && rejection.data.message === 'Rate limit exceeded') {
         return gettextCatalog.getString('You\'ve reached the API request limit, please try again in 10 minutes');
       }
 

@@ -43,7 +43,7 @@
     "offline": "~0.7.18"
   },
   "resolutions": {
-    "angular": "1.6.5",
+    "angular": "1.6.6",
     "google-libphonenumber": "2.0.19"
   }
 }
