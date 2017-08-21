@@ -181,7 +181,7 @@
         }
 
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error saving the profile'));
+        $exceptionHandler(error, 'Save updated user error');
         $scope.$emit('editUser', {status: 'fail'});
       });
     }
@@ -205,7 +205,7 @@
           callback();
         }
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error saving the phone number'));
+        $exceptionHandler(error, 'Save phone number error');
         $scope.$emit('editUser', {status: 'fail'});
       });
     }
@@ -384,7 +384,7 @@
           callback();
         }
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error setting the primary organization.'));
+        $exceptionHandler(error, 'Set primary organization error');
         $scope.$emit('editUser', {status: 'fail'});
       });
     }
@@ -428,7 +428,7 @@
           message: gettextCatalog.getString('Primary email updated')
         });
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error setting your primary email.'));
+        $exceptionHandler(error, 'Set primary email error');
         $scope.$emit('editUser', {status: 'fail'});
       });
     }
@@ -437,7 +437,7 @@
       $scope.user.resendValidationEmail(email, function () {
         alertService.add('success', gettextCatalog.getString('Validation email sent successfully.'));
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error sending the validation email.'));
+        $exceptionHandler(error, 'Resend validation email error');
         $scope.$emit('editUser', {status: 'fail'});
       });
     }
@@ -454,7 +454,7 @@
           message: gettextCatalog.getString('Primary phone number updated')
         });
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error setting the primary phone number.'));
+        $exceptionHandler(error, 'Set primary phone number error');
         $scope.$emit('editUser', {status: 'fail'});
       });
     }

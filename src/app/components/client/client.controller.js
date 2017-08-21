@@ -5,9 +5,9 @@
     .module('app.client')
     .controller('ClientCtrl', ClientCtrl);
 
-  ClientCtrl.$inject = ['$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Client'];
+  ClientCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Client'];
 
-  function ClientCtrl ($scope, $routeParams, $http, $window, gettextCatalog, alertService, Client) {
+  function ClientCtrl ($exceptionHandler, $scope, $routeParams, $http, $window, gettextCatalog, alertService, Client) {
     if ($routeParams.clientId) {
       $scope.client = Client.get({'clientId': $routeParams.clientId});
     }
@@ -20,7 +20,7 @@
         alertService.add('success', gettextCatalog.getString('Client saved successfully'));
       };
       var error = function (err) {
-        alertService.add('danger', gettextCatalog.getString('There was an error saving this client'));
+        $exceptionHandler(error, 'Save client');
       };
       if ($scope.client._id) {
         $scope.client.$update(success, error);

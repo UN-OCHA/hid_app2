@@ -5,9 +5,9 @@
     .module('app.service')
     .controller('AllSubscriptionsCtrl', AllSubscriptionsCtrl);
 
-  AllSubscriptionsCtrl.$inject = ['$scope', 'alertService', 'Service', 'gettextCatalog'];
-  
-  function AllSubscriptionsCtrl ($scope, alertService, Service, gettextCatalog) {
+  AllSubscriptionsCtrl.$inject = ['$exceptionHandler', '$scope', 'alertService', 'Service', 'gettextCatalog'];
+
+  function AllSubscriptionsCtrl ($exceptionHandler, $scope, alertService, Service, gettextCatalog) {
     $scope.unsubscribe = unsubscribe;
     $scope.page = 1;
     $scope.itemsPerPage = 10;
@@ -26,7 +26,7 @@
             alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'));
           })
           .catch(function (err) {
-            alertService.add('danger', gettextCatalog.getString('We could not unsubscribe you from this service'));
+            $exceptionHandler(error, 'Unsubscribe');
           });
       });
     }

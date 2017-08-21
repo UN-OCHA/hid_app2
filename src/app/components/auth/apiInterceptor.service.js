@@ -5,12 +5,12 @@
     .module('app.auth')
     .factory('APIInterceptor', APIInterceptor);
 
-  APIInterceptor.$inject = ['$window', 'config'];
+  APIInterceptor.$inject = ['$q', '$rootScope', '$window', 'config'];
 
-  function APIInterceptor ($window, config) {
+  function APIInterceptor ($q, $rootScope, $window, config) {
+
     return {
       request: function(request) {
-
         var user = JSON.parse($window.localStorage.getItem('currentUser'));
         if (user && user.locale) {
           request.headers['Accept-Language'] = user.locale;
@@ -24,6 +24,13 @@
           }
         }
         return request;
+      },
+
+      'responseError': function(rejection) {
+        if (Offline.state === 'up') {
+          $rootScope.$broadcast('apiRejection', rejection);
+        }
+        return $q.reject(rejection);
       }
     };
   }

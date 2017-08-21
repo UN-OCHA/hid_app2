@@ -37,7 +37,7 @@
       user.$update(function () {
         alertService.add('success', gettextCatalog.getString('User updated'));
       }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error updating this user'));
+        $exceptionHandler(error, 'Verify user form user options');
       });
     }
 
@@ -128,7 +128,7 @@
           alertService.add('success', gettextCatalog.getString('Successfully checked in to list'));
           UserDataService.notify();
         }, function () {
-          alertService.add('danger', gettextCatalog.getString('There was an error checking in this user'));
+          $exceptionHandler(error, 'Check in user from user openCheckInModal');
         });
       });
     }

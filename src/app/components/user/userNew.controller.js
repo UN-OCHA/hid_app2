@@ -20,11 +20,8 @@
     $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + verifyUrl;
 
     var newUserSuccessMsg = gettextCatalog.getString('The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information.');
-    var newUserErrorMsg = gettextCatalog.getString('There was an error processing your registration.');
     var registrationSuccessMsg = gettextCatalog.getString('Thank you for creating an account. You will soon receive a confirmation email to confirm your account.');
-    var registrationErrorMsg = gettextCatalog.getString('There was an error processing your registration.');
     var successMessage = $scope.isRegistration ? registrationSuccessMsg : newUserSuccessMsg;
-    var errorMessage = $scope.isRegistration ? registrationErrorMsg : newUserErrorMsg;
 
     function userCreate (registerForm) {
       $scope.saving = true;
@@ -43,7 +40,6 @@
         $location.path('/users/' + user._id);
 
       }, function () {
-        alertService.add('danger', errorMessage);
         registerForm.$setPristine();
         $scope.saving = false;
       });

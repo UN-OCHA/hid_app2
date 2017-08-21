@@ -92,7 +92,6 @@
     }
 
     function saveError (error) {
-      alertService.add('danger', gettextCatalog.getString('There was an error saving this service'));
       $exceptionHandler(error, 'Save service fail');
     }
 
@@ -117,7 +116,6 @@
         .then(function (result) {
           $scope.mailchimpLists = result.data.lists;
         }, function () {
-          alertService.add('danger', gettextCatalog.getString('Invalid API key'));
           $scope.service.mailchimp.apiKey = '';
           $scope.mailchimpLists = [];
         });

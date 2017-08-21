@@ -5,10 +5,10 @@
   .module('app.service')
   .controller('SuggestionsCtrl', SuggestionsCtrl);
 
-  SuggestionsCtrl.$inject = ['$location', '$q', '$routeParams', '$scope', 'alertService', 'Service', 'User', 'gettextCatalog'];
+  SuggestionsCtrl.$inject = ['$exceptionHandler', '$location', '$q', '$routeParams', '$scope', 'alertService', 'Service', 'User', 'gettextCatalog'];
 
-  function SuggestionsCtrl ($location, $q, $routeParams, $scope, alertService, Service, User, gettextCatalog) {
-    $scope.services = [];    
+  function SuggestionsCtrl ($exceptionHandler, $location, $q, $routeParams, $scope, alertService, Service, User, gettextCatalog) {
+    $scope.services = [];
     $scope.suggestions = {};
     $scope.subscribe = subscribe;
     $scope.skipSuggestions = skipSuggestions;
@@ -43,8 +43,8 @@
           return;
         });
 
-      }, function () {
-        alertService.add('danger', gettextCatalog.getString('There was an error subscribing you'));
+      }, function (error) {
+        $exceptionHandler(error, 'Subscribe error');
       });
     }
 
