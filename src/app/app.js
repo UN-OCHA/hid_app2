@@ -262,7 +262,7 @@ app.config(['$routeProvider', '$locationProvider',
         adminOrManagerOnly: true,
         title: 'Services'
       }).
-      when('/services/suggestions', {
+      when('/services/suggestions/:userId', {
         templateUrl: 'app/components/service/suggestions.html',
         controller: 'SuggestionsCtrl',
         authenticate: true,

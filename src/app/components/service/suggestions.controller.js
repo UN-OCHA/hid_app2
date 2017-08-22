@@ -9,16 +9,21 @@
 
   function SuggestionsCtrl ($exceptionHandler, $location, $q, $routeParams, $scope, alertService, Service, User, gettextCatalog) {
     $scope.services = [];
+    $scope.user = {};
     $scope.suggestions = {};
     $scope.subscribe = subscribe;
     $scope.skipSuggestions = skipSuggestions;
     var lists = $routeParams.lists;
 
     function getServices () {
+      var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
       $scope.services = Service.suggestedServices;
       if (!Service.suggestedServices.length && lists) {
-        Service.getSuggestions(lists, $scope.currentUser).$promise.then(function (services) {
-          $scope.services = Service.suggestedServices;
+        User.get({userId: userId}, function (user) {
+          $scope.user = user;
+          Service.getSuggestions(lists, $scope.user).$promise.then(function (services) {
+            $scope.services = Service.suggestedServices;
+          });
         });
       }
     }
@@ -30,15 +35,20 @@
         if (!service.selected) {
           return;
         }
-        promises.push(service.subscribe($scope.currentUser));
+        promises.push(service.subscribe($scope.user));
       });
 
       $q.all(promises).then(function () {
 
-        User.get({userId: $scope.currentUser._id}, function (user) {
-          $scope.setCurrentUser(user);
+        User.get({userId: $scope.user._id}, function (user) {
           Service.suggestions = [];
-          alertService.add('success', gettextCatalog.getString('You were successfully subscribed'));
+          if ($scope.currentUser._id === $scope.user._id) {
+            $scope.setCurrentUser(user);
+            alertService.add('success', gettextCatalog.getString('You were successfully subscribed'));
+          }
+          else {
+            alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully subscribed'));
+          }
           $location.url('/dashboard');
           return;
         });

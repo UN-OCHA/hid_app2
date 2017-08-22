@@ -115,24 +115,31 @@
       $scope.saving = true;
 
       function lastTask(){
-        if ($scope.currentUser._id === $scope.user._id) {
-          $scope.user = User.get({userId: $scope.currentUser._id}, function () {
+        $scope.user = User.get({userId: $scope.user._id}, function () {
+          if ($scope.currentUser._id === $scope.user._id) {
             $scope.setCurrentUser($scope.user);
-            defer.resolve();
-            var moderatedLists = false;
-            var listIds = $scope.selectedLists.map(function (list) {
-              if (list.joinability === 'moderated') {
-                moderatedLists = true;
-              }
-              return list._id.toString();
-            });
+          }
+          defer.resolve();
+          var moderatedLists = false;
+          var listIds = $scope.selectedLists.map(function (list) {
+            if (list.joinability === 'moderated') {
+              moderatedLists = true;
+            }
+            return list._id.toString();
+          });
 
-            Service.getSuggestions(listIds.join(','), $scope.currentUser).$promise.then(function () {
-              if (Service.suggestedServices.length) {
+          Service.getSuggestions(listIds.join(','), $scope.user).$promise.then(function () {
+            if (Service.suggestedServices.length) {
+              if ($scope.currentUser._id === $scope.user._id) {
                 $location.path('services/suggestions').search({lists: listIds.join(',') });
-                return;
               }
+              else {
+                $location.path('services/suggestions/' + $scope.user._id).search({lists: listIds.join(',')});
+              }
+              return;
+            }
 
+            if ($scope.currentUser._id === $scope.user._id) {
               var message = gettextCatalog.getString('You were successfully checked in.');
               if (moderatedLists) {
                 message += ' ' + gettextCatalog.getString('Some of you check-ins are pending, we will get back to you soon.');
@@ -140,14 +147,14 @@
               alertService.add('success', message);
               $scope.saving = false;
               $location.path('/dashboard');
-            });
+            }
+            else {
+              alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
+              $scope.saving = false;
+              defer.resolve();
+            }
           });
-        }
-        else {
-          alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
-          $scope.saving = false;
-          defer.resolve();
-        }
+        });
       }
 
       function checkinOneList (list) {
