@@ -18,14 +18,14 @@
     function getServices () {
       var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
       $scope.services = Service.suggestedServices;
-      if (!Service.suggestedServices.length && lists) {
-        User.get({userId: userId}, function (user) {
-          $scope.user = user;
+      User.get({userId: userId}, function (user) {
+        $scope.user = user;
+        if (!Service.suggestedServices.length && lists) {
           Service.getSuggestions(lists, $scope.user).$promise.then(function (services) {
             $scope.services = Service.suggestedServices;
           });
-        });
-      }
+        }
+      });
     }
 
     function subscribe () {
