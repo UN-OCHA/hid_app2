@@ -40,6 +40,7 @@
        scopeUser.$delete = function () {};
        scopeUser.setPrimaryOrganization = function () {};
        scopeUser.addPhone = function () {};
+       scopeUser.addEmail = function () {};
        scopeUser.setPrimaryPhone = function () {};
        scopeUser.setPrimaryEmail = function () {};
        scope.user = scopeUser;
@@ -74,6 +75,16 @@
         callback({
           data: {
             organization: newOrganization
+          }
+        });
+      });
+      spyOn(scopeUser, 'addEmail').and.callFake(function (arg, callback) {
+        callback({
+          data: {
+            emails: [
+              {_id: '987986', email: 'old@example.com', type: 'Work'},
+              newEmail
+            ]
           }
         });
       });
@@ -243,8 +254,8 @@
         expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
       });
 
-      it('should update the user', function () {
-        expect(scopeUser.$update).toHaveBeenCalled();
+      it ('should call addEmail', function () {
+        expect(scopeUser.addEmail).toHaveBeenCalled();
       });
 
       it('should emit the success event', function () {
