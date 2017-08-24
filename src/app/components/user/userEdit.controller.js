@@ -210,6 +210,26 @@
       });
     }
 
+    function saveEmail (email, callback) {
+      $scope.$emit('editUser', {status: 'saving'});
+      $scope.user.addEmail(email, function (resp) {
+        $scope.user.emails = resp.data.emails;
+        updateCurrentUser();
+        $scope.$emit('editUser', {
+          status: 'success',
+          type: 'addemail',
+          message: gettextCatalog.getString('Profile updated')
+        });
+
+        if (callback) {
+          callback();
+        }
+      }, function () {
+        $exceptionHandler(error, 'Save email error');
+        $scope.$emit('editUser', {status: 'fail'});
+      });
+    }
+
     function isListMember (list, user) {
       var inList = false;
       angular.forEach(config.listTypes, function (listType) {
@@ -314,7 +334,9 @@
       }
 
       if (key === 'email') {
-        $scope.user[key + 's'].push($scope.temp[key]);
+        saveEmail($scope.temp[key]);
+        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        return;
       } else {
         $scope.user[key + 's'].unshift($scope.temp[key]);
       }
