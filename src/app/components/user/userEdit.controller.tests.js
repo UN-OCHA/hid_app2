@@ -40,6 +40,7 @@
        scopeUser.$delete = function () {};
        scopeUser.setPrimaryOrganization = function () {};
        scopeUser.addPhone = function () {};
+       scopeUser.addEmail = function () {};
        scopeUser.setPrimaryPhone = function () {};
        scopeUser.setPrimaryEmail = function () {};
        scope.user = scopeUser;
@@ -76,6 +77,9 @@
             organization: newOrganization
           }
         });
+      });
+      spyOn(scopeUser, 'addEmail').and.callFake(function (arg, callback) {
+        callback();
       });
       spyOn(scopeUser, 'addPhone').and.callFake(function (arg, callback) {
         callback();
