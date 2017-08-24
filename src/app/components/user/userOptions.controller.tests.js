@@ -3,9 +3,9 @@
 
   describe('User options controller', function () {
 
-    var allLists, listFixture, ownedAndManagedLists, mockConfig, mockAlertService, mockGetText, mockList, mockListDataService, 
-    mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm, userFixture;    
-    
+    var allLists, listFixture, ownedAndManagedLists, mockConfig, mockAlertService, mockGetText, mockList, mockListDataService,
+    mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm, userFixture;
+
     beforeEach(function() {
       userFixture = readJSON('app/test-fixtures/user.json');
       listFixture = readJSON('app/test-fixtures/list.json');
@@ -26,8 +26,8 @@
 
       mockUibModal = {
         open: function() {}
-      }; 
- 
+      };
+
       spyOn(mockUibModal, 'open').and.returnValue({result: modalResult });
 
       mockAlertService = {};
@@ -109,14 +109,14 @@
 
     describe('Verifying / unverifying users', function () {
 
-      it('should verify the user', function () { 
+      it('should verify the user', function () {
         scope.verifyUser(mockUser);
 
         expect(mockUser.verified).toBe(true);
         expect(mockUser.$update).toHaveBeenCalled();
       });
 
-      it('should un-verify the user', function () { 
+      it('should un-verify the user', function () {
         mockUser.verified = true;
         scope.verifyUser(mockUser);
 
@@ -124,7 +124,7 @@
         expect(mockUser.$update).toHaveBeenCalled();
       });
     });
-    
+
     describe('Deleting a user', function () {
 
       beforeEach(function () {
@@ -139,98 +139,6 @@
         expect(mockUser.$delete).toHaveBeenCalled();
       });
     });
-    
-    describe('Checking user into lists', function () {
-
-      describe('As an admin', function () {
-        beforeEach(function () {
-          scope.selectedLists = [listFixture.lists[4]];
-          scope.openCheckInModal({}, true);
-        });
-
-        it('should open the modal', function () {
-          expect(mockUibModal.open).toHaveBeenCalled();
-        });
-
-        describe('Getting available lists', function () {
-          beforeEach(function () {
-            scope.getAvailableLists(userFixture.adminUser, userFixture.user1, 'findme');
-          });
-
-          it('should get lists with your searchTerm', function () {
-            var params = {
-              name: 'findme',
-              limit: 50,
-              sort: 'name'
-            };
-            expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
-          });
-
-          it('should remove any lists the user is already in or that have already been selected', function () {
-            var expectedLists = [listFixture.lists[2], listFixture.lists[3], listFixture.lists[5]];
-            expect(scope.availableLists).toEqual(expectedLists);
-          });
-
-        });
-        
-      });
-
-      describe('As a global manager', function () {
-        beforeEach(function () {
-          scope.selectedLists = [listFixture.lists[4]];
-          scope.openCheckInModal({}, true);
-        });
-
-        it('should open the modal', function () {
-          expect(mockUibModal.open).toHaveBeenCalled();
-        });
-
-        describe('Getting available lists', function () {
-          beforeEach(function () {
-            scope.getAvailableLists(userFixture.globalManagerUser, userFixture.user1, 'findme');
-          });
-
-          it('should get lists with your searchTerm', function () {
-            var params = {
-              name: 'findme',
-              limit: 50,
-              sort: 'name'
-            };
-            expect(mockList.query).toHaveBeenCalledWith(params, jasmine.any(Function));
-          });
-
-          it('should remove any lists the user is already in or that have already been selected', function () {
-            var expectedLists = [listFixture.lists[2], listFixture.lists[3], listFixture.lists[5]];
-            expect(scope.availableLists).toEqual(expectedLists);
-          });
-
-        });
-        
-      });
-
-      describe('As a normal user', function () {
-        
-        describe('Getting available lists', function () {
-          beforeEach(function () {
-            scope.selectedLists = [listFixture.lists[3]];
-            scope.getAvailableLists(userFixture.user2, userFixture.user1, 'findme');
-          });
-
-          it('should get lists you own and manage', function () {
-            expect(mockListDataService.getManagedAndOwnedLists).toHaveBeenCalledWith(userFixture.user2, 'findme', jasmine.any(Function));
-          });
-
-          it('should remove any lists the user is already in or that have already been selected', function () {
-            var expectedLists = [listFixture.lists[2], listFixture.lists[4], listFixture.lists[5]];
-            expect(scope.availableLists).toEqual(expectedLists);
-          });
-
-        });
-        
-      });
-
-    });
 
   });
 })();
-
