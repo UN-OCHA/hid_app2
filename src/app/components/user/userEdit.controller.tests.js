@@ -254,6 +254,10 @@
         expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
       });
 
+      it ('should call addEmail', function () {
+        expect(scopeUser.addEmail).toHaveBeenCalled();
+      });
+
       it('should emit the success event', function () {
         var emitObj = {
           status: 'success',
