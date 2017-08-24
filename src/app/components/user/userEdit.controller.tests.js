@@ -254,10 +254,6 @@
         expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
       });
 
-      it('should update the user', function () {
-        expect(scopeUser.$update).toHaveBeenCalled();
-      });
-
       it('should emit the success event', function () {
         var emitObj = {
           status: 'success',
