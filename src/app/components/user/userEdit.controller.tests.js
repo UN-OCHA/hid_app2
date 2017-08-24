@@ -79,7 +79,12 @@
         });
       });
       spyOn(scopeUser, 'addEmail').and.callFake(function (arg, callback) {
-        callback();
+        callback({
+          emails: [
+            {_id: '987986', email: 'old@example.com', type: 'Work'},
+            newEmail
+          ]
+        });
       });
       spyOn(scopeUser, 'addPhone').and.callFake(function (arg, callback) {
         callback();
