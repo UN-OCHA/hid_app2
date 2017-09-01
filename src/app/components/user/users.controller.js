@@ -194,11 +194,6 @@
         delete qs.list;
       }
 
-      if (qs.q) {
-        qs.name = qs.q;
-        delete qs.q;
-      }
-
       if (qs && Object.keys(qs).length) {
         $scope.selectedFilters = angular.copy(qs);
 
