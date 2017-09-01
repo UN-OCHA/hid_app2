@@ -357,7 +357,7 @@
           populateCurrentFilter(value, type, $scope.currentFilters.all);
         }
 
-        if (type === 'user_type' || type === 'name') {
+        if (type === 'user_type' || type === 'name' || type === 'q') {
           populateCurrentFilter(value, type, $scope.currentFilters.all);
         }
       });
@@ -417,7 +417,7 @@
         label = selected.label;
       }
 
-      if (type === 'name') {
+      if (type === 'name' || type === 'q') {
         label = value;
         type = 'name';
       }
