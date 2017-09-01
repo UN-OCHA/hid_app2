@@ -794,7 +794,7 @@ describe ('Searching all users by name', function () {
   controllerSetup(false, {q: 'perkins'});
   it ('should add the search term to the filters', function () {
     filterParams = defaultParams;
-    filterParams.name = 'perkins';
+    filterParams.q = 'perkins';
 
     expect(mockUserDataService.getUsers).toHaveBeenCalledWith(filterParams, undefined, jasmine.any(Function));
   });
