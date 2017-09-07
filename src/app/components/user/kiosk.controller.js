@@ -100,14 +100,23 @@
         if (user.organization && user.organization.list) {
           // Check out from the old organization
           UserCheckInService.delete({userId: user._id, listType: 'organization', checkInId: user.organization._id}, {}, function (user) {
-            UserCheckInService.save({userId: user._id, listType: 'organization'}, checkinUser, function (out) {
-              $scope._checkinHelper(user);
+            UserCheckInService.save({userId: user._id, listType: 'organizations'}, checkinUser, function (out) {
+              $scope.setPrimaryOrganization(user, $scope.organization.list, function (err) {
+                if (!err) {
+                  $scope._checkinHelper(user);
+                }
+              });
             });
           });
         }
         else {
-          UserCheckInService.save({userId: user._id, listType: 'organization'}, checkinUser, function (out) {
-            $scope._checkinHelper(user);
+          UserCheckInService.save({userId: user._id, listType: 'organizations'}, checkinUser, function (out) {
+            // Set the primary organization
+            $scope.setPrimaryOrganization(user, $scope.organization.list, function (err) {
+              if (!err) {
+                $scope._checkinHelper(user);
+              }
+            });
           });
         }
       }
@@ -160,6 +169,14 @@
 
     $scope.showDatePicker = function() {
       $scope.datePicker.opened = true;
+    };
+
+    $scope.setPrimaryOrganization = function (user, org, callback) {
+      user.setPrimaryOrganization(org, function (resp) {
+        callback();
+      }, function () {
+        callback(error);
+      });
     };
 
   }
