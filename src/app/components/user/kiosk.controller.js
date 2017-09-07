@@ -93,7 +93,7 @@
     // Check user in in the lists selected
     $scope.checkin = function (user) {
       if ($scope.organization.list && (!user.organization || !user.organization.list || $scope.organization.list._id != user.organization.list._id)) {
-        checkinUser = {
+        var checkinUser = {
           list: $scope.organization.list._id,
           checkoutDate: $scope.departureDate
         };
