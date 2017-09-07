@@ -50,7 +50,7 @@
         $scope.title = "Check into " + $scope.list.list.name;
       }
       if (step === 3) {
-        $scope.users = User.query({email: $scope.user.email, authOnly: false}, function () {
+        $scope.users = User.query({email: $scope.user.email}, function () {
           if ($scope.users.length) {
             $scope.user = $scope.users[0];
           }
@@ -101,7 +101,7 @@
           // Check out from the old organization
           UserCheckInService.delete({userId: user._id, listType: 'organization', checkInId: user.organization._id}, {}, function (user) {
             UserCheckInService.save({userId: user._id, listType: 'organizations'}, checkinUser, function (out) {
-              $scope.setPrimaryOrganization(user, $scope.organization.list, function (err) {
+              $scope.setPrimaryOrganization(user, out.organizations[0], function (err) {
                 if (!err) {
                   $scope._checkinHelper(user);
                 }
@@ -112,7 +112,7 @@
         else {
           UserCheckInService.save({userId: user._id, listType: 'organizations'}, checkinUser, function (out) {
             // Set the primary organization
-            $scope.setPrimaryOrganization(user, $scope.organization.list, function (err) {
+            $scope.setPrimaryOrganization(user, out.organizations[0], function (err) {
               if (!err) {
                 $scope._checkinHelper(user);
               }
