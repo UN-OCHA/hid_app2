@@ -490,6 +490,10 @@
           }
         }
 
+        if (filter.type === 'name' && $scope.selectedFilters['q']) {
+          delete $scope.selectedFilters['q'];
+        }
+
         delete $scope.selectedFilters[filter.type];
       }
       filterUsers();
