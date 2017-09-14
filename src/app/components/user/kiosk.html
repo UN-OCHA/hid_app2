@@ -43,10 +43,6 @@
             <div ng-messages="kiosk.given_name.$error" ng-show="kiosk.given_name.$touched" ng-messages-multiple="ng-messages-multiple">
               <div ng-messages-include="app/common/messages.html"></div>
             </div>
-            <div class="form-field">
-              <label for="middle_name" translate>Middle Name</label>
-              <input type="text" class="form-control" id="middle_name" placeholder="{{'Your middle name'|translate}}" ng-model="user.middle_name">
-            </div>
             <div class="form-field" ng-class="{'has-error': kiosk.family_name.$touched && kiosk.family_name.$invalid}">
               <label for="family_name" translate>Last Name</label>
               <input type="text" name="family_name" class="form-control" id="family_name" placeholder="{{'Your last name'|translate}}" ng-model="user.family_name" required>
