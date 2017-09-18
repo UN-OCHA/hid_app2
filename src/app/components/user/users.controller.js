@@ -478,6 +478,10 @@
         return item._id !== filter._id;
       });
 
+      if (filter.type === 'name' && $scope.selectedFilters.q) {
+        delete $scope.selectedFilters.q;
+      }
+
       if ($scope.selectedFilters[filter.type]) {
         if (filter.type === 'user_type') {
 
@@ -488,10 +492,6 @@
           if ($scope.selectedFilters[filter._id]) {
             delete $scope.selectedFilters[filter._id];
           }
-        }
-
-        if (filter.type === 'name' && $scope.selectedFilters['q']) {
-          delete $scope.selectedFilters['q'];
         }
 
         delete $scope.selectedFilters[filter.type];
