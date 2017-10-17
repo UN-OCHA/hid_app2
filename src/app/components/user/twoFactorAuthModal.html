@@ -1,0 +1,14 @@
+<button type="button" class="btn-transparent modal-close" ng-click="dismiss()">
+  <icon name="cancel" text="Close"></icon>
+</button>
+<div class="modal-body" id="modal-body">
+  <div class="modal-body__content">
+    <form ng-submit="close(token)">
+      <p>
+        <label for="token" translate>Please enter your Two-Factor Authentication code:</label>
+        <input type="tel" id="code" name="code" ng-model="token" minlength="6" maxlength="6" required />
+      </p>
+      <button type="submit" class="btn-primary btn-block" translate>Submit</button>
+    </form>
+  </div>
+</div>

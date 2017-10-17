@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserPrefsCtrl', UserPrefsCtrl);
 
-  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog'];
+  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', '$uibModal', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog', 'TwoFactorAuth', 'FileSaver', 'Blob'];
 
-  function UserPrefsCtrl($exceptionHandler, $scope, $location, AuthService, alertService, UserDataService, gettextCatalog) {
+  function UserPrefsCtrl($exceptionHandler, $scope, $location, $timeout, $uibModal, AuthService, alertService, UserDataService, gettextCatalog, TwoFactorAuth, FileSaver, Blob) {
     $scope.pendingConnections = [];
     $scope.approvedConnections = [];
     $scope.password = {
@@ -16,6 +16,7 @@
     };
 
     $scope.timezones = moment.tz.names();
+    $scope.twoFactorAuthStep = 1;
 
     UserDataService.getUser($scope.currentUser.id, function () {
       $scope.user = UserDataService.user;
@@ -134,6 +135,91 @@
       });
     };
 
+    // Two Factor Auth
+    $scope.getQRCode = function () {
+      TwoFactorAuth.generateQRCode(function (response) {
+        $scope.qrCode = response.data.url;
+        $scope.twoFactorAuthStep = 2;
+      }, function (error) {
+        $exceptionHandler(error, 'getQRCode');
+      });
+    };
+
+    $scope.getRecoveryCodes = function () {
+      TwoFactorAuth.generateRecoveryCodes(function (response) {
+        $scope.recoveryCodes = response.data;
+      }, function (error) {
+        $exceptionHandler(error, 'getRecoveryCodes');
+      });
+    };
+
+    $scope.downloadRecoveryCodes = function () {
+      var codes = [];
+      angular.forEach($scope.recoveryCodes, function (code) {
+        codes.push(code + '\n');
+      });
+      var data = new Blob(codes, { type: 'text/plain;charset=utf-8' });
+      FileSaver.saveAs(data, 'hid-recovery-codes.txt');
+    };
+
+    $scope.enableTFA = function (code) {
+      TwoFactorAuth.enable(code, function (response) {
+        $scope.twoFactorAuthStep = 3;
+        $scope.setCurrentUser(response.data);
+        $scope.getRecoveryCodes();
+      }, function (error) {
+        $exceptionHandler(error, 'enableTFA');
+      });
+    };
+
+    function disableTFA (token) {
+      TwoFactorAuth.disable(token, function (response) {
+        $scope.setCurrentUser(response.data);
+        $scope.user.totp = false;
+        $scope.recoveryCodes = [];
+        twoFAModal.close();
+      }, function (error) {
+        $exceptionHandler(error, 'disableTFA');
+      });
+    }
+
+    var twoFAModal;
+    $scope.openTFAModal = function () {
+      twoFAModal = $uibModal.open({
+        controller: function ($scope) {
+          $scope.close = function () {
+            twoFAModal.close($scope.token);
+          };
+          $scope.dismiss = function () {
+            twoFAModal.dismiss();
+          }
+        },
+        size: 'sm',
+        templateUrl: 'app/components/user/twoFactorAuthModal.html',
+      });
+
+      twoFAModal.opened.then(function () {
+        $timeout(function () {
+          document.getElementById('code').focus();
+        }, 0);
+      });
+
+      twoFAModal.result.then(function (token) {
+        disableTFA(token);
+        return;
+      }, function () {
+        return;
+      });
+    };
+
+    $scope.resetTFAForm = function () {
+      $scope.user.totp = true;
+      $scope.twoFactorAuthStep = 1;
+      $scope.recoveryCodes = [];
+    };
+
   }
+
+
 
 })();

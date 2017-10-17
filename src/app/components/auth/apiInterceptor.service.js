@@ -28,6 +28,10 @@
 
       'responseError': function(rejection) {
         if (Offline.state === 'up') {
+          // 2FA required
+          if (rejection.status === 401 && rejection.data.message === 'No TOTP token') {
+            return $q.reject(rejection);
+          }
           $rootScope.$broadcast('apiRejection', rejection);
         }
         return $q.reject(rejection);

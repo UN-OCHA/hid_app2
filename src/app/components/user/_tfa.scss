@@ -1,0 +1,31 @@
+.recovery-codes__info {
+  position: relative;
+  padding-left: $base-unit*5;
+
+  .icon {
+    position: absolute;
+    left: 0;
+    top: $base-unit/2;
+    width: $base-unit*4;
+    height: $base-unit*4;
+    fill: $error-color;
+  }
+}
+.recovery-codes__list {
+  display: flex;
+  flex-wrap: wrap;
+  background: $light-grey;
+  padding: $base-unit;
+  margin-bottom: $base-unit;
+}
+
+.recovery-codes__item {
+  width: 50%;
+  padding-right: $base-unit;
+}
+
+@include media-query(md) {
+  .recovery-codes__item {
+    width: 25%;
+  }
+}

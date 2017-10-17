@@ -5,11 +5,12 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$window', 'alertService', 'AuthService', 'gettextCatalog'];
+  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$uibModal', '$window', 'alertService', 'AuthService', 'gettextCatalog'];
 
-  function AuthCtrl ($exceptionHandler, $scope, $location, $window, alertService, AuthService, gettextCatalog) {
+  function AuthCtrl ($exceptionHandler, $scope, $location, $uibModal, $window, alertService, AuthService, gettextCatalog) {
     $scope.email = '';
     $scope.saving = false;
+    var twoFAModal;
 
     function onFirstLogin () {
       $scope.currentUser.setAppMetaData({login: true});
@@ -20,9 +21,35 @@
       });
     }
 
-    $scope.login = function() {
+    $scope.login = function(tfaCode) {
+      console.log('login tfaCode', tfaCode)
+      if (twoFAModal) {
+        twoFAModal.close();
+      }
       $scope.saving = true;
-      AuthService.login($scope.email, $scope.password).then(function () {
+      AuthService.login($scope.email, $scope.password, tfaCode).then(function (response) {
+        console.log('auth controller login', response);
+        // 2FA required
+        if (response && response.data.statusCode === 401 && response.data.message === 'No TOTP token') {
+          console.log('open modal')
+
+          twoFAModal = $uibModal.open({
+            scope: $scope,
+            size: 'sm',
+            templateUrl: 'app/components/user/twoFactorAuthLoginModal.html',
+          })
+
+          twoFAModal.result.then(function () {
+            return;
+          }, function () {
+            $scope.saving = false;
+            return;
+          });
+
+          return;
+        }
+
+
         $scope.initCurrentUser();
         $scope.saving = false;
         $window.localStorage.setItem('hidResetPassword', true);

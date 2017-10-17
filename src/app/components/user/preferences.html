@@ -147,4 +147,94 @@
 
     </div>
   </tab>
+
+  <tab heading="Additional security">
+    <div class="block">
+      <div class="block-heading">
+        <h2 translate>Two-Factor Authentication</h2>
+      </div>
+
+      <div ng-if="twoFactorAuthStep === 1">
+        <p class="form-section__info" translate>TO DO Description of what 2FA is and why should enable</p>
+
+        <div class="form-inline-fields">
+          <strong class="form-inline-fields__item">
+            <span translate>Status: </span>
+            <span ng-if="!user.totp" translate>Off</span>
+            <span ng-if="user.totp" translate>On</span>
+          </strong>
+          <button type="button" class="btn-primary" ng-if="!user.totp" ng-click="getQRCode()">
+            <span translate>Activate</span>
+          </button>
+          <button type="button" class="btn-primary" ng-if="user.totp" ng-click="openTFAModal()">
+            <span translate>Deactivate</span>
+          </button>
+        </div>
+      </div>
+
+
+      <div ng-if="twoFactorAuthStep === 2" class="row">
+        <div class="col-md-6">
+          <p translate><strong>1. Scan the QR Code:</strong></p>
+          <img src="{{qrCode}}" />
+        </div>
+        <div class="col-md-6">
+          <form ng-submit="enableTFA(tfaCode)">
+            <label for="tfaCode" translate>2. Enter the code given:</label>
+            <div class="form-inline-fields">
+
+              <span class="form-inline-fields__item">
+                <input type="text" id="code" name="code" ng-model="tfaCode" required />
+              </span>
+              <button type="submit" class="btn-primary" translate>Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div ng-if="twoFactorAuthStep === 3">
+        <div ng-if="recoveryCodes">
+          <p class="form-section__info" translate><strong>3. Save your recovery codes:</strong></p>
+          <p class="form-section__info recovery-codes__info">
+            <icon name="caution"></icon>
+            <span translate>Download and save your recovery codes in a safe place. They will allow you to access your account if you ever lose your phone.</span>
+          </p>
+          <ul class="recovery-codes">
+            <li class="recovery-codes__item" ng-repeat="code in recoveryCodes">{{code}}</li>
+          </ul>
+          <div class="form-field">
+            <button type="button" class="btn-primary" ng-click="downloadRecoveryCodes()" translate>Download</button>
+            <button clipboard supported="supported" text="recoveryCodes" class="btn-primary" translate>Copy</button>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" ng-click="resetTFAForm()" ng-if="twoFactorAuthStep === 3">Done</button>
+      </div>
+
+    </div>
+  </div>
+
+    <div class="block recovery-codes" ng-if="user.totp">
+      <div class="block-heading">
+        <h3 translate>Recovery codes</h3>
+      </div>
+
+      <p class="form-section__info recovery-codes__info">
+        <icon name="caution"></icon>
+        <span translate>Download and save your recovery codes in a safe place. They will allow you to access your account if you ever lose your phone.</span>
+      </p>
+
+      <button type="button" class="btn-primary" ng-click="getRecoveryCodes()" ng-if="!recoveryCodes" translate>Get recovery codes</button>
+
+      <div ng-if="recoveryCodes">
+        <ul class="recovery-codes__list">
+          <li class="recovery-codes__item" ng-repeat="code in recoveryCodes">{{code}}</li>
+        </ul>
+        <button type="button" class="btn-primary" ng-click="downloadRecoveryCodes()" translate>Download</button>
+        <button clipboard supported="supported" text="recoveryCodes" class="btn-primary" translate>Copy</button>
+      </div>
+
+    </div>
+
+  </tab>
 </tabset>

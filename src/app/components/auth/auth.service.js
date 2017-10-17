@@ -190,12 +190,29 @@
     }
 
     var jwt = {
-      login: function(email, password) {
+      login: function(email, password, tfaCode) {
         var expiry = moment().add(7, 'days').unix();
-        var promise = $http.post(config.apiUrl + 'jsonwebtoken', { 'email': email, 'password': password, exp: expiry }).then(function (response) {
+
+        var req = {
+          method: 'POST',
+          url: config.apiUrl + 'jsonwebtoken',
+          data: { 'email': email, 'password': password, exp: expiry }
+        }
+
+        if (tfaCode) {
+          req.headers = {
+            'X-HID-TOTP': tfaCode
+          }
+        }
+
+        var promise = $http(req).then(function (response) {
+          console.log('login', response)
           if (response.data && response.data.token) {
             storeUser(response);
           }
+        }, function (error) {
+          console.log('login error', error);
+          return error;
         });
         return promise;
       },

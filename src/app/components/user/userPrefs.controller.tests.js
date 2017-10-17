@@ -3,9 +3,9 @@
 
   describe('User preferences controller', function () {
 
-  	var connection, mockAlertService, mockAuthService, mockGetText, mockUserDataService, newToken, returnedTokens, scope, 
+  	var connection, mockAlertService, mockAuthService, mockGetText, mockUserDataService, newToken, returnedTokens, scope,
   	scopeUser, showTokens, userFixture;
-  	
+
   	newToken = {id: 4, blacklist: false, token: '124324'};
   	returnedTokens = [{id: 1, blacklist: false}, {id: 2, blacklist: true}, {id: 3, blacklist: false}];
   	showTokens = [{id: 1, blacklist: false}, {id: 3, blacklist: false}];
@@ -196,6 +196,15 @@
   		});
 
   	});
+
+    describe('Two-Factor Authentication', function () {
+
+      it('should enable @FA', function () {
+        scope.enable2FA();
+        expect(mock2FAService.generateQRCode).toHaveBeenCalled();
+      });
+
+    });
 
   });
 })();
