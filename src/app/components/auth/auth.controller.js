@@ -49,6 +49,7 @@
         $scope.login(tfa.token, tfa.trustDevice);
         return;
       }, function () {
+        $scope.saving = false;
         return;
       });
     }

@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserPrefsCtrl', UserPrefsCtrl);
 
-  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', '$uibModal', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog', 'TwoFactorAuth', 'FileSaver', 'Blob'];
+  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog', 'TwoFactorAuth', 'FileSaver', 'Blob'];
 
-  function UserPrefsCtrl($exceptionHandler, $scope, $location, $timeout, $uibModal, AuthService, alertService, UserDataService, gettextCatalog, TwoFactorAuth, FileSaver, Blob) {
+  function UserPrefsCtrl($exceptionHandler, $scope, $location, $timeout, AuthService, alertService, UserDataService, gettextCatalog, TwoFactorAuth, FileSaver, Blob) {
     $scope.pendingConnections = [];
     $scope.approvedConnections = [];
     $scope.password = {
@@ -24,17 +24,31 @@
       getConnections($scope.user);
     });
 
-    // Set a new password for the current user
-    $scope.savePassword = function(form) {
-      $scope.user.old_password = $scope.password.old;
-      $scope.user.new_password = $scope.password.new;
-      $scope.user.$update(function () {
+    function updateUserPassword (form, token) {
+      $scope.user.changePassword($scope.user, function () {
         alertService.add('success', gettextCatalog.getString('Your password was successfully changed.'));
         form.$setPristine();
       }, function (error) {
         $exceptionHandler(error, 'savePassword');
         form.$setPristine();
-      });
+      }, token);
+    }
+
+    // Set a new password for the current user
+    $scope.savePassword = function(form) {
+      $scope.user.old_password = $scope.password.old;
+      $scope.user.new_password = $scope.password.new;
+
+      if ($scope.user.totp) {
+        TwoFactorAuth.requestToken(function (token) {
+          updateUserPassword(form, token);
+        }, function () {
+          form.$setPristine();
+        });
+        return;
+      }
+
+      updateUserPassword(form);
     };
 
     // Set settings for the current user
@@ -163,8 +177,8 @@
       FileSaver.saveAs(data, 'hid-recovery-codes.txt');
     };
 
-    $scope.enableTFA = function (code) {
-      TwoFactorAuth.enable(code, function (response) {
+    $scope.enableTFA = function (token) {
+      TwoFactorAuth.enable(token, function (response) {
         $scope.twoFactorAuthStep = 3;
         $scope.setCurrentUser(response.data);
         $scope.getRecoveryCodes();

@@ -21,7 +21,7 @@
       method: 'DELETE'
     },
     'update': {
-      method: 'PUT',
+      method: 'PUT'
     }
     });
 
@@ -72,7 +72,6 @@
 
     // Set primary email
     User.prototype.setPrimaryEmail = function (email, success, error, token) {
-      console.log('token',token)
       var req = {
         method: 'PUT',
         url: config.apiUrl + 'user/' + this._id + '/email',
@@ -80,7 +79,7 @@
         headers: {
           'X-HID-TOTP': token
         }
-      }
+      };
       $http(req).then(success, error);
     };
 
@@ -193,6 +192,18 @@
 
     User.prototype.deleteConnection = function (userId, connectionId, success, error) {
       $http.delete(config.apiUrl + 'user/' + userId + '/connections/' + connectionId, {}).then(success, error);
+    };
+
+    User.prototype.changePassword = function (user, success, error, token) {
+      var req = {
+        method: 'PUT',
+        url: config.apiUrl + 'user/' + user._id,
+        data: user,
+        headers: {
+          'X-HID-TOTP': token
+        }
+      };
+      $http(req).then(success, error);
     };
 
     return User;

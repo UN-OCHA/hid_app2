@@ -3,12 +3,14 @@
 
   describe('User preferences controller', function () {
 
-  	var connection, mockAlertService, mockAuthService, mockGetText, mockUserDataService, newToken, returnedTokens, scope,
-  	scopeUser, showTokens, userFixture;
+  	var connection, mockAlertService, mockAuthService, mockBlob, mockFileSaver, mockGetText, mockTwoFactorAuth, mockUserDataService,
+    newToken, recoveryCodes, returnedTokens, scope, scopeUser, showTokens, tfaToken, userFixture;
 
   	newToken = {id: 4, blacklist: false, token: '124324'};
   	returnedTokens = [{id: 1, blacklist: false}, {id: 2, blacklist: true}, {id: 3, blacklist: false}];
   	showTokens = [{id: 1, blacklist: false}, {id: 3, blacklist: false}];
+    tfaToken = '123456';
+    recoveryCodes = ['1345325', '235425'];
 
   	beforeEach(function() {
   		userFixture = readJSON('app/test-fixtures/user.json');
@@ -41,8 +43,14 @@
 	    });
 
 	    mockUserDataService = {};
+      mockTwoFactorAuth = {};
+      mockFileSaver = {};
+      mockBlob = {};
 	    module('app.user', function($provide) {
 	      $provide.value('UserDataService', mockUserDataService);
+        $provide.value('TwoFactorAuth', mockTwoFactorAuth);
+        $provide.value('FileSaver', mockFileSaver);
+        $provide.value('Blob', mockBlob);
 	    });
 	    mockUserDataService.getUser = function () {};
 
@@ -53,6 +61,29 @@
       module('gettext', function($provide) {
         $provide.value('gettextCatalog', mockGetText);
       });
+
+      mockTwoFactorAuth.requestToken = function () {};
+      mockTwoFactorAuth.generateQRCode = function () {};
+      mockTwoFactorAuth.enable = function () {};
+      mockTwoFactorAuth.disable = function () {};
+      mockTwoFactorAuth.generateRecoveryCodes = function () {};
+      mockTwoFactorAuth.deleteTrustedDevice = function () {};
+      spyOn(mockTwoFactorAuth, 'requestToken').and.callFake(function (callback) {
+        callback(tfaToken);
+      });
+      spyOn(mockTwoFactorAuth, 'generateQRCode').and.callFake(function (callback) {
+        callback({data: {url: 'a-qr-code'}});
+      });
+      spyOn(mockTwoFactorAuth, 'enable').and.callFake(function (arg, callback) {
+        callback({data: {_id: '111'}});
+      });
+      spyOn(mockTwoFactorAuth, 'disable').and.callFake(function (arg, callback) {
+        callback({data: {_id: '111'}});
+      });
+      spyOn(mockTwoFactorAuth, 'generateRecoveryCodes').and.callFake(function (callback) {
+        callback({data: recoveryCodes});
+      });
+      spyOn(mockTwoFactorAuth, 'deleteTrustedDevice').and.callFake(function () {});
 
 	    inject(function($rootScope, $controller) {
 	    	scope = $rootScope.$new();
@@ -199,9 +230,70 @@
 
     describe('Two-Factor Authentication', function () {
 
-      it('should enable @FA', function () {
-        scope.enable2FA();
-        expect(mock2FAService.generateQRCode).toHaveBeenCalled();
+      describe('Enabling TwoFactorAuth', function () {
+        it('should request a QR Code', function () {
+          scope.getQRCode();
+          expect(mockTwoFactorAuth.generateQRCode).toHaveBeenCalled();
+        });
+
+        it('should add the QR Code url to scope and move to the next step', function () {
+          scope.getQRCode();
+          expect(scope.qrCode).toEqual('a-qr-code');
+          expect(scope.twoFactorAuthStep).toEqual(2);
+        });
+
+        it('should enable Two Factor Auth using the token', function () {
+        scope.enableTFA(tfaToken);
+          expect(mockTwoFactorAuth.enable).toHaveBeenCalledWith(tfaToken, jasmine.any(Function), jasmine.any(Function));
+        });
+
+        it('should get the recovery codes', function () {
+          scope.enableTFA(tfaToken);
+          expect(mockTwoFactorAuth.generateRecoveryCodes).toHaveBeenCalled();
+          expect(scope.recoveryCodes).toEqual(recoveryCodes);
+        });
+
+        it('should reset the form', function () {
+          scope.enableTFA(tfaToken);
+          scope.resetTFAForm();
+          expect(scope.user.totp).toEqual(true);
+          expect(scope.twoFactorAuthStep).toEqual(1);
+          expect(scope.recoveryCodes).toEqual([]);
+        });
+      });
+
+      describe('Recovery codes', function () {
+        it('should get the recovery codes', function () {
+          scope.getRecoveryCodes();
+          expect(mockTwoFactorAuth.generateRecoveryCodes).toHaveBeenCalled();
+          expect(scope.recoveryCodes).toEqual(recoveryCodes);
+        });
+      });
+
+      describe('Disabling TwoFactorAuth', function () {
+        beforeEach(function () {
+          scope.disableTwoFactorAuth();
+        });
+
+        it('should request a token', function () {
+          expect(mockTwoFactorAuth.requestToken).toHaveBeenCalled();
+        });
+
+        it('should disable two factor auth', function () {
+          expect(mockTwoFactorAuth.disable).toHaveBeenCalledWith(tfaToken, jasmine.any(Function), jasmine.any(Function));
+        });
+
+        it('should reset the page', function () {
+          expect(scope.user.totp).toEqual(false);
+          expect(scope.recoveryCodes).toEqual([]);
+        });
+      });
+
+      describe('Trusted devices', function () {
+        it('should remove devices', function () {
+          scope.deleteTrustedDevice('1');
+          expect(mockTwoFactorAuth.deleteTrustedDevice).toHaveBeenCalledWith('1', jasmine.any(Function), jasmine.any(Function));
+        });
       });
 
     });
