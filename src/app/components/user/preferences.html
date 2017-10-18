@@ -166,7 +166,7 @@
           <button type="button" class="btn-primary" ng-if="!user.totp" ng-click="getQRCode()">
             <span translate>Activate</span>
           </button>
-          <button type="button" class="btn-primary" ng-if="user.totp" ng-click="openTFAModal()">
+          <button type="button" class="btn-primary" ng-if="user.totp" ng-click="disableTwoFactorAuth()">
             <span translate>Deactivate</span>
           </button>
         </div>
@@ -199,7 +199,7 @@
             <icon name="caution"></icon>
             <span translate>Download and save your recovery codes in a safe place. They will allow you to access your account if you ever lose your phone.</span>
           </p>
-          <ul class="recovery-codes">
+          <ul class="recovery-codes__list">
             <li class="recovery-codes__item" ng-repeat="code in recoveryCodes">{{code}}</li>
           </ul>
           <div class="form-field">
@@ -224,9 +224,9 @@
         <span translate>Download and save your recovery codes in a safe place. They will allow you to access your account if you ever lose your phone.</span>
       </p>
 
-      <button type="button" class="btn-primary" ng-click="getRecoveryCodes()" ng-if="!recoveryCodes" translate>Get recovery codes</button>
+      <button type="button" class="btn-primary" ng-click="getRecoveryCodes()" ng-if="!recoveryCodes || !recoveryCodes.length" translate>Get recovery codes</button>
 
-      <div ng-if="recoveryCodes">
+      <div ng-if="recoveryCodes && recoveryCodes.length">
         <ul class="recovery-codes__list">
           <li class="recovery-codes__item" ng-repeat="code in recoveryCodes">{{code}}</li>
         </ul>

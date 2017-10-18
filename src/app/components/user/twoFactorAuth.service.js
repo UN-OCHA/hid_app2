@@ -5,33 +5,33 @@
   .module('app.user')
   .factory('TwoFactorAuth', TwoFactorAuth);
 
-  TwoFactorAuth.$inject = ['$resource', '$http', '$location', '$window', 'config'];
+  TwoFactorAuth.$inject = ['$http', '$timeout', '$uibModal', 'config'];
 
-  function TwoFactorAuth($resource, $http, $location, $window, config) {
+  function TwoFactorAuth($http, $timeout, $uibModal, config) {
 
     TwoFactorAuth.generateQRCode = function (success, error) {
       $http.post(config.apiUrl + 'totp/qrcode').then(success, error);
     }
 
-    TwoFactorAuth.enable = function (code, success, error) {
+    TwoFactorAuth.enable = function (token, success, error) {
       var req = {
         method: 'POST',
         url: config.apiUrl + 'totp',
         headers: {
-          'X-HID-TOTP': code
+          'X-HID-TOTP': token
         },
         data: {method: 'app'}
       }
       $http(req).then(success, error);
     }
 
-    TwoFactorAuth.disable = function (code, success, error) {
+    TwoFactorAuth.disable = function (token, success, error) {
       console.log('disable')
       var req = {
         method: 'DELETE',
         url: config.apiUrl + 'totp',
         headers: {
-          'X-HID-TOTP': code
+          'X-HID-TOTP': token
         }
       }
       $http(req).then(success, error);
@@ -42,12 +42,12 @@
       $http.post(config.apiUrl + 'totp/codes').then(success, error);
     }
 
-    TwoFactorAuth.trustDevice = function (code, success, error) {
+    TwoFactorAuth.trustDevice = function (token, success, error) {
       var req = {
         method: 'POST',
         url: config.apiUrl + 'totp/device',
         headers: {
-          'X-HID-TOTP': code
+          'X-HID-TOTP': token
         }
       }
       $http(req).then(success, error);
@@ -59,6 +59,36 @@
         url: config.apiUrl + 'totp/device',
       }
       $http(req).then(success, error);
+    }
+
+    TwoFactorAuth.requestToken = function (success, error) {
+      var twoFAModal;
+      twoFAModal = $uibModal.open({
+        controller: function ($scope) {
+          $scope.close = function () {
+            twoFAModal.close($scope.token);
+          };
+          $scope.dismiss = function () {
+            twoFAModal.dismiss();
+          };
+        },
+        size: 'sm',
+        templateUrl: 'app/components/user/twoFactorAuthModal.html',
+      });
+
+      twoFAModal.opened.then(function () {
+        $timeout(function () {
+          document.getElementById('code').focus();
+        }, 0);
+      });
+
+      twoFAModal.result.then(function (token) {
+        success(token);
+        return;
+      }, function () {
+        error();
+        return;
+      });
     }
 
     return TwoFactorAuth;

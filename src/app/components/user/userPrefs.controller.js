@@ -178,38 +178,14 @@
         $scope.setCurrentUser(response.data);
         $scope.user.totp = false;
         $scope.recoveryCodes = [];
-        twoFAModal.close();
       }, function (error) {
         $exceptionHandler(error, 'disableTFA');
       });
     }
 
-    var twoFAModal;
-    $scope.openTFAModal = function () {
-      twoFAModal = $uibModal.open({
-        controller: function ($scope) {
-          $scope.close = function () {
-            twoFAModal.close($scope.token);
-          };
-          $scope.dismiss = function () {
-            twoFAModal.dismiss();
-          };
-        },
-        size: 'sm',
-        templateUrl: 'app/components/user/twoFactorAuthModal.html',
-      });
-
-      twoFAModal.opened.then(function () {
-        $timeout(function () {
-          document.getElementById('code').focus();
-        }, 0);
-      });
-
-      twoFAModal.result.then(function (token) {
+    $scope.disableTwoFactorAuth = function () {
+      TwoFactorAuth.requestToken(function (token) {
         disableTFA(token);
-        return;
-      }, function () {
-        return;
       });
     };
 

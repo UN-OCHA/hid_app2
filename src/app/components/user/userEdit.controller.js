@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserEditCtrl', UserEditCtrl);
 
-  UserEditCtrl.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'UserCheckInService'];
+  UserEditCtrl.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'TwoFactorAuth', 'UserCheckInService'];
 
-  function UserEditCtrl($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, UserCheckInService) {
+  function UserEditCtrl($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, TwoFactorAuth, UserCheckInService) {
     $scope.phoneNumberTypes = [];
     $scope.emailTypes = [];
     $scope.voipTypes = [];
@@ -52,6 +52,7 @@
     $scope.urlRegEx = /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/
     var defaultSettings = {};
     var lastStep = 4;
+    var primaryEmail = '';
 
     function getCountries () {
       hrinfoService.getCountries().then(function (countries) {
@@ -108,6 +109,7 @@
       $scope.temp.phonesVisibility = angular.copy($scope.user.phonesVisibility);
       $scope.temp.emailsVisibility = angular.copy($scope.user.emailsVisibility);
       $scope.temp.locationsVisibility = angular.copy($scope.user.locationsVisibility);
+      primaryEmail = $scope.user.email;
 
       getCountries();
       getRoles();
@@ -180,7 +182,7 @@
           callback();
         }
 
-      }, function () {
+      }, function (error) {
         $exceptionHandler(error, 'Save updated user error');
         $scope.$emit('editUser', {status: 'fail'});
       });
@@ -204,7 +206,7 @@
         if (callback) {
           callback();
         }
-      }, function () {
+      }, function (error) {
         $exceptionHandler(error, 'Save phone number error');
         $scope.$emit('editUser', {status: 'fail'});
       });
@@ -224,7 +226,7 @@
         if (callback) {
           callback();
         }
-      }, function () {
+      }, function (error) {
         $exceptionHandler(error, 'Save email error');
         $scope.$emit('editUser', {status: 'fail'});
       });
@@ -405,7 +407,7 @@
         if (callback) {
           callback();
         }
-      }, function () {
+      }, function (error) {
         $exceptionHandler(error, 'Set primary organization error');
         $scope.$emit('editUser', {status: 'fail'});
       });
@@ -439,8 +441,7 @@
       $scope.$emit('editUser', {status: 'fail'});
     }
 
-    function setPrimaryEmail (email) {
-      $scope.$emit('editUser', {status: 'saving'});
+    function setUserPrimaryEmail (email, token) {
       $scope.user.setPrimaryEmail(email, function (resp) {
         $scope.user.email = resp.data.email;
         updateCurrentUser();
@@ -449,16 +450,31 @@
           type: 'primaryEmail',
           message: gettextCatalog.getString('Primary email updated')
         });
-      }, function () {
+      }, function (error) {
         $exceptionHandler(error, 'Set primary email error');
+        $scope.user.email = primaryEmail;
         $scope.$emit('editUser', {status: 'fail'});
-      });
+      }, token);
+    }
+
+    function setPrimaryEmail (email) {
+      $scope.$emit('editUser', {status: 'saving'});
+      if ($scope.user.totp) {
+        TwoFactorAuth.requestToken(function (token) {
+          setUserPrimaryEmail(email, token);
+        }, function () {
+          $scope.user.email = primaryEmail;
+          $scope.$emit('editUser', {status: 'fail'});
+        });
+        return;
+      }
+      setUserPrimaryEmail(email);
     }
 
     function resendValidationEmail (email) {
       $scope.user.resendValidationEmail(email, function () {
         alertService.add('success', gettextCatalog.getString('Validation email sent successfully.'));
-      }, function () {
+      }, function (error) {
         $exceptionHandler(error, 'Resend validation email error');
         $scope.$emit('editUser', {status: 'fail'});
       });
@@ -475,7 +491,7 @@
           status: 'success',
           message: gettextCatalog.getString('Primary phone number updated')
         });
-      }, function () {
+      }, function (error) {
         $exceptionHandler(error, 'Set primary phone number error');
         $scope.$emit('editUser', {status: 'fail'});
       });

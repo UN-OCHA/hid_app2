@@ -71,8 +71,17 @@
     };
 
     // Set primary email
-    User.prototype.setPrimaryEmail = function (email, success, error) {
-      $http.put(config.apiUrl + 'user/' + this._id + '/email', { email: email }).then(success, error);
+    User.prototype.setPrimaryEmail = function (email, success, error, token) {
+      console.log('token',token)
+      var req = {
+        method: 'PUT',
+        url: config.apiUrl + 'user/' + this._id + '/email',
+        data: { email: email },
+        headers: {
+          'X-HID-TOTP': token
+        }
+      }
+      $http(req).then(success, error);
     };
 
     // Delete email

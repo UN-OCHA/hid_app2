@@ -5,7 +5,7 @@
 
   	var checkinResponseUser, countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList,
     mockUserCheckInService, mockUserDataService, newEmail, newJobTitle, newLocation, newOrganization, newOrgCheckIn,
-    newPhoneNumber, newRole, newVoip, newWebsite, regions, scope, scopeUser, userFixture, mockUpload;
+    newPhoneNumber, newRole, newVoip, newWebsite, regions, scope, scopeUser, userFixture, mockUpload, mockTwoFactorAuth, tfaToken;
 
     countries = ['france', 'uk'];
     newOrganization = {list: {_id: '999', name: 'My new org'}};
@@ -28,6 +28,7 @@
     newWebsite = {url: 'http://bbc.co.uk'};
     newRole = {_id: '12', list: {_id: 'role-id'}};
     regions = [{id: '1', name: 'region 1'}, {id: '2', name: 'region 2'}];
+    tfaToken = '123456';
 
     function setUpCtrl(user, currentUser) {
       inject(function($rootScope, $controller, $injector, $q) {
@@ -109,7 +110,7 @@
       spyOn(scope, '$emit').and.callThrough();
 
       var deferred = $q.defer();
-      mockUpload = jasmine.createSpy('uploadSpy').and.returnValue(deferred.promise)
+      mockUpload = jasmine.createSpy('uploadSpy').and.returnValue(deferred.promise);
 
       $controller('UserEditCtrl', {
         $scope: scope
@@ -131,12 +132,14 @@
       mockhrinfoService = {};
       mockConfig = {};
       mockConfig.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
+      mockTwoFactorAuth = {};
 
       module('app.user', function($provide) {
         $provide.constant('config', mockConfig);
         $provide.constant('UserDataService', mockUserDataService);
         $provide.value('UserCheckInService', mockUserCheckInService);
         $provide.value('upload', mockUpload);
+        $provide.value('TwoFactorAuth', mockTwoFactorAuth);
       });
       mockUserDataService.getUser = function () {};
       mockUserDataService.formatUserLocations = function () {};
@@ -148,6 +151,11 @@
         callback(checkinResponseUser);
       });
       spyOn(mockUserCheckInService, 'delete').and.callThrough();
+
+      mockTwoFactorAuth.requestToken = function () {};
+      spyOn(mockTwoFactorAuth, 'requestToken').and.callFake(function (callback) {
+        callback(tfaToken);
+      });
 
       module('app.common', function($provide) {
         $provide.value('alertService', mockAlertService);
@@ -263,6 +271,67 @@
           status: 'success',
           type: 'addemail',
           message: 'Profile updated'
+        };
+        expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
+      });
+    });
+
+    describe('Setting primary email', function () {
+      beforeEach(function () {
+        setUpCtrl(userFixture.user1, userFixture.user1);
+        scope.$emit('userLoaded');
+        scope.setPrimaryEmail('an@email.com');
+      });
+
+      it('should emit the saving event', function () {
+        var emitObj = {
+          status: 'saving'
+        };
+        expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
+      });
+
+      it ('should call setPrimaryEmail', function () {
+        expect(scopeUser.setPrimaryEmail).toHaveBeenCalledWith('an@email.com', jasmine.any(Function), jasmine.any(Function), undefined);
+      });
+
+      it('should emit the success event', function () {
+        var emitObj = {
+          status: 'success',
+          type: 'primaryEmail',
+          message: 'Primary email updated'
+        };
+        expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
+      });
+    });
+
+    describe('Setting primary email with Two Factor Auth enabled', function () {
+      beforeEach(function () {
+        userFixture.user1.totp = true;
+        setUpCtrl(userFixture.user1, userFixture.user1);
+        scope.$emit('userLoaded');
+        scope.setPrimaryEmail('an@email.com');
+      });
+
+      it('should emit the saving event', function () {
+        var emitObj = {
+          status: 'saving'
+        };
+        expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
+      });
+
+      it('should request a token from the user', function () {
+        expect(mockTwoFactorAuth.requestToken).toHaveBeenCalled();
+      });
+
+      it ('should call setPrimaryEmail with the token', function () {
+        expect(scopeUser.setPrimaryEmail).toHaveBeenCalledWith('an@email.com', jasmine.any(Function), jasmine.any(Function), tfaToken);
+      });
+
+      it('should emit the success event', function () {
+        var emitObj = {
+          status: 'success',
+          type: 'primaryEmail',
+          message: 'Primary email updated'
         };
         expect(scope.$emit).toHaveBeenCalledWith('editUser', emitObj);
       });
