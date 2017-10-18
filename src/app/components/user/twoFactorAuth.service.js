@@ -9,16 +9,6 @@
 
   function TwoFactorAuth($resource, $http, $location, $window, config) {
 
-    var TwoFactorAuth = $resource(config.apiUrl + 'totp',
-     {
-      'save': {
-        method: 'POST'
-      },
-      'delete': {
-        method: 'DELETE'
-      },
-    });
-
     TwoFactorAuth.generateQRCode = function (success, error) {
       $http.post(config.apiUrl + 'totp/qrcode').then(success, error);
     }
@@ -50,6 +40,18 @@
     TwoFactorAuth.generateRecoveryCodes = function (success, error) {
       console.log('generateRecoveryCodes');
       $http.post(config.apiUrl + 'totp/codes').then(success, error);
+    }
+
+    TwoFactorAuth.trustDevice = function (code, success, error) {
+      console.log('trustDevice');
+      var req = {
+        method: 'POST',
+        url: config.apiUrl + 'totp/device',
+        headers: {
+          'X-HID-TOTP': code
+        }
+      }
+      $http(req).then(success, error);
     }
 
     return TwoFactorAuth;

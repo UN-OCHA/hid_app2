@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$uibModal', '$window', 'alertService', 'AuthService', 'gettextCatalog'];
+  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', '$uibModal', '$window', 'alertService', 'AuthService', 'gettextCatalog', 'TwoFactorAuth'];
 
-  function AuthCtrl ($exceptionHandler, $scope, $location, $uibModal, $window, alertService, AuthService, gettextCatalog) {
+  function AuthCtrl ($exceptionHandler, $scope, $location, $timeout, $uibModal, $window, alertService, AuthService, gettextCatalog, TwoFactorAuth) {
     $scope.email = '';
     $scope.saving = false;
     var twoFAModal;
@@ -21,60 +21,91 @@
       });
     }
 
-    $scope.login = function(tfaCode) {
-      console.log('login tfaCode', tfaCode)
+    function doTwoFactorAuth () {
+      twoFAModal = $uibModal.open({
+        controller: function ($scope) {
+          $scope.tfa = {
+            token: '',
+            trustDevice: false
+          }
+          $scope.close = function () {
+            twoFAModal.close($scope.tfa);
+          };
+          $scope.dismiss = function () {
+            twoFAModal.dismiss();
+          }
+        },
+        size: 'sm',
+        templateUrl: 'app/components/user/twoFactorAuthLoginModal.html',
+      });
+
+      twoFAModal.opened.then(function () {
+        $timeout(function () {
+          document.getElementById('code').focus();
+        }, 0);
+      });
+
+      twoFAModal.result.then(function (tfa) {
+        $scope.login(tfa.token, tfa.trustDevice);
+        return;
+      }, function () {
+        return;
+      });
+    }
+
+    function successfullLogin () {
+      $scope.initCurrentUser();
+      $scope.saving = false;
+      $window.localStorage.setItem('hidResetPassword', true);
+
+      if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid) {
+
+        // New user first login (login is set to false in registration)
+        if (!$scope.currentUser.appMetadata.hid.login) {
+          onFirstLogin();
+          return;
+        }
+
+        //HIDv1 user first login (login is already set to true)
+        if ($scope.currentUser.appMetadata.hid.login && !$scope.currentUser.appMetadata.hid.viewedTutorial) {
+          $location.path('/tutorial');
+          return;
+        }
+
+        // User has logged in previously
+        $location.path('/landing');
+        return;
+      }
+
+      // Users registering via auth dont have metadata set until first login
+      onFirstLogin();
+    }
+
+    $scope.login = function(tfaCode, trustDevice) {
       if (twoFAModal) {
         twoFAModal.close();
       }
       $scope.saving = true;
       AuthService.login($scope.email, $scope.password, tfaCode).then(function (response) {
-        console.log('auth controller login', response);
+
+
+        if (trustDevice) {
+          TwoFactorAuth.trustDevice(tfaCode, function () {
+            successfullLogin();
+          }, function () {
+            $exceptionHandler(error, 'Trust device fail');
+            successfullLogin();
+          })
+          return;
+        }
+
         // 2FA required
         if (response && response.data.statusCode === 401 && response.data.message === 'No TOTP token') {
-          console.log('open modal')
-
-          twoFAModal = $uibModal.open({
-            scope: $scope,
-            size: 'sm',
-            templateUrl: 'app/components/user/twoFactorAuthLoginModal.html',
-          })
-
-          twoFAModal.result.then(function () {
-            return;
-          }, function () {
-            $scope.saving = false;
-            return;
-          });
-
+          doTwoFactorAuth();
           return;
         }
 
-
-        $scope.initCurrentUser();
-        $scope.saving = false;
-        $window.localStorage.setItem('hidResetPassword', true);
-
-        if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid) {
-
-          // New user first login (login is set to false in registration)
-          if (!$scope.currentUser.appMetadata.hid.login) {
-            onFirstLogin();
-            return;
-          }
-
-          //HIDv1 user first login (login is already set to true)
-          if ($scope.currentUser.appMetadata.hid.login && !$scope.currentUser.appMetadata.hid.viewedTutorial) {
-            $location.path('/tutorial');
-            return;
-          }
-
-          // User has logged in previously
-          $location.path('/landing');
-          return;
-        }
-
-        // Users registering via auth dont have metadata set until first login
-        onFirstLogin();
+        successfullLogin();
 
       }, function (error) {
         $scope.saving = false;
