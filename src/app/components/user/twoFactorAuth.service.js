@@ -11,7 +11,7 @@
 
     TwoFactorAuth.generateQRCode = function (success, error) {
       $http.post(config.apiUrl + 'totp/qrcode').then(success, error);
-    }
+    };
 
     TwoFactorAuth.enable = function (token, success, error) {
       var req = {
@@ -21,26 +21,24 @@
           'X-HID-TOTP': token
         },
         data: {method: 'app'}
-      }
+      };
       $http(req).then(success, error);
-    }
+    };
 
     TwoFactorAuth.disable = function (token, success, error) {
-      console.log('disable')
       var req = {
         method: 'DELETE',
         url: config.apiUrl + 'totp',
         headers: {
           'X-HID-TOTP': token
         }
-      }
+      };
       $http(req).then(success, error);
-    }
+    };
 
     TwoFactorAuth.generateRecoveryCodes = function (success, error) {
-      console.log('generateRecoveryCodes');
       $http.post(config.apiUrl + 'totp/codes').then(success, error);
-    }
+    };
 
     TwoFactorAuth.trustDevice = function (token, success, error) {
       var req = {
@@ -49,17 +47,17 @@
         headers: {
           'X-HID-TOTP': token
         }
-      }
+      };
       $http(req).then(success, error);
-    }
+    };
 
-    TwoFactorAuth.deleteTrustedDevice = function (success, error) {
+    TwoFactorAuth.deleteTrustedDevice = function (id, success, error) {
       var req = {
         method: 'DELETE',
-        url: config.apiUrl + 'totp/device',
-      }
+        url: config.apiUrl + 'totp/device/' + id,
+      };
       $http(req).then(success, error);
-    }
+    };
 
     TwoFactorAuth.requestToken = function (success, error) {
       var twoFAModal;
@@ -89,7 +87,7 @@
         error();
         return;
       });
-    }
+    };
 
     return TwoFactorAuth;
 

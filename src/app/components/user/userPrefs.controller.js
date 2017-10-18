@@ -195,8 +195,14 @@
       $scope.recoveryCodes = [];
     };
 
-    $scope.deleteTrustedDevice = function () {
-      TwoFactorAuth.deleteTrustedDevice();
+    $scope.deleteTrustedDevice = function (id) {
+      TwoFactorAuth.deleteTrustedDevice(id, function () {
+        alertService.add('success', gettextCatalog.getString('Device removed.'));
+        var index = $scope.trustedDevices.map(function(x){ return x._id; }).indexOf(id);
+        $scope.trustedDevices.splice(index,1);
+      }, function (error) {
+         $exceptionHandler(error, 'delete Trusted Device');
+      });
     };
 
     function parseTrustedDevices (devices) {
@@ -205,10 +211,10 @@
         if (UAParser) {
           var ua = new UAParser(device.ua);
           var deviceString = ua.getBrowser().name + ' on ' + ua.getOS().name;
-          if (ua.getDevice()) {
+          if (ua.getDevice().model !== undefined) {
             deviceString += ', ' + ua.getDevice().model;
           }
-          parsedDevices.push(deviceString);
+          parsedDevices.push({name: deviceString, _id: device._id});
         } else {
           parsedDevices.push(device.ua);
         }

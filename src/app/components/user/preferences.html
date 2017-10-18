@@ -242,9 +242,9 @@
       </div>
 
       <ul class="list list--has-dividers list--has-buttons">
-        <li class="list__item" ng-repeat="device in user.totpTrusted">
-          {{device.ua}}
-          <button type="button" class="btn-transparent list__button" ng-click="deleteTrustedDevice()">
+        <li class="list__item" ng-repeat="device in trustedDevices">
+          {{device.name}}
+          <button type="button" class="btn-transparent list__button" ng-click="deleteTrustedDevice(device._id)">
             <icon name="cancel" text="Remove"></icon>
           </button>
         </li>
