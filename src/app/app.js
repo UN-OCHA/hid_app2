@@ -348,6 +348,7 @@ app.config(['$routeProvider', '$locationProvider',
 ]);
 
 app.config(["$httpProvider", function ($httpProvider) {
+  $httpProvider.defaults.withCredentials = true;
   $httpProvider.defaults.transformResponse.push(function(responseData){
     var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
     var convertDateStringsToDates = function (input) {
