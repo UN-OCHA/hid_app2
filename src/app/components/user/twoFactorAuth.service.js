@@ -43,13 +43,20 @@
     }
 
     TwoFactorAuth.trustDevice = function (code, success, error) {
-      console.log('trustDevice');
       var req = {
         method: 'POST',
         url: config.apiUrl + 'totp/device',
         headers: {
           'X-HID-TOTP': code
         }
+      }
+      $http(req).then(success, error);
+    }
+
+    TwoFactorAuth.deleteTrustedDevice = function (success, error) {
+      var req = {
+        method: 'DELETE',
+        url: config.apiUrl + 'totp/device',
       }
       $http(req).then(success, error);
     }

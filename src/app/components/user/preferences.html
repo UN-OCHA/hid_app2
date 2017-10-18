@@ -236,5 +236,20 @@
 
     </div>
 
+    <div class="block" ng-if="user.totp && user.totpTrusted.length">
+      <div class="block-heading">
+        <h3 translate>Trusted devices</h3>
+      </div>
+
+      <ul class="list list--has-dividers list--has-buttons">
+        <li class="list__item" ng-repeat="device in user.totpTrusted">
+          {{device.ua}}
+          <button type="button" class="btn-transparent list__button" ng-click="deleteTrustedDevice()">
+            <icon name="cancel" text="Remove"></icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+
   </tab>
 </tabset>

@@ -27,6 +27,8 @@
     "by": false,
     "protractor": false,
     "beforeAll": false,
-    "afterAll": false
+    "afterAll": false,
+
+    "UAParser": false
   }
 }

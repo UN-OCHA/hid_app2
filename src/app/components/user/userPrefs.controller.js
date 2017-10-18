@@ -20,6 +20,7 @@
 
     UserDataService.getUser($scope.currentUser.id, function () {
       $scope.user = UserDataService.user;
+      $scope.trustedDevices = parseTrustedDevices($scope.user.totpTrusted);
       getConnections($scope.user);
     });
 
@@ -192,7 +193,7 @@
           };
           $scope.dismiss = function () {
             twoFAModal.dismiss();
-          }
+          };
         },
         size: 'sm',
         templateUrl: 'app/components/user/twoFactorAuthModal.html',
@@ -218,8 +219,27 @@
       $scope.recoveryCodes = [];
     };
 
+    $scope.deleteTrustedDevice = function () {
+      TwoFactorAuth.deleteTrustedDevice();
+    };
+
+    function parseTrustedDevices (devices) {
+      var parsedDevices = [];
+      angular.forEach(devices, function (device) {
+        if (UAParser) {
+          var ua = new UAParser(device.ua);
+          var deviceString = ua.getBrowser().name + ' on ' + ua.getOS().name;
+          if (ua.getDevice()) {
+            deviceString += ', ' + ua.getDevice().model;
+          }
+          parsedDevices.push(deviceString);
+        } else {
+          parsedDevices.push(device.ua);
+        }
+      });
+      return parsedDevices;
+    }
+
   }
-
-
 
 })();
