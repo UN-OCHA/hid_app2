@@ -50,7 +50,7 @@
       };
       $http(req).then(function (response) {
         var cookieValue = response.data['x-hid-totp-trust'];
-        $cookies.put('x-hid-totp-trust', cookieValue);
+        $cookies.put('x-hid-totp-trust', cookieValue, {domain: 'humanitarian.id'});
         success();
       }, error);
     };
