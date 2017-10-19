@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config', 'gettextCatalog'];
+  UserCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config', 'gettextCatalog', 'TwoFactorAuth'];
 
-  function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config, gettextCatalog) {
+  function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config, gettextCatalog, TwoFactorAuth) {
     $scope.pictureUrl = '';
     $scope.userLoaded = false;
     $scope.canEditUser = ($routeParams.userId === $scope.currentUser._id) || $scope.currentUser.is_admin || $scope.currentUser.isManager;
@@ -253,12 +253,23 @@
       $scope.saving.show = false;
     };
 
+    function sendDeleteRequest (user, token) {
+      user.delete(user, function () {
+        alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'));
+        $location.path('/landing');
+        UserDataService.notify();
+      }, function (){}, token);
+    }
+
     $scope.deleteUser = function (user) {
       alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.'), true, function() {
-        user.$delete(function () {
-          alertService.add('success', gettextCatalog.getString('The user was successfully deleted.'), false, function () {});
-          $location.path('/landing');
-        });
+        if ($scope.currentUser.totp) {
+          TwoFactorAuth.requestToken(function (token) {
+            sendDeleteRequest(user, token);
+          }, function () {});
+          return
+        }
+        sendDeleteRequest(user);
       });
     };
 

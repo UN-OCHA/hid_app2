@@ -1,14 +1,14 @@
 (function() {
   'use strict';
 
-  	describe('User controller', function () {
-  	var mockAlertService, mockConfig, mockGetText, mockmd5, mockUserDataService, scope, scopeUser, userFixture;
+  	fdescribe('User controller', function () {
+  	var mockAlertService, mockConfig, mockGetText, mockmd5, mockTwoFactorAuth, mockUserDataService, scope, scopeUser, userFixture;
   	var connectionRequiredMessage = 'Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking \'Connect\'.';
     var connectionPendingMessage = 'Your connection request is pending';
     var verifiedRequiredMessage = 'Please note that some of the information made available by this user is only available to verified users';
     var connectionAndVerifiedMessage = 'Please note that some of the information made available by this user is private and some is available only to verified users. You can contact them with a request to see the private sections of their profile by clicking \'Connect\'.';
     var pendingAndVerifiedMessage = 'Your connection request is pending. Please note that some of the information made available by this user is only available to verified users.';
-
+    var tfaToken = '123456';
 
   	function setUpCtrl(user, currentUser, edit) {
   		inject(function($rootScope, $controller) {
@@ -17,7 +17,7 @@
   			scope.setCurrentUser = function () {};
   			scopeUser = user;
   			scopeUser.$update = function () {};
-  			scopeUser.$delete = function () {};
+  			scopeUser.delete = function () {};
   			scopeUser.requestConnection = function () {};
   			scopeUser.notify = function () {};
   			scopeUser.claimEmail = function () {};
@@ -29,7 +29,7 @@
 	      spyOn(scopeUser, '$update').and.callFake(function (callback) {
 	      	callback();
 	      });
-	      spyOn(scopeUser, '$delete').and.callFake(function (callback) {
+	      spyOn(scopeUser, 'delete').and.callFake(function (arg, callback) {
 	      	callback();
 	      });
 	      spyOn(scopeUser, 'requestConnection').and.callFake(function (arg1, callback) {
@@ -73,14 +73,22 @@
   		mockUserDataService = {};
   		mockConfig = {};
   		mockConfig.apiUrl = 'the-url';
+      mockTwoFactorAuth = {};
 
   		module('app.user', function($provide) {
         $provide.constant('config', mockConfig);
         $provide.constant('UserDataService', mockUserDataService);
+        $provide.value('TwoFactorAuth', mockTwoFactorAuth);
       });
       mockUserDataService.getUser = function () {};
       mockUserDataService.formatUserLocations = function () {};
       spyOn(mockUserDataService, 'formatUserLocations').and.callThrough();
+      mockUserDataService.notify = function () {};
+
+      mockTwoFactorAuth.requestToken = function () {};
+      spyOn(mockTwoFactorAuth, 'requestToken').and.callFake(function (callback) {
+        callback(tfaToken);
+      });
 
       module('app.common', function($provide) {
         $provide.value('alertService', mockAlertService);
@@ -90,7 +98,7 @@
       mockAlertService.pageAlert = function () {};
       mockAlertService.resetPageAlert = function () {};
       spyOn(mockAlertService, 'add').and.callFake(function (a1, a2, a3, callback) {
-        callback();
+        if (callback) {callback();}
       });
       spyOn(mockAlertService, 'pageAlert').and.callThrough();
       spyOn(mockAlertService, 'resetPageAlert').and.callThrough();
@@ -290,18 +298,45 @@
 
 		describe('Deleting a user', function () {
 
-  		beforeEach(function () {
-				setUpCtrl(userFixture.user1, userFixture.adminUser);
-				scope.deleteUser(scopeUser);
-			});
+      describe('With Two Factor Auth', function () {
+    		beforeEach(function () {
+          userFixture.adminUser.totp = true;
+  				setUpCtrl(userFixture.user1, userFixture.adminUser);
+  				scope.deleteUser(scopeUser);
+  			});
 
-			it('should ask the user to confirm the deletion', function () {
-				expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, jasmine.any(Function));
-			});
+  			it('should ask the user to confirm the deletion', function () {
+  				expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, jasmine.any(Function));
+  			});
 
-			it('should delete the user', function () {
-				expect(scopeUser.$delete).toHaveBeenCalled();
-			});
+        it('should request a Two Factor Auth token', function () {
+          expect(mockTwoFactorAuth.requestToken).toHaveBeenCalled();
+        });
+
+  			it('should delete the user', function () {
+  				expect(scopeUser.delete).toHaveBeenCalledWith(scopeUser, jasmine.any(Function), jasmine.any(Function), tfaToken);
+  			});
+      });
+
+      describe('Without Two Factor Auth', function () {
+        beforeEach(function () {
+          userFixture.adminUser.totp = false;
+          setUpCtrl(userFixture.user1, userFixture.adminUser);
+          scope.deleteUser(scopeUser);
+        });
+
+        it('should ask the user to confirm the deletion', function () {
+          expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, jasmine.any(Function));
+        });
+
+        it('should not request a Two Factor Auth token', function () {
+          expect(mockTwoFactorAuth.requestToken).not.toHaveBeenCalled();
+        });
+
+        it('should delete the user', function () {
+          expect(scopeUser.delete).toHaveBeenCalledWith(scopeUser, jasmine.any(Function), jasmine.any(Function), undefined);
+        });
+      });
 
 		});
 

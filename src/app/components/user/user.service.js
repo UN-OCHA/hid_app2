@@ -49,8 +49,20 @@
     };
 
     // Reset user email
-    User.resetPassword = function(hash, password, success, error) {
-      $http.put(config.apiUrl + 'user/password', {hash: hash, password: password}).then(success, error);
+    User.resetPassword = function(hash, password, success, error, token) {
+      var req = {
+        method: 'PUT',
+        url: config.apiUrl + 'user/password',
+        data: {
+          hash: hash,
+          password: password
+        },
+        headers: {
+          'X-HID-TOTP': token
+        }
+      };
+      $http(req).then(success, error);
+      // $http.put(config.apiUrl + 'user/password', {hash: hash, password: password}).then(success, error);
     };
 
     // Validate user email
@@ -205,6 +217,19 @@
       };
       $http(req).then(success, error);
     };
+
+    User.prototype.delete = function (user, success, error, token) {
+      console.log('delete', user)
+       var req = {
+        method: 'DELETE',
+        url: config.apiUrl + 'user/' + user._id,
+        data: user,
+        headers: {
+          'X-HID-TOTP': token
+        }
+      };
+      $http(req).then(success, error);
+    }
 
     return User;
 

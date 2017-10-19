@@ -4,7 +4,10 @@
   describe('User options controller', function () {
 
     var allLists, listFixture, ownedAndManagedLists, mockConfig, mockAlertService, mockGetText, mockList, mockListDataService,
-    mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm, userFixture;
+    mockTwoFactorAuth, mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm,
+    tfaToken, userFixture;
+
+    tfaToken = '123456';
 
     beforeEach(function() {
       userFixture = readJSON('app/test-fixtures/user.json');
@@ -16,9 +19,9 @@
 
       mockUser = userFixture.user1;
       mockUser.$update = function () {};
-      mockUser.$delete = function () {};
+      mockUser.delete = function () {};
       spyOn(mockUser, '$update').and.callFake(function () {});
-      spyOn(mockUser, '$delete').and.callFake(function () {});
+      spyOn(mockUser, 'delete').and.callFake(function () {});
 
       modalResult = {
         then: function() {}
@@ -42,6 +45,7 @@
         $provide.value('ListDataService', mockListDataService);
       });
 
+      mockTwoFactorAuth = {};
       mockUserCheckInService = {};
       mockUserDataService = {};
       mockConfig = {};
@@ -50,6 +54,12 @@
         $provide.value('UserCheckInService', mockUserCheckInService);
         $provide.value('UserDataService', mockUserDataService);
         $provide.constant('config', mockConfig);
+        $provide.value('TwoFactorAuth', mockTwoFactorAuth);
+      });
+
+      mockTwoFactorAuth.requestToken = function () {};
+      spyOn(mockTwoFactorAuth, 'requestToken').and.callFake(function (callback) {
+        callback(tfaToken);
       });
 
       mockGetText = {};
@@ -127,16 +137,42 @@
 
     describe('Deleting a user', function () {
 
-      beforeEach(function () {
-        scope.deleteUser(mockUser);
+      describe('With Two Factor Auth enabled', function () {
+        beforeEach(function () {
+          scope.currentUser = {_id: 1, totp: true};
+          scope.deleteUser(mockUser);
+        });
+
+        it('should ask the user to confirm they want to delete', function () {
+          expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, jasmine.any(Function));
+        });
+
+        it('should request a Two Factor Auth token', function () {
+          expect(mockTwoFactorAuth.requestToken).toHaveBeenCalled();
+        });
+
+        it('should send the delete request, including the token', function () {
+          expect(mockUser.delete).toHaveBeenCalledWith(mockUser, jasmine.any(Function), jasmine.any(Function), tfaToken);
+        });
       });
 
-      it('should ask the user to confirm they want to delete', function () {
-        expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, jasmine.any(Function));
-      });
+      describe('Without Two Factor Auth enabled', function () {
+        beforeEach(function () {
+          scope.currentUser = {_id: 2, totp: false};
+          scope.deleteUser(mockUser);
+        });
 
-      it('should delete the user', function () {
-        expect(mockUser.$delete).toHaveBeenCalled();
+        it('should ask the user to confirm they want to delete', function () {
+          expect(mockAlertService.add).toHaveBeenCalledWith('danger', 'Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.', true, jasmine.any(Function));
+        });
+
+        it('should not request a Two Factor Auth token', function () {
+          expect(mockTwoFactorAuth.requestToken).not.toHaveBeenCalled();
+        });
+
+        it('should delete the user', function () {
+          expect(mockUser.delete).toHaveBeenCalled();
+        });
       });
     });
 
