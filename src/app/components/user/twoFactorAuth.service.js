@@ -5,9 +5,9 @@
   .module('app.user')
   .factory('TwoFactorAuth', TwoFactorAuth);
 
-  TwoFactorAuth.$inject = ['$http', '$timeout', '$uibModal', 'config'];
+  TwoFactorAuth.$inject = ['$cookies', '$http', '$timeout', '$uibModal', 'config'];
 
-  function TwoFactorAuth($http, $timeout, $uibModal, config) {
+  function TwoFactorAuth($cookies, $http, $timeout, $uibModal, config) {
 
     TwoFactorAuth.generateQRCode = function (success, error) {
       $http.post(config.apiUrl + 'totp/qrcode').then(success, error);
@@ -48,7 +48,15 @@
           'X-HID-TOTP': token
         }
       };
-      $http(req).then(success, error);
+      // $http(req).then(success, error);
+      $http(req).then(function (response) {
+        console.log('response', response)
+        console.log('response.headers(set-cookie)', response.headers('set-cookie'))
+        $timeout(function() {
+          console.log('$cookies', $cookies.getAll());
+          success();
+        })
+      }, error);
     };
 
     TwoFactorAuth.deleteTrustedDevice = function (id, success, error) {
