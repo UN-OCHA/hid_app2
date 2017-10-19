@@ -22,6 +22,7 @@
           if (token) {
             request.headers.Authorization = 'Bearer ' + token;
           }
+          request.withCredentials = true;
         }
         return request;
       },

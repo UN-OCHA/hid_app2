@@ -196,8 +196,7 @@
         var req = {
           method: 'POST',
           url: config.apiUrl + 'jsonwebtoken',
-          data: { 'email': email, 'password': password, exp: expiry },
-          withCredentials: true
+          data: { 'email': email, 'password': password, exp: expiry }
         }
 
         if (tfaCode) {
