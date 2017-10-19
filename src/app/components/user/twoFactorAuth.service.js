@@ -48,14 +48,10 @@
           'X-HID-TOTP': token
         }
       };
-      // $http(req).then(success, error);
       $http(req).then(function (response) {
-        console.log('response', response)
-        console.log('response.headers(set-cookie)', response.headers('set-cookie'))
-        $timeout(function() {
-          console.log('$cookies', $cookies.getAll());
-          success();
-        })
+        var cookieValue = response.data['x-hid-totp-trust'];
+        $cookies.put('x-hid-totp-trust', cookieValue);
+        success();
       }, error);
     };
 
