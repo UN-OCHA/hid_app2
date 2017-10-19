@@ -1,3 +1,13 @@
+.tfa-intro {
+  border-bottom: 1px solid $border-grey;
+  margin-bottom: $base-unit*2;
+  padding-bottom: $base-unit*2;
+
+  .btn-small {
+    padding-left: 0;
+  }
+}
+
 .recovery-codes__info {
   position: relative;
   padding-left: $base-unit*5;

@@ -155,7 +155,31 @@
       </div>
 
       <div ng-if="twoFactorAuthStep === 1">
-        <p class="form-section__info" translate>TO DO Description of what 2FA is and why should enable</p>
+        <div  class="tfa-intro">
+          <p class="form-section__info" translate>Two-step verification is an effective way to protect your account from unauthorized access. When you sign in to Humanitarian ID, you can enable it through the activate button.
+          </p>
+          <div ng-show="showMore" class="text-block">
+            <p>First you will need to download an authenticator app (e.g. the Google Authenticator). You'll then be sent a code to your mobile authenticator app.</p>
+            <p>Two-step verification is an optional security feature. Once enabled, Humanitarian ID will require a six-digit security code or a security key in addition to your password if you wish to change your password.</p>
+            <p>Before enabling two-step verification, you'll receive 16 backup codes. Copy these codes down and store them securely. Once a backup code is used, it can't be used again.</p>
+            <p>Enable two-step verification</p>
+            <ol>
+            <li>Sign in to Humanitarian ID.</li>
+            <li>Click your name at the top of any page to open the account menu.</li>
+            <li>Click on Preferences.</li>
+            <li>Select the Security tab.</li>
+            <li>Under Two-step verification, toggle to On.</li>
+            <li>Click Get started.</li>
+            </ol>
+            <p>You can remove the two-step verification at any point in this menu.</p>
+          </div>
+          <button type="button" class="btn-small btn-transparent" ng-click="showMore = !showMore">
+            <span ng-if="!showMore" translate>Find out more</span>
+            <icon ng-if="!showMore" name="arrow-down"></icon>
+            <span ng-if="showMore" translate>Show less</span>
+            <icon ng-if="showMore" name="arrow-up"></icon>
+          </button>
+        </div>
 
         <div class="form-inline-fields">
           <strong class="form-inline-fields__item">

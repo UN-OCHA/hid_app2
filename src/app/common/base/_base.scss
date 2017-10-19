@@ -90,6 +90,22 @@ em {
   font-style: italic;
 }
 
+.text-block {
+  h1, h2, h3, h4, p, ul, ol {
+    @include font-size($small-font-size);
+    margin-bottom: $base-unit;
+  }
+
+  ul, ol {
+    padding-left: $base-unit*3;
+    list-style: initial;
+  }
+
+  ol {
+    list-style: decimal
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -139,6 +155,16 @@ em {
 
   .hidden-sm-up {
     display: block;
+  }
+
+  .text-block {
+    h1, h2, h3, h4, p, ul, ol {
+      @include font-size($base-font-size);
+    }
+
+    p, ul, ol {
+      margin-bottom: $base-unit*2;
+    }
   }
 }
 
