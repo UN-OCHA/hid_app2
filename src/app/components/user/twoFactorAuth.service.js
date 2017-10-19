@@ -46,7 +46,8 @@
         url: config.apiUrl + 'totp/device',
         headers: {
           'X-HID-TOTP': token
-        }
+        },
+        withCredentials: true
       };
       $http(req).then(function (response) {
         var cookieValue = response.data['x-hid-totp-trust'];

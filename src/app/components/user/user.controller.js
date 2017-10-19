@@ -78,7 +78,6 @@
      $scope.connectionInfo.canRequestConnection = false;
 
      if (user.connections) {
-      console.log(user.connections)
         angular.forEach(user.connections, function (connection) {
           if (connection.user && connection.user._id === currentUserId) {
             if (connection.pending) {
