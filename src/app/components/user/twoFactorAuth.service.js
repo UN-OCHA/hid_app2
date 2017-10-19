@@ -5,9 +5,9 @@
   .module('app.user')
   .factory('TwoFactorAuth', TwoFactorAuth);
 
-  TwoFactorAuth.$inject = ['$cookies', '$http', '$timeout', '$uibModal', 'config'];
+  TwoFactorAuth.$inject = ['$http', '$timeout', '$uibModal', 'config'];
 
-  function TwoFactorAuth($cookies, $http, $timeout, $uibModal, config) {
+  function TwoFactorAuth($http, $timeout, $uibModal, config) {
 
     TwoFactorAuth.generateQRCode = function (success, error) {
       $http.post(config.apiUrl + 'totp/qrcode').then(success, error);
@@ -50,7 +50,7 @@
       };
       $http(req).then(function (response) {
         var cookieValue = response.data['x-hid-totp-trust'];
-        $cookies.put('x-hid-totp-trust', cookieValue, {domain: 'humanitarian.id'});
+        document.cookie = 'x-hid-totp-trust=' + cookieValue + ';domain=humanitarian.id';
         success();
       }, error);
     };
