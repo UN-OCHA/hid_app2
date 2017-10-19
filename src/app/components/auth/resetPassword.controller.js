@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('ResetPasswordCtrl', ResetPasswordCtrl);
 
-  ResetPasswordCtrl.$inject = ['$scope', '$routeParams', '$location', 'alertService', 'User', 'gettextCatalog'];
+  ResetPasswordCtrl.$inject = ['$scope', '$routeParams', '$location', 'alertService', 'TwoFactorAuth', 'User', 'gettextCatalog'];
 
-  function ResetPasswordCtrl ($scope, $routeParams, $location, alertService, User, gettextCatalog) {
+  function ResetPasswordCtrl ($scope, $routeParams, $location, alertService, TwoFactorAuth, User, gettextCatalog) {
     $scope.isOrphan = $routeParams.orphan;
     $scope.resetPassword = resetPassword;
     $scope.requestPasswordReset = requestPasswordReset;
@@ -27,15 +27,23 @@
       });
     }
 
-    function resetPassword () {
+    function resetPassword (token) {
       User.resetPassword($location.search().hash, $scope.newPassword, function (response) {
         alertService.add('success', gettextCatalog.getString('Your password was successfully changed. You can now login.'));
         $location.path('/');
-      }, function (response) {
+      }, function (error) {
+        if (error && error.status === 401 && error.data.message === "No TOTP token") {
+          TwoFactorAuth.requestToken(function(token) {
+            resetPassword(token);
+          }, function () {
+            $scope.resetPasswordForm.$setPristine();
+          });
+          return;
+        }
         alertService.add('danger', gettextCatalog.getString('There was an error resetting your password. Please try again or contact the HID team.'));
         $scope.resetPasswordForm.$setPristine();
-      });
+      }, token);
     }
-    
+
   }
 })();

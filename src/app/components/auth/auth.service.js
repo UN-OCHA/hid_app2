@@ -206,12 +206,10 @@
         }
 
         var promise = $http(req).then(function (response) {
-          console.log('login', response)
           if (response.data && response.data.token) {
             storeUser(response);
           }
         }, function (error) {
-          console.log('login error', error);
           return error;
         });
         return promise;
