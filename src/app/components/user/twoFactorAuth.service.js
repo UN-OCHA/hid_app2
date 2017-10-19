@@ -3,12 +3,12 @@
 
   angular
   .module('app.user')
-  .factory('TwoFactorAuth', TwoFactorAuth);
+  .factory('TwoFactorAuthService', TwoFactorAuthService);
 
-  TwoFactorAuth.$inject = ['$http', '$timeout', '$uibModal', 'config'];
+  TwoFactorAuthService.$inject = ['$http', '$timeout', '$uibModal', 'config'];
 
-  function TwoFactorAuth($http, $timeout, $uibModal, config) {
-
+  function TwoFactorAuthService($http, $timeout, $uibModal, config) {
+    var TwoFactorAuth = {};
     TwoFactorAuth.generateQRCode = function (success, error) {
       $http.post(config.apiUrl + 'totp/qrcode').then(success, error);
     };
@@ -63,12 +63,17 @@
       $http(req).then(success, error);
     };
 
-    TwoFactorAuth.requestToken = function (success, error) {
+    TwoFactorAuth.requestToken = function (success, error, requestTrustDevice) {
       var twoFAModal;
       twoFAModal = $uibModal.open({
         controller: function ($scope) {
+          $scope.requestTrustDevice = requestTrustDevice;
+          $scope.tfa = {
+            token: '',
+            trustDevice: false
+          };
           $scope.close = function () {
-            twoFAModal.close($scope.token);
+            twoFAModal.close($scope.tfa);
           };
           $scope.dismiss = function () {
             twoFAModal.dismiss();
@@ -80,15 +85,15 @@
 
       twoFAModal.opened.then(function () {
         $timeout(function () {
-          document.getElementById('code').focus();
+          document.getElementById('token').focus();
         }, 0);
       });
 
-      twoFAModal.result.then(function (token) {
-        success(token);
+      twoFAModal.result.then(function (tfa) {
+        success(tfa.token, tfa.trustDevice);
         return;
       }, function () {
-        error();
+        if (error) { error(); }
         return;
       });
     };

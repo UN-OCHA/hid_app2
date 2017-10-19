@@ -6,7 +6,12 @@
     <form ng-submit="close(token)">
       <p>
         <label for="token" translate>Please enter your Two-Factor Authentication code:</label>
-        <input type="tel" id="code" name="code" ng-model="token" minlength="6" maxlength="6" required />
+        <input type="tel" id="token" name="token" ng-model="tfa.token" minlength="6" maxlength="6" autocomplete="off" required />
+      </p>
+      <p class="form-field" ng-if="requestTrustDevice">
+        <input type="checkbox" id="trust-device" ng-model="tfa.trustDevice" />
+        <label class="clickie-label" for="trust-device">Trust this device</label>
+        <span class="form-hint"><em>Trusted devices will be remembered for 30 days.</em></span>
       </p>
       <button type="submit" class="btn-primary btn-block" translate>Submit</button>
     </form>

@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', '$uibModal', '$window', 'alertService', 'AuthService', 'gettextCatalog', 'TwoFactorAuth'];
+  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', '$window', 'alertService', 'AuthService', 'gettextCatalog', 'TwoFactorAuthService'];
 
-  function AuthCtrl ($exceptionHandler, $scope, $location, $timeout, $uibModal, $window, alertService, AuthService, gettextCatalog, TwoFactorAuth) {
+  function AuthCtrl ($exceptionHandler, $scope, $location, $timeout, $window, alertService, AuthService, gettextCatalog, TwoFactorAuthService) {
     $scope.email = '';
     $scope.saving = false;
     var twoFAModal;
@@ -18,39 +18,6 @@
       $scope.currentUser.$update(function () {
         $scope.setCurrentUser($scope.currentUser);
         $location.path('/start');
-      });
-    }
-
-    function doTwoFactorAuth () {
-      twoFAModal = $uibModal.open({
-        controller: function ($scope) {
-          $scope.tfa = {
-            token: '',
-            trustDevice: false
-          }
-          $scope.close = function () {
-            twoFAModal.close($scope.tfa);
-          };
-          $scope.dismiss = function () {
-            twoFAModal.dismiss();
-          }
-        },
-        size: 'sm',
-        templateUrl: 'app/components/user/twoFactorAuthLoginModal.html',
-      });
-
-      twoFAModal.opened.then(function () {
-        $timeout(function () {
-          document.getElementById('code').focus();
-        }, 0);
-      });
-
-      twoFAModal.result.then(function (tfa) {
-        $scope.login(tfa.token, tfa.trustDevice);
-        return;
-      }, function () {
-        $scope.saving = false;
-        return;
       });
     }
 
@@ -89,20 +56,23 @@
       $scope.saving = true;
       AuthService.login($scope.email, $scope.password, tfaCode).then(function (response) {
 
-
         if (trustDevice) {
-          TwoFactorAuth.trustDevice(tfaCode, function () {
+          TwoFactorAuthService.trustDevice(tfaCode, function () {
             successfullLogin();
-          }, function () {
+          }, function (error) {
             $exceptionHandler(error, 'Trust device fail');
             successfullLogin();
-          })
+          });
           return;
         }
 
         // 2FA required
         if (response && response.data.statusCode === 401 && response.data.message === 'No TOTP token') {
-          doTwoFactorAuth();
+          TwoFactorAuthService.requestToken(function (token, trustDevice) {
+            $scope.login(token, trustDevice);
+          }, function () {
+            $scope.saving = false;
+          }, true);
           return;
         }
 

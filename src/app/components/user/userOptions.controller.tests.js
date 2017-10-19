@@ -4,7 +4,7 @@
   describe('User options controller', function () {
 
     var allLists, listFixture, ownedAndManagedLists, mockConfig, mockAlertService, mockGetText, mockList, mockListDataService,
-    mockTwoFactorAuth, mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm,
+    mockTwoFactorAuthService, mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm,
     tfaToken, userFixture;
 
     tfaToken = '123456';
@@ -45,7 +45,7 @@
         $provide.value('ListDataService', mockListDataService);
       });
 
-      mockTwoFactorAuth = {};
+      mockTwoFactorAuthService = {};
       mockUserCheckInService = {};
       mockUserDataService = {};
       mockConfig = {};
@@ -54,11 +54,11 @@
         $provide.value('UserCheckInService', mockUserCheckInService);
         $provide.value('UserDataService', mockUserDataService);
         $provide.constant('config', mockConfig);
-        $provide.value('TwoFactorAuth', mockTwoFactorAuth);
+        $provide.value('TwoFactorAuthService', mockTwoFactorAuthService);
       });
 
-      mockTwoFactorAuth.requestToken = function () {};
-      spyOn(mockTwoFactorAuth, 'requestToken').and.callFake(function (callback) {
+      mockTwoFactorAuthService.requestToken = function () {};
+      spyOn(mockTwoFactorAuthService, 'requestToken').and.callFake(function (callback) {
         callback(tfaToken);
       });
 
@@ -148,7 +148,7 @@
         });
 
         it('should request a Two Factor Auth token', function () {
-          expect(mockTwoFactorAuth.requestToken).toHaveBeenCalled();
+          expect(mockTwoFactorAuthService.requestToken).toHaveBeenCalled();
         });
 
         it('should send the delete request, including the token', function () {
@@ -167,7 +167,7 @@
         });
 
         it('should not request a Two Factor Auth token', function () {
-          expect(mockTwoFactorAuth.requestToken).not.toHaveBeenCalled();
+          expect(mockTwoFactorAuthService.requestToken).not.toHaveBeenCalled();
         });
 
         it('should delete the user', function () {

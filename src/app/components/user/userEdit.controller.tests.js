@@ -5,7 +5,7 @@
 
   	var checkinResponseUser, countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList,
     mockUserCheckInService, mockUserDataService, newEmail, newJobTitle, newLocation, newOrganization, newOrgCheckIn,
-    newPhoneNumber, newRole, newVoip, newWebsite, regions, scope, scopeUser, userFixture, mockUpload, mockTwoFactorAuth, tfaToken;
+    newPhoneNumber, newRole, newVoip, newWebsite, regions, scope, scopeUser, userFixture, mockUpload, mockTwoFactorAuthService, tfaToken;
 
     countries = ['france', 'uk'];
     newOrganization = {list: {_id: '999', name: 'My new org'}};
@@ -132,14 +132,14 @@
       mockhrinfoService = {};
       mockConfig = {};
       mockConfig.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
-      mockTwoFactorAuth = {};
+      mockTwoFactorAuthService = {};
 
       module('app.user', function($provide) {
         $provide.constant('config', mockConfig);
         $provide.constant('UserDataService', mockUserDataService);
         $provide.value('UserCheckInService', mockUserCheckInService);
         $provide.value('upload', mockUpload);
-        $provide.value('TwoFactorAuth', mockTwoFactorAuth);
+        $provide.value('TwoFactorAuthService', mockTwoFactorAuthService);
       });
       mockUserDataService.getUser = function () {};
       mockUserDataService.formatUserLocations = function () {};
@@ -152,8 +152,8 @@
       });
       spyOn(mockUserCheckInService, 'delete').and.callThrough();
 
-      mockTwoFactorAuth.requestToken = function () {};
-      spyOn(mockTwoFactorAuth, 'requestToken').and.callFake(function (callback) {
+      mockTwoFactorAuthService.requestToken = function () {};
+      spyOn(mockTwoFactorAuthService, 'requestToken').and.callFake(function (callback) {
         callback(tfaToken);
       });
 
@@ -320,7 +320,7 @@
       });
 
       it('should request a token from the user', function () {
-        expect(mockTwoFactorAuth.requestToken).toHaveBeenCalled();
+        expect(mockTwoFactorAuthService.requestToken).toHaveBeenCalled();
       });
 
       it ('should call setPrimaryEmail with the token', function () {

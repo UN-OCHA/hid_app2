@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserEditCtrl', UserEditCtrl);
 
-  UserEditCtrl.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'TwoFactorAuth', 'UserCheckInService'];
+  UserEditCtrl.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'TwoFactorAuthService', 'UserCheckInService'];
 
-  function UserEditCtrl($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, TwoFactorAuth, UserCheckInService) {
+  function UserEditCtrl($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, TwoFactorAuthService, UserCheckInService) {
     $scope.phoneNumberTypes = [];
     $scope.emailTypes = [];
     $scope.voipTypes = [];
@@ -460,7 +460,7 @@
     function setPrimaryEmail (email) {
       $scope.$emit('editUser', {status: 'saving'});
       if ($scope.user.totp) {
-        TwoFactorAuth.requestToken(function (token) {
+        TwoFactorAuthService.requestToken(function (token) {
           setUserPrimaryEmail(email, token);
         }, function () {
           $scope.user.email = primaryEmail;

@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('ResetPasswordCtrl', ResetPasswordCtrl);
 
-  ResetPasswordCtrl.$inject = ['$scope', '$routeParams', '$location', 'alertService', 'TwoFactorAuth', 'User', 'gettextCatalog'];
+  ResetPasswordCtrl.$inject = ['$scope', '$routeParams', '$location', 'alertService', 'TwoFactorAuthService', 'User', 'gettextCatalog'];
 
-  function ResetPasswordCtrl ($scope, $routeParams, $location, alertService, TwoFactorAuth, User, gettextCatalog) {
+  function ResetPasswordCtrl ($scope, $routeParams, $location, alertService, TwoFactorAuthService, User, gettextCatalog) {
     $scope.isOrphan = $routeParams.orphan;
     $scope.resetPassword = resetPassword;
     $scope.requestPasswordReset = requestPasswordReset;
@@ -33,7 +33,7 @@
         $location.path('/');
       }, function (error) {
         if (error && error.status === 401 && error.data.message === "No TOTP token") {
-          TwoFactorAuth.requestToken(function(token) {
+          TwoFactorAuthService.requestToken(function(token) {
             resetPassword(token);
           }, function () {
             $scope.resetPasswordForm.$setPristine();

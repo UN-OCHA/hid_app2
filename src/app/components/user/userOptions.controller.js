@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserOptionsCtrl', UserOptionsCtrl);
 
-  UserOptionsCtrl.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'TwoFactorAuth', 'UserCheckInService', 'UserDataService', 'gettextCatalog'];
+  UserOptionsCtrl.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'TwoFactorAuthService', 'UserCheckInService', 'UserDataService', 'gettextCatalog'];
 
-  function UserOptionsCtrl($exceptionHandler, $scope, $uibModal, alertService, config, List, ListDataService, TwoFactorAuth, UserCheckInService, UserDataService, gettextCatalog) {
+  function UserOptionsCtrl($exceptionHandler, $scope, $uibModal, alertService, config, List, ListDataService, TwoFactorAuthService, UserCheckInService, UserDataService, gettextCatalog) {
     $scope.deleteUser = deleteUser;
     $scope.verifyUser = verifyUser;
     $scope.removeFromList = removeFromList;
@@ -22,7 +22,7 @@
     function deleteUser (user) {
       alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.'), true, function() {
         if ($scope.currentUser.totp) {
-          TwoFactorAuth.requestToken(function (token) {
+          TwoFactorAuthService.requestToken(function (token) {
             sendDeleteRequest(user, token);
           }, function () {});
           return;

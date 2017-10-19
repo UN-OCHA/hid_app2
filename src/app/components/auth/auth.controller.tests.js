@@ -3,7 +3,8 @@
 
   describe('Auth controller', function () {
 
-  	var authUser, hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, mockGetText, newUser, returnUser, scope;
+  	var authUser, hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, mockGetText, mockTwoFactorAuthService,
+    newUser, returnUser, scope, tfaToken, tfaUser;
 
   	newUser = {
   		_id: 1,
@@ -37,6 +38,13 @@
       _id: 4
     };
 
+    tfaToken = '123456';
+
+    tfaUser = {
+      _id: 5,
+      totp: true
+    };
+
   	beforeEach(function() {
 
   		mockAuthService = {};
@@ -62,16 +70,34 @@
       module('gettext', function($provide) {
         $provide.value('gettextCatalog', mockGetText);
       });
+
+      mockTwoFactorAuthService = {};
+      module('app.user', function($provide) {
+        $provide.value('TwoFactorAuthService', mockTwoFactorAuthService);
+      });
+      mockTwoFactorAuthService.requestToken = function () {};
+      spyOn(mockTwoFactorAuthService, 'requestToken').and.callFake(function (callback) {
+        callback(tfaToken, true);
+      });
+      mockTwoFactorAuthService.trustDevice = function () {};
+      spyOn(mockTwoFactorAuthService, 'trustDevice').and.callFake(function (arg, callback) {
+        callback();
+      });
+
     });
 
-    function setUpController (currentUser) {
+    function setUpController (currentUser, tfaRequired) {
     	inject(function($controller, $q, $rootScope, _$location_) {
       	scope = $rootScope.$new();
       	$location = _$location_;
 
       	mockAuthService.login = function () {
       		var deferred = $q.defer();
-      		deferred.resolve();
+          if (tfaRequired) {
+            deferred.resolve({data: {statusCode: 401, message: 'No TOTP token'}});
+          } else {
+      		  deferred.resolve();
+          }
       		return deferred.promise;
       	};
 
@@ -102,7 +128,7 @@
     	it('should log the user in', function () {
     		setUpController();
     		scope.login();
-    		expect(mockAuthService.login).toHaveBeenCalledWith('email@email.com', 'a password');
+    		expect(mockAuthService.login).toHaveBeenCalledWith('email@email.com', 'a password', undefined);
     	});
 
     	describe('Set path and metaData', function () {
@@ -184,6 +210,26 @@
     		});
 
     	});
+
+      describe('With Two Factor Auth enabled', function () {
+        beforeEach(function () {
+          setUpController(returnUser, true);
+          scope.login();
+          scope.$digest();
+        });
+
+        it('should request the token', function () {
+          expect(mockTwoFactorAuthService.requestToken).toHaveBeenCalled();
+        });
+
+        it('should log the user in', function () {
+          expect(mockAuthService.login).toHaveBeenCalledWith('email@email.com', 'a password', tfaToken);
+        });
+
+        it('should set the device as trusted', function () {
+          expect(mockTwoFactorAuthService.trustDevice).toHaveBeenCalledWith(tfaToken, jasmine.any(Function), jasmine.any(Function));
+        });
+      });
 
     });
 

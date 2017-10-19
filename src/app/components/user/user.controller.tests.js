@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  	fdescribe('User controller', function () {
-  	var mockAlertService, mockConfig, mockGetText, mockmd5, mockTwoFactorAuth, mockUserDataService, scope, scopeUser, userFixture;
+  	describe('User controller', function () {
+  	var mockAlertService, mockConfig, mockGetText, mockmd5, mockTwoFactorAuthService, mockUserDataService, scope, scopeUser, userFixture;
   	var connectionRequiredMessage = 'Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking \'Connect\'.';
     var connectionPendingMessage = 'Your connection request is pending';
     var verifiedRequiredMessage = 'Please note that some of the information made available by this user is only available to verified users';
@@ -73,20 +73,20 @@
   		mockUserDataService = {};
   		mockConfig = {};
   		mockConfig.apiUrl = 'the-url';
-      mockTwoFactorAuth = {};
+      mockTwoFactorAuthService = {};
 
   		module('app.user', function($provide) {
         $provide.constant('config', mockConfig);
         $provide.constant('UserDataService', mockUserDataService);
-        $provide.value('TwoFactorAuth', mockTwoFactorAuth);
+        $provide.value('TwoFactorAuthService', mockTwoFactorAuthService);
       });
       mockUserDataService.getUser = function () {};
       mockUserDataService.formatUserLocations = function () {};
       spyOn(mockUserDataService, 'formatUserLocations').and.callThrough();
       mockUserDataService.notify = function () {};
 
-      mockTwoFactorAuth.requestToken = function () {};
-      spyOn(mockTwoFactorAuth, 'requestToken').and.callFake(function (callback) {
+      mockTwoFactorAuthService.requestToken = function () {};
+      spyOn(mockTwoFactorAuthService, 'requestToken').and.callFake(function (callback) {
         callback(tfaToken);
       });
 
@@ -310,7 +310,7 @@
   			});
 
         it('should request a Two Factor Auth token', function () {
-          expect(mockTwoFactorAuth.requestToken).toHaveBeenCalled();
+          expect(mockTwoFactorAuthService.requestToken).toHaveBeenCalled();
         });
 
   			it('should delete the user', function () {
@@ -330,7 +330,7 @@
         });
 
         it('should not request a Two Factor Auth token', function () {
-          expect(mockTwoFactorAuth.requestToken).not.toHaveBeenCalled();
+          expect(mockTwoFactorAuthService.requestToken).not.toHaveBeenCalled();
         });
 
         it('should delete the user', function () {

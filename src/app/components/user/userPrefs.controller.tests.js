@@ -3,7 +3,7 @@
 
   describe('User preferences controller', function () {
 
-  	var connection, mockAlertService, mockAuthService, mockBlob, mockFileSaver, mockGetText, mockTwoFactorAuth, mockUserDataService,
+  	var connection, mockAlertService, mockAuthService, mockBlob, mockFileSaver, mockGetText, mockTwoFactorAuthService, mockUserDataService,
     newToken, recoveryCodes, returnedTokens, scope, scopeUser, showTokens, tfaToken, userFixture;
 
   	newToken = {id: 4, blacklist: false, token: '124324'};
@@ -43,12 +43,12 @@
 	    });
 
 	    mockUserDataService = {};
-      mockTwoFactorAuth = {};
+      mockTwoFactorAuthService = {};
       mockFileSaver = {};
       mockBlob = {};
 	    module('app.user', function($provide) {
 	      $provide.value('UserDataService', mockUserDataService);
-        $provide.value('TwoFactorAuth', mockTwoFactorAuth);
+        $provide.value('TwoFactorAuthService', mockTwoFactorAuthService);
         $provide.value('FileSaver', mockFileSaver);
         $provide.value('Blob', mockBlob);
 	    });
@@ -62,28 +62,28 @@
         $provide.value('gettextCatalog', mockGetText);
       });
 
-      mockTwoFactorAuth.requestToken = function () {};
-      mockTwoFactorAuth.generateQRCode = function () {};
-      mockTwoFactorAuth.enable = function () {};
-      mockTwoFactorAuth.disable = function () {};
-      mockTwoFactorAuth.generateRecoveryCodes = function () {};
-      mockTwoFactorAuth.deleteTrustedDevice = function () {};
-      spyOn(mockTwoFactorAuth, 'requestToken').and.callFake(function (callback) {
+      mockTwoFactorAuthService.requestToken = function () {};
+      mockTwoFactorAuthService.generateQRCode = function () {};
+      mockTwoFactorAuthService.enable = function () {};
+      mockTwoFactorAuthService.disable = function () {};
+      mockTwoFactorAuthService.generateRecoveryCodes = function () {};
+      mockTwoFactorAuthService.deleteTrustedDevice = function () {};
+      spyOn(mockTwoFactorAuthService, 'requestToken').and.callFake(function (callback) {
         callback(tfaToken);
       });
-      spyOn(mockTwoFactorAuth, 'generateQRCode').and.callFake(function (callback) {
+      spyOn(mockTwoFactorAuthService, 'generateQRCode').and.callFake(function (callback) {
         callback({data: {url: 'a-qr-code'}});
       });
-      spyOn(mockTwoFactorAuth, 'enable').and.callFake(function (arg, callback) {
+      spyOn(mockTwoFactorAuthService, 'enable').and.callFake(function (arg, callback) {
         callback({data: {_id: '111'}});
       });
-      spyOn(mockTwoFactorAuth, 'disable').and.callFake(function (arg, callback) {
+      spyOn(mockTwoFactorAuthService, 'disable').and.callFake(function (arg, callback) {
         callback({data: {_id: '111'}});
       });
-      spyOn(mockTwoFactorAuth, 'generateRecoveryCodes').and.callFake(function (callback) {
+      spyOn(mockTwoFactorAuthService, 'generateRecoveryCodes').and.callFake(function (callback) {
         callback({data: recoveryCodes});
       });
-      spyOn(mockTwoFactorAuth, 'deleteTrustedDevice').and.callFake(function () {});
+      spyOn(mockTwoFactorAuthService, 'deleteTrustedDevice').and.callFake(function () {});
 
 	    inject(function($rootScope, $controller) {
 	    	scope = $rootScope.$new();
@@ -230,10 +230,10 @@
 
     describe('Two-Factor Authentication', function () {
 
-      describe('Enabling TwoFactorAuth', function () {
+      describe('Enabling TwoFactorAuthService', function () {
         it('should request a QR Code', function () {
           scope.getQRCode();
-          expect(mockTwoFactorAuth.generateQRCode).toHaveBeenCalled();
+          expect(mockTwoFactorAuthService.generateQRCode).toHaveBeenCalled();
         });
 
         it('should add the QR Code url to scope and move to the next step', function () {
@@ -244,12 +244,12 @@
 
         it('should enable Two Factor Auth using the token', function () {
         scope.enableTFA(tfaToken);
-          expect(mockTwoFactorAuth.enable).toHaveBeenCalledWith(tfaToken, jasmine.any(Function), jasmine.any(Function));
+          expect(mockTwoFactorAuthService.enable).toHaveBeenCalledWith(tfaToken, jasmine.any(Function), jasmine.any(Function));
         });
 
         it('should get the recovery codes', function () {
           scope.enableTFA(tfaToken);
-          expect(mockTwoFactorAuth.generateRecoveryCodes).toHaveBeenCalled();
+          expect(mockTwoFactorAuthService.generateRecoveryCodes).toHaveBeenCalled();
           expect(scope.recoveryCodes).toEqual(recoveryCodes);
         });
 
@@ -265,22 +265,22 @@
       describe('Recovery codes', function () {
         it('should get the recovery codes', function () {
           scope.getRecoveryCodes();
-          expect(mockTwoFactorAuth.generateRecoveryCodes).toHaveBeenCalled();
+          expect(mockTwoFactorAuthService.generateRecoveryCodes).toHaveBeenCalled();
           expect(scope.recoveryCodes).toEqual(recoveryCodes);
         });
       });
 
-      describe('Disabling TwoFactorAuth', function () {
+      describe('Disabling TwoFactorAuthService', function () {
         beforeEach(function () {
           scope.disableTwoFactorAuth();
         });
 
         it('should request a token', function () {
-          expect(mockTwoFactorAuth.requestToken).toHaveBeenCalled();
+          expect(mockTwoFactorAuthService.requestToken).toHaveBeenCalled();
         });
 
         it('should disable two factor auth', function () {
-          expect(mockTwoFactorAuth.disable).toHaveBeenCalledWith(tfaToken, jasmine.any(Function), jasmine.any(Function));
+          expect(mockTwoFactorAuthService.disable).toHaveBeenCalledWith(tfaToken, jasmine.any(Function), jasmine.any(Function));
         });
 
         it('should reset the page', function () {
@@ -292,7 +292,7 @@
       describe('Trusted devices', function () {
         it('should remove devices', function () {
           scope.deleteTrustedDevice('1');
-          expect(mockTwoFactorAuth.deleteTrustedDevice).toHaveBeenCalledWith('1', jasmine.any(Function), jasmine.any(Function));
+          expect(mockTwoFactorAuthService.deleteTrustedDevice).toHaveBeenCalledWith('1', jasmine.any(Function), jasmine.any(Function));
         });
       });
 

@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserPrefsCtrl', UserPrefsCtrl);
 
-  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog', 'TwoFactorAuth', 'FileSaver', 'Blob'];
+  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog', 'TwoFactorAuthService', 'FileSaver', 'Blob'];
 
-  function UserPrefsCtrl($exceptionHandler, $scope, $location, $timeout, AuthService, alertService, UserDataService, gettextCatalog, TwoFactorAuth, FileSaver, Blob) {
+  function UserPrefsCtrl($exceptionHandler, $scope, $location, $timeout, AuthService, alertService, UserDataService, gettextCatalog, TwoFactorAuthService, FileSaver, Blob) {
     $scope.pendingConnections = [];
     $scope.approvedConnections = [];
     $scope.password = {
@@ -17,6 +17,7 @@
 
     $scope.timezones = moment.tz.names();
     $scope.twoFactorAuthStep = 1;
+    $scope.showMore = false;
 
     UserDataService.getUser($scope.currentUser.id, function () {
       $scope.user = UserDataService.user;
@@ -40,7 +41,7 @@
       $scope.user.new_password = $scope.password.new;
 
       if ($scope.user.totp) {
-        TwoFactorAuth.requestToken(function (token) {
+        TwoFactorAuthService.requestToken(function (token) {
           updateUserPassword(form, token);
         }, function () {
           form.$setPristine();
@@ -152,7 +153,7 @@
 
     // Two Factor Auth
     $scope.getQRCode = function () {
-      TwoFactorAuth.generateQRCode(function (response) {
+      TwoFactorAuthService.generateQRCode(function (response) {
         $scope.qrCode = response.data.url;
         $scope.twoFactorAuthStep = 2;
       }, function (error) {
@@ -161,7 +162,7 @@
     };
 
     $scope.getRecoveryCodes = function () {
-      TwoFactorAuth.generateRecoveryCodes(function (response) {
+      TwoFactorAuthService.generateRecoveryCodes(function (response) {
         $scope.recoveryCodes = response.data;
       }, function (error) {
         $exceptionHandler(error, 'getRecoveryCodes');
@@ -178,7 +179,7 @@
     };
 
     $scope.enableTFA = function (token) {
-      TwoFactorAuth.enable(token, function (response) {
+      TwoFactorAuthService.enable(token, function (response) {
         $scope.twoFactorAuthStep = 3;
         $scope.setCurrentUser(response.data);
         $scope.getRecoveryCodes();
@@ -188,7 +189,7 @@
     };
 
     function disableTFA (token) {
-      TwoFactorAuth.disable(token, function (response) {
+      TwoFactorAuthService.disable(token, function (response) {
         $scope.setCurrentUser(response.data);
         $scope.user.totp = false;
         $scope.recoveryCodes = [];
@@ -198,7 +199,7 @@
     }
 
     $scope.disableTwoFactorAuth = function () {
-      TwoFactorAuth.requestToken(function (token) {
+      TwoFactorAuthService.requestToken(function (token) {
         disableTFA(token);
       });
     };
@@ -210,7 +211,7 @@
     };
 
     $scope.deleteTrustedDevice = function (id) {
-      TwoFactorAuth.deleteTrustedDevice(id, function () {
+      TwoFactorAuthService.deleteTrustedDevice(id, function () {
         alertService.add('success', gettextCatalog.getString('Device removed.'));
         var index = $scope.trustedDevices.map(function(x){ return x._id; }).indexOf(id);
         $scope.trustedDevices.splice(index,1);
