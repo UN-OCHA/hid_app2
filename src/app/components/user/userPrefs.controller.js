@@ -172,7 +172,7 @@
     $scope.downloadRecoveryCodes = function () {
       var codes = [];
       angular.forEach($scope.recoveryCodes, function (code) {
-        codes.push(code + '\n');
+        codes.push(code + '\r\n');
       });
       var data = new Blob(codes, { type: 'text/plain;charset=utf-8' });
       FileSaver.saveAs(data, 'hid-recovery-codes.txt');
