@@ -6,7 +6,7 @@
     <form ng-submit="close(token)">
       <p>
         <label for="token" translate>Please enter your Two-Factor Authentication code:</label>
-        <input type="tel" id="token" name="token" ng-model="tfa.token" minlength="6" maxlength="6" autocomplete="off" required />
+        <input type="text" id="token" name="token" ng-model="tfa.token" minlength="6" autocomplete="off" required />
       </p>
       <p class="form-field" ng-if="requestTrustDevice">
         <input type="checkbox" id="trust-device" ng-model="tfa.trustDevice" />
