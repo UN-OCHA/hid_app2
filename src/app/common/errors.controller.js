@@ -39,7 +39,7 @@
 
       // New user create error
       if (rejection.config.url === config.apiUrl + 'user' && rejection.config.method === 'POST') {
-        return gettextCatalog.getString('There was an error processing your registration.');
+        return gettextCatalog.getString('There is an error in your registration. You may have already registered. If so, simply reset your password at https://humanitarian.id/password_reset.');
       }
 
       // Return error message from API
