@@ -33,10 +33,10 @@
         <span translate>Check into List</span>
       </a>
 
-      <button class="btn-transparent sidebar-section__button" ng-click="exportVcard();">
+      <a class="btn-transparent sidebar-section__button" download="{{ user._id }}.vcf" ng-href="{{ vcardUrl }}">
         <icon name="inbox-download"></icon>
         <span translate>Export Contact Info</span>
-      </button>
+      </a>
 
       <button class="btn-transparent sidebar-section__button" ng-click="sendClaimEmail();" ng-disabled="!isOnline" ng-if="user.is_orphan && (currentUser.is_admin || currentUser.isManager)">
         <icon name="mail-envelope-closed"></icon>

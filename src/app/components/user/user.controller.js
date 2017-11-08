@@ -26,6 +26,7 @@
     };
     $scope.canViewInfo = true;
     $scope.userExists = true;
+    $scope.vcardUrl = '';
 
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
@@ -197,41 +198,32 @@
     };
 
     // Export user details to vcard
-    $scope.exportVcard = function () {
-      var vcard = "BEGIN:VCARD\n" +
+    $scope.vcardUrl = "BEGIN:VCARD\n" +
         "VERSION:3.0\n" +
         "N:" + $scope.user.family_name + ";" + $scope.user.given_name + ";;;\n" +
         "FN:" + $scope.user.name + "\n";
-      if ($scope.user.organization && $scope.user.organization.name) {
-        vcard += "ORG:" + $scope.user.organization.name + "\n";
+    if ($scope.user.organization && $scope.user.organization.name) {
+      $scope.vcardUrl += "ORG:" + $scope.user.organization.name + "\n";
+    }
+    if ($scope.user.job_title) {
+      $scope.vcardUrl += "TITLE:" + $scope.user.job_title + "\n";
+    }
+    angular.forEach($scope.user.phone_numbers, function (item) {
+      if (item.type && item.number) {
+        $scope.vcardUrl += "TEL;TYPE=" + item.type + ",VOICE:" + item.number + "\n";
       }
-      if ($scope.user.job_title) {
-        vcard += "TITLE:" + $scope.user.job_title + "\n";
+    });
+    if ($scope.user.email) {
+      $scope.vcardUrl += "EMAIL:" + $scope.user.email + "\n";
+    }
+    angular.forEach($scope.user.emails, function (item) {
+      if (item.email) {
+        $scope.vcardUrl += "EMAIL:" + item.email + "\n";
       }
-      if ($scope.user.phone_number) {
-        vcard += "TEL;";
-        if ($scope.user.phone_number_type) {
-          vcard += "TYPE=" + $scope.user.phone_number_type+",";
-        }
-        vcard += "VOICE:" + $scope.user.phone_number + "\n";
-      }
-      angular.forEach($scope.user.phone_numbers, function (item) {
-        if (item.type && item.number) {
-          vcard += "TEL;TYPE=" + item.type + ",VOICE:" + item.number + "\n";
-        }
-      });
-      if ($scope.user.email) {
-        vcard += "EMAIL:" + $scope.user.email + "\n";
-      }
-      angular.forEach($scope.user.emails, function (item) {
-        if (item.email) {
-          vcard += "EMAIL:" + item.email + "\n";
-        }
-      });
-      vcard += "REV:" + new Date().toISOString() + "\n" +
-        "END:VCARD\n";
-      window.location.href = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent(vcard);
-    };
+    });
+    $scope.vcardUrl += "REV:" + new Date().toISOString() + "\n" +
+      "END:VCARD\n";
+    $scope.vcardUrl = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent($scope.vcardUrl);
 
     $scope.verifyUser = function () {
       if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
