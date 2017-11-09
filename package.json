@@ -6,7 +6,7 @@
   "scripts": {
     "test": "grunt test",
     "protractor": "protractor src/e2e-tests/conf.js",
-    "ci": "npm test && npm run protractor",
+    "ci": "npm test",
     "start": "http-server ./src -a localhost -p 3000 -c-1"
   },
   "repository": {
