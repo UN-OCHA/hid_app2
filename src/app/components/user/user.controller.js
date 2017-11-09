@@ -132,12 +132,43 @@
       }
     }
 
+    function setVcardUrl (user) {
+      // Export user details to vcard
+      var vcardUrl = "BEGIN:VCARD\n" +
+          "VERSION:3.0\n" +
+          "N:" + user.family_name + ";" + user.given_name + ";;;\n" +
+          "FN:" + user.name + "\n";
+      if (user.organization && user.organization.name) {
+        vcardUrl += "ORG:" + user.organization.name + "\n";
+      }
+      if (user.job_title) {
+        vcardUrl += "TITLE:" + user.job_title + "\n";
+      }
+      angular.forEach(user.phone_numbers, function (item) {
+        if (item.type && item.number) {
+          vcardUrl += "TEL;TYPE=" + item.type + ",VOICE:" + item.number + "\n";
+        }
+      });
+      if (user.email) {
+        vcardUrl += "EMAIL:" + user.email + "\n";
+      }
+      angular.forEach(user.emails, function (item) {
+        if (item.email) {
+          vcardUrl += "EMAIL:" + item.email + "\n";
+        }
+      });
+      vcardUrl += "REV:" + new Date().toISOString() + "\n" +
+        "END:VCARD\n";
+      $scope.vcardUrl = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent(vcardUrl);
+    }
+
     function getUser () {
       UserDataService.getUser($routeParams.userId, function () {
         $scope.user = UserDataService.user;
         userPicture($scope.user.picture, $scope.user.email);
         setConnectionInfo($scope.user, $scope.currentUser._id);
         authUserAlert($scope.user, $scope.currentUser);
+        setVcardUrl($scope.user);
         if (!$scope.currentUser.verified && $scope.user.is_orphan) {
           $scope.canViewInfo = false;
           alertService.pageAlert('warning', gettextCatalog.getString('In order to view this person’s profile, please contact info@humanitarian.id'));
@@ -196,34 +227,6 @@
         });
       });
     };
-
-    // Export user details to vcard
-    $scope.vcardUrl = "BEGIN:VCARD\n" +
-        "VERSION:3.0\n" +
-        "N:" + $scope.user.family_name + ";" + $scope.user.given_name + ";;;\n" +
-        "FN:" + $scope.user.name + "\n";
-    if ($scope.user.organization && $scope.user.organization.name) {
-      $scope.vcardUrl += "ORG:" + $scope.user.organization.name + "\n";
-    }
-    if ($scope.user.job_title) {
-      $scope.vcardUrl += "TITLE:" + $scope.user.job_title + "\n";
-    }
-    angular.forEach($scope.user.phone_numbers, function (item) {
-      if (item.type && item.number) {
-        $scope.vcardUrl += "TEL;TYPE=" + item.type + ",VOICE:" + item.number + "\n";
-      }
-    });
-    if ($scope.user.email) {
-      $scope.vcardUrl += "EMAIL:" + $scope.user.email + "\n";
-    }
-    angular.forEach($scope.user.emails, function (item) {
-      if (item.email) {
-        $scope.vcardUrl += "EMAIL:" + item.email + "\n";
-      }
-    });
-    $scope.vcardUrl += "REV:" + new Date().toISOString() + "\n" +
-      "END:VCARD\n";
-    $scope.vcardUrl = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent($scope.vcardUrl);
 
     $scope.verifyUser = function () {
       if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
