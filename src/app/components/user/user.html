@@ -33,7 +33,7 @@
         <span translate>Check into List</span>
       </a>
 
-      <a class="btn-transparent sidebar-section__button" download="{{ user._id }}.vcf" href="{{ vcardUrl }}">
+      <a class="btn-transparent sidebar-section__button" download="{{ user.given_name + ' ' + user.family_name }}.vcf" href="{{ vcardUrl }}">
         <icon name="inbox-download"></icon>
         <span translate>Export Contact Info</span>
       </a>
