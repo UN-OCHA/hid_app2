@@ -406,6 +406,11 @@ app.config(['$localForageProvider', function ($localForageProvider) {
   });
 }]);
 
+// Add data as part of the whitelist
+app.config(['$compileProvider', function ($compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|data):/);
+}]);
+
 app.run(function ($localForage) {
   $localForage.createInstance({
     name: 'lists',

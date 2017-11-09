@@ -149,9 +149,6 @@
           vcardUrl += "TEL;TYPE=" + item.type + ",VOICE:" + item.number + "\n";
         }
       });
-      if (user.email) {
-        vcardUrl += "EMAIL:" + user.email + "\n";
-      }
       angular.forEach(user.emails, function (item) {
         if (item.email) {
           vcardUrl += "EMAIL:" + item.email + "\n";
