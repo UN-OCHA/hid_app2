@@ -45,6 +45,6 @@
   },
   "resolutions": {
     "angular": "1.6.6",
-    "google-libphonenumber": "2.0.19"
+    "google-libphonenumber": "~3.0.8"
   }
 }
