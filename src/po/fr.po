@@ -2551,7 +2551,7 @@ msgstr "Vos mots de passe ne correspondent pas "
 
 #: src/app/components/landing/landing.html:155
 msgid "Your profile has been verified."
-msgstr "Votre compte n'a pas été vérifié "
+msgstr "Votre compte est vérifié "
 
 #: src/app/components/list/list.html:80
 msgid "Your request for check-in is pending. We will get back to you soon."
