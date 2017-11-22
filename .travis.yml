@@ -15,18 +15,15 @@ cache:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm install || exit 1
-  - npm install -g grunt-cli || exit 1
-  - npm install -g bower || exit 1
-  - npm install -g protractor || exit 1
-  - bower install || exit 1
+  - yarn --ignore-engines || exit 1
+  - yarn install -g grunt-cli || exit 1
   - webdriver-manager update --gecko false || exit 1
-  - npm start &
+  - yarn run start &
   - until netstat -an 2>/dev/null | grep '3000.*LISTEN'; do true; done
   - grunt test-config --target="test" || exit 1
   - sleep 3
 script:
-  - npm run ci
+  - yarn run ci
 notifications:
   email: guillaume@viguierjust.com
   flowdock:

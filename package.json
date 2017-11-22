@@ -6,7 +6,7 @@
   "scripts": {
     "test": "grunt test",
     "protractor": "protractor src/e2e-tests/conf.js",
-    "ci": "npm test",
+    "ci": "yarn test",
     "start": "http-server ./src -a localhost -p 3000 -c-1",
     "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@bower_components'), 'src/bower_components', 'junction') } catch (e) { }\""
   },
