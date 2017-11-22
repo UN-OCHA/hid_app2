@@ -17,6 +17,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - yarn --ignore-engines || exit 1
   - yarn global add grunt-cli || exit 1
+  - yarn global add protractor || exit 1
   - webdriver-manager update --gecko false || exit 1
   - yarn run start &
   - until netstat -an 2>/dev/null | grep '3000.*LISTEN'; do true; done
