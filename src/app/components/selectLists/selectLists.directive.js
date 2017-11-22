@@ -10,7 +10,9 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/selectLists/select-lists.html',
-      scope: true,
+      scope: {
+        types: '@'
+      },
       controller: 'SelectListsCtrl'
     };
 

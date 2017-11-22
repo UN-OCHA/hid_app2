@@ -9,7 +9,7 @@
 
   function SelectListsCtrl ($scope, config, List, gettextCatalog) {
   	// On parent controller:
-  	// $scope.selectedLists = []; 
+  	// $scope.selectedLists = [];
   	// $scope.filterListsMember = true; - if need to filter out lists user is a member of
   	$scope.listTypes = [];
   	$scope.getLists = getLists;
@@ -21,7 +21,8 @@
   	var searchTerm = '';
 
   	function getListTypes () {
-      angular.forEach(config.listTypes, function (listType) {
+      var listTypes = scope.types ? scope.types.split(" ") : config.listTypes;
+      angular.forEach(listTypes, function (listType) {
 
         var label = listType.charAt(0).toUpperCase() + listType.slice(1);
         if (listType === 'bundle') {
