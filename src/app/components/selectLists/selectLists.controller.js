@@ -21,7 +21,7 @@
   	var searchTerm = '';
 
   	function getListTypes () {
-      var listTypes = scope.types ? scope.types.split(" ") : config.listTypes;
+      var listTypes = $scope.types ? $scope.types.split(" ") : config.listTypes;
       angular.forEach(listTypes, function (listType) {
 
         var label = listType.charAt(0).toUpperCase() + listType.slice(1);
