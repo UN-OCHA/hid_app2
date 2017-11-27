@@ -45,7 +45,7 @@
         });
         scope.$digest();
       });
-    	
+
     });
 
     describe ('Get List types', function () {
@@ -63,10 +63,6 @@
           {
             "name": "disaster",
             "label": "Disaster",
-          },
-          {
-            "name": "organization",
-            "label": "Organization",
           },
           {
             "name": "functional_role",
