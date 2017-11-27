@@ -11,8 +11,7 @@ docker run --privileged --rm \
     -v /var/run/docker.sock:/var/run/docker.sock \
     unocha/alpine-nodejs-builder \
     sh -c "cd /src && \
-        npm install && \
-        bower --allow-root install && \
+        yarn --ignore-engines && \
         grunt --target=production && \
         mv /src/dist /src/html"
 
