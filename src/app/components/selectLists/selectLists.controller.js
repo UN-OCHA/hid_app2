@@ -21,7 +21,9 @@
   	var searchTerm = '';
 
   	function getListTypes () {
-      var listTypes = $scope.types ? $scope.types.split(" ") : config.listTypes;
+      var listTypes = config.listTypes.filter(function (item) {
+        return item !== 'organization';
+      });
       angular.forEach(listTypes, function (listType) {
 
         var label = listType.charAt(0).toUpperCase() + listType.slice(1);
