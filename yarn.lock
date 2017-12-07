@@ -21,6 +21,16 @@
   version "2.3.10"
   resolved "https://codeload.github.com/rubenv/angular-gettext/tar.gz/5a5b42ba4d0a2eff1d60bdff65a0e849aea19cf5"
 
+"@bower_components/angular-google-gapi@maximepvrt/angular-google-gapi#^1.0.1":
+  version "1.0.1"
+  resolved "https://codeload.github.com/maximepvrt/angular-google-gapi/tar.gz/ed166f58c8eb8ceed730e64cf9156c0121a7b7ec"
+  dependencies:
+    angular "~1.x"
+
+"@bower_components/angular-google-picker@softmonkeyjapan/angular-google-picker#^0.2.2":
+  version "0.2.2"
+  resolved "https://codeload.github.com/softmonkeyjapan/angular-google-picker/tar.gz/e80992d071a7bbef159449daf58d976d6d2013a2"
+
 "@bower_components/angular-localforage@ocombe/angular-localForage#~1.3.3":
   version "1.3.7"
   resolved "https://codeload.github.com/ocombe/angular-localForage/tar.gz/e5d977c92a652dbcf69cb8ee00d60f3efd5b634a"

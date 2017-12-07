@@ -5,8 +5,8 @@
     .module('app.user')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['$exceptionHandler', '$location', '$q', '$rootScope', '$routeParams', '$scope', '$window', 'gettextCatalog', 'hrinfoService', 'List', 'SearchService', 'SidebarService', 'User', 'UserDataService'];
-  function UsersCtrl($exceptionHandler, $location, $q, $rootScope, $routeParams, $scope, $window, gettextCatalog, hrinfoService, List, SearchService, SidebarService, User, UserDataService) {
+  UsersCtrl.$inject = ['$exceptionHandler', '$location', '$q', '$rootScope', '$routeParams', '$scope', '$window', 'gettextCatalog', 'GAuth', 'GApi', 'alertService', 'hrinfoService', 'List', 'SearchService', 'SidebarService', 'User', 'UserDataService'];
+  function UsersCtrl($exceptionHandler, $location, $q, $rootScope, $routeParams, $scope, $window, gettextCatalog, GAuth, GApi, alertService, hrinfoService, List, SearchService, SidebarService, User, UserDataService) {
     $scope.usersLoaded = false;
     $scope.pageChanged = pageChanged;
     $scope.setLimit = setLimit;
@@ -533,6 +533,41 @@
     $scope.$on('users-export-pdf', function (evt, format) {
       var url = User.getPDFUrl(currentRequest, format);
       $window.open(url);
+    });
+
+    $scope.$on('users-export-gss', function (evt, doc) {
+      User.exportGSS(currentRequest, function(resp) {
+        var values = [];
+        var data = [];
+        var index = 2;
+        var organization = '';
+        data.push({
+          range: 'A1:G1',
+          values: [['Humanitarian ID', 'First Name', 'Last Name', 'Job Title', 'Organization', 'Email', 'Phone number']]
+        });
+        resp.data.forEach(function (elt) {
+          organization = elt.organization ? elt.organization.name : '';
+          data.push({
+            range: 'A' + index + ':G' + index,
+            values: [[elt.id, elt.given_name, elt.family_name, elt.job_title, organization, elt.email, elt.phone_number]]
+          });
+          index++;
+        });
+        var body = {
+          data: data,
+          valueInputOption: 'RAW'
+        };
+        GApi.execute('sheets', 'spreadsheets.values.batchUpdate', {
+          spreadsheetId: doc.id,
+          resource: body
+        }).then(function(resp) {
+          alertService.add('success', gettextCatalog.getString('The users were successfully exported.'));
+        }, function() {
+          alertService.add('danger', gettextCatalog.getString('Sorry, the spreadsheet export did not work...'));
+        });
+      }, function (err) {
+        alertService.add('danger', gettextCatalog.getString('Sorry, we could not retrieve the users...'));
+      });
     });
 
     function init () {

@@ -12,6 +12,7 @@
     $scope.closeExportEmailslModal = closeExportEmailslModal;
     $scope.exportCSV = exportCSV;
     $scope.exportPDF = exportPDF;
+    $scope.exportGSS = exportGSS;
     $scope.emailsText = '';
     var exportEmailModal;
 
@@ -48,5 +49,8 @@
       $rootScope.$broadcast('users-export-pdf', format);
     }
 
+    function exportGSS (docs) {
+      $rootScope.$broadcast('users-export-gss', docs[0]);
+    }
   }
 })();

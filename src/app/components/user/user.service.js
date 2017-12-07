@@ -148,6 +148,17 @@
       $http.get(config.apiUrl + 'user.txt?' + urlp).then(success, error);
     };
 
+    User.exportGSS = function (params, success, error) {
+      var par = angular.copy(params);
+      delete par.limit;
+      delete par.offset;
+      par.fields = 'given_name family_name job_title organization email phone_number';
+      var urlp = Object.keys(par).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
+      }).join('&');
+      $http.get(config.apiUrl + 'user?' + urlp).then(success, error);
+    };
+
     // Export to pdf
     User.getPDFUrl = function (params, format) {
       var par = angular.copy(params);
