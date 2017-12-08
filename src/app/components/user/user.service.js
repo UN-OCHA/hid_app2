@@ -152,7 +152,7 @@
       var par = angular.copy(params);
       delete par.limit;
       delete par.offset;
-      par.fields = 'given_name family_name job_title organization email phone_number';
+      par.fields = 'given_name family_name job_title organization email phone_number location voips bundles functional_roles status';
       var urlp = Object.keys(par).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');

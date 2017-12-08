@@ -540,16 +540,49 @@
         var values = [];
         var data = [];
         var index = 2;
-        var organization = '';
+        var organization = '',
+          country = '',
+          region = '',
+          skype = '',
+          bundles = '',
+          roles = '';
         data.push({
-          range: 'A1:G1',
-          values: [['Humanitarian ID', 'First Name', 'Last Name', 'Job Title', 'Organization', 'Email', 'Phone number']]
+          range: 'A1:M1',
+          values: [['Humanitarian ID', 'First Name', 'Last Name', 'Job Title', 'Organization', 'Groups', 'Roles', 'Country', 'Admin Area', 'Phone number', 'Skype', 'Email', 'Notes']]
         });
         resp.data.forEach(function (elt) {
           organization = elt.organization ? elt.organization.name : '';
+          country = '';
+          region = '';
+          skype = '';
+          bundles = '';
+          roles = '';
+          if (elt.location && elt.location.country) {
+            country = elt.location.country.name;
+          }
+          if (elt.location && elt.location.region) {
+            region = elt.location.region.name;
+          }
+          if (elt.voips.length) {
+            elt.voips.forEach(function (voip) {
+              if (voip.type === 'Skype') {
+                skype = voip.username;
+              }
+            });
+          }
+          if (elt.bundles && elt.bundles.length) {
+            elt.bundles.forEach(function (bundle) {
+              bundles += bundle.name + ';';
+            });
+          }
+          if (elt.functional_roles && elt.functional_roles.length) {
+            elt.functional_roles.forEach(function (role) {
+              roles += role.name + ';';
+            });
+          }
           data.push({
-            range: 'A' + index + ':G' + index,
-            values: [[elt.id, elt.given_name, elt.family_name, elt.job_title, organization, elt.email, elt.phone_number]]
+            range: 'A' + index + ':M' + index,
+            values: [[elt.id, elt.given_name, elt.family_name, elt.job_title, organization, bundles, roles, country, region, elt.phone_number, skype, elt.email, elt.status]]
           });
           index++;
         });
