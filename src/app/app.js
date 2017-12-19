@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'angular-google-gapi', 'lk-google-picker', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar']);
+var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.gpicker', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar']);
 
 app.constant('config', env);
 
@@ -427,48 +427,12 @@ app.run(function (editableOptions) {
   editableOptions.theme = 'bs3';
 });
 
-app.run(function(GApi, GAuth, GData, $rootScope) {
+app.config(['gpickerSettingsProvider', function (gpickerSettingsProvider) {
 
-        $rootScope.gdata = GData;
-        $rootScope.guser = {};
-
-        var CLIENT = '398838971380-r17klsu7vbbar1du8k0dd4kt1f5grk7d.apps.googleusercontent.com';
-        /*var BASE = 'https://myGoogleAppEngine.appspot.com/_ah/api';
-
-        GApi.load('myApiName','v1',BASE);*/
-        GApi.load('sheets','v4'); // for google api (https://developers.google.com/apis-explorer/)
-        //GApi.load('picker');
-
-        GAuth.setClient(CLIENT);
-        // default scope is only https://www.googleapis.com/auth/userinfo.email
-        GAuth.setScope('https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive');
-
-        // load the auth api so that it doesn't have to be loaded asynchronously
-        // when the user clicks the 'login' button.
-        // That would lead to popup blockers blocking the auth window
-
-        // or just call checkAuth, which in turn does load the oauth api.
-        // if you do that, GAuth.load(); is unnecessary
-        GAuth.checkAuth().then(
-          function (user) {
-            $rootScope.guser = user;
-            //$state.go('webapp.home'); // an example of action if it's possible to
-                              // authenticate user at startup of the application
-          },
-          function() {
-          //$state.go('login'); // an example of action if it's impossible to
-                      // authenticate user at startup of the application
-          }
-        );
-    }
-);
-
-app.config(['lkGoogleSettingsProvider', function (lkGoogleSettingsProvider) {
-
-  lkGoogleSettingsProvider.configure({
+  gpickerSettingsProvider.configure({
     apiKey   : 'AIzaSyDVZnMEzJqvfUkfpdD-T-i3IvYGBxCxc6Q',
     clientId : '398838971380-r17klsu7vbbar1du8k0dd4kt1f5grk7d.apps.googleusercontent.com',
-    scopes   : ['https://www.googleapis.com/auth/drive'],
+    scopes   : 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets',
     features : [],
     views    : ['DocsView(google.picker.ViewId.SPREADSHEETS)']
   });

@@ -37,8 +37,8 @@
 		<span translate>Export into CSV</span>
 	</button>
 
-	<button type="button" class="btn-transparent sidebar-section__button" ng-if="currentUser.verified" lk-google-picker on-picked="exportGSS(docs)">
+	<button type="button" class="btn-transparent sidebar-section__button" ng-if="currentUser.verified" gpicker get-token="googleToken(authInstance)" on-picked="exportGSS(docs)">
 		<icon name="inbox-download"></icon>
-		<span translate>Export into Google Spreadsheet</span>
+		<span translate>Synchronize with Google Spreadsheet</span>
 	</button>
 </div>

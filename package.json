@@ -71,7 +71,7 @@
     "@bower_components/angular-ui-select": "angular-ui/ui-select#~0.18.1",
     "@bower_components/angular-upload": "leon/angular-upload#~1.0.12",
     "@bower_components/angular-xeditable": "vitalets/angular-xeditable#~0.2.0",
-    "@bower_components/bc-countries": "git://github.com/guillaumev/bc-countries.git#master",
+    "@bower_components/bc-countries": "guillaumev/bc-countries.git#master",
     "@bower_components/bc-css-flags": "blockchain/bc-css-flags#~3.0.0",
     "@bower_components/bc-phone-number": "blockchain/bc-phone-number#~5.1.1",
     "@bower_components/blob-polyfill": "bjornstar/blob-polyfill#~1.0.20150320",
@@ -86,8 +86,7 @@
     "@bower_components/moment": "moment/moment#>= 2.9.0",
     "@bower_components/moment-timezone": "moment/moment-timezone#~0.5.9",
     "@bower_components/offline": "HubSpot/offline#~0.7.18",
-    "@bower_components/ua-parser-js": "faisalman/ua-parser-js#^0.7.17",
-    "@bower_components/angular-google-picker": "softmonkeyjapan/angular-google-picker#^0.2.2"
+    "@bower_components/ua-parser-js": "faisalman/ua-parser-js#^0.7.17"
   },
   "engines": {
     "yarn": ">= 1.0.0"

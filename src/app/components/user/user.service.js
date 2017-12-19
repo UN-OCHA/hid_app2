@@ -125,6 +125,11 @@
       $http.post(config.apiUrl + 'user/' + this._id + '/notification', {message: message}).then(success, error);
     };
 
+    // Store google credentials
+    User.prototype.saveGoogleCredentials = function (code) {
+      return $http.post(config.apiUrl + 'user/' + this._id + '/googlecredentials', {code: code});
+    };
+
     // Export to csv
     User.getCSVUrl = function(params) {
       var par = angular.copy(params);
@@ -157,6 +162,10 @@
         return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');
       $http.get(config.apiUrl + 'user?' + urlp).then(success, error);
+    };
+
+    User.syncGSS = function (body) {
+      return $http.post(config.apiUrl + 'gsssync', body);
     };
 
     // Export to pdf

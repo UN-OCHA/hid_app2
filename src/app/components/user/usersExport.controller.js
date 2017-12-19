@@ -13,6 +13,7 @@
     $scope.exportCSV = exportCSV;
     $scope.exportPDF = exportPDF;
     $scope.exportGSS = exportGSS;
+    $scope.googleToken = googleToken;
     $scope.emailsText = '';
     var exportEmailModal;
 
@@ -51,6 +52,29 @@
 
     function exportGSS (docs) {
       $rootScope.$broadcast('users-export-gss', docs[0]);
+    }
+
+    function googleToken (authInstance) {
+      var authPromise = {};
+      if ($scope.currentUser.googleCredentials === false) {
+        authPromise = authInstance.grantOfflineAccess({redirect_uri: 'postmessage'})
+          .then(function (code) {
+            return $scope.currentUser.saveGoogleCredentials(code.code);
+          })
+          .then(function (resp) {
+            $scope.currentUser.googleCredentials = true;
+            $scope.setCurrentUser($scope.currentUser);
+            return authInstance.signIn();
+          });
+      }
+      else {
+        authPromise = authInstance.signIn();
+      }
+      return authPromise
+          .then(function (guser) {
+            var response = guser.getAuthResponse();
+            return response.access_token;
+          });
     }
   }
 })();
