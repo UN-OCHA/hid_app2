@@ -536,11 +536,37 @@
     });
 
     $scope.$on('users-export-gss', function (evt, doc) {
-      if (currentRequest['lists.list']) {
+      if (currentRequest['lists.list'] ||
+        currentRequest['operations.list'] ||
+        currentRequest['bundles.list'] ||
+        currentRequest['organizations.list'] ||
+        currentRequest['disasters.list'] ||
+        currentRequest['functional_roles.list'] ||
+        currentRequest['offices.list']) {
         var body = {
-          list: currentRequest['lists.list'],
           spreadsheet: doc.id
         };
+        if (currentRequest['lists.list']) {
+          body.list = currentRequest['lists.list'];
+        }
+        if (currentRequest['operations.list']) {
+          body.list = currentRequest['operations.list'];
+        }
+        if (currentRequest['bundles.list']) {
+          body.list = currentRequest['bundles.list'];
+        }
+        if (currentRequest['organizations.list']) {
+          body.list = currentRequest['organizations.list'];
+        }
+        if (currentRequest['disasters.list']) {
+          body.list = currentRequest['disasters.list'];
+        }
+        if (currentRequest['functional_roles.list']) {
+          body.list = currentRequest['functional_roles.list'];
+        }
+        if (currentRequest['offices.list']) {
+          body.list = currentRequest['offices.list'];
+        }
         User.syncGSS(body)
           .then(function (resp) {
             alertService.add('success', gettextCatalog.getString('The users were successfully exported.'));
