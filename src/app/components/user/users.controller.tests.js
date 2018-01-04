@@ -4,7 +4,7 @@
   describe('Users controller', function () {
 
     var adminDefaultParams, countries, defaultParams, filterParams, filterRouteParams, initialUsers, listFixture, listInfo, listParams, listQueryResponse,
-    mockGetText, mockhrinfoService, mockList, mockLocation, mockSearchService, mockSidebarService, mockUser,
+    mockGetText, mockAlertService, mockhrinfoService, mockList, mockLocation, mockSearchService, mockSidebarService, mockUser,
     mockUserDataService, scope, userFixture;
 
     listFixture = readJSON('app/test-fixtures/list.json');
@@ -59,6 +59,18 @@
       };
       module('gettext', function($provide) {
         $provide.value('gettextCatalog', mockGetText);
+      });
+
+      mockAlertService = {
+      	add: function () {}
+      };
+      spyOn(mockAlertService, 'add').and.callFake(function(arg1, arg2, arg3, callback) {
+        if (callback) {
+          callback();
+        }
+      });
+      module('app.common', function($provide) {
+        $provide.value('alertService', mockAlertService);
       });
 
       mockSidebarService = {
