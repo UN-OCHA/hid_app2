@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.gpicker', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar']);
+var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar']);
 
 app.constant('config', env);
 
@@ -426,14 +426,3 @@ app.run(function ($localForage) {
 app.run(function (editableOptions) {
   editableOptions.theme = 'bs3';
 });
-
-app.config(['gpickerSettingsProvider', function (gpickerSettingsProvider) {
-
-  gpickerSettingsProvider.configure({
-    apiKey   : 'AIzaSyDVZnMEzJqvfUkfpdD-T-i3IvYGBxCxc6Q',
-    clientId : '398838971380-r17klsu7vbbar1du8k0dd4kt1f5grk7d.apps.googleusercontent.com',
-    scopes   : 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets',
-    features : [],
-    views    : ['DocsView(google.picker.ViewId.SPREADSHEETS)']
-  });
-}]);
