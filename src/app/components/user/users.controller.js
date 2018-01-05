@@ -535,7 +535,7 @@
       $window.open(url);
     });
 
-    $scope.$on('users-export-gss', function (evt, doc) {
+    $scope.$on('users-export-gss', function (evt) {
       if (currentRequest['lists.list'] ||
         currentRequest['operations.list'] ||
         currentRequest['bundles.list'] ||
@@ -543,9 +543,7 @@
         currentRequest['disasters.list'] ||
         currentRequest['functional_roles.list'] ||
         currentRequest['offices.list']) {
-        var body = {
-          spreadsheet: doc.id
-        };
+        var body = {};
         if (currentRequest['lists.list']) {
           body.list = currentRequest['lists.list'];
         }
@@ -569,7 +567,9 @@
         }
         User.syncGSS(body)
           .then(function (resp) {
-            alertService.add('success', gettextCatalog.getString('The users were successfully exported.'));
+            var msg = gettextCatalog.getString('A new google sheet was created for the synchronization. You will be able to find it at: ');
+            msg += '<a href="https://docs.google.com/spreadsheets/d/' + resp.data.spreadsheet + '/edit">' + 'https://docs.google.com/spreadsheets/d/' + resp.data.spreadsheet + '/edit' + '</a>';
+            alertService.pageAlert('success', msg);
           })
           .catch(function (err) {
             alertService.add('danger', gettextCatalog.getString('Sorry, the spreadsheet export did not work...'));

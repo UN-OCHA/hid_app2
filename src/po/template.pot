@@ -32,6 +32,10 @@ msgstr ""
 msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
 msgstr ""
 
+#: src/app/components/user/users.controller.js:570
+msgid "A new google sheet was created for the synchronization. You will be able to find it at:"
+msgstr ""
+
 #: src/app/components/user/userPrefs.controller.js:149
 msgid "API key deleted"
 msgstr ""
@@ -1787,10 +1791,6 @@ msgstr ""
 #: src/app/components/service/service.controller.js:73
 #: src/app/components/service/services.controller.js:59
 msgid "The user was successfully unsubscribed from this service"
-msgstr ""
-
-#: src/app/components/user/users.controller.js:572
-msgid "The users were successfully exported."
 msgstr ""
 
 #: src/app/components/auth/verify.controller.js:16
