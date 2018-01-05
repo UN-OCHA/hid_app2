@@ -568,7 +568,7 @@
         User.syncGSS(body)
           .then(function (resp) {
             var msg = gettextCatalog.getString('A new google sheet was created for the synchronization. You will be able to find it at: ');
-            msg += '<a href="https://docs.google.com/spreadsheets/d/' + resp.data.spreadsheet + '/edit">' + 'https://docs.google.com/spreadsheets/d/' + resp.data.spreadsheet + '/edit' + '</a>';
+            msg += '<a href="https://docs.google.com/spreadsheets/d/' + resp.data.spreadsheet + '/edit" target="_blank">' + 'https://docs.google.com/spreadsheets/d/' + resp.data.spreadsheet + '/edit' + '</a>';
             alertService.pageAlert('success', msg);
           })
           .catch(function (err) {
