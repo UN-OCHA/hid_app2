@@ -62,7 +62,7 @@
         })
         .then(function (authInstance) {
           var authPromise = {};
-          if ($scope.currentUser.googleCredentials === false) {
+          if (!$scope.currentUser.googleCredentials) {
             authPromise = authInstance.grantOfflineAccess({redirect_uri: 'postmessage'})
               .then(function (code) {
                 return $scope.currentUser.saveGoogleCredentials(code.code);
