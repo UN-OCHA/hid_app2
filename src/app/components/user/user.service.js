@@ -130,6 +130,14 @@
       return $http.post(config.apiUrl + 'user/' + this._id + '/googlecredentials', {code: code});
     };
 
+    // Store outlook credentials
+    User.prototype.saveOutlookCredentials = function (code) {
+      return $http.post(config.apiUrl + 'user/' + this._id + '/outlookcredentials', {
+        code: code,
+        redirectUri: $location.protocol() + '://' + $location.host() + '/outlook'
+      });
+    };
+
     // Export to csv
     User.getCSVUrl = function(params) {
       var par = angular.copy(params);
@@ -166,6 +174,10 @@
 
     User.syncGSS = function (body) {
       return $http.post(config.apiUrl + 'gsssync', body);
+    };
+
+    User.createOutlookGroup = function () {
+      return $http.post(config.apiUrl + 'outlookGroup');
     };
 
     // Export to pdf

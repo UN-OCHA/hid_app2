@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar']);
+var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar', 'app.outlook']);
 
 app.constant('config', env);
 
@@ -338,6 +338,11 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'TutorialCtrl',
         authenticate: true,
         title: 'Tutorial'
+      })
+      .when('/outlook', {
+        template: '',
+        controller: 'OutlookCtrl',
+        authenticate: true
       })
       .otherwise({
         redirectTo: '/'

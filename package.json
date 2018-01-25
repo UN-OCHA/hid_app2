@@ -86,7 +86,8 @@
     "@bower_components/moment": "moment/moment#>= 2.9.0",
     "@bower_components/moment-timezone": "moment/moment-timezone#~0.5.9",
     "@bower_components/offline": "HubSpot/offline#~0.7.18",
-    "@bower_components/ua-parser-js": "faisalman/ua-parser-js#^0.7.17"
+    "@bower_components/ua-parser-js": "faisalman/ua-parser-js#^0.7.17",
+    "@bower_components/microsoft-graph-client": "microsoftgraph/msgraph-sdk-javascript#^1.0.0"
   },
   "engines": {
     "yarn": ">= 1.0.0"
