@@ -110,7 +110,7 @@
       sessionStorage.authNonce = outlookGuid();
 
       var authEndpoint = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?';
-      var redirectUri = $location.protocol() . '://' . $location.host() . '/outlook';
+      var redirectUri = $location.protocol() + '://' + $location.host() + '/outlook';
       var appId = 'c31cf820-b95c-4fbc-8546-eb94976bec0e';
       var scopes = 'openid offline_access User.Read Contacts.ReadWrite';
 
