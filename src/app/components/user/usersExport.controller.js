@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserExportCtrl', UserExportCtrl);
 
-  UserExportCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$uibModal', '$window', 'User'];
+  UserExportCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$uibModal', '$window', '$location', 'User'];
 
-  function UserExportCtrl($exceptionHandler, $rootScope, $scope, $uibModal, $window, User) {
+  function UserExportCtrl($exceptionHandler, $rootScope, $scope, $uibModal, $window, $location, User) {
     $scope.exportEmails = exportEmails;
     $scope.closeExportEmailslModal = closeExportEmailslModal;
     $scope.exportCSV = exportCSV;
@@ -110,7 +110,7 @@
       sessionStorage.authNonce = outlookGuid();
 
       var authEndpoint = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?';
-      var redirectUri = 'https://app.hid.vm/outlook';
+      var redirectUri = $location.protocol() . '://' . $location.host() . '/outlook';
       var appId = 'c31cf820-b95c-4fbc-8546-eb94976bec0e';
       var scopes = 'openid offline_access User.Read Contacts.ReadWrite';
 
