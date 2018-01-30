@@ -134,7 +134,7 @@
         $window.location.href = buildOutlookAuthUrl();
       }
       else {
-        User.createOutlookGroup();
+        $rootScope.$broadcast('users-export-outlook');
       }
     }
   }

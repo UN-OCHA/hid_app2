@@ -176,8 +176,10 @@
       return $http.post(config.apiUrl + 'gsssync', body);
     };
 
-    User.createOutlookGroup = function () {
-      return $http.post(config.apiUrl + 'outlookGroup');
+    User.createOutlookGroup = function (list) {
+      var body = {};
+      body.list = list;
+      return $http.post(config.apiUrl + 'outlookGroup', body);
     };
 
     // Export to pdf

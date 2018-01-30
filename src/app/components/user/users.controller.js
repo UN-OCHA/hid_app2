@@ -517,6 +517,39 @@
       });
     }
 
+    function getList () {
+      if (currentRequest['lists.list'] ||
+        currentRequest['operations.list'] ||
+        currentRequest['bundles.list'] ||
+        currentRequest['organizations.list'] ||
+        currentRequest['disasters.list'] ||
+        currentRequest['functional_roles.list'] ||
+        currentRequest['offices.list']) {
+        var body = {};
+        if (currentRequest['lists.list']) {
+          return currentRequest['lists.list'];
+        }
+        if (currentRequest['operations.list']) {
+          return currentRequest['operations.list'];
+        }
+        if (currentRequest['bundles.list']) {
+          return currentRequest['bundles.list'];
+        }
+        if (currentRequest['organizations.list']) {
+          return currentRequest['organizations.list'];
+        }
+        if (currentRequest['disasters.list']) {
+          return currentRequest['disasters.list'];
+        }
+        if (currentRequest['functional_roles.list']) {
+          return currentRequest['functional_roles.list'];
+        }
+        if (currentRequest['offices.list']) {
+          return currentRequest['offices.list'];
+        }
+      }
+    }
+
     $rootScope.$on('sidebar-closed', function () {
       $scope.selectedFilters = angular.copy(activeFilters);
     });
@@ -536,35 +569,9 @@
     });
 
     $scope.$on('users-export-gss', function (evt) {
-      if (currentRequest['lists.list'] ||
-        currentRequest['operations.list'] ||
-        currentRequest['bundles.list'] ||
-        currentRequest['organizations.list'] ||
-        currentRequest['disasters.list'] ||
-        currentRequest['functional_roles.list'] ||
-        currentRequest['offices.list']) {
-        var body = {};
-        if (currentRequest['lists.list']) {
-          body.list = currentRequest['lists.list'];
-        }
-        if (currentRequest['operations.list']) {
-          body.list = currentRequest['operations.list'];
-        }
-        if (currentRequest['bundles.list']) {
-          body.list = currentRequest['bundles.list'];
-        }
-        if (currentRequest['organizations.list']) {
-          body.list = currentRequest['organizations.list'];
-        }
-        if (currentRequest['disasters.list']) {
-          body.list = currentRequest['disasters.list'];
-        }
-        if (currentRequest['functional_roles.list']) {
-          body.list = currentRequest['functional_roles.list'];
-        }
-        if (currentRequest['offices.list']) {
-          body.list = currentRequest['offices.list'];
-        }
+      var body = {};
+      body.list = getList();
+      if (body.list) {
         User.syncGSS(body)
           .then(function (resp) {
             var msg = gettextCatalog.getString('A synchronized Google Sheet was created. Find it at: ');
@@ -578,6 +585,23 @@
       else {
         alertService.add('danger', gettextCatalog.getString('You need to select a list'));
       }
+    });
+
+    $scope.$on('users-export-outlook', function (evt) {
+      var list = {};
+      if (list) {
+        User.createOutlookGroup(list)
+          .then(function (resp) {
+            alertService.add('success', gettextCatalog.getString('The contact folder was successfully created.'));
+          })
+          .catch(function (err) {
+            alertService.add('danger', gettextCatalog.getString('Sorry, the contact folder could not be created...'));
+          });
+      }
+      else {
+        alertService.add('danger', gettextCatalog.getString('You need to select a list'));
+      }
+
     });
 
     function init () {
