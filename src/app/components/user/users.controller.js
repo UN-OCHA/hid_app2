@@ -588,7 +588,7 @@
     });
 
     $scope.$on('users-export-outlook', function (evt) {
-      var list = {};
+      var list = getList();
       if (list) {
         User.createOutlookGroup(list)
           .then(function (resp) {
