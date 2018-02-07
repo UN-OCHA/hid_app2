@@ -42,6 +42,8 @@ app.run(function ($rootScope, $window, $location, AuthService, alertService) {
 
       if (nextRoute && nextRoute.authenticate && !isAuthenticated){
         // User isn’t authenticated
+        var oldPath = $location.path();
+        $location.search('redirect', oldPath);
         $location.path('/');
         event.preventDefault();
         return;
