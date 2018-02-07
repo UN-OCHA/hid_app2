@@ -42,13 +42,12 @@
 
         // User has logged in previously
         var redirectUri = $location.search();
-        console.log('test');
-        console.log(redirectUri);
-        if (redirectUri.redirect === '') {
+        if (!redirectUri.redirect) {
           $location.path('/landing');
         }
         else {
           $location.path(redirectUri.redirect);
+          $location.search('redirect', null);
         }
         return;
       }
