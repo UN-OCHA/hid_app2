@@ -148,6 +148,9 @@
       if (list.type === 'operation') {
         filterClusters(user, list.name);
       }
+      if (list.type === 'office' && list.metadata && list.metadata.operation[0]) {
+        filterClusters(user, list.metadata.operation[0].label);
+      }
     });
     return users;
   }
