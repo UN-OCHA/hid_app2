@@ -41,6 +41,13 @@
         }
 
         // User has logged in previously
+        var redirectUri = $location.search();
+        if (redirectUri.redirect === '') {
+          $location.path('/landing');
+        }
+        else {
+          $location.path(redirectUri.redirect);
+        }
         $location.path('/landing');
         return;
       }
@@ -96,7 +103,6 @@
     }
     else if ($location.path() == '/' && $scope.currentUser) {
       var redirectUri = $location.search();
-      console.log(redirectUri);
       if (redirectUri.redirect === '') {
         $location.path('/landing');
       }
