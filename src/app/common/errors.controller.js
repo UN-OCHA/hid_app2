@@ -30,6 +30,10 @@
          return gettextCatalog.getString('We could not log you in, the email address does not exist.');
         }
 
+        if (rejection.data && rejection.data.message === 'password is expired') {
+          return gettextCatalog.getString('We could not log you in, because your password is expired. Please reset your password.');
+        }
+
         if (rejection.status === 429) {
           return gettextCatalog.getString('Your account has been locked for 5 minutes due to too many unsuccessful login attempts');
         }
