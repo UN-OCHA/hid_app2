@@ -95,12 +95,12 @@
       $scope.logout();
     }
     else if ($location.path() == '/' && $scope.currentUser) {
-      var redirectUri = $location.search('redirect');
-      if (redirectUri === '') {
+      var redirectUri = $location.search();
+      if (redirectUri.redirect === '') {
         $location.path('/landing');
       }
       else {
-        $location.path(redirectUri);
+        $location.path(redirectUri.redirect);
       }
     }
   }
