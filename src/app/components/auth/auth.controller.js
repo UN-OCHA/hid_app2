@@ -103,7 +103,7 @@
     }
     else if ($location.path() == '/' && $scope.currentUser) {
       var redirectUri = $location.search();
-      if (redirectUri.redirect === '') {
+      if (!redirectUri.redirect) {
         $location.path('/landing');
       }
       else {
