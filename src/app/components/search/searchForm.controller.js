@@ -52,6 +52,15 @@
       $location.path(url);
     }
 
+    function goToOperationSearch (searchTerm) {
+      var params = {
+        q: searchTerm,
+        type: 'operation',
+        view: 'lists'
+      };
+      $location.path('/search').search(params);
+    }
+
     $scope.fullOperationsSearch = function (searchTerm) {
 
       if (!$scope.landingOperations.length) {
@@ -59,22 +68,20 @@
           $scope.landingOperations = data;
           if ($scope.landingOperations.length === 1) {
             goToOperation($scope.landingOperations[0]);
-            return;
+          }
+          else {
+            goToOperationSearch(searchTerm);
           }
         });
       }
-
-      if ($scope.landingOperations.length === 1) {
-        goToOperation($scope.landingOperations[0]);
-        return;
+      else {
+        if ($scope.landingOperations.length === 1) {
+          goToOperation($scope.landingOperations[0]);
+        }
+        else {
+          goToOperationSearch(searchTerm);
+        }
       }
-
-      var params = {
-        q: searchTerm,
-        type: 'operation',
-        view: 'lists'
-      };
-      $location.path('/search').search(params);
     };
 
     $scope.searchUsersAutocomplete = function () {
