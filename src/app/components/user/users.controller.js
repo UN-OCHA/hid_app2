@@ -556,6 +556,12 @@
 
     $scope.$on('users-export-csv', function () {
       var url = User.getCSVUrl(currentRequest);
+      $window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'CSV',
+        eventAction: 'Download',
+        eventLabel: $scope.list.name + '(' + $scope.list._id + ')'
+      });
       $window.open(url);
     });
 
@@ -569,7 +575,7 @@
         hitType: 'event',
         eventCategory: 'PDF',
         eventAction: 'Download',
-        eventLabel: getList()
+        eventLabel: $scope.list.name + '(' + $scope.list._id + ')'
       });
       $window.open(url);
     });
