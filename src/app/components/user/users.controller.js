@@ -565,6 +565,12 @@
 
     $scope.$on('users-export-pdf', function (evt, format) {
       var url = User.getPDFUrl(currentRequest, format);
+      $window.ga('send', {
+        hitType: 'event',
+        eventCategory: 'PDF',
+        eventAction: 'Download',
+        eventLabel: getList()
+      });
       $window.open(url);
     });
 
