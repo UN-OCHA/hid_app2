@@ -556,11 +556,20 @@
 
     $scope.$on('users-export-csv', function () {
       var url = User.getCSVUrl(currentRequest);
+      var eventLabel = '';
+      if ($scope.list) {
+        eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
+      }
+      else {
+        $scope.selectedFilters.forEach(function (filter) {
+          eventLabel += filter.label + ' ';
+        });
+      }
       $window.ga('send', {
         hitType: 'event',
         eventCategory: 'CSV',
         eventAction: 'Download',
-        eventLabel: $scope.list.name + '(' + $scope.list._id + ')'
+        eventLabel: eventLabel
       });
       $window.open(url);
     });
@@ -571,11 +580,20 @@
 
     $scope.$on('users-export-pdf', function (evt, format) {
       var url = User.getPDFUrl(currentRequest, format);
+      var eventLabel = '';
+      if ($scope.list) {
+        eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
+      }
+      else {
+        $scope.selectedFilters.forEach(function (filter) {
+          eventLabel += filter.label + ' ';
+        });
+      }
       $window.ga('send', {
         hitType: 'event',
         eventCategory: 'PDF',
         eventAction: 'Download',
-        eventLabel: $scope.list.name + '(' + $scope.list._id + ')'
+        eventLabel: eventLabel
       });
       $window.open(url);
     });
