@@ -561,9 +561,11 @@
         eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
       }
       else {
-        $scope.selectedFilters.values().forEach(function (filter) {
-          eventLabel += filter.label + ' ';
-        });
+        if ($scope.currentFilters && $scope.currentFilters.all) {
+          $scope.currentFilters.all.forEach(function (filter) {
+            eventLabel += filter.label + ' ';
+          });
+        }
       }
       $window.ga('send', {
         hitType: 'event',
@@ -585,9 +587,11 @@
         eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
       }
       else {
-        $scope.selectedFilters.values().forEach(function (filter) {
-          eventLabel += filter.label + ' ';
-        });
+        if ($scope.currentFilters && $scope.currentFilters.all) {
+          $scope.currentFilters.all.forEach(function (filter) {
+            eventLabel += filter.label + ' ';
+          });
+        }
       }
       $window.ga('send', {
         hitType: 'event',
