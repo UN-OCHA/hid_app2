@@ -162,6 +162,7 @@
     function getUser () {
       UserDataService.getUser($routeParams.userId, function () {
         $scope.user = UserDataService.user;
+        $scope.title = $scope.user.name;
         userPicture($scope.user.picture, $scope.user.email);
         setConnectionInfo($scope.user, $scope.currentUser._id);
         authUserAlert($scope.user, $scope.currentUser);
