@@ -86,6 +86,7 @@
 
       List.get({'listId': $routeParams.list}, function (list) {
         $scope.list = list;
+        $scope.title = list.name;
         setUpList();
       }, function () {
         // Offline fallback
