@@ -5,9 +5,9 @@
     .module('app.user')
     .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config', 'gettextCatalog', 'TwoFactorAuthService'];
+  UserCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config', 'gettextCatalog', 'TwoFactorAuthService'];
 
-  function UserCtrl($exceptionHandler, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config, gettextCatalog, TwoFactorAuthService) {
+  function UserCtrl($exceptionHandler, $rootScope, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config, gettextCatalog, TwoFactorAuthService) {
     $scope.pictureUrl = '';
     $scope.userLoaded = false;
     $scope.canEditUser = ($routeParams.userId === $scope.currentUser._id) || $scope.currentUser.is_admin || $scope.currentUser.isManager;
@@ -162,7 +162,7 @@
     function getUser () {
       UserDataService.getUser($routeParams.userId, function () {
         $scope.user = UserDataService.user;
-        $scope.title = $scope.user.name;
+        $rootScope.title = $scope.user.name;
         userPicture($scope.user.picture, $scope.user.email);
         setConnectionInfo($scope.user, $scope.currentUser._id);
         authUserAlert($scope.user, $scope.currentUser);

@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
+  ListCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
 
-  function ListCtrl ($exceptionHandler, $scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
+  function ListCtrl ($exceptionHandler, $rootScope, $scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -86,7 +86,7 @@
 
       List.get({'listId': $routeParams.list}, function (list) {
         $scope.list = list;
-        $scope.title = list.name;
+        $rootScope.title = list.name;
         setUpList();
       }, function () {
         // Offline fallback
