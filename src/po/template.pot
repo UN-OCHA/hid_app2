@@ -669,10 +669,6 @@ msgstr ""
 msgid "Enter your personal details"
 msgstr ""
 
-#: src/app/components/operations/operation.html:4
-msgid "Ethiopia"
-msgstr ""
-
 #: src/app/components/user/user.html:38
 msgid "Export Contact Info"
 msgstr ""
@@ -881,8 +877,13 @@ msgstr ""
 msgid "Key Contacts"
 msgstr ""
 
+#: src/app/components/operations/new-operation.html:21
 #: src/app/components/operations/operation.html:14
 msgid "Key Lists"
+msgstr ""
+
+#: src/app/components/operations/new-operation.html:32
+msgid "Key Roles"
 msgstr ""
 
 #: src/app/components/user/userEdit.controller.js:66
@@ -1002,6 +1003,7 @@ msgid "Manager"
 msgstr ""
 
 #: src/app/components/list/new-list.html:30
+#: src/app/components/operations/new-operation.html:41
 msgid "Managers"
 msgstr ""
 
@@ -1203,11 +1205,11 @@ msgstr ""
 msgid "Operation ID"
 msgstr ""
 
-#: src/app/components/operations/operation.controller.js:36
+#: src/app/components/operations/operation.controller.js:43
 msgid "Operation deleted successfully"
 msgstr ""
 
-#: src/app/components/operations/operation.controller.js:21
+#: src/app/components/operations/operation.controller.js:28
 msgid "Operation saved successfully"
 msgstr ""
 
@@ -1435,7 +1437,7 @@ msgstr ""
 
 #: src/app/components/client/new-client.html:65
 #: src/app/components/list/new-list.html:40
-#: src/app/components/operations/new-operation.html:20
+#: src/app/components/operations/new-operation.html:49
 #: src/app/components/service/new-service.html:87
 msgid "Save"
 msgstr ""
@@ -1593,9 +1595,18 @@ msgstr ""
 msgid "Select social network type"
 msgstr ""
 
+#: src/app/components/operations/new-operation.html:23
+msgid "Select some lists"
+msgstr ""
+
 #: src/app/components/list/list-admin.html:13
 #: src/app/components/list/new-list.html:32
+#: src/app/components/operations/new-operation.html:43
 msgid "Select some people"
+msgstr ""
+
+#: src/app/components/operations/new-operation.html:34
+msgid "Select some roles"
 msgstr ""
 
 #: src/app/components/service/service-admin.html:15
@@ -2432,6 +2443,10 @@ msgstr ""
 
 #: src/app/components/service/suggestions.controller.js:50
 msgid "was successfully subscribed"
+msgstr ""
+
+#: src/app/components/operations/operation.html:4
+msgid "{{operationList.name}}"
 msgstr ""
 
 #: src/app/common/icon-template.html:5

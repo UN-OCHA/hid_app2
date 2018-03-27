@@ -366,6 +366,13 @@ app.config(['$routeProvider', '$locationProvider',
         adminOnly: true,
         title: 'New operation'
       })
+      .when('/operations/:operationId', {
+        templateUrl: 'app/components/operations/new-operation.html',
+        controller: 'OperationCtrl',
+        authenticate: true,
+        adminOnly: true,
+        title: 'New operation'
+      })
       .otherwise({
         redirectTo: '/'
       });

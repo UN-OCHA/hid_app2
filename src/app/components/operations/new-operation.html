@@ -17,6 +17,35 @@
         <label for="url" translate>URL</label>
         <input type="text" name="name" class="form-control" id="name" placeholder="{{'The url prefix in HID'|translate}}" ng-model="operation.url" required>
       </div>
+      <div class="form-field">
+        <label for="key_lists" translate>Key Lists</label>
+        <ui-select ng-model="operation.key_lists" multiple name="key_lists">
+          <ui-select-match placeholder="{{'Select some lists' | translate}}">{{$item.name}}</ui-select-match>
+          <ui-select-choices refresh="getKeyLists($select.search)" repeat="list.id as list in newKeyLists" minimum-input-length="3">
+            {{list.name}} &nbsp; <span class="list-type list-type--{{list.type}}">
+              {{list.displayType || list.type}}
+            </span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-field">
+        <label for="key_roles" translate>Key Roles</label>
+        <ui-select ng-model="operation.key_roles" multiple name="key_roles">
+          <ui-select-match placeholder="{{'Select some roles' | translate}}">{{$item.name}}</ui-select-match>
+          <ui-select-choices refresh="getKeyRoles($select.search)" repeat="list.id as list in newKeyRoles" minimum-input-length="3">
+            {{list.name}}
+          </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-field">
+        <label for="managers" translate>Managers</label>
+        <ui-select ng-model="operation.managers" multiple name="managers">
+          <ui-select-match placeholder="{{'Select some people' | translate}}">{{$item.name}}</ui-select-match>
+          <ui-select-choices refresh="getManagers($select.search)" repeat="person.id as person in newManagers" minimum-input-length="3">
+            {{person.name}}
+          </ui-select-choices>
+        </ui-select>
+      </div>
       <button type="submit" class="btn btn-primary" ng-disabled="editOperation.$invalid || editOperation.$submitted" translate>Save</button>
     </form>
   </div>
