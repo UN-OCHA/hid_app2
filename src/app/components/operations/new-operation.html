@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div class="page-header">
+      <h1 class="page-header__heading" translate>Create a new operation</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+
+    <form name="editOperation" ng-submit="editOperation.$valid && saveOperation()" novalidate>
+      <div class="form-field" ng-class="{'has-error': editOperation.remote_id.$touched && editOperation.remote_id.$invalid}">
+        <label for="remote_id" translate>Operation ID</label>
+        <input type="text" name="remote_id" class="form-control" id="remote_id" placeholder="{{'The operation ID'|translate}}" ng-model="operation.remote_id" required>
+      </div>
+      <div class="form-field" ng-class="{'has-error': editOperation.url.$touched && editOperation.url.$invalid}">
+        <label for="url" translate>URL</label>
+        <input type="text" name="name" class="form-control" id="name" placeholder="{{'The url prefix in HID'|translate}}" ng-model="operation.url" required>
+      </div>
+      <button type="submit" class="btn btn-primary" ng-disabled="editOperation.$invalid || editOperation.$submitted" translate>Save</button>
+    </form>
+  </div>
+</div>

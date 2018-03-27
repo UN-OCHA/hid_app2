@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar', 'app.outlook']);
+var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar', 'app.outlook', 'app.operations']);
 
 app.constant('config', env);
 
@@ -157,8 +157,7 @@ app.config(['$routeProvider', '$locationProvider',
       when('/users/:userId', {
         templateUrl: 'app/components/user/user.html',
         controller: 'UserCtrl',
-        authenticate: true,
-        title: 'User profile'
+        authenticate: true
       }).
       when('/users/:userId/:edit', {
         templateUrl: 'app/components/user/user.html',
@@ -345,6 +344,27 @@ app.config(['$routeProvider', '$locationProvider',
         template: '',
         controller: 'OutlookCtrl',
         authenticate: true
+      })
+      .when('/main/:operationUrl', {
+        templateUrl: 'app/components/operations/operation.html',
+        controller: 'OperationViewCtrl',
+        authenticate: true,
+        adminOnly: true,
+        title: 'Operation'
+      })
+      .when('/operations', {
+        templateUrl: 'app/components/operations/operations.html',
+        controller: 'OperationsCtrl',
+        authenticate: true,
+        adminOnly: true,
+        title: 'Operations'
+      })
+      .when('/operations/new', {
+        templateUrl: 'app/components/operations/new-operation.html',
+        controller: 'OperationCtrl',
+        authenticate: true,
+        adminOnly: true,
+        title: 'New operation'
       })
       .otherwise({
         redirectTo: '/'

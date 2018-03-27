@@ -1,0 +1,63 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('app.operations')
+    .controller('OperationViewCtrl', OperationViewCtrl);
+
+  OperationViewCtrl.$inject = ['$scope', '$routeParams', 'ListDataService', 'Operation'];
+
+  function OperationViewCtrl($scope, $routeParams, ListDataService, Operation) {
+
+    $scope.groups = [];
+    $scope.offices = [];
+    $scope.disasters = [];
+    $scope.operation = {};
+    $scope.operationList = {};
+
+    var params = {
+      url: $routeParams.operationUrl
+    };
+
+    Operation.query(params, function (operations, headers) {
+      $scope.operation = operations[0];
+      initOperationList();
+      initGroups();
+      initOffices();
+      initDisasters();
+    });
+
+
+    function initGroups() {
+      var groupsRequest = { type: 'bundle', sort: '-count' };
+      groupsRequest['metadata.operation.id'] = $scope.operation.remote_id;
+      ListDataService.queryLists(groupsRequest, function (lists, number) {
+        $scope.groups = lists;
+      });
+    }
+
+    function initOffices() {
+      var officesRequest = { type: 'office', sort: '-count' };
+      officesRequest['metadata.operation.id'] = $scope.operation.remote_id;
+      ListDataService.queryLists(officesRequest, function (lists, number) {
+        $scope.offices = lists;
+      });
+    }
+
+    function initDisasters() {
+      var disastersRequest = { type: 'disaster', sort: '-count' };
+      disastersRequest['metadata.operation.id'] = $scope.operation.remote_id;
+      ListDataService.queryLists(disastersRequest, function (lists, number) {
+        $scope.disasters = lists;
+      });
+    }
+
+    function initOperationList() {
+      var operationRequest = { type: 'operation', remote_id: $scope.operation.remote_id };
+      ListDataService.queryLists(operationRequest, function (lists, number) {
+        $scope.operationList = lists[0];
+      });
+    }
+
+  }
+})();

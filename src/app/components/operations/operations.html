@@ -1,0 +1,34 @@
+<div class="page-header row">
+  <div class="col-sm-8">
+    <h1 class="page-header__heading" translate>
+      Operations
+    </h1>
+  </div>
+  <div class="col-sm-4 page-header__actions">
+    <a class="btn-primary" href="operations/new" translate>Add Operation</a>
+  </div>
+</div>
+
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th translate>ID</th>
+      <th translate>URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="operation in operations">
+      <td>{{operation.remote_id}}</td>
+      <td><a ng-href="/operations/{{operation._id}}">{{operation.url}}</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<uib-pagination
+  total-items="pagination.totalItems"
+  ng-model="pagination.currentPage"
+  ng-change="pageChanged()"
+  direction-links="false"
+  items-per-page=pagination.itemsPerPage
+  class="pagination" >
+</uib-pagination>

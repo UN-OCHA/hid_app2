@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header page-header--no-actions">
+      <h1 class="page-header__heading" translate>Ethiopia</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-4">
+
+    <div class="secondary-block">
+      <h2 class="secondary-block__heading" translate>Key Lists</h2>
+
+      <ul class="secondary-block__list">
+
+        <li class="secondary-block__item">
+          <span class="list-type list-type--{{operationList.type}}">
+            {{operationList.displayType || operationList.type}}
+          </span>&nbsp;
+          <a ng-href="/lists/{{operationList._id}}">{{operationList.name}}</a>
+        </li>
+      </ul>
+
+      <h2 class="secondary-block__heading" translate>Key Contacts</h2>
+
+      <ul class="secondary-block__list">
+
+        <li class="secondary-block__item">
+          <a ng-href="/lists/{{operationList._id}}?functional_roles.list=58b44a7a3d0ba000db4149d2">Humanitarian Coordinators</a>
+        </li>
+
+        <li class="secondary-block__item">
+          <a ng-href="/lists/{{operationList._id}}?functional_roles.list=58b44a793d0ba000db4149c6">Information Management Officers</a>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-8 block">
+
+    <h2 class="block-heading" translate>Groups</h2>
+
+    <table class="table table-responsive">
+      <tbody>
+        <tr ng-repeat="group in groups">
+          <td class="table__td-primary"><a ng-href="/lists/{{group._id}}">{{group.name}}</a></td>
+          <td>
+            <span class="list-type list-type--{{group.type}}">
+              {{group.displayType || group.type}}
+            </span>
+          </td>
+          <td>{{group.count}} <span translate>contacts</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="block-heading" translate>Coordination Hubs</h2>
+
+    <table class="table table-responsive">
+      <tbody>
+        <tr ng-repeat="office in offices">
+          <td class="table__td-primary"><a ng-href="/lists/{{office._id}}">{{office.name}}</a></td>
+          <td>
+            <span class="list-type list-type--{{office.type}}">
+              {{office.displayType || office.type}}
+            </span>
+          </td>
+          <td>{{office.count}} <span translate>contacts</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="block-heading" translate>Disasters</h2>
+
+    <table class="table table-responsive">
+      <tbody>
+        <tr ng-repeat="disaster in disasters">
+          <td class="table__td-primary"><a ng-href="/lists/{{disaster._id}}">{{disaster.name}}</a></td>
+          <td>
+            <span class="list-type list-type--{{disaster.type}}">
+              {{disaster.displayType || disaster.type}}
+            </span>
+          </td>
+          <td>{{disaster.count}} <span translate>contacts</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

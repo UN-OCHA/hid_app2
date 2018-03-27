@@ -32,7 +32,7 @@ msgstr ""
 msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:577
+#: src/app/components/user/users.controller.js:611
 msgid "A synchronized Google Sheet was created. Find it at:"
 msgstr ""
 
@@ -66,6 +66,10 @@ msgstr ""
 
 #: src/app/components/list/list-admin.html:21
 msgid "Add Member"
+msgstr ""
+
+#: src/app/components/operations/operations.html:8
+msgid "Add Operation"
 msgstr ""
 
 #: src/app/components/service/services-page.html:8
@@ -200,7 +204,7 @@ msgstr ""
 msgid "Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:257
+#: src/app/components/user/user.controller.js:258
 #: src/app/components/user/userOptions.controller.js:23
 msgid "Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore."
 msgstr ""
@@ -214,8 +218,8 @@ msgstr ""
 #: src/app/components/dashboard/dashboard.controller.js:76
 #: src/app/components/dashboard/dashboard.controller.js:87
 #: src/app/components/dashboard/dashboard.controller.js:97
-#: src/app/components/list/list.controller.js:166
-#: src/app/components/list/list.controller.js:235
+#: src/app/components/list/list.controller.js:167
+#: src/app/components/list/list.controller.js:236
 #: src/app/components/service/allSubscriptions.controller.js:22
 #: src/app/components/service/service.controller.js:84
 #: src/app/components/service/services.controller.js:68
@@ -321,7 +325,7 @@ msgstr ""
 msgid "Choose the list"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:221
+#: src/app/components/user/user.controller.js:222
 msgid "Claim email sent successfully"
 msgstr ""
 
@@ -394,7 +398,7 @@ msgstr ""
 msgid "Connection removed"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:270
+#: src/app/components/user/user.controller.js:271
 msgid "Connection request sent"
 msgstr ""
 
@@ -412,6 +416,10 @@ msgstr ""
 
 #: src/app/components/search/search-results.html:23
 msgid "Contacts admin"
+msgstr ""
+
+#: src/app/components/operations/operation.html:61
+msgid "Coordination Hubs"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:33
@@ -440,6 +448,10 @@ msgstr ""
 
 #: src/app/components/list/new-list.html:4
 msgid "Create a new list"
+msgstr ""
+
+#: src/app/components/operations/new-operation.html:4
+msgid "Create a new operation"
 msgstr ""
 
 #: src/app/components/service/new-service.html:6
@@ -568,6 +580,7 @@ msgstr ""
 msgid "Disaster"
 msgstr ""
 
+#: src/app/components/operations/operation.html:77
 #: src/app/components/user/user.html:707
 msgid "Disasters"
 msgstr ""
@@ -654,6 +667,10 @@ msgstr ""
 
 #: src/app/components/user/kiosk.html:39
 msgid "Enter your personal details"
+msgstr ""
+
+#: src/app/components/operations/operation.html:4
+msgid "Ethiopia"
 msgstr ""
 
 #: src/app/components/user/user.html:38
@@ -777,6 +794,10 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
+#: src/app/components/operations/operation.html:45
+msgid "Groups"
+msgstr ""
+
 #: src/app/components/checkin/listTypesModal.html:19
 msgid "Groups can be clusters, sectors or simply working groups that are set up in a specific country to facilitate coordination among humanitarian partners."
 msgstr ""
@@ -806,6 +827,7 @@ msgstr ""
 #: src/app/components/client/clients.html:15
 #: src/app/components/client/new-client.html:13
 #: src/app/components/duplicate/duplicates.html:12
+#: src/app/components/operations/operations.html:15
 msgid "ID"
 msgstr ""
 
@@ -822,7 +844,7 @@ msgstr ""
 msgid "If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:171
+#: src/app/components/user/user.controller.js:172
 msgid "In order to view this person’s profile, please contact info@humanitarian.id"
 msgstr ""
 
@@ -853,6 +875,14 @@ msgstr ""
 
 #: src/app/components/user/user.html:472
 msgid "Job titles"
+msgstr ""
+
+#: src/app/components/operations/operation.html:26
+msgid "Key Contacts"
+msgstr ""
+
+#: src/app/components/operations/operation.html:14
+msgid "Key Lists"
 msgstr ""
 
 #: src/app/components/user/userEdit.controller.js:66
@@ -1169,6 +1199,19 @@ msgstr ""
 msgid "Operation"
 msgstr ""
 
+#: src/app/components/operations/new-operation.html:13
+msgid "Operation ID"
+msgstr ""
+
+#: src/app/components/operations/operation.controller.js:36
+msgid "Operation deleted successfully"
+msgstr ""
+
+#: src/app/components/operations/operation.controller.js:21
+msgid "Operation saved successfully"
+msgstr ""
+
+#: src/app/components/operations/operations.html:3
 #: src/app/components/user/user.html:683
 msgid "Operations"
 msgstr ""
@@ -1392,6 +1435,7 @@ msgstr ""
 
 #: src/app/components/client/new-client.html:65
 #: src/app/components/list/new-list.html:40
+#: src/app/components/operations/new-operation.html:20
 #: src/app/components/service/new-service.html:87
 msgid "Save"
 msgstr ""
@@ -1656,11 +1700,11 @@ msgstr ""
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:598
+#: src/app/components/user/users.controller.js:632
 msgid "Sorry, the contact folder could not be created..."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:582
+#: src/app/components/user/users.controller.js:616
 msgid "Sorry, the spreadsheet export did not work..."
 msgstr ""
 
@@ -1705,7 +1749,7 @@ msgstr ""
 msgid "Subscriptions"
 msgstr ""
 
-#: src/app/components/list/list.controller.js:154
+#: src/app/components/list/list.controller.js:155
 msgid "Successfully added to list"
 msgstr ""
 
@@ -1757,7 +1801,7 @@ msgstr ""
 msgid "The client name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:595
+#: src/app/components/user/users.controller.js:629
 msgid "The contact folder was successfully created."
 msgstr ""
 
@@ -1766,15 +1810,23 @@ msgid "The list owner and editors of this list only"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.controller.js:89
-#: src/app/components/list/list.controller.js:168
+#: src/app/components/list/list.controller.js:169
 msgid "The list was successfully deleted."
+msgstr ""
+
+#: src/app/components/operations/new-operation.html:14
+msgid "The operation ID"
 msgstr ""
 
 #: src/app/components/service/new-service.html:17
 msgid "The service name"
 msgstr ""
 
-#: src/app/components/list/list.controller.js:244
+#: src/app/components/operations/new-operation.html:18
+msgid "The url prefix in HID"
+msgstr ""
+
+#: src/app/components/list/list.controller.js:245
 msgid "The user was successfully approved."
 msgstr ""
 
@@ -1786,7 +1838,7 @@ msgstr ""
 msgid "The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:250
+#: src/app/components/user/user.controller.js:251
 #: src/app/components/user/userOptions.controller.js:17
 msgid "The user was successfully deleted."
 msgstr ""
@@ -1850,11 +1902,11 @@ msgstr ""
 msgid "This list was removed from your favourites."
 msgstr ""
 
-#: src/app/components/list/list.controller.js:180
+#: src/app/components/list/list.controller.js:181
 msgid "This list was successfully added to your favourites."
 msgstr ""
 
-#: src/app/components/list/list.controller.js:195
+#: src/app/components/list/list.controller.js:196
 msgid "This list was successfully removed from your favourites."
 msgstr ""
 
@@ -1904,6 +1956,8 @@ msgstr ""
 #: src/app/components/client/client.html:40
 #: src/app/components/client/clients.html:17
 #: src/app/components/client/new-client.html:31
+#: src/app/components/operations/new-operation.html:17
+#: src/app/components/operations/operations.html:16
 msgid "URL"
 msgstr ""
 
@@ -1968,12 +2022,12 @@ msgstr ""
 msgid "User not found"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:237
+#: src/app/components/user/user.controller.js:238
 #: src/app/components/user/userOptions.controller.js:37
 msgid "User updated"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:212
+#: src/app/components/user/user.controller.js:213
 msgid "User was successfully notified"
 msgstr ""
 
@@ -2136,8 +2190,8 @@ msgstr ""
 msgid "You have granted the following applications access to your Humanitarian ID account."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:586
-#: src/app/components/user/users.controller.js:602
+#: src/app/components/user/users.controller.js:620
+#: src/app/components/user/users.controller.js:636
 msgid "You need to select a list"
 msgstr ""
 
@@ -2299,6 +2353,12 @@ msgstr ""
 
 #: src/app/components/user/userEdit.controller.js:152
 msgid "added"
+msgstr ""
+
+#: src/app/components/operations/operation.html:56
+#: src/app/components/operations/operation.html:72
+#: src/app/components/operations/operation.html:88
+msgid "contacts"
 msgstr ""
 
 #: src/app/components/user/users.html:9
