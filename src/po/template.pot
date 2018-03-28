@@ -418,7 +418,7 @@ msgstr ""
 msgid "Contacts admin"
 msgstr ""
 
-#: src/app/components/operations/operation.html:61
+#: src/app/components/operations/operation.html:71
 msgid "Coordination Hubs"
 msgstr ""
 
@@ -580,7 +580,7 @@ msgstr ""
 msgid "Disaster"
 msgstr ""
 
-#: src/app/components/operations/operation.html:77
+#: src/app/components/operations/operation.html:87
 #: src/app/components/user/user.html:707
 msgid "Disasters"
 msgstr ""
@@ -790,7 +790,7 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: src/app/components/operations/operation.html:45
+#: src/app/components/operations/operation.html:55
 msgid "Groups"
 msgstr ""
 
@@ -873,16 +873,16 @@ msgstr ""
 msgid "Job titles"
 msgstr ""
 
-#: src/app/components/operations/operation.html:26
+#: src/app/components/operations/operation.html:40
 msgid "Key Contacts"
 msgstr ""
 
-#: src/app/components/operations/new-operation.html:21
-#: src/app/components/operations/operation.html:14
+#: src/app/components/operations/new-operation.html:22
+#: src/app/components/operations/operation.html:28
 msgid "Key Lists"
 msgstr ""
 
-#: src/app/components/operations/new-operation.html:32
+#: src/app/components/operations/new-operation.html:33
 msgid "Key Roles"
 msgstr ""
 
@@ -1003,7 +1003,7 @@ msgid "Manager"
 msgstr ""
 
 #: src/app/components/list/new-list.html:30
-#: src/app/components/operations/new-operation.html:41
+#: src/app/components/operations/new-operation.html:42
 msgid "Managers"
 msgstr ""
 
@@ -1201,7 +1201,7 @@ msgstr ""
 msgid "Operation"
 msgstr ""
 
-#: src/app/components/operations/new-operation.html:13
+#: src/app/components/operations/new-operation.html:14
 msgid "Operation ID"
 msgstr ""
 
@@ -1437,7 +1437,7 @@ msgstr ""
 
 #: src/app/components/client/new-client.html:65
 #: src/app/components/list/new-list.html:40
-#: src/app/components/operations/new-operation.html:49
+#: src/app/components/operations/new-operation.html:50
 #: src/app/components/service/new-service.html:87
 msgid "Save"
 msgstr ""
@@ -1595,17 +1595,17 @@ msgstr ""
 msgid "Select social network type"
 msgstr ""
 
-#: src/app/components/operations/new-operation.html:23
+#: src/app/components/operations/new-operation.html:24
 msgid "Select some lists"
 msgstr ""
 
 #: src/app/components/list/list-admin.html:13
 #: src/app/components/list/new-list.html:32
-#: src/app/components/operations/new-operation.html:43
+#: src/app/components/operations/new-operation.html:44
 msgid "Select some people"
 msgstr ""
 
-#: src/app/components/operations/new-operation.html:34
+#: src/app/components/operations/new-operation.html:35
 msgid "Select some roles"
 msgstr ""
 
@@ -1825,7 +1825,7 @@ msgstr ""
 msgid "The list was successfully deleted."
 msgstr ""
 
-#: src/app/components/operations/new-operation.html:14
+#: src/app/components/operations/new-operation.html:15
 msgid "The operation ID"
 msgstr ""
 
@@ -1833,7 +1833,7 @@ msgstr ""
 msgid "The service name"
 msgstr ""
 
-#: src/app/components/operations/new-operation.html:18
+#: src/app/components/operations/new-operation.html:19
 msgid "The url prefix in HID"
 msgstr ""
 
@@ -1967,7 +1967,7 @@ msgstr ""
 #: src/app/components/client/client.html:40
 #: src/app/components/client/clients.html:17
 #: src/app/components/client/new-client.html:31
-#: src/app/components/operations/new-operation.html:17
+#: src/app/components/operations/new-operation.html:18
 #: src/app/components/operations/operations.html:16
 msgid "URL"
 msgstr ""
@@ -2366,9 +2366,9 @@ msgstr ""
 msgid "added"
 msgstr ""
 
-#: src/app/components/operations/operation.html:56
-#: src/app/components/operations/operation.html:72
-#: src/app/components/operations/operation.html:88
+#: src/app/components/operations/operation.html:66
+#: src/app/components/operations/operation.html:82
+#: src/app/components/operations/operation.html:98
 msgid "contacts"
 msgstr ""
 
@@ -2443,10 +2443,6 @@ msgstr ""
 
 #: src/app/components/service/suggestions.controller.js:50
 msgid "was successfully subscribed"
-msgstr ""
-
-#: src/app/components/operations/operation.html:4
-msgid "{{operationList.name}}"
 msgstr ""
 
 #: src/app/common/icon-template.html:5

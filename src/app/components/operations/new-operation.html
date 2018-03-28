@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <div class="page-header">
-      <h1 class="page-header__heading" translate>Create a new operation</h1>
+      <h1 class="page-header__heading" ng-if="!operation._id" translate>Create a new operation</h1>
+      <h1 class="page-header__heading" ng-if="operation._id">{{operation.url}}</h1>
     </div>
   </div>
 </div>
@@ -21,7 +22,7 @@
         <label for="key_lists" translate>Key Lists</label>
         <ui-select ng-model="operation.key_lists" multiple name="key_lists">
           <ui-select-match placeholder="{{'Select some lists' | translate}}">{{$item.name}}</ui-select-match>
-          <ui-select-choices refresh="getKeyLists($select.search)" repeat="list.id as list in newKeyLists" minimum-input-length="3">
+          <ui-select-choices refresh="getKeyLists($select.search)" repeat="list._id as list in newKeyLists" minimum-input-length="3">
             {{list.name}} &nbsp; <span class="list-type list-type--{{list.type}}">
               {{list.displayType || list.type}}
             </span>
@@ -32,7 +33,7 @@
         <label for="key_roles" translate>Key Roles</label>
         <ui-select ng-model="operation.key_roles" multiple name="key_roles">
           <ui-select-match placeholder="{{'Select some roles' | translate}}">{{$item.name}}</ui-select-match>
-          <ui-select-choices refresh="getKeyRoles($select.search)" repeat="list.id as list in newKeyRoles" minimum-input-length="3">
+          <ui-select-choices refresh="getKeyRoles($select.search)" repeat="list._id as list in newKeyRoles" minimum-input-length="3">
             {{list.name}}
           </ui-select-choices>
         </ui-select>

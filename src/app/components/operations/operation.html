@@ -1,9 +1,23 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div class="page-header page-header--no-actions">
-      <h1 class="page-header__heading" translate>{{operationList.name}}</h1>
-    </div>
+<div sticky stickyelement=".page-header" class="page-header-mobile">
+  <h1 class="page-header-mobile__heading">{{operationList.name}}</h1>
+
+  <div class="page-header-mobile__buttons" ng-if="isManager || currentUser.is_admin">
+
+    <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin', true)" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
+      <icon name="wheel" text="Actions"></icon>
+    </button>
   </div>
+</div>
+
+<div class="page-header">
+  <h1 class="page-header__heading">{{operationList.name}}</h1>
+
+  <div class="page-header__buttons page-header__buttons--list" ng-if="isManager || currentUser.is_admin">
+    <a class="btn-icon btn-toggle-admin t-list-admin-btn" type="button" href="operations/{{operation._id}}" ng-disabled="!isOnline">
+      <icon name="wheel" text="Actions"></icon>
+    </a>
+  </div>
+
 </div>
 
 <div class="row">
@@ -15,11 +29,11 @@
 
       <ul class="secondary-block__list">
 
-        <li class="secondary-block__item">
-          <span class="list-type list-type--{{operationList.type}}">
-            {{operationList.displayType || operationList.type}}
+        <li class="secondary-block__item" ng-repeat="key_list in operation.key_lists">
+          <span class="list-type list-type--{{key_list.type}}">
+            {{key_list.displayType || key_list.type}}
           </span>&nbsp;
-          <a ng-href="/lists/{{operationList._id}}">{{operationList.name}}</a>
+          <a ng-href="/lists/{{key_list._id}}">{{key_list.name}}</a>
         </li>
       </ul>
 
@@ -27,12 +41,8 @@
 
       <ul class="secondary-block__list">
 
-        <li class="secondary-block__item">
-          <a ng-href="/lists/{{operationList._id}}?functional_roles.list=58b44a7a3d0ba000db4149d2">Humanitarian Coordinators</a>
-        </li>
-
-        <li class="secondary-block__item">
-          <a ng-href="/lists/{{operationList._id}}?functional_roles.list=58b44a793d0ba000db4149c6">Information Management Officers</a>
+        <li class="secondary-block__item" ng-repeat="key_role in operation.key_roles">
+          <a ng-href="/lists/{{operationList._id}}?functional_roles.list={{key_role._id}}">{{key_role.name}}</a>
         </li>
       </ul>
 

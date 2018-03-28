@@ -5,9 +5,9 @@
     .module('app.operations')
     .controller('OperationViewCtrl', OperationViewCtrl);
 
-  OperationViewCtrl.$inject = ['$scope', '$routeParams', 'ListDataService', 'Operation'];
+  OperationViewCtrl.$inject = ['$scope', '$rootScope', '$routeParams', 'ListDataService', 'Operation'];
 
-  function OperationViewCtrl($scope, $routeParams, ListDataService, Operation) {
+  function OperationViewCtrl($scope, $rootScope, $routeParams, ListDataService, Operation) {
 
     $scope.groups = [];
     $scope.offices = [];
@@ -56,6 +56,7 @@
       var operationRequest = { type: 'operation', remote_id: $scope.operation.remote_id };
       ListDataService.queryLists(operationRequest, function (lists, number) {
         $scope.operationList = lists[0];
+        $rootScope.title = $scope.operationList.name;
       });
     }
 
