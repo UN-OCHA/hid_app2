@@ -24,6 +24,17 @@
       }
     });
 
+    // Is a user manager of a list ?
+    Operation.prototype.isManager = function (user) {
+      var out = false;
+      angular.forEach(this.managers, function (val) {
+        if (angular.equals(user._id, val._id)) {
+          out = true;
+        }
+      });
+      return out;
+    };
+
     return Operation;
   }
 })();

@@ -14,6 +14,7 @@
     $scope.disasters = [];
     $scope.operation = {};
     $scope.operationList = {};
+    $scope.isManager = false;
 
     var params = {
       url: $routeParams.operationUrl
@@ -21,6 +22,7 @@
 
     Operation.query(params, function (operations, headers) {
       $scope.operation = operations[0];
+      $scope.isManager = $scope.operation.isManager($scope.currentUser);
       initOperationList();
       initGroups();
       initOffices();
