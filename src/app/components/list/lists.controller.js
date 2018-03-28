@@ -47,6 +47,10 @@
       {
         label: 'type',
         name: 'Type'
+      },
+      {
+        label: '-count',
+        name: 'Number of contacts'
       }
     ];
 

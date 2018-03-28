@@ -478,10 +478,6 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: src/app/components/list/all-lists.html:46
-msgid "Created by"
-msgstr ""
-
 #: src/app/components/user/preferences.html:27
 msgid "Current connections"
 msgstr ""
@@ -1178,6 +1174,10 @@ msgstr ""
 #: src/app/components/landing/landing.html:136
 #: src/app/components/notifications/notifications.html:5
 msgid "Notifications"
+msgstr ""
+
+#: src/app/components/list/all-lists.html:46
+msgid "Number of contacts"
 msgstr ""
 
 #: src/app/components/user/user-filters.html:78
