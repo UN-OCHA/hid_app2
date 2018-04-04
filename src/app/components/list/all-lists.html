@@ -43,6 +43,7 @@
       <tr>
         <th translate>Name</th>
         <th translate>Type</th>
+        <th translate>Created by</th>
         <th translate>Number of contacts</th>
       </tr>
     </thead>
@@ -54,6 +55,7 @@
             {{list.displayType || list.type}}
           </span>
         </td>
+        <td><a ng-if="list.owner.name" ng-href="/users/{{list.owner._id}}">{{list.owner.name}}</a></td>
         <td>{{list.count}} contacts</a></td>
       </tr>
     </tbody>
