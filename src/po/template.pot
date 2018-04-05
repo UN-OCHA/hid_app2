@@ -4,6 +4,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: src/app/components/operations/operation.html:58
+#: src/app/components/operations/operation.html:73
+#: src/app/components/operations/operation.html:88
+msgid "&lt; Hide"
+msgstr ""
+
 #: src/app/components/user/user.html:290
 #: src/app/components/user/user.html:336
 msgid "/ Unverified"
@@ -478,6 +484,10 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
+#: src/app/components/list/all-lists.html:46
+msgid "Created by"
+msgstr ""
+
 #: src/app/components/user/preferences.html:27
 msgid "Current connections"
 msgstr ""
@@ -576,7 +586,7 @@ msgstr ""
 msgid "Disaster"
 msgstr ""
 
-#: src/app/components/operations/operation.html:87
+#: src/app/components/operations/operation.html:86
 #: src/app/components/user/user.html:707
 msgid "Disasters"
 msgstr ""
@@ -786,7 +796,7 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: src/app/components/operations/operation.html:55
+#: src/app/components/operations/operation.html:56
 msgid "Groups"
 msgstr ""
 
@@ -1176,7 +1186,7 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
-#: src/app/components/list/all-lists.html:46
+#: src/app/components/list/all-lists.html:47
 msgid "Number of contacts"
 msgstr ""
 
@@ -2080,6 +2090,12 @@ msgstr ""
 msgid "Verify user"
 msgstr ""
 
+#: src/app/components/operations/operation.html:57
+#: src/app/components/operations/operation.html:72
+#: src/app/components/operations/operation.html:87
+msgid "View All &gt;"
+msgstr ""
+
 #: src/app/components/dashboard/dashboard.html:96
 msgid "View OAuth Clients"
 msgstr ""
@@ -2366,9 +2382,9 @@ msgstr ""
 msgid "added"
 msgstr ""
 
-#: src/app/components/operations/operation.html:66
-#: src/app/components/operations/operation.html:82
-#: src/app/components/operations/operation.html:98
+#: src/app/components/operations/operation.html:65
+#: src/app/components/operations/operation.html:80
+#: src/app/components/operations/operation.html:95
 msgid "contacts"
 msgstr ""
 

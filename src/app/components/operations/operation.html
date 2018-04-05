@@ -52,33 +52,45 @@
 
   <div class="col-md-8 block">
 
-    <h2 class="block-heading" translate>Groups</h2>
+    <div class="block-heading">
+      <h2 translate>Groups</h2>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="groupsLimit = groups.length" ng-show="groupsLimit == 4" translate>View All &gt;</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="groupsLimit = 4" ng-show="groupsLimit == groups.length" translate>&lt; Hide</button>
+    </div>
 
     <table class="table table-responsive">
       <tbody>
-        <tr ng-repeat="group in groups">
+        <tr ng-repeat="group in groups | limitTo: groupsLimit">
           <td class="table__td-primary"><a ng-href="/lists/{{group._id}}">{{group.name}}</a></td>
           <td>{{group.count}} <span translate>contacts</span></td>
         </tr>
       </tbody>
     </table>
 
-    <h2 class="block-heading" translate>Coordination Hubs</h2>
+    <div class="block-heading">
+      <h2 translate>Coordination Hubs</h2>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="officesLimit = offices.length" ng-show="officesLimit == 4" translate>View All &gt;</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="officesLimit = 4" ng-show="officesLimit == offices.length" translate>&lt; Hide</button>
+    </div>
 
     <table class="table table-responsive">
       <tbody>
-        <tr ng-repeat="office in offices">
+        <tr ng-repeat="office in offices | limitTo: officesLimit">
           <td class="table__td-primary"><a ng-href="/lists/{{office._id}}">{{office.name}}</a></td>
           <td>{{office.count}} <span translate>contacts</span></td>
         </tr>
       </tbody>
     </table>
 
-    <h2 class="block-heading" translate>Disasters</h2>
+    <div class="block-heading">
+      <h2 translate>Disasters</h2>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="disastersLimit = disasters.length" ng-show="disastersLimit == 4" translate>View All &gt;</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="disastersLimit = 4" ng-show="disastersLimit == disasters.length" translate>&lt; Hide</button>
+    </div>
 
     <table class="table table-responsive">
       <tbody>
-        <tr ng-repeat="disaster in disasters">
+        <tr ng-repeat="disaster in disasters | limitTo: disastersLimit">
           <td class="table__td-primary"><a ng-href="/lists/{{disaster._id}}">{{disaster.name}}</a></td>
           <td>{{disaster.count}} <span translate>contacts</span></td>
         </tr>

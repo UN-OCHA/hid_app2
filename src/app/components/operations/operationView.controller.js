@@ -10,6 +10,9 @@
   function OperationViewCtrl($scope, $rootScope, $routeParams, ListDataService, Operation) {
 
     $scope.groups = [];
+    $scope.groupsLimit = 4;
+    $scope.officesLimit = 4;
+    $scope.disastersLimit = 4;
     $scope.offices = [];
     $scope.disasters = [];
     $scope.operation = {};
