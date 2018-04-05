@@ -349,7 +349,6 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/components/operations/operation.html',
         controller: 'OperationViewCtrl',
         authenticate: true,
-        adminOnly: true,
         title: 'Operation'
       })
       .when('/operations', {
