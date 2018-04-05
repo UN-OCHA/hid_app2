@@ -5,9 +5,9 @@
     .module('app.operations')
     .controller('OperationCtrl', OperationCtrl);
 
-  OperationCtrl.$inject = ['$scope', '$routeParams', 'Operation', 'User', 'List', 'alertService', 'gettextCatalog'];
+  OperationCtrl.$inject = ['$scope', '$routeParams', '$location', 'Operation', 'User', 'List', 'alertService', 'gettextCatalog'];
 
-  function OperationCtrl($scope, $routeParams, Operation, User, List, alertService, gettextCatalog) {
+  function OperationCtrl($scope, $routeParams, $location, Operation, User, List, alertService, gettextCatalog) {
 
     if ($routeParams.operationId) {
       $scope.operation = Operation.get({'operationId': $routeParams.operationId});
@@ -26,6 +26,7 @@
     $scope.saveOperation = function() {
       var success = function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Operation saved successfully'));
+        $location.path('/main/' + $scope.operation.url);
       };
       var error = function (err) {
         $exceptionHandler(error, 'Save operation');
