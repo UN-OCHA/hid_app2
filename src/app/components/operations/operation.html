@@ -1,7 +1,7 @@
 <div sticky stickyelement=".page-header" class="page-header-mobile">
   <h1 class="page-header-mobile__heading">{{operationList.name}}</h1>
 
-  <div class="page-header-mobile__buttons" ng-if="isManager || currentUser.is_admin">
+  <div class="page-header-mobile__buttons" ng-if="isManager || currentUser.isManager || currentUser.is_admin">
 
     <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin', true)" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline">
       <icon name="wheel" text="Actions"></icon>
