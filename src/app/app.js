@@ -355,21 +355,18 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'app/components/operations/operations.html',
         controller: 'OperationsCtrl',
         authenticate: true,
-        adminOnly: true,
         title: 'Operations'
       })
       .when('/operations/new', {
         templateUrl: 'app/components/operations/new-operation.html',
         controller: 'OperationCtrl',
         authenticate: true,
-        adminOnly: true,
         title: 'New operation'
       })
       .when('/operations/:operationId', {
         templateUrl: 'app/components/operations/new-operation.html',
         controller: 'OperationCtrl',
         authenticate: true,
-        adminOnly: true,
         title: 'New operation'
       })
       .otherwise({
