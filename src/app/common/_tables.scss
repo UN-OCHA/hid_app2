@@ -44,7 +44,7 @@
     display: block;
     padding: 1px 0;
     @include font-size($small-font-size);
-    
+
     &:empty, &.table__td-empty {
       display: none;
     }
@@ -76,7 +76,7 @@
     margin: $base-unit/4 0 0 $base-unit/2;
   }
 
-  
+
 }
 
 .table-responsive--has-icon {
@@ -170,7 +170,7 @@
 
       &:empty, &.table__td-empty {
         display: table-cell;
-        
+
       }
 
     }
@@ -207,7 +207,7 @@
   .table-responsive--has-actions {
     td:not(.table__td-icon) {
       padding: $base-unit*1.5 $base-unit;
-    } 
+    }
   }
 
   .table__td-actions {
@@ -228,7 +228,7 @@
       display: inline-block;
       margin: $base-unit/2 0;
     }
-    
+
   }
 
   .table__td-primary {
@@ -242,6 +242,12 @@
 
   .table__td-secondary {
     font-style: normal;
+  }
+
+  .table__fixed {
+    .table__td-primary {
+      width: 750px;
+    }
   }
 }
 

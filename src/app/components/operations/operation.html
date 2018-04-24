@@ -58,7 +58,7 @@
       <button type="button" class="btn-link btn-small block-heading" ng-click="groupsLimit = 4" ng-show="groupsLimit == groups.length" translate>&lt; Hide</button>
     </div>
 
-    <table class="table table-responsive">
+    <table class="table table-responsive table__fixed">
       <tbody>
         <tr ng-repeat="group in groups | limitTo: groupsLimit">
           <td class="table__td-primary"><a ng-href="/lists/{{group._id}}">{{group.name}}</a></td>
@@ -73,7 +73,7 @@
       <button type="button" class="btn-link btn-small block-heading" ng-click="officesLimit = 4" ng-show="officesLimit == offices.length" translate>&lt; Hide</button>
     </div>
 
-    <table class="table table-responsive">
+    <table class="table table-responsive table__fixed">
       <tbody>
         <tr ng-repeat="office in offices | limitTo: officesLimit">
           <td class="table__td-primary"><a ng-href="/lists/{{office._id}}">{{office.name}}</a></td>
@@ -88,7 +88,7 @@
       <button type="button" class="btn-link btn-small block-heading" ng-click="disastersLimit = 4" ng-show="disastersLimit == disasters.length" translate>&lt; Hide</button>
     </div>
 
-    <table class="table table-responsive">
+    <table class="table table-responsive table__fixed">
       <tbody>
         <tr ng-repeat="disaster in disasters | limitTo: disastersLimit">
           <td class="table__td-primary"><a ng-href="/lists/{{disaster._id}}">{{disaster.name}}</a></td>
