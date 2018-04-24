@@ -21,7 +21,6 @@
     $scope.newKeyLists = [];
     $scope.getKeyLists = getKeyLists;
     $scope.newKeyRoles = List.query({type: 'functional_role'});
-    $scope.getKeyRoles = getKeyRoles;
 
     $scope.saveOperation = function() {
       var success = function (resp, headers) {

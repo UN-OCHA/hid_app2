@@ -31,7 +31,7 @@
       </div>
       <div class="form-field">
         <label for="key_roles" translate>Key Roles</label>
-        <ui-select ng-model="operation.key_roles" name="key_roles">
+        <ui-select ng-model="operation.key_roles" multiple name="key_roles">
           <ui-select-match placeholder="{{'Select some roles' | translate}}">{{$item.name}}</ui-select-match>
           <ui-select-choices repeat="list._id as list in newKeyRoles">
             {{list.name}}

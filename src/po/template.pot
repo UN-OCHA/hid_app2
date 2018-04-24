@@ -1215,11 +1215,11 @@ msgstr ""
 msgid "Operation ID"
 msgstr ""
 
-#: src/app/components/operations/operation.controller.js:44
+#: src/app/components/operations/operation.controller.js:43
 msgid "Operation deleted successfully"
 msgstr ""
 
-#: src/app/components/operations/operation.controller.js:28
+#: src/app/components/operations/operation.controller.js:27
 msgid "Operation saved successfully"
 msgstr ""
 
