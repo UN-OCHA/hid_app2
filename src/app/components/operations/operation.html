@@ -12,7 +12,7 @@
 <div class="page-header">
   <h1 class="page-header__heading">{{operationList.name}}</h1>
 
-  <div class="page-header__buttons page-header__buttons--list" ng-if="isManager || currentUser.is_admin">
+  <div class="page-header__buttons page-header__buttons--list" ng-if="isManager ||currentUser.isManager || currentUser.is_admin">
     <a class="btn-icon btn-toggle-admin t-list-admin-btn" type="button" href="operations/{{operation._id}}" ng-disabled="!isOnline">
       <icon name="wheel" text="Actions"></icon>
     </a>
