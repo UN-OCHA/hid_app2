@@ -24,7 +24,6 @@
     $scope.getOffices = getOffices;
     $scope.getOperations = getOperations;
     $scope.getOrganizations = getOrganizations;
-    $scope.getRoles = getRoles;
     $scope.applyFilters = applyFilters;
     $scope.resetFilters = resetFilters;
     $scope.saveSearch = saveSearch;
@@ -136,6 +135,7 @@
         value: 54593
       }
     ];
+    $scope.roles = List.query({'type': 'functional_role'});
 
     $scope.pagination = {
       currentPage: 1,
@@ -286,10 +286,6 @@
 
     function getOrganizations (search) {
       $scope.organizations = List.query({type: 'organization', name: search});
-    }
-
-    function getRoles (search) {
-      $scope.roles = List.query({'type': 'functional_role', name: search});
     }
 
     function formatUserTypes (filters) {

@@ -116,7 +116,7 @@ tabIndex="{{ sidebar.open ? '-1' : ''}}"">
           <label for="roles" class="sr-only" translate>Filter by role</label>
           <ui-select ng-model="selectedFilters['functional_roles.list']" name="roles">
             <ui-select-match allow-clear="true" placeholder="{{'Role' | translate}}">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices refresh="getRoles($select.search)" minimum-input-length="3" repeat="role._id as role in roles | filter: $select.search">
+            <ui-select-choices repeat="role._id as role in roles | filter: $select.search">
               {{role.name}}
             </ui-select-choices>
           </ui-select>
