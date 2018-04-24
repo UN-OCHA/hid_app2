@@ -20,7 +20,7 @@
     $scope.getManagers = getManagers;
     $scope.newKeyLists = [];
     $scope.getKeyLists = getKeyLists;
-    $scope.newKeyRoles = [];
+    $scope.newKeyRoles = List.query({type: 'functional_role'});
     $scope.getKeyRoles = getKeyRoles;
 
     $scope.saveOperation = function() {
@@ -59,14 +59,6 @@
       }
 
       $scope.newKeyLists = List.query({name: search});
-    }
-
-    function getKeyRoles (search) {
-      if (search === '') {
-        return;
-      }
-
-      $scope.newKeyRoles = List.query({name: search, type: 'functional_role'});
     }
 
   }

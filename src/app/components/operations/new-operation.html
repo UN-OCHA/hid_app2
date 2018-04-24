@@ -31,9 +31,17 @@
       </div>
       <div class="form-field">
         <label for="key_roles" translate>Key Roles</label>
+        <ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
+          <ui-select-match placeholder="{{'Select a country' | translate}}">
+            {{$select.selected.name}}
+          </ui-select-match>
+          <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
+            {{country.name}}
+          </ui-select-choices>
+        </ui-select>
         <ui-select ng-model="operation.key_roles" multiple name="key_roles">
           <ui-select-match placeholder="{{'Select some roles' | translate}}">{{$item.name}}</ui-select-match>
-          <ui-select-choices refresh="getKeyRoles($select.search)" repeat="list._id as list in newKeyRoles" minimum-input-length="3">
+          <ui-select-choices repeat="list._id as list in newKeyRoles" minimum-input-length="3">
             {{list.name}}
           </ui-select-choices>
         </ui-select>
