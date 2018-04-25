@@ -38,7 +38,7 @@ msgstr ""
 msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:611
+#: src/app/components/user/users.controller.js:607
 msgid "A synchronized Google Sheet was created. Find it at:"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:79
+#: src/app/components/user/users.controller.js:78
 msgid "Academic / Research"
 msgstr ""
 
@@ -160,7 +160,7 @@ msgstr ""
 msgid "Administrator"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:70
+#: src/app/components/user/users.controller.js:69
 msgid "Adminstrator"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgstr ""
 msgid "Associated lists"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:74
+#: src/app/components/user/users.controller.js:73
 msgid "Auth user"
 msgstr ""
 
@@ -599,7 +599,7 @@ msgstr ""
 msgid "Domain"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:83
+#: src/app/components/user/users.controller.js:82
 msgid "Donor"
 msgstr ""
 
@@ -667,7 +667,7 @@ msgstr ""
 msgid "Email type"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:87
+#: src/app/components/user/users.controller.js:86
 msgid "Embassy"
 msgstr ""
 
@@ -777,7 +777,7 @@ msgstr ""
 msgid "Get the app"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:58
+#: src/app/components/user/users.controller.js:57
 msgid "Ghost"
 msgstr ""
 
@@ -785,7 +785,7 @@ msgstr ""
 msgid "Given name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:91
+#: src/app/components/user/users.controller.js:90
 msgid "Government"
 msgstr ""
 
@@ -858,11 +858,11 @@ msgstr ""
 msgid "Info / actions"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:95
+#: src/app/components/user/users.controller.js:94
 msgid "International NGO"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:99
+#: src/app/components/user/users.controller.js:98
 msgid "International Organization"
 msgstr ""
 
@@ -870,7 +870,7 @@ msgstr ""
 msgid "Job Title"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:40
+#: src/app/components/user/users.controller.js:39
 #: src/app/components/user/users.html:38
 msgid "Job title"
 msgstr ""
@@ -1017,7 +1017,7 @@ msgstr ""
 msgid "Mark as favourite"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:103
+#: src/app/components/user/users.controller.js:102
 msgid "Media"
 msgstr ""
 
@@ -1033,7 +1033,7 @@ msgstr ""
 msgid "Middle Name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:107
+#: src/app/components/user/users.controller.js:106
 msgid "Military"
 msgstr ""
 
@@ -1059,12 +1059,12 @@ msgstr ""
 #: src/app/components/list/new-list.html:9
 #: src/app/components/service/new-service.html:16
 #: src/app/components/service/services.html:5
-#: src/app/components/user/users.controller.js:36
+#: src/app/components/user/users.controller.js:35
 #: src/app/components/user/users.html:37
 msgid "Name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:111
+#: src/app/components/user/users.controller.js:110
 msgid "National NGO"
 msgstr ""
 
@@ -1239,7 +1239,7 @@ msgstr ""
 #: src/app/components/checkin/listTypesModal.html:25
 #: src/app/components/user/kiosk.html:99
 #: src/app/components/user/user-filters.html:108
-#: src/app/components/user/users.controller.js:44
+#: src/app/components/user/users.controller.js:43
 #: src/app/components/user/users.html:39
 msgid "Organization"
 msgstr ""
@@ -1252,11 +1252,11 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:54
+#: src/app/components/user/users.controller.js:53
 msgid "Orphan"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:115
+#: src/app/components/user/users.controller.js:114
 msgid "Other"
 msgstr ""
 
@@ -1345,7 +1345,7 @@ msgstr ""
 msgid "Primary phone number updated"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:119
+#: src/app/components/user/users.controller.js:118
 msgid "Private sector"
 msgstr ""
 
@@ -1375,7 +1375,7 @@ msgstr ""
 msgid "Recovery codes"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:123
+#: src/app/components/user/users.controller.js:122
 msgid "Red Cross / Red Crescent"
 msgstr ""
 
@@ -1399,7 +1399,7 @@ msgstr ""
 msgid "Related platforms"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:127
+#: src/app/components/user/users.controller.js:126
 msgid "Religious"
 msgstr ""
 
@@ -1721,11 +1721,11 @@ msgstr ""
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:632
+#: src/app/components/user/users.controller.js:628
 msgid "Sorry, the contact folder could not be created..."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:616
+#: src/app/components/user/users.controller.js:612
 msgid "Sorry, the spreadsheet export did not work..."
 msgstr ""
 
@@ -1822,7 +1822,7 @@ msgstr ""
 msgid "The client name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:629
+#: src/app/components/user/users.controller.js:625
 msgid "The contact folder was successfully created."
 msgstr ""
 
@@ -1982,7 +1982,7 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:66
+#: src/app/components/user/users.controller.js:65
 msgid "Un-verified"
 msgstr ""
 
@@ -1998,11 +1998,11 @@ msgstr ""
 msgid "Unfavourite"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:131
+#: src/app/components/user/users.controller.js:130
 msgid "United Nations"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:135
+#: src/app/components/user/users.controller.js:134
 msgid "Unknown"
 msgstr ""
 
@@ -2064,8 +2064,8 @@ msgstr ""
 msgid "Validation email sent successfully."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:48
-#: src/app/components/user/users.controller.js:62
+#: src/app/components/user/users.controller.js:47
+#: src/app/components/user/users.controller.js:61
 #: src/app/components/user/users.html:36
 msgid "Verified"
 msgstr ""
@@ -2217,8 +2217,8 @@ msgstr ""
 msgid "You have granted the following applications access to your Humanitarian ID account."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:620
-#: src/app/components/user/users.controller.js:636
+#: src/app/components/user/users.controller.js:616
+#: src/app/components/user/users.controller.js:632
 msgid "You need to select a list"
 msgstr ""
 

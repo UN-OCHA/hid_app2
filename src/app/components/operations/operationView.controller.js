@@ -26,6 +26,7 @@
     Operation.query(params, function (operations, headers) {
       $scope.operation = operations[0];
       $scope.isManager = $scope.operation.isManager($scope.currentUser);
+      $scope.operation.setListTypes();
       initOperationList();
       initGroups();
       initOffices();

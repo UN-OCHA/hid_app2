@@ -35,6 +35,49 @@
       return out;
     };
 
+    Operation.prototype.setListTypes = function () {
+      var listTypes = [
+        {
+          key: 'operation',
+          val: 'Operation'
+        },
+        {
+          key: 'bundle',
+          val: 'Group'
+        },
+        {
+          key: 'organization',
+          val: 'Organization'
+        },
+        {
+          key: 'disaster',
+          val: 'Disaster'
+        },
+        {
+          key: 'functional_role',
+          val: 'Role'
+        },
+        {
+          key: 'office',
+          val: 'Co-ordination hub'
+        },
+        {
+          key: 'list',
+          val: 'Custom'
+        }
+      ];
+
+      this.key_lists.map(function (list) {
+        var listType = listTypes.filter(function (type) {
+          return type.key === list.type;
+        })[0];
+        if (listType) {
+          list.displayType = listType.val;
+        }
+        return list;
+      });
+    };
+
     return Operation;
   }
 })();
