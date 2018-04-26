@@ -54,8 +54,8 @@
 
     <div class="block-heading">
       <h2 translate>Groups</h2>
-      <button type="button" class="btn-link btn-small block-heading" ng-click="groupsLimit = groups.length" ng-show="groupsLimit == 4" translate>View All &gt;</button>
-      <button type="button" class="btn-link btn-small block-heading" ng-click="groupsLimit = 4" ng-show="groupsLimit == groups.length" translate>&lt; Hide</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="groupsLimit = groups.length" ng-show="groupsLimit == 4 && groups.length > 4" translate>View All &gt;</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="groupsLimit = 4" ng-show="groupsLimit == groups.length && groups.length > 4" translate>&lt; Hide</button>
     </div>
 
     <table class="table table-responsive table__fixed">
@@ -69,8 +69,8 @@
 
     <div class="block-heading">
       <h2 translate>Coordination Hubs</h2>
-      <button type="button" class="btn-link btn-small block-heading" ng-click="officesLimit = offices.length" ng-show="officesLimit == 4" translate>View All &gt;</button>
-      <button type="button" class="btn-link btn-small block-heading" ng-click="officesLimit = 4" ng-show="officesLimit == offices.length" translate>&lt; Hide</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="officesLimit = offices.length" ng-show="officesLimit == 4 && offices.length > 4" translate>View All &gt;</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="officesLimit = 4" ng-show="officesLimit == offices.length && offices.length > 4" translate>&lt; Hide</button>
     </div>
 
     <table class="table table-responsive table__fixed">
@@ -84,8 +84,8 @@
 
     <div class="block-heading">
       <h2 translate>Disasters</h2>
-      <button type="button" class="btn-link btn-small block-heading" ng-click="disastersLimit = disasters.length" ng-show="disastersLimit == 4" translate>View All &gt;</button>
-      <button type="button" class="btn-link btn-small block-heading" ng-click="disastersLimit = 4" ng-show="disastersLimit == disasters.length" translate>&lt; Hide</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="disastersLimit = disasters.length" ng-show="disastersLimit == 4 && disasters.length > 4" translate>View All &gt;</button>
+      <button type="button" class="btn-link btn-small block-heading" ng-click="disastersLimit = 4" ng-show="disastersLimit == disasters.length && disasters.length > 4" translate>&lt; Hide</button>
     </div>
 
     <table class="table table-responsive table__fixed">
