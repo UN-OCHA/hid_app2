@@ -52,6 +52,7 @@
 
     function initDisasters() {
       var disastersRequest = { type: 'disaster', sort: '-metadata.created' };
+      disastersRequest['metadata.status[ne]'] = 'past';
       disastersRequest['metadata.operation.id'] = $scope.operation.remote_id;
       ListDataService.queryLists(disastersRequest, function (lists, number) {
         $scope.disasters = lists;
