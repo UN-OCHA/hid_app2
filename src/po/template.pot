@@ -2117,7 +2117,7 @@ msgid "We could not log you in because your email address is not verified yet."
 msgstr ""
 
 #: src/app/common/errors.controller.js:34
-msgid "We could not log you in, because your password is expired. Please reset your password."
+msgid "We could not log you in, because your password is expired. Please reset your password by clicking on the \"Forgot your password ?\" link below."
 msgstr ""
 
 #: src/app/common/errors.controller.js:30

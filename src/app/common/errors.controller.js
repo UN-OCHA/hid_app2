@@ -31,7 +31,7 @@
         }
 
         if (rejection.data && rejection.data.message === 'password is expired') {
-          return gettextCatalog.getString('We could not log you in, because your password is expired. Please reset your password.');
+          return gettextCatalog.getString('We could not log you in, because your password is expired. Please reset your password by clicking on the "Forgot your password ?" link below.');
         }
 
         if (rejection.status === 429) {
