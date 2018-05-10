@@ -56,7 +56,6 @@
     function showModal (type, msg, confirm, displayTime) {
       var modalClass = confirm ? 'alert-modal modal-confirm' : 'alert-modal modal-' + type;
       var time = Number.isInteger(displayTime) ? displayTime : defaultDisplayTime;
-      console.log(time);
 
       var modal = $uibModal.open({
         animation: false,
