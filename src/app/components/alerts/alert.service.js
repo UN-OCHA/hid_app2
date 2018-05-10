@@ -66,7 +66,7 @@
           $scope.modal = $uibModalInstance;
           $scope.message = msg;
 
-          if (!confirm) {
+          if (!confirm && time !== 0) {
             setTimeout(function () {
               $scope.modal.close();
             }, time);
@@ -106,4 +106,3 @@
   }
 
 })();
-

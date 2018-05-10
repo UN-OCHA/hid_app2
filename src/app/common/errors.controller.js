@@ -57,7 +57,7 @@
 
     $rootScope.$on('apiRejection', function (event, rejection) {
       var errorMessage = getErrorMessage(rejection);
-      alertService.add('danger', errorMessage);
+      alertService.add('danger', errorMessage, false, null, 0);
     });
   }
 })();
