@@ -644,7 +644,7 @@ msgid "Edit service"
 msgstr ""
 
 #: src/app/components/auth/login.html:9
-#: src/app/components/auth/password_reset.html:9
+#: src/app/components/auth/password_reset.html:10
 #: src/app/components/user/kiosk.html:127
 #: src/app/components/user/kiosk.html:27
 #: src/app/components/user/new-user.html:3
@@ -758,7 +758,7 @@ msgid "First name"
 msgstr ""
 
 #: src/app/components/auth/login.html:27
-msgid "Forgot your password?"
+msgid "Forgot/Reset password"
 msgstr ""
 
 #: src/app/components/user/user.html:644
@@ -834,7 +834,7 @@ msgid "ID"
 msgstr ""
 
 #: src/app/components/auth/password_reset.html:6
-msgid "If you forget the password for your Humanitarian ID account, you can request a new password by entering your email address here and clicking on 'Reset Password'."
+msgid "If you forgot the password to your Humanitarian ID account, or your password has expired, you can request a new password by entering your email address here and clicking \"Reset Password\". You will receive an email with a temporary link."
 msgstr ""
 
 #: src/app/components/start/tutorial.html:21
@@ -1181,6 +1181,10 @@ msgstr ""
 msgid "None set"
 msgstr ""
 
+#: src/app/components/auth/password_reset.html:7
+msgid "Note: Allow some time for the email to get to your inbox (especially if using @un.org domain). If you do not receive the email kindly do not reset the password a second time, but get in touch with us: <a href=\"mailto:info@humanitarian.id\">info@humanitarian.id</a>"
+msgstr ""
+
 #: src/app/components/landing/landing.html:136
 #: src/app/components/notifications/notifications.html:5
 msgid "Notifications"
@@ -1421,7 +1425,7 @@ msgstr ""
 msgid "Request"
 msgstr ""
 
-#: src/app/components/auth/password_reset.html:15
+#: src/app/components/auth/password_reset.html:16
 msgid "Reset Password"
 msgstr ""
 
@@ -2117,7 +2121,7 @@ msgid "We could not log you in because your email address is not verified yet."
 msgstr ""
 
 #: src/app/common/errors.controller.js:34
-msgid "We could not log you in, because your password is expired. Please reset your password by clicking on the Forgot your password ? link below."
+msgid "We could not log you in because your password is expired. Following UN regulations, as a security measure passwords must be updated every six months. Kindly reset your password by clicking on the \"Forgot/Reset password\" link below."
 msgstr ""
 
 #: src/app/common/errors.controller.js:30
@@ -2310,7 +2314,7 @@ msgid "Your device lost its internet connection."
 msgstr ""
 
 #: src/app/components/auth/login.html:10
-#: src/app/components/auth/password_reset.html:10
+#: src/app/components/auth/password_reset.html:11
 #: src/app/components/user/kiosk.html:28
 msgid "Your email address"
 msgstr ""
