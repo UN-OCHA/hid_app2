@@ -111,9 +111,9 @@
     digits-trie "^1.0.0"
     google-libphonenumber "^1.0.7"
 
-"@bower_components/bc-css-flags@blockchain/bc-css-flags#~3.0.0":
+"@bower_components/bc-css-flags@UN-OCHA/bc-css-flags.git#master":
   version "3.0.0"
-  resolved "https://codeload.github.com/blockchain/bc-css-flags/tar.gz/9e046941c5f847e4e560df23ee0aaa21454868bf"
+  resolved "https://codeload.github.com/UN-OCHA/bc-css-flags/tar.gz/6152962e1bbcc0f31096195202de09af0b0499ae"
 
 "@bower_components/bc-phone-number@blockchain/bc-phone-number#~5.1.1":
   version "5.1.1"
