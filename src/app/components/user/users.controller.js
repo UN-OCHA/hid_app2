@@ -67,10 +67,6 @@
       {
         value: 'is_admin',
         label: gettextCatalog.getString('Adminstrator')
-      },
-      {
-        value: 'authOnly',
-        label: gettextCatalog.getString('Auth user')
       }
     ];
     $scope.orgTypes = [
@@ -155,9 +151,6 @@
     var currentRequest = angular.copy(defaultRequest);
 
     function getUsers(params) {
-      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
-        params.authOnly = false;
-      }
 
       UserDataService.getUsers(params, $scope.list, function () {
         $scope.users = UserDataService.listUsers;

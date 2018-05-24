@@ -130,7 +130,7 @@
     }
 
     function getUsers (search) {
-      User.query({'name': search, authOnly: false}, function (users) {
+      User.query({'name': search}, function (users) {
         $scope.newUsers = filterManagers(users);
       });
     }

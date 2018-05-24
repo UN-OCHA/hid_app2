@@ -31,7 +31,7 @@
     $scope.toggleForm = function () {
       $scope.showProfileForm = !$scope.showProfileForm;
     };
-    var showingAuthBanner = false;
+
     var permissionsMessage;
     var connectionRequired = false;
     var verifiedRequired = false;
@@ -124,14 +124,6 @@
       }, 5000);
     }
 
-    function authUserAlert (user, currentUser) {
-      if (user.authOnly && (currentUser.is_admin || currentUser.isManager)) {
-        var authMessage = gettextCatalog.getString('This account is currently only visible to global managers. By editing it, you will automatically inform the user that you have created his/her profile and made it visible to everyone on Humanitarian ID.');
-        alertService.pageAlert('warning', authMessage, 'caution');
-        showingAuthBanner = true;
-      }
-    }
-
     function setVcardUrl (user) {
       // Export user details to vcard
       var vcardUrl = "BEGIN:VCARD\n" +
@@ -165,7 +157,6 @@
         $rootScope.title = $scope.user.name;
         userPicture($scope.user.picture, $scope.user.email);
         setConnectionInfo($scope.user, $scope.currentUser._id);
-        authUserAlert($scope.user, $scope.currentUser);
         setVcardUrl($scope.user);
         if (!$scope.currentUser.verified && $scope.user.is_orphan) {
           $scope.canViewInfo = false;
@@ -201,11 +192,6 @@
       $scope.saving.status = data.status;
       showSavedMessage(data.message);
       UserDataService.formatUserLocations();
-
-      if (showingAuthBanner && !$scope.user.authOnly) {
-        showingAuthBanner = false;
-        alertService.resetPageAlert();
-      }
     });
 
     $scope.notify = function () {
