@@ -33,7 +33,7 @@
       var userParams = {q: searchTerm, limit: limit, sort: 'name'};
 
       return $q.all([
-        List.query({name: searchTerm, limit: limit, sort: 'name'}).$promise,
+        List.query({name: searchTerm, limit: limit, sort: '-count'}).$promise,
         User.query(userParams).$promise
       ]).then(function(data) {
         return data;
