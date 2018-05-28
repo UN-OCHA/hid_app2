@@ -14,7 +14,7 @@
     $scope.currentPage = 1;
     $scope.request.limit = $scope.itemsPerPage;
     $scope.request.offset = 0;
-    $scope.request.sort = 'name';
+    $scope.request.sort = '-count';
     $scope.listsLoaded = false;
     $scope.selectedFilters = {};
     $scope.listFilters = {};
