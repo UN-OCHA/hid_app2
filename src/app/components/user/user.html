@@ -118,6 +118,7 @@
           </ul>
 
           <p class="profile-header__status">{{user.status}}</p>
+          <p class="page-header__heading profile-header__unverified" ng-show="!user.verified"><icon name="cancel-circle"></icon>This user has not been verified. Learn how to verify a profile <a href="https://about.humanitarian.id/faqs/" target="_blank">here</a></p>
         </div>
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">

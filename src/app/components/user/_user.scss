@@ -88,6 +88,12 @@
   }
 }
 
+.profile-header__unverified {
+  .icon {
+    stroke: $primary-color;
+  }
+}
+
 .profile-header__content {
 
   .no-flexbox & {
@@ -119,7 +125,7 @@
   label {
     font-weight: normal;
   }
-  
+
   .icon {
     position: relative;
   }
@@ -195,7 +201,7 @@
 .profile-header__connect-btn--mobile {
   display: block;
   margin-top: $base-unit;
-} 
+}
 
 .profile-permission-message {
   color: $error-color;
