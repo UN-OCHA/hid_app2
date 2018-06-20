@@ -94,6 +94,13 @@
   }
 }
 
+.profile-header__verified-text {
+  color: $verified-color;
+  .icon {
+    stroke: $verified-color;
+  }
+}
+
 .profile-header__content {
 
   .no-flexbox & {
