@@ -347,3 +347,10 @@
     max-width: $base-unit*77;
   }
 }
+
+.table__td-icon {
+  .icon--check-circle {
+    width: 24px;
+    height: 24px;
+  }
+}
