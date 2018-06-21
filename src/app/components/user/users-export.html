@@ -37,7 +37,7 @@
 		<span translate>Export into CSV</span>
 	</button>
 
-	<button type="button" class="btn-transparent sidebar-section__button" ng-if="currentUser.is_admin || currentUser.isManager" ng-click="googleToken()">
+	<button type="button" class="btn-transparent sidebar-section__button" ng-if="currentUser.verified" ng-click="googleToken()">
 		<icon name="inbox-download"></icon>
 		<span translate>Synchronize with Google Spreadsheet</span>
 	</button>
