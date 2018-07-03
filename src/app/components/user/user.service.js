@@ -143,7 +143,7 @@
       var par = angular.copy(params);
       delete par.limit;
       delete par.offset;
-      par.token = $window.localStorage.getItem('jwtToken');
+      par.access_token = $window.localStorage.getItem('jwtToken');
       var urlp = Object.keys(par).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');
@@ -187,7 +187,7 @@
       var par = angular.copy(params);
       delete par.limit;
       delete par.offset;
-      par.token = $window.localStorage.getItem('jwtToken');
+      par.access_token = $window.localStorage.getItem('jwtToken');
 
       //remove any undefined params
       angular.forEach(par, function (value, key) {
