@@ -37,6 +37,18 @@
       return out;
     };
 
+    // Determine whether a user has access to a list and can cache it
+    List.prototype.isCacheable = function (user) {
+      if (this.visibility === 'all' || this.visibility === 'inlist'
+        || (this.visibility === 'verified' && user.verified)
+        || (this.visibility === 'me' && (this.owner === user._id.toString() || this.managers.indexOf(user._id.toString()) !== -1))) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    };
+
     function cacheUsers (lfusers, users, count, total, callback) {
       // if run out of users
       if (!users[count]) {

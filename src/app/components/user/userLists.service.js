@@ -50,7 +50,7 @@
       }
     }
 
-    function cacheList (listId) {
+    function cacheList (listId, user) {
       if (isCurrentlyCaching()) {
         return;
       }
@@ -61,11 +61,16 @@
 
       updateCachedLists(listId, 'caching');
       List.get({listId: listId}).$promise.then(function (list) {
-        list.cache().then(function () {
-          updateCachedLists(list._id, 'success');
-        }, function () {
+        if (list.isCacheable(user)) {
+          list.cache().then(function () {
+            updateCachedLists(list._id, 'success');
+          }, function () {
+            updateCachedLists(list._id, 'fail');
+          });
+        }
+        else {
           updateCachedLists(list._id, 'fail');
-        });
+        }
       });
     }
 
@@ -73,7 +78,7 @@
       var lists = user.favoriteLists;
       angular.forEach(lists, function (list) {
         if (list._id) {
-          cacheList(list._id);
+          cacheList(list._id, user);
         }
       });
     }
@@ -85,7 +90,7 @@
           updateListCacheStatus(list);
 
           if (!getCachedList(list._id)) {
-            cacheList(list._id);
+            cacheList(list._id, user);
           }
 
         }
@@ -97,7 +102,7 @@
       angular.forEach(config.listTypes, function (listType) {
         angular.forEach(user[listType + 's'], function (checkin) {
           if (!checkin.list) { return; }
-          cacheList(checkin.list);
+          cacheList(checkin.list, user);
         });
       });
     }
@@ -118,7 +123,7 @@
           lists.push(list);
 
           if (!getCachedList(checkin.list)) {
-            cacheList(checkin.list);
+            cacheList(checkin.list, user);
           }
         });
       });
@@ -243,4 +248,3 @@
   }
 
 })();
-
