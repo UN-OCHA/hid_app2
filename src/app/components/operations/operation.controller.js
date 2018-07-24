@@ -49,7 +49,7 @@
         return;
       }
 
-      $scope.newManagers = User.query({name: search});
+      $scope.newManagers = User.query({name: search,  authOnly: false});
     }
 
     function getKeyLists (search) {

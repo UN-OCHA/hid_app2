@@ -118,7 +118,7 @@
     }
 
     function getUsers (search) {
-      User.query({'name': search}, function (users) {
+      User.query({'name': search, authOnly: false}, function (users) {
         $scope.newUsers = filterUsers(users, $scope.subscribers);
       });
     }
@@ -133,7 +133,8 @@
       var params = {
         'subscriptions.service': $scope.service._id,
         limit: $scope.pagination.itemsPerPage,
-        sort: 'name'
+        sort: 'name',
+        authOnly: false
       };
       params.offset = offset || 0;
       User.query(params, function (response, headers) {

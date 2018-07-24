@@ -31,6 +31,9 @@
 
     Search.UsersAndLists = function (searchTerm, limit, currentUser) {
       var userParams = {q: searchTerm, limit: limit, sort: 'name'};
+      if (currentUser && !currentUser.is_admin && !currentUser.isManager) {
+        userParams.authOnly = false;
+      }
 
       return $q.all([
         List.query({name: searchTerm, limit: limit, sort: '-count'}).$promise,

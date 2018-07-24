@@ -91,6 +91,9 @@
       }
       var searchTerm = $scope.searchUsersTerm.trim();
       var params = {q: searchTerm, limit: 5, sort: 'name'};
+      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
+        params.authOnly = false;
+      }
 
 
       User.query(params).$promise.then(function (data) {

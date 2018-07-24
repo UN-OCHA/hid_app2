@@ -138,7 +138,7 @@
     // Retrieve users
     $scope.getUsers = function(search) {
       if (search) {
-        User.query({'name': search}, function (users) {
+        User.query({'name': search, authOnly: false}, function (users) {
           if (users) {
             $scope.newMembers = filterUsers(users, $scope.usersAdded.users);
           }
