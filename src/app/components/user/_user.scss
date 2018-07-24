@@ -101,6 +101,10 @@
   }
 }
 
+.profile-header__unverified {
+  color: $dark-blue;
+}
+
 .profile-header__content {
 
   .no-flexbox & {
