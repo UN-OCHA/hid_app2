@@ -65,6 +65,10 @@
         label: gettextCatalog.getString('Un-verified')
       },
       {
+        value: 'isManager',
+        label: gettextCatalog.getString('Manager')
+      },
+      {
         value: 'is_admin',
         label: gettextCatalog.getString('Adminstrator')
       },
