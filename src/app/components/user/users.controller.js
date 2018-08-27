@@ -45,6 +45,10 @@
       {
         value: '-verified',
         name: gettextCatalog.getString('Verified')
+      },
+      {
+        value: '-createdAt',
+        name: gettextCatalog.getString('Creation date')
       }
     ];
     $scope.userTypes = [
