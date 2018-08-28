@@ -993,7 +993,7 @@ custom-event@~1.0.0:
 
 "customizr@https://github.com/doctyper/customizr/tarball/develop":
   version "1.0.0-alpha"
-  resolved "https://github.com/doctyper/customizr/tarball/develop#bf72bdbc0e693e253cfc2b80180eb7b984753111"
+  resolved "https://github.com/doctyper/customizr/tarball/develop#7f45419c18d8fefc1378cd1ca00bd2aa3aa501b5"
   dependencies:
     colors "~0.6.2"
     deep-equal "~0.1.2"
