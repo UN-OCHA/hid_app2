@@ -51,6 +51,10 @@
       {
         label: '-count',
         name: 'Number of contacts'
+      },
+      {
+        label: '-createdAt',
+        name: 'Creation date'
       }
     ];
 
