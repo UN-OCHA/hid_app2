@@ -162,6 +162,39 @@
       });
     };
 
+    // Check current user in list
+    $scope.checkIn = function () {
+      UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (user) {
+        alertService.add('success', gettextCatalog.getString('You were successfully checked into the list'));
+        $scope.setCurrentUser(user);
+        UserDataService.notify();
+        $scope.isMember = true;
+      }, function (error) {
+        $exceptionHandler(error, 'Removing duplicate');
+      });
+    };
+
+    // Check current user out of the list
+    $scope.checkOut = function () {
+      var checkIn = null;
+      angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val) {
+        var listId = typeof val.list === 'object' ? val.list._id : val.list;
+        if (listId === $scope.list._id) {
+          checkIn = val;
+        }
+      });
+      alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
+        UserCheckInService.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkIn._id}, {}, function (user) {
+          alertService.add('success', gettextCatalog.getString('Successfully removed from list'), false, function(){});
+          $scope.setCurrentUser(user);
+          UserDataService.notify();
+          $scope.isMember = false;
+        }, function (error) {
+          $exceptionHandler(error, 'Leaving list');
+        });
+      });
+    };
+
     // Delete list
     $scope.deleteList = function() {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {

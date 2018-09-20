@@ -23,6 +23,19 @@
       </form>
     </div>
 
+    <div>
+      <div class="sidebar-section">
+        <button type="button" class="btn-transparent sidebar-section__button" ng-click="checkOut();" ng-if="isMember">
+          <icon name="arrow-left"></icon>
+          <span translate>Checkout</span>
+        </button>
+        <button type="button" class="btn-transparent sidebar-section__button" ng-click="checkIn();" ng-if="!isMember">
+          <icon name="arrow-right"></icon>
+          <span translate>Checkin</span>
+        </button>
+      </div>
+    </div>
+
     <div ng-if="isManager || isOwner || currentUser.is_admin">
       <div class="sidebar-section">
         <h2 class="sidebar-section__heading" translate>List Settings</h2>
