@@ -13,6 +13,15 @@
     <button class="btn-icon btn-toggle-admin" type="button" ng-click="sidebar.toggle('admin', true)" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline" ng-if="list.visible">
       <icon name="wheel" text="Actions"></icon>
     </button>
+
+    <button type="button" class="btn-icon" ng-click="checkOut();" ng-if="isMember">
+      <icon name="arrow-left" text="Checkout"></icon>
+    </button>
+
+    <button type="button" class="btn-icon" ng-click="checkIn();" ng-if="!isMember">
+      <icon name="arrow-right" text="Checkin"></icon>
+    </button>
+
   </div>
 </div>
 
@@ -28,6 +37,14 @@
 
     <button class="btn-icon btn-toggle-admin t-list-admin-btn" type="button" ng-click="sidebar.toggle('admin', true)" ng-class="{'active' : sidebar.sidebars.admin && sidebar.open}" ng-disabled="!isOnline" ng-if="list.visible">
       <icon name="wheel" text="Actions"></icon>
+    </button>
+
+    <button type="button" class="btn-icon" ng-click="checkOut();" ng-if="isMember">
+      <icon name="arrow-left" text="Checkout"></icon>
+    </button>
+
+    <button type="button" class="btn-icon" ng-click="checkIn();" ng-if="!isMember">
+      <icon name="arrow-right" text="Checkin"></icon>
     </button>
   </div>
 
