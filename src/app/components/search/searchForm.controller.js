@@ -30,7 +30,7 @@
       SearchService.UsersAndLists(searchTerm, searchLimit, $scope.currentUser).then(function(data) {
         $scope.searchLists = data[0];
         $scope.searchPeople = data[1];
-        $scope.showAutocomplete = data[0].length || data[1].length ? true : false;
+        $scope.showAutocomplete = true;
       });
     };
 

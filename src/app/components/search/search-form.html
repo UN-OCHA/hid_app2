@@ -22,7 +22,7 @@
             </li>
           </ul>
         </li>
-        <li ng-if="!searchPeople">
+        <li ng-if="searchPeople.length === 0">
           <span class="search-autocomplete__heading">
             <span translate>Contacts</span>
           </span>
@@ -40,6 +40,16 @@
           <ul>
             <li class="search-autocomplete__item" ng-repeat="result in searchLists">
               <a ng-href="lists/{{result._id}}" ng-click="saveSearch(result, 'list')">{{result.name}}</a>
+            </li>
+          </ul>
+        </li>
+        <li ng-if="searchLists.length === 0">
+          <span class="search-autocomplete__heading">
+            <span translate>Lists</span>
+          </span>
+          <ul>
+            <li class="search-autocomplete__item">
+              <span translate>No results found</span>
             </li>
           </ul>
         </li>
