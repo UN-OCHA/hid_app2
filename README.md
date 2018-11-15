@@ -18,8 +18,7 @@
 * Clone repo `git clone git@github.com:UN-OCHA/hid_app2.git`
 * In the app directory `cd hid_app2`
 * Switch to the dev branch `git checkout dev`
-* Install node modules `npm install`
-* Install Bower modules `bower install`
+* Install node modules with yarn `yarn install`
 * Add the local url to your hosts file:
 on Mac: `sudo vi /etc/hosts`
 Add `127.0.0.1   app.hid.vm`
@@ -28,13 +27,8 @@ Add `127.0.0.1   app.hid.vm`
 
 ### Running the app
 
-* If you are using Docker for Mac you will need to add ports to docker-compose.yml
-	```
-	ports:
-   	- 80:80
-  ```
 * `docker-compose up`
-* visit [http://app.hid.vm](http://app.hid.vm)
+* visit [https://app.hid.vm](https://app.hid.vm) and accept the SSL certificate exception
 
 ## Deployment
 
