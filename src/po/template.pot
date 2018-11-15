@@ -426,7 +426,6 @@ msgid "Contact Information"
 msgstr ""
 
 #: src/app/components/search/search-form.html:16
-#: src/app/components/search/search-form.html:27
 msgid "Contacts"
 msgstr ""
 
@@ -948,8 +947,7 @@ msgid "List not found, try"
 msgstr ""
 
 #: src/app/components/list/lists.html:4
-#: src/app/components/search/search-form.html:37
-#: src/app/components/search/search-form.html:48
+#: src/app/components/search/search-form.html:27
 msgid "Lists"
 msgstr ""
 
@@ -1173,8 +1171,7 @@ msgstr ""
 msgid "No phone numbers"
 msgstr ""
 
-#: src/app/components/search/search-form.html:31
-#: src/app/components/search/search-form.html:52
+#: src/app/components/search/search-form.html:39
 msgid "No results found"
 msgstr ""
 
@@ -1568,7 +1565,7 @@ msgstr ""
 
 #: src/app/components/checkin/checkin.html:23
 #: src/app/components/search/search-form.html:17
-#: src/app/components/search/search-form.html:38
+#: src/app/components/search/search-form.html:28
 msgid "See all"
 msgstr ""
 
