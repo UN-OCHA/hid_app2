@@ -36,7 +36,7 @@
 	      	<page-alert ng-if="pageAlert.show" iconname="{{pageAlert.icon}}" message="{{pageAlert.message}}" type="{{pageAlert.type}}"></page-alert>
 
           <div class="container breadcrumbs">
-              <a href="" back-button="" translate="" ng-if="isAuthenticated &amp;&amp; !hideHeaderFooter">
+              <a href="" back-button="" translate="" ng-if="!activeNav(&apos;/&apos;)">
                   <icon name="arrow-left"></icon>
                   <span translate="">Back</span>
               </a>
