@@ -238,7 +238,7 @@
                     <span class="list__meta">{{phone.type}}</span>
                   </label>
 
-                  <button type="button" class="btn-transparent list__button" ng-show="phone.number !== user.phone_number" ng-click="dropItem('phone_number', phone)"><icon name="cancel" text="Remove phone number"></icon></button>
+                  <button type="button" class="btn-transparent list__button" ng-click="dropPhoneNumber(phone._id)"><icon name="cancel" text="Remove phone number"></icon></button>
                 </li>
               </ul>
             </fieldset>

@@ -21,6 +21,7 @@
     $scope.setRegions = setRegions;
     $scope.addItem = addItem;
     $scope.dropItem = dropItem;
+    $scope.dropPhoneNumber = dropPhoneNumber;
     $scope.setPrimaryOrganization = setPrimaryOrganization;
     $scope.setPrimaryLocation = setPrimaryLocation;
     $scope.setPrimaryJobTitle = setPrimaryJobTitle;
@@ -392,6 +393,28 @@
       }
       $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
       saveUser();
+    }
+
+    function dropPhoneNumber (id, callback) {
+      $scope.$emit('editUser', {status: 'saving'});
+      $scope.user.dropPhone(id, function (resp) {
+        $scope.user.phone_numbers = resp.data.phone_numbers;
+        $scope.user.phone_number = resp.data.phone_number;
+        $scope.user.phone_number_type = resp.data.phone_number_type;
+        updateCurrentUser();
+        $scope.$emit('editUser', {
+          status: 'success',
+          type: 'dropphone_number',
+          message: gettextCatalog.getString('Profile updated')
+        });
+
+        if (callback) {
+          callback();
+        }
+      }, function (error) {
+        $exceptionHandler(error, 'Drop phone number error');
+        $scope.$emit('editUser', {status: 'fail'});
+      });
     }
 
     function setPrimaryOrganization (org, callback) {

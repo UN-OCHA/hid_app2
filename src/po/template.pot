@@ -172,11 +172,11 @@ msgstr ""
 msgid "All subscriptions"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:330
+#: src/app/components/user/userEdit.controller.js:331
 msgid "Already added"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:41
+#: src/app/components/user/userEdit.controller.js:42
 msgid "Anyone"
 msgstr ""
 
@@ -202,7 +202,7 @@ msgstr ""
 msgid "Are you about to deploy to a new operation, join the response to a specific disaster or start working with a different sector or cluster? If so, check in to the relevant contact lists and don’t forget to check out when you leave the country."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:386
+#: src/app/components/user/userEdit.controller.js:387
 msgid "Are you sure you want to check out of this list?"
 msgstr ""
 
@@ -905,7 +905,7 @@ msgstr ""
 msgid "Key Roles"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:66
+#: src/app/components/user/userEdit.controller.js:67
 msgid "Landline"
 msgstr ""
 
@@ -1051,11 +1051,11 @@ msgstr ""
 msgid "Military"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:67
+#: src/app/components/user/userEdit.controller.js:68
 msgid "Mobile"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:49
+#: src/app/components/user/userEdit.controller.js:50
 msgid "My connections"
 msgstr ""
 
@@ -1319,7 +1319,7 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:74
+#: src/app/components/user/userEdit.controller.js:75
 msgid "Personal"
 msgstr ""
 
@@ -1332,7 +1332,7 @@ msgstr ""
 msgid "Phone type:"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:434
+#: src/app/components/user/userEdit.controller.js:457
 msgid "Picture uploaded"
 msgstr ""
 
@@ -1360,15 +1360,15 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:451
+#: src/app/components/user/userEdit.controller.js:474
 msgid "Primary email updated"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:405
+#: src/app/components/user/userEdit.controller.js:428
 msgid "Primary organization updated"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:492
+#: src/app/components/user/userEdit.controller.js:515
 msgid "Primary phone number updated"
 msgstr ""
 
@@ -1380,9 +1380,10 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:178
-#: src/app/components/user/userEdit.controller.js:203
-#: src/app/components/user/userEdit.controller.js:223
+#: src/app/components/user/userEdit.controller.js:179
+#: src/app/components/user/userEdit.controller.js:204
+#: src/app/components/user/userEdit.controller.js:224
+#: src/app/components/user/userEdit.controller.js:408
 msgid "Profile updated"
 msgstr ""
 
@@ -1468,7 +1469,7 @@ msgstr ""
 msgid "Roles are closely related to your job title. Very common roles are those of Humanitarian Coordinator, Information Management Officer or UNDAC member. As with checking into organizational lists, role check-ins are moderated."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:68
+#: src/app/components/user/userEdit.controller.js:69
 msgid "Satellite Phone"
 msgstr ""
 
@@ -1616,7 +1617,7 @@ msgstr ""
 msgid "Select current location"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:72
+#: src/app/components/user/userEdit.controller.js:73
 msgid "Select email type"
 msgstr ""
 
@@ -1624,11 +1625,11 @@ msgstr ""
 msgid "Select managers"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:65
+#: src/app/components/user/userEdit.controller.js:66
 msgid "Select phone number type"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:78
+#: src/app/components/user/userEdit.controller.js:79
 msgid "Select social network type"
 msgstr ""
 
@@ -1919,7 +1920,7 @@ msgstr ""
 msgid "There was an error resetting your password. Please try again or contact the HID team."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:438
+#: src/app/components/user/userEdit.controller.js:461
 msgid "There was an error uploading the picture"
 msgstr ""
 
@@ -2088,7 +2089,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:476
+#: src/app/components/user/userEdit.controller.js:499
 msgid "Validation email sent successfully."
 msgstr ""
 
@@ -2102,7 +2103,7 @@ msgstr ""
 msgid "Verified by"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:45
+#: src/app/components/user/userEdit.controller.js:46
 msgid "Verified users"
 msgstr ""
 
@@ -2205,7 +2206,7 @@ msgstr ""
 msgid "Who should be able to see your phone numbers?"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:73
+#: src/app/components/user/userEdit.controller.js:74
 msgid "Work"
 msgstr ""
 
@@ -2410,7 +2411,7 @@ msgstr ""
 msgid "about managing lists"
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:152
+#: src/app/components/user/userEdit.controller.js:153
 msgid "added"
 msgstr ""
 
@@ -2468,7 +2469,7 @@ msgstr ""
 msgid "phone numbers can only be viewed by verified users."
 msgstr ""
 
-#: src/app/components/user/userEdit.controller.js:165
+#: src/app/components/user/userEdit.controller.js:166
 msgid "removed"
 msgstr ""
 
