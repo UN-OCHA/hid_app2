@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar', 'app.outlook', 'app.operations']);
+var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar', 'app.outlook', 'app.operations', 'app.trustedDomain']);
 
 app.constant('config', env);
 
@@ -241,6 +241,13 @@ app.config(['$routeProvider', '$locationProvider',
         authenticate: true,
         adminOnly: true,
         title: 'Edit client'
+      }).
+      when('/trustedDomains', {
+        templateUrl: 'app/components/trustedDomain/trustedDomains.html',
+        controller: 'TrustedDomainsCtrl',
+        authenticate: true,
+        adminOnly: true,
+        title: 'Trusted Domains'
       }).
       when('/duplicates', {
         templateUrl: 'app/components/duplicate/duplicates.html',

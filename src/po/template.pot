@@ -612,6 +612,18 @@ msgstr ""
 msgid "Domain"
 msgstr ""
 
+#: src/app/components/trustedDomain/trustedDomains.html:16
+msgid "Domain URL"
+msgstr ""
+
+#: src/app/components/trustedDomain/trustedDomains.controller.js:56
+msgid "Domain deleted successfully"
+msgstr ""
+
+#: src/app/components/trustedDomain/trustedDomains.controller.js:44
+msgid "Domain saved successfully"
+msgstr ""
+
 #: src/app/components/user/users.controller.js:90
 msgid "Donor"
 msgstr ""
@@ -843,6 +855,7 @@ msgstr ""
 #: src/app/components/client/new-client.html:13
 #: src/app/components/duplicate/duplicates.html:12
 #: src/app/components/operations/operations.html:15
+#: src/app/components/trustedDomain/trustedDomains.html:26
 msgid "ID"
 msgstr ""
 
@@ -1477,6 +1490,7 @@ msgstr ""
 #: src/app/components/list/new-list.html:40
 #: src/app/components/operations/new-operation.html:50
 #: src/app/components/service/new-service.html:87
+#: src/app/components/trustedDomain/trustedDomains.html:18
 msgid "Save"
 msgstr ""
 
@@ -1969,6 +1983,10 @@ msgstr ""
 msgid "To get started, please give us some information about yourself."
 msgstr ""
 
+#: src/app/components/trustedDomain/trustedDomains.html:3
+msgid "Trusted Domains"
+msgstr ""
+
 #: src/app/components/user/preferences.html:265
 msgid "Trusted devices"
 msgstr ""
@@ -2008,6 +2026,8 @@ msgstr ""
 #: src/app/components/client/new-client.html:31
 #: src/app/components/operations/new-operation.html:18
 #: src/app/components/operations/operations.html:16
+#: src/app/components/trustedDomain/trustedDomains.html:15
+#: src/app/components/trustedDomain/trustedDomains.html:27
 msgid "URL"
 msgstr ""
 

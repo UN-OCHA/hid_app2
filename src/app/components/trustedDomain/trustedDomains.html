@@ -1,0 +1,45 @@
+<div class="page-header row">
+  <div class="col-sm-12">
+    <h1 class="page-header__heading" translate>
+      Trusted Domains
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Add a new domain</h2>
+
+    <form name="addDomain" ng-submit="newDomain()" novalidate>
+      <div class="form-field">
+        <label for="url" translate>URL</label>
+        <input type="text" class="form-control" id="url" placeholder="{{'Domain URL'|translate}}" ng-model="addedDomain.url">
+      </div>
+      <button type="submit" class="btn btn-primary" ng-disabled="addedDomain.$invalid || addedDomain.$submitted" translate>Save</button>
+    </form>
+  </div>
+</div>
+
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th translate>ID</th>
+      <th translate>URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="domain in domains">
+      <td>{{domain._id}}</td>
+      <td>{{domain.url}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<uib-pagination
+  total-items="pagination.totalItems"
+  ng-model="pagination.currentPage"
+  ng-change="pageChanged()"
+  direction-links="false"
+  items-per-page=pagination.itemsPerPage
+  class="pagination" >
+</uib-pagination>
