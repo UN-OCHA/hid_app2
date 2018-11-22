@@ -15,6 +15,10 @@
         <label for="url" translate>URL</label>
         <input type="text" class="form-control" id="url" placeholder="{{'Domain URL'|translate}}" ng-model="addedDomain.url">
       </div>
+      <div class="form-field">
+        <label for="description" translate>Description</label>
+        <textarea ng-model="addedDomain.description" class="form-control" name="description" rows="5" cols="20"></textarea>
+      </div>
       <button type="submit" class="btn btn-primary" ng-disabled="addedDomain.$invalid || addedDomain.$submitted" translate>Save</button>
     </form>
   </div>
@@ -25,6 +29,7 @@
     <tr>
       <th translate>ID</th>
       <th translate>URL</th>
+      <th translate>Description</th>
       <th translate>Remove</th>
     </tr>
   </thead>
@@ -32,6 +37,7 @@
     <tr ng-repeat="domain in domains">
       <td>{{domain._id}}</td>
       <td>{{domain.url}}</td>
+      <td>{{domain.description}}</td>
       <td class="table__td-actions"><button type="button" class="btn-transparent" title="Remove" ng-click="deleteDomain(domain)">
         <icon name="cancel" text="Remove"></icon>
       </button></td>
