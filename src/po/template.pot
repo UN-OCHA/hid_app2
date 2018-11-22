@@ -1444,6 +1444,10 @@ msgstr ""
 msgid "Religious"
 msgstr ""
 
+#: src/app/components/trustedDomain/trustedDomains.html:28
+msgid "Remove"
+msgstr ""
+
 #: src/app/components/dashboard/dashboard.html:32
 msgid "Remove from favourites"
 msgstr ""

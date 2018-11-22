@@ -20,17 +20,21 @@
   </div>
 </div>
 
-<table class="table table-responsive">
+<table class="table table-responsive table-responsive--has-actions">
   <thead>
     <tr>
       <th translate>ID</th>
       <th translate>URL</th>
+      <th translate>Remove</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="domain in domains">
       <td>{{domain._id}}</td>
       <td>{{domain.url}}</td>
+      <td class="table__td-actions"><button type="button" class="btn-transparent" title="Remove" ng-click="deleteDomain(domain)">
+        <icon name="cancel" text="Remove"></icon>
+      </button></td>
     </tr>
   </tbody>
 </table>

@@ -54,6 +54,7 @@
     $scope.deleteDomain = function (domain) {
       domain.$delete(function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Domain deleted successfully'));
+        $scope.pageChanged();
       });
     };
 
