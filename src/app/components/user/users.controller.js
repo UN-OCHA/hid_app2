@@ -79,6 +79,10 @@
       {
         value: 'authOnly',
         label: gettextCatalog.getString('Auth user')
+      },
+      {
+        value: 'profiles',
+        label: gettextCatalog.getString('Profile users')
       }
     ];
     $scope.orgTypes = [
@@ -308,6 +312,11 @@
         return;
       }
 
+      if (type === 'profiles') {
+        filters.authOnly = false;
+        return;
+      }
+
       filters[type] = true;
     }
 
@@ -315,6 +324,12 @@
       if (filters.verified === 'false') {
         delete filters.verified;
         filters.user_type = 'unverified';
+        return;
+      }
+
+      if (filters.authOnly === 'false') {
+        delete filters.authOnly;
+        filters.user_type = 'profiles';
         return;
       }
 

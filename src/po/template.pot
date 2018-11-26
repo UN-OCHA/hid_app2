@@ -38,7 +38,7 @@ msgstr ""
 msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:615
+#: src/app/components/user/users.controller.js:630
 msgid "A synchronized Google Sheet was created. Find it at:"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:86
+#: src/app/components/user/users.controller.js:90
 msgid "Academic / Research"
 msgstr ""
 
@@ -579,6 +579,8 @@ msgstr ""
 #: src/app/components/client/client.html:44
 #: src/app/components/client/new-client.html:53
 #: src/app/components/service/new-service.html:25
+#: src/app/components/trustedDomain/trustedDomains.html:19
+#: src/app/components/trustedDomain/trustedDomains.html:32
 msgid "Description"
 msgstr ""
 
@@ -624,7 +626,7 @@ msgstr ""
 msgid "Domain saved successfully"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:90
+#: src/app/components/user/users.controller.js:94
 msgid "Donor"
 msgstr ""
 
@@ -692,7 +694,7 @@ msgstr ""
 msgid "Email type"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:94
+#: src/app/components/user/users.controller.js:98
 msgid "Embassy"
 msgstr ""
 
@@ -810,7 +812,7 @@ msgstr ""
 msgid "Given name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:98
+#: src/app/components/user/users.controller.js:102
 msgid "Government"
 msgstr ""
 
@@ -855,7 +857,7 @@ msgstr ""
 #: src/app/components/client/new-client.html:13
 #: src/app/components/duplicate/duplicates.html:12
 #: src/app/components/operations/operations.html:15
-#: src/app/components/trustedDomain/trustedDomains.html:26
+#: src/app/components/trustedDomain/trustedDomains.html:30
 msgid "ID"
 msgstr ""
 
@@ -884,11 +886,11 @@ msgstr ""
 msgid "Info / actions"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:102
+#: src/app/components/user/users.controller.js:106
 msgid "International NGO"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:106
+#: src/app/components/user/users.controller.js:110
 msgid "International Organization"
 msgstr ""
 
@@ -1044,7 +1046,7 @@ msgstr ""
 msgid "Mark as favourite"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:110
+#: src/app/components/user/users.controller.js:114
 msgid "Media"
 msgstr ""
 
@@ -1060,7 +1062,7 @@ msgstr ""
 msgid "Middle Name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:114
+#: src/app/components/user/users.controller.js:118
 msgid "Military"
 msgstr ""
 
@@ -1091,7 +1093,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:118
+#: src/app/components/user/users.controller.js:122
 msgid "National NGO"
 msgstr ""
 
@@ -1291,7 +1293,7 @@ msgstr ""
 msgid "Orphan"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:122
+#: src/app/components/user/users.controller.js:126
 msgid "Other"
 msgstr ""
 
@@ -1385,7 +1387,7 @@ msgstr ""
 msgid "Primary phone number updated"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:126
+#: src/app/components/user/users.controller.js:130
 msgid "Private sector"
 msgstr ""
 
@@ -1398,6 +1400,10 @@ msgstr ""
 #: src/app/components/user/userEdit.controller.js:224
 #: src/app/components/user/userEdit.controller.js:408
 msgid "Profile updated"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:85
+msgid "Profile users"
 msgstr ""
 
 #: src/app/components/start/tutorial.html:13
@@ -1416,7 +1422,7 @@ msgstr ""
 msgid "Recovery codes"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:130
+#: src/app/components/user/users.controller.js:134
 msgid "Red Cross / Red Crescent"
 msgstr ""
 
@@ -1440,11 +1446,11 @@ msgstr ""
 msgid "Related platforms"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:134
+#: src/app/components/user/users.controller.js:138
 msgid "Religious"
 msgstr ""
 
-#: src/app/components/trustedDomain/trustedDomains.html:28
+#: src/app/components/trustedDomain/trustedDomains.html:33
 msgid "Remove"
 msgstr ""
 
@@ -1494,7 +1500,7 @@ msgstr ""
 #: src/app/components/list/new-list.html:40
 #: src/app/components/operations/new-operation.html:50
 #: src/app/components/service/new-service.html:87
-#: src/app/components/trustedDomain/trustedDomains.html:18
+#: src/app/components/trustedDomain/trustedDomains.html:22
 msgid "Save"
 msgstr ""
 
@@ -1767,11 +1773,11 @@ msgstr ""
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:636
+#: src/app/components/user/users.controller.js:651
 msgid "Sorry, the contact folder could not be created..."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:620
+#: src/app/components/user/users.controller.js:635
 msgid "Sorry, the spreadsheet export did not work..."
 msgstr ""
 
@@ -1869,7 +1875,7 @@ msgstr ""
 msgid "The client name"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:633
+#: src/app/components/user/users.controller.js:648
 msgid "The contact folder was successfully created."
 msgstr ""
 
@@ -2031,7 +2037,7 @@ msgstr ""
 #: src/app/components/operations/new-operation.html:18
 #: src/app/components/operations/operations.html:16
 #: src/app/components/trustedDomain/trustedDomains.html:15
-#: src/app/components/trustedDomain/trustedDomains.html:27
+#: src/app/components/trustedDomain/trustedDomains.html:31
 msgid "URL"
 msgstr ""
 
@@ -2051,11 +2057,11 @@ msgstr ""
 msgid "Unfavourite"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:138
+#: src/app/components/user/users.controller.js:142
 msgid "United Nations"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:142
+#: src/app/components/user/users.controller.js:146
 msgid "Unknown"
 msgstr ""
 
@@ -2270,8 +2276,8 @@ msgstr ""
 msgid "You have granted the following applications access to your Humanitarian ID account."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:624
-#: src/app/components/user/users.controller.js:640
+#: src/app/components/user/users.controller.js:639
+#: src/app/components/user/users.controller.js:655
 msgid "You need to select a list"
 msgstr ""
 
