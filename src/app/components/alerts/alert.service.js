@@ -40,7 +40,7 @@
         icon = '<icon name="' + iconName + '" class="modal-icon"></icon>';
       }
 
-      var body = '<div class="modal-body">' + icon + '<h2 translate>{{message}}</h2></div>';
+      var body = '<div class="modal-body">' + icon + '<h2>' + msg + '</h2></div>';
       var closeButton = '<button class="btn-primary" ng-click="modal.close()" translate>' + closeText +'</button>';
 
       var confirmButtons = '<button class="btn-secondary" ng-click="modal.dismiss()" translate>' + cancelText + '</button>';

@@ -43,7 +43,7 @@
 
       // New user create error
       if (rejection.config.url === config.apiUrl + 'user' && rejection.config.method === 'POST') {
-        return gettextCatalog.getString('There is an error in your registration. You may have already registered. If so, simply reset your password.');
+        return gettextCatalog.getString('There is an error in your registration. You may have already registered. If so, simply <a href="/password_reset">reset your password</a>.');
       }
 
       // Return error message from API
