@@ -1757,7 +1757,9 @@ msgid "Showing lists"
 msgstr ""
 
 #: src/app/components/auth/register.html:6
-msgid "Sign up for a Humanitarian ID account. Doing so will give you access to Humanitarian ID as well as a growing number of related humanitarian community sites."
+msgid ""
+"Sign up for a Humanitarian ID account. Doing so will give you access to Humanitarian ID as well as a growing number of\n"
+"\t\t\t<a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\">related humanitarian community sites</a>."
 msgstr ""
 
 #: src/app/components/service/suggestions.html:26
