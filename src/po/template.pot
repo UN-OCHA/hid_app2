@@ -941,6 +941,10 @@ msgstr ""
 msgid "Last update of your profile"
 msgstr ""
 
+#: src/app/components/landing/landing.html:157
+msgid "Learn how to verify it"
+msgstr ""
+
 #: src/app/components/list/list-admin.html:41
 msgid "List Settings"
 msgstr ""
@@ -2321,10 +2325,6 @@ msgstr ""
 msgid "You will soon receive an email which will allow you to reset your password."
 msgstr ""
 
-#: src/app/components/landing/landing.html:156
-msgid "You're not verified yet."
-msgstr ""
-
 #: src/app/common/errors.controller.js:16
 msgid "You've reached the API request limit, please try again in 10 minutes"
 msgstr ""
@@ -2419,6 +2419,10 @@ msgstr ""
 
 #: src/app/components/landing/landing.html:155
 msgid "Your profile has been verified."
+msgstr ""
+
+#: src/app/components/landing/landing.html:156
+msgid "Your profile is not verified."
 msgstr ""
 
 #: src/app/components/list/list.html:97

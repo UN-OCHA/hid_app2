@@ -153,7 +153,8 @@
           <li class="secondary-block__item secondary-block__item--has-icon">
             <icon name="arrow-right"></icon>
             <span ng-if="currentUser.verified" translate>Your profile has been verified.</span>
-            <span ng-if="!currentUser.verified" translate>You're not verified yet.</span>
+            <span ng-if="!currentUser.verified" translate>Your profile is not verified.</span>
+            <a href="https://about.humanitarian.id/faqs#verification" ng-if="!currentUser.verified" target="_blank" translate>Learn how to verify it</a>
           </li>
         </ul>
 
