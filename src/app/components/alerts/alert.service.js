@@ -77,10 +77,9 @@
     }
 
     alertService.add = function(type, msg, confirm, callback, displayTime) {
-      confirm = confirm || false;
       callback = callback || false;
 
-      return showModal(type, msg, confirm, displayTime).then(function () {
+      return showModal(type, msg, true, 0).then(function () {
         return callback ? callback() : true;
       }, function () {
         return;
