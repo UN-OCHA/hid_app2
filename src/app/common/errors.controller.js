@@ -23,7 +23,7 @@
         }
 
         if (rejection.data && rejection.data.message === 'invalid email or password') {
-          return gettextCatalog.getString('We could not log you in. Please check your email and password.');
+          return gettextCatalog.getString('We could not log you in. The username or password you have entered are incorrect. Kindly try again.');
         }
 
         if (rejection.data && rejection.data.message === 'Email address could not be found') {

@@ -2184,7 +2184,7 @@ msgid "We could not log you in, the email address does not exist."
 msgstr ""
 
 #: src/app/common/errors.controller.js:26
-msgid "We could not log you in. Please check your email and password."
+msgid "We could not log you in. The username or password you have entered are incorrect. Kindly try again."
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.controller.js:104
