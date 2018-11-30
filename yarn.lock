@@ -100,9 +100,9 @@
     jquery "^1.11.1"
     moment "^2.5.0"
 
-"@bower_components/angular@angular/bower-angular#*":
-  version "1.6.6"
-  resolved "https://codeload.github.com/angular/bower-angular/tar.gz/928fe478bd68d049ff9863dc51814eac24d33b9a"
+"@bower_components/angular@angular/bower-angular#~1.7.5":
+  version "1.7.5"
+  resolved "https://codeload.github.com/angular/bower-angular/tar.gz/a3f5186cd6cd26db5bfe40f08b0c872bd38f446e"
 
 "@bower_components/bc-countries@guillaumev/bc-countries.git#master":
   version "2.0.0"
