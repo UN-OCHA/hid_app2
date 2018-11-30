@@ -1859,12 +1859,12 @@ msgstr ""
 msgid "Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap."
 msgstr ""
 
-#: src/app/components/user/userNew.controller.js:23
-msgid "Thank you for creating an account. You will soon receive a confirmation email to confirm your account."
+#: src/app/components/auth/verify.controller.js:13
+msgid "Thank you for confirming your email. You can now login through our application, or through any other application using Humanitarian ID"
 msgstr ""
 
-#: src/app/components/auth/verify.controller.js:13
-msgid "Thank you for verifying your email. You can now login through our application, or through any other application using Humanitarian ID"
+#: src/app/components/user/userNew.controller.js:23
+msgid "Thank you for creating an account. You will soon receive a confirmation email to confirm your account."
 msgstr ""
 
 #: src/app/components/start/start.html:8
@@ -1877,6 +1877,10 @@ msgstr ""
 
 #: src/app/components/client/new-client.html:23
 msgid "The client name"
+msgstr ""
+
+#: src/app/components/auth/verify.controller.js:16
+msgid "The confirmation link did not work"
 msgstr ""
 
 #: src/app/components/user/users.controller.js:648
@@ -1929,10 +1933,6 @@ msgstr ""
 #: src/app/components/service/service.controller.js:73
 #: src/app/components/service/services.controller.js:59
 msgid "The user was successfully unsubscribed from this service"
-msgstr ""
-
-#: src/app/components/auth/verify.controller.js:16
-msgid "The verification link did not work"
 msgstr ""
 
 #: src/app/common/errors.controller.js:46
