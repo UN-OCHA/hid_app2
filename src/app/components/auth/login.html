@@ -14,16 +14,12 @@
         <input type="password" id="password" ng-model="password" required placeholder="{{'Your password' |  translate }}">
       </div>
       <div class="row form-field">
-        <div class="col-xs-6">
-          <a href="/register" class="btn-secondary btn-block btn-body-font" translate>Register</a>
-        </div>
-        <div class="col-xs-6">
-          <button type="submit" class="btn-primary btn-block btn-body-font t-login-btn" ng-class="{'saving' : saving}">
-            <loader type="inline" text="" ng-if="saving"></loader>
-            <span ng-if="!saving" translate>Login</span>
-          </button>
-        </div>
+        <button type="submit" class="btn-primary btn-block btn-body-font t-login-btn" ng-class="{'saving' : saving}">
+          <loader type="inline" text="" ng-if="saving"></loader>
+          <span ng-if="!saving" translate>Login</span>
+        </button>
       </div>
+      <p><a href="/register" translate>Register a new Humanitarian ID Account</a></p>
       <p><a href="/password_reset" translate>Forgot/Reset password</a></p>
     </form>
   </div>
