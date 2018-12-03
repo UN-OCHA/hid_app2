@@ -1941,7 +1941,7 @@ msgid "The user was successfully unsubscribed from this service"
 msgstr ""
 
 #: src/app/common/errors.controller.js:46
-msgid "There is an error in your registration. You may have already registered. If so, simply <a href=\"/password_reset\">reset your password</a>."
+msgid "There is an error in your registration. You may have already registered. If so, simply <a href=\"/password_reset\" target=\"_top\">reset your password</a>."
 msgstr ""
 
 #: src/app/common/errors.controller.js:41
