@@ -7,6 +7,11 @@
 	display: none;
 }
 
+.t-login-btn {
+	max-width: 50%;
+	margin-left: 1em;
+}
+
 @include media-query(sm) {
 
 	.login__heading {
