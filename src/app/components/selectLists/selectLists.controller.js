@@ -72,8 +72,21 @@
       return listSelected;
     }
 
+    function canCheckIn (list, user) {
+      if (list.joinability === 'public' || list.joinability === 'moderated') {
+        return true;
+      }
+      if (list.joinability === 'private' && (list.isManager(user) || list.isOwner(user))) {
+        return true;
+      }
+      return false;
+    }
+
     function filterLists (lists, selectedLists, user) {
       var filteredLists = lists.filter(function (list) {
+        if ($scope.filterListsMember && $scope.checkInOnly) {
+          return !isListMember(list, user) && !isSelected(selectedLists, list) && canCheckIn(list, user);
+        }
       	if ($scope.filterListsMember) {
         	return !isListMember(list, user) && !isSelected(selectedLists, list);
       	}

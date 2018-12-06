@@ -37,6 +37,11 @@
       return out;
     };
 
+    // Is user owner of the list ?
+    List.prototype.isOwner = function (user) {
+      return angular.equals(user._id, this.owner._id);
+    };
+
     // Determine whether a user has access to a list and can cache it
     List.prototype.isCacheable = function (user) {
       if (this.visibility === 'all' || this.visibility === 'inlist'

@@ -268,23 +268,23 @@ msgstr ""
 msgid "Change settings"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:201
+#: src/app/components/checkin/checkin.controller.js:202
 msgid "Changed primary email to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:209
+#: src/app/components/checkin/checkin.controller.js:210
 msgid "Changed primary job title to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:205
+#: src/app/components/checkin/checkin.controller.js:206
 msgid "Changed primary location to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:193
+#: src/app/components/checkin/checkin.controller.js:194
 msgid "Changed primary organization to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:197
+#: src/app/components/checkin/checkin.controller.js:198
 msgid "Changed primary phone number to:"
 msgstr ""
 
@@ -1774,7 +1774,7 @@ msgstr ""
 msgid "Social Networks"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:145
+#: src/app/components/checkin/checkin.controller.js:146
 msgid "Some of you check-ins are pending, we will get back to you soon."
 msgstr ""
 
@@ -2294,7 +2294,7 @@ msgstr ""
 msgid "You should only check into an organization that you belong to. All organizational lists are moderated, i.e. your check-in will have to be approved by a Humanitarian ID manager."
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:143
+#: src/app/components/checkin/checkin.controller.js:144
 msgid "You were successfully checked in."
 msgstr ""
 
@@ -2525,7 +2525,7 @@ msgstr ""
 msgid "subscribers"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:152
+#: src/app/components/checkin/checkin.controller.js:153
 msgid "was successfully checked in"
 msgstr ""
 

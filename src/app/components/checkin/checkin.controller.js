@@ -25,6 +25,7 @@
     $scope.saving = false;
     $scope.selectedLists = []; // used by nested select lists controller
     $scope.filterListsMember = true; // used by nested select lists controller
+    $scope.checkInOnly = true; // used by nested select lists controller
 
     function isListMember (list, user) {
       var inList = false;
