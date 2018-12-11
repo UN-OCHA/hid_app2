@@ -39,7 +39,7 @@
         name: gettextCatalog.getString('Job title')
       },
       {
-        value: 'organization',
+        value: 'organization.acronymsOrNames.' + gettextCatalog.getCurrentLanguage(),
         name: gettextCatalog.getString('Organization')
       },
       {
