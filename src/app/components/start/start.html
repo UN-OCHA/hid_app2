@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
-		
+
 		<div ng-controller="UserEditCtrl">
 			<div class="start-form start-form-header"><img src="/img/logo.svg" alt="Humanitarian ID"></div>
 			<form class="start-form" ng-if="currentStep === 1">
@@ -8,7 +8,7 @@
 					<h1 class="start-form__heading" translate>Thanks for registering</h1>
 
 				<p class="start-form__intro" translate>To get started, please give us some information about yourself.</p>
-				<button type="submit" 
+				<button type="submit"
 					class="btn-primary btn-block"
 					ng-click="nextStep()"
 					translate>Next
@@ -27,10 +27,11 @@
 							</ui-select-choices>
 						</ui-select>
 					</div>
+					<p translate>If your organization is not listed, click <a href="https://docs.google.com/a/humanitarianresponse.info/forms/d/e/1FAIpQLSdpkMue4gFydSm1PwhSIQonpWRGG50ouJJdo8NbcvaMv_pcDw/viewform?c=0&w=1" target="_blank">here</a> to request adding it.</p>
 				</div>
 
 				<div class="form-field">
-					<button type="submit" 
+					<button type="submit"
 						class="btn-primary btn-block"
 						ng-click="addPrimaryOrg()"
 						translate>Next
@@ -68,7 +69,7 @@
         </div>
 
 				<div class="form-field">
-					<button type="submit" 
+					<button type="submit"
 						class="btn-primary btn-block"
 						ng-click="addPrimaryLocation()"
 						translate>Next
@@ -80,7 +81,7 @@
 			<form class="start-form" ng-if="currentStep === 4">
 				<h1 class="start-form__heading">Finishing your profile</h1>
 				<p class="start-form__intro" translate>You can add more information to your profile at any time via the 'Profile' link in your account menu on the top right</p>
-				<button type="submit" 
+				<button type="submit"
 						class="btn-primary btn-block"
 						ng-click="nextStep()"
 						translate>Next

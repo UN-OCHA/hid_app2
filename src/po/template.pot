@@ -82,11 +82,11 @@ msgstr ""
 msgid "Add Service"
 msgstr ""
 
-#: src/app/components/user/user.html:489
+#: src/app/components/user/user.html:490
 msgid "Add a job title"
 msgstr ""
 
-#: src/app/components/user/user.html:487
+#: src/app/components/user/user.html:488
 msgid "Add a job title:"
 msgstr ""
 
@@ -123,7 +123,7 @@ msgid "Add email:"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:309
-#: src/app/components/user/user.html:590
+#: src/app/components/user/user.html:591
 msgid "Add location"
 msgstr ""
 
@@ -147,16 +147,16 @@ msgstr ""
 msgid "Add social network:"
 msgstr ""
 
-#: src/app/components/user/user.html:737
+#: src/app/components/user/user.html:738
 msgid "Add website:"
 msgstr ""
 
-#: src/app/components/user/user.html:643
+#: src/app/components/user/user.html:644
 msgid "Additional Information"
 msgstr ""
 
-#: src/app/components/user/user.html:773
-#: src/app/components/user/user.html:784
+#: src/app/components/user/user.html:774
+#: src/app/components/user/user.html:785
 msgid "Administrator"
 msgstr ""
 
@@ -381,11 +381,11 @@ msgstr ""
 msgid "Cluster"
 msgstr ""
 
-#: src/app/components/user/user.html:697
+#: src/app/components/user/user.html:698
 msgid "Clusters / Working Groups"
 msgstr ""
 
-#: src/app/components/user/user.html:721
+#: src/app/components/user/user.html:722
 msgid "Co-ordination Hubs"
 msgstr ""
 
@@ -489,7 +489,7 @@ msgstr ""
 msgid "Create your own contact lists and share them with others. Let others check in to your lists or decide for yourself who can join."
 msgstr ""
 
-#: src/app/components/user/user.html:801
+#: src/app/components/user/user.html:802
 msgid "Created"
 msgstr ""
 
@@ -602,7 +602,7 @@ msgid "Disaster"
 msgstr ""
 
 #: src/app/components/operations/operation.html:86
-#: src/app/components/user/user.html:709
+#: src/app/components/user/user.html:710
 msgid "Disasters"
 msgstr ""
 
@@ -788,7 +788,7 @@ msgstr ""
 msgid "Forgot/Reset password"
 msgstr ""
 
-#: src/app/components/user/user.html:646
+#: src/app/components/user/user.html:647
 msgid "Functional roles"
 msgstr ""
 
@@ -874,6 +874,11 @@ msgstr ""
 msgid "If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date."
 msgstr ""
 
+#: src/app/components/start/start.html:30
+#: src/app/components/user/user.html:450
+msgid "If your organization is not listed, click <a href=\"https://docs.google.com/a/humanitarianresponse.info/forms/d/e/1FAIpQLSdpkMue4gFydSm1PwhSIQonpWRGG50ouJJdo8NbcvaMv_pcDw/viewform?c=0&w=1\" target=\"_blank\">here</a> to request adding it."
+msgstr ""
+
 #: src/app/components/user/user.controller.js:172
 msgid "In order to view this person’s profile, please contact info@humanitarian.id"
 msgstr ""
@@ -903,7 +908,7 @@ msgstr ""
 msgid "Job title"
 msgstr ""
 
-#: src/app/components/user/user.html:474
+#: src/app/components/user/user.html:475
 msgid "Job titles"
 msgstr ""
 
@@ -929,7 +934,7 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: src/app/components/user/user.html:800
+#: src/app/components/user/user.html:801
 msgid "Last Updated"
 msgstr ""
 
@@ -983,8 +988,8 @@ msgid "Locale"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:303
-#: src/app/components/start/start.html:66
-#: src/app/components/user/user.html:580
+#: src/app/components/start/start.html:67
+#: src/app/components/user/user.html:581
 msgid "Locality"
 msgstr ""
 
@@ -992,7 +997,7 @@ msgstr ""
 msgid "Location filters"
 msgstr ""
 
-#: src/app/components/user/user.html:528
+#: src/app/components/user/user.html:529
 msgid "Locations"
 msgstr ""
 
@@ -1035,8 +1040,8 @@ msgstr ""
 msgid "Manage your own lists"
 msgstr ""
 
-#: src/app/components/user/user.html:774
-#: src/app/components/user/user.html:793
+#: src/app/components/user/user.html:775
+#: src/app/components/user/user.html:794
 #: src/app/components/user/users.controller.js:73
 msgid "Manager"
 msgstr ""
@@ -1113,9 +1118,9 @@ msgid "New password"
 msgstr ""
 
 #: src/app/components/start/start.html:11
-#: src/app/components/start/start.html:33
-#: src/app/components/start/start.html:71
-#: src/app/components/start/start.html:83
+#: src/app/components/start/start.html:34
+#: src/app/components/start/start.html:72
+#: src/app/components/start/start.html:84
 #: src/app/components/start/tutorial.html:87
 #: src/app/components/user/kiosk.html:22
 #: src/app/components/user/kiosk.html:34
@@ -1142,7 +1147,7 @@ msgstr ""
 msgid "No job title"
 msgstr ""
 
-#: src/app/components/user/user.html:481
+#: src/app/components/user/user.html:482
 msgid "No job titles"
 msgstr ""
 
@@ -1158,7 +1163,7 @@ msgstr ""
 msgid "No location"
 msgstr ""
 
-#: src/app/components/user/user.html:551
+#: src/app/components/user/user.html:552
 msgid "No locations"
 msgstr ""
 
@@ -1178,7 +1183,7 @@ msgstr ""
 msgid "No pending connections"
 msgstr ""
 
-#: src/app/components/user/user.html:775
+#: src/app/components/user/user.html:776
 msgid "No permissions set"
 msgstr ""
 
@@ -1194,7 +1199,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: src/app/components/user/user.html:679
+#: src/app/components/user/user.html:680
 msgid "No roles"
 msgstr ""
 
@@ -1210,7 +1215,7 @@ msgstr ""
 msgid "No subscriptions"
 msgstr ""
 
-#: src/app/components/user/user.html:758
+#: src/app/components/user/user.html:759
 msgid "No websites"
 msgstr ""
 
@@ -1265,7 +1270,7 @@ msgid "Operation saved successfully"
 msgstr ""
 
 #: src/app/components/operations/operations.html:3
-#: src/app/components/user/user.html:685
+#: src/app/components/user/user.html:686
 msgid "Operations"
 msgstr ""
 
@@ -1334,7 +1339,7 @@ msgstr ""
 msgid "People on the list only"
 msgstr ""
 
-#: src/app/components/user/user.html:771
+#: src/app/components/user/user.html:772
 msgid "Permissions"
 msgstr ""
 
@@ -1475,7 +1480,7 @@ msgstr ""
 
 #: src/app/components/user/user.html:178
 #: src/app/components/user/user.html:277
-#: src/app/components/user/user.html:533
+#: src/app/components/user/user.html:534
 msgid "Request"
 msgstr ""
 
@@ -1535,7 +1540,7 @@ msgstr ""
 msgid "Search by name"
 msgstr ""
 
-#: src/app/components/start/start.html:45
+#: src/app/components/start/start.html:46
 msgid "Search for a country"
 msgstr ""
 
@@ -1595,18 +1600,18 @@ msgstr ""
 msgid "Secret"
 msgstr ""
 
+#: src/app/components/footer/footer.html:44
+msgid "See <a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\" style=\"color: #fff;\">here</a> other platforms using Humanitarian ID login."
+msgstr ""
+
 #: src/app/components/checkin/checkin.html:23
 #: src/app/components/search/search-form.html:17
 #: src/app/components/search/search-form.html:28
 msgid "See all"
 msgstr ""
 
-#: src/app/components/footer/footer.html:44
-msgid "See below for other platforms using Humanitarian ID login:"
-msgstr ""
-
 #: src/app/components/checkin/checkin.html:282
-#: src/app/components/user/user.html:560
+#: src/app/components/user/user.html:561
 msgid "Select a country"
 msgstr ""
 
@@ -1631,12 +1636,12 @@ msgid "Select a primary phone number:"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:293
-#: src/app/components/start/start.html:56
-#: src/app/components/user/user.html:570
+#: src/app/components/start/start.html:57
+#: src/app/components/user/user.html:571
 msgid "Select a region"
 msgstr ""
 
-#: src/app/components/user/user.html:653
+#: src/app/components/user/user.html:654
 msgid "Select a role"
 msgstr ""
 
@@ -1728,15 +1733,15 @@ msgstr ""
 msgid "Set primary email:"
 msgstr ""
 
-#: src/app/components/user/user.html:502
+#: src/app/components/user/user.html:503
 msgid "Set primary job title:"
 msgstr ""
 
-#: src/app/components/user/user.html:596
+#: src/app/components/user/user.html:597
 msgid "Set primary location:"
 msgstr ""
 
-#: src/app/components/user/user.html:454
+#: src/app/components/user/user.html:455
 msgid "Set primary organization:"
 msgstr ""
 
@@ -2030,8 +2035,8 @@ msgid "Type"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:304
-#: src/app/components/start/start.html:67
-#: src/app/components/user/user.html:581
+#: src/app/components/start/start.html:68
+#: src/app/components/user/user.html:582
 msgid "Type a locality"
 msgstr ""
 
@@ -2138,7 +2143,7 @@ msgstr ""
 msgid "Verified"
 msgstr ""
 
-#: src/app/components/user/user.html:765
+#: src/app/components/user/user.html:766
 msgid "Verified by"
 msgstr ""
 
@@ -2200,7 +2205,7 @@ msgstr ""
 msgid "We could not unsubscribe you from this service"
 msgstr ""
 
-#: src/app/components/user/user.html:734
+#: src/app/components/user/user.html:735
 msgid "Websites"
 msgstr ""
 
@@ -2213,7 +2218,7 @@ msgstr ""
 msgid "What are these?"
 msgstr ""
 
-#: src/app/components/start/start.html:43
+#: src/app/components/start/start.html:44
 msgid "What is your primary location?"
 msgstr ""
 
@@ -2237,7 +2242,7 @@ msgstr ""
 msgid "Who should be able to see your email addresses?"
 msgstr ""
 
-#: src/app/components/user/user.html:620
+#: src/app/components/user/user.html:621
 msgid "Who should be able to see your locations?"
 msgstr ""
 
@@ -2257,7 +2262,7 @@ msgstr ""
 msgid "You are not part of any lists"
 msgstr ""
 
-#: src/app/components/start/start.html:82
+#: src/app/components/start/start.html:83
 msgid "You can add more information to your profile at any time via the 'Profile' link in your account menu on the top right"
 msgstr ""
 
@@ -2353,7 +2358,7 @@ msgstr ""
 #: src/app/components/user/user.controller.js:39
 #: src/app/components/user/user.html:183
 #: src/app/components/user/user.html:281
-#: src/app/components/user/user.html:538
+#: src/app/components/user/user.html:539
 msgid "Your connection request is pending"
 msgstr ""
 
@@ -2484,11 +2489,11 @@ msgstr ""
 msgid "lists found"
 msgstr ""
 
-#: src/app/components/user/user.html:533
+#: src/app/components/user/user.html:534
 msgid "location"
 msgstr ""
 
-#: src/app/components/user/user.html:542
+#: src/app/components/user/user.html:543
 msgid "locations can only be viewed by verified users."
 msgstr ""
 
