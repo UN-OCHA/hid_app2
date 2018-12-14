@@ -15,7 +15,7 @@ msgstr ""
 msgid "/ Unverified"
 msgstr ""
 
-#: src/app/components/user/preferences.html:207
+#: src/app/components/user/preferences.html:203
 msgid "2. Enter the code given:"
 msgstr ""
 
@@ -26,11 +26,11 @@ msgid ""
 "        </button>"
 msgstr ""
 
-#: src/app/components/user/preferences.html:202
+#: src/app/components/user/preferences.html:198
 msgid "<strong>1. Scan the QR Code:</strong>"
 msgstr ""
 
-#: src/app/components/user/preferences.html:221
+#: src/app/components/user/preferences.html:217
 msgid "<strong>3. Save your recovery codes:</strong>"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 msgid "Account preferences"
 msgstr ""
 
-#: src/app/components/user/preferences.html:191
+#: src/app/components/user/preferences.html:187
 msgid "Activate"
 msgstr ""
 
@@ -441,8 +441,8 @@ msgstr ""
 msgid "Coordination hub"
 msgstr ""
 
-#: src/app/components/user/preferences.html:231
-#: src/app/components/user/preferences.html:258
+#: src/app/components/user/preferences.html:227
+#: src/app/components/user/preferences.html:254
 msgid "Copy"
 msgstr ""
 
@@ -534,7 +534,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: src/app/components/user/preferences.html:194
+#: src/app/components/user/preferences.html:190
 msgid "Deactivate"
 msgstr ""
 
@@ -630,13 +630,13 @@ msgstr ""
 msgid "Donor"
 msgstr ""
 
-#: src/app/components/user/preferences.html:230
-#: src/app/components/user/preferences.html:257
+#: src/app/components/user/preferences.html:226
+#: src/app/components/user/preferences.html:253
 msgid "Download"
 msgstr ""
 
-#: src/app/components/user/preferences.html:224
-#: src/app/components/user/preferences.html:248
+#: src/app/components/user/preferences.html:220
+#: src/app/components/user/preferences.html:244
 msgid "Download and save your recovery codes in a safe place. They will allow you to access your account if you ever lose your phone."
 msgstr ""
 
@@ -771,7 +771,7 @@ msgstr ""
 msgid "Find others"
 msgstr ""
 
-#: src/app/components/user/preferences.html:177
+#: src/app/components/user/preferences.html:173
 msgid "Find out more"
 msgstr ""
 
@@ -792,7 +792,7 @@ msgstr ""
 msgid "Functional roles"
 msgstr ""
 
-#: src/app/components/user/preferences.html:251
+#: src/app/components/user/preferences.html:247
 msgid "Get recovery codes"
 msgstr ""
 
@@ -1240,11 +1240,11 @@ msgstr ""
 msgid "Occupation filters"
 msgstr ""
 
-#: src/app/components/user/preferences.html:187
+#: src/app/components/user/preferences.html:183
 msgid "Off"
 msgstr ""
 
-#: src/app/components/user/preferences.html:188
+#: src/app/components/user/preferences.html:184
 msgid "On"
 msgstr ""
 
@@ -1427,7 +1427,7 @@ msgstr ""
 msgid "Recent:&nbsp;"
 msgstr ""
 
-#: src/app/components/user/preferences.html:243
+#: src/app/components/user/preferences.html:239
 msgid "Recovery codes"
 msgstr ""
 
@@ -1749,7 +1749,7 @@ msgstr ""
 msgid "Set primary phone number:"
 msgstr ""
 
-#: src/app/components/user/preferences.html:179
+#: src/app/components/user/preferences.html:175
 msgid "Show less"
 msgstr ""
 
@@ -1814,11 +1814,11 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: src/app/components/user/preferences.html:186
+#: src/app/components/user/preferences.html:182
 msgid "Status:"
 msgstr ""
 
-#: src/app/components/user/preferences.html:213
+#: src/app/components/user/preferences.html:209
 #: src/app/components/user/twoFactorAuthModal.html:16
 msgid "Submit"
 msgstr ""
@@ -2011,7 +2011,7 @@ msgstr ""
 msgid "Trusted Domains"
 msgstr ""
 
-#: src/app/components/user/preferences.html:265
+#: src/app/components/user/preferences.html:261
 msgid "Trusted devices"
 msgstr ""
 
@@ -2020,11 +2020,11 @@ msgid "Tutorial"
 msgstr ""
 
 #: src/app/components/user/preferences.html:154
-msgid "Two-step verification"
+msgid "Two-factor verification"
 msgstr ""
 
 #: src/app/components/user/preferences.html:159
-msgid "Two-step verification is an effective way to protect your account from unauthorized access. When you sign in to Humanitarian ID, you can enable it through the activate button."
+msgid "Two-factor verification is an effective way to protect your account from unauthorized access. What you need to do to enable this feature:"
 msgstr ""
 
 #: src/app/components/list/all-lists.html:45

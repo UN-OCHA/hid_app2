@@ -151,27 +151,23 @@
   <tab heading="Additional security">
     <div class="block">
       <div class="block-heading">
-        <h2 translate>Two-step verification</h2>
+        <h2 translate>Two-factor verification</h2>
       </div>
 
       <div ng-if="twoFactorAuthStep === 1">
         <div  class="tfa-intro">
-          <p class="form-section__info" translate>Two-step verification is an effective way to protect your account from unauthorized access. When you sign in to Humanitarian ID, you can enable it through the activate button.
+          <p class="form-section__info" translate>Two-factor verification is an effective way to protect your account from unauthorized access. What you need to do to enable this feature:
           </p>
           <div ng-show="showMore" class="text-block">
-            <p>First you will need to download an authenticator app (e.g. the Google Authenticator - <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB">Play Store</a>, <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">App Store</a>). You'll then be sent a code to your mobile authenticator app.</p>
-            <p>Two-step verification is an optional security feature. Once enabled, Humanitarian ID will require a six-digit security code or a security key in addition to your password if you wish to <strong>change your password</strong>.</p>
-            <p>Before enabling two-step verification, you'll receive 16 backup codes. Copy these codes down and store them securely. Once a backup code is used, it can't be used again.</p>
-            <p>Enable two-step verification</p>
             <ol>
-            <li>Sign in to Humanitarian ID.</li>
-            <li>Click your name at the top of any page to open the account menu.</li>
-            <li>Click on Preferences.</li>
-            <li>Select the Security tab.</li>
-            <li>Under Two-step verification, toggle to On.</li>
-            <li>Click Get started.</li>
+            <li>If you don't have one yet, download an authenticator app (e.g. the Google Authenticator - <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_GB">Play Store</a>, <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">App Store</a>).</li>
+            <li>Then click on the Activate button below</li>
+            <li>After you have activated the Two-factor verification on this page you will see a QR-code that you need to scan with your authenticator app or you do the set-up manually.</li>
+            <li>You'll then be sent a code to your mobile authenticator app.</li>
             </ol>
-            <p>You can remove the two-step verification at any point in this menu.</p>
+            <p>Two-factor authentication is an optional security feature. Once enabled, Humanitarian ID will require a six-digit security code or a security key in addition to your password if you wish to login or change your password. You can also set a device as trusted during login, you will then not be asked a seperate code on this device.</p>
+            <p>After enabling two-factor authentication, you'll receive 16 backup codes. Copy these codes or download them and store them securely. Once a backup code is used, it can't be used again.</p>
+            <p>You can remove the two-factor authentication at any point by clicking on ‘Deactivate’ button.</p>
           </div>
           <button type="button" class="btn-small btn-transparent" ng-click="showMore = !showMore">
             <span ng-if="!showMore" translate>Find out more</span>
