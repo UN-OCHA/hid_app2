@@ -97,7 +97,7 @@
     $scope.visibility = [
       {
         value: 'me',
-        label: gettextCatalog.getString('The list owner and editors of this list only')
+        label: gettextCatalog.getString('The list owner and the managers of this list only')
       },
       {
         value: 'inlist',

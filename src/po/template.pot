@@ -494,7 +494,12 @@ msgid "Created"
 msgstr ""
 
 #: src/app/components/list/all-lists.html:46
+#: src/app/components/list/new-list.html:45
 msgid "Created by"
+msgstr ""
+
+#: src/app/components/list/new-list.html:40
+msgid "Created on"
 msgstr ""
 
 #: src/app/components/user/users.controller.js:51
@@ -1509,7 +1514,7 @@ msgid "Satellite Phone"
 msgstr ""
 
 #: src/app/components/client/new-client.html:65
-#: src/app/components/list/new-list.html:40
+#: src/app/components/list/new-list.html:52
 #: src/app/components/operations/new-operation.html:50
 #: src/app/components/service/new-service.html:87
 #: src/app/components/trustedDomain/trustedDomains.html:22
@@ -1601,7 +1606,7 @@ msgid "Secret"
 msgstr ""
 
 #: src/app/components/footer/footer.html:44
-msgid "See <a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\" style=\"color: #fff;\">here</a> other platforms using Humanitarian ID login."
+msgid "See <a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\" style=\"color: #fff;\">here</a> platforms using Humanitarian ID login."
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:23
@@ -1898,7 +1903,7 @@ msgid "The contact folder was successfully created."
 msgstr ""
 
 #: src/app/components/list/listEdit.controller.js:100
-msgid "The list owner and editors of this list only"
+msgid "The list owner and the managers of this list only"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.controller.js:89

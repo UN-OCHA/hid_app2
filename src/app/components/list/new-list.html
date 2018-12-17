@@ -35,6 +35,18 @@
           </ui-select-choices>
         </ui-select>
       </div>
+
+      <div class="form-field" ng-if="list._id">
+        <label translate>Created on</label>
+        <p><span ng-bind="list.createdAt | date:'longDate'"></span></p>
+      </div>
+
+      <div class="form-field" ng-if="list._id">
+        <label translate>Created by</label>
+        <p ng-if="list.owner.id"><a href="/user/{{list.owner.id}}">{{list.owner.name}}</a></p>
+        <p ng-if="!list.owner.id"><a href="/user/5b2128e754a0d6046d6c69f2">Humanitarian ID</a></p>
+      </div>
+
       <button type="submit" class="btn-primary t-save-list-btn" ng-class="{'saving' : saving}">
         <loader type="inline" text="" ng-if="saving"></loader>
         <span ng-if="!saving" translate>Save</span>
