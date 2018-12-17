@@ -24,6 +24,10 @@
       }
       $scope.list = new List();
       $scope.list.type = 'list';
+      if ($scope.currentUser.verified !== true) {
+        $scope.list.visibility = 'me';
+        $scope.list.joinability = 'private';
+      }
     }
 
     function getManagers (search) {
