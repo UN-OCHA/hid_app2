@@ -15,7 +15,7 @@
     function requestPasswordReset () {
       var app_reset_url = $location.protocol() + '://' + $location.host() + '/reset_password';
       User.passwordReset($scope.email, function (response) {
-        alertService.add('success', gettextCatalog.getString('You will soon receive an email which will allow you to reset your password.'));
+        alertService.add('success', gettextCatalog.getString('Your password reset instructions have been sent. Please check your email. If you do not receive an email, please check your spam folder or contact Humanitarian ID Support.'));
         $scope.reset.$setPristine();
       }, function (error) {
         var msg = gettextCatalog.getString('There was an error resetting your password. Please try again or contact the HID team.');

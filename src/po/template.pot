@@ -2336,10 +2336,6 @@ msgstr ""
 msgid "You were successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/components/auth/resetPassword.controller.js:18
-msgid "You will soon receive an email which will allow you to reset your password."
-msgstr ""
-
 #: src/app/common/errors.controller.js:16
 msgid "You've reached the API request limit, please try again in 10 minutes"
 msgstr ""
@@ -2418,6 +2414,10 @@ msgstr ""
 
 #: src/app/common/messages.html:4
 msgid "Your password is not valid"
+msgstr ""
+
+#: src/app/components/auth/resetPassword.controller.js:18
+msgid "Your password reset instructions have been sent. Please check your email. If you do not receive an email, please check your spam folder or contact Humanitarian ID Support."
 msgstr ""
 
 #: src/app/components/user/userPrefs.controller.js:30
