@@ -38,7 +38,7 @@ msgstr ""
 msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:630
+#: src/app/components/user/users.controller.js:632
 msgid "A synchronized Google Sheet was created. Find it at:"
 msgstr ""
 
@@ -1792,11 +1792,11 @@ msgstr ""
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:651
+#: src/app/components/user/users.controller.js:653
 msgid "Sorry, the contact folder could not be created..."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:635
+#: src/app/components/user/users.controller.js:637
 msgid "Sorry, the spreadsheet export did not work..."
 msgstr ""
 
@@ -1898,7 +1898,7 @@ msgstr ""
 msgid "The confirmation link did not work"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:648
+#: src/app/components/user/users.controller.js:650
 msgid "The contact folder was successfully created."
 msgstr ""
 
@@ -2025,11 +2025,11 @@ msgid "Tutorial"
 msgstr ""
 
 #: src/app/components/user/preferences.html:154
-msgid "Two-factor verification"
+msgid "Two-factor authentication"
 msgstr ""
 
 #: src/app/components/user/preferences.html:159
-msgid "Two-factor verification is an effective way to protect your account from unauthorized access. What you need to do to enable this feature:"
+msgid "Two-factor authentication is an effective way to protect your account from unauthorized access. What you need to do to enable this feature:"
 msgstr ""
 
 #: src/app/components/list/all-lists.html:45
@@ -2295,8 +2295,8 @@ msgstr ""
 msgid "You have granted the following applications access to your Humanitarian ID account."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:639
-#: src/app/components/user/users.controller.js:655
+#: src/app/components/user/users.controller.js:641
+#: src/app/components/user/users.controller.js:657
 msgid "You need to select a list"
 msgstr ""
 

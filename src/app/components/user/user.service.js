@@ -139,15 +139,20 @@
     };
 
     // Export to csv
-    User.getCSVUrl = function(params) {
+    User.getCSVUrl = function(params, success, error) {
       var par = angular.copy(params);
       delete par.limit;
       delete par.offset;
-      par.access_token = $window.localStorage.getItem('jwtToken');
+
       var urlp = Object.keys(par).map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(par[k]);
       }).join('&');
-      return config.apiUrl + 'user.csv?' + urlp;
+
+      this
+        .getBewit(config.apiUrl + 'user.csv?' + urlp)
+        .then(function (response) {
+          success(config.apiUrl + 'user.csv?' + urlp + '&bewit=' + response.data.bewit);
+        });
     };
 
     // Export to TXT
@@ -182,12 +187,17 @@
       return $http.post(config.apiUrl + 'outlookGroup', body);
     };
 
+    User.getBewit = function (url) {
+      var body = {};
+      body.url = url;
+      return $http.post(config.apiUrl + 'signedRequest', body);
+    };
+
     // Export to pdf
-    User.getPDFUrl = function (params, format) {
+    User.getPDFUrl = function (params, format, success, error) {
       var par = angular.copy(params);
       delete par.limit;
       delete par.offset;
-      par.access_token = $window.localStorage.getItem('jwtToken');
 
       //remove any undefined params
       angular.forEach(par, function (value, key) {
@@ -204,8 +214,12 @@
       if (format) {
         url += 'format=' + format + '&';
       }
-
-      return pdfViewer + encodeURIComponent(url + urlp);
+      this
+        .getBewit(url + urlp)
+        .then(function (response) {
+          var fullUrl = url + urlp + '&bewit=' + response.data.bewit;
+          success(pdfViewer + encodeURIComponent(fullUrl));
+        });
     };
 
     User.prototype.setAppMetaData = function (param) {

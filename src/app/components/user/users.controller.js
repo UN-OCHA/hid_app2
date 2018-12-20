@@ -574,25 +574,26 @@
     });
 
     $scope.$on('users-export-csv', function () {
-      var url = User.getCSVUrl(currentRequest);
-      var eventLabel = '';
-      if ($scope.list) {
-        eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
-      }
-      else {
-        if ($scope.currentFilters && $scope.currentFilters.all) {
-          $scope.currentFilters.all.forEach(function (filter) {
-            eventLabel += filter.label + ' ';
-          });
+      User.getCSVUrl(currentRequest, function (url) {
+        var eventLabel = '';
+        if ($scope.list) {
+          eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
         }
-      }
-      $window.ga('send', {
-        hitType: 'event',
-        eventCategory: 'CSV',
-        eventAction: 'Download',
-        eventLabel: eventLabel
+        else {
+          if ($scope.currentFilters && $scope.currentFilters.all) {
+            $scope.currentFilters.all.forEach(function (filter) {
+              eventLabel += filter.label + ' ';
+            });
+          }
+        }
+        $window.ga('send', {
+          hitType: 'event',
+          eventCategory: 'CSV',
+          eventAction: 'Download',
+          eventLabel: eventLabel
+        });
+        $window.open(url);
       });
-      $window.open(url);
     });
 
     $scope.$on('users-export-txt', function (evt, success, error) {
@@ -600,25 +601,26 @@
     });
 
     $scope.$on('users-export-pdf', function (evt, format) {
-      var url = User.getPDFUrl(currentRequest, format);
-      var eventLabel = '';
-      if ($scope.list) {
-        eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
-      }
-      else {
-        if ($scope.currentFilters && $scope.currentFilters.all) {
-          $scope.currentFilters.all.forEach(function (filter) {
-            eventLabel += filter.label + ' ';
-          });
+      User.getPDFUrl(currentRequest, format, function (url) {
+        var eventLabel = '';
+        if ($scope.list) {
+          eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
         }
-      }
-      $window.ga('send', {
-        hitType: 'event',
-        eventCategory: 'PDF',
-        eventAction: 'Download',
-        eventLabel: eventLabel
+        else {
+          if ($scope.currentFilters && $scope.currentFilters.all) {
+            $scope.currentFilters.all.forEach(function (filter) {
+              eventLabel += filter.label + ' ';
+            });
+          }
+        }
+        $window.ga('send', {
+          hitType: 'event',
+          eventCategory: 'PDF',
+          eventAction: 'Download',
+          eventLabel: eventLabel
+        });
+        $window.open(url);
       });
-      $window.open(url);
     });
 
     $scope.$on('users-export-gss', function (evt) {
