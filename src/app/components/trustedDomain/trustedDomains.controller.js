@@ -5,9 +5,9 @@
     .module('app.client')
     .controller('TrustedDomainsCtrl', TrustedDomainsCtrl);
 
-  TrustedDomainsCtrl.$inject = ['$scope', '$routeParams', 'gettextCatalog', 'alertService', 'TrustedDomain'];
+  TrustedDomainsCtrl.$inject = ['$scope', '$routeParams', 'gettextCatalog', 'alertService', 'TrustedDomain', 'List'];
 
-  function TrustedDomainsCtrl ($scope, $routeParams, gettextCatalog, alertService, TrustedDomain) {
+  function TrustedDomainsCtrl ($scope, $routeParams, gettextCatalog, alertService, TrustedDomain, List) {
     $scope.pagination = {
       currentPage: 1,
       itemsPerPage: 10,
@@ -55,6 +55,12 @@
       domain.$delete(function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Domain deleted successfully'));
         $scope.pageChanged();
+      });
+    };
+
+    $scope.getOrganizations = function (search) {
+      List.query({'name': search, 'type': 'organization'}, function (orgs) {
+        $scope.organizations = orgs;
       });
     };
 

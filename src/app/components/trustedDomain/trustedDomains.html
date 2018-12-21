@@ -19,6 +19,17 @@
         <label for="description" translate>Description</label>
         <textarea ng-model="addedDomain.description" class="form-control" name="description" rows="5" cols="20"></textarea>
       </div>
+      <div class="form-field">
+        <label for="list" translate>Description</label>
+        <ui-select name="list" ng-model="addedDomain.list">
+          <ui-select-match placeholder="{{'Select an organisation'|translate}}">
+            {{$select.selected.name}}
+          </ui-select-match>
+          <ui-select-choices refresh="getOrganizations($select.search)" repeat="organization in organizations | filter: $select.search track by $index">
+            {{organization.name}}
+          </ui-select-choices>
+        </ui-select>
+      </div>
       <button type="submit" class="btn btn-primary" ng-disabled="addedDomain.$invalid || addedDomain.$submitted" translate>Save</button>
     </form>
   </div>
@@ -30,6 +41,7 @@
       <th translate>ID</th>
       <th translate>URL</th>
       <th translate>Description</th>
+      <th translate>List</th>
       <th translate>Remove</th>
     </tr>
   </thead>
@@ -38,6 +50,7 @@
       <td>{{domain._id}}</td>
       <td>{{domain.url}}</td>
       <td>{{domain.description}}</td>
+      <td><a href="/lists/{{domain.list._id}}" ng-if="domain.list">{{domain.list.name}}</a></td>
       <td class="table__td-actions"><button type="button" class="btn-transparent" title="Remove" ng-click="deleteDomain(domain)">
         <icon name="cancel" text="Remove"></icon>
       </button></td>

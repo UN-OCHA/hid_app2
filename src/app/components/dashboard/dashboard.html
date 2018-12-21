@@ -95,6 +95,9 @@
       <a class="btn-block btn-primary t-new-user-btn" href="/users/new"  ng-if="currentUser.is_admin || currentUser.isManager" translate>Add new user</a>
       <a class="btn-block btn-primary t-oauth-btn" href="/clients"  ng-if="currentUser.is_admin" translate>View OAuth Clients</a>
     </div>
+    <div class="dashboard-ctas">
+      <a class="btn-block btn-primary t-oauth-btn" href="/trustedDomains"  ng-if="currentUser.is_admin" translate>View Trusted Domains</a>
+    </div>
 
     <div class="secondary-block">
       <h2 class="secondary-block__heading" translate>Subscriptions</h2>
