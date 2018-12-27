@@ -585,7 +585,6 @@ msgstr ""
 #: src/app/components/client/new-client.html:53
 #: src/app/components/service/new-service.html:25
 #: src/app/components/trustedDomain/trustedDomains.html:19
-#: src/app/components/trustedDomain/trustedDomains.html:23
 #: src/app/components/trustedDomain/trustedDomains.html:43
 msgid "Description"
 msgstr ""
@@ -1293,6 +1292,7 @@ msgid "Options"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:25
+#: src/app/components/trustedDomain/trustedDomains.html:23
 #: src/app/components/user/kiosk.html:99
 #: src/app/components/user/user-filters.html:108
 #: src/app/components/user/users.controller.js:43

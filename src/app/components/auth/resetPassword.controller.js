@@ -28,7 +28,7 @@
     }
 
     function resetPassword (token) {
-      User.resetPassword($location.search().hash, $scope.newPassword, function (response) {
+      User.resetPassword($location.search().hash, $location.search().id, $location.search().time, $scope.newPassword, function (response) {
         alertService.add('success', gettextCatalog.getString('Your password was successfully changed. You can now login.'));
         $location.path('/');
       }, function (error) {

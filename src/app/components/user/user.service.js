@@ -49,12 +49,14 @@
     };
 
     // Reset user email
-    User.resetPassword = function(hash, password, success, error, token) {
+    User.resetPassword = function(hash, id, time, password, success, error, token) {
       var req = {
         method: 'PUT',
         url: config.apiUrl + 'user/password',
         data: {
           hash: hash,
+          id: id,
+          time: time,
           password: password
         },
         headers: {
