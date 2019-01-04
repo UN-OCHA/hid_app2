@@ -1,4 +1,9 @@
 <loader ng-if="!servicesLoaded"></loader>
+<div class="filters-group filter__search">
+  <label for="query" class="sr-only" translate>Search</label>
+  <input type="text" class="filter__search__input t-filter-name" ng-model="query" name="search" id="query" placeholder="{{'Search services'| translate}}" ng-change="search()">
+  <icon name="search"></icon>
+</div>
 <table class="table table-responsive table-responsive--has-actions">
   <thead>
     <tr>
@@ -28,11 +33,11 @@
   </tbody>
 </table>
 
-<uib-pagination 
-  total-items="pagination.totalItems" 
+<uib-pagination
+  total-items="pagination.totalItems"
   ng-model="pagination.currentPage"
-  ng-change="pageChanged()" 
-  direction-links="false" 
+  ng-change="pageChanged()"
+  direction-links="false"
   items-per-page=pagination.itemsPerPage
-  class="pagination" >    
+  class="pagination" >
 </uib-pagination>

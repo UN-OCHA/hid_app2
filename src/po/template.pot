@@ -229,7 +229,7 @@ msgstr ""
 #: src/app/components/list/list.controller.js:269
 #: src/app/components/service/allSubscriptions.controller.js:22
 #: src/app/components/service/service.controller.js:84
-#: src/app/components/service/services.controller.js:68
+#: src/app/components/service/services.controller.js:72
 msgid "Are you sure?"
 msgstr ""
 
@@ -654,7 +654,7 @@ msgstr ""
 msgid "Duplicates"
 msgstr ""
 
-#: src/app/components/service/services.html:20
+#: src/app/components/service/services.html:25
 #: src/app/components/user/userOptions.html:9
 msgid "Edit"
 msgstr ""
@@ -1105,7 +1105,7 @@ msgstr ""
 #: src/app/components/list/all-lists.html:44
 #: src/app/components/list/new-list.html:9
 #: src/app/components/service/new-service.html:16
-#: src/app/components/service/services.html:5
+#: src/app/components/service/services.html:10
 #: src/app/components/user/users.controller.js:35
 #: src/app/components/user/users.html:37
 msgid "Name"
@@ -1536,6 +1536,7 @@ msgstr ""
 
 #: src/app/components/checkin/all-check-ins.html:4
 #: src/app/components/service/all-subscriptions.html:4
+#: src/app/components/service/services.html:3
 msgid "Search"
 msgstr ""
 
@@ -1603,6 +1604,10 @@ msgstr ""
 
 #: src/app/components/checkin/checkin.html:13
 msgid "Search lists"
+msgstr ""
+
+#: src/app/components/service/services.html:4
+msgid "Search services"
 msgstr ""
 
 #: src/app/components/client/client.html:43
@@ -1712,7 +1717,7 @@ msgstr ""
 
 #: src/app/components/dashboard/dashboard.controller.js:113
 #: src/app/components/service/service.controller.js:86
-#: src/app/components/service/services.controller.js:70
+#: src/app/components/service/services.controller.js:74
 msgid "Service deleted successfully"
 msgstr ""
 
@@ -1947,12 +1952,12 @@ msgid "The user was successfully deleted."
 msgstr ""
 
 #: src/app/components/service/service.controller.js:54
-#: src/app/components/service/services.controller.js:43
+#: src/app/components/service/services.controller.js:47
 msgid "The user was successfully subscribed to this service"
 msgstr ""
 
 #: src/app/components/service/service.controller.js:73
-#: src/app/components/service/services.controller.js:59
+#: src/app/components/service/services.controller.js:63
 msgid "The user was successfully unsubscribed from this service"
 msgstr ""
 
@@ -2041,7 +2046,7 @@ msgstr ""
 #: src/app/components/list/all-lists.html:45
 #: src/app/components/list/lists-filters.html:31
 #: src/app/components/service/service.html:8
-#: src/app/components/service/services.html:6
+#: src/app/components/service/services.html:11
 msgid "Type"
 msgstr ""
 
@@ -2335,14 +2340,14 @@ msgid "You were successfully subscribed"
 msgstr ""
 
 #: src/app/components/service/service.controller.js:51
-#: src/app/components/service/services.controller.js:40
+#: src/app/components/service/services.controller.js:44
 msgid "You were successfully subscribed to this service"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.controller.js:101
 #: src/app/components/service/allSubscriptions.controller.js:26
 #: src/app/components/service/service.controller.js:70
-#: src/app/components/service/services.controller.js:56
+#: src/app/components/service/services.controller.js:60
 msgid "You were successfully unsubscribed from this service"
 msgstr ""
 

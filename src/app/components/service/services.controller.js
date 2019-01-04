@@ -15,6 +15,7 @@
       itemsPerPage: 10,
       totalItems: 0
     };
+    $scope.query = '';
 
     function getServices (offset) {
       var params = {
@@ -22,6 +23,9 @@
         limit: $scope.pagination.itemsPerPage
       };
       params.offset = offset || 0;
+      if ($scope.query !== '' && $scope.query.length > 2) {
+        params.name = $scope.query;
+      }
 
       Service.query(params, function (services, headers) {
         $scope.services = services;
@@ -75,6 +79,10 @@
     $scope.pageChanged = function () {
       var offset = $scope.pagination.itemsPerPage * ($scope.pagination.currentPage - 1);
       getServices(offset);
+    };
+
+    $scope.search = function () {
+      getServices(0);
     };
   }
 })();
