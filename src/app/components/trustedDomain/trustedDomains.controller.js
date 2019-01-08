@@ -10,7 +10,7 @@
   function TrustedDomainsCtrl ($scope, $routeParams, gettextCatalog, alertService, TrustedDomain, List) {
     $scope.pagination = {
       currentPage: 1,
-      itemsPerPage: 10,
+      itemsPerPage: 100,
       totalItems: 0
     };
 
