@@ -2,7 +2,7 @@
   window.__env = window.__env || {};
 
   // API url
-  window.__env.apiUrl = 'https://api2.dev.humanitarian.id/api/v2/';
+  window.__env.apiUrl = 'https://api.dev.humanitarian.id/api/v2/';
 
   // Hrinfo url
   window.__env.hrinfoUrl = 'https://www.humanitarianresponse.info/en/api/v1.0/';
