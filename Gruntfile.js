@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     copy: {
       config: {
         src: 'src/app/config/config.' + target + '.js',
-        dest: 'src/app/config/config.js',
+        dest: 'dist/js/config.js',
       },
       fonts_exo: {
         expand: true,
