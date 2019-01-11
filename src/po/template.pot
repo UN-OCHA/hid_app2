@@ -1791,7 +1791,7 @@ msgid ""
 "\t\t\t<a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\">related humanitarian community sites</a>."
 msgstr ""
 
-#: src/app/components/service/suggestions.html:26
+#: src/app/components/service/suggestions.html:27
 msgid "Skip"
 msgstr ""
 
@@ -1848,7 +1848,7 @@ msgid "Submit"
 msgstr ""
 
 #: src/app/components/service/service-admin.html:21
-#: src/app/components/service/suggestions.html:31
+#: src/app/components/service/suggestions.html:32
 msgid "Subscribe"
 msgstr ""
 
@@ -2333,7 +2333,9 @@ msgid "You were successfully checked in."
 msgstr ""
 
 #: src/app/components/service/suggestions.html:5
-msgid "You were successfully checked in. Given the lists you checked into, we recommend that you subscribe to the following services:"
+msgid ""
+"You were successfully checked in. Given the list(s) you checked into, we recommend that you subscribe to the services listed below.\n"
+"        Subscribing to a service means either joining a Google Group or a Mailchimp list. You will be able to unsubcribe to these services anytime from your \"Check out\" section\"."
 msgstr ""
 
 #: src/app/components/list/list.controller.js:168

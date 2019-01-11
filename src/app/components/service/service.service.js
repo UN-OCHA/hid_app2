@@ -74,6 +74,15 @@
       return index !== -1;
     };
 
+    Service.prototype.getFullName = function () {
+      if (this.type === 'googlegroup') {
+        return this.name + ' [Google Group]';
+      }
+      else {
+        return this.name + ' [Mailchimp]';
+      }
+    };
+
     // Get mailchimp lists
     Service.getMailchimpLists = function (apiKey) {
       return $http.get(config.apiUrl + 'service/mailchimp/lists?apiKey=' + apiKey);

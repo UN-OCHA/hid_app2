@@ -6,7 +6,7 @@
   </div>
   <ul class="list list--has-buttons list--has-dividers">
     <li class="list__item" ng-repeat="subscription in filterData = (currentUser.subscriptions | filter : subscriptionSearchTerm) | limitTo:itemsPerPage:itemsPerPage*(page-1) | orderBy: 'createdAt' : true">
-      {{subscription.service.name}}
+      {{subscription.service.getFullName()}}
       <button type="button" class="btn-transparent list__button" ng-click="unsubscribe(subscription)">
         <icon name="cancel" text="Remove subscription"></icon>
       </button>
@@ -14,13 +14,13 @@
     <li class="list__item" ng-if="!currentUser.subscriptions.length"><em translate>No subscriptions</em></li>
   </ul>
 
-   <uib-pagination 
+   <uib-pagination
     ng-show="filterData.length > itemsPerPage"
-    total-items="filterData.length" 
+    total-items="filterData.length"
     ng-model="page"
-    ng-change="pageChanged()" 
-    direction-links="false" 
+    ng-change="pageChanged()"
+    direction-links="false"
     items-per-page=itemsPerPage
-    class="pagination" >    
+    class="pagination" >
   </uib-pagination>
 </div>
