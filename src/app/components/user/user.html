@@ -48,6 +48,12 @@
         <span translate>Report a Problem</span>
       </button>
 
+      <button type="button" ng-click="hideUser()" class="btn-transparent sidebar-section__button t-hide-btn" ng-if="currentUser.is_admin">
+        <icon name="eye-hidden"></icon>
+        <span ng-if="!user.hidden" translate>Hide user</span>
+        <span ng-if="user.hidden" translate>Show user</span>
+      </button>
+
       <button class="btn-danger btn-transparent sidebar-section__button" ng-if="currentUser.is_admin || (currentUser.isManager && !user.email_verified && user.createdBy === currentUser._id)" ng-disabled="!isOnline" ng-click="deleteUser(user)">
         <icon name="trash"></icon>
         <span translate>Delete User</span>
@@ -120,6 +126,7 @@
           <p class="profile-header__status">{{user.status}}</p>
           <p class="profile-header__verified-text" ng-show="user.verified"><icon name="check-circle"></icon>This user has been verified.</p>
           <p class="profile-header__unverified" ng-show="!user.verified"><icon name="cancel-circle"></icon>This user has not been verified. Learn how to verify a profile <a href="https://about.humanitarian.id/faqs/" target="_blank">here</a></p>
+          <p class="profile-header__hidden-text" ng-show="user.hidden && currentUser.is_admin"><icon name="eye-hidden"></icon>This user is hidden.</p>
         </div>
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">

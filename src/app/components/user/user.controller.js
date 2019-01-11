@@ -241,6 +241,21 @@
       });
     };
 
+    $scope.hideUser = function () {
+      if (!$scope.currentUser.is_admin) {
+        return;
+      }
+      $scope.user.hidden = !$scope.user.hidden;
+      $scope.user.$update(function () {
+        if ($scope.user.id === $scope.currentUser.id) {
+          $scope.setCurrentUser($scope.user);
+        }
+        alertService.add('success', gettextCatalog.getString('User updated'), false, function () {});
+      }, function () {
+        $exceptionHandler(error, 'Verify user error');
+      });
+    };
+
     $scope.cancel = function () {
       $scope.profileForm.$hide();
       $scope.saving.show = false;
