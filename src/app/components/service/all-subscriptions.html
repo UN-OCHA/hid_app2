@@ -6,7 +6,7 @@
   </div>
   <ul class="list list--has-buttons list--has-dividers">
     <li class="list__item" ng-repeat="subscription in filterData = (currentUser.subscriptions | filter : subscriptionSearchTerm) | limitTo:itemsPerPage:itemsPerPage*(page-1) | orderBy: 'createdAt' : true">
-      {{subscription.service.getFullName()}}
+      {{subscription.service.name}}
       <button type="button" class="btn-transparent list__button" ng-click="unsubscribe(subscription)">
         <icon name="cancel" text="Remove subscription"></icon>
       </button>
