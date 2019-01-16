@@ -126,7 +126,7 @@
           <p class="profile-header__status">{{user.status}}</p>
           <p class="profile-header__verified-text" ng-show="user.verified"><icon name="check-circle"></icon>This user has been verified.</p>
           <p class="profile-header__unverified" ng-show="!user.verified"><icon name="cancel-circle"></icon>This user has not been verified. Learn how to verify a profile <a href="https://about.humanitarian.id/faqs/" target="_blank">here</a></p>
-          <p class="profile-header__hidden-text" ng-show="user.hidden && currentUser.is_admin"><icon name="eye-hidden"></icon>This user is hidden.</p>
+          <p class="profile-header__hidden-text" ng-show="user.hidden && (currentUser.is_admin || currentUser._id == user._id)"><icon name="eye-hidden"></icon>This user is hidden.</p>
         </div>
 
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}">
