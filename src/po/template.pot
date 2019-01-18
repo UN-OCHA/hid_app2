@@ -1460,7 +1460,7 @@ msgstr ""
 
 #: src/app/components/auth/register.html:4
 #: src/app/components/user/kiosk.html:131
-#: src/app/components/user/new-user.html:40
+#: src/app/components/user/new-user.html:41
 msgid "Register"
 msgstr ""
 
@@ -2335,7 +2335,7 @@ msgstr ""
 #: src/app/components/service/suggestions.html:5
 msgid ""
 "You were successfully checked in. Given the list(s) you checked into, we recommend that you subscribe to the services listed below.\n"
-"        Subscribing to a service means either joining a Google Group or a Mailchimp list. You will be able to unsubcribe to these services anytime from your \"Check out\" section\"."
+"        Subscribing to a service means either joining a Google Group or a Mailchimp list. You will be able to unsubcribe to these services anytime from your \"Check out\" section."
 msgstr ""
 
 #: src/app/components/list/list.controller.js:168

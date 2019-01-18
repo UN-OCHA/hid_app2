@@ -69,6 +69,10 @@
     karma-spec-reporter "0.0.26"
     phantomjs-prebuilt "^2.1.7"
 
+"@bower_components/angular-recaptcha@VividCortex/angular-recaptcha#^4.2.0":
+  version "4.2.0"
+  resolved "https://codeload.github.com/VividCortex/angular-recaptcha/tar.gz/73d01e431d07f2fc9b84c5e62677e8ed5b41a377"
+
 "@bower_components/angular-resource@angular/bower-angular-resource#~1.5.7":
   version "1.5.11"
   resolved "https://codeload.github.com/angular/bower-angular-resource/tar.gz/9c261ab3b6afb7d6ac5b09d0d2191ed7d6c77f80"
