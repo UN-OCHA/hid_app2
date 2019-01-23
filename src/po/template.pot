@@ -224,9 +224,9 @@ msgstr ""
 #: src/app/components/dashboard/dashboard.controller.js:76
 #: src/app/components/dashboard/dashboard.controller.js:87
 #: src/app/components/dashboard/dashboard.controller.js:97
-#: src/app/components/list/list.controller.js:186
-#: src/app/components/list/list.controller.js:200
-#: src/app/components/list/list.controller.js:269
+#: src/app/components/list/list.controller.js:193
+#: src/app/components/list/list.controller.js:207
+#: src/app/components/list/list.controller.js:276
 #: src/app/components/service/allSubscriptions.controller.js:22
 #: src/app/components/service/service.controller.js:84
 #: src/app/components/service/services.controller.js:72
@@ -1334,6 +1334,10 @@ msgstr ""
 msgid "Password (confirm)"
 msgstr ""
 
+#: src/app/components/auth/resetPassword.controller.js:18
+msgid "Password reset was sent to . Please make sure the email address is correct. If not, please reset your password again"
+msgstr ""
+
 #: src/app/components/user/new-user.html:25
 #: src/app/components/user/preferences.html:45
 msgid "Passwords must be at least <strong>8 characters</strong> long, contain at least one <strong>number</strong>, one <strong>uppercase character</strong> and one <strong>lowercase character</strong>."
@@ -1865,7 +1869,7 @@ msgid "Successfully added to list"
 msgstr ""
 
 #: src/app/components/checkin/allCheckIns.controller.js:101
-#: src/app/components/list/list.controller.js:188
+#: src/app/components/list/list.controller.js:195
 msgid "Successfully removed from list"
 msgstr ""
 
@@ -1926,7 +1930,7 @@ msgid "The list owner and the managers of this list only"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.controller.js:89
-#: src/app/components/list/list.controller.js:202
+#: src/app/components/list/list.controller.js:209
 msgid "The list was successfully deleted."
 msgstr ""
 
@@ -1942,7 +1946,7 @@ msgstr ""
 msgid "The url prefix in HID"
 msgstr ""
 
-#: src/app/components/list/list.controller.js:278
+#: src/app/components/list/list.controller.js:285
 msgid "The user was successfully approved."
 msgstr ""
 
@@ -1978,7 +1982,7 @@ msgid "There was an error logging in."
 msgstr ""
 
 #: src/app/components/auth/resetPassword.controller.js:21
-#: src/app/components/auth/resetPassword.controller.js:43
+#: src/app/components/auth/resetPassword.controller.js:40
 msgid "There was an error resetting your password. Please try again or contact the HID team."
 msgstr ""
 
@@ -1992,10 +1996,6 @@ msgstr ""
 
 #: src/app/components/list/list.html:68
 msgid "This contact list can only be viewed by verified users. Please contact us at"
-msgstr ""
-
-#: src/app/components/auth/resetPassword.controller.js:23
-msgid "This email address does not exist."
 msgstr ""
 
 #: src/app/common/messages.html:1
@@ -2014,11 +2014,11 @@ msgstr ""
 msgid "This list was removed from your favourites."
 msgstr ""
 
-#: src/app/components/list/list.controller.js:214
+#: src/app/components/list/list.controller.js:221
 msgid "This list was successfully added to your favourites."
 msgstr ""
 
-#: src/app/components/list/list.controller.js:229
+#: src/app/components/list/list.controller.js:236
 msgid "This list was successfully removed from your favourites."
 msgstr ""
 
@@ -2338,7 +2338,7 @@ msgid ""
 "        Subscribing to a service means either joining a Google Group or a Mailchimp list. You will be able to unsubcribe to these services anytime from your \"Check out\" section."
 msgstr ""
 
-#: src/app/components/list/list.controller.js:168
+#: src/app/components/list/list.controller.js:174
 msgid "You were successfully checked into the list"
 msgstr ""
 
@@ -2442,15 +2442,11 @@ msgstr ""
 msgid "Your password is not valid"
 msgstr ""
 
-#: src/app/components/auth/resetPassword.controller.js:18
-msgid "Your password reset instructions have been sent. Please check your email. If you do not receive an email, please check your spam folder or contact Humanitarian ID Support."
-msgstr ""
-
 #: src/app/components/user/userPrefs.controller.js:30
 msgid "Your password was successfully changed."
 msgstr ""
 
-#: src/app/components/auth/resetPassword.controller.js:32
+#: src/app/components/auth/resetPassword.controller.js:29
 msgid "Your password was successfully changed. You can now login."
 msgstr ""
 

@@ -5,9 +5,9 @@
     .module('app.list')
     .controller('ListCtrl', ListCtrl);
 
-  ListCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'alertService', 'gettextCatalog'];
+  ListCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'Service', 'alertService', 'gettextCatalog'];
 
-  function ListCtrl ($exceptionHandler, $rootScope, $scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, alertService, gettextCatalog) {
+  function ListCtrl ($exceptionHandler, $rootScope, $scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, Service, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;
@@ -165,10 +165,17 @@
     // Check current user in list
     $scope.checkIn = function () {
       UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (user) {
-        alertService.add('success', gettextCatalog.getString('You were successfully checked into the list'));
-        $scope.setCurrentUser(user);
-        UserDataService.notify();
-        $scope.isMember = true;
+        Service.getSuggestions($scope.list._id, $scope.currentUser).$promise.then(function () {
+          if (Service.suggestedServices.length) {
+            $location.path('services/suggestions').search({lists: $scope.list._id });
+            return;
+          }
+
+          alertService.add('success', gettextCatalog.getString('You were successfully checked into the list'));
+          $scope.setCurrentUser(user);
+          UserDataService.notify();
+          $scope.isMember = true;
+        });
       }, function (error) {
         $exceptionHandler(error, 'Removing duplicate');
       });
