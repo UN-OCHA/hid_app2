@@ -109,6 +109,9 @@
       </div>
         <div ng-if="canEditUser" ng-show="showProfileForm" aria-hidden="{{!showProfileForm}}" class="profile-header__upload">
           <ng-include src="'app/components/user/upload-button.html'"></ng-include>
+          <button class="btn-secondary btn-upload btn-danger" ng-click="deletePicture()">
+            Delete
+          </button>
         </div>
       </div>
 

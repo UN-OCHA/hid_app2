@@ -28,6 +28,7 @@
     $scope.uploadStatus = '';
     $scope.onUploadSuccess = onUploadSuccess;
     $scope.onUploadError = onUploadError;
+    $scope.deletePicture = deletePicture;
     $scope.setPrimaryEmail = setPrimaryEmail;
     $scope.resendValidationEmail = resendValidationEmail;
     $scope.setPrimaryPhone = setPrimaryPhone;
@@ -462,6 +463,11 @@
       $scope.uploadStatus = '';
       $exceptionHandler(error, 'Image upload fail');
       $scope.$emit('editUser', {status: 'fail'});
+    }
+
+    function deletePicture () {
+      $scope.user.picture = '';
+      saveUser('picture');
     }
 
     function setUserPrimaryEmail (email, token) {
