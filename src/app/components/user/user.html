@@ -299,7 +299,7 @@
           <li class="list__item" ng-repeat="email in user.emails">
             <icon name="direction-up" text="Primary" class="primary-icon" title="Primary" ng-if="user.email === email.email"></icon>
             <a ng-href="mailto:{{email.email}}">{{email.email}}</a>
-            <span class="list__meta">{{email.type}} <span ng-if="!email.validated" translate> / Unverified</span></span>
+            <span class="list__meta">{{email.type}} <span ng-if="!email.validated" translate> / Not confirmed</span></span>
           </li>
           <li class="list__item" ng-if="!user.emails.length"><em translate>No emails</em></li>
         </ul>
@@ -345,7 +345,7 @@
                     {{email.email}}
                     <span class="list__meta">{{email.type}}
                       <span ng-if="!email.validated">
-                      <span translate> / Unverified</span> -
+                      <span translate> / Not confirmed</span> -
                         <button type="button" class="btn-link" ng-click="resendValidationEmail(email.email)" translate>resend validation email</button>
                       </span>
                     </span>
