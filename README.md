@@ -15,6 +15,7 @@
 
 ### Building the app
 
+
 * Clone repo `git clone git@github.com:UN-OCHA/hid_app2.git`
 * In the app directory `cd hid_app2`
 * Switch to the dev branch `git checkout dev`
