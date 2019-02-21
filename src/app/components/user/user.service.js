@@ -68,8 +68,8 @@
     };
 
     // Validate user email
-    User.validateEmail = function (hash, email, time, success, error) {
-      $http.put(config.apiUrl + 'user/emails', { hash: hash, email: email, time: time }).then(success, error);
+    User.validateEmail = function (params, success, error) {
+      $http.put(config.apiUrl + 'user/emails', { hash: params.hash, id: params.id, email: params.email, emailId: params.emailId, time: params.time }).then(success, error);
     };
 
     // Resend validation email
