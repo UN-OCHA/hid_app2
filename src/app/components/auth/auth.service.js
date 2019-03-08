@@ -144,7 +144,7 @@
     }
 
     function refreshToken (success, failure) {
-      var newExpiry = moment().add(7, 'days').unix();
+      var newExpiry = moment().add(1, 'days').unix();
       $http.post(config.apiUrl + 'jsonwebtoken', {exp: newExpiry}).then(function (response) {
         if (response.data && response.data.token) {
           storeUser(response);
@@ -191,7 +191,7 @@
 
     var jwt = {
       login: function(email, password, tfaCode) {
-        var expiry = moment().add(7, 'days').unix();
+        var expiry = moment().add(1, 'days').unix();
 
         var req = {
           method: 'POST',
