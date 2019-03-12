@@ -75,13 +75,13 @@
   		});
 
   		it('should log the user in', function () {
-        var expiry =  moment().add(7, 'days').unix();
+        var expiry =  moment().add(1, 'days').unix();
   			httpBackend.expectPOST('http://mock-url/jsonwebtoken', {"email":"test@example.com","password":"my-password", exp: expiry}).respond({});
 	      httpBackend.flush();
   		});
 
   		it('should store the token and the user', function () {
-        var expiry =  moment().add(7, 'days').unix();
+        var expiry =  moment().add(1, 'days').unix();
   			httpBackend.whenPOST('http://mock-url/jsonwebtoken', {"email":"test@example.com","password":"my-password", exp: expiry}).respond({
   				token: 'a-token',
   				user: userFixture.user1
@@ -180,14 +180,14 @@
 
           it('should refresh the token', function () {
             AuthService.isAuthenticated();
-            var expiry = moment().add(7, 'days').unix();
+            var expiry = moment().add(1, 'days').unix();
 
             httpBackend.expectPOST('http://mock-url/jsonwebtoken', {exp: expiry}).respond({});
             httpBackend.flush();
           });
 
           it('should authenticate', function () {
-            var expiry = moment().add(7, 'days').unix();
+            var expiry = moment().add(1, 'days').unix();
             httpBackend.whenPOST('http://mock-url/jsonwebtoken', {exp: expiry}).respond({});
             AuthService.isAuthenticated(function (resp) {
               expect(resp).toBe(true);
