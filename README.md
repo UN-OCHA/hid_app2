@@ -1,6 +1,6 @@
 # Humanitarian ID Web App version 2
 
-[![Build Status](https://travis-ci.org/UN-OCHA/hid_app2.svg?branch=master)](https://travis-ci.org/UN-OCHA/hid_app2)
+[![Build Status](https://travis-ci.org/UN-OCHA/hid_app2.svg?branch=master)](https://travis-ci.org/UN-OCHA/hid_app2) [![Greenkeeper badge](https://badges.greenkeeper.io/UN-OCHA/hid_app2.svg)](https://greenkeeper.io/)
 
 ## Running locally
 
