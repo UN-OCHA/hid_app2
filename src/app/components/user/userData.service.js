@@ -146,7 +146,7 @@
     angular.forEach(users, function (user) {
       checkPending(user, list.type + 's', list._id);
       if (list.type === 'operation') {
-        filterClusters(user, list.name);
+        filterClusters(user, list.metadata.label);
       }
       if (list.type === 'office' && list.metadata && list.metadata.operation[0]) {
         filterClusters(user, list.metadata.operation[0].label);
