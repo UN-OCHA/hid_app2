@@ -17,15 +17,19 @@
     blob-tmp "^1.0.0"
     file-saver "^1.3.3"
 
-"@bower_components/angular-gettext@rubenv/angular-gettext#~2.3.4":
-  version "2.3.10"
-  resolved "https://codeload.github.com/rubenv/angular-gettext/tar.gz/5a5b42ba4d0a2eff1d60bdff65a0e849aea19cf5"
+"@bower_components/angular-gettext@rubenv/angular-gettext#^2.4.1":
+  version "2.4.1"
+  resolved "https://codeload.github.com/rubenv/angular-gettext/tar.gz/3f100a49493c6b94f1026d486ef67795461e2e1a"
 
 "@bower_components/angular-google-gapi@maximepvrt/angular-google-gapi#^1.0.1":
   version "1.0.1"
   resolved "https://codeload.github.com/maximepvrt/angular-google-gapi/tar.gz/ed166f58c8eb8ceed730e64cf9156c0121a7b7ec"
   dependencies:
     angular "~1.x"
+
+"@bower_components/angular-jwt@auth0/angular-jwt#^0.1.11":
+  version "0.1.10"
+  resolved "https://codeload.github.com/auth0/angular-jwt/tar.gz/3f597ccc69a50060a17b1a0c5ccb58b4ba405099"
 
 "@bower_components/angular-localforage@ocombe/angular-localForage#~1.3.3":
   version "1.3.7"
