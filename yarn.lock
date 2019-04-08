@@ -1252,7 +1252,7 @@ custom-event@~1.0.0:
 
 "customizr@https://github.com/doctyper/customizr/tarball/develop":
   version "1.0.0"
-  resolved "https://github.com/doctyper/customizr/tarball/develop#2fb79b5e0952f3d2d46b7c5a665e64e2f5e75a2e"
+  resolved "https://github.com/doctyper/customizr/tarball/develop#43938052ded218fded8a34df360d30a971a58c8f"
   dependencies:
     colors "^1.3.3"
     cross-spawn "^6.0.5"
