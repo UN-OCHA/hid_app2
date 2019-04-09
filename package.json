@@ -39,7 +39,7 @@
     "grunt-modernizr": "^1.0.2",
     "grunt-ng-annotate": "^3.0.0",
     "grunt-sass-import": "^0.2.2",
-    "grunt-svgmin": "^5.0.0",
+    "grunt-svgmin": "^6.0.0",
     "grunt-usemin": "^3.1.1",
     "http-server": "^0.11.1",
     "jasmine": "^3.3.1",

@@ -1,4 +1,4 @@
-FROM unocha/alpine-nodejs-builder AS builder
+FROM unocha/nodejs-builder:8.11.3 AS builder
 
 WORKDIR /src
 
