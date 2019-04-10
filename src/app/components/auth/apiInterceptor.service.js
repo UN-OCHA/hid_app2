@@ -5,9 +5,9 @@
     .module('app.auth')
     .factory('APIInterceptor', APIInterceptor);
 
-  APIInterceptor.$inject = ['$q', '$rootScope', '$window', 'config'];
+  APIInterceptor.$inject = ['$q', '$rootScope', '$window', 'config', 'jwtHelper'];
 
-  function APIInterceptor ($q, $rootScope, $window, config) {
+  function APIInterceptor ($q, $rootScope, $window, config, jwtHelper) {
 
     return {
       request: function(request) {
@@ -20,6 +20,10 @@
         if (request.url.indexOf(config.apiUrl) != -1) {
           var token = $window.localStorage.getItem('jwtToken');
           if (token) {
+            if (jwtHelper.isTokenExpired(token)) {
+              $rootScope.$broadcast('tokenExpired');
+              return null;
+            }
             request.headers.Authorization = 'Bearer ' + token;
           }
           request.withCredentials = true;

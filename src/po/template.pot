@@ -12,7 +12,7 @@ msgstr ""
 
 #: src/app/components/user/user.html:302
 #: src/app/components/user/user.html:348
-msgid "/ Unverified"
+msgid "/ Not confirmed"
 msgstr ""
 
 #: src/app/components/user/preferences.html:203
@@ -880,7 +880,7 @@ msgstr ""
 
 #: src/app/components/start/tutorial.html:42
 #: src/app/components/start/tutorial.html:65
-msgid "If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically two weeks after the end-date."
+msgid "If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically at the date you specified."
 msgstr ""
 
 #: src/app/components/start/start.html:30
@@ -1234,6 +1234,10 @@ msgstr ""
 
 #: src/app/components/checkin/editCheckinModal.html:11
 msgid "None set"
+msgstr ""
+
+#: src/app/components/checkin/checkin.html:206
+msgid "Not confirmed"
 msgstr ""
 
 #: src/app/components/auth/password_reset.html:7
@@ -1897,7 +1901,7 @@ msgstr ""
 msgid "Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap."
 msgstr ""
 
-#: src/app/components/auth/verify.controller.js:13
+#: src/app/components/auth/verify.controller.js:12
 msgid "Thank you for confirming your email. You can now login through our application, or through any other application using Humanitarian ID"
 msgstr ""
 
@@ -1917,7 +1921,7 @@ msgstr ""
 msgid "The client name"
 msgstr ""
 
-#: src/app/components/auth/verify.controller.js:16
+#: src/app/components/auth/verify.controller.js:15
 msgid "The confirmation link did not work"
 msgstr ""
 
@@ -2106,10 +2110,6 @@ msgstr ""
 #: src/app/components/dashboard/dashboard.html:115
 #: src/app/components/service/service.html:32
 msgid "Unsubscribe"
-msgstr ""
-
-#: src/app/components/checkin/checkin.html:206
-msgid "Unverified"
 msgstr ""
 
 #: src/app/components/checkin/editCheckinModal.html:1

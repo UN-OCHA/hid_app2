@@ -5,7 +5,7 @@ if (window) {
   angular.copy(window.__env, env);
 }
 
-var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'vcRecaptcha', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar', 'app.outlook', 'app.operations', 'app.trustedDomain']);
+var app = angular.module('hidApp', ['ngRoute', 'ngResource', 'xeditable', 'ui.bootstrap', 'angular-md5', 'ui.select', 'lr.upload', 'ngPassword', 'ngMessages', 'gettext', 'bcPhoneNumber', 'angularMoment', 'ngTouch', 'LocalForageModule', 'ngFileSaver', 'angular-clipboard', 'vcRecaptcha', 'angular-jwt', 'app.start', 'app.dashboard', 'app.list', 'app.client', 'app.duplicate', 'app.service', 'app.auth', 'app.common', 'app.user', 'app.checkin', 'app.search', 'app.notifications', 'app.sidebar', 'app.outlook', 'app.operations', 'app.trustedDomain']);
 
 app.constant('config', env);
 

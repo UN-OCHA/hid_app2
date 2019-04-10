@@ -5,9 +5,9 @@
     .module('app.auth')
     .controller('AuthCtrl', AuthCtrl);
 
-  AuthCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', '$window', 'alertService', 'AuthService', 'gettextCatalog', 'TwoFactorAuthService'];
+  AuthCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$location', '$timeout', '$window', 'alertService', 'AuthService', 'gettextCatalog', 'TwoFactorAuthService'];
 
-  function AuthCtrl ($exceptionHandler, $scope, $location, $timeout, $window, alertService, AuthService, gettextCatalog, TwoFactorAuthService) {
+  function AuthCtrl ($exceptionHandler, $rootScope, $scope, $location, $timeout, $window, alertService, AuthService, gettextCatalog, TwoFactorAuthService) {
     $scope.email = '';
     $scope.saving = false;
     var twoFAModal;
@@ -97,6 +97,10 @@
       $location.path('/');
       alertService.add('success', gettextCatalog.getString('You were successfully logged out.'));
     };
+
+    $rootScope.$on('tokenExpired', function (event) {
+      $scope.logout();
+    });
 
     if ($location.path() == '/logout') {
       $scope.logout();
