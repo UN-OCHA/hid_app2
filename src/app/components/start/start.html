@@ -4,6 +4,19 @@
 		<div ng-controller="UserEditCtrl">
 			<div class="start-form start-form-header"><img src="/img/logo.svg" alt="Humanitarian ID"></div>
 			<form class="start-form" ng-if="currentStep === 1">
+				<h1 class="start-form__heading">Allowing others to find you</h1>
+				<p class="start-form__intro" translate>Dear user as this is the first time you log in on Humanitarian ID website we want to inform you that by logging in, and clicking on "I agree", your profile will become visible to other users. If you do not want your profile to be find-able, please click on "I do not agree".</p>
+				<button type="submit"
+					class="btn-primary btn-block"
+					ng-click="makeVisible()"
+					translate>I agree</button>
+				<button type="submit"
+					class="btn-secondary btn-block"
+					ng-click="nextStep()"
+					translate>I do not agree</button>
+			</form>
+
+			<form class="start-form" ng-if="currentStep === 2">
 					<img src="/img/start-slide.jpg" alt="">
 					<h1 class="start-form__heading" translate>Thanks for registering</h1>
 
@@ -14,7 +27,8 @@
 					translate>Next
 				</button>
 			</form>
-			<form class="start-form" ng-if="currentStep === 2">
+
+			<form class="start-form" ng-if="currentStep === 3">
 				<div class="form-field">
 					<h1 class="start-form__heading"><label for="newOrganization" translate>What is your primary organization?</label></h1>
 					<div class="form-field">
@@ -39,7 +53,7 @@
 				</div>
 			</form>
 
-			<form class="start-form" ng-if="currentStep === 3">
+			<form class="start-form" ng-if="currentStep === 4">
 				<div class="form-field">
 					<h1 class="start-form__heading"><label for="location" translate>What is your primary location?</label></h1>
 					<ui-select ng-model="temp.location.country" on-select="setRegions($item, $model)">
@@ -78,7 +92,7 @@
 
 			</form>
 
-			<form class="start-form" ng-if="currentStep === 4">
+			<form class="start-form" ng-if="currentStep === 5">
 				<h1 class="start-form__heading">Finishing your profile</h1>
 				<p class="start-form__intro" translate>You can add more information to your profile at any time via the 'Profile' link in your account menu on the top right</p>
 				<button type="submit"
