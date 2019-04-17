@@ -35,6 +35,7 @@
     $scope.updateUser = updateUser;
     $scope.addPrimaryOrg = addPrimaryOrg;
     $scope.addPrimaryLocation = addPrimaryLocation;
+    $scope.makeVisible = makeVisible;
     $scope.nextStep = nextStep;
     $scope.currentStep = 1;
     $scope.visibilityOptions = [
@@ -53,7 +54,7 @@
     ];
     $scope.urlRegEx = /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/
     var defaultSettings = {};
-    var lastStep = 4;
+    var lastStep = 5;
     var primaryEmail = '';
 
     function getCountries () {
@@ -549,7 +550,17 @@
       addItem('location', nextStep);
     }
 
+    function makeVisible() {
+      $scope.user.authOnly = false;
+      saveUser('authOnly', nextStep);
+    }
+
     function nextStep () {
+      if (!$scope.user.appMetadata.hid.login) {
+        $scope.user.setAppMetaData({login: true});
+        updateCurrentUser();
+        saveUser('login');
+      }
       if ($scope.currentStep === lastStep) {
         $location.path('/tutorial');
         return;
