@@ -556,6 +556,9 @@
     }
 
     function nextStep () {
+      if (!$scope.user.appMetadata) {
+        $scope.user.setAppMetaData({});
+      }
       if (!$scope.user.appMetadata.hid.login) {
         $scope.user.setAppMetaData({login: true});
         updateCurrentUser();
