@@ -130,6 +130,11 @@
         alertService.pageAlert('warning', authMessage, 'caution');
         showingAuthBanner = true;
       }
+      if (user.authOnly && !currentUser.is_admin && !currentUser.isManager && user.id === currentUser.id) {
+        var authMessage = gettextCatalog.getString('Your account is currently not findable by other users. If you would like to allow other users to find you, click on the wheel icon in your profile and click on "Make profile visible"');
+        alertService.pageAlert('warning', authMessage, 'caution');
+        showingAuthBanner = true;
+      }
     }
 
     function setVcardUrl (user) {
@@ -241,7 +246,7 @@
       });
     };
 
-    $scope.hideUser = function () {
+    $scope.flagUser = function () {
       if (!$scope.currentUser.is_admin) {
         return;
       }
@@ -255,6 +260,29 @@
         $exceptionHandler(error, 'Verify user error');
       });
     };
+
+    $scope.hideUser = function () {
+      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager && $scope.user.id !== $scope.currentUser.id) {
+        return;
+      }
+      $scope.user.authOnly = !$scope.user.authOnly;
+      if (showingAuthBanner && !$scope.user.authOnly) {
+        showingAuthBanner = false;
+        alertService.resetPageAlert();
+      }
+      if ($scope.user.authOnly) {
+        authUserAlert($scope.user, $scope.currentUser);
+      }
+      $scope.user.$update(function () {
+        if ($scope.user.id === $scope.currentUser.id) {
+          $scope.setCurrentUser($scope.user);
+        }
+        alertService.add('success', gettextCatalog.getString('User updated'), false, function () {});
+
+      }, function () {
+        $exceptionHandler(error, 'Verify user error');
+      });
+    }
 
     $scope.cancel = function () {
       $scope.profileForm.$hide();

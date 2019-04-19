@@ -48,10 +48,16 @@
         <span translate>Report a Problem</span>
       </button>
 
-      <button type="button" ng-click="hideUser()" class="btn-transparent sidebar-section__button t-hide-btn" ng-if="currentUser.is_admin">
+      <button type="button" ng-click="flagUser()" class="btn-transparent sidebar-section__button t-hide-btn" ng-if="currentUser.is_admin">
+        <icon name="warning"></icon>
+        <span ng-if="!user.hidden" translate>Flag suspicious user</span>
+        <span ng-if="user.hidden" translate>Unflag suspicious user</span>
+      </button>
+
+      <button type="button" ng-click="hideUser()" class="btn-transparent sidebar-section__button t-hide-btn" ng-if="currentUser.is_admin || currentUser.isManager || currentUser._id === user._id">
         <icon name="eye-hidden"></icon>
-        <span ng-if="!user.hidden" translate>Hide user</span>
-        <span ng-if="user.hidden" translate>Show user</span>
+        <span ng-if="!user.authOnly" translate>Make profile invisible</span>
+        <span ng-if="user.authOnly" translate>Make profile visible</span>
       </button>
 
       <button class="btn-danger btn-transparent sidebar-section__button" ng-if="currentUser.is_admin || (currentUser.isManager && !user.email_verified && user.createdBy === currentUser._id)" ng-disabled="!isOnline" ng-click="deleteUser(user)">
