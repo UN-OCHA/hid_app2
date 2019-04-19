@@ -113,6 +113,7 @@
       }
       emailHash = md5.createHash(email.trim().toLowerCase());
       $scope.pictureUrl = 'https://secure.gravatar.com/avatar/' + emailHash + '?s=200&d=' + defaultImagePath;
+      console.log($scope.pictureUrl);
     }
 
     function showSavedMessage (message) {

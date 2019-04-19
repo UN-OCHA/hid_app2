@@ -453,7 +453,7 @@
     }
 
     function onUploadSuccess (response) {
-      $scope.user.picture = response.data.picture;
+      $scope.user.picture = response.data.picture + '?id=' + Date.now();
       $scope.uploadStatus = 'success';
       updateCurrentUser();
       $scope.$emit('editUser', {status: 'success', message: gettextCatalog.getString('Picture uploaded'), type: 'picture'});
