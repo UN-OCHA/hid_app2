@@ -131,11 +131,11 @@
         alertService.pageAlert('warning', authMessage, 'caution');
         showingAuthBanner = true;
       }
-      if (user.authOnly && !currentUser.is_admin && !currentUser.isManager && user.id === currentUser.id) {
+      /*if (user.authOnly && !currentUser.is_admin && !currentUser.isManager && user.id === currentUser.id) {
         var authMessage = gettextCatalog.getString('Your account is currently not findable by other users. If you would like to allow other users to find you, click on the wheel icon in your profile and click on "Make profile visible"');
         alertService.pageAlert('warning', authMessage, 'caution');
         showingAuthBanner = true;
-      }
+      }*/
     }
 
     function setVcardUrl (user) {

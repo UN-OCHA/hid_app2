@@ -54,7 +54,7 @@
     ];
     $scope.urlRegEx = /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/
     var defaultSettings = {};
-    var lastStep = 5;
+    var lastStep = 4;
     var primaryEmail = '';
 
     function getCountries () {

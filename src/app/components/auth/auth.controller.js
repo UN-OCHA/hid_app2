@@ -12,6 +12,15 @@
     $scope.saving = false;
     var twoFAModal;
 
+    function onFirstLogin () {
+      $scope.currentUser.setAppMetaData({login: true});
+      $scope.currentUser.authOnly = false;
+      $scope.currentUser.$update(function () {
+        $scope.setCurrentUser($scope.currentUser);
+        $location.path('/start');
+      });
+    }
+
     function successfullLogin () {
       $scope.initCurrentUser();
       $scope.saving = false;
@@ -21,7 +30,8 @@
 
         // New user first login (login is set to false in registration)
         if (!$scope.currentUser.appMetadata.hid.login) {
-          $location.path('/start');
+          onFirstLogin();
+          //$location.path('/start');
           return;
         }
 
@@ -44,7 +54,8 @@
       }
 
       // Users registering via auth dont have metadata set until first login
-      $location.path('/start');
+      onFirstLogin();
+      //$location.path('/start');
     }
 
     $scope.login = function(tfaCode, trustDevice) {
