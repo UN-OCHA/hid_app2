@@ -44,7 +44,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="user in users">
-      <td class="table__td-icon"><icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon><icon name="eye-hidden" text="Hidden" ng-if="user.hidden"></icon></td>
+      <td class="table__td-icon"><icon name="check-circle" text="Verified" title="Verified" ng-if="user.verified"></icon><icon name="eye-hidden" text="Hidden" ng-if="user.authOnly"></icon><icon name="flag" text="Flagged" ng-if="user.hidden"></icon></td>
       <td class="table__td-primary"><a ng-href="/users/{{user._id}}" ng-click="saveSearch(user)">{{user.name}}</a></td>
       <td class="table__td-secondary" ng-class="{'table__td-empty': !user.job_title}">
         {{user.job_title}}
