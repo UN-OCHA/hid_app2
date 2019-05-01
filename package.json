@@ -36,7 +36,7 @@
     "grunt-dom-munger": "^3.4.0",
     "grunt-karma": "^3.0.1",
     "grunt-manifest": "^0.4.4",
-    "grunt-modernizr": "^1.0.2",
+    "grunt-modernizr": "^2.0.1",
     "grunt-ng-annotate": "^3.0.0",
     "grunt-sass-import": "^0.2.2",
     "grunt-svgmin": "^6.0.0",
