@@ -64,7 +64,7 @@
     "@bower_components/angular-messages": "angular/bower-angular-messages#~1.5.7",
     "@bower_components/angular-mocks": "angular/bower-angular-mocks#~1.6.1",
     "@bower_components/angular-moment": "urish/angular-moment#~1.0.0",
-    "@bower_components/angular-password": "gdi2290/angular-password#~1.0.1",
+    "@bower_components/angular-password": "PatrickJS/angular-password#master",
     "@bower_components/angular-recaptcha": "VividCortex/angular-recaptcha#^4.2.0",
     "@bower_components/angular-resource": "angular/bower-angular-resource#~1.5.7",
     "@bower_components/angular-route": "angular/bower-angular-route#~1.5.7",
