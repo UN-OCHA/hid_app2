@@ -543,10 +543,6 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
-#: src/app/components/start/start.html:8
-msgid "Dear user as this is the first time you log in on Humanitarian ID website we want to inform you that by logging in, and clicking on \"I agree\", your profile will become visible to other users. If you do not want your profile to be find-able, please click on \"I do not agree\"."
-msgstr ""
-
 #: src/app/components/user/userOptions.html:18
 msgid "Delete Account"
 msgstr ""
@@ -863,14 +859,6 @@ msgstr ""
 
 #: src/app/components/user/user.html:428
 msgid "Humanitarian details"
-msgstr ""
-
-#: src/app/components/start/start.html:9
-msgid "I agree"
-msgstr ""
-
-#: src/app/components/start/start.html:13
-msgid "I do not agree"
 msgstr ""
 
 #: src/app/components/client/client.html:39
@@ -2363,7 +2351,7 @@ msgstr ""
 msgid "You were successfully checked into the list"
 msgstr ""
 
-#: src/app/components/auth/auth.controller.js:89
+#: src/app/components/auth/auth.controller.js:100
 msgid "You were successfully logged out."
 msgstr ""
 
@@ -2393,10 +2381,6 @@ msgstr ""
 
 #: src/app/common/errors.controller.js:38
 msgid "Your account has been locked for 5 minutes due to too many unsuccessful login attempts"
-msgstr ""
-
-#: src/app/components/user/user.controller.js:135
-msgid "Your account is currently not findable by other users. If you would like to allow other users to find you, click on the wheel icon in your profile and click on \"Make profile visible\""
 msgstr ""
 
 #: src/app/components/user/userPrefs.controller.js:70
