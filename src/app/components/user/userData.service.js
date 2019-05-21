@@ -37,6 +37,41 @@
       return out;
     };
 
+    UserDataService.getUsersFromCache = function (params, list, callback) {
+      var lfusers = $localForage.instance('users');
+      var users = [], nbUsers = 0;
+      lfusers.iterate(function (user, key, index) {
+        if (!list) {
+          if (index > params.offset && index < params.offset + params.limit) {
+            users.push(user);
+          }
+          nbUsers++;
+        }
+        else {
+          if (UserDataService.userHasList(user, list)) {
+            nbUsers++;
+            if (nbUsers > params.offset && nbUsers < params.offset + params.limit) {
+              users.push(user);
+            }
+          }
+        }
+      })
+      .then(function (result) {
+        return callback(nbUsers, users);
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+    };
+
+    UserDataService.getUsersFromServer = function (params, list, callback) {
+      User.query(params, function (response, headers) {
+        var users = list ? transformUsers(response, list) : response;
+        var nbUsers = headers()["x-total-count"];
+        return callback(nbUsers, users);
+      });
+    };
+
     UserDataService.getUsers = function (params, list, callback) {
       return User.query(params, function (response, headers) {
         UserDataService.listUsers = list ? transformUsers(response, list) : response;

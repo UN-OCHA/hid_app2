@@ -38,7 +38,7 @@ msgstr ""
 msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:632
+#: src/app/components/user/users.controller.js:642
 msgid "A synchronized Google Sheet was created. Find it at:"
 msgstr ""
 
@@ -1823,11 +1823,11 @@ msgstr ""
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:653
+#: src/app/components/user/users.controller.js:663
 msgid "Sorry, the contact folder could not be created..."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:637
+#: src/app/components/user/users.controller.js:647
 msgid "Sorry, the spreadsheet export did not work..."
 msgstr ""
 
@@ -1929,7 +1929,7 @@ msgstr ""
 msgid "The confirmation link did not work"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:650
+#: src/app/components/user/users.controller.js:660
 msgid "The contact folder was successfully created."
 msgstr ""
 
@@ -2328,8 +2328,8 @@ msgstr ""
 msgid "You have granted the following applications access to your Humanitarian ID account."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:641
-#: src/app/components/user/users.controller.js:657
+#: src/app/components/user/users.controller.js:651
+#: src/app/components/user/users.controller.js:667
 msgid "You need to select a list"
 msgstr ""
 
