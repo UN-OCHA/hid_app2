@@ -38,7 +38,7 @@ msgstr ""
 msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:642
+#: src/app/components/user/users.controller.js:729
 msgid "A synchronized Google Sheet was created. Find it at:"
 msgstr ""
 
@@ -155,6 +155,10 @@ msgstr ""
 msgid "Additional Information"
 msgstr ""
 
+#: src/app/components/user/users.controller.js:153
+msgid "Administrative Officer"
+msgstr ""
+
 #: src/app/components/user/user.html:790
 #: src/app/components/user/user.html:801
 msgid "Administrator"
@@ -224,13 +228,17 @@ msgstr ""
 #: src/app/components/dashboard/dashboard.controller.js:76
 #: src/app/components/dashboard/dashboard.controller.js:87
 #: src/app/components/dashboard/dashboard.controller.js:97
-#: src/app/components/list/list.controller.js:193
-#: src/app/components/list/list.controller.js:207
-#: src/app/components/list/list.controller.js:276
+#: src/app/components/list/list.controller.js:225
+#: src/app/components/list/list.controller.js:239
+#: src/app/components/list/list.controller.js:308
 #: src/app/components/service/allSubscriptions.controller.js:22
 #: src/app/components/service/service.controller.js:84
 #: src/app/components/service/services.controller.js:72
 msgid "Are you sure?"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:157
+msgid "Area Coordinator"
 msgstr ""
 
 #: src/app/components/service/new-service.html:65
@@ -340,6 +348,10 @@ msgstr ""
 msgid "Choose the list"
 msgstr ""
 
+#: src/app/components/user/users.controller.js:161
+msgid "Civil-Military Officer"
+msgstr ""
+
 #: src/app/components/user/user.controller.js:247
 msgid "Claim email sent successfully"
 msgstr ""
@@ -381,6 +393,18 @@ msgstr ""
 msgid "Cluster"
 msgstr ""
 
+#: src/app/components/user/users.controller.js:165
+msgid "Cluster Co-Chair / Co-Lead"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:169
+msgid "Cluster Coordination Team - Focal Points"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:173
+msgid "Cluster Coordinator"
+msgstr ""
+
 #: src/app/components/user/user.html:714
 msgid "Clusters / Working Groups"
 msgstr ""
@@ -397,6 +421,10 @@ msgstr ""
 #: src/app/components/footer/footer.html:20
 #: src/app/components/user/users-export.html:9
 msgid "Code of conduct"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:177
+msgid "Communications / PI Officer"
 msgstr ""
 
 #: src/app/components/auth/reset_password.html:24
@@ -631,6 +659,7 @@ msgstr ""
 msgid "Domain saved successfully"
 msgstr ""
 
+#: src/app/components/user/users.controller.js:181
 #: src/app/components/user/users.controller.js:94
 msgid "Donor"
 msgstr ""
@@ -705,6 +734,10 @@ msgstr ""
 
 #: src/app/components/user/kiosk.html:39
 msgid "Enter your personal details"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:185
+msgid "Environmental Expert"
 msgstr ""
 
 #: src/app/components/user/user.html:38
@@ -801,6 +834,10 @@ msgstr ""
 msgid "Functional roles"
 msgstr ""
 
+#: src/app/components/user/users.controller.js:189
+msgid "GenCap Officer"
+msgstr ""
+
 #: src/app/components/user/preferences.html:247
 msgid "Get recovery codes"
 msgstr ""
@@ -825,6 +862,10 @@ msgstr ""
 msgid "Government"
 msgstr ""
 
+#: src/app/components/user/users.controller.js:193
+msgid "Government Official"
+msgstr ""
+
 #: src/app/components/checkin/listTypesModal.html:17
 #: src/app/components/selectLists/selectLists.controller.js:31
 #: src/app/components/service/new-service.html:55
@@ -840,12 +881,32 @@ msgstr ""
 msgid "Groups can be clusters, sectors or simply working groups that are set up in a specific country to facilitate coordination among humanitarian partners."
 msgstr ""
 
+#: src/app/components/user/users.controller.js:197
+msgid "Head of Agency"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:201
+msgid "Head of Agency - Executive Assistant / Secretary"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:205
+msgid "Head of Sub-Office"
+msgstr ""
+
 #: src/app/components/checkin/checkin.html:25
 msgid "Hide"
 msgstr ""
 
 #: src/app/components/service/new-service.html:61
 msgid "Hide the service - HID users will not be able to search for it"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:209
+msgid "Humanitarian Coordinator"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:213
+msgid "Humanitarian Country Team"
 msgstr ""
 
 #: src/app/components/start/tutorial.html:73
@@ -898,6 +959,10 @@ msgstr ""
 
 #: src/app/components/user/users.html:42
 msgid "Info / actions"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:217
+msgid "Information Management Officer"
 msgstr ""
 
 #: src/app/components/user/users.controller.js:106
@@ -1094,6 +1159,10 @@ msgstr ""
 
 #: src/app/components/user/users.controller.js:118
 msgid "Military"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:221
+msgid "Military Officer"
 msgstr ""
 
 #: src/app/components/user/userEdit.controller.js:70
@@ -1430,6 +1499,10 @@ msgstr ""
 msgid "Private sector"
 msgstr ""
 
+#: src/app/components/user/users.controller.js:225
+msgid "ProCap Officer"
+msgstr ""
+
 #: src/app/components/header/header.html:78
 msgid "Profile"
 msgstr ""
@@ -1522,6 +1595,10 @@ msgstr ""
 #: src/app/components/auth/reset_password.html:32
 #: src/app/components/auth/reset_password.html:5
 msgid "Reset password"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:229
+msgid "Resident Coordinator"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:29
@@ -1823,11 +1900,11 @@ msgstr ""
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:663
+#: src/app/components/user/users.controller.js:750
 msgid "Sorry, the contact folder could not be created..."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:647
+#: src/app/components/user/users.controller.js:734
 msgid "Sorry, the spreadsheet export did not work..."
 msgstr ""
 
@@ -1872,12 +1949,12 @@ msgstr ""
 msgid "Subscriptions"
 msgstr ""
 
-#: src/app/components/list/list.controller.js:155
+#: src/app/components/list/list.controller.js:187
 msgid "Successfully added to list"
 msgstr ""
 
 #: src/app/components/checkin/allCheckIns.controller.js:101
-#: src/app/components/list/list.controller.js:195
+#: src/app/components/list/list.controller.js:227
 msgid "Successfully removed from list"
 msgstr ""
 
@@ -1929,7 +2006,7 @@ msgstr ""
 msgid "The confirmation link did not work"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:660
+#: src/app/components/user/users.controller.js:747
 msgid "The contact folder was successfully created."
 msgstr ""
 
@@ -1938,7 +2015,7 @@ msgid "The list owner and the managers of this list only"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.controller.js:89
-#: src/app/components/list/list.controller.js:209
+#: src/app/components/list/list.controller.js:241
 msgid "The list was successfully deleted."
 msgstr ""
 
@@ -1954,7 +2031,7 @@ msgstr ""
 msgid "The url prefix in HID"
 msgstr ""
 
-#: src/app/components/list/list.controller.js:285
+#: src/app/components/list/list.controller.js:317
 msgid "The user was successfully approved."
 msgstr ""
 
@@ -2022,11 +2099,11 @@ msgstr ""
 msgid "This list was removed from your favourites."
 msgstr ""
 
-#: src/app/components/list/list.controller.js:221
+#: src/app/components/list/list.controller.js:253
 msgid "This list was successfully added to your favourites."
 msgstr ""
 
-#: src/app/components/list/list.controller.js:236
+#: src/app/components/list/list.controller.js:268
 msgid "This list was successfully removed from your favourites."
 msgstr ""
 
@@ -2075,6 +2152,14 @@ msgstr ""
 #: src/app/components/user/user-filters.html:125
 #: src/app/components/user/user-filters.html:127
 msgid "Type of user"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:233
+msgid "UNCT Member"
+msgstr ""
+
+#: src/app/components/user/users.controller.js:237
+msgid "UNDAC Member"
 msgstr ""
 
 #: src/app/components/client/client.html:40
@@ -2328,8 +2413,8 @@ msgstr ""
 msgid "You have granted the following applications access to your Humanitarian ID account."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:651
-#: src/app/components/user/users.controller.js:667
+#: src/app/components/user/users.controller.js:738
+#: src/app/components/user/users.controller.js:754
 msgid "You need to select a list"
 msgstr ""
 
@@ -2347,7 +2432,7 @@ msgid ""
 "        Subscribing to a service means either joining a Google Group or a Mailchimp list. You will be able to unsubcribe to these services anytime from your \"Check out\" section."
 msgstr ""
 
-#: src/app/components/list/list.controller.js:174
+#: src/app/components/list/list.controller.js:206
 msgid "You were successfully checked into the list"
 msgstr ""
 

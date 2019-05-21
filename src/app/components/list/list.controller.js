@@ -83,25 +83,35 @@
     };
 
     $scope.$on('user-service-ready', function() {
-
-      List.get({'listId': $routeParams.list}, function (list) {
-        $scope.list = list;
-        $rootScope.title = list.name;
-        setUpList();
-      }, function () {
-        // Offline fallback
-        var lflists = $localForage.instance('lists');
-        lflists.getItem($routeParams.list).then(function (list) {
+      var listId = $routeParams.list;
+      var lflists = $localForage.instance('lists');
+      // Try to load from cache first
+      lflists.getItem(listId)
+      .then(function (list) {
+        if (list) {
           $scope.list = list;
           $scope.list.fromCache = true;
           setUpList();
-        }).catch(function () {
-          $scope.listLoaded = true;
-          $scope.listUnavailable = true;
-          $scope.offline = Offline.state === 'up' ? false : true;
-        });
+        }
+        if ($rootScope.isOnline) {
+          return List.get({'listId': listId}).$promise;
+        }
+      })
+      .then(function (list) {
+        // Then load from server
+        if ($rootScope.isOnline) {
+          lflists.setItem(listId, list);
+          $scope.list = list;
+          $scope.list.fromCache = false;
+          $rootScope.title = list.name;
+          setUpList();
+        }
+      })
+      .catch(function (err) {
+        $scope.listLoaded = true;
+        $scope.listUnavailable = true;
+        $scope.offline = Offline.state === 'up' ? false : true;
       });
-
     });
 
     function isListMember (listId, user) {
