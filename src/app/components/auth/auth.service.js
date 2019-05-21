@@ -117,7 +117,9 @@
       getUnreadNotifications();
 
       checkingNotifications = $interval(function () {
-        getUnreadNotifications();
+        if ($rootScope.isOnline) {
+          getUnreadNotifications();
+        }
       }, 60000);
     }
 
@@ -130,14 +132,18 @@
         if (cacheDate && moment(cacheDate).add(1, 'hour').isAfter()) {
           return;
         }
-        UserListsService.cacheListsForUser(user);
+        if ($rootScope.isOnline) {
+          UserListsService.cacheListsForUser(user);
+        }
 
       }).catch(function () {
-        UserListsService.cacheListsForUser(user);
+        if ($rootScope.isOnline) {
+          UserListsService.cacheListsForUser(user);
+        }
       });
 
       cachingLists = $interval(function () {
-        if ($rootScope.canCache) {
+        if ($rootScope.canCache && $rootScope.isOnline) {
           UserListsService.cacheListsForUser(user);
         }
       }, 3600000);
