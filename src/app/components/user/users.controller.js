@@ -147,7 +147,96 @@
         value: 54593
       }
     ];
-    $scope.roles = List.query({'type': 'functional_role'});
+    $scope.roles = [
+        {
+            "_id": "58e39c4eab77c100ae461b99",
+            "name": gettextCatalog.getString("Administrative Officer")
+        },
+        {
+            "_id": "58e39c4fab77c100ae461bd2",
+            "name": gettextCatalog.getString("Area Coordinator")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461b9f",
+            "name": gettextCatalog.getString("Civil-Military Officer")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461ba2",
+            "name": gettextCatalog.getString("Cluster Co-Chair / Co-Lead")
+        },
+        {
+            "_id": "58e39c4fab77c100ae461bd8",
+            "name": gettextCatalog.getString("Cluster Coordination Team - Focal Points")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461ba5",
+            "name": gettextCatalog.getString("Cluster Coordinator")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461ba8",
+            "name": gettextCatalog.getString("Communications / PI Officer")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bba",
+            "name": gettextCatalog.getString("Donor")
+        },
+        {
+            "_id": "5988f63f0cb8ee0114dd93bf",
+            "name": gettextCatalog.getString("Environmental Expert")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bab",
+            "name": gettextCatalog.getString("GenCap Officer")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bae",
+            "name": gettextCatalog.getString("Government Official")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461b9c",
+            "name": gettextCatalog.getString("Head of Agency")
+        },
+        {
+            "_id": "58e39c4fab77c100ae461bcc",
+            "name": gettextCatalog.getString("Head of Agency - Executive Assistant / Secretary")
+        },
+        {
+            "_id": "58e39c4fab77c100ae461bc9",
+            "name": gettextCatalog.getString("Head of Sub-Office")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bbd",
+            "name": gettextCatalog.getString("Humanitarian Coordinator")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bb1",
+            "name": gettextCatalog.getString("Humanitarian Country Team")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bb4",
+            "name": gettextCatalog.getString("Information Management Officer")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bc0",
+            "name": gettextCatalog.getString("Military Officer")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bb7",
+            "name": gettextCatalog.getString("ProCap Officer")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bc6",
+            "name": gettextCatalog.getString("Resident Coordinator")
+        },
+        {
+            "_id": "58e39c4eab77c100ae461bc3",
+            "name": gettextCatalog.getString("UNCT Member")
+        },
+        {
+            "_id": "58e39c4fab77c100ae461bd5",
+            "name": gettextCatalog.getString("UNDAC Member")
+        }
+    ];
 
     $scope.pagination = {
       currentPage: 1,
