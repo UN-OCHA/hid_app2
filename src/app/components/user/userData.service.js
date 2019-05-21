@@ -70,42 +70,32 @@
       });
     };
 
-    UserDataService.getUser = function (userId, callback, errorCallback) {
-      User.get({userId: userId}).$promise.then(function (user) {
-        var lfusers = $localForage.instance('users');
-        lfusers.setItem(user.id, user).then(function () {
-          UserDataService.user = transformUser(user);
-          return callback();
-        })
-        .catch(function (err) {
-          $exceptionHandler(err, 'Failed to write to Indexeddb');
-        });
-      })
-      .catch(function (responseError) {
-        // Don't try to get from cache if the user doesn't exist
-        if (responseError && responseError.status === 404) {
-          if (errorCallback) {
-            return errorCallback(responseError);
-          }
-          return callback();
-        }
+    UserDataService.getUserFromCache = function (userId) {
+      var lfUsers = $localForage.instance('users');
+      return lfUsers.getItem(userId);
+    };
 
-        var lfusers = $localForage.instance('users');
-        lfusers.getItem(userId).then(function (user) {
-          UserDataService.user = transformUser(user);
-          return callback();
-        })
-        .catch(function () {
-          if (errorCallback) {
-            return errorCallback(responseError);
-          }
-          return callback();
-        });
-      });
+    UserDataService.getUserFromServer = function (userId) {
+      return User.get({userId: userId}).$promise;
+    };
+
+    UserDataService.cacheUser = function (userId, user) {
+      var lfUsers = $localForage.instance('users');
+      lfUsers.setItem(user.id, user);
     };
 
     UserDataService.formatUserLocations = function () {
       formatLocations (UserDataService.user.locations, UserDataService.user.location);
+    };
+
+    UserDataService.transformUser = function (user) {
+      orderByPrimary('location', user.locations, user.location);
+      orderByPrimary('email', user.emails, user.email);
+      orderByPrimary('phone', user.phone_numbers, user.phone_number);
+      orderByPrimary('organization', user.organizations, user.organization);
+      orderByPrimary('jobTitle', user.job_titles, user.job_title);
+      formatLocations(user.locations, user.location);
+      return user;
     };
 
     return UserDataService;
@@ -218,16 +208,6 @@
 
       addTempLocationId(location, index);
     });
-  }
-
-  function transformUser (user) {
-    orderByPrimary('location', user.locations, user.location);
-    orderByPrimary('email', user.emails, user.email);
-    orderByPrimary('phone', user.phone_numbers, user.phone_number);
-    orderByPrimary('organization', user.organizations, user.organization);
-    orderByPrimary('jobTitle', user.job_titles, user.job_title);
-    formatLocations(user.locations, user.location);
-    return user;
   }
 
 })();

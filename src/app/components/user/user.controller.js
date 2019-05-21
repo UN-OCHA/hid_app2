@@ -166,8 +166,7 @@
     }
 
     function getUser () {
-      UserDataService.getUser($routeParams.userId, function () {
-        $scope.user = UserDataService.user;
+      var afterUserLoaded = function () {
         $rootScope.title = $scope.user.name;
         userPicture($scope.user.picture, $scope.user.email);
         setConnectionInfo($scope.user, $scope.currentUser._id);
@@ -179,11 +178,31 @@
         }
         $scope.userLoaded = true;
         $scope.$broadcast('userLoaded');
-      }, function (error) {
-        $scope.userLoaded = true;
-        $scope.userExists = false;
-        $exceptionHandler(error, 'getUser');
-      });
+      };
+      // Try to get user from cache first
+      UserDataService.getUserFromCache($routeParams.userId)
+        .then(function (user) {
+          if (user) {
+            $scope.user = UserDataService.transformUser(user);
+            afterUserLoaded();
+          }
+          if ($rootScope.isOnline) {
+            return UserDataService.getUserFromServer($routeParams.userId);
+          }
+        })
+        .then(function (user) {
+          // If online, try to refresh with a fresh copy from server
+          if ($rootScope.isOnline && user) {
+            UserDataService.cacheUser($routeParams.userId, user);
+            $scope.user = UserDataService.transformUser(user);
+            afterUserLoaded();
+          }
+        })
+        .catch (function (err) {
+          $scope.userLoaded = true;
+          $scope.userExists = false;
+          $exceptionHandler(err, 'getUser');
+        });
     }
     getUser();
 
