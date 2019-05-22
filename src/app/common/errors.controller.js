@@ -51,13 +51,20 @@
         return rejection.data.message;
       }
 
-      // Return generic error message
-      return gettextCatalog.getString('Sorry there was an problem making this request, please try again');
+      // Return generic error message only on non GET requests
+      if (rejection.config.method !== 'GET') {
+        return gettextCatalog.getString('Sorry there was an problem making this request, please try again');
+      }
+      else {
+        return '';
+      }
     }
 
     $rootScope.$on('apiRejection', function (event, rejection) {
       var errorMessage = getErrorMessage(rejection);
-      alertService.add('danger', errorMessage, false, null, 0);
+      if (errorMessage) {
+        alertService.add('danger', errorMessage, false, null, 0);
+      }
     });
   }
 })();
