@@ -147,7 +147,7 @@
         value: 54593
       }
     ];
-    $scope.roles = List.query({'type': 'functional_role'});
+    $scope.roles = List.roles;
 
     $scope.pagination = {
       currentPage: 1,
@@ -171,10 +171,18 @@
         params.authOnly = false;
       }
 
-      UserDataService.getUsers(params, $scope.list, function () {
-        $scope.users = UserDataService.listUsers;
-        $scope.totalItems = UserDataService.listUsersTotal;
+      // Get users from cache first
+      UserDataService.getUsersFromCache(params, $scope.list, function (nbUsers, users) {
+        $scope.users = users;
+        $scope.totalItems = nbUsers;
         $scope.usersLoaded = true;
+        if ($rootScope.isOnline) {
+          UserDataService.getUsersFromServer(params, $scope.list, function (nbUsers, users) {
+            $scope.users = users;
+            $scope.totalItems = nbUsers;
+            $scope.usersLoaded = true;
+          });
+        }
       });
     }
 

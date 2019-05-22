@@ -256,9 +256,14 @@
     }
 
     function getOrganizations(search) {
-      List.query({'name': search, 'type': 'organization'}, function (orgs) {
-        $scope.organizations = filterLists(orgs, $scope.user);
-      });
+      if (search) {
+        List.query({'name': search, 'type': 'organization'}, function (orgs) {
+          $scope.organizations = filterLists(orgs, $scope.user);
+        });
+      }
+      else {
+        $scope.organizations = [];
+      }
     }
 
     function setRegions ($item) {
@@ -276,9 +281,7 @@
     }
 
     function getRoles () {
-      List.query({'type': 'functional_role'}, function (roles) {
-        $scope.roles = filterLists(roles, $scope.user);
-      });
+      $scope.roles = filterLists(List.roles, $scope.user);
     }
 
     function formatUrl (url) {

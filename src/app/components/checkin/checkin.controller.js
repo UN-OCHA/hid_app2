@@ -92,7 +92,7 @@
 
     function getUser () {
       var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
-      UserDataService.getUser(userId, function () {
+      UserDataService.getUserFromServer(userId, function () {
         $scope.user = UserDataService.user;
         $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
         $scope.$broadcast('userLoaded');
