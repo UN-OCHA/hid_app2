@@ -812,6 +812,18 @@
         </ul>
       </div>
 
+      <div class="form-section form-section--compact" ng-if="currentUser.is_admin">
+
+        <h3 class="form-section__heading" translate>Authorized Clients</h3>
+
+        <ul class="list list--has-buttons">
+          <li class="list__item" ng-repeat="client in user.authorizedClients">
+            {{client.name}}
+          </li>
+          <li class="list__item" ng-if="!user.authorizedClients.length" ng-show="!showProfileForm"><em translate>No authorized client</em></li>
+        </ul>
+      </div>
+
       <div class="form-section form-section--compact">
         <ul class="list">
           <li class="list__item"><span translate>Last Updated</span>: <span ng-bind="user.lastModified | date:'longDate'"></span></li>
