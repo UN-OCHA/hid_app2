@@ -171,19 +171,21 @@
         params.authOnly = false;
       }
 
-      // Get users from cache first
-      UserDataService.getUsersFromCache(params, $scope.list, function (nbUsers, users) {
-        $scope.users = users;
-        $scope.totalItems = nbUsers;
-        $scope.usersLoaded = true;
-        if ($rootScope.isOnline) {
-          UserDataService.getUsersFromServer(params, $scope.list, function (nbUsers, users) {
-            $scope.users = users;
-            $scope.totalItems = nbUsers;
-            $scope.usersLoaded = true;
-          });
-        }
-      });
+      // Get users from API first
+      if ($rootScope.isOnline) {
+        UserDataService.getUsersFromServer(params, $scope.list, function (nbUsers, users) {
+          $scope.users = users;
+          $scope.totalItems = nbUsers;
+          $scope.usersLoaded = true;
+        });
+      }
+      else {
+        UserDataService.getUsersFromCache(params, $scope.list, function (nbUsers, users) {
+          $scope.users = users;
+          $scope.totalItems = nbUsers;
+          $scope.usersLoaded = true;
+        });
+      }
     }
 
     function pageChanged () {

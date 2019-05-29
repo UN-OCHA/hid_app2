@@ -38,7 +38,7 @@ msgstr ""
 msgid "A coordination hub is a location where coordination takes place, usually in or outside a large city. For instance, more often than not an OSOCC set up in a sudden-onset disaster becomes a coordination hub for a few weeks after a disaster strikes."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:640
+#: src/app/components/user/users.controller.js:642
 msgid "A synchronized Google Sheet was created. Find it at:"
 msgstr ""
 
@@ -251,6 +251,10 @@ msgstr ""
 
 #: src/app/components/user/preferences.html:76
 msgid "Authorized Applications"
+msgstr ""
+
+#: src/app/components/user/user.html:817
+msgid "Authorized Clients"
 msgstr ""
 
 #: src/app/components/user/preferences.html:74
@@ -517,7 +521,7 @@ msgstr ""
 msgid "Create your own contact lists and share them with others. Let others check in to your lists or decide for yourself who can join."
 msgstr ""
 
-#: src/app/components/user/user.html:818
+#: src/app/components/user/user.html:830
 msgid "Created"
 msgstr ""
 
@@ -1008,7 +1012,7 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: src/app/components/user/user.html:817
+#: src/app/components/user/user.html:829
 msgid "Last Updated"
 msgstr ""
 
@@ -1223,6 +1227,10 @@ msgstr ""
 
 #: src/app/components/user/preferences.html:29
 msgid "No approved connections"
+msgstr ""
+
+#: src/app/components/user/user.html:823
+msgid "No authorized client"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:181
@@ -1896,15 +1904,15 @@ msgstr ""
 msgid "Some of you check-ins are pending, we will get back to you soon."
 msgstr ""
 
-#: src/app/common/errors.controller.js:57
+#: src/app/common/errors.controller.js:56
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:661
+#: src/app/components/user/users.controller.js:663
 msgid "Sorry, the contact folder could not be created..."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:645
+#: src/app/components/user/users.controller.js:647
 msgid "Sorry, the spreadsheet export did not work..."
 msgstr ""
 
@@ -2006,7 +2014,7 @@ msgstr ""
 msgid "The confirmation link did not work"
 msgstr ""
 
-#: src/app/components/user/users.controller.js:658
+#: src/app/components/user/users.controller.js:660
 msgid "The contact folder was successfully created."
 msgstr ""
 
@@ -2058,11 +2066,11 @@ msgstr ""
 msgid "The user was successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/common/errors.controller.js:47
+#: src/app/common/errors.controller.js:46
 msgid "There is an error in your registration. You may have already registered. If so, simply <a href=\"/password_reset\" target=\"_top\">reset your password</a>."
 msgstr ""
 
-#: src/app/common/errors.controller.js:42
+#: src/app/common/errors.controller.js:41
 msgid "There was an error logging in."
 msgstr ""
 
@@ -2308,19 +2316,19 @@ msgstr ""
 msgid "View as PDF"
 msgstr ""
 
-#: src/app/common/errors.controller.js:23
+#: src/app/common/errors.controller.js:22
 msgid "We could not log you in because your email address is not verified yet."
 msgstr ""
 
-#: src/app/common/errors.controller.js:35
+#: src/app/common/errors.controller.js:34
 msgid "We could not log you in because your password is expired. Following UN regulations, as a security measure passwords must be updated every six months. Kindly reset your password by clicking on the \"Forgot/Reset password\" link below."
 msgstr ""
 
-#: src/app/common/errors.controller.js:31
+#: src/app/common/errors.controller.js:30
 msgid "We could not log you in, the email address does not exist."
 msgstr ""
 
-#: src/app/common/errors.controller.js:27
+#: src/app/common/errors.controller.js:26
 msgid "We could not log you in. The username or password you have entered are incorrect. Kindly try again."
 msgstr ""
 
@@ -2413,8 +2421,8 @@ msgstr ""
 msgid "You have granted the following applications access to your Humanitarian ID account."
 msgstr ""
 
-#: src/app/components/user/users.controller.js:649
-#: src/app/components/user/users.controller.js:665
+#: src/app/components/user/users.controller.js:651
+#: src/app/components/user/users.controller.js:667
 msgid "You need to select a list"
 msgstr ""
 
@@ -2456,7 +2464,7 @@ msgstr ""
 msgid "You were successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/common/errors.controller.js:17
+#: src/app/common/errors.controller.js:16
 msgid "You've reached the API request limit, please try again in 10 minutes"
 msgstr ""
 
@@ -2464,7 +2472,7 @@ msgstr ""
 msgid "Your API keys"
 msgstr ""
 
-#: src/app/common/errors.controller.js:39
+#: src/app/common/errors.controller.js:38
 msgid "Your account has been locked for 5 minutes due to too many unsuccessful login attempts"
 msgstr ""
 
