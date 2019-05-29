@@ -42,7 +42,7 @@ msgstr ""
 msgid "A synchronized Google Sheet was created. Find it at:"
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:149
+#: src/app/components/user/userPrefs.controller.js:150
 msgid "API key deleted"
 msgstr ""
 
@@ -193,7 +193,7 @@ msgstr ""
 msgid "Anyone within Humanitarian ID"
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:90
+#: src/app/components/user/userPrefs.controller.js:91
 msgid "Application successfully revoked."
 msgstr ""
 
@@ -210,7 +210,7 @@ msgstr ""
 msgid "Are you sure you want to check out of this list?"
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:68
+#: src/app/components/user/userPrefs.controller.js:69
 msgid "Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore."
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore."
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:80
+#: src/app/components/user/userPrefs.controller.js:81
 msgid "Are you sure you want to do this? You will need to authorize this application again to access it through Humanitarian ID."
 msgstr ""
 
@@ -280,23 +280,23 @@ msgstr ""
 msgid "Change settings"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:202
+#: src/app/components/checkin/checkin.controller.js:203
 msgid "Changed primary email to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:210
+#: src/app/components/checkin/checkin.controller.js:211
 msgid "Changed primary job title to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:206
+#: src/app/components/checkin/checkin.controller.js:207
 msgid "Changed primary location to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:194
+#: src/app/components/checkin/checkin.controller.js:195
 msgid "Changed primary organization to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:198
+#: src/app/components/checkin/checkin.controller.js:199
 msgid "Changed primary phone number to:"
 msgstr ""
 
@@ -441,7 +441,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:122
+#: src/app/components/user/userPrefs.controller.js:123
 msgid "Connection removed"
 msgstr ""
 
@@ -629,7 +629,7 @@ msgstr ""
 msgid "Developers"
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:215
+#: src/app/components/user/userPrefs.controller.js:216
 msgid "Device removed."
 msgstr ""
 
@@ -1900,7 +1900,7 @@ msgstr ""
 msgid "Social Networks"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:146
+#: src/app/components/checkin/checkin.controller.js:147
 msgid "Some of you check-ins are pending, we will get back to you soon."
 msgstr ""
 
@@ -2430,7 +2430,7 @@ msgstr ""
 msgid "You should only check into an organization that you belong to. All organizational lists are moderated, i.e. your check-in will have to be approved by a Humanitarian ID manager."
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:144
+#: src/app/components/checkin/checkin.controller.js:145
 msgid "You were successfully checked in."
 msgstr ""
 
@@ -2476,7 +2476,7 @@ msgstr ""
 msgid "Your account has been locked for 5 minutes due to too many unsuccessful login attempts"
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:70
+#: src/app/components/user/userPrefs.controller.js:71
 msgid "Your account was successfully removed. You are now logged out. Sorry to have you go."
 msgstr ""
 
@@ -2544,7 +2544,7 @@ msgstr ""
 msgid "Your password is not valid"
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:30
+#: src/app/components/user/userPrefs.controller.js:31
 msgid "Your password was successfully changed."
 msgstr ""
 
@@ -2568,7 +2568,7 @@ msgstr ""
 msgid "Your request for check-in is pending. We will get back to you soon."
 msgstr ""
 
-#: src/app/components/user/userPrefs.controller.js:58
+#: src/app/components/user/userPrefs.controller.js:59
 msgid "Your settings were successfully changed."
 msgstr ""
 
@@ -2659,7 +2659,7 @@ msgstr ""
 msgid "subscribers"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:153
+#: src/app/components/checkin/checkin.controller.js:154
 msgid "was successfully checked in"
 msgstr ""
 

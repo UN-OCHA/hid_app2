@@ -19,8 +19,9 @@
     $scope.twoFactorAuthStep = 1;
     $scope.showMore = false;
 
-    UserDataService.getUserFromServer($scope.currentUser.id, function () {
-      $scope.user = UserDataService.user;
+    UserDataService.getUserFromServer($scope.currentUser.id)
+    .then(function (user) {
+      $scope.user = user;
       $scope.trustedDevices = parseTrustedDevices($scope.user.totpTrusted);
       getConnections($scope.user);
     });

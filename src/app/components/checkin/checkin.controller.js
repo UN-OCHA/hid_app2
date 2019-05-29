@@ -92,11 +92,12 @@
 
     function getUser () {
       var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
-      UserDataService.getUserFromServer(userId, function () {
-        $scope.user = UserDataService.user;
+      UserDataService.getUserFromServer(userId).then(function (user) {
+        $scope.user = user;
         $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
         $scope.$broadcast('userLoaded');
-      }, function (error) {
+      })
+      .catch(function (error) {
         $exceptionHandler(error, 'getUser');
       });
     }
