@@ -76,7 +76,7 @@ module.exports = function(grunt) {
     watch: {
       sass: {
         files: ['src/app/common/**/*.scss', 'src/app/components/**/*.scss'],
-        tasks: ['sass_import', 'sass:dist', 'autoprefixer'],
+        tasks: ['sass_import', 'sass:dist', 'postcss'],
         options: {
           spawn: false,
         }
@@ -100,14 +100,16 @@ module.exports = function(grunt) {
         'uglify': true
       }
     },
-    autoprefixer: {
+    postcss: {
+      options: {
+        processors: [
+          require('autoprefixer')
+        ]
+      },
       dist: {
         files: {
           'src/assets/css/main.css': 'src/assets/css/main.css'
         },
-        options: {
-          browsers: ['last 2 versions', 'iOS 8']
-        }
       }
     },
     cacheHash: {},
@@ -235,7 +237,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks("grunt-modernizr");
-  grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-angular-templates');
@@ -273,7 +275,7 @@ module.exports = function(grunt) {
     'sass_import',
     'sass:dist',
     'modernizr',
-    'autoprefixer',
+    'postcss',
     'useminPrepare',
     'ngtemplates',
     'concat:generated',
