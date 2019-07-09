@@ -4,17 +4,18 @@
 
 ## Running locally
 
-### Prerequisites:
+### Prerequisites
 
 * [Docker for Mac](https://docs.docker.com/docker-for-mac/) / Docker for your OS of choice
 * [Node](https://nodejs.org/en/)
+* [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 * [Bower](https://bower.io/#install-bower)
 * [Grunt](http://gruntjs.com/getting-started)
 * [Ruby](https://www.ruby-lang.org/en/)
 * [Sass](http://sass-lang.com/install)
 
-### Building the app
 
+### Building the app
 
 * Clone repo `git clone git@github.com:UN-OCHA/hid_app2.git`
 * In the app directory `cd hid_app2`
@@ -22,13 +23,15 @@
 * Install node modules with yarn `yarn install`
 * Add the local url to your hosts file:
   * macOS: `sudo vi /etc/hosts`, then add `127.0.0.1  app.hid.vm`
-* Run the Grunt tasks `grunt`
-(Note to set you local environment to use the staging api use `grunt --target="dev"`)
+* Run the Grunt tasks `grunt`. Specify a `--target` to point to different HID API environments
+  * Example: `grunt --target=local` will use your local API. Edit `app/config/config.local.js` to configure each endpoint.
+
 
 ### Running the app
 
 * `docker-compose up`
 * visit [https://app.hid.vm](https://app.hid.vm) and accept the SSL certificate exception
+
 
 ## Deployment
 
