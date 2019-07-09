@@ -1,6 +1,6 @@
 {
   "name": "hid_app2",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "HID Client application",
   "main": "index.js",
   "scripts": {
@@ -49,7 +49,8 @@
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^2.0.1",
     "karma-ng-html2js-preprocessor": "^1.0.0",
-    "phantomjs-polyfill-object-assign": "0.0.2"
+    "phantomjs-polyfill-object-assign": "0.0.2",
+    "shelljs": ">=0.8.3"
   },
   "dependencies": {
     "@bower_components/angular": "angular/bower-angular#^1.7.5",
