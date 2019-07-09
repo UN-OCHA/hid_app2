@@ -155,7 +155,7 @@
     }
 
     angular.forEach(bundles, function (bundle) {
-      if (bundle.name.indexOf(operationName) !== -1) {
+      if (bundle.name && bundle.name.indexOf(operationName) !== -1) {
         displayName = bundle.name.replace(operationName + ' :', '');
         displayName = displayName.replace(operationName + ':', '');
         bundle.displayName = displayName;
