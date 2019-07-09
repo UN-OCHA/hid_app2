@@ -76,18 +76,6 @@
   resolved "https://codeload.github.com/PatrickJS/angular-password/tar.gz/78f5892502f1860c1eafa32f95f64df6f9c9e613"
   dependencies:
     angular "^1.5.5"
-    angular-mocks "^1.5.5"
-    gulp "^3.9.1"
-    gulp-jshint "^2.0.0"
-    gulp-rename "^1.2.2"
-    gulp-uglify "^1.5.3"
-    jasmine-core "^2.4.1"
-    jshint "^2.9.2"
-    karma "^0.13.22"
-    karma-jasmine "^0.3.8"
-    karma-phantomjs-launcher "^1.0.0"
-    karma-spec-reporter "0.0.26"
-    phantomjs-prebuilt "^2.1.7"
 
 "@bower_components/angular-recaptcha@VividCortex/angular-recaptcha#^4.2.0":
   version "4.2.0"
@@ -5981,6 +5969,15 @@ shelljs@0.3.x:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.3.0.tgz#3596e6307a781544f591f37da618360f31db57b1"
   integrity sha1-NZbmMHp4FUT1kfN9phg2DzHbV7E=
+
+shelljs@>=0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.3.tgz#a7f3319520ebf09ee81275b2368adb286659b097"
+  integrity sha512-fc0BKlAWiLpwZljmOvAOTE/gXawtCoNrP5oaY7KIaQbbyHeQVg01pSEuEGvGh3HEdBU4baCD7wQBwADmM/7f7A==
+  dependencies:
+    glob "^7.0.0"
+    interpret "^1.0.0"
+    rechoir "^0.6.2"
 
 sigmund@~1.0.0:
   version "1.0.1"
