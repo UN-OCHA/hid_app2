@@ -1,9 +1,9 @@
 module.exports = {
-  baseUrl: 'http://app.hid.vm/',
+  baseUrl: 'https://app.hid.vm/',
 
   // These will be made available in browser.params inside tests
   params: {
-  	testUserName: '',
+    testUserName: '',
     testUserEmail: '',
     testUserPassword: '',
     testUserId: '',

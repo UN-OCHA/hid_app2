@@ -4,32 +4,34 @@
 
 ## Running locally
 
-### Prerequisites:
+### Prerequisites
 
 * [Docker for Mac](https://docs.docker.com/docker-for-mac/) / Docker for your OS of choice
 * [Node](https://nodejs.org/en/)
+* [Yarn](https://yarnpkg.com/lang/en/docs/install/)
 * [Bower](https://bower.io/#install-bower)
 * [Grunt](http://gruntjs.com/getting-started)
 * [Ruby](https://www.ruby-lang.org/en/)
 * [Sass](http://sass-lang.com/install)
 
-### Building the app
 
+### Building the app
 
 * Clone repo `git clone git@github.com:UN-OCHA/hid_app2.git`
 * In the app directory `cd hid_app2`
 * Switch to the dev branch `git checkout dev`
 * Install node modules with yarn `yarn install`
 * Add the local url to your hosts file:
-on Mac: `sudo vi /etc/hosts`
-Add `127.0.0.1   app.hid.vm`
-* Run the Grunt tasks `grunt`
-(Note to set you local environment to use the staging api use `grunt --target="dev"`)
+  * macOS: `sudo vi /etc/hosts`, then add `127.0.0.1  app.hid.vm`
+* Run the Grunt tasks `grunt`. Specify a `--target` to point to different HID API environments
+  * Example: `grunt --target=local` will use your local API. Edit `app/config/config.local.js` to configure each endpoint.
+
 
 ### Running the app
 
 * `docker-compose up`
 * visit [https://app.hid.vm](https://app.hid.vm) and accept the SSL certificate exception
+
 
 ## Deployment
 
@@ -122,13 +124,9 @@ As Test Admin E2E User:
 
 ## Front end
 
-### Styleguide and pattern library
-
-The styleguide and pattern library is available at https://un-ocha.github.io/styleguide/hid/
-
 ### CSS
 
-This project uses [Sass](http://sass-lang.com/)
+This project uses [Sass](https://sass-lang.com/)
 
 Run `grunt watch` to watch for changes and rebuild the css.
 
@@ -138,7 +136,7 @@ Run `grunt watch` to watch for changes and rebuild the css.
 
 Global styles, such as resets and grid styles, should be added to `app/common`.
 
-Any _*.scss file in `app/common` (excluding sub-directories) will be automatically added to the CSS build.
+Any `_*.scss` file in `app/common` (excluding sub-directories) will be automatically added to the CSS build.
 
 ##### Variables and mixins
 
@@ -148,4 +146,4 @@ As variables and mixins need to be imported before other Sass these are added to
 
 Component specific files should be added to that component's directory, e.g. `app/components/my-component/my-component.scss`.
 
-Any _*.scss file in `app/components` (including sub-directories) will be automatically added to the CSS build.
+Any `_*.scss` file in `app/components` (including sub-directories) will be automatically added to the CSS build.

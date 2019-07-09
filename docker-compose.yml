@@ -1,5 +1,5 @@
 app:
-  image: unocha/alpine-base-nginx
+  image: unocha/nginx:1.14.2
   volumes:
     - ./dist:/srv/www/html
     - ./conf/nginx/default.conf:/etc/nginx/conf.d/default.conf
