@@ -79,7 +79,7 @@
     "@bower_components/components-font-awesome": "components/font-awesome#~4.7.0",
     "@bower_components/digits-trie": "blockchain/digits-trie#~1.0.0",
     "@bower_components/file-saver.js": "Teleborder/FileSaver.js#~1.20150507.2",
-    "@bower_components/google-libphonenumber": "ruimarinho/google-libphonenumber#~3.1.6",
+    "@bower_components/google-libphonenumber": "ruimarinho/google-libphonenumber#~3.2.3",
     "@bower_components/karma-read-json": "pizzapanther/Karma-Read-JSON#^1.1.0",
     "@bower_components/localforage": "mozilla/localForage#~1.4",
     "@bower_components/microsoft-graph-client": "microsoftgraph/msgraph-sdk-javascript#^1.0.0",
