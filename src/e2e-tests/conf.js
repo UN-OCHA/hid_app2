@@ -19,6 +19,21 @@ exports.config = {
       }
     }));
   },
+  capabilities: {
+    browserName: 'chrome',
+    acceptInsecureCerts : true,
+    acceptSslCerts : true,
+    chromeOptions: {
+      args: [
+        // '--headless',
+        // '--disable-gpu',
+        '--remember-cert-error-decisions',
+        '--ignore-certificate-errors',
+        '--reduce-security-for-testing',
+        '--allow-running-insecure-content',
+      ]
+    },
+  },
 	specs: ['specs/**/*-spec.js'],
   suites: {
   	login: 'specs/login-spec.js',

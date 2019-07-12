@@ -37,6 +37,7 @@
 
 See https://github.com/UN-OCHA/hid-stack/blob/master/README.md
 
+
 ## Code style guide
 
 This project aims to follow the [John Papa Angular 1 style guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1)
@@ -46,57 +47,50 @@ This project aims to follow the [John Papa Angular 1 style guide](https://github
 
 Unit tests are written using [Jasmine](https://jasmine.github.io/) and run with [Karma](https://karma-runner.github.io/).
 
-### Pre-requisites
-
-Install Karma CLI
-
-```
+```sh
+# install Karma CLI
 npm install -g karma-cli
+
+# Run tests once
+grunt test
+
+# Re-run tests when files are changed
+grunt test-watch
 ```
 
-### Running the tests
-
-Single run: `grunt test`
-
-Watch for changes an re-run tests: `grunt test-watch`
 
 ## E2E tests
 
-### Pre-requisites
+E2E is implemented with Protractor, an end-to-end testing tool for Angular.
 
-Protractor:
+Installation on **host machine**:
 
-```
-npm install -g protractor
-```
-
-webdriver-manager
-
-```
+```sh
+# install E2E tools: first-time setup
+yarn global add protractor
 webdriver-manager update
 ```
 
-Java Development Kit (JDK) http://www.oracle.com/technetwork/java/javase/downloads/index.html
-
-### Environment variables
+Manually install [Java Development Kit (JDK)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 You will need to add the environment variables to run the tests locally.
 
 * Ask Ops to share 'HID E2E test environment vars' with you on LastPass.
-* Rename e2e-tests/enviroment.example.js to environment.js
+* Copy `e2e-tests/enviroment.example.js` to `environment.js`
 * Replace the file's content with the variables from LastPass
 
-### Running the tests
+Finally, make sure you're running both containers (API/App) and they're both properly configured for local development.
 
-```
-npm run protractor
-```
+Now you can run the E2E tests:
 
-Running a single test suite
+```sh
+# Run all E2E tests in series
+yarn run protractor
 
-```
+# Run a single E2E test suite
 protractor --suite="my-suite-name" src/e2e-tests/conf.js
 ```
+
 
 ### What to do if it fails on TravisCI
 
@@ -121,6 +115,7 @@ As Test Admin E2E User:
 * Delete 'E2e temp' user
 * Un-verify 'Test E2E user'
 * Cancel pending connection with 'Test E2E user'
+
 
 ## Front end
 
