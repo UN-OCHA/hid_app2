@@ -3,14 +3,10 @@ module.exports = {
 
   // These will be made available in browser.params inside tests
   params: {
-    testUserName: '',
     testUserEmail: '',
     testUserPassword: '',
-    testUserId: '',
-    testAdminUserName: '',
     testAdminUserEmail: '',
     testAdminUserPassword: '',
-    testAdminUserId: '',
-    testMailChimpApiKey: ''
+    testMailChimpApiKey: '',
   }
 }

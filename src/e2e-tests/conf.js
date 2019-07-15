@@ -15,7 +15,7 @@ exports.config = {
 	onPrepare: function () {
     jasmine.getEnv().addReporter(new SpecReporter({
       spec: {
-        displayStacktrace: true
+        displayStacktrace: false
       }
     }));
   },
@@ -49,13 +49,11 @@ exports.config = {
 
 exports.config.params = {
   userName: 'Test E2E User',
-	email: process.env.TRAVIS ? process.env.testUserEmail : env.params.testUserEmail,
-	password: process.env.TRAVIS ? process.env.testUserPassword : env.params.testUserPassword,
-  userId: process.env.TRAVIS ? process.env.testUserId : env.params.testUserId,
+  email: process.env.TRAVIS ? process.env.testUserEmail : env.params.testUserEmail,
+  password: process.env.TRAVIS ? process.env.testUserPassword : env.params.testUserPassword,
   adminUserName: 'Test Admin E2E User',
   adminEmail: process.env.TRAVIS ? process.env.testAdminUserEmail : env.params.testAdminUserEmail,
   adminPassword: process.env.TRAVIS ? process.env.testAdminUserPassword : env.params.testAdminUserPassword,
-  adminUserId: process.env.TRAVIS ? process.env.testAdminUserId : env.params.testAdminUserId,
   adminUserPhoneNumber: '+44 114 139 3939',
   standardTestList: 'E2e test list - standard',
   tempList: 'E2e temp list',
