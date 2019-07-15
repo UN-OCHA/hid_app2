@@ -1,13 +1,23 @@
+# generated assets/artifacts
 dist/
+src/coverage
+src/app/common/translations.js
+
+# dev dependencies
 node_modules/
 src/bower_components
-src/app/common/translations.js
 .sass-cache/
+src/app/config/config.js
+src/e2e-tests/environment.js
+
+# OS stuff
 **/.DS_Store
 **/*.map
+
+# random config?
+#
+# TODO: most of this should be avoidable by configuring Sass differently
 src/assets/css/*.scss
 src/assets/css/*.css
 src/assets/css/*.css.map
 !src/assets/css/api.scss
-src/app/config/config.js
-src/e2e-tests/environment.js
