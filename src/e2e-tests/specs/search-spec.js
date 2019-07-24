@@ -55,7 +55,7 @@ describe('Search', function () {
 			});
 
 			it('should go to the search results when submit the search form', function () {
-				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'search?q=Test%20E2E%20User');
+				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'search?q=' + encodeURIComponent(browser.params.userName));
 			});
 
 			it('should show the search term in the current filters', function () {
@@ -81,7 +81,7 @@ describe('Search', function () {
 			});
 
 			it('should go to the search results when click see all', function () {
-				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'search?q=Test%20E2E%20User');
+				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'search?q=' + encodeURIComponent(browser.params.userName));
 			});
 
 			afterAll(function () {
@@ -130,7 +130,7 @@ describe('Search', function () {
 			});
 
 			it('should go to the search results when submit the search form', function () {
-				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'search?q=climb%20for%20haiti');
+				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'search?q=' + encodeURIComponent(listSearchText));
 			});
 
 			it('should show list results when click show lists', function () {
@@ -161,7 +161,7 @@ describe('Search', function () {
 			});
 
 			it('should go to the search results with the lists tab open when click see all', function () {
-				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'search?q=climb%20for%20haiti&view=lists');
+				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'search?q=' + encodeURIComponent(listSearchText) + '&view=lists');
 				expect(searchResultsPage.allLists.isDisplayed()).toBeTruthy();
 			});
 
