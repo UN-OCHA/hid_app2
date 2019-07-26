@@ -59,19 +59,13 @@ module.exports = function(grunt) {
     },
     sass: {
       dist: {
-        files: {
-          'src/assets/css/main.css': 'src/assets/css/main.scss'
-        }
+        src: 'src/assets/css/main.scss',
+        dest: 'src/assets/css/main.css',
       },
       api: {
-        files: {
-          'src/assets/css/api.css': 'src/assets/css/api.scss'
-        },
-        options: {
-          sourcemap: 'none',
-          style: 'compressed'
-        }
-      }
+        src: 'src/assets/css/api.scss',
+        dest: 'src/assets/css/api.css',
+      },
     },
     watch: {
       sass: {
@@ -232,7 +226,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-angular-gettext');
   grunt.loadNpmTasks('grunt-sass-import');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-node-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');

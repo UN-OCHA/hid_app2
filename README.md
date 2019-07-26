@@ -9,9 +9,7 @@
 * [Docker for Mac](https://docs.docker.com/docker-for-mac/) / Docker for your OS of choice
 * [Node](https://nodejs.org/en/)
 * [Yarn](https://yarnpkg.com/lang/en/docs/install/)
-* [Bower](https://bower.io/#install-bower)
 * [Grunt](http://gruntjs.com/getting-started)
-* [Ruby](https://www.ruby-lang.org/en/)
 * [Sass](http://sass-lang.com/install)
 
 
