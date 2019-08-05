@@ -5,9 +5,9 @@
     .module('app.common')
     .controller('AppController', AppController);
 
-  AppController.$inject = ['$rootScope', '$scope', '$location', '$window', 'alertService', 'gettextCatalog', 'SidebarService', 'User'];
+  AppController.$inject = ['$rootScope', '$scope', '$location', '$document', '$window', 'alertService', 'gettextCatalog', 'SidebarService', 'User'];
 
-  function AppController($rootScope, $scope, $location, $window, alertService, gettextCatalog, SidebarService, User) {
+  function AppController($rootScope, $scope, $location, $document, $window, alertService, gettextCatalog, SidebarService, User) {
     $rootScope.canCache = true;
     $scope.currentUser = null;
     $scope.currentUserResource = null;
@@ -28,9 +28,9 @@
     }
     // Fix for iOS keyboard not closing when tap outside of an input
     function closeIOSKeyboard () {
-      document.addEventListener('touchstart', function(e) {
-        if (!isTextInput(e.target) && isTextInput(document.activeElement)) {
-          document.activeElement.blur();
+      $document[0].addEventListener('touchstart', function(e) {
+        if (!isTextInput(e.target) && isTextInput($document[0].activeElement)) {
+          $document[0].activeElement.blur();
         }
       }, false);
     }
