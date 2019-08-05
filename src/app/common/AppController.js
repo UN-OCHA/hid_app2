@@ -18,7 +18,7 @@
 
     function detectApp () {
       // The Cordova app appends 'Cordova/version-number' to the end of the User Agent, e.g. 'Cordova/2.0.1'
-      var ua = window.navigator.userAgent;
+      var ua = $window.navigator.userAgent;
       return ua.indexOf('Cordova') > 0;
     }
     $scope.isApp = detectApp();
