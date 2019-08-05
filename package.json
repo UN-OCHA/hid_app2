@@ -4,6 +4,7 @@
   "description": "HID Client application",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint src/app",
     "test": "grunt test",
     "protractor": "protractor src/e2e-tests/conf.js",
     "ci": "yarn test",
@@ -21,6 +22,8 @@
   },
   "homepage": "https://github.com/un-ocha/hid_app2#readme",
   "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-plugin-angular": "^4.0.1",
     "grunt": "^1.0.3",
     "grunt-angular-gettext": "^2.2.3",
     "grunt-angular-templates": "^1.1.0",

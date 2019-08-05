@@ -36,9 +36,13 @@
 See https://github.com/UN-OCHA/hid-stack/blob/master/README.md
 
 
-## Code style guide
+## Coding standards
 
-This project aims to follow the [John Papa Angular 1 style guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1)
+This project aims to follow the [John Papa Angular 1 style guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1). You can lint the codebase by running the following command (look at [the plugin's README](https://www.npmjs.com/package/eslint-plugin-angular) to interpret the rule names, which link to the styleguide in the format `y123`)
+
+```sh
+yarn run lint
+```
 
 
 ## Unit tests
