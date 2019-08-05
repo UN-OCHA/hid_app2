@@ -3,11 +3,11 @@
 
   angular
     .module('app.common')
-    .controller('AppCtrl', AppCtrl);
+    .controller('AppController', AppController);
 
-  AppCtrl.$inject = ['$rootScope', '$scope', '$location', '$window', 'alertService', 'gettextCatalog', 'SidebarService', 'User'];
+  AppController.$inject = ['$rootScope', '$scope', '$location', '$window', 'alertService', 'gettextCatalog', 'SidebarService', 'User'];
 
-  function AppCtrl($rootScope, $scope, $location, $window, alertService, gettextCatalog, SidebarService, User) {
+  function AppController($rootScope, $scope, $location, $window, alertService, gettextCatalog, SidebarService, User) {
     $rootScope.canCache = true;
     $scope.currentUser = null;
     $scope.currentUserResource = null;
