@@ -44,6 +44,8 @@ This project aims to follow the [John Papa Angular 1 style guide](https://github
 yarn run lint
 ```
 
+The linting is run on every PR via Travis integration.
+
 
 ## Unit tests
 
