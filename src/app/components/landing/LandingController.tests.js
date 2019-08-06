@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Landing controller', function () {
+  describe('LandingController', function () {
 
   	var $location, mockNotificationsService, notification, scope, userFixture;
 
@@ -42,7 +42,7 @@
         $controller('LandingCtrl', {
           $scope: scope
         });
-        
+
         scope.$digest();
 
       });

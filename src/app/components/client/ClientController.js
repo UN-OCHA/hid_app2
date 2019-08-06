@@ -3,11 +3,11 @@
 
   angular
     .module('app.client')
-    .controller('ClientCtrl', ClientCtrl);
+    .controller('ClientController', ClientController);
 
-  ClientCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Client'];
+  ClientController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$http', '$window', 'gettextCatalog', 'alertService', 'Client'];
 
-  function ClientCtrl ($exceptionHandler, $scope, $routeParams, $http, $window, gettextCatalog, alertService, Client) {
+  function ClientController ($exceptionHandler, $scope, $routeParams, $http, $window, gettextCatalog, alertService, Client) {
     if ($routeParams.clientId) {
       $scope.client = Client.get({'clientId': $routeParams.clientId});
     }

@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  describe('Checkin controller', function () {
+  describe('CheckinController', function () {
 
-    var deferred, deferredLists, expectedMessage, listFixture, scope, mockAlertService, mockConfig, mockGetText, mockList, mockService, mockUser, 
+    var deferred, deferredLists, expectedMessage, listFixture, scope, mockAlertService, mockConfig, mockGetText, mockList, mockService, mockUser,
     mockUserCheckInService, mockUserDataService, mockUibModal, userFixture, userId;
 
     expectedMessage = 'I am the messsage';
@@ -18,7 +18,7 @@
 
         scope.$broadcast = function () {};
         spyOn(scope, '$broadcast');
-        
+
         mockUserCheckInService = {};
         mockUserCheckInService.save = function () {
           deferred = $q.defer();
@@ -44,7 +44,7 @@
     }
 
     beforeEach(function() {
-     
+
       mockConfig = {
         listTypes: ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office']
       };
@@ -90,7 +90,7 @@
     });
 
     describe('Get the user', function () {
-      
+
       describe('Checking in the current user', function () {
 
         beforeEach(function () {
@@ -195,7 +195,7 @@
           setUpCtrl(true);
           var list = listFixture.lists[0];
           list.type = 'list';
-          
+
           scope.$emit('selectList', {
             list: list,
             searchTerm: 'findme'
@@ -319,6 +319,6 @@
 
       });
     });
-   
+
   });
 })();

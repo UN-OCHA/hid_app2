@@ -223,11 +223,11 @@ msgstr ""
 msgid "Are you sure you want to do this? You will need to authorize this application again to access it through Humanitarian ID."
 msgstr ""
 
-#: src/app/components/checkin/allCheckIns.controller.js:99
-#: src/app/components/dashboard/dashboard.controller.js:111
-#: src/app/components/dashboard/dashboard.controller.js:76
-#: src/app/components/dashboard/dashboard.controller.js:87
-#: src/app/components/dashboard/dashboard.controller.js:97
+#: src/app/components/checkin/AllCheckInsController.js:99
+#: src/app/components/dashboard/DashboardController.js:111
+#: src/app/components/dashboard/DashboardController.js:76
+#: src/app/components/dashboard/DashboardController.js:87
+#: src/app/components/dashboard/DashboardController.js:97
 #: src/app/components/list/list.controller.js:203
 #: src/app/components/list/list.controller.js:217
 #: src/app/components/list/list.controller.js:286
@@ -265,7 +265,7 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: src/app/components/alerts/alert.service.js:32
+#: src/app/components/alerts/alertService.js:32
 #: src/app/components/checkin/editCheckinModal.html:34
 #: src/app/components/user/preferences.html:32
 msgid "Cancel"
@@ -280,23 +280,23 @@ msgstr ""
 msgid "Change settings"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:203
+#: src/app/components/checkin/CheckinController.js:203
 msgid "Changed primary email to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:211
+#: src/app/components/checkin/CheckinController.js:211
 msgid "Changed primary job title to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:207
+#: src/app/components/checkin/CheckinController.js:207
 msgid "Changed primary location to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:195
+#: src/app/components/checkin/CheckinController.js:195
 msgid "Changed primary organization to:"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:199
+#: src/app/components/checkin/CheckinController.js:199
 msgid "Changed primary phone number to:"
 msgstr ""
 
@@ -368,7 +368,7 @@ msgstr ""
 msgid "Client admin"
 msgstr ""
 
-#: src/app/components/client/client.controller.js:35
+#: src/app/components/client/ClientController.js:35
 msgid "Client deleted successfully"
 msgstr ""
 
@@ -376,7 +376,7 @@ msgstr ""
 msgid "Client redirect URL"
 msgstr ""
 
-#: src/app/components/client/client.controller.js:20
+#: src/app/components/client/ClientController.js:20
 msgid "Client saved successfully"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr ""
 msgid "Clients"
 msgstr ""
 
-#: src/app/components/alerts/alert.service.js:31
+#: src/app/components/alerts/alertService.js:31
 #: src/app/components/checkin/listTypesModal.html:39
 msgid "Close"
 msgstr ""
@@ -678,7 +678,7 @@ msgstr ""
 msgid "Download and save your recovery codes in a safe place. They will allow you to access your account if you ever lose your phone."
 msgstr ""
 
-#: src/app/components/duplicate/duplicates.controller.js:43
+#: src/app/components/duplicate/DuplicatesController.js:43
 msgid "Duplicate successfully removed"
 msgstr ""
 
@@ -1423,7 +1423,7 @@ msgstr ""
 msgid "Password (confirm)"
 msgstr ""
 
-#: src/app/components/auth/resetPassword.controller.js:18
+#: src/app/components/auth/ResetPasswordController.js:18
 msgid "Password reset was sent to . Please make sure the email address is correct. If not, please reset your password again"
 msgstr ""
 
@@ -1820,7 +1820,7 @@ msgstr ""
 msgid "Service admin"
 msgstr ""
 
-#: src/app/components/dashboard/dashboard.controller.js:113
+#: src/app/components/dashboard/DashboardController.js:113
 #: src/app/components/service/service.controller.js:86
 #: src/app/components/service/services.controller.js:74
 msgid "Service deleted successfully"
@@ -1900,11 +1900,11 @@ msgstr ""
 msgid "Social Networks"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:147
+#: src/app/components/checkin/CheckinController.js:147
 msgid "Some of you check-ins are pending, we will get back to you soon."
 msgstr ""
 
-#: src/app/common/errors.controller.js:56
+#: src/app/common/ErrorsController.js:56
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
@@ -1961,12 +1961,12 @@ msgstr ""
 msgid "Successfully added to list"
 msgstr ""
 
-#: src/app/components/checkin/allCheckIns.controller.js:101
+#: src/app/components/checkin/AllCheckInsController.js:101
 #: src/app/components/list/list.controller.js:205
 msgid "Successfully removed from list"
 msgstr ""
 
-#: src/app/components/dashboard/dashboard.controller.js:78
+#: src/app/components/dashboard/DashboardController.js:78
 msgid "Successfully removed from list."
 msgstr ""
 
@@ -1990,7 +1990,7 @@ msgstr ""
 msgid "Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap."
 msgstr ""
 
-#: src/app/components/auth/verify.controller.js:12
+#: src/app/components/auth/VerifyController.js:12
 msgid "Thank you for confirming your email. You can now login through our application, or through any other application using Humanitarian ID"
 msgstr ""
 
@@ -2010,7 +2010,7 @@ msgstr ""
 msgid "The client name"
 msgstr ""
 
-#: src/app/components/auth/verify.controller.js:15
+#: src/app/components/auth/VerifyController.js:15
 msgid "The confirmation link did not work"
 msgstr ""
 
@@ -2022,7 +2022,7 @@ msgstr ""
 msgid "The list owner and the managers of this list only"
 msgstr ""
 
-#: src/app/components/dashboard/dashboard.controller.js:89
+#: src/app/components/dashboard/DashboardController.js:89
 #: src/app/components/list/list.controller.js:219
 msgid "The list was successfully deleted."
 msgstr ""
@@ -2066,16 +2066,16 @@ msgstr ""
 msgid "The user was successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/common/errors.controller.js:46
+#: src/app/common/ErrorsController.js:46
 msgid "There is an error in your registration. You may have already registered. If so, simply <a href=\"/password_reset\" target=\"_top\">reset your password</a>."
 msgstr ""
 
-#: src/app/common/errors.controller.js:41
+#: src/app/common/ErrorsController.js:41
 msgid "There was an error logging in."
 msgstr ""
 
-#: src/app/components/auth/resetPassword.controller.js:21
-#: src/app/components/auth/resetPassword.controller.js:40
+#: src/app/components/auth/ResetPasswordController.js:21
+#: src/app/components/auth/ResetPasswordController.js:40
 msgid "There was an error resetting your password. Please try again or contact the HID team."
 msgstr ""
 
@@ -2103,7 +2103,7 @@ msgstr ""
 msgid "This list has been set to private by the list owner. Unfortunately you do not have the rights to access it."
 msgstr ""
 
-#: src/app/components/dashboard/dashboard.controller.js:70
+#: src/app/components/dashboard/DashboardController.js:70
 msgid "This list was removed from your favourites."
 msgstr ""
 
@@ -2316,23 +2316,23 @@ msgstr ""
 msgid "View as PDF"
 msgstr ""
 
-#: src/app/common/errors.controller.js:22
+#: src/app/common/ErrorsController.js:22
 msgid "We could not log you in because your email address is not verified yet."
 msgstr ""
 
-#: src/app/common/errors.controller.js:34
+#: src/app/common/ErrorsController.js:34
 msgid "We could not log you in because your password is expired. Following UN regulations, as a security measure passwords must be updated every six months. Kindly reset your password by clicking on the \"Forgot/Reset password\" link below."
 msgstr ""
 
-#: src/app/common/errors.controller.js:30
+#: src/app/common/ErrorsController.js:30
 msgid "We could not log you in, the email address does not exist."
 msgstr ""
 
-#: src/app/common/errors.controller.js:26
+#: src/app/common/ErrorsController.js:26
 msgid "We could not log you in. The username or password you have entered are incorrect. Kindly try again."
 msgstr ""
 
-#: src/app/components/dashboard/dashboard.controller.js:104
+#: src/app/components/dashboard/DashboardController.js:104
 msgid "We could not unsubscribe you from this service"
 msgstr ""
 
@@ -2430,7 +2430,7 @@ msgstr ""
 msgid "You should only check into an organization that you belong to. All organizational lists are moderated, i.e. your check-in will have to be approved by a Humanitarian ID manager."
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:145
+#: src/app/components/checkin/CheckinController.js:145
 msgid "You were successfully checked in."
 msgstr ""
 
@@ -2444,7 +2444,7 @@ msgstr ""
 msgid "You were successfully checked into the list"
 msgstr ""
 
-#: src/app/components/auth/auth.controller.js:100
+#: src/app/components/auth/AuthController.js:100
 msgid "You were successfully logged out."
 msgstr ""
 
@@ -2457,14 +2457,14 @@ msgstr ""
 msgid "You were successfully subscribed to this service"
 msgstr ""
 
-#: src/app/components/dashboard/dashboard.controller.js:101
+#: src/app/components/dashboard/DashboardController.js:101
 #: src/app/components/service/allSubscriptions.controller.js:26
 #: src/app/components/service/service.controller.js:70
 #: src/app/components/service/services.controller.js:60
 msgid "You were successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/common/errors.controller.js:16
+#: src/app/common/ErrorsController.js:16
 msgid "You've reached the API request limit, please try again in 10 minutes"
 msgstr ""
 
@@ -2472,7 +2472,7 @@ msgstr ""
 msgid "Your API keys"
 msgstr ""
 
-#: src/app/common/errors.controller.js:38
+#: src/app/common/ErrorsController.js:38
 msgid "Your account has been locked for 5 minutes due to too many unsuccessful login attempts"
 msgstr ""
 
@@ -2503,11 +2503,11 @@ msgstr ""
 msgid "Your current password"
 msgstr ""
 
-#: src/app/components/offlineStatus/offline.directive.js:20
+#: src/app/components/offlineStatus/offlineStatus.js:20
 msgid "Your device is connected to the internet"
 msgstr ""
 
-#: src/app/components/offlineStatus/offline.directive.js:19
+#: src/app/components/offlineStatus/offlineStatus.js:19
 msgid "Your device lost its internet connection."
 msgstr ""
 
@@ -2548,7 +2548,7 @@ msgstr ""
 msgid "Your password was successfully changed."
 msgstr ""
 
-#: src/app/components/auth/resetPassword.controller.js:29
+#: src/app/components/auth/ResetPasswordController.js:29
 msgid "Your password was successfully changed. You can now login."
 msgstr ""
 
@@ -2659,7 +2659,7 @@ msgstr ""
 msgid "subscribers"
 msgstr ""
 
-#: src/app/components/checkin/checkin.controller.js:154
+#: src/app/components/checkin/CheckinController.js:154
 msgid "was successfully checked in"
 msgstr ""
 

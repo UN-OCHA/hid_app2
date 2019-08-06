@@ -3,11 +3,11 @@
 
   angular
     .module('app.common')
-    .controller('ErrorsCtrl', ErrorsCtrl);
+    .controller('ErrorsController', ErrorsController);
 
-  ErrorsCtrl.$inject = ['$rootScope', 'alertService', 'config', 'gettextCatalog'];
+  ErrorsController.$inject = ['$rootScope', 'alertService', 'config', 'gettextCatalog'];
 
-  function ErrorsCtrl($rootScope, alertService, config, gettextCatalog) {
+  function ErrorsController($rootScope, alertService, config, gettextCatalog) {
 
     function getErrorMessage (rejection) {
 

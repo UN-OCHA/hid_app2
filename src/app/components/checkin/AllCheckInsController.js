@@ -3,11 +3,11 @@
 
   angular
     .module('app.checkin')
-    .controller('AllCheckInsCtrl', AllCheckInsCtrl);
+    .controller('AllCheckInsController', AllCheckInsController);
 
-  AllCheckInsCtrl.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'UserCheckInService', 'UserDataService', 'gettextCatalog'];
+  AllCheckInsController.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'UserCheckInService', 'UserDataService', 'gettextCatalog'];
 
-  function AllCheckInsCtrl ($exceptionHandler, $scope, $uibModal, alertService, config, UserCheckInService, UserDataService, gettextCatalog) {
+  function AllCheckInsController ($exceptionHandler, $scope, $uibModal, alertService, config, UserCheckInService, UserDataService, gettextCatalog) {
     $scope.listsMember = [];
     $scope.leaveList = leaveList;
     $scope.editCheckIn = editCheckIn;

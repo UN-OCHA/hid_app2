@@ -3,11 +3,11 @@
 
   angular
     .module('app.checkin')
-    .controller('CheckinCtrl', CheckinCtrl);
+    .controller('CheckinController', CheckinController);
 
-  CheckinCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$filter', '$q', '$location', '$uibModal', 'gettextCatalog', 'config', 'alertService', 'User', 'UserDataService', 'UserCheckInService', 'List', 'Service'];
+  CheckinController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$filter', '$q', '$location', '$uibModal', 'gettextCatalog', 'config', 'alertService', 'User', 'UserDataService', 'UserCheckInService', 'List', 'Service'];
 
-  function CheckinCtrl ($exceptionHandler, $scope, $routeParams, $filter, $q, $location, $uibModal, gettextCatalog, config, alertService, User, UserDataService, UserCheckInService, List, Service) {
+  function CheckinController ($exceptionHandler, $scope, $routeParams, $filter, $q, $location, $uibModal, gettextCatalog, config, alertService, User, UserDataService, UserCheckInService, List, Service) {
     $scope.modifications = {};
     $scope.datePicker = {
       opened: false

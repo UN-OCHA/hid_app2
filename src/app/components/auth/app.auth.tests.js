@@ -4,7 +4,7 @@
   var $interval, $localForage, $rootScope, $timeout, AuthService, httpBackend, mockConfig, mockLf, mockLocalForage, mockNotificationsService,
   mockUserListsService, userFixture;
 
-  describe('Auth service', function () {
+  describe('app.auth', function () {
 
     function setUpCtrl (token) {
       inject(function(_AuthService_, _$httpBackend_,  _$interval_, _$rootScope_, config, $q, _$timeout_) {

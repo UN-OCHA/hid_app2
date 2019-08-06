@@ -3,11 +3,11 @@
 
   angular
     .module('app.auth')
-    .controller('ResetPasswordCtrl', ResetPasswordCtrl);
+    .controller('ResetPasswordController', ResetPasswordController);
 
-  ResetPasswordCtrl.$inject = ['$scope', '$routeParams', '$location', 'alertService', 'TwoFactorAuthService', 'User', 'gettextCatalog'];
+  ResetPasswordController.$inject = ['$scope', '$routeParams', '$location', 'alertService', 'TwoFactorAuthService', 'User', 'gettextCatalog'];
 
-  function ResetPasswordCtrl ($scope, $routeParams, $location, alertService, TwoFactorAuthService, User, gettextCatalog) {
+  function ResetPasswordController ($scope, $routeParams, $location, alertService, TwoFactorAuthService, User, gettextCatalog) {
     $scope.isOrphan = $routeParams.orphan;
     $scope.resetPassword = resetPassword;
     $scope.requestPasswordReset = requestPasswordReset;

@@ -3,11 +3,11 @@
 
   angular
     .module('app.duplicate')
-    .controller('DuplicatesCtrl', DuplicatesCtrl);
+    .controller('DuplicatesController', DuplicatesController);
 
-  DuplicatesCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', 'alertService', 'Duplicate', 'gettextCatalog'];
+  DuplicatesController.$inject = ['$exceptionHandler', '$scope', '$routeParams', 'alertService', 'Duplicate', 'gettextCatalog'];
 
-  function DuplicatesCtrl ($exceptionHandler, $scope, $routeParams, alertService, Duplicate, gettextCatalog) {
+  function DuplicatesController ($exceptionHandler, $scope, $routeParams, alertService, Duplicate, gettextCatalog) {
     $scope.pagination = {
       currentPage: 1,
       itemsPerPage: 10,

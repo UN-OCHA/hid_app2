@@ -3,11 +3,11 @@
 
   angular
     .module('app.dashboard')
-    .controller('LandingCtrl', LandingCtrl);
+    .controller('LandingController', LandingController);
 
-  LandingCtrl.$inject = ['$location', '$scope', 'notificationsService'];
+  LandingController.$inject = ['$location', '$scope', 'notificationsService'];
 
-  function LandingCtrl($location, $scope, notificationsService) {
+  function LandingController($location, $scope, notificationsService) {
     $scope.notifications = notificationsService;
 
     $scope.recentUserSearches = [];
@@ -32,7 +32,7 @@
 
     $scope.readNotification = function (notification) {
       notification.notified = true;
-      notification.read = true; 
+      notification.read = true;
       notificationsService.update(notification);
       $location.path(notification.link);
     };

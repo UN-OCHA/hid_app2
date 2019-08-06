@@ -3,11 +3,11 @@
 
   angular
     .module('app.dashboard')
-    .controller('DashboardCtrl', DashboardCtrl);
+    .controller('DashboardController', DashboardController);
 
-  DashboardCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', 'alertService', 'config', 'UserListsService', 'gettextCatalog', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
+  DashboardController.$inject = ['$exceptionHandler', '$rootScope', '$scope', 'alertService', 'config', 'UserListsService', 'gettextCatalog', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
-  function DashboardCtrl($exceptionHandler, $rootScope, $scope, alertService, config, UserListsService, gettextCatalog, Service, User, UserCheckInService, UserDataService) {
+  function DashboardController($exceptionHandler, $rootScope, $scope, alertService, config, UserListsService, gettextCatalog, Service, User, UserCheckInService, UserDataService) {
     $scope.subscriptions = [];
     $scope.itemsPerPage = 5;
     $scope.currentPage = 1;

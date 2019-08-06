@@ -3,11 +3,11 @@
 
   angular
     .module('app.client')
-    .controller('ClientsCtrl', ClientsCtrl);
+    .controller('ClientsController', ClientsController);
 
-  ClientsCtrl.$inject = ['$scope', '$routeParams', 'Client'];
+  ClientsController.$inject = ['$scope', '$routeParams', 'Client'];
 
-  function ClientsCtrl ($scope, $routeParams, Client) {
+  function ClientsController ($scope, $routeParams, Client) {
     $scope.pagination = {
       currentPage: 1,
       itemsPerPage: 10,
@@ -21,7 +21,7 @@
     function getClients (offset) {
       var params = {
         sort: 'name',
-        limit: $scope.pagination.itemsPerPage 
+        limit: $scope.pagination.itemsPerPage
       };
       params.offset = offset || 0;
 

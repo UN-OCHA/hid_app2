@@ -3,11 +3,11 @@
 
   angular
     .module('app.auth')
-    .controller('AuthCtrl', AuthCtrl);
+    .controller('AuthController', AuthController);
 
-  AuthCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$location', '$timeout', '$window', 'alertService', 'AuthService', 'gettextCatalog', 'TwoFactorAuthService'];
+  AuthController.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$location', '$timeout', '$window', 'alertService', 'AuthService', 'gettextCatalog', 'TwoFactorAuthService'];
 
-  function AuthCtrl ($exceptionHandler, $rootScope, $scope, $location, $timeout, $window, alertService, AuthService, gettextCatalog, TwoFactorAuthService) {
+  function AuthController ($exceptionHandler, $rootScope, $scope, $location, $timeout, $window, alertService, AuthService, gettextCatalog, TwoFactorAuthService) {
     $scope.email = '';
     $scope.saving = false;
     var twoFAModal;

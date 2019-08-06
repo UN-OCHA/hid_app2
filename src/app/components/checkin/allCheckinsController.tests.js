@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('All Check-ins controller', function () {
+  describe('AllCheckinsController', function () {
 
   	var checkinToEdit, checkinToRemove, mockAlertService, mockConfig, mockGetText, mockUibModal, mockUserCheckInService, mockUserDataService,
     scope, userFixture;

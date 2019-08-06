@@ -109,24 +109,23 @@ app.run(function ($rootScope, $window, $location, config) {
   }
 });
 
-app.config(['$routeProvider', '$locationProvider',
-  function($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider.
       when('/', {
         templateUrl: 'app/components/auth/login.html',
-        controller: 'AuthCtrl',
+        controller: 'AuthController',
         title: 'Log in'
       }).
       when('/landing', {
         templateUrl: 'app/components/landing/landing.html',
-        controller: 'LandingCtrl',
+        controller: 'LandingController',
         authenticate: true,
         title: 'Welcome'
       }).
       when('/dashboard', {
         templateUrl: 'app/components/dashboard/dashboard.html',
-        controller: 'DashboardCtrl',
+        controller: 'DashboardController',
         authenticate: true,
         title: 'Dashboard'
       }).
@@ -167,7 +166,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/checkin', {
         templateUrl: 'app/components/checkin/checkin.html',
-        controller: 'CheckinCtrl',
+        controller: 'CheckinController',
         authenticate: true,
         title: 'Check-in'
       }).
@@ -178,7 +177,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/checkin/:userId', {
         templateUrl: 'app/components/checkin/checkin.html',
-        controller: 'CheckinCtrl',
+        controller: 'CheckinController',
         authenticate: true,
         title: 'Check-in'
       }).
@@ -216,28 +215,28 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/clients/new', {
         templateUrl: 'app/components/client/new-client.html',
-        controller: 'ClientCtrl',
+        controller: 'ClientController',
         authenticate: true,
         adminOnly: true,
         title: 'New client'
       }).
       when('/clients', {
         templateUrl: 'app/components/client/clients.html',
-        controller: 'ClientsCtrl',
+        controller: 'ClientsController',
         authenticate: true,
         adminOnly: true,
         title: 'Clients'
       }).
       when('/clients/:clientId', {
         templateUrl: 'app/components/client/client.html',
-        controller: 'ClientCtrl',
+        controller: 'ClientController',
         authenticate: true,
         adminOnly: true,
         title: 'Client'
       }).
       when('/clients/:clientId/edit', {
         templateUrl: 'app/components/client/new-client.html',
-        controller: 'ClientCtrl',
+        controller: 'ClientController',
         authenticate: true,
         adminOnly: true,
         title: 'Edit client'
@@ -251,7 +250,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/duplicates', {
         templateUrl: 'app/components/duplicate/duplicates.html',
-        controller: 'DuplicatesCtrl',
+        controller: 'DuplicatesController',
         authenticate: true,
         adminOnly: true,
         title: 'Duplicates'
@@ -305,12 +304,12 @@ app.config(['$routeProvider', '$locationProvider',
       })
       .when('/password_reset', {
         templateUrl: 'app/components/auth/password_reset.html',
-        controller: 'ResetPasswordCtrl',
+        controller: 'ResetPasswordController',
         title: 'Reset password'
       })
       .when('/reset_password', {
         templateUrl: 'app/components/auth/reset_password.html',
-        controller: 'ResetPasswordCtrl',
+        controller: 'ResetPasswordController',
         title: 'Reset password'
       })
       .when('/verify', {
@@ -319,7 +318,7 @@ app.config(['$routeProvider', '$locationProvider',
       })
       .when('/logout', {
         template: '',
-        controller: 'AuthCtrl',
+        controller: 'AuthController',
         authenticate: true
       })
       .when('/search', {

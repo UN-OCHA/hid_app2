@@ -1,3 +1,15 @@
 {
-  "extends": "plugin:angular/johnpapa"
+  "extends": "plugin:angular/johnpapa",
+  "rules": {
+    "angular/controller-as": "off",
+    "angular/controller-as-route": "off",
+    "angular/no-run-logic": "off",
+    "angular/window-service": "off",
+    "angular/document-service": "off",
+    "angular/module-getter": "off",
+    "angular/module-setter": "off",
+    "angular/function-type": "off",
+    "angular/timeout-service": "off",
+    "angular/directive-restrict": "off"
+  }
 }

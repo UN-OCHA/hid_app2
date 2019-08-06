@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('DashboardCtrl controller', function () {
+  describe('DashboardController', function () {
 
   	var deleteServiceSpy, favoriteLists, listFixture, listsMember, listsOwnedAndManaged, mockAlertService, mockConfig,
     mockGetText, mockList, mockService, mockUser, mockUserCheckInService, mockUserDataService, mockUserListsService,

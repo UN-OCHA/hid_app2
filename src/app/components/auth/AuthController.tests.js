@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Auth controller', function () {
+  describe('AuthController', function () {
 
   	var authUser, hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, mockGetText, mockTwoFactorAuthService,
     newUser, returnUser, scope, tfaToken, tfaUser;
