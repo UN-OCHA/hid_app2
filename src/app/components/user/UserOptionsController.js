@@ -3,11 +3,11 @@
 
   angular
     .module('app.user')
-    .controller('UserOptionsCtrl', UserOptionsCtrl);
+    .controller('UserOptionsController', UserOptionsController);
 
-  UserOptionsCtrl.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'TwoFactorAuthService', 'UserCheckInService', 'UserDataService', 'gettextCatalog'];
+  UserOptionsController.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'List', 'ListDataService', 'TwoFactorAuthService', 'UserCheckInService', 'UserDataService', 'gettextCatalog'];
 
-  function UserOptionsCtrl($exceptionHandler, $scope, $uibModal, alertService, config, List, ListDataService, TwoFactorAuthService, UserCheckInService, UserDataService, gettextCatalog) {
+  function UserOptionsController($exceptionHandler, $scope, $uibModal, alertService, config, List, ListDataService, TwoFactorAuthService, UserCheckInService, UserDataService, gettextCatalog) {
     $scope.deleteUser = deleteUser;
     $scope.verifyUser = verifyUser;
     $scope.removeFromList = removeFromList;

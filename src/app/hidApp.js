@@ -131,36 +131,36 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       }).
       when('/settings', {
         templateUrl: 'app/components/user/preferences.html',
-        controller: 'UserPrefsCtrl',
+        controller: 'UserPrefsController',
         authenticate: true,
         title: 'Settings'
       }).
       when('/settings/:userId', {
         templateUrl: 'app/components/user/preferences.html',
-        controller: 'UserCtrl',
+        controller: 'UserController',
         authenticate: true,
         title: 'Settings'
       }).
       when('/users', {
         templateUrl: 'app/components/user/users-page.html',
-        controller: 'UsersPageCtrl',
+        controller: 'UsersPageController',
         authenticate: true,
         title: 'Users'
       }).
       when('/users/new', {
         templateUrl: 'app/components/user/new-user-page.html',
-        controller: 'UserNewCtrl',
+        controller: 'UserNewController',
         authenticate: true,
         title: 'New user'
       }).
       when('/users/:userId', {
         templateUrl: 'app/components/user/user.html',
-        controller: 'UserCtrl',
+        controller: 'UserController',
         authenticate: true
       }).
       when('/users/:userId/:edit', {
         templateUrl: 'app/components/user/user.html',
-        controller: 'UserCtrl',
+        controller: 'UserController',
         authenticate: true,
         title: 'User profile'
       }).
@@ -184,7 +184,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
       when('/kiosk', {
         templateUrl: 'app/components/user/kiosk.html',
-        controller: 'KioskCtrl',
+        controller: 'KioskController',
         authenticate: true,
         title: 'Kiosk'
       }).
@@ -299,7 +299,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       }).
       when('/register', {
         templateUrl: 'app/components/auth/register.html',
-        controller: 'UserNewCtrl',
+        controller: 'UserNewController',
         title: 'Register'
       })
       .when('/password_reset', {

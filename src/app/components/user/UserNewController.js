@@ -3,11 +3,11 @@
 
   angular
     .module('app.user')
-    .controller('UserNewCtrl', UserNewCtrl);
+    .controller('UserNewController', UserNewController);
 
-  UserNewCtrl.$inject = ['$scope', '$location', '$window', 'alertService', 'User', 'gettextCatalog'];
+  UserNewController.$inject = ['$scope', '$location', '$window', 'alertService', 'User', 'gettextCatalog'];
 
-  function UserNewCtrl($scope, $location, $window, alertService, User, gettextCatalog) {
+  function UserNewController($scope, $location, $window, alertService, User, gettextCatalog) {
     $scope.saving = false;
     $scope.user = new User();
     $scope.user.setAppMetaData({login: false});

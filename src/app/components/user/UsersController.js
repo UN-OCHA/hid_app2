@@ -3,10 +3,10 @@
 
   angular
     .module('app.user')
-    .controller('UsersCtrl', UsersCtrl);
+    .controller('UsersController', UsersController);
 
-  UsersCtrl.$inject = ['$exceptionHandler', '$location', '$q', '$rootScope', '$routeParams', '$scope', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'List', 'SearchService', 'SidebarService', 'User', 'UserDataService'];
-  function UsersCtrl($exceptionHandler, $location, $q, $rootScope, $routeParams, $scope, $window, gettextCatalog, alertService, hrinfoService, List, SearchService, SidebarService, User, UserDataService) {
+  UsersController.$inject = ['$exceptionHandler', '$location', '$q', '$rootScope', '$routeParams', '$scope', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'List', 'SearchService', 'SidebarService', 'User', 'UserDataService'];
+  function UsersController($exceptionHandler, $location, $q, $rootScope, $routeParams, $scope, $window, gettextCatalog, alertService, hrinfoService, List, SearchService, SidebarService, User, UserDataService) {
     $scope.usersLoaded = false;
     $scope.pageChanged = pageChanged;
     $scope.setLimit = setLimit;

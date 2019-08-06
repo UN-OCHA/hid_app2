@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('User edit controller', function () {
+  describe('UserEditController', function () {
 
   	var checkinResponseUser, countries, mockAlertService, mockConfig, mockGetText, mockhrinfoService, mockList,
     mockUserCheckInService, mockUserDataService, newEmail, newJobTitle, newLocation, newOrganization, newOrgCheckIn,
@@ -112,7 +112,7 @@
       var deferred = $q.defer();
       mockUpload = jasmine.createSpy('uploadSpy').and.returnValue(deferred.promise);
 
-      $controller('UserEditCtrl', {
+      $controller('UserEditController', {
         $scope: scope
       });
 

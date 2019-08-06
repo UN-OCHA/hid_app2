@@ -3,11 +3,11 @@
 
   angular
     .module('app.user')
-    .controller('KioskCtrl', KioskCtrl);
+    .controller('KioskController', KioskController);
 
-  KioskCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'UserCheckInService', 'List'];
+  KioskController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'UserCheckInService', 'List'];
 
-  function KioskCtrl($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, hrinfoService, User, UserCheckInService, List) {
+  function KioskController($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, hrinfoService, User, UserCheckInService, List) {
 
     $scope.step = 1;
     $scope.user = new User();

@@ -3,11 +3,11 @@
 
   angular
     .module('app.user')
-    .controller('UserEditCtrl', UserEditCtrl);
+    .controller('UserEditController', UserEditController);
 
-  UserEditCtrl.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'TwoFactorAuthService', 'UserCheckInService'];
+  UserEditController.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'TwoFactorAuthService', 'UserCheckInService'];
 
-  function UserEditCtrl($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, TwoFactorAuthService, UserCheckInService) {
+  function UserEditController($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, TwoFactorAuthService, UserCheckInService) {
     $scope.phoneNumberTypes = [];
     $scope.emailTypes = [];
     $scope.voipTypes = [];

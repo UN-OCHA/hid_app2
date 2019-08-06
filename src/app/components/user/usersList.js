@@ -11,7 +11,7 @@
       restrict: 'E',
       templateUrl: 'app/components/user/users.html',
       scope: true,
-      controller: 'UsersCtrl'
+      controller: 'UsersController'
     };
 
     return directive;

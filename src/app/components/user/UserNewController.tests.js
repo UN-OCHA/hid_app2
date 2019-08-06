@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('New User controller', function () {
+  describe('UserNewController', function () {
 
     var mockAlertService, mockGetText, mockLocation, mockRegisterForm, mockSave, mockSetAppMetaData, mockSetItem,
     mockUser, mockWindow, scope;
@@ -82,7 +82,7 @@
           mockLocation.path = jasmine.createSpy().and.returnValue('/register');
         }
 
-        $controller('UserNewCtrl', {
+        $controller('UserNewController', {
           $scope: scope
         });
         scope.$digest();

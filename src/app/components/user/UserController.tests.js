@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  	describe('User controller', function () {
+  	describe('UserController', function () {
   	var mockAlertService, mockConfig, mockGetText, mockmd5, mockTwoFactorAuthService, mockUserDataService, scope, scopeUser, userFixture;
   	var connectionRequiredMessage = 'Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking \'Connect\'.';
     var connectionPendingMessage = 'Your connection request is pending';
@@ -58,7 +58,7 @@
 	      	routeParams.edit = 'edit';
 	      }
 
-  			$controller('UserCtrl', {
+  			$controller('UserController', {
           $scope: scope,
           $routeParams: routeParams
         });

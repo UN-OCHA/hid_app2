@@ -3,11 +3,11 @@
 
   angular
     .module('app.user')
-    .controller('UserCtrl', UserCtrl);
+    .controller('UserController', UserController);
 
-  UserCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config', 'gettextCatalog', 'TwoFactorAuthService'];
+  UserController.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config', 'gettextCatalog', 'TwoFactorAuthService'];
 
-  function UserCtrl($exceptionHandler, $rootScope, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config, gettextCatalog, TwoFactorAuthService) {
+  function UserController($exceptionHandler, $rootScope, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config, gettextCatalog, TwoFactorAuthService) {
     $scope.pictureUrl = '';
     $scope.userLoaded = false;
     $scope.canEditUser = ($routeParams.userId === $scope.currentUser._id) || $scope.currentUser.is_admin || $scope.currentUser.isManager;

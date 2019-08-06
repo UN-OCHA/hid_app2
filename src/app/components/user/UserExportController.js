@@ -3,11 +3,11 @@
 
   angular
     .module('app.user')
-    .controller('UserExportCtrl', UserExportCtrl);
+    .controller('UserExportController', UserExportController);
 
-  UserExportCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$uibModal', '$window', '$location', 'User'];
+  UserExportController.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$uibModal', '$window', '$location', 'User'];
 
-  function UserExportCtrl($exceptionHandler, $rootScope, $scope, $uibModal, $window, $location, User) {
+  function UserExportController($exceptionHandler, $rootScope, $scope, $uibModal, $window, $location, User) {
     $scope.exportEmails = exportEmails;
     $scope.closeExportEmailslModal = closeExportEmailslModal;
     $scope.exportCSV = exportCSV;

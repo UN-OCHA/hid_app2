@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('User options controller', function () {
+  describe('UserOptionsController', function () {
 
     var allLists, listFixture, ownedAndManagedLists, mockConfig, mockAlertService, mockGetText, mockList, mockListDataService,
     mockTwoFactorAuthService, mockUibModal, mockUser, mockUserCheckInService, mockUserDataService, modalResult, scope, searchTerm,
@@ -90,7 +90,7 @@
           callback(allLists);
         });
 
-        $controller('UserOptionsCtrl', {
+        $controller('UserOptionsController', {
           $scope: scope,
           $uibModal: mockUibModal
         });

@@ -3,11 +3,11 @@
 
   angular
     .module('app.user')
-    .controller('UserPrefsCtrl', UserPrefsCtrl);
+    .controller('UserPrefsController', UserPrefsController);
 
-  UserPrefsCtrl.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog', 'TwoFactorAuthService', 'FileSaver', 'Blob'];
+  UserPrefsController.$inject = ['$exceptionHandler', '$scope', '$location', '$timeout', 'AuthService', 'alertService', 'UserDataService', 'gettextCatalog', 'TwoFactorAuthService', 'FileSaver', 'Blob'];
 
-  function UserPrefsCtrl($exceptionHandler, $scope, $location, $timeout, AuthService, alertService, UserDataService, gettextCatalog, TwoFactorAuthService, FileSaver, Blob) {
+  function UserPrefsController($exceptionHandler, $scope, $location, $timeout, AuthService, alertService, UserDataService, gettextCatalog, TwoFactorAuthService, FileSaver, Blob) {
     $scope.pendingConnections = [];
     $scope.approvedConnections = [];
     $scope.password = {

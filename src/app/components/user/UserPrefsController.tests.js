@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('User preferences controller', function () {
+  describe('UserPrefsController', function () {
 
   	var connection, mockAlertService, mockAuthService, mockBlob, mockFileSaver, mockGetText, mockTwoFactorAuthService, mockUserDataService,
     newToken, recoveryCodes, returnedTokens, scope, scopeUser, showTokens, tfaToken, userFixture;
@@ -108,7 +108,7 @@
 
 	      spyOn(scope, 'setCurrentUser').and.callThrough();
 
-	    	$controller('UserPrefsCtrl', {
+	    	$controller('UserPrefsController', {
 	        $scope: scope,
 	      });
 	      scope.$digest();

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Users controller', function () {
+  describe('UsersController', function () {
 
     var adminDefaultParams, countries, defaultParams, filterParams, filterRouteParams, initialUsers, listFixture, listInfo, listParams, listQueryResponse,
     mockGetText, mockAlertService, mockhrinfoService, mockList, mockLocation, mockSearchService, mockSidebarService, mockUser,
@@ -166,7 +166,7 @@
           };
           spyOn(mockhrinfoService, 'getCountries').and.callThrough();
 
-          $controller('UsersCtrl', ctrlParams);
+          $controller('UsersController', ctrlParams);
 
           scope.$broadcast('populate-list', listInfo);
 
