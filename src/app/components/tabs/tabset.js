@@ -1,6 +1,6 @@
 /**
  * Tabs
- * Usage: 
+ * Usage:
  * <tabset>
  *   <tab heading="Tab Heading 1">
  *     Tab content 1
@@ -21,32 +21,6 @@
 
   angular
   .module('app.common')
-  .directive('tab', tab);
-
-  function tab() {
-    var directive = {
-      require: '^tabset',
-      restrict: 'E',
-      scope: {
-        default: '=',
-        heading: '@'
-      },
-      transclude: true,
-      templateUrl: 'app/components/tabs/tab.html',
-      link: function(scope, elem, attr, tabsetCtrl) {
-        scope.toggle = function () {
-          tabsetCtrl.toggle(scope);
-        };
-        
-        tabsetCtrl.addTab(scope);
-      }
-    };
-
-    return directive;
-  }
-
-  angular
-  .module('app.common')
   .directive('tabset', tabset);
 
   function tabset() {
@@ -55,7 +29,7 @@
       transclude: true,
       scope: {
         vertical: '@',
-        responsive: '@' 
+        responsive: '@'
       },
       templateUrl: 'app/components/tabs/tabset.html',
       bindToController: true,
@@ -84,7 +58,7 @@
               tab.desktopActive = false;
             });
             return;
-          } 
+          }
 
           if (self.tabs.length === defaultTab) {
             tab.desktopActive = true;
@@ -97,9 +71,9 @@
               tab.mobileActive = !tab.mobileActive;
               tab.desktopActive = true;
               return;
-            } 
+            }
             tab.desktopActive = false;
-            
+
           });
         };
       }
