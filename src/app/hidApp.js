@@ -243,7 +243,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       }).
       when('/trustedDomains', {
         templateUrl: 'app/components/trustedDomain/trustedDomains.html',
-        controller: 'TrustedDomainsCtrl',
+        controller: 'TrustedDomainsController',
         authenticate: true,
         adminOnly: true,
         title: 'Trusted Domains'

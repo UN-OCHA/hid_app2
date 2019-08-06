@@ -3,11 +3,11 @@
 
   angular
     .module('app.client')
-    .controller('TrustedDomainsCtrl', TrustedDomainsCtrl);
+    .controller('TrustedDomainsController', TrustedDomainsController);
 
-  TrustedDomainsCtrl.$inject = ['$scope', '$routeParams', 'gettextCatalog', 'alertService', 'TrustedDomain', 'List'];
+  TrustedDomainsController.$inject = ['$scope', '$routeParams', 'gettextCatalog', 'alertService', 'TrustedDomain', 'List'];
 
-  function TrustedDomainsCtrl ($scope, $routeParams, gettextCatalog, alertService, TrustedDomain, List) {
+  function TrustedDomainsController ($scope, $routeParams, gettextCatalog, alertService, TrustedDomain, List) {
     $scope.pagination = {
       currentPage: 1,
       itemsPerPage: 100,
