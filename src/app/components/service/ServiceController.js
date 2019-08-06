@@ -3,11 +3,11 @@
 
   angular
     .module('app.service')
-    .controller('ServiceCtrl', ServiceCtrl);
+    .controller('ServiceController', ServiceController);
 
-  ServiceCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'Service', 'User'];
+  ServiceController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'Service', 'User'];
 
-  function ServiceCtrl ($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, Service, User) {
+  function ServiceController ($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, Service, User) {
     $scope.isSubscribed = false;
     $scope.userSubscribed = {};
     $scope.subscribers = [];

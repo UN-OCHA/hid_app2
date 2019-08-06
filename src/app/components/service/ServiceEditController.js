@@ -3,11 +3,11 @@
 
   angular
     .module('app.service')
-    .controller('ServiceEditCtrl', ServiceEditCtrl);
+    .controller('ServiceEditController', ServiceEditController);
 
-  ServiceEditCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'User'];
+  ServiceEditController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'User'];
 
-  function ServiceEditCtrl ($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, Service, ServiceCredentials, User) {
+  function ServiceEditController ($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, Service, ServiceCredentials, User) {
     $scope.getMailchimpLists = getMailchimpLists;
     $scope.getGoogleGroups = getGoogleGroups;
     $scope.getUsers = getUsers;

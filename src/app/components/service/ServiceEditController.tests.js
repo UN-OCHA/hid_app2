@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Service Edit controller', function () {
+  describe('ServiceEditController', function () {
 
   	var $location, ctrlParams, listFixture, mockAlertService, mockGetText, mockService, mockServiceCredentials, mockUser, returnedUsers,
   	savedService, scope, service, userFixture;
@@ -81,7 +81,7 @@
           ctrlParams.$routeParams.serviceId = service._id;
         }
 
-        $controller('ServiceEditCtrl', ctrlParams);
+        $controller('ServiceEditController', ctrlParams);
       });
   	}
 

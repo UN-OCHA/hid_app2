@@ -231,9 +231,9 @@ msgstr ""
 #: src/app/components/list/ListController.js:203
 #: src/app/components/list/ListController.js:217
 #: src/app/components/list/ListController.js:286
-#: src/app/components/service/allSubscriptions.controller.js:22
-#: src/app/components/service/service.controller.js:84
-#: src/app/components/service/services.controller.js:72
+#: src/app/components/service/AllSubscriptionsController.js:22
+#: src/app/components/service/ServiceController.js:84
+#: src/app/components/service/ServicesController.js:72
 msgid "Are you sure?"
 msgstr ""
 
@@ -1821,8 +1821,8 @@ msgid "Service admin"
 msgstr ""
 
 #: src/app/components/dashboard/DashboardController.js:113
-#: src/app/components/service/service.controller.js:86
-#: src/app/components/service/services.controller.js:74
+#: src/app/components/service/ServiceController.js:86
+#: src/app/components/service/ServicesController.js:74
 msgid "Service deleted successfully"
 msgstr ""
 
@@ -1830,7 +1830,7 @@ msgstr ""
 msgid "Service manager"
 msgstr ""
 
-#: src/app/components/service/serviceEdit.controller.js:82
+#: src/app/components/service/ServiceEditController.js:82
 msgid "Service saved successfully"
 msgstr ""
 
@@ -2056,13 +2056,13 @@ msgstr ""
 msgid "The user was successfully deleted."
 msgstr ""
 
-#: src/app/components/service/service.controller.js:54
-#: src/app/components/service/services.controller.js:47
+#: src/app/components/service/ServiceController.js:54
+#: src/app/components/service/ServicesController.js:47
 msgid "The user was successfully subscribed to this service"
 msgstr ""
 
-#: src/app/components/service/service.controller.js:73
-#: src/app/components/service/services.controller.js:63
+#: src/app/components/service/ServiceController.js:73
+#: src/app/components/service/ServicesController.js:63
 msgid "The user was successfully unsubscribed from this service"
 msgstr ""
 
@@ -2448,19 +2448,19 @@ msgstr ""
 msgid "You were successfully logged out."
 msgstr ""
 
-#: src/app/components/service/suggestions.controller.js:47
+#: src/app/components/service/SuggestionsController.js:47
 msgid "You were successfully subscribed"
 msgstr ""
 
-#: src/app/components/service/service.controller.js:51
-#: src/app/components/service/services.controller.js:44
+#: src/app/components/service/ServiceController.js:51
+#: src/app/components/service/ServicesController.js:44
 msgid "You were successfully subscribed to this service"
 msgstr ""
 
 #: src/app/components/dashboard/DashboardController.js:101
-#: src/app/components/service/allSubscriptions.controller.js:26
-#: src/app/components/service/service.controller.js:70
-#: src/app/components/service/services.controller.js:60
+#: src/app/components/service/AllSubscriptionsController.js:26
+#: src/app/components/service/ServiceController.js:70
+#: src/app/components/service/ServicesController.js:60
 msgid "You were successfully unsubscribed from this service"
 msgstr ""
 
@@ -2663,7 +2663,7 @@ msgstr ""
 msgid "was successfully checked in"
 msgstr ""
 
-#: src/app/components/service/suggestions.controller.js:50
+#: src/app/components/service/SuggestionsController.js:50
 msgid "was successfully subscribed"
 msgstr ""
 

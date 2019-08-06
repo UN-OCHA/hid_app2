@@ -3,11 +3,11 @@
 
   angular
     .module('app.service')
-    .controller('ServicesCtrl', ServicesCtrl);
+    .controller('ServicesController', ServicesController);
 
-  ServicesCtrl.$inject = ['$exceptionHandler', '$scope', '$routeParams', 'Service', 'alertService', 'gettextCatalog'];
+  ServicesController.$inject = ['$exceptionHandler', '$scope', '$routeParams', 'Service', 'alertService', 'gettextCatalog'];
 
-  function ServicesCtrl ($exceptionHandler, $scope, $routeParams, Service, alertService, gettextCatalog) {
+  function ServicesController ($exceptionHandler, $scope, $routeParams, Service, alertService, gettextCatalog) {
     $scope.servicesLoaded = false;
     $scope.services = [];
     $scope.pagination = {

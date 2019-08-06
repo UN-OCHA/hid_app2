@@ -3,11 +3,11 @@
 
   angular
     .module('app.service')
-    .controller('AllSubscriptionsCtrl', AllSubscriptionsCtrl);
+    .controller('AllSubscriptionsController', AllSubscriptionsController);
 
-  AllSubscriptionsCtrl.$inject = ['$exceptionHandler', '$scope', 'alertService', 'Service', 'gettextCatalog'];
+  AllSubscriptionsController.$inject = ['$exceptionHandler', '$scope', 'alertService', 'Service', 'gettextCatalog'];
 
-  function AllSubscriptionsCtrl ($exceptionHandler, $scope, alertService, Service, gettextCatalog) {
+  function AllSubscriptionsController ($exceptionHandler, $scope, alertService, Service, gettextCatalog) {
     $scope.unsubscribe = unsubscribe;
     $scope.page = 1;
     $scope.itemsPerPage = 10;

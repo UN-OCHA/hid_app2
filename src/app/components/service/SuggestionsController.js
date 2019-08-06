@@ -3,11 +3,11 @@
 
   angular
   .module('app.service')
-  .controller('SuggestionsCtrl', SuggestionsCtrl);
+  .controller('SuggestionsController', SuggestionsController);
 
-  SuggestionsCtrl.$inject = ['$exceptionHandler', '$location', '$q', '$routeParams', '$scope', 'alertService', 'Service', 'User', 'gettextCatalog'];
+  SuggestionsController.$inject = ['$exceptionHandler', '$location', '$q', '$routeParams', '$scope', 'alertService', 'Service', 'User', 'gettextCatalog'];
 
-  function SuggestionsCtrl ($exceptionHandler, $location, $q, $routeParams, $scope, alertService, Service, User, gettextCatalog) {
+  function SuggestionsController ($exceptionHandler, $location, $q, $routeParams, $scope, alertService, Service, User, gettextCatalog) {
     $scope.services = [];
     $scope.user = {};
     $scope.suggestions = {};

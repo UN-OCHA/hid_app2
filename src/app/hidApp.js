@@ -257,42 +257,42 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       }).
       when('/services/new', {
         templateUrl: 'app/components/service/new-service.html',
-        controller: 'ServiceEditCtrl',
+        controller: 'ServiceEditController',
         authenticate: true,
         adminOrManagerOnly: true,
         title: 'New service'
       }).
       when('/services', {
         templateUrl: 'app/components/service/services-page.html',
-        controller: 'ServicesPageCtrl',
+        controller: 'ServicesPageController',
         authenticate: true,
         adminOrManagerOnly: true,
         title: 'Services'
       }).
       when('/services/suggestions/:userId', {
         templateUrl: 'app/components/service/suggestions.html',
-        controller: 'SuggestionsCtrl',
+        controller: 'SuggestionsController',
         authenticate: true,
         adminOnly: false,
         title: 'Suggestions'
       }).
       when('/services/suggestions', {
         templateUrl: 'app/components/service/suggestions.html',
-        controller: 'SuggestionsCtrl',
+        controller: 'SuggestionsController',
         authenticate: true,
         adminOnly: false,
         title: 'Suggestions'
       }).
       when('/services/:serviceId', {
         templateUrl: 'app/components/service/service.html',
-        controller: 'ServiceCtrl',
+        controller: 'ServiceController',
         authenticate: true,
         adminOnly: false,
         title: 'Service'
       }).
       when('/services/:serviceId/edit', {
         templateUrl: 'app/components/service/new-service.html',
-        controller: 'ServiceEditCtrl',
+        controller: 'ServiceEditController',
         authenticate: true,
         adminOnly: false,
         title: 'Edit service'

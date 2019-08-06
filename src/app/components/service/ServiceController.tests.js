@@ -43,7 +43,7 @@
           callback();
         });
 
-        $controller('ServiceCtrl', {
+        $controller('ServiceController', {
           $scope: scope,
           $routeParams: {
             serviceId: service._id
