@@ -314,7 +314,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       })
       .when('/verify', {
         template: '',
-        controller: 'VerifyCtrl'
+        controller: 'VerifyController'
       })
       .when('/logout', {
         template: '',
