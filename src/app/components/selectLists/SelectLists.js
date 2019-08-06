@@ -11,7 +11,7 @@
       restrict: 'E',
       templateUrl: 'app/components/selectLists/select-lists.html',
       scope: true,
-      controller: 'SelectListsCtrl'
+      controller: 'SelectListsController'
     };
 
     return directive;
