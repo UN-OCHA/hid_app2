@@ -3,11 +3,11 @@
 
   angular
     .module('app.notifications')
-    .controller('NotificationsCtrl', NotificationsCtrl);
+    .controller('NotificationsController', NotificationsController);
 
-  NotificationsCtrl.$inject = ['$scope', 'notificationsService'];
+  NotificationsController.$inject = ['$scope', 'notificationsService'];
 
-  function NotificationsCtrl($scope, notificationsService) {
+  function NotificationsController($scope, notificationsService) {
     var limit = 10;
     $scope.itemsPerPage = limit;
     $scope.totalItems = 0;

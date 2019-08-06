@@ -330,7 +330,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       })
       .when('/notifications', {
         templateUrl: 'app/components/notifications/notifications.html',
-        controller: 'NotificationsCtrl',
+        controller: 'NotificationsController',
         authenticate: true,
         title: 'Notifications'
       })
