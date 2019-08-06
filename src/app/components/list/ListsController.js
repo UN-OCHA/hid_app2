@@ -3,11 +3,11 @@
 
   angular
     .module('app.list')
-    .controller('ListsCtrl', ListsCtrl);
+    .controller('ListsController', ListsController);
 
-  ListsCtrl.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'SearchService', 'SidebarService'];
+  ListsController.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'SearchService', 'SidebarService'];
 
-  function ListsCtrl($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, SearchService, SidebarService) {
+  function ListsController($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, SearchService, SidebarService) {
     $scope.request = {};
     $scope.totalItems = 0;
     $scope.itemsPerPage = 50;

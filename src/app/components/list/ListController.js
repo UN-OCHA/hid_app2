@@ -3,11 +3,11 @@
 
   angular
     .module('app.list')
-    .controller('ListCtrl', ListCtrl);
+    .controller('ListController', ListController);
 
-  ListCtrl.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'Service', 'alertService', 'gettextCatalog'];
+  ListController.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'Service', 'alertService', 'gettextCatalog'];
 
-  function ListCtrl ($exceptionHandler, $rootScope, $scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, Service, alertService, gettextCatalog) {
+  function ListController ($exceptionHandler, $rootScope, $scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, Service, alertService, gettextCatalog) {
     $scope.isMember = false;
     $scope.isManager = false;
     $scope.isOwner = false;

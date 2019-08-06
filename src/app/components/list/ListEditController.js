@@ -3,11 +3,11 @@
 
   angular
     .module('app.list')
-    .controller('ListEditCtrl', ListEditCtrl);
+    .controller('ListEditController', ListEditController);
 
-  ListEditCtrl.$inject = ['$scope', '$routeParams', '$location', 'List', 'User', 'gettextCatalog'];
+  ListEditController.$inject = ['$scope', '$routeParams', '$location', 'List', 'User', 'gettextCatalog'];
 
-  function ListEditCtrl($scope, $routeParams, $location, List, User, gettextCatalog) {
+  function ListEditController($scope, $routeParams, $location, List, User, gettextCatalog) {
     $scope.saving = false;
     $scope.newManagers = [];
     $scope.visibility = [];

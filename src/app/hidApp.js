@@ -188,30 +188,30 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         authenticate: true,
         title: 'Kiosk'
       }).
+      when('/lists', {
+        templateUrl: 'app/components/list/lists.html',
+        controller: 'ListsController',
+        authenticate: true,
+        title: 'Lists'
+      }).
       when('/lists/new', {
         templateUrl: 'app/components/list/new-list.html',
-        controller: 'ListEditCtrl',
+        controller: 'ListEditController',
         authenticate: true,
         title: 'New list'
       }).
       when('/lists/:list', {
         templateUrl: 'app/components/list/list.html',
-        controller: 'ListCtrl',
+        controller: 'ListController',
         authenticate: true,
         title: 'List',
         reloadOnSearch: false
       }).
       when('/lists/:list/edit', {
         templateUrl: 'app/components/list/new-list.html',
-        controller: 'ListEditCtrl',
+        controller: 'ListEditController',
         authenticate: true,
         title: 'Edit list'
-      }).
-      when('/lists', {
-        templateUrl: 'app/components/list/lists.html',
-        controller: 'ListsCtrl',
-        authenticate: true,
-        title: 'Lists'
       }).
       when('/clients/new', {
         templateUrl: 'app/components/client/new-client.html',
