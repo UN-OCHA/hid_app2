@@ -348,7 +348,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       })
       .when('/outlook', {
         template: '',
-        controller: 'OutlookCtrl',
+        controller: 'OutlookController',
         authenticate: true
       })
       .when('/main/:operationUrl', {

@@ -3,11 +3,11 @@
 
   angular
     .module('app.outlook')
-    .controller('OutlookCtrl', OutlookCtrl);
+    .controller('OutlookController', OutlookController);
 
-  OutlookCtrl.$inject = ['$scope', '$location', '$routeParams', 'User', 'gettextCatalog', 'alertService'];
+  OutlookController.$inject = ['$scope', '$location', '$routeParams', 'User', 'gettextCatalog', 'alertService'];
 
-  function OutlookCtrl ($scope, $location, $routeParams, User, gettextCatalog, alertService) {
+  function OutlookController ($scope, $location, $routeParams, User, gettextCatalog, alertService) {
 
     var hash = $location.hash().split('&');
     if (hash[0].indexOf('code') === 0) {
