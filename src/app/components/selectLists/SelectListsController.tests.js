@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Select Lists controller', function () {
+  describe('SelectListsController', function () {
 
     var expectedLists, expectListTypes, expectedParams, listFixture, mockConfig, mockGetText, mockList, scope, userFixture;
 
@@ -40,7 +40,7 @@
 
         spyOn(scope, '$emit').and.callThrough();
 
-        $controller('SelectListsCtrl', {
+        $controller('SelectListsController', {
           $scope: scope
         });
         scope.$digest();

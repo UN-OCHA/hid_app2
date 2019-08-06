@@ -417,7 +417,7 @@ msgstr ""
 msgid "Co-ordination Hubs"
 msgstr ""
 
-#: src/app/components/selectLists/selectLists.controller.js:37
+#: src/app/components/selectLists/SelectListsController.js:37
 #: src/app/components/user/user-filters.html:65
 msgid "Co-ordination hub"
 msgstr ""
@@ -871,7 +871,7 @@ msgid "Government Official"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:17
-#: src/app/components/selectLists/selectLists.controller.js:31
+#: src/app/components/selectLists/SelectListsController.js:31
 #: src/app/components/service/new-service.html:55
 #: src/app/components/user/user-filters.html:88
 msgid "Group"
@@ -1610,7 +1610,7 @@ msgid "Resident Coordinator"
 msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:29
-#: src/app/components/selectLists/selectLists.controller.js:34
+#: src/app/components/selectLists/SelectListsController.js:34
 #: src/app/components/user/user-filters.html:118
 msgid "Role"
 msgstr ""

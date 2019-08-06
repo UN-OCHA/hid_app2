@@ -3,9 +3,9 @@
 
   angular
     .module('app.list')
-    .directive('selectLists', selectLists);
+    .directive('SelectLists', SelectLists);
 
-  function selectLists() {
+  function SelectLists() {
 
     var directive = {
       restrict: 'E',

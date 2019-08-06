@@ -3,11 +3,11 @@
 
   angular
     .module('app.list')
-    .controller('SelectListsCtrl', SelectListsCtrl);
+    .controller('SelectListsController', SelectListsController);
 
-  SelectListsCtrl.$inject = ['$scope', 'config', 'List', 'gettextCatalog'];
+  SelectListsController.$inject = ['$scope', 'config', 'List', 'gettextCatalog'];
 
-  function SelectListsCtrl ($scope, config, List, gettextCatalog) {
+  function SelectListsController ($scope, config, List, gettextCatalog) {
   	// On parent controller:
   	// $scope.selectedLists = [];
   	// $scope.filterListsMember = true; - if need to filter out lists user is a member of
