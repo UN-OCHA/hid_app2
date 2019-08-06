@@ -3,11 +3,11 @@
 
   angular
     .module('app.operations')
-    .controller('OperationViewCtrl', OperationViewCtrl);
+    .controller('OperationViewController', OperationViewController);
 
-  OperationViewCtrl.$inject = ['$scope', '$rootScope', '$routeParams', 'ListDataService', 'Operation'];
+  OperationViewController.$inject = ['$scope', '$rootScope', '$routeParams', 'ListDataService', 'Operation'];
 
-  function OperationViewCtrl($scope, $rootScope, $routeParams, ListDataService, Operation) {
+  function OperationViewController($scope, $rootScope, $routeParams, ListDataService, Operation) {
 
     $scope.groups = [];
     $scope.groupsLimit = 4;

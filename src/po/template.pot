@@ -1363,11 +1363,11 @@ msgstr ""
 msgid "Operation ID"
 msgstr ""
 
-#: src/app/components/operations/operation.controller.js:43
+#: src/app/components/operations/OperationController.js:43
 msgid "Operation deleted successfully"
 msgstr ""
 
-#: src/app/components/operations/operation.controller.js:27
+#: src/app/components/operations/OperationController.js:27
 msgid "Operation saved successfully"
 msgstr ""
 

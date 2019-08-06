@@ -353,25 +353,25 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       })
       .when('/main/:operationUrl', {
         templateUrl: 'app/components/operations/operation.html',
-        controller: 'OperationViewCtrl',
+        controller: 'OperationViewController',
         authenticate: true,
         title: 'Operation'
       })
       .when('/operations', {
         templateUrl: 'app/components/operations/operations.html',
-        controller: 'OperationsCtrl',
+        controller: 'OperationsController',
         authenticate: true,
         title: 'Operations'
       })
       .when('/operations/new', {
         templateUrl: 'app/components/operations/new-operation.html',
-        controller: 'OperationCtrl',
+        controller: 'OperationController',
         authenticate: true,
         title: 'New operation'
       })
       .when('/operations/:operationId', {
         templateUrl: 'app/components/operations/new-operation.html',
-        controller: 'OperationCtrl',
+        controller: 'OperationController',
         authenticate: true,
         title: 'New operation'
       })

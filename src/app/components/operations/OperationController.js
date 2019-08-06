@@ -3,11 +3,11 @@
 
   angular
     .module('app.operations')
-    .controller('OperationCtrl', OperationCtrl);
+    .controller('OperationController', OperationController);
 
-  OperationCtrl.$inject = ['$scope', '$routeParams', '$location', 'Operation', 'User', 'List', 'alertService', 'gettextCatalog'];
+  OperationController.$inject = ['$scope', '$routeParams', '$location', 'Operation', 'User', 'List', 'alertService', 'gettextCatalog'];
 
-  function OperationCtrl($scope, $routeParams, $location, Operation, User, List, alertService, gettextCatalog) {
+  function OperationController($scope, $routeParams, $location, Operation, User, List, alertService, gettextCatalog) {
 
     if ($routeParams.operationId) {
       $scope.operation = Operation.get({'operationId': $routeParams.operationId});

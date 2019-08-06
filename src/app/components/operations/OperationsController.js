@@ -3,11 +3,11 @@
 
   angular
     .module('app.operations')
-    .controller('OperationsCtrl', OperationsCtrl);
+    .controller('OperationsController', OperationsController);
 
-  OperationsCtrl.$inject = ['$scope', '$routeParams', 'Operation'];
+  OperationsController.$inject = ['$scope', '$routeParams', 'Operation'];
 
-  function OperationsCtrl ($scope, $routeParams, Operation) {
+  function OperationsController ($scope, $routeParams, Operation) {
     $scope.pagination = {
       currentPage: 1,
       itemsPerPage: 10,
