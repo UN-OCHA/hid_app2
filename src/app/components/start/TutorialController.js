@@ -3,15 +3,15 @@
 
   angular
     .module('app.start')
-    .controller('TutorialCtrl', TutorialCtrl);
+    .controller('TutorialController', TutorialController);
 
-  TutorialCtrl.$inject = ['$location', '$scope', 'User', 'gettextCatalog'];
+  TutorialController.$inject = ['$location', '$scope', 'User', 'gettextCatalog'];
 
-  function TutorialCtrl($location, $scope, User, gettextCatalog) {
+  function TutorialController($location, $scope, User, gettextCatalog) {
     $scope.user = new User($scope.currentUser);
     $scope.activeSlide = 0;
     $scope.numSlides = $scope.isApp ? 3 : 4;
-    
+
     function updateUser () {
 
       if ($scope.user.appMetadata && $scope.user.appMetadata.hid && $scope.user.appMetadata.hid.viewedTutorial) {
@@ -40,6 +40,6 @@
     $scope.finishTutorial = function () {
       $location.path('/landing');
     };
-    
+
   }
 })();

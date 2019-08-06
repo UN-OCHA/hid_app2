@@ -3,15 +3,15 @@
 
   angular
     .module('app.start')
-    .controller('StartCtrl', StartCtrl);
+    .controller('StartController', StartController);
 
-  StartCtrl.$inject = ['$location', '$scope', 'User'];
+  StartController.$inject = ['$location', '$scope', 'User'];
 
-  function StartCtrl($location, $scope, User) {
+  function StartController($location, $scope, User) {
 
   	User.get({userId: $scope.currentUser._id}, function (user) {
       $scope.user = user;
       $scope.$broadcast('userLoaded');
-    });    
+    });
   }
 })();

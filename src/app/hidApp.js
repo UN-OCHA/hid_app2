@@ -336,13 +336,13 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       })
       .when('/start', {
         templateUrl: 'app/components/start/start.html',
-        controller: 'StartCtrl',
+        controller: 'StartController',
         authenticate: true,
         title: 'Getting started'
       })
       .when('/tutorial', {
         templateUrl: 'app/components/start/tutorial.html',
-        controller: 'TutorialCtrl',
+        controller: 'TutorialController',
         authenticate: true,
         title: 'Tutorial'
       })
