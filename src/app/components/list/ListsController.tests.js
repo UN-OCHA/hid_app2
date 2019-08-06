@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Lists controller', function () {
+  describe('ListsController', function () {
 
   	var listFixture, mockListDataService, scope;
 
@@ -12,13 +12,11 @@
 
       	ctrlParams = {
           $scope: scope,
-          $routeParams: {
-          	
-          },
+          $routeParams: {},
           $localForage: mockLocalForage
         };
 
-      	$controller('ListsCtrl', ctrlParams);      	
+        $controller('ListsController', ctrlParams);
         scope.$digest();
       });
 
