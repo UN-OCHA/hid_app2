@@ -323,7 +323,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       })
       .when('/search', {
         templateUrl: 'app/components/search/search-results.html',
-        controller: 'SearchCtrl',
+        controller: 'SearchController',
         authenticate: true,
         title: 'Search results',
         reloadOnSearch: false

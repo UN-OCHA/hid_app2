@@ -3,11 +3,11 @@
 
   angular
     .module('app.search')
-    .controller('SearchFormCtrl', SearchFormCtrl);
+    .controller('SearchFormController', SearchFormController);
 
-  SearchFormCtrl.$inject = ['$rootScope', '$route', '$scope', '$location', 'SearchService', 'User', 'List'];
+  SearchFormController.$inject = ['$rootScope', '$route', '$scope', '$location', 'SearchService', 'User', 'List'];
 
-  function SearchFormCtrl($rootScope, $route, $scope, $location, SearchService, User, List) {
+  function SearchFormController($rootScope, $route, $scope, $location, SearchService, User, List) {
 
     $scope.searchTerm = '';
     $scope.searchUsersTerm = '';

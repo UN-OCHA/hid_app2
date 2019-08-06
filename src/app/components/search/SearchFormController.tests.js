@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Search Form controller', function () {
+  describe('SearchFormController', function () {
 
     var scope, mockSearchService, mockUser, mockList, mockRoute, searchResults, $location, userFixture;
     userFixture = readJSON('app/test-fixtures/user.json');
@@ -62,7 +62,7 @@
         spyOn(mockSearchService, 'UsersAndLists').and.callThrough();
         spyOn($location, 'search').and.callThrough();
 
-        $controller('SearchFormCtrl', {
+        $controller('SearchFormController', {
           $scope: scope,
           User: mockUser
         });

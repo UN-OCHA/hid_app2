@@ -3,11 +3,11 @@
 
   angular
     .module('app.search')
-    .controller('SearchCtrl', SearchCtrl);
+    .controller('SearchController', SearchController);
 
-  SearchCtrl.$inject = ['$location', '$scope', '$routeParams', 'gettextCatalog'];
+  SearchController.$inject = ['$location', '$scope', '$routeParams', 'gettextCatalog'];
 
-  function SearchCtrl($location, $scope, $routeParams, gettextCatalog) {
+  function SearchController($location, $scope, $routeParams, gettextCatalog) {
     $scope.heading = $routeParams.q ? gettextCatalog.getString('Search Results') : gettextCatalog.getString('Humanitarian contacts');
     $scope.searchTerm = $routeParams.q;
 

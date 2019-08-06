@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Search service', function () {
+  describe('SearchService', function () {
 
   	var $rootScope, existingMetaData, expectedParams, List, listFixture, mockList, mockUser, newSearch, newSearchSaved,
   	returnedSearches, savedSearches, SearchService, user, User, userFixture;

@@ -918,7 +918,7 @@ msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
 msgstr ""
 
 #: src/app/components/header/header.html:106
-#: src/app/components/search/search.controller.js:11
+#: src/app/components/search/SearchController.js:11
 msgid "Humanitarian contacts"
 msgstr ""
 
@@ -1645,7 +1645,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: src/app/components/search/search.controller.js:11
+#: src/app/components/search/SearchController.js:11
 msgid "Search Results"
 msgstr ""
 
