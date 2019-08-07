@@ -27,9 +27,8 @@ module.exports = function(config) {
         '../node_modules/@bower_components/angular-ui-select/dist/select.min.js',
         '../node_modules/@bower_components/angular-password/angular-password.min.js',
         '../node_modules/@bower_components/angular-messages/angular-messages.min.js',
-        '../node_modules/@bower_components/angular-gettext/dist/angular-gettext.min.js',
         '../node_modules/@bower_components/digits-trie/dist/digits-trie.js',
-        '../node_modules/@bower_components/google-libphonenumber/dist/browser/libphonenumber.js',
+        '../node_modules/@bower_components/google-libphonenumber/dist/libphonenumber.js',
         '../node_modules/@bower_components/bc-countries/dist/bc-countries.js',
         '../node_modules/@bower_components/bc-phone-number/dist/js/bc-phone-number.js',
         '../node_modules/@bower_components/moment/moment.js',
@@ -41,16 +40,23 @@ module.exports = function(config) {
         'assets/js/modernizr-output.js',
         '../node_modules/@bower_components/offline/offline.min.js',
         '../node_modules/phantomjs-polyfill-object-assign/object-assign-polyfill.js',
-        'app/config/config.js',
-        'app/app.js',
-        'app/common/*.module.js',
-        'app/components/**/*.module.js',
-        'app/components/**/*.controller.js',
-        'app/components/**/*.service.js',
-        'app/components/**/*.directive.js',
+        'app/config/config.test.js',
+        'app/hidApp.js',
+        'app/common/app.common.js',
+        'app/common/AppController.js',
+        'app/common/backButton.js',
+        'app/common/ErrorsController.js',
+        'app/common/hrinfoService.js',
+        'app/common/hrinfoTypeahead.js',
+        'app/common/icon.js',
+        'app/common/sticky.js',
+        'app/components/**/app.*.js',
+        'app/components/**/*Controller.js',
+        'app/components/**/*Service.js',
+        'app/components/**/!(*.tests).js',
         'app/components/**/*.tests.js',
-        'app/common/validators.directive.js',
-        'app/common/validators.directive.tests.js',
+        'app/common/validatePassword.js',
+        'app/common/validatePassword.tests.js',
         {pattern: 'app/test-fixtures/**/*.json', included: false},
     ],
 
@@ -63,9 +69,9 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'app/components/**/*.controller.js': 'coverage',
-        'app/components/**/*.service.js': 'coverage',
-        'app/common/validators.directive.js': 'coverage'
+        'app/components/**/*Controller.js': 'coverage',
+        'app/components/**/*Service.js': 'coverage',
+        'app/common/validatePassword.js': 'coverage'
     },
 
 
@@ -87,10 +93,12 @@ module.exports = function(config) {
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
+
     browserConsoleLogOptions: {
-        terminal: true,
-        level: ""
+      terminal: true,
+      level: ""
     },
+
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
@@ -106,9 +114,9 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false,
 
+
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity,
-
   })
 }
