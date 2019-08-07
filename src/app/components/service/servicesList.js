@@ -3,9 +3,9 @@
 
   angular
     .module('app.service')
-    .directive('ServicesList', ServicesList);
+    .directive('servicesList', servicesList);
 
-  function ServicesList() {
+  function servicesList() {
 
     var directive = {
       restrict: 'E',
