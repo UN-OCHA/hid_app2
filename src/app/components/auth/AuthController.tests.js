@@ -3,36 +3,36 @@
 
   describe('AuthController', function () {
 
-  	var authUser, hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, mockGetText, mockTwoFactorAuthService,
+    var authUser, hidV1FirstLoginUser, $location, mockAlertService, mockAuthService, mockGetText, mockTwoFactorAuthService,
     newUser, returnUser, scope, tfaToken, tfaUser;
 
-  	newUser = {
-  		_id: 1,
-  		appMetadata: {
-  			hid: {
-  				login: false
-  			}
-  		}
-  	};
+    newUser = {
+      _id: 1,
+      appMetadata: {
+        hid: {
+          login: false
+        }
+      }
+    };
 
-  	hidV1FirstLoginUser = {
-  		_id: 2,
-  		appMetadata: {
-  			hid: {
-  				login: true
-  			}
-  		}
-  	};
+    hidV1FirstLoginUser = {
+      _id: 2,
+      appMetadata: {
+        hid: {
+          login: true
+        }
+      }
+    };
 
-  	returnUser = {
-  		_id: 3,
-  		appMetadata: {
-  			hid: {
-  				login: true,
-  				viewedTutorial: true
-  			}
-  		}
-  	};
+    returnUser = {
+      _id: 3,
+      appMetadata: {
+        hid: {
+          login: true,
+          viewedTutorial: true
+        }
+      }
+    };
 
     authUser = {
       _id: 4
@@ -45,9 +45,9 @@
       totp: true
     };
 
-  	beforeEach(function() {
+    beforeEach(function() {
 
-  		mockAuthService = {};
+      mockAuthService = {};
       module('app.auth', function($provide) {
         $provide.value('AuthService', mockAuthService);
       });
@@ -87,87 +87,87 @@
     });
 
     function setUpController (currentUser, tfaRequired) {
-    	inject(function($controller, $q, $rootScope, _$location_) {
-      	scope = $rootScope.$new();
-      	$location = _$location_;
+      inject(function($controller, $q, $rootScope, _$location_) {
+        scope = $rootScope.$new();
+        $location = _$location_;
 
-      	mockAuthService.login = function () {
-      		var deferred = $q.defer();
+        mockAuthService.login = function () {
+          var deferred = $q.defer();
           if (tfaRequired) {
             deferred.resolve({data: {statusCode: 401, message: 'No TOTP token'}});
           } else {
-      		  deferred.resolve();
+            deferred.resolve();
           }
-      		return deferred.promise;
-      	};
+          return deferred.promise;
+        };
 
-      	$controller('AuthCtrl', {
-      		$scope: scope
-      	});
+        $controller('AuthController', {
+          $scope: scope
+        });
 
-      	scope.email = 'email@email.com';
-      	scope.password = 'a password';
-      	scope.currentUser = currentUser || {};
-      	scope.currentUser.setAppMetaData = function () {};
-      	scope.currentUser.$update = function () {};
-      	scope.initCurrentUser = function () {};
-				scope.setCurrentUser = function () {};
-      	spyOn(mockAuthService, 'login').and.callThrough();
-      	spyOn($location, 'path').and.callThrough();
-      	spyOn(scope.currentUser, '$update').and.callFake(function (callback) {
+        scope.email = 'email@email.com';
+        scope.password = 'a password';
+        scope.currentUser = currentUser || {};
+        scope.currentUser.setAppMetaData = function () {};
+        scope.currentUser.$update = function () {};
+        scope.initCurrentUser = function () {};
+        scope.setCurrentUser = function () {};
+        spyOn(mockAuthService, 'login').and.callThrough();
+        spyOn($location, 'path').and.callThrough();
+        spyOn(scope.currentUser, '$update').and.callFake(function (callback) {
            callback();
         });
         spyOn(scope.currentUser, 'setAppMetaData').and.callThrough();
         spyOn(scope, 'setCurrentUser').and.callThrough();
-      	scope.$digest();
+        scope.$digest();
       });
     }
 
     describe('Login', function () {
 
-    	it('should log the user in', function () {
-    		setUpController();
-    		scope.login();
-    		expect(mockAuthService.login).toHaveBeenCalledWith('email@email.com', 'a password', undefined);
-    	});
+      it('should log the user in', function () {
+        setUpController();
+        scope.login();
+        expect(mockAuthService.login).toHaveBeenCalledWith('email@email.com', 'a password', undefined);
+      });
 
-    	describe('Set path and metaData', function () {
+      describe('Set path and metaData', function () {
 
-    		describe('A new user on their first login', function () {
-    			beforeEach(function () {
-    				setUpController(newUser);
-    				scope.login();
-    				scope.$digest();
-    			});
+        describe('A new user on their first login', function () {
+          beforeEach(function () {
+            setUpController(newUser);
+            scope.login();
+            scope.$digest();
+          });
 
-    			it('should set appMetadata login to true', function () {
-    				expect(scope.currentUser.setAppMetaData).toHaveBeenCalledWith({login: true});
-    			});
+          it('should set appMetadata login to true', function () {
+            expect(scope.currentUser.setAppMetaData).toHaveBeenCalledWith({login: true});
+          });
 
-    			it('should update the user', function () {
-    				expect(scope.currentUser.$update).toHaveBeenCalled();
-    			});
+          it('should update the user', function () {
+            expect(scope.currentUser.$update).toHaveBeenCalled();
+          });
 
-    			it('should set the current user', function () {
-    				expect(scope.setCurrentUser).toHaveBeenCalled();
-    			});
+          it('should set the current user', function () {
+            expect(scope.setCurrentUser).toHaveBeenCalled();
+          });
 
-    			it('should go to the start page', function () {
-    				expect($location.path).toHaveBeenCalledWith('/start');
-    			});
-    		});
+          it('should go to the start page', function () {
+            expect($location.path).toHaveBeenCalledWith('/start');
+          });
+        });
 
-    		describe('A HID v1 user on their first login', function () {
-    			beforeEach(function () {
-    				setUpController(hidV1FirstLoginUser);
-    				scope.login();
-    				scope.$digest();
-    			});
+        describe('A HID v1 user on their first login', function () {
+          beforeEach(function () {
+            setUpController(hidV1FirstLoginUser);
+            scope.login();
+            scope.$digest();
+          });
 
-    			it('should go to the tutorial', function () {
-    				expect($location.path).toHaveBeenCalledWith('/tutorial');
-    			});
-    		});
+          it('should go to the tutorial', function () {
+            expect($location.path).toHaveBeenCalledWith('/tutorial');
+          });
+        });
 
         describe('A user who registered using auth on their first login', function () {
           beforeEach(function () {
@@ -197,19 +197,19 @@
           });
         });
 
-    		describe('A user on subsequent logins', function () {
-    			beforeEach(function () {
-    				setUpController(returnUser);
-    				scope.login();
-    				scope.$digest();
-    			});
+        describe('A user on subsequent logins', function () {
+          beforeEach(function () {
+            setUpController(returnUser);
+            scope.login();
+            scope.$digest();
+          });
 
-    			it('should go to the landing page', function () {
-    				expect($location.path).toHaveBeenCalledWith('/landing');
-    			});
-    		});
+          it('should go to the landing page', function () {
+            expect($location.path).toHaveBeenCalledWith('/landing');
+          });
+        });
 
-    	});
+      });
 
       describe('With Two Factor Auth enabled', function () {
         beforeEach(function () {

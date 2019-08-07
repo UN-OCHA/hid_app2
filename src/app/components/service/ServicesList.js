@@ -11,7 +11,7 @@
       restrict: 'E',
       templateUrl: 'app/components/service/services.html',
       scope: true,
-      controller: 'ServicesCtrl'
+      controller: 'ServicesController'
     };
 
     return directive;

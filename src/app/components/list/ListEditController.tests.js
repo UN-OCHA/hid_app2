@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('List edit controller', function () {
+  describe('ListEditController', function () {
 
     var $location, ctrlParams, editList, listFixture, managers, mockGetText, mockList, mockUser, newList, scope;
     listFixture = readJSON('app/test-fixtures/list.json');
@@ -34,7 +34,7 @@
         }
 
 
-        $controller('ListEditCtrl', ctrlParams);
+        $controller('ListEditController', ctrlParams);
         scope.$digest();
       });
     }

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('Notifications controller', function () {
+  describe('NotificationsController', function () {
 
     var scope, mockNotificationsService;
 
@@ -45,7 +45,7 @@
         spyOn(mockNotificationsService, 'getNotifications').and.callThrough();
         spyOn(mockNotificationsService, 'markAsRead').and.callThrough();
 
-        $controller('NotificationsCtrl', {
+        $controller('NotificationsController', {
           $scope: scope
         });
         scope.$digest();

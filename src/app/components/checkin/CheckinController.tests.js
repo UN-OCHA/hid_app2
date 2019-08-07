@@ -31,7 +31,7 @@
         deferredLists = $q.defer();
         spyOn(mockList, 'query').and.returnValue({$promise: deferredLists.promise})
 
-        $controller('CheckinCtrl', {
+        $controller('CheckinController', {
           $scope: scope,
           $routeParams: {userId: userId},
           $uibModal: mockUibModal,

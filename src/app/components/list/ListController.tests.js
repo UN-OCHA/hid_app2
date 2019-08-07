@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('List controller', function () {
+  describe('ListController', function () {
 
   	var $location, ctrlParams, listFixture, mockAlertService, mockConfig, mockGetText, mockLf, mockList, mockListDataService,
   	mockLocalForage, mockUser, mockUserCheckInService, mockUserDataService, scope, testList, userFixture;
@@ -56,7 +56,7 @@
        $localForage: mockLocalForage
      };
 
-     $controller('ListCtrl', ctrlParams);
+     $controller('ListController', ctrlParams);
      scope.$digest();
    });
    }

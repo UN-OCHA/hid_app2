@@ -113,7 +113,7 @@
           callback();
         });
 
-        $controller('DashboardCtrl', {
+        $controller('DashboardController', {
           $scope: scope
         });
 

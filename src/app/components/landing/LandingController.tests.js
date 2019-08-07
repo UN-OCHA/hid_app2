@@ -39,7 +39,7 @@
   				}
   			};
 
-        $controller('LandingCtrl', {
+        $controller('LandingController', {
           $scope: scope
         });
 
