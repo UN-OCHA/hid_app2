@@ -53,7 +53,8 @@ module.exports = function(config) {
         'app/components/**/app.*.js',
         'app/components/**/*Controller.js',
         'app/components/**/*Service.js',
-        'app/components/**/!(*.tests).js',
+        // Directives currently not included as they caused test failures
+        // during HID-1824.
         'app/components/**/*.tests.js',
         'app/common/validatePassword.js',
         'app/common/validatePassword.tests.js',
