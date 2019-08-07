@@ -53,7 +53,7 @@ Unit tests are written using [Jasmine](https://jasmine.github.io/) and run with 
 
 ```sh
 # install Karma CLI
-npm install -g karma-cli
+yarn global add karma-cli
 
 # Run tests once
 grunt test
