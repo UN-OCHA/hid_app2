@@ -9,6 +9,5 @@
     "angular/module-getter": "off",
     "angular/module-setter": "off",
     "angular/function-type": "off",
-    "angular/timeout-service": "off",
   }
 }

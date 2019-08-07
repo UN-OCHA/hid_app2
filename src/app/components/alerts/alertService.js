@@ -21,9 +21,9 @@
   .module('app.common')
   .factory('alertService', alertService);
 
-  alertService.$inject = ['$rootScope', '$uibModal', 'gettextCatalog'];
+  alertService.$inject = ['$rootScope', '$uibModal', 'gettextCatalog', '$timeout'];
 
-  function alertService($rootScope, $uibModal, gettextCatalog) {
+  function alertService($rootScope, $uibModal, gettextCatalog, $timeout) {
 
     var alertService = {};
     $rootScope.pageAlert = {};
@@ -67,7 +67,7 @@
           $scope.message = msg;
 
           if (!confirm && time !== 0) {
-            setTimeout(function () {
+            $timeout(function () {
               $scope.modal.close();
             }, time);
           }

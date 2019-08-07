@@ -54,7 +54,7 @@
             $location.path(link);
           };
 
-          setTimeout(notification.close.bind(notification), 5000);
+          $timeout(notification.close.bind(notification), 5000);
 
         } catch (e) {
           if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -78,7 +78,7 @@
     }
 
     function showNotifications (index, items) {
-      setTimeout(function (index, items) {
+      $timeout(function (index, items) {
         showNotification(items[index]);
         if (items.length > index + 1) {
           showNotifications(index + 1, items);
