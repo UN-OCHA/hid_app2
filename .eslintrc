@@ -10,6 +10,5 @@
     "angular/module-setter": "off",
     "angular/function-type": "off",
     "angular/timeout-service": "off",
-    "angular/directive-restrict": "off"
   }
 }

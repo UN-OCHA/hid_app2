@@ -16,7 +16,6 @@
   function icon($rootScope) {
 
     var directive = {
-      restrict: 'AE',
       replace: 'true',
       scope: {
         name: '@',

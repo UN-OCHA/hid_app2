@@ -11,7 +11,6 @@
 
     var directive = {
       replace: true,
-      restrict: 'AE',
       template: '<span>{{notifications.totalUnread}}</span>',
       scope: true,
       link: function (scope) {
