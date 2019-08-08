@@ -6,8 +6,7 @@
     "angular/no-run-logic": "off",
     "angular/window-service": "off",
     "angular/document-service": "off",
-    "angular/module-getter": "off",
     "angular/file-name": "error",
-    "angular/module-setter": "error",
+    "angular/module-getter": "error",
   }
 }
