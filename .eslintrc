@@ -8,6 +8,5 @@
     "angular/document-service": "off",
     "angular/module-getter": "off",
     "angular/module-setter": "off",
-    "angular/function-type": "off",
   }
 }

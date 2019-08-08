@@ -414,7 +414,7 @@ app.config(["$httpProvider", function ($httpProvider) {
 }]);
 
 app.config(function ($provide) {
-    $provide.decorator('$exceptionHandler', function ($delegate, $injector, $log) {
+    $provide.decorator('$exceptionHandler', function provideDecorator($delegate, $injector, $log) {
       return function (exception, cause) {
         if (newrelic && newrelic.noticeError) {
           var errorMessage = cause;
