@@ -94,7 +94,7 @@ var app = angular.module('hidApp', [
     }
   })
   // Accessibility features - focus h1 on route change, page titles
-  .run(function ($rootScope) {
+  .run(function ($rootScope, $document) {
     var hasPrevious = false;
     var siteTitle = ' | Humanitarian ID';
 
@@ -105,7 +105,7 @@ var app = angular.module('hidApp', [
 
     $rootScope.$on('$viewContentLoaded', function () {
       if (hasPrevious) {
-        var h1 = document.querySelector('h1');
+        var h1 = $document[0].querySelector('h1');
         if (h1) {
           h1.setAttribute('tabIndex', -1);
           h1.focus();

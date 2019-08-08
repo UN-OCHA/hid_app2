@@ -5,9 +5,9 @@
     .module('app.sidebar')
     .directive('sidebar', sidebar);
 
-  sidebar.$inject = ['$rootScope'];
+  sidebar.$inject = ['$rootScope', '$document'];
 
-  function sidebar($rootScope) {
+  function sidebar($rootScope, $document) {
     var breakpoint = 576;
     var headerHeight = 102;
 
@@ -17,22 +17,22 @@
 
     function setHeight (element) {
       var windowHeight = window.innerHeight;
-      element.css('height', windowHeight + 'px'); 
+      element.css('height', windowHeight + 'px');
     }
 
     function setScrollPosition (element) {
-      var scrollPosition = document.body.scrollTop;
+      var scrollPosition = $document[0].body.scrollTop;
       var marginTop = scrollPosition - headerHeight;
 
       if (scrollPosition > headerHeight) {
         element.css('top', marginTop + 'px');
         return;
       }
-      reset(element);  
+      reset(element);
     }
 
     function reset (element) {
-      document.removeEventListener('scroll', setScrollPosition);
+      $document[0].removeEventListener('scroll', setScrollPosition);
       element.css({
         top: '',
         height: ''
@@ -43,7 +43,7 @@
       setHeight(element);
       setScrollPosition(element);
     }
- 
+
     var directive = {
       restrict: 'A',
       link: function (scope, element) {
@@ -56,7 +56,7 @@
           reset(element);
         });
       }
-      
+
     };
 
     return directive;

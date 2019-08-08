@@ -5,7 +5,6 @@
     "angular/controller-as-route": "off",
     "angular/no-run-logic": "off",
     "angular/window-service": "off",
-    "angular/document-service": "off",
     "angular/file-name": "error",
     "angular/module-getter": "error",
   }
