@@ -7,6 +7,7 @@
     "angular/window-service": "off",
     "angular/document-service": "off",
     "angular/module-getter": "off",
-    "angular/module-setter": "off",
+    "angular/file-name": "error",
+    "angular/module-setter": "error",
   }
 }
