@@ -12,8 +12,8 @@
     .module('app.common')
     .directive('icon', icon);
 
-  icon.$inject = ['$rootScope'];
-  function icon($rootScope) {
+  icon.$inject = ['$rootScope', '$window'];
+  function icon($rootScope, $window) {
 
     var directive = {
       replace: 'true',
@@ -38,7 +38,7 @@
     };
 
     function iconUrl (name) {
-      return window.location.href + '#icon-' + name;
+      return $window.location.href + '#icon-' + name;
     }
 
     return directive;

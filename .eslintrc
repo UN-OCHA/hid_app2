@@ -4,7 +4,7 @@
     "angular/controller-as": "off",
     "angular/controller-as-route": "off",
     "angular/no-run-logic": "off",
-    "angular/window-service": "off",
+    "angular/window-service": "error",
     "angular/file-name": "error",
     "angular/module-getter": "error",
   }

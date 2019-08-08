@@ -5,18 +5,18 @@
     .module('app.sidebar')
     .directive('sidebar', sidebar);
 
-  sidebar.$inject = ['$rootScope', '$document'];
+  sidebar.$inject = ['$rootScope', '$document', '$window'];
 
-  function sidebar($rootScope, $document) {
+  function sidebar($rootScope, $document, $window) {
     var breakpoint = 576;
     var headerHeight = 102;
 
     function shouldScroll (scroll) {
-      return scroll && window.innerWidth < breakpoint;
+      return scroll && $window.innerWidth < breakpoint;
     }
 
     function setHeight (element) {
-      var windowHeight = window.innerHeight;
+      var windowHeight = $window.innerHeight;
       element.css('height', windowHeight + 'px');
     }
 

@@ -15,13 +15,13 @@
     .module('app.common')
     .directive('videoPlayer', videoPlayer);
 
-  videoPlayer.$inject = ['$sce'];
+  videoPlayer.$inject = ['$sce', '$window'];
 
-  function videoPlayer($sce) {
+  function videoPlayer($sce, $window) {
 
   	function template () {
   		var breakpoint = 1025;
-  		if (window.innerWidth < breakpoint) {
+  		if ($window.innerWidth < breakpoint) {
   			return '<div></div>';
   		}
   		return '<div class="video-container"><iframe width="560" height="315" src="{{url}}" frameborder="0" allowfullscreen></iframe></div>';

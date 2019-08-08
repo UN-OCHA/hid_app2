@@ -90,7 +90,7 @@
     }
 
     function outlookGuid() {
-      var cryptObj = window.crypto || window.msCrypto;
+      var cryptObj = $window.crypto || $window.msCrypto;
       var buf = new Uint16Array(8);
       cryptObj.getRandomValues(buf);
       function s4(num) {

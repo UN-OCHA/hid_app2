@@ -84,8 +84,8 @@ var app = angular.module('hidApp', [
     });
   })
   // Configure languages
-  .run(function (gettextCatalog) {
-    var lang = window.navigator.language || window.navigator.userLanguage;
+  .run(function (gettextCatalog, $window) {
+    var lang = $window.navigator.language || $window.navigator.userLanguage;
     if (lang != 'fr' && lang != 'en') {
       gettextCatalog.setCurrentLanguage('en');
     }
@@ -476,7 +476,7 @@ var app = angular.module('hidApp', [
 // Load config
 var env = {};
 if (window) {
-  angular.copy(window.__env, env);
+  angular.copy(window.__env, env); // eslint-disable-line angular/window-service
 }
 app.constant('config', env) // eslint-disable-line angular/file-name,angular/module-getter
 

@@ -1,1 +1,2 @@
 src/**/*.tests.js
+src/app/config/config.*.js
