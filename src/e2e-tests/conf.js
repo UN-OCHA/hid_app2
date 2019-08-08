@@ -53,7 +53,7 @@ exports.config.params = {
   email: process.env.TRAVIS ? process.env.testUserEmail : env.params.testUserEmail,
   password: process.env.TRAVIS ? process.env.testUserPassword : env.params.testUserPassword,
   adminUserId: process.env.TRAVIS ? process.env.testAdminUserId : env.params.testAdminUserId,
-  adminUserName: 'Test Admin E2E User',
+  adminUserName: 'Test Admin',
   adminEmail: process.env.TRAVIS ? process.env.testAdminUserEmail : env.params.testAdminUserEmail,
   adminPassword: process.env.TRAVIS ? process.env.testAdminUserPassword : env.params.testAdminUserPassword,
   adminUserPhoneNumber: '+44 114 139 3939',
