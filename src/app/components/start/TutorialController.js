@@ -8,36 +8,38 @@
   TutorialController.$inject = ['$location', '$scope', 'User', 'gettextCatalog'];
 
   function TutorialController($location, $scope, User, gettextCatalog) {
-    $scope.user = new User($scope.currentUser);
-    $scope.activeSlide = 0;
-    $scope.numSlides = $scope.isApp ? 3 : 4;
+    var thisScope = $scope;
+
+    thisScope.user = new User(thisScope.currentUser);
+    thisScope.activeSlide = 0;
+    thisScope.numSlides = thisScope.isApp ? 3 : 4;
 
     function updateUser () {
 
-      if ($scope.user.appMetadata && $scope.user.appMetadata.hid && $scope.user.appMetadata.hid.viewedTutorial) {
+      if (thisScope.user.appMetadata && thisScope.user.appMetadata.hid && thisScope.user.appMetadata.hid.viewedTutorial) {
         return;
       }
 
-      $scope.user.setAppMetaData({viewedTutorial: true});
-      $scope.user.$update(function (user) {
-        $scope.setCurrentUser(user);
+      thisScope.user.setAppMetaData({viewedTutorial: true});
+      thisScope.user.$update(function (user) {
+        thisScope.setCurrentUser(user);
       });
     }
     updateUser();
 
-    $scope.swipeLeft = function () {
-      if ($scope.activeSlide +1 < $scope.numSlides) {
-        $scope.activeSlide = $scope.activeSlide + 1;
+    thisScope.swipeLeft = function () {
+      if (thisScope.activeSlide +1 < thisScope.numSlides) {
+        thisScope.activeSlide = thisScope.activeSlide + 1;
       }
     };
 
-    $scope.swipeRight = function () {
-      if ($scope.activeSlide > 0) {
-        $scope.activeSlide = $scope.activeSlide - 1;
+    thisScope.swipeRight = function () {
+      if (thisScope.activeSlide > 0) {
+        thisScope.activeSlide = thisScope.activeSlide - 1;
       }
     };
 
-    $scope.finishTutorial = function () {
+    thisScope.finishTutorial = function () {
       $location.path('/landing');
     };
 
