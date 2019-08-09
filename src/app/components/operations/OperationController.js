@@ -8,38 +8,39 @@
   OperationController.$inject = ['$scope', '$routeParams', '$location', 'Operation', 'User', 'List', 'alertService', 'gettextCatalog'];
 
   function OperationController($scope, $routeParams, $location, Operation, User, List, alertService, gettextCatalog) {
+    var thisScope = $scope;
 
     if ($routeParams.operationId) {
-      $scope.operation = Operation.get({'operationId': $routeParams.operationId});
+      thisScope.operation = Operation.get({'operationId': $routeParams.operationId});
     }
     else {
-      $scope.operation = new Operation();
+      thisScope.operation = new Operation();
     }
 
-    $scope.newManagers = [];
-    $scope.getManagers = getManagers;
-    $scope.newKeyLists = [];
-    $scope.getKeyLists = getKeyLists;
-    $scope.newKeyRoles = List.query({type: 'functional_role'});
+    thisScope.newManagers = [];
+    thisScope.getManagers = getManagers;
+    thisScope.newKeyLists = [];
+    thisScope.getKeyLists = getKeyLists;
+    thisScope.newKeyRoles = List.query({type: 'functional_role'});
 
-    $scope.saveOperation = function() {
+    thisScope.saveOperation = function() {
       var success = function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Operation saved successfully'));
-        $location.path('/main/' + $scope.operation.url);
+        $location.path('/main/' + thisScope.operation.url);
       };
       var error = function (err) {
         $exceptionHandler(error, 'Save operation');
       };
-      if ($scope.operation._id) {
-        $scope.operation.$update(success, error);
+      if (thisScope.operation._id) {
+        thisScope.operation.$update(success, error);
       }
       else {
-        $scope.operation.$save(success, error);
+        thisScope.operation.$save(success, error);
       }
     };
 
-    $scope.deleteOperation = function () {
-      $scope.operation.$delete(function (resp, headers) {
+    thisScope.deleteOperation = function () {
+      thisScope.operation.$delete(function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Operation deleted successfully'));
       });
     };
@@ -49,7 +50,7 @@
         return;
       }
 
-      $scope.newManagers = User.query({name: search,  authOnly: false});
+      thisScope.newManagers = User.query({name: search,  authOnly: false});
     }
 
     function getKeyLists (search) {
@@ -57,7 +58,7 @@
         return;
       }
 
-      $scope.newKeyLists = List.query({name: search});
+      thisScope.newKeyLists = List.query({name: search});
     }
 
   }
