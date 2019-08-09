@@ -1,7 +1,6 @@
 {
   "extends": "plugin:angular/johnpapa",
   "rules": {
-    "angular/controller-as": "error",
     "angular/controller-as-route": "off",
     "angular/no-run-logic": "off",
     "angular/window-service": "error",
