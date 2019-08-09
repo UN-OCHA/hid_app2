@@ -8,25 +8,27 @@
   ListEditController.$inject = ['$scope', '$routeParams', '$location', 'List', 'User', 'gettextCatalog'];
 
   function ListEditController($scope, $routeParams, $location, List, User, gettextCatalog) {
-    $scope.saving = false;
-    $scope.newManagers = [];
-    $scope.visibility = [];
-    $scope.joinability = [];
-    $scope.listSave = listSave;
-    $scope.getManagers = getManagers;
+    var thisScope = $scope;
+
+    thisScope.saving = false;
+    thisScope.newManagers = [];
+    thisScope.visibility = [];
+    thisScope.joinability = [];
+    thisScope.listSave = listSave;
+    thisScope.getManagers = getManagers;
 
     initList();
 
     function initList () {
       if ($routeParams.list) {
-        $scope.list = List.get({'listId': $routeParams.list});
+        thisScope.list = List.get({'listId': $routeParams.list});
         return;
       }
-      $scope.list = new List();
-      $scope.list.type = 'list';
-      if ($scope.currentUser.verified !== true) {
-        $scope.list.visibility = 'me';
-        $scope.list.joinability = 'private';
+      thisScope.list = new List();
+      thisScope.list.type = 'list';
+      if (thisScope.currentUser.verified !== true) {
+        thisScope.list.visibility = 'me';
+        thisScope.list.joinability = 'private';
       }
     }
 
@@ -35,7 +37,7 @@
         return;
       }
 
-      $scope.newManagers = User.query({name: search,  authOnly: false});
+      thisScope.newManagers = User.query({name: search,  authOnly: false});
     }
 
     function formatManagers (list) {
@@ -66,39 +68,39 @@
     }
 
     function updateList () {
-      formatLabels($scope.list, $scope.language);
-      formatManagers($scope.list);
+      formatLabels(thisScope.list, thisScope.language);
+      formatManagers(thisScope.list);
 
-      $scope.list.$update(function () {
-        $scope.saving = false;
-        $location.path('/lists/' + $scope.list._id);
+      thisScope.list.$update(function () {
+        thisScope.saving = false;
+        $location.path('/lists/' + thisScope.list._id);
       });
     }
 
     function saveNewList () {
-      $scope.list.labels = [
+      thisScope.list.labels = [
         {
-          text: $scope.list.label,
-          language: $scope.language
+          text: thisScope.list.label,
+          language: thisScope.language
         }
       ];
-      List.save($scope.list, function (list) {
-        $scope.saving = false;
+      List.save(thisScope.list, function (list) {
+        thisScope.saving = false;
         $location.path('/lists/' + list._id);
       });
     }
 
     function listSave () {
-      $scope.saving = true;
+      thisScope.saving = true;
 
-      if ($scope.list._id) {
+      if (thisScope.list._id) {
         updateList();
         return;
       }
       saveNewList();
     }
 
-    $scope.visibility = [
+    thisScope.visibility = [
       {
         value: 'me',
         label: gettextCatalog.getString('The list owner and the managers of this list only')
@@ -117,7 +119,7 @@
       }
     ];
 
-    $scope.joinability = [
+    thisScope.joinability = [
       {
         value: 'public',
         label: gettextCatalog.getString('Anyone within Humanitarian ID')
