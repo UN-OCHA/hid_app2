@@ -8,30 +8,31 @@
   DashboardController.$inject = ['$exceptionHandler', '$rootScope', '$scope', 'alertService', 'config', 'UserListsService', 'gettextCatalog', 'Service', 'User', 'UserCheckInService', 'UserDataService'];
 
   function DashboardController($exceptionHandler, $rootScope, $scope, alertService, config, UserListsService, gettextCatalog, Service, User, UserCheckInService, UserDataService) {
-    $scope.subscriptions = [];
-    $scope.itemsPerPage = 5;
-    $scope.currentPage = 1;
-    $scope.userLists = UserListsService;
-    $scope.listsOwnedAndManagedLoaded = Offline.state === 'up' ? false : true;
-    UserListsService.getListsForUser($scope.currentUser);
+    var thisScope = $scope;
+    thisScope.subscriptions = [];
+    thisScope.itemsPerPage = 5;
+    thisScope.currentPage = 1;
+    thisScope.userLists = UserListsService;
+    thisScope.listsOwnedAndManagedLoaded = Offline.state === 'up' ? false : true;
+    UserListsService.getListsForUser(thisScope.currentUser);
 
     var usersListsLoaded =  $rootScope.$on('usersListsLoaded', function () {
-      $scope.listsOwnedAndManagedLoaded = true;
+      thisScope.listsOwnedAndManagedLoaded = true;
 
       var listIds = [];
       angular.forEach(UserListsService.listsOwnedAndManaged, function (list) {
         listIds.push(list._id);
       });
 
-      if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid && $scope.currentUser.appMetadata.hid.listsOwnedAndManaged) {
-        if (!angular.equals($scope.currentUser.appMetadata.hid.listsOwnedAndManaged, listIds)) {
+      if (thisScope.currentUser.appMetadata && thisScope.currentUser.appMetadata.hid && thisScope.currentUser.appMetadata.hid.listsOwnedAndManaged) {
+        if (!angular.equals(thisScope.currentUser.appMetadata.hid.listsOwnedAndManaged, listIds)) {
           // Get the user first to ensure no problems on update
-          User.get({userId: $scope.currentUser._id}, function (user) {
-            $scope.currentUser = user;
-            $scope.setCurrentUser($scope.currentUser);
-            $scope.currentUser.setAppMetaData({listsOwnedAndManaged: listIds});
-            $scope.currentUser.$update(function () {
-              $scope.setCurrentUser($scope.currentUser);
+          User.get({userId: thisScope.currentUser._id}, function (user) {
+            thisScope.currentUser = user;
+            thisScope.setCurrentUser(thisScope.currentUser);
+            thisScope.currentUser.setAppMetaData({listsOwnedAndManaged: listIds});
+            thisScope.currentUser.$update(function () {
+              thisScope.setCurrentUser(thisScope.currentUser);
             }, function (error) {
               $exceptionHandler(error, 'Save lists owned and managed - update user');
             });
@@ -42,20 +43,20 @@
       }
     });
 
-    $scope.$on('$destroy', function() {
+    thisScope.$on('$destroy', function() {
       usersListsLoaded();
     });
 
 
     function getSubscriptions () {
-      $scope.subscriptions = $scope.currentUser.subscriptions;
-      angular.forEach($scope.subscriptions, function (sub) {
-        if (sub.service.owner === $scope.currentUser._id) {
+      thisScope.subscriptions = thisScope.currentUser.subscriptions;
+      angular.forEach(thisScope.subscriptions, function (sub) {
+        if (sub.service.owner === thisScope.currentUser._id) {
           sub.isOwner = true;
         }
 
         angular.forEach(sub.managers, function (manager) {
-          if (manager === $scope.currentUser._id) {
+          if (manager === thisScope.currentUser._id) {
             sub.service.isManager = true;
           }
         });
@@ -63,27 +64,27 @@
     }
     getSubscriptions();
 
-    $scope.removeFavorite = function (list) {
-      $scope.currentUser.favoriteLists.splice($scope.currentUser.favoriteLists.indexOf(list), 1);
+    thisScope.removeFavorite = function (list) {
+      thisScope.currentUser.favoriteLists.splice(thisScope.currentUser.favoriteLists.indexOf(list), 1);
 
-      User.update($scope.currentUser, function () {
+      User.update(thisScope.currentUser, function () {
         alertService.add('success', gettextCatalog.getString('This list was removed from your favourites.'), false, function () {});
-        $scope.setCurrentUser($scope.currentUser);
+        thisScope.setCurrentUser(thisScope.currentUser);
       });
     };
 
-    $scope.leaveList = function (list) {
+    thisScope.leaveList = function (list) {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        UserCheckInService.delete({userId: $scope.currentUser._id, listType: list.type + 's', checkInId: list.checkinId}, {}, function(user) {
+        UserCheckInService.delete({userId: thisScope.currentUser._id, listType: list.type + 's', checkInId: list.checkinId}, {}, function(user) {
           alertService.add('success', gettextCatalog.getString('Successfully removed from list.'), false, function () {});
           UserListsService.listsMember.splice(UserListsService.listsMember.indexOf(list), 1);
           UserDataService.notify();
-          $scope.setCurrentUser(user);
+          thisScope.setCurrentUser(user);
         });
       });
     };
 
-    $scope.deleteList = function (list) {
+    thisScope.deleteList = function (list) {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         list.$delete(function () {
           alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'), false, function () {});
@@ -92,12 +93,12 @@
       });
     };
 
-    $scope.unsubscribe = function (subscription) {
+    thisScope.unsubscribe = function (subscription) {
       var service = new Service(subscription.service);
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        service.unsubscribe($scope.currentUser)
+        service.unsubscribe(thisScope.currentUser)
           .then(function (response) {
-            $scope.setCurrentUser(response.data);
+            thisScope.setCurrentUser(response.data);
             alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'), false, function () {});
           })
           .catch(function () {
@@ -106,7 +107,7 @@
       });
     };
 
-    $scope.deleteService = function (subscription) {
+    thisScope.deleteService = function (subscription) {
       var service = new Service(subscription.service);
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
         service.$delete(function () {
