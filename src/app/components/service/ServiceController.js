@@ -8,16 +8,18 @@
   ServiceController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'Service', 'User'];
 
   function ServiceController ($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, Service, User) {
-    $scope.isSubscribed = false;
-    $scope.userSubscribed = {};
-    $scope.subscribers = [];
-    $scope.subscribersLoaded = false;
-    $scope.subscribe = subscribe;
-    $scope.unsubscribe = unsubscribe;
-    $scope.getUsers = getUsers;
-    $scope.deleteService = deleteService;
-    $scope.pageChanged = pageChanged;
-    $scope.pagination = {
+    var thisScope = $scope;
+
+    thisScope.isSubscribed = false;
+    thisScope.userSubscribed = {};
+    thisScope.subscribers = [];
+    thisScope.subscribersLoaded = false;
+    thisScope.subscribe = subscribe;
+    thisScope.unsubscribe = unsubscribe;
+    thisScope.getUsers = getUsers;
+    thisScope.deleteService = deleteService;
+    thisScope.pageChanged = pageChanged;
+    thisScope.pagination = {
       currentPage: 1,
       itemsPerPage: 50,
       totalItems: 0
@@ -35,26 +37,26 @@
 
     function initService () {
       Service.get({'serviceId': $routeParams.serviceId}, function(service) {
-        $scope.service = service;
+        thisScope.service = service;
         getSubscribers();
-        $scope.isSubscribed = isUserSubscribed($scope.currentUser, $scope.service._id);
+        thisScope.isSubscribed = isUserSubscribed(thisScope.currentUser, thisScope.service._id);
       });
     }
     initService();
 
     function subscribe (user) {
-      $scope.service.subscribe(user)
+      thisScope.service.subscribe(user)
         .then(function(response) {
-          if (user._id === $scope.currentUser._id) {
-            $scope.setCurrentUser(response.data);
-            $scope.isSubscribed = true;
+          if (user._id === thisScope.currentUser._id) {
+            thisScope.setCurrentUser(response.data);
+            thisScope.isSubscribed = true;
             alertService.add('success', gettextCatalog.getString('You were successfully subscribed to this service'));
           }
           else {
             alertService.add('success', gettextCatalog.getString('The user was successfully subscribed to this service'));
           }
-          $scope.newUsers = [];
-          $scope.subscribers.push(user);
+          thisScope.newUsers = [];
+          thisScope.subscribers.push(user);
         })
         .catch(function (error) {
           $exceptionHandler(error, 'Subscribe fail');
@@ -62,18 +64,18 @@
     }
 
     function unsubscribe (user) {
-      $scope.service.unsubscribe(user)
+      thisScope.service.unsubscribe(user)
         .then(function (response) {
-          if (user._id == $scope.currentUser._id) {
-            $scope.setCurrentUser(response.data);
-            $scope.isSubscribed = false;
+          if (user._id == thisScope.currentUser._id) {
+            thisScope.setCurrentUser(response.data);
+            thisScope.isSubscribed = false;
             alertService.add('success', gettextCatalog.getString('You were successfully unsubscribed from this service'));
           }
           else {
             alertService.add('success', gettextCatalog.getString('The user was successfully unsubscribed from this service'));
           }
 
-          $scope.subscribers.splice($scope.subscribers.indexOf(user), 1);
+          thisScope.subscribers.splice(thisScope.subscribers.indexOf(user), 1);
         })
         .catch(function (error) {
           $exceptionHandler(error, 'Unsubscribe fail');
@@ -82,7 +84,7 @@
 
     function deleteService () {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        $scope.service.$delete(function () {
+        thisScope.service.$delete(function () {
           alertService.add('success', gettextCatalog.getString('Service deleted successfully'));
           $location.path('/services');
         });
@@ -93,7 +95,7 @@
       if (!subscribers.length) {
         return users;
       }
-      var serviceId = $scope.service._id;
+      var serviceId = thisScope.service._id;
       var filteredUsers = [];
 
       angular.forEach(users, function (user) {
@@ -119,28 +121,28 @@
 
     function getUsers (search) {
       User.query({'name': search, authOnly: false}, function (users) {
-        $scope.newUsers = filterUsers(users, $scope.subscribers);
+        thisScope.newUsers = filterUsers(users, thisScope.subscribers);
       });
     }
 
 
     function pageChanged () {
-      var offset = $scope.pagination.itemsPerPage * ($scope.pagination.currentPage - 1);
+      var offset = thisScope.pagination.itemsPerPage * (thisScope.pagination.currentPage - 1);
       getSubscribers(offset);
     }
 
     function getSubscribers (offset) {
       var params = {
-        'subscriptions.service': $scope.service._id,
-        limit: $scope.pagination.itemsPerPage,
+        'subscriptions.service': thisScope.service._id,
+        limit: thisScope.pagination.itemsPerPage,
         sort: 'name',
         authOnly: false
       };
       params.offset = offset || 0;
       User.query(params, function (response, headers) {
-        $scope.subscribers = response;
-        $scope.pagination.totalItems = headers()['x-total-count'];
-        $scope.subscribersLoaded = true;
+        thisScope.subscribers = response;
+        thisScope.pagination.totalItems = headers()['x-total-count'];
+        thisScope.subscribersLoaded = true;
       });
     }
 
