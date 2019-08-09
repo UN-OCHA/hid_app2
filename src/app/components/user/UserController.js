@@ -8,28 +8,30 @@
   UserController.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$timeout', '$location', 'alertService', 'md5', 'UserDataService', 'config', 'gettextCatalog', 'TwoFactorAuthService'];
 
   function UserController($exceptionHandler, $rootScope, $scope, $routeParams, $timeout, $location, alertService, md5, UserDataService, config, gettextCatalog, TwoFactorAuthService) {
-    $scope.pictureUrl = '';
-    $scope.userLoaded = false;
-    $scope.canEditUser = ($routeParams.userId === $scope.currentUser._id) || $scope.currentUser.is_admin || $scope.currentUser.isManager;
-    $scope.showProfileForm  = $routeParams.edit && $scope.canEditUser ? true : false;
-    $scope.saving = {
+    var thisScope = $scope;
+
+    thisScope.pictureUrl = '';
+    thisScope.userLoaded = false;
+    thisScope.canEditUser = ($routeParams.userId === thisScope.currentUser._id) || thisScope.currentUser.is_admin || thisScope.currentUser.isManager;
+    thisScope.showProfileForm  = $routeParams.edit && thisScope.canEditUser ? true : false;
+    thisScope.saving = {
       status: '',
       message: '',
       show: false
     };
-    $scope.apiUrl = config.apiUrl;
-    $scope.connectionInfo = {
+    thisScope.apiUrl = config.apiUrl;
+    thisScope.connectionInfo = {
       canRequestConnection: false,
       phonesPermission: '',
       emailsPermission: '',
       locationsPermission: ''
     };
-    $scope.canViewInfo = true;
-    $scope.userExists = true;
-    $scope.vcardUrl = '';
+    thisScope.canViewInfo = true;
+    thisScope.userExists = true;
+    thisScope.vcardUrl = '';
 
-    $scope.toggleForm = function () {
-      $scope.showProfileForm = !$scope.showProfileForm;
+    thisScope.toggleForm = function () {
+      thisScope.showProfileForm = !thisScope.showProfileForm;
     };
     var showingAuthBanner = false;
     var permissionsMessage;
@@ -76,7 +78,7 @@
 
     function setConnectionInfo (user, currentUserId) {
      var connectionPending = false;
-     $scope.connectionInfo.canRequestConnection = false;
+     thisScope.connectionInfo.canRequestConnection = false;
 
      if (user.connections) {
         angular.forEach(user.connections, function (connection) {
@@ -88,10 +90,10 @@
         });
       }
 
-      $scope.connectionInfo.phonesPermission = getPermission(user.phone_number, connectionPending, user.phonesVisibility);
-      $scope.connectionInfo.emailsPermission = getPermission(user.email, connectionPending, user.emailsVisibility);
-      $scope.connectionInfo.locationsPermission = getPermission(user.location, connectionPending, user.locationsVisibility);
-      $scope.connectionInfo.canRequestConnection = connectionRequired && !connectionPending;
+      thisScope.connectionInfo.phonesPermission = getPermission(user.phone_number, connectionPending, user.phonesVisibility);
+      thisScope.connectionInfo.emailsPermission = getPermission(user.email, connectionPending, user.emailsVisibility);
+      thisScope.connectionInfo.locationsPermission = getPermission(user.location, connectionPending, user.locationsVisibility);
+      thisScope.connectionInfo.canRequestConnection = connectionRequired && !connectionPending;
       permissionsMessage = getPermissionMessage(connectionPending, connectionRequired, verifiedRequired);
 
       if (permissionsMessage) {
@@ -104,24 +106,24 @@
       var defaultImage = '/img/default-avatar.png';
       var defaultImagePath = $location.protocol() + '://' + $location.host() + defaultImage;
       if (Offline.state !== 'up' || (!picture && !email)) {
-        $scope.pictureUrl = defaultImage;
+        thisScope.pictureUrl = defaultImage;
         return;
       }
       if (picture) {
-        $scope.pictureUrl = picture;
+        thisScope.pictureUrl = picture;
         return;
       }
       emailHash = md5.createHash(email.trim().toLowerCase());
-      $scope.pictureUrl = 'https://secure.gravatar.com/avatar/' + emailHash + '?s=200&d=' + defaultImagePath;
-      console.log($scope.pictureUrl);
+      thisScope.pictureUrl = 'https://secure.gravatar.com/avatar/' + emailHash + '?s=200&d=' + defaultImagePath;
+      console.log(thisScope.pictureUrl);
     }
 
     function showSavedMessage (message) {
       var messageTimer;
-      $scope.saving.message = message || 'Profile updated';
+      thisScope.saving.message = message || 'Profile updated';
       $timeout.cancel(messageTimer);
       messageTimer = $timeout(function () {
-        $scope.saving.show = false;
+        thisScope.saving.show = false;
       }, 5000);
     }
 
@@ -162,28 +164,28 @@
       });
       vcardUrl += "REV:" + new Date().toISOString() + "\n" +
         "END:VCARD\n";
-      $scope.vcardUrl = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent(vcardUrl);
+      thisScope.vcardUrl = 'data:text/vcard;charset=UTF-8,' + encodeURIComponent(vcardUrl);
     }
 
     function getUser () {
       var afterUserLoaded = function () {
-        $rootScope.title = $scope.user.name;
-        userPicture($scope.user.picture, $scope.user.email);
-        setConnectionInfo($scope.user, $scope.currentUser._id);
-        authUserAlert($scope.user, $scope.currentUser);
-        setVcardUrl($scope.user);
-        if (!$scope.currentUser.verified && $scope.user.is_orphan) {
-          $scope.canViewInfo = false;
+        $rootScope.title = thisScope.user.name;
+        userPicture(thisScope.user.picture, thisScope.user.email);
+        setConnectionInfo(thisScope.user, thisScope.currentUser._id);
+        authUserAlert(thisScope.user, thisScope.currentUser);
+        setVcardUrl(thisScope.user);
+        if (!thisScope.currentUser.verified && thisScope.user.is_orphan) {
+          thisScope.canViewInfo = false;
           alertService.pageAlert('warning', gettextCatalog.getString('In order to view this person’s profile, please contact info@humanitarian.id'));
         }
-        $scope.userLoaded = true;
-        $scope.$broadcast('userLoaded');
+        thisScope.userLoaded = true;
+        thisScope.$broadcast('userLoaded');
       };
       // Try to get user from cache first
       UserDataService.getUserFromCache($routeParams.userId)
         .then(function (user) {
           if (user) {
-            $scope.user = UserDataService.transformUser(user);
+            thisScope.user = UserDataService.transformUser(user);
             afterUserLoaded();
           }
           if ($rootScope.isOnline) {
@@ -194,56 +196,56 @@
           // If online, try to refresh with a fresh copy from server
           if ($rootScope.isOnline && user) {
             UserDataService.cacheUser($routeParams.userId, user);
-            $scope.user = UserDataService.transformUser(user);
+            thisScope.user = UserDataService.transformUser(user);
             afterUserLoaded();
           }
         })
         .catch (function (err) {
-          $scope.userLoaded = true;
-          $scope.userExists = false;
+          thisScope.userLoaded = true;
+          thisScope.userExists = false;
           $exceptionHandler(err, 'getUser');
         });
     }
     getUser();
 
     //Listen for user edited event
-    $scope.$on('editUser', function (event, data) {
+    thisScope.$on('editUser', function (event, data) {
       if (data.status === 'saving') {
-        $scope.saving.show = true;
-        $scope.saving.status = 'saving';
+        thisScope.saving.show = true;
+        thisScope.saving.status = 'saving';
         return;
       }
 
       if (data.status === 'fail') {
-        $scope.saving.show = false;
+        thisScope.saving.show = false;
         return;
       }
 
       if (data.type === 'picture') {
-        $scope.pictureUrl = $scope.user.picture;
+        thisScope.pictureUrl = thisScope.user.picture;
       }
 
-      $scope.saving.status = data.status;
+      thisScope.saving.status = data.status;
       showSavedMessage(data.message);
       UserDataService.formatUserLocations();
 
-      if (showingAuthBanner && !$scope.user.authOnly) {
+      if (showingAuthBanner && !thisScope.user.authOnly) {
         showingAuthBanner = false;
         alertService.resetPageAlert();
       }
     });
 
-    $scope.notify = function () {
-      $scope.user.notify('Test', function () {
+    thisScope.notify = function () {
+      thisScope.user.notify('Test', function () {
         alertService.add('success', gettextCatalog.getString('User was successfully notified'), false, function () {});
       }, function () {
         $exceptionHandler(error, 'User notification error');
       });
     };
 
-    $scope.sendClaimEmail = function () {
+    thisScope.sendClaimEmail = function () {
       alertService.add('warning', 'Are you sure?', true, function() {
-        $scope.user.claimEmail(function () {
+        thisScope.user.claimEmail(function () {
           alertService.add('success', gettextCatalog.getString('Claim email sent successfully'), false, function () {});
         }, function () {
           $exceptionHandler(error, 'Claim email error');
@@ -251,14 +253,14 @@
       });
     };
 
-    $scope.verifyUser = function () {
-      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
+    thisScope.verifyUser = function () {
+      if (!thisScope.currentUser.is_admin && !thisScope.currentUser.isManager) {
         return;
       }
-      $scope.user.verified = !$scope.user.verified;
-      $scope.user.$update(function () {
-        if ($scope.user.id === $scope.currentUser.id) {
-          $scope.setCurrentUser($scope.user);
+      thisScope.user.verified = !thisScope.user.verified;
+      thisScope.user.$update(function () {
+        if (thisScope.user.id === thisScope.currentUser.id) {
+          thisScope.setCurrentUser(thisScope.user);
         }
         alertService.add('success', gettextCatalog.getString('User updated'), false, function () {});
       }, function () {
@@ -266,14 +268,14 @@
       });
     };
 
-    $scope.flagUser = function () {
-      if (!$scope.currentUser.is_admin) {
+    thisScope.flagUser = function () {
+      if (!thisScope.currentUser.is_admin) {
         return;
       }
-      $scope.user.hidden = !$scope.user.hidden;
-      $scope.user.$update(function () {
-        if ($scope.user.id === $scope.currentUser.id) {
-          $scope.setCurrentUser($scope.user);
+      thisScope.user.hidden = !thisScope.user.hidden;
+      thisScope.user.$update(function () {
+        if (thisScope.user.id === thisScope.currentUser.id) {
+          thisScope.setCurrentUser(thisScope.user);
         }
         alertService.add('success', gettextCatalog.getString('User updated'), false, function () {});
       }, function () {
@@ -281,21 +283,21 @@
       });
     };
 
-    $scope.hideUser = function () {
-      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager && $scope.user.id !== $scope.currentUser.id) {
+    thisScope.hideUser = function () {
+      if (!thisScope.currentUser.is_admin && !thisScope.currentUser.isManager && thisScope.user.id !== thisScope.currentUser.id) {
         return;
       }
-      $scope.user.authOnly = !$scope.user.authOnly;
-      if (showingAuthBanner && !$scope.user.authOnly) {
+      thisScope.user.authOnly = !thisScope.user.authOnly;
+      if (showingAuthBanner && !thisScope.user.authOnly) {
         showingAuthBanner = false;
         alertService.resetPageAlert();
       }
-      if ($scope.user.authOnly) {
-        authUserAlert($scope.user, $scope.currentUser);
+      if (thisScope.user.authOnly) {
+        authUserAlert(thisScope.user, thisScope.currentUser);
       }
-      $scope.user.$update(function () {
-        if ($scope.user.id === $scope.currentUser.id) {
-          $scope.setCurrentUser($scope.user);
+      thisScope.user.$update(function () {
+        if (thisScope.user.id === thisScope.currentUser.id) {
+          thisScope.setCurrentUser(thisScope.user);
         }
         alertService.add('success', gettextCatalog.getString('User updated'), false, function () {});
 
@@ -304,9 +306,9 @@
       });
     }
 
-    $scope.cancel = function () {
-      $scope.profileForm.$hide();
-      $scope.saving.show = false;
+    thisScope.cancel = function () {
+      thisScope.profileForm.$hide();
+      thisScope.saving.show = false;
     };
 
     function sendDeleteRequest (user, token) {
@@ -317,9 +319,9 @@
       }, function (){}, token);
     }
 
-    $scope.deleteUser = function (user) {
+    thisScope.deleteUser = function (user) {
       alertService.add('danger', gettextCatalog.getString('Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore.'), true, function() {
-        if ($scope.currentUser.totp) {
+        if (thisScope.currentUser.totp) {
           TwoFactorAuthService.requestToken(function (token) {
             sendDeleteRequest(user, token);
           }, function () {});
@@ -329,8 +331,8 @@
       });
     };
 
-    $scope.requestConnection = function () {
-      $scope.user.requestConnection($scope.user._id, function () {
+    thisScope.requestConnection = function () {
+      thisScope.user.requestConnection(thisScope.user._id, function () {
         alertService.add('success', gettextCatalog.getString('Connection request sent'), false, function () {});
         alertService.resetPageAlert();
         getUser();
