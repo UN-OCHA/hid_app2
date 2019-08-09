@@ -8,38 +8,40 @@
   ListsController.$inject = ['$rootScope', '$scope', '$routeParams', '$location', '$q', '$localForage', 'gettextCatalog', 'hrinfoService', 'alertService', 'ListDataService', 'SearchService', 'SidebarService'];
 
   function ListsController($rootScope, $scope, $routeParams, $location, $q, $localForage, gettextCatalog, hrinfoService, alertService, ListDataService, SearchService, SidebarService) {
-    $scope.request = {};
-    $scope.totalItems = 0;
-    $scope.itemsPerPage = 50;
-    $scope.currentPage = 1;
-    $scope.request.limit = $scope.itemsPerPage;
-    $scope.request.offset = 0;
-    $scope.request.sort = '-count';
-    $scope.listsLoaded = false;
-    $scope.selectedFilters = {};
-    $scope.listFilters = {};
-    $scope.currentFilters = [];
+    var thisScope = $scope;
+
+    thisScope.request = {};
+    thisScope.totalItems = 0;
+    thisScope.itemsPerPage = 50;
+    thisScope.currentPage = 1;
+    thisScope.request.limit = thisScope.itemsPerPage;
+    thisScope.request.offset = 0;
+    thisScope.request.sort = '-count';
+    thisScope.listsLoaded = false;
+    thisScope.selectedFilters = {};
+    thisScope.listFilters = {};
+    thisScope.currentFilters = [];
 
     var searchValue = $routeParams.q || $routeParams.name;
 
     if (searchValue) {
-      $scope.listFilters.name = searchValue;
-      $scope.request.name = searchValue;
-      $scope.selectedFilters.name = searchValue;
-      $scope.currentFilters.push({label: searchValue, filterType: 'name', type: 'name'});
+      thisScope.listFilters.name = searchValue;
+      thisScope.request.name = searchValue;
+      thisScope.selectedFilters.name = searchValue;
+      thisScope.currentFilters.push({label: searchValue, filterType: 'name', type: 'name'});
     }
     if ($routeParams.type) {
-      $scope.selectedFilters.type = $routeParams.type;
-      $scope.listFilters.type = $routeParams.type;
-      $scope.request.type = $routeParams.type;
+      thisScope.selectedFilters.type = $routeParams.type;
+      thisScope.listFilters.type = $routeParams.type;
+      thisScope.request.type = $routeParams.type;
     }
 
-    var currentSortOrder = $scope.request.name;
-    ListDataService.setRequest($scope.request);
+    var currentSortOrder = thisScope.request.name;
+    ListDataService.setRequest(thisScope.request);
 
-    $scope.listTypes = ListDataService.listTypes;
+    thisScope.listTypes = ListDataService.listTypes;
 
-    $scope.sortBy = [
+    thisScope.sortBy = [
       {
         label: 'name',
         name: 'Name'
@@ -65,104 +67,104 @@
     }
 
     var queryCallback = function (lists, headers) {
-      $scope.totalItems = headers()["x-total-count"];
+      thisScope.totalItems = headers()["x-total-count"];
       formatTypes(lists);
-      $scope.listsLoaded = true;
+      thisScope.listsLoaded = true;
     };
 
     ListDataService.subscribe($scope, function () {
-      $scope.currentPage = 1;
-      $scope.pageChanged();
+      thisScope.currentPage = 1;
+      thisScope.pageChanged();
     });
-    ListDataService.queryLists($scope.request, function (lists, number) {
-      $scope.lists = lists;
-      $scope.totalItems = number;
-      formatTypes($scope.lists);
-      $scope.listsLoaded = true;
+    ListDataService.queryLists(thisScope.request, function (lists, number) {
+      thisScope.lists = lists;
+      thisScope.totalItems = number;
+      formatTypes(thisScope.lists);
+      thisScope.listsLoaded = true;
     });
 
     $rootScope.$on('sidebar-closed', function () {
-      $scope.selectedFilters = angular.copy($scope.listFilters);
-      $scope.request.sort = currentSortOrder;
+      thisScope.selectedFilters = angular.copy(thisScope.listFilters);
+      thisScope.request.sort = currentSortOrder;
     });
 
-    $scope.setLimit = function (limit) {
-      $scope.itemsPerPage = limit;
-      $scope.request.limit = limit;
-      $scope.pageChanged();
+    thisScope.setLimit = function (limit) {
+      thisScope.itemsPerPage = limit;
+      thisScope.request.limit = limit;
+      thisScope.pageChanged();
     };
 
-    $scope.resetFilters = function () {
+    thisScope.resetFilters = function () {
       ListDataService.setFilters({});
-      $scope.listFilters = {};
-      $scope.selectedFilters = {};
-      $scope.currentPage = 1;
+      thisScope.listFilters = {};
+      thisScope.selectedFilters = {};
+      thisScope.currentPage = 1;
       $location.search('type', null);
       $location.search('q', null);
-      $scope.currentFilters = [];
-      $scope.pageChanged();
+      thisScope.currentFilters = [];
+      thisScope.pageChanged();
     };
 
-    $scope.pageChanged = function () {
-      currentSortOrder = $scope.request.sort;
-      $scope.request.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-      ListDataService.setRequest($scope.request);
+    thisScope.pageChanged = function () {
+      currentSortOrder = thisScope.request.sort;
+      thisScope.request.offset = (thisScope.currentPage - 1) * thisScope.itemsPerPage;
+      ListDataService.setRequest(thisScope.request);
       ListDataService.filter(queryCallback);
-      $scope.lists = ListDataService.getLists();
+      thisScope.lists = ListDataService.getLists();
     };
 
     function updateCurrentFilters (selectedFilters) {
-      $scope.currentFilters = [];
+      thisScope.currentFilters = [];
       if (selectedFilters.name) {
-        $scope.currentFilters.push({label: selectedFilters.name, filterType: 'name'});
+        thisScope.currentFilters.push({label: selectedFilters.name, filterType: 'name'});
       }
 
       if (selectedFilters.type) {
-        var selected = $scope.listTypes.filter(function (item) {
+        var selected = thisScope.listTypes.filter(function (item) {
           return item.key === selectedFilters.type;
         })[0];
-        $scope.currentFilters.push({label: selected.val, filterType: 'type'});
+        thisScope.currentFilters.push({label: selected.val, filterType: 'type'});
       }
     }
 
-    $scope.removeFilter = function (filter) {
-      if ($scope.selectedFilters[filter.filterType]) {
-        delete $scope.selectedFilters[filter.filterType];
+    thisScope.removeFilter = function (filter) {
+      if (thisScope.selectedFilters[filter.filterType]) {
+        delete thisScope.selectedFilters[filter.filterType];
       }
-      if ($scope.request[filter.filterType]) {
-        delete $scope.request[filter.filterType];
+      if (thisScope.request[filter.filterType]) {
+        delete thisScope.request[filter.filterType];
       }
-      $scope.filter();
+      thisScope.filter();
     };
 
-    $scope.filter = function() {
-      $scope.listsLoaded = false;
+    thisScope.filter = function() {
+      thisScope.listsLoaded = false;
 
-      if ($scope.selectedFilters.name === '') {
-        delete $scope.selectedFilters.name;
-        delete $scope.request.name;
+      if (thisScope.selectedFilters.name === '') {
+        delete thisScope.selectedFilters.name;
+        delete thisScope.request.name;
       }
       if (searchValue) {
-        $scope.listFilters.name = searchValue;
+        thisScope.listFilters.name = searchValue;
       }
-      $scope.listFilters = angular.copy($scope.selectedFilters);
-      ListDataService.setFilters($scope.listFilters);
-      $scope.currentPage = 1;
-      $scope.pageChanged();
-      updateCurrentFilters($scope.selectedFilters);
+      thisScope.listFilters = angular.copy(thisScope.selectedFilters);
+      ListDataService.setFilters(thisScope.listFilters);
+      thisScope.currentPage = 1;
+      thisScope.pageChanged();
+      updateCurrentFilters(thisScope.selectedFilters);
     };
 
-    $scope.applyFilters = function () {
-      $scope.filter();
+    thisScope.applyFilters = function () {
+      thisScope.filter();
       SidebarService.close();
     };
 
-    $scope.saveSearch = function (searchList) {
-      if (!$scope.searchTerm) {
+    thisScope.saveSearch = function (searchList) {
+      if (!thisScope.searchTerm) {
         return;
       }
-      SearchService.saveSearch($scope.currentUser, searchList, 'list', function (user) {
-        $scope.setCurrentUser(user);
+      SearchService.saveSearch(thisScope.currentUser, searchList, 'list', function (user) {
+        thisScope.setCurrentUser(user);
       });
     };
   }
