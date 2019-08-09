@@ -8,37 +8,38 @@
   DuplicatesController.$inject = ['$exceptionHandler', '$scope', '$routeParams', 'alertService', 'Duplicate', 'gettextCatalog'];
 
   function DuplicatesController ($exceptionHandler, $scope, $routeParams, alertService, Duplicate, gettextCatalog) {
-    $scope.pagination = {
+    var thisScope = $scope;
+    thisScope.pagination = {
       currentPage: 1,
       itemsPerPage: 10,
       totalItems: 0
     };
 
     var setTotalDuplicates = function (duplicates, headers) {
-      $scope.pagination.totalItems = headers()["x-total-count"];
+      thisScope.pagination.totalItems = headers()["x-total-count"];
     };
 
     function getDuplicates (offset) {
       var params = {
         sort: 'name',
-        limit: $scope.pagination.itemsPerPage
+        limit: thisScope.pagination.itemsPerPage
       };
       params.offset = offset || 0;
 
       Duplicate.query(params, function (duplicates, headers) {
         setTotalDuplicates(duplicates, headers);
-        $scope.duplicates = duplicates;
+        thisScope.duplicates = duplicates;
       });
     }
 
     getDuplicates();
 
-    $scope.pageChanged = function () {
-      var offset = $scope.pagination.itemsPerPage * ($scope.pagination.currentPage - 1);
+    thisScope.pageChanged = function () {
+      var offset = thisScope.pagination.itemsPerPage * (thisScope.pagination.currentPage - 1);
       getDuplicates(offset);
     };
 
-    $scope.deleteDuplicate = function (duplicate, user) {
+    thisScope.deleteDuplicate = function (duplicate, user) {
       duplicate.delete(user, function () {
         alertService.add('success', gettextCatalog.getString('Duplicate successfully removed'));
       }, function (error) {
