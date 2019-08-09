@@ -8,20 +8,21 @@
   AppController.$inject = ['$rootScope', '$scope', '$location', '$document', '$window', 'alertService', 'gettextCatalog', 'SidebarService', 'User'];
 
   function AppController($rootScope, $scope, $location, $document, $window, alertService, gettextCatalog, SidebarService, User) {
+    var thisScope = $scope;
     $rootScope.canCache = true;
-    $scope.currentUser = null;
-    $scope.currentUserResource = null;
-    $scope.filters = {};
-    $scope.language = gettextCatalog.getCurrentLanguage();
-    $scope.sidebar = SidebarService;
-    $scope.isApp = false;
+    thisScope.currentUser = null;
+    thisScope.currentUserResource = null;
+    thisScope.filters = {};
+    thisScope.language = gettextCatalog.getCurrentLanguage();
+    thisScope.sidebar = SidebarService;
+    thisScope.isApp = false;
 
     function detectApp () {
       // The Cordova app appends 'Cordova/version-number' to the end of the User Agent, e.g. 'Cordova/2.0.1'
       var ua = $window.navigator.userAgent;
       return ua.indexOf('Cordova') > 0;
     }
-    $scope.isApp = detectApp();
+    thisScope.isApp = detectApp();
 
     function isTextInput(node) {
       return ['INPUT', 'TEXTAREA'].indexOf(node.nodeName) !== -1;
@@ -36,51 +37,51 @@
     }
     closeIOSKeyboard();
 
-    $scope.keyupEvent = function (event) {
+    thisScope.keyupEvent = function (event) {
       if (event.key === 'Escape' || event.code === 'Escape' || event.keyCode === 27) {
-        $scope.sidebar.close();
+        thisScope.sidebar.close();
       }
     };
 
-    $scope.removeCurrentUser = function() {
-      $scope.currentUser = null;
+    thisScope.removeCurrentUser = function() {
+      thisScope.currentUser = null;
     };
 
-    $scope.setCurrentUser = function (user) {
-      $scope.currentUser = new User(user);
+    thisScope.setCurrentUser = function (user) {
+      thisScope.currentUser = new User(user);
       $window.localStorage.setItem('currentUser', JSON.stringify(user));
     };
 
-    $scope.saveCurrentUser = function() {
-      var prom = $scope.getCurrentUserResource().$promise;
+    thisScope.saveCurrentUser = function() {
+      var prom = thisScope.getCurrentUserResource().$promise;
       prom.then(function () {
-        angular.copy($scope.currentUser, $scope.currentUserResource);
-        $scope.currentUserResource.$save();
+        angular.copy(thisScope.currentUser, thisScope.currentUserResource);
+        thisScope.currentUserResource.$save();
       });
       return prom;
     };
 
-    $scope.getCurrentUserResource = function () {
-      if (!$scope.currentUserResource) {
-        $scope.currentUserResource = User.get({userId: $scope.currentUser.id});
+    thisScope.getCurrentUserResource = function () {
+      if (!thisScope.currentUserResource) {
+        thisScope.currentUserResource = User.get({userId: thisScope.currentUser.id});
       }
-      return $scope.currentUserResource;
+      return thisScope.currentUserResource;
     };
 
-    $scope.initCurrentUser = function () {
+    thisScope.initCurrentUser = function () {
       if ($window.localStorage.getItem('currentUser')) {
-        $scope.setCurrentUser(JSON.parse($window.localStorage.getItem('currentUser')));
+        thisScope.setCurrentUser(JSON.parse($window.localStorage.getItem('currentUser')));
       }
-      $scope.initLanguage();
+      thisScope.initLanguage();
     };
 
     $rootScope.$on('updateCurrentUser', function () {
-      User.get({userId: $scope.currentUser.id}, function (user) {
-        $scope.setCurrentUser(user);
+      User.get({userId: thisScope.currentUser.id}, function (user) {
+        thisScope.setCurrentUser(user);
       });
     });
 
-    $scope.activeNav = function (path) {
+    thisScope.activeNav = function (path) {
       return $location.path() === path;
     };
 
@@ -88,45 +89,44 @@
       return ($location.path() === '/start' || $location.path() === '/tutorial' || $location.path() === '/kiosk') ? true : false;
     }
 
-    $scope.hideHeaderFooter = hideHeaderFooter();
+    thisScope.hideHeaderFooter = hideHeaderFooter();
 
-    $scope.initLanguage = function () {
-      if (!$scope.currentUser) {
+    thisScope.initLanguage = function () {
+      if (!thisScope.currentUser) {
         return;
       }
 
-      var locale = $scope.currentUser.locale ? $scope.currentUser.locale : 'en';
+      var locale = thisScope.currentUser.locale ? thisScope.currentUser.locale : 'en';
       var lang = gettextCatalog.getCurrentLanguage();
 
       if (lang !== locale) {
         gettextCatalog.setCurrentLanguage(locale);
-        $scope.language = locale;
+        thisScope.language = locale;
       }
     };
 
-    $scope.changeLanguage = function (lang) {
+    thisScope.changeLanguage = function (lang) {
       gettextCatalog.setCurrentLanguage(lang);
-      $scope.currentUser.locale = lang;
-      $scope.language = lang;
-      User.update($scope.currentUser, function (user) {
-        $scope.setCurrentUser(user);
+      thisScope.currentUser.locale = lang;
+      thisScope.language = lang;
+      User.update(thisScope.currentUser, function (user) {
+        thisScope.setCurrentUser(user);
       });
     };
 
-    $scope.getCurrentLanguage = function () {
+    thisScope.getCurrentLanguage = function () {
       var lang = gettextCatalog.getCurrentLanguage();
       return lang.toUpperCase();
     };
 
     var initView = function () {
       alertService.resetPageAlert();
-      $scope.sidebar.close();
-      $scope.hideHeaderFooter = hideHeaderFooter();
+      thisScope.sidebar.close();
+      thisScope.hideHeaderFooter = hideHeaderFooter();
     };
 
-    $scope.initCurrentUser();
+    thisScope.initCurrentUser();
 
-    $scope.$on('$routeChangeSuccess', initView);
+    thisScope.$on('$routeChangeSuccess', initView);
   }
-
 })();
