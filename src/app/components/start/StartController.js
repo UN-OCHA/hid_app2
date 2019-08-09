@@ -8,10 +8,11 @@
   StartController.$inject = ['$location', '$scope', 'User'];
 
   function StartController($location, $scope, User) {
+    var thisScope = $scope;
 
-  	User.get({userId: $scope.currentUser._id}, function (user) {
-      $scope.user = user;
-      $scope.$broadcast('userLoaded');
+  	User.get({userId: thisScope.currentUser._id}, function (user) {
+      thisScope.user = user;
+      thisScope.$broadcast('userLoaded');
     });
   }
 })();
