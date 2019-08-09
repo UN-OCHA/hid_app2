@@ -8,37 +8,39 @@
   UserEditController.$inject = ['$exceptionHandler', '$location', '$scope', 'alertService', 'config', 'gettextCatalog', 'hrinfoService', 'List', 'TwoFactorAuthService', 'UserCheckInService'];
 
   function UserEditController($exceptionHandler, $location, $scope, alertService, config, gettextCatalog, hrinfoService, List, TwoFactorAuthService, UserCheckInService) {
-    $scope.phoneNumberTypes = [];
-    $scope.emailTypes = [];
-    $scope.voipTypes = [];
-    $scope.regions = [];
-    $scope.countries = [];
-    $scope.temp = {};
-    $scope.organization = {};
-    $scope.showRegion = false;
-    $scope.getOrganizations = getOrganizations;
-    $scope.getCountries = getCountries;
-    $scope.setRegions = setRegions;
-    $scope.addItem = addItem;
-    $scope.dropItem = dropItem;
-    $scope.dropPhoneNumber = dropPhoneNumber;
-    $scope.setPrimaryOrganization = setPrimaryOrganization;
-    $scope.setPrimaryLocation = setPrimaryLocation;
-    $scope.setPrimaryJobTitle = setPrimaryJobTitle;
-    $scope.uploadStatus = '';
-    $scope.onUploadSuccess = onUploadSuccess;
-    $scope.onUploadError = onUploadError;
-    $scope.deletePicture = deletePicture;
-    $scope.setPrimaryEmail = setPrimaryEmail;
-    $scope.resendValidationEmail = resendValidationEmail;
-    $scope.setPrimaryPhone = setPrimaryPhone;
-    $scope.updateUser = updateUser;
-    $scope.addPrimaryOrg = addPrimaryOrg;
-    $scope.addPrimaryLocation = addPrimaryLocation;
-    $scope.makeVisible = makeVisible;
-    $scope.nextStep = nextStep;
-    $scope.currentStep = 1;
-    $scope.visibilityOptions = [
+    var thisScope = $scope;
+
+    thisScope.phoneNumberTypes = [];
+    thisScope.emailTypes = [];
+    thisScope.voipTypes = [];
+    thisScope.regions = [];
+    thisScope.countries = [];
+    thisScope.temp = {};
+    thisScope.organization = {};
+    thisScope.showRegion = false;
+    thisScope.getOrganizations = getOrganizations;
+    thisScope.getCountries = getCountries;
+    thisScope.setRegions = setRegions;
+    thisScope.addItem = addItem;
+    thisScope.dropItem = dropItem;
+    thisScope.dropPhoneNumber = dropPhoneNumber;
+    thisScope.setPrimaryOrganization = setPrimaryOrganization;
+    thisScope.setPrimaryLocation = setPrimaryLocation;
+    thisScope.setPrimaryJobTitle = setPrimaryJobTitle;
+    thisScope.uploadStatus = '';
+    thisScope.onUploadSuccess = onUploadSuccess;
+    thisScope.onUploadError = onUploadError;
+    thisScope.deletePicture = deletePicture;
+    thisScope.setPrimaryEmail = setPrimaryEmail;
+    thisScope.resendValidationEmail = resendValidationEmail;
+    thisScope.setPrimaryPhone = setPrimaryPhone;
+    thisScope.updateUser = updateUser;
+    thisScope.addPrimaryOrg = addPrimaryOrg;
+    thisScope.addPrimaryLocation = addPrimaryLocation;
+    thisScope.makeVisible = makeVisible;
+    thisScope.nextStep = nextStep;
+    thisScope.currentStep = 1;
+    thisScope.visibilityOptions = [
       {
         value: 'anyone',
         label: gettextCatalog.getString('Anyone')
@@ -52,32 +54,32 @@
         label: gettextCatalog.getString('My connections')
       }
     ];
-    $scope.urlRegEx = /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/
+    thisScope.urlRegEx = /(http(s)?:\\)?([\w-]+\.)+[\w-]+[.com|.in|.org]+(\[\?%&=]*)?/
     var defaultSettings = {};
     var lastStep = 4;
     var primaryEmail = '';
 
     function getCountries () {
       hrinfoService.getCountries().then(function (countries) {
-        $scope.countries = countries;
+        thisScope.countries = countries;
       });
     }
 
     function setUpFields () {
-      $scope.phoneNumberTypes = [
+      thisScope.phoneNumberTypes = [
         {value: '', name: gettextCatalog.getString('Select phone number type')},
         {value: 'Landline', name: gettextCatalog.getString('Landline')},
         {value: 'Mobile', name: gettextCatalog.getString('Mobile')},
         {value: 'Satellite', name: gettextCatalog.getString('Satellite Phone')}
       ];
 
-      $scope.emailTypes = [
+      thisScope.emailTypes = [
         {value: '', name: gettextCatalog.getString('Select email type')},
         {value: 'Work', name: gettextCatalog.getString('Work')},
         {value: 'Personal', name: gettextCatalog.getString('Personal')}
       ];
 
-      $scope.voipTypes = [
+      thisScope.voipTypes = [
         {value: '', name: gettextCatalog.getString('Select social network type')},
         {value: 'Skype', name: 'Skype'},
         {value: 'Google', name: 'Google'}
@@ -107,35 +109,35 @@
         },
         functional_role: {}
       };
-      $scope.temp = angular.copy(defaultSettings);
-      angular.copy($scope.user.organization, $scope.organization);
-      $scope.temp.phonesVisibility = angular.copy($scope.user.phonesVisibility);
-      $scope.temp.emailsVisibility = angular.copy($scope.user.emailsVisibility);
-      $scope.temp.locationsVisibility = angular.copy($scope.user.locationsVisibility);
-      primaryEmail = $scope.user.email;
+      thisScope.temp = angular.copy(defaultSettings);
+      angular.copy(thisScope.user.organization, thisScope.organization);
+      thisScope.temp.phonesVisibility = angular.copy(thisScope.user.phonesVisibility);
+      thisScope.temp.emailsVisibility = angular.copy(thisScope.user.emailsVisibility);
+      thisScope.temp.locationsVisibility = angular.copy(thisScope.user.locationsVisibility);
+      primaryEmail = thisScope.user.email;
 
       getCountries();
       getRoles();
     }
 
     function updateCurrentUser () {
-      if ($scope.user._id === $scope.currentUser._id) {
-        $scope.setCurrentUser($scope.user);
+      if (thisScope.user._id === thisScope.currentUser._id) {
+        thisScope.setCurrentUser(thisScope.user);
       }
     }
 
     function addList (list, listType, callback) {
-      $scope.$emit('editUser', {status: 'saving'});
+      thisScope.$emit('editUser', {status: 'saving'});
       var listId = list.list._id;
 
-      UserCheckInService.save({userId: $scope.user._id, listType: listType}, {list: listId}, function (response) {
-        $scope.$parent.user[listType] = angular.copy(response[listType]);
+      UserCheckInService.save({userId: thisScope.user._id, listType: listType}, {list: listId}, function (response) {
+        thisScope.$parent.user[listType] = angular.copy(response[listType]);
 
-        var newList = $scope.$parent.user[listType].pop();
-        $scope.$parent.user[listType].unshift(newList);
+        var newList = thisScope.$parent.user[listType].pop();
+        thisScope.$parent.user[listType].unshift(newList);
 
         if (listType === 'organizations') {
-          var primaryOrg = $scope.$parent.user.organizations.filter(function (org) {
+          var primaryOrg = thisScope.$parent.user.organizations.filter(function (org) {
             return org.list === listId;
           })[0];
 
@@ -149,7 +151,7 @@
 
         updateCurrentUser();
         var capitalized = listType.charAt(0).toUpperCase() + listType.slice(1);
-        $scope.$emit('editUser', {
+        thisScope.$emit('editUser', {
           status: 'success',
           type: 'add' + capitalized,
           message: capitalized + gettextCatalog.getString(' added')
@@ -162,20 +164,20 @@
     }
 
     function removeList (listType, listUser) {
-      $scope.$emit('editUser', {status: 'saving'});
-      UserCheckInService.delete({userId: $scope.user._id, listType: listType + 's', checkInId: listUser._id}, {}, function () {
+      thisScope.$emit('editUser', {status: 'saving'});
+      UserCheckInService.delete({userId: thisScope.user._id, listType: listType + 's', checkInId: listUser._id}, {}, function () {
         updateCurrentUser();
-        $scope.$emit('editUser', {status: 'success', message: listType + gettextCatalog.getString(' removed')});
+        thisScope.$emit('editUser', {status: 'success', message: listType + gettextCatalog.getString(' removed')});
       });
     }
 
     function saveUpdatedUser (type, callback) {
-      $scope.user.$update(function () {
+      thisScope.user.$update(function () {
         updateCurrentUser();
         if (type === 'addlocation') {
-          $scope.showRegion = false;
+          thisScope.showRegion = false;
         }
-        $scope.$emit('editUser', {
+        thisScope.$emit('editUser', {
           status: 'success',
           type: type,
           message: gettextCatalog.getString('Profile updated')
@@ -187,20 +189,20 @@
 
       }, function (error) {
         $exceptionHandler(error, 'Save updated user error');
-        $scope.$emit('editUser', {status: 'fail'});
+        thisScope.$emit('editUser', {status: 'fail'});
       });
     }
 
     function saveUser (type, callback) {
-      $scope.$emit('editUser', {status: 'saving'});
+      thisScope.$emit('editUser', {status: 'saving'});
       saveUpdatedUser(type, callback);
     }
 
     function savePhoneNumber (number, callback) {
-      $scope.$emit('editUser', {status: 'saving'});
-      $scope.user.addPhone(number, function () {
+      thisScope.$emit('editUser', {status: 'saving'});
+      thisScope.user.addPhone(number, function () {
         updateCurrentUser();
-        $scope.$emit('editUser', {
+        thisScope.$emit('editUser', {
           status: 'success',
           type: 'addphone_number',
           message: gettextCatalog.getString('Profile updated')
@@ -211,16 +213,16 @@
         }
       }, function (error) {
         $exceptionHandler(error, 'Save phone number error');
-        $scope.$emit('editUser', {status: 'fail'});
+        thisScope.$emit('editUser', {status: 'fail'});
       });
     }
 
     function saveEmail (email, callback) {
-      $scope.$emit('editUser', {status: 'saving'});
-      $scope.user.addEmail(email, function (resp) {
-        $scope.user.emails = resp.data.emails;
+      thisScope.$emit('editUser', {status: 'saving'});
+      thisScope.user.addEmail(email, function (resp) {
+        thisScope.user.emails = resp.data.emails;
         updateCurrentUser();
-        $scope.$emit('editUser', {
+        thisScope.$emit('editUser', {
           status: 'success',
           type: 'addemail',
           message: gettextCatalog.getString('Profile updated')
@@ -231,7 +233,7 @@
         }
       }, function (error) {
         $exceptionHandler(error, 'Save email error');
-        $scope.$emit('editUser', {status: 'fail'});
+        thisScope.$emit('editUser', {status: 'fail'});
       });
     }
 
@@ -258,30 +260,30 @@
     function getOrganizations(search) {
       if (search) {
         List.query({'name': search, 'type': 'organization'}, function (orgs) {
-          $scope.organizations = filterLists(orgs, $scope.user);
+          thisScope.organizations = filterLists(orgs, thisScope.user);
         });
       }
       else {
-        $scope.organizations = [];
+        thisScope.organizations = [];
       }
     }
 
     function setRegions ($item) {
-      if ($scope.temp.location && $scope.temp.location.region) {
-        delete $scope.temp.location.region;
+      if (thisScope.temp.location && thisScope.temp.location.region) {
+        delete thisScope.temp.location.region;
       }
-      if ($scope.temp.location && $scope.temp.location.locality) {
-        delete $scope.temp.location.locality;
+      if (thisScope.temp.location && thisScope.temp.location.locality) {
+        delete thisScope.temp.location.locality;
       }
 
       hrinfoService.getRegions($item.id).then(function (regions) {
-        $scope.showRegion = regions.length ? true : false;
-        $scope.regions = regions;
+        thisScope.showRegion = regions.length ? true : false;
+        thisScope.regions = regions;
       });
     }
 
     function getRoles () {
-      $scope.roles = filterLists(List.roles, $scope.user);
+      thisScope.roles = filterLists(List.roles, thisScope.user);
     }
 
     function formatUrl (url) {
@@ -328,86 +330,86 @@
     }
 
     function addItem (key, callback) {
-      if (!$scope.user[key + 's'] || angular.equals($scope.temp[key], defaultSettings[key])) {
+      if (!thisScope.user[key + 's'] || angular.equals(thisScope.temp[key], defaultSettings[key])) {
         return;
       }
 
-      if (hasDuplicates(key, $scope.user, $scope.temp)) {
+      if (hasDuplicates(key, thisScope.user, thisScope.temp)) {
         alertService.add('danger', gettextCatalog.getString('Already added'));
         return;
       }
 
       if (key === 'website') {
-        $scope.temp.website.url = formatUrl($scope.temp.website.url);
+        thisScope.temp.website.url = formatUrl(thisScope.temp.website.url);
       }
 
       if (key === 'email') {
-        saveEmail($scope.temp[key]);
-        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        saveEmail(thisScope.temp[key]);
+        thisScope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       } else {
-        $scope.user[key + 's'].unshift($scope.temp[key]);
+        thisScope.user[key + 's'].unshift(thisScope.temp[key]);
       }
 
       if (key === 'organization' || key === 'functional_role') {
-        addList($scope.temp[key], key + 's', callback);
-        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        addList(thisScope.temp[key], key + 's', callback);
+        thisScope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
 
       if (key === 'phone_number') {
-        savePhoneNumber($scope.user[key + 's'][0], function () {
-          setPrimaryPhone($scope.user[key + 's'][0]);
+        savePhoneNumber(thisScope.user[key + 's'][0], function () {
+          setPrimaryPhone(thisScope.user[key + 's'][0]);
         });
-        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        thisScope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
 
       if (key === 'job_title') {
         saveUser('add' + key, function () {
-          setPrimaryJobTitle($scope.user[key + 's'][0]);
+          setPrimaryJobTitle(thisScope.user[key + 's'][0]);
         });
-        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        thisScope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
 
       if (key === 'location') {
         saveUser('add' + key, function () {
-          setPrimaryLocation($scope.user[key + 's'][0], callback);
+          setPrimaryLocation(thisScope.user[key + 's'][0], callback);
         });
-        $scope.temp[key] = angular.copy(defaultSettings[key]);
+        thisScope.temp[key] = angular.copy(defaultSettings[key]);
         return;
       }
 
-      $scope.temp[key] = angular.copy(defaultSettings[key]);
+      thisScope.temp[key] = angular.copy(defaultSettings[key]);
       saveUser('add' + key, callback);
     }
 
     function dropItem (key, value) {
-      if (!$scope.user[key + 's']) {
+      if (!thisScope.user[key + 's']) {
         return;
       }
 
       if (config.listTypes.indexOf(key) !== -1) {
         alertService.add('danger', gettextCatalog.getString('Are you sure you want to check out of this list?'), true, function () {
           removeList(key, value);
-          $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
+          thisScope.user[key + 's'].splice(thisScope.user[key + 's'].indexOf(value), 1);
           return;
         });
         return;
       }
-      $scope.user[key + 's'].splice($scope.user[key + 's'].indexOf(value), 1);
+      thisScope.user[key + 's'].splice(thisScope.user[key + 's'].indexOf(value), 1);
       saveUser();
     }
 
     function dropPhoneNumber (id, callback) {
-      $scope.$emit('editUser', {status: 'saving'});
-      $scope.user.dropPhone(id, function (resp) {
-        $scope.user.phone_numbers = resp.data.phone_numbers;
-        $scope.user.phone_number = resp.data.phone_number;
-        $scope.user.phone_number_type = resp.data.phone_number_type;
+      thisScope.$emit('editUser', {status: 'saving'});
+      thisScope.user.dropPhone(id, function (resp) {
+        thisScope.user.phone_numbers = resp.data.phone_numbers;
+        thisScope.user.phone_number = resp.data.phone_number;
+        thisScope.user.phone_number_type = resp.data.phone_number_type;
         updateCurrentUser();
-        $scope.$emit('editUser', {
+        thisScope.$emit('editUser', {
           status: 'success',
           type: 'dropphone_number',
           message: gettextCatalog.getString('Profile updated')
@@ -418,16 +420,16 @@
         }
       }, function (error) {
         $exceptionHandler(error, 'Drop phone number error');
-        $scope.$emit('editUser', {status: 'fail'});
+        thisScope.$emit('editUser', {status: 'fail'});
       });
     }
 
     function setPrimaryOrganization (org, callback) {
-      $scope.$emit('editUser', {status: 'saving'});
-      $scope.user.setPrimaryOrganization(org, function (resp) {
-        $scope.user.organization = resp.data.organization;
+      thisScope.$emit('editUser', {status: 'saving'});
+      thisScope.user.setPrimaryOrganization(org, function (resp) {
+        thisScope.user.organization = resp.data.organization;
         updateCurrentUser();
-        $scope.$emit('editUser', {
+        thisScope.$emit('editUser', {
           status: 'success',
           type: 'primaryOrganization',
           message: gettextCatalog.getString('Primary organization updated')
@@ -437,67 +439,67 @@
         }
       }, function (error) {
         $exceptionHandler(error, 'Set primary organization error');
-        $scope.$emit('editUser', {status: 'fail'});
+        thisScope.$emit('editUser', {status: 'fail'});
       });
     }
 
     function setPrimaryLocation (location, callback) {
-      $scope.user.location = angular.copy(location);
+      thisScope.user.location = angular.copy(location);
       saveUser('primaryLocation', callback);
     }
 
     function setPrimaryJobTitle (title) {
-      $scope.user.job_title = title;
+      thisScope.user.job_title = title;
       saveUser('primaryJobTitle');
     }
 
     function onUploadStart () {
-      $scope.uploadStatus = 'uploading';
+      thisScope.uploadStatus = 'uploading';
     }
 
     function onUploadSuccess (response) {
-      $scope.user.picture = response.data.picture + '?id=' + Date.now();
-      $scope.uploadStatus = 'success';
+      thisScope.user.picture = response.data.picture + '?id=' + Date.now();
+      thisScope.uploadStatus = 'success';
       updateCurrentUser();
-      $scope.$emit('editUser', {status: 'success', message: gettextCatalog.getString('Picture uploaded'), type: 'picture'});
+      thisScope.$emit('editUser', {status: 'success', message: gettextCatalog.getString('Picture uploaded'), type: 'picture'});
     }
 
     function onUploadError (error) {
       alertService.add('danger', gettextCatalog.getString('There was an error uploading the picture'));
-      $scope.uploadStatus = '';
+      thisScope.uploadStatus = '';
       $exceptionHandler(error, 'Image upload fail');
-      $scope.$emit('editUser', {status: 'fail'});
+      thisScope.$emit('editUser', {status: 'fail'});
     }
 
     function deletePicture () {
-      $scope.user.picture = '';
+      thisScope.user.picture = '';
       saveUser('picture');
     }
 
     function setUserPrimaryEmail (email, token) {
-      $scope.user.setPrimaryEmail(email, function (resp) {
-        $scope.user.email = resp.data.email;
+      thisScope.user.setPrimaryEmail(email, function (resp) {
+        thisScope.user.email = resp.data.email;
         updateCurrentUser();
-        $scope.$emit('editUser', {
+        thisScope.$emit('editUser', {
           status: 'success',
           type: 'primaryEmail',
           message: gettextCatalog.getString('Primary email updated')
         });
       }, function (error) {
         $exceptionHandler(error, 'Set primary email error');
-        $scope.user.email = primaryEmail;
-        $scope.$emit('editUser', {status: 'fail'});
+        thisScope.user.email = primaryEmail;
+        thisScope.$emit('editUser', {status: 'fail'});
       }, token);
     }
 
     function setPrimaryEmail (email) {
-      $scope.$emit('editUser', {status: 'saving'});
-      if ($scope.user.totp) {
+      thisScope.$emit('editUser', {status: 'saving'});
+      if (thisScope.user.totp) {
         TwoFactorAuthService.requestToken(function (token) {
           setUserPrimaryEmail(email, token);
         }, function () {
-          $scope.user.email = primaryEmail;
-          $scope.$emit('editUser', {status: 'fail'});
+          thisScope.user.email = primaryEmail;
+          thisScope.$emit('editUser', {status: 'fail'});
         });
         return;
       }
@@ -505,28 +507,28 @@
     }
 
     function resendValidationEmail (email) {
-      $scope.user.resendValidationEmail(email, function () {
+      thisScope.user.resendValidationEmail(email, function () {
         alertService.add('success', gettextCatalog.getString('Validation email sent successfully.'));
       }, function (error) {
         $exceptionHandler(error, 'Resend validation email error');
-        $scope.$emit('editUser', {status: 'fail'});
+        thisScope.$emit('editUser', {status: 'fail'});
       });
     }
 
     function setPrimaryPhone (phone) {
-      $scope.$emit('editUser', {status: 'saving'});
+      thisScope.$emit('editUser', {status: 'saving'});
 
-      $scope.user.setPrimaryPhone(phone.number, function (resp) {
-        $scope.user.phone_number = resp.data.phone_number;
+      thisScope.user.setPrimaryPhone(phone.number, function (resp) {
+        thisScope.user.phone_number = resp.data.phone_number;
         updateCurrentUser();
-        $scope.$emit('editUser', {
+        thisScope.$emit('editUser', {
           type: 'primaryPhone',
           status: 'success',
           message: gettextCatalog.getString('Primary phone number updated')
         });
       }, function (error) {
         $exceptionHandler(error, 'Set primary phone number error');
-        $scope.$emit('editUser', {status: 'fail'});
+        thisScope.$emit('editUser', {status: 'fail'});
       });
     }
 
@@ -538,7 +540,7 @@
     }
 
     function addPrimaryOrg () {
-      if (!Object.keys($scope.temp.organization).length) {
+      if (!Object.keys(thisScope.temp.organization).length) {
         nextStep();
         return;
       }
@@ -546,7 +548,7 @@
     }
 
     function addPrimaryLocation () {
-      if (!Object.keys($scope.temp.location).length) {
+      if (!Object.keys(thisScope.temp.location).length) {
         nextStep();
         return;
       }
@@ -554,33 +556,33 @@
     }
 
     function makeVisible() {
-      $scope.user.authOnly = false;
+      thisScope.user.authOnly = false;
       saveUser('authOnly', nextStep);
     }
 
     function nextStep () {
-      if (!$scope.user.appMetadata) {
-        $scope.user.setAppMetaData({});
+      if (!thisScope.user.appMetadata) {
+        thisScope.user.setAppMetaData({});
       }
-      if (!$scope.user.appMetadata.hid.login) {
-        $scope.user.setAppMetaData({login: true});
+      if (!thisScope.user.appMetadata.hid.login) {
+        thisScope.user.setAppMetaData({login: true});
         updateCurrentUser();
         saveUser('login');
       }
-      if ($scope.currentStep === lastStep) {
+      if (thisScope.currentStep === lastStep) {
         $location.path('/tutorial');
         return;
       }
-      $scope.currentStep = $scope.currentStep + 1;
+      thisScope.currentStep = thisScope.currentStep + 1;
     }
 
-    $scope.changePermission = function (key) {
-      $scope.user[key] = $scope.temp[key];
+    thisScope.changePermission = function (key) {
+      thisScope.user[key] = thisScope.temp[key];
       saveUser(key);
     };
 
     //Wait until user is loaded into scope by parent controller
-    $scope.$on('userLoaded', function () {
+    thisScope.$on('userLoaded', function () {
       setUpFields();
     });
 
