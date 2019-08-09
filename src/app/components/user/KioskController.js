@@ -8,102 +8,103 @@
   KioskController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'hrinfoService', 'User', 'UserCheckInService', 'List'];
 
   function KioskController($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, hrinfoService, User, UserCheckInService, List) {
+    var thisScope = $scope;
 
-    $scope.step = 1;
-    $scope.user = new User();
-    $scope.title = 'Kiosk Registration';
-    $scope.lists = new Array();
-    $scope.list = {};
-    $scope.kioskCreating = false;
-    $scope.newUser = true;
-    $scope.organization = {};
-    $scope.datePicker = {
+    thisScope.step = 1;
+    thisScope.user = new User();
+    thisScope.title = 'Kiosk Registration';
+    thisScope.lists = new Array();
+    thisScope.list = {};
+    thisScope.kioskCreating = false;
+    thisScope.newUser = true;
+    thisScope.organization = {};
+    thisScope.datePicker = {
       opened: false
     };
-    $scope.dateOptions = {
+    thisScope.dateOptions = {
       maxDate: moment().add(5, 'year')._d,
       minDate: new Date(),
       showWeeks: false,
       startingDay: 1
     };
 
-    $scope.getLists = function (val) {
-      $scope.lists = List.query({'name': val});
+    thisScope.getLists = function (val) {
+      thisScope.lists = List.query({'name': val});
     };
 
-    $scope.getOrganizations = function(search) {
-      $scope.organizations = List.query({'name': search, 'type': 'organization'});
+    thisScope.getOrganizations = function(search) {
+      thisScope.organizations = List.query({'name': search, 'type': 'organization'});
     };
 
-    $scope.setStep1Clicked = function () {
-      $scope.step1clicked = true;
+    thisScope.setStep1Clicked = function () {
+      thisScope.step1clicked = true;
       return true;
     };
 
-    $scope.setStep2Clicked = function () {
-      $scope.step2clicked = true;
+    thisScope.setStep2Clicked = function () {
+      thisScope.step2clicked = true;
       return true;
     };
 
-    $scope.gotoStep = function (step) {
+    thisScope.gotoStep = function (step) {
       if (step === 2) {
-        $scope.title = "Check into " + $scope.list.list.name;
+        thisScope.title = "Check into " + thisScope.list.list.name;
       }
       if (step === 3) {
-        $scope.users = User.query({email: $scope.user.email}, function () {
-          if ($scope.users.length) {
-            $scope.user = $scope.users[0];
+        thisScope.users = User.query({email: thisScope.user.email}, function () {
+          if (thisScope.users.length) {
+            thisScope.user = thisScope.users[0];
           }
         });
       }
-      $scope.step = step;
+      thisScope.step = step;
     };
 
-    $scope.countries = [];
+    thisScope.countries = [];
     hrinfoService.getCountries().then(function (countries) {
-      $scope.countries = countries;
+      thisScope.countries = countries;
     });
 
-    $scope.regions = [];
-    $scope.setRegions = function ($item, $model) {
-      $scope.regions = [];
+    thisScope.regions = [];
+    thisScope.setRegions = function ($item, $model) {
+      thisScope.regions = [];
       hrinfoService.getRegions($item.id).then(function (regions) {
-        $scope.regions = regions;
+        thisScope.regions = regions;
       });
     };
 
-    $scope.reinitialize = function() {
-      $scope.step = 2;
-      $scope.kioskCreating = false;
-      $scope.departureDate = '';
-      $scope.user = new User();
-      $scope.step2clicked = false;
+    thisScope.reinitialize = function() {
+      thisScope.step = 2;
+      thisScope.kioskCreating = false;
+      thisScope.departureDate = '';
+      thisScope.user = new User();
+      thisScope.step2clicked = false;
     };
 
-    $scope.checkInSuccess = function() {
-      if ($scope.newUser) {
+    thisScope.checkInSuccess = function() {
+      if (thisScope.newUser) {
         alertService.add('success', gettextCatalog.getString('Thank you for checking in. You will soon receive an email address which will allow you to confirm your account. Please confirm it asap.'));
       }
       else {
         alertService.add('success', gettextCatalog.getString('Thank you for checking in'));
       }
-      $scope.reinitialize();
+      thisScope.reinitialize();
     };
 
     // Check user in in the lists selected
-    $scope.checkin = function (user) {
-      if ($scope.organization.list && (!user.organization || !user.organization.list || $scope.organization.list._id != user.organization.list._id)) {
+    thisScope.checkin = function (user) {
+      if (thisScope.organization.list && (!user.organization || !user.organization.list || thisScope.organization.list._id != user.organization.list._id)) {
         var checkinUser = {
-          list: $scope.organization.list._id,
-          checkoutDate: $scope.departureDate
+          list: thisScope.organization.list._id,
+          checkoutDate: thisScope.departureDate
         };
         if (user.organization && user.organization.list) {
           // Check out from the old organization
           UserCheckInService.delete({userId: user._id, listType: 'organization', checkInId: user.organization._id}, {}, function (user) {
             UserCheckInService.save({userId: user._id, listType: 'organizations'}, checkinUser, function (out) {
-              $scope.setPrimaryOrganization(user, out.organizations[0], function (err) {
+              thisScope.setPrimaryOrganization(user, out.organizations[0], function (err) {
                 if (!err) {
-                  $scope._checkinHelper(user);
+                  thisScope._checkinHelper(user);
                 }
               });
             });
@@ -112,66 +113,66 @@
         else {
           UserCheckInService.save({userId: user._id, listType: 'organizations'}, checkinUser, function (out) {
             // Set the primary organization
-            $scope.setPrimaryOrganization(user, out.organizations[0], function (err) {
+            thisScope.setPrimaryOrganization(user, out.organizations[0], function (err) {
               if (!err) {
-                $scope._checkinHelper(user);
+                thisScope._checkinHelper(user);
               }
             });
           });
         }
       }
       else {
-        $scope._checkinHelper(user);
+        thisScope._checkinHelper(user);
       }
     };
 
 
-    $scope._checkinHelper = function (user) {
+    thisScope._checkinHelper = function (user) {
       var checkinUser = {}, prom = [];
       checkinUser = {
-        list: $scope.list.list._id,
-        checkoutDate: $scope.departureDate
+        list: thisScope.list.list._id,
+        checkoutDate: thisScope.departureDate
       };
       // Then do the checkin
-      UserCheckInService.save({userId: user._id, listType: $scope.list.list.type + 's'}, checkinUser, function (out) {
-        $scope.checkInSuccess();
+      UserCheckInService.save({userId: user._id, listType: thisScope.list.list.type + 's'}, checkinUser, function (out) {
+        thisScope.checkInSuccess();
       }, function (error) {
         $exceptionHandler(error, 'Kiosk checkin error');
-        $scope.reinitialize();
+        thisScope.reinitialize();
       });
     };
 
-    $scope.kioskCreate = function (kiosk) {
-      $scope.kioskCreating = true;
+    thisScope.kioskCreate = function (kiosk) {
+      thisScope.kioskCreating = true;
       // If there is no user, create user
-      if (!$scope.user._id) {
-        $scope.user.locale = gettextCatalog.getCurrentLanguage();
-        $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/reset_password';
-        $scope.user.registration_type = 'kiosk';
+      if (!thisScope.user._id) {
+        thisScope.user.locale = gettextCatalog.getCurrentLanguage();
+        thisScope.user.app_verify_url = $location.protocol() + '://' + $location.host() + '/reset_password';
+        thisScope.user.registration_type = 'kiosk';
 
-        $scope.user.$save(function(user) {
-          $scope.checkin(user);
+        thisScope.user.$save(function(user) {
+          thisScope.checkin(user);
         }, function (resp) {
           $exceptionHandler(error, 'Kiosk registration error');
-          $scope.reinitialize();
+          thisScope.reinitialize();
         });
       }
       else {
-        $scope.newUser = false;
-        $scope.user.$update(function (user) {
-          $scope.checkin($scope.user);
+        thisScope.newUser = false;
+        thisScope.user.$update(function (user) {
+          thisScope.checkin(thisScope.user);
         }, function (resp) {
           $exceptionHandler(error, 'Kiosk update account error');
-          $scope.reinitialize();
+          thisScope.reinitialize();
         });
       }
     };
 
-    $scope.showDatePicker = function() {
-      $scope.datePicker.opened = true;
+    thisScope.showDatePicker = function() {
+      thisScope.datePicker.opened = true;
     };
 
-    $scope.setPrimaryOrganization = function (user, org, callback) {
+    thisScope.setPrimaryOrganization = function (user, org, callback) {
       user.setPrimaryOrganization(org, function (resp) {
         callback();
       }, function () {
