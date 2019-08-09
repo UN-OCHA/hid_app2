@@ -8,33 +8,34 @@
   SearchFormController.$inject = ['$rootScope', '$route', '$scope', '$location', 'SearchService', 'User', 'List'];
 
   function SearchFormController($rootScope, $route, $scope, $location, SearchService, User, List) {
+    var thisScope = $scope;
 
-    $scope.searchTerm = '';
-    $scope.searchUsersTerm = '';
-    $scope.searchListsTerm = '';
-    $scope.searchLists = [];
-    $scope.searchPeople = [];
-    $scope.landingOperations = [];
-    $scope.showAutocomplete = false;
-    $scope.showUsersAutocomplete = false;
-    $scope.showListsAutocomplete = false;
+    thisScope.searchTerm = '';
+    thisScope.searchUsersTerm = '';
+    thisScope.searchListsTerm = '';
+    thisScope.searchLists = [];
+    thisScope.searchPeople = [];
+    thisScope.landingOperations = [];
+    thisScope.showAutocomplete = false;
+    thisScope.showUsersAutocomplete = false;
+    thisScope.showListsAutocomplete = false;
     var minSearchLength = 3;
     var searchLimit = 3;
 
-    $scope.searchAutocomplete = function() {
-      if ($scope.searchTerm.length < minSearchLength) {
-        $scope.showAutocomplete = false;
+    thisScope.searchAutocomplete = function() {
+      if (thisScope.searchTerm.length < minSearchLength) {
+        thisScope.showAutocomplete = false;
         return;
       }
-      var searchTerm = $scope.searchTerm.trim();
-      SearchService.UsersAndLists(searchTerm, searchLimit, $scope.currentUser).then(function(data) {
-        $scope.searchLists = data[0];
-        $scope.searchPeople = data[1];
-        $scope.showAutocomplete = true;
+      var searchTerm = thisScope.searchTerm.trim();
+      SearchService.UsersAndLists(searchTerm, searchLimit, thisScope.currentUser).then(function(data) {
+        thisScope.searchLists = data[0];
+        thisScope.searchPeople = data[1];
+        thisScope.showAutocomplete = true;
       });
     };
 
-    $scope.fullSearch = function (searchTerm, view, filterType) {
+    thisScope.fullSearch = function (searchTerm, view, filterType) {
       var params = {q: searchTerm};
       if (view) {
         params.view = view;
@@ -48,7 +49,7 @@
 
     function goToOperation (operation) {
       var url = '/lists/' + operation._id;
-      $scope.saveSearch(operation, 'operation');
+      thisScope.saveSearch(operation, 'operation');
       $location.path(url);
     }
 
@@ -61,13 +62,13 @@
       $location.path('/search').search(params);
     }
 
-    $scope.fullOperationsSearch = function (searchTerm) {
+    thisScope.fullOperationsSearch = function (searchTerm) {
 
-      if (!$scope.landingOperations.length) {
-        List.query({name: $scope.searchOperationsTerm, limit: 5, sort: 'name', type: 'operation'}).$promise.then(function (data) {
-          $scope.landingOperations = data;
-          if ($scope.landingOperations.length === 1) {
-            goToOperation($scope.landingOperations[0]);
+      if (!thisScope.landingOperations.length) {
+        List.query({name: thisScope.searchOperationsTerm, limit: 5, sort: 'name', type: 'operation'}).$promise.then(function (data) {
+          thisScope.landingOperations = data;
+          if (thisScope.landingOperations.length === 1) {
+            goToOperation(thisScope.landingOperations[0]);
           }
           else {
             goToOperationSearch(searchTerm);
@@ -75,8 +76,8 @@
         });
       }
       else {
-        if ($scope.landingOperations.length === 1) {
-          goToOperation($scope.landingOperations[0]);
+        if (thisScope.landingOperations.length === 1) {
+          goToOperation(thisScope.landingOperations[0]);
         }
         else {
           goToOperationSearch(searchTerm);
@@ -84,57 +85,57 @@
       }
     };
 
-    $scope.searchUsersAutocomplete = function () {
-      if ($scope.searchUsersTerm.length < minSearchLength) {
-        $scope.showUsersAutocomplete = false;
+    thisScope.searchUsersAutocomplete = function () {
+      if (thisScope.searchUsersTerm.length < minSearchLength) {
+        thisScope.showUsersAutocomplete = false;
         return;
       }
-      var searchTerm = $scope.searchUsersTerm.trim();
+      var searchTerm = thisScope.searchUsersTerm.trim();
       var params = {q: searchTerm, limit: 5, sort: 'name'};
-      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
+      if (!thisScope.currentUser.is_admin && !thisScope.currentUser.isManager) {
         params.authOnly = false;
       }
 
 
       User.query(params).$promise.then(function (data) {
-        $scope.landingUsers = data;
-        $scope.showUsersAutocomplete = true;
+        thisScope.landingUsers = data;
+        thisScope.showUsersAutocomplete = true;
       });
     };
 
-    $scope.searchOperationsAutocomplete = function () {
-      if ($scope.searchOperationsTerm.length < minSearchLength) {
-        $scope.showOperationsAutocomplete = false;
+    thisScope.searchOperationsAutocomplete = function () {
+      if (thisScope.searchOperationsTerm.length < minSearchLength) {
+        thisScope.showOperationsAutocomplete = false;
         return;
       }
-      var searchTerm = $scope.searchOperationsTerm.trim();
+      var searchTerm = thisScope.searchOperationsTerm.trim();
       List.query({name: searchTerm, limit: 5, sort: 'name', type: 'operation'}).$promise.then(function (data) {
-        $scope.landingOperations = data;
-        $scope.showOperationsAutocomplete = true;
+        thisScope.landingOperations = data;
+        thisScope.showOperationsAutocomplete = true;
       });
     };
 
-    $scope.searchListsAutocomplete = function () {
-      if ($scope.searchListsTerm.length < minSearchLength) {
-        $scope.showListsAutocomplete = false;
+    thisScope.searchListsAutocomplete = function () {
+      if (thisScope.searchListsTerm.length < minSearchLength) {
+        thisScope.showListsAutocomplete = false;
         return;
       }
-      var searchTerm = $scope.searchListsTerm.trim();
+      var searchTerm = thisScope.searchListsTerm.trim();
       List.query({name: searchTerm, limit: 5, sort: 'name'}).$promise.then(function (data) {
-        $scope.landingLists = data;
-        $scope.showListsAutocomplete = true;
+        thisScope.landingLists = data;
+        thisScope.showListsAutocomplete = true;
       });
     };
 
-    $scope.saveSearch = function (result, type) {
-      SearchService.saveSearch($scope.currentUser, result, type, function (user) {
-        $scope.setCurrentUser(user);
+    thisScope.saveSearch = function (result, type) {
+      SearchService.saveSearch(thisScope.currentUser, result, type, function (user) {
+        thisScope.setCurrentUser(user);
       });
     };
 
     $rootScope.$on('$routeChangeSuccess', function () {
-      $scope.showAutocomplete = false;
-      $scope.searchTerm = '';
+      thisScope.showAutocomplete = false;
+      thisScope.searchTerm = '';
     });
 
   }
