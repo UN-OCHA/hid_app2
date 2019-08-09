@@ -8,31 +8,33 @@
   UserNewController.$inject = ['$scope', '$location', '$window', 'alertService', 'User', 'gettextCatalog'];
 
   function UserNewController($scope, $location, $window, alertService, User, gettextCatalog) {
-    $scope.saving = false;
-    $scope.user = new User();
-    $scope.user.setAppMetaData({login: false});
-    $scope.user.locale = gettextCatalog.getCurrentLanguage();
-    $scope.isRegistration = $location.path() === '/register';
-    $scope.validPassword = false;
-    $scope.userCreate = userCreate;
+    var thisScope = $scope;
 
-    var verifyUrl = $scope.isRegistration ? '/verify' : '/reset_password?orphan=true';
-    $scope.user.app_verify_url = $location.protocol() + '://' + $location.host() + verifyUrl;
+    thisScope.saving = false;
+    thisScope.user = new User();
+    thisScope.user.setAppMetaData({login: false});
+    thisScope.user.locale = gettextCatalog.getCurrentLanguage();
+    thisScope.isRegistration = $location.path() === '/register';
+    thisScope.validPassword = false;
+    thisScope.userCreate = userCreate;
+
+    var verifyUrl = thisScope.isRegistration ? '/verify' : '/reset_password?orphan=true';
+    thisScope.user.app_verify_url = $location.protocol() + '://' + $location.host() + verifyUrl;
 
     var newUserSuccessMsg = gettextCatalog.getString('The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information.');
     var registrationSuccessMsg = gettextCatalog.getString('Thank you for creating an account. You will soon receive a confirmation email to confirm your account.');
-    var successMessage = $scope.isRegistration ? registrationSuccessMsg : newUserSuccessMsg;
+    var successMessage = thisScope.isRegistration ? registrationSuccessMsg : newUserSuccessMsg;
 
     function userCreate (registerForm) {
-      $scope.saving = true;
-      $scope.user.$save(function(user) {
+      thisScope.saving = true;
+      thisScope.user.$save(function(user) {
         alertService.add('success', successMessage, false, false, 6000);
         registerForm.$setPristine();
         registerForm.$setUntouched();
-        $scope.user = new User();
-        $scope.saving = false;
+        thisScope.user = new User();
+        thisScope.saving = false;
 
-        if ($scope.isRegistration) {
+        if (thisScope.isRegistration) {
           $window.localStorage.setItem('hidNewUser', true);
           $location.path('/');
           return;
@@ -41,7 +43,7 @@
 
       }, function () {
         registerForm.$setPristine();
-        $scope.saving = false;
+        thisScope.saving = false;
       });
     };
   }
