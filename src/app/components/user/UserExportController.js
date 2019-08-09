@@ -8,18 +8,20 @@
   UserExportController.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$uibModal', '$window', '$location', 'User'];
 
   function UserExportController($exceptionHandler, $rootScope, $scope, $uibModal, $window, $location, User) {
-    $scope.exportEmails = exportEmails;
-    $scope.closeExportEmailslModal = closeExportEmailslModal;
-    $scope.exportCSV = exportCSV;
-    $scope.exportPDF = exportPDF;
-    $scope.exportGSS = exportGSS;
-    $scope.googleToken = googleToken;
-    $scope.outlookToken = outlookToken;
-    $scope.emailsText = '';
+    var thisScope = $scope;
+
+    thisScope.exportEmails = exportEmails;
+    thisScope.closeExportEmailslModal = closeExportEmailslModal;
+    thisScope.exportCSV = exportCSV;
+    thisScope.exportPDF = exportPDF;
+    thisScope.exportGSS = exportGSS;
+    thisScope.googleToken = googleToken;
+    thisScope.outlookToken = outlookToken;
+    thisScope.emailsText = '';
     var exportEmailModal;
 
     function showExportEmailsModal (resp) {
-      $scope.emailsText = resp.data;
+      thisScope.emailsText = resp.data;
       exportEmailModal = $uibModal.open({
         animation: true,
         ariaLabelledBy: 'modal-title',
@@ -63,14 +65,14 @@
         })
         .then(function (authInstance) {
           var authPromise = {};
-          if (!$scope.currentUser.googleCredentials) {
+          if (!thisScope.currentUser.googleCredentials) {
             authPromise = authInstance.grantOfflineAccess({redirect_uri: 'postmessage'})
               .then(function (code) {
-                return $scope.currentUser.saveGoogleCredentials(code.code);
+                return thisScope.currentUser.saveGoogleCredentials(code.code);
               })
               .then(function (resp) {
-                $scope.currentUser.googleCredentials = true;
-                $scope.setCurrentUser($scope.currentUser);
+                thisScope.currentUser.googleCredentials = true;
+                thisScope.setCurrentUser(thisScope.currentUser);
                 return authInstance.signIn();
               });
           }
@@ -84,7 +86,7 @@
               });
         })
         .then(function (token) {
-          $scope.exportGSS();
+          thisScope.exportGSS();
         });
       }});
     }
@@ -130,7 +132,7 @@
     }
 
     function outlookToken() {
-      if (!$scope.currentUser.outlookCredentials) {
+      if (!thisScope.currentUser.outlookCredentials) {
         $window.location.href = buildOutlookAuthUrl();
       }
       else {
