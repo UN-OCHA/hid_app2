@@ -8,12 +8,14 @@
   NotificationsController.$inject = ['$scope', 'notificationsService'];
 
   function NotificationsController($scope, notificationsService) {
+    var thisScope = $scope;
+
     var limit = 10;
-    $scope.itemsPerPage = limit;
-    $scope.totalItems = 0;
-    $scope.notifications = {};
-    $scope.currentPage = 1;
-    $scope.notificationsLoaded = false;
+    thisScope.itemsPerPage = limit;
+    thisScope.totalItems = 0;
+    thisScope.notifications = {};
+    thisScope.currentPage = 1;
+    thisScope.notificationsLoaded = false;
 
     var params = {
       limit: limit,
@@ -21,13 +23,13 @@
       sort: '-createdAt'
     };
 
-    $scope.getNotifications = function () {
-      params.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+    thisScope.getNotifications = function () {
+      params.offset = (thisScope.currentPage - 1) * thisScope.itemsPerPage;
 
       notificationsService.getNotifications(params).then(function () {
-        $scope.notifications = notificationsService;
-        $scope.totalItems = notificationsService.total;
-        $scope.notificationsLoaded = true;
+        thisScope.notifications = notificationsService;
+        thisScope.totalItems = notificationsService.total;
+        thisScope.notificationsLoaded = true;
 
         if (notificationsService.totalUnread > 0 ) {
           notificationsService.markAsRead();
@@ -36,7 +38,7 @@
 
     };
 
-    $scope.getNotifications();
+    thisScope.getNotifications();
 
   }
 })();
