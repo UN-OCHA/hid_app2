@@ -8,17 +8,19 @@
   ServiceEditController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$location', 'gettextCatalog', 'alertService', 'Service', 'ServiceCredentials', 'User'];
 
   function ServiceEditController ($exceptionHandler, $scope, $routeParams, $location, gettextCatalog, alertService, Service, ServiceCredentials, User) {
-    $scope.getMailchimpLists = getMailchimpLists;
-    $scope.getGoogleGroups = getGoogleGroups;
-    $scope.getUsers = getUsers;
-    $scope.removeManager = removeManager;
-    $scope.saveService = saveService;
-    $scope.mailchimpLists = [];
-    $scope.credentials = [];
-    $scope.newUsers = [];
-    $scope.managers = [];
-    $scope.selectedLists = [];// used by nested select lists controller
-    $scope.serviceTypes = [
+    var thisScope = $scope;
+
+    thisScope.getMailchimpLists = getMailchimpLists;
+    thisScope.getGoogleGroups = getGoogleGroups;
+    thisScope.getUsers = getUsers;
+    thisScope.removeManager = removeManager;
+    thisScope.saveService = saveService;
+    thisScope.mailchimpLists = [];
+    thisScope.credentials = [];
+    thisScope.newUsers = [];
+    thisScope.managers = [];
+    thisScope.selectedLists = [];// used by nested select lists controller
+    thisScope.serviceTypes = [
       {
         value: 'mailchimp',
         label: 'Mailchimp'
@@ -30,26 +32,26 @@
     ];
 
     function initService () {
-      $scope.credentials = ServiceCredentials.query();
+      thisScope.credentials = ServiceCredentials.query();
 
       if ($routeParams.serviceId) {
         Service.get({'serviceId': $routeParams.serviceId}, function(service) {
-          $scope.service = service;
-          $scope.selectedLists = $scope.service.lists;
-          $scope.managers = angular.copy($scope.service.managers);
-          if ($scope.service.mailchimp) {
+          thisScope.service = service;
+          thisScope.selectedLists = thisScope.service.lists;
+          thisScope.managers = angular.copy(thisScope.service.managers);
+          if (thisScope.service.mailchimp) {
             getMailchimpLists();
             return;
           }
-          if ($scope.service.googlegroup && $scope.service.googlegroup.domain) {
+          if (thisScope.service.googlegroup && thisScope.service.googlegroup.domain) {
             getGoogleGroups();
           }
         });
         return;
       }
 
-      $scope.service = new Service();
-      $scope.service.lists = [];
+      thisScope.service = new Service();
+      thisScope.service.lists = [];
     }
 
     initService();
@@ -71,8 +73,8 @@
     }
 
     function subscribeManagers (service) {
-      angular.forEach($scope.managers, function (manager) {
-        if (!isUserSubscribed(manager, $scope.service._id)) {
+      angular.forEach(thisScope.managers, function (manager) {
+        if (!isUserSubscribed(manager, thisScope.service._id)) {
           service.subscribe({_id: manager._id, email: manager.email});
         }
       });
@@ -84,7 +86,7 @@
       if ($routeParams.serviceId) {
         subscribeManagers(service);
       } else {
-        service.subscribe({_id: $scope.currentUser._id, email: $scope.currentUser.email});
+        service.subscribe({_id: thisScope.currentUser._id, email: thisScope.currentUser.email});
         subscribeManagers(service);
       }
 
@@ -96,56 +98,56 @@
     }
 
     function saveService () {
-      $scope.service.lists = $scope.selectedLists;
-      $scope.service.managers = $scope.managers;
+      thisScope.service.lists = thisScope.selectedLists;
+      thisScope.service.managers = thisScope.managers;
 
-      if ($scope.service._id) {
-        $scope.service.$update(saveSuccess, saveError);
+      if (thisScope.service._id) {
+        thisScope.service.$update(saveSuccess, saveError);
         return;
       }
 
-      $scope.service.$save(saveSuccess, saveError);
+      thisScope.service.$save(saveSuccess, saveError);
     }
 
     function getMailchimpLists () {
-      if(!$scope.service.mailchimp || !$scope.service.mailchimp.apiKey) {
+      if(!thisScope.service.mailchimp || !thisScope.service.mailchimp.apiKey) {
         return;
       }
       Service
-        .getMailchimpLists($scope.service.mailchimp.apiKey)
+        .getMailchimpLists(thisScope.service.mailchimp.apiKey)
         .then(function (result) {
-          $scope.mailchimpLists = result.data.lists;
+          thisScope.mailchimpLists = result.data.lists;
         }, function () {
-          $scope.service.mailchimp.apiKey = '';
-          $scope.mailchimpLists = [];
+          thisScope.service.mailchimp.apiKey = '';
+          thisScope.mailchimpLists = [];
         });
     }
 
     function getGoogleGroups () {
       Service
-        .getGoogleGroups($scope.service.googlegroup.domain)
+        .getGoogleGroups(thisScope.service.googlegroup.domain)
         .then(function (result) {
-          $scope.googleGroups = result.data;
+          thisScope.googleGroups = result.data;
         });
     }
 
     function getUsers (search) {
       User.query({'name': search, authOnly: false}, function (users) {
-        $scope.newUsers = filterManagers(users);
+        thisScope.newUsers = filterManagers(users);
       });
     }
 
     function removeManager (user) {
-      $scope.managers.splice($scope.managers.indexOf(user), 1);
+      thisScope.managers.splice(thisScope.managers.indexOf(user), 1);
     }
 
     function filterManagers (users) {
-      if (!$scope.managers.length) {
+      if (!thisScope.managers.length) {
         return users;
       }
 
       var filteredUsers = users.filter(function (user) {
-        var inManagers = $scope.managers.filter(function (manager) {
+        var inManagers = thisScope.managers.filter(function (manager) {
           return manager._id === user._id;
         })[0];
         return inManagers ? false : true;
