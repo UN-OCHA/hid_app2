@@ -8,19 +8,21 @@
   SelectListsController.$inject = ['$scope', 'config', 'List', 'gettextCatalog'];
 
   function SelectListsController ($scope, config, List, gettextCatalog) {
-  	// On parent controller:
-  	// $scope.selectedLists = [];
-  	// $scope.filterListsMember = true; - if need to filter out lists user is a member of
-  	$scope.listTypes = [];
-  	$scope.getLists = getLists;
-  	$scope.selectList = selectList;
-  	$scope.removeList = removeList;
-  	$scope.selectedTypes = {
+    var thisScope = $scope;
+
+    // On parent controller:
+    // thisScope.selectedLists = [];
+    // thisScope.filterListsMember = true; - if need to filter out lists user is a member of
+    thisScope.listTypes = [];
+    thisScope.getLists = getLists;
+    thisScope.selectList = selectList;
+    thisScope.removeList = removeList;
+    thisScope.selectedTypes = {
       name: 'all'
     };
-  	var searchTerm = '';
+    var searchTerm = '';
 
-  	function getListTypes () {
+    function getListTypes () {
       var listTypes = config.listTypes.filter(function (item) {
         return item !== 'organization';
       });
@@ -39,7 +41,7 @@
         if (listType === 'list') {
           return;
         }
-        $scope.listTypes.push(
+        thisScope.listTypes.push(
           {
             name: listType,
             label: label
@@ -84,13 +86,13 @@
 
     function filterLists (lists, selectedLists, user) {
       var filteredLists = lists.filter(function (list) {
-        if ($scope.filterListsMember && $scope.checkInOnly) {
+        if (thisScope.filterListsMember && thisScope.checkInOnly) {
           return !isListMember(list, user) && !isSelected(selectedLists, list) && canCheckIn(list, user);
         }
-      	if ($scope.filterListsMember) {
-        	return !isListMember(list, user) && !isSelected(selectedLists, list);
-      	}
-      	return !isSelected(selectedLists, list);
+        if (thisScope.filterListsMember) {
+          return !isListMember(list, user) && !isSelected(selectedLists, list);
+        }
+        return !isSelected(selectedLists, list);
       });
       return filteredLists;
     }
@@ -103,25 +105,25 @@
       var params = {
         name: search
       };
-      if ($scope.selectedTypes.name !== 'all') {
-        params.type = $scope.selectedTypes.name;
+      if (thisScope.selectedTypes.name !== 'all') {
+        params.type = thisScope.selectedTypes.name;
       }
 
       List.query(params, function (lists) {
-        $scope.lists = filterLists(lists, $scope.selectedLists, $scope.user);
+        thisScope.lists = filterLists(lists, thisScope.selectedLists, thisScope.user);
       });
     }
 
     function selectList (list) {
-      $scope.selectedLists.push(list);
-      $scope.$emit('selectList', {
-      	list: list,
-      	searchTerm: searchTerm
+      thisScope.selectedLists.push(list);
+      thisScope.$emit('selectList', {
+        list: list,
+        searchTerm: searchTerm
       });
     }
 
     function removeList (list) {
-      $scope.selectedLists.splice($scope.selectedLists.indexOf(list), 1);
+      thisScope.selectedLists.splice(thisScope.selectedLists.indexOf(list), 1);
     }
 
     function init () {
