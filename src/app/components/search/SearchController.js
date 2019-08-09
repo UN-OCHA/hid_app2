@@ -8,13 +8,15 @@
   SearchController.$inject = ['$location', '$scope', '$routeParams', 'gettextCatalog'];
 
   function SearchController($location, $scope, $routeParams, gettextCatalog) {
-    $scope.heading = $routeParams.q ? gettextCatalog.getString('Search Results') : gettextCatalog.getString('Humanitarian contacts');
-    $scope.searchTerm = $routeParams.q;
+    var thisScope = $scope;
 
-    $scope.showLists = $routeParams.view === 'lists' ? true : false;
+    thisScope.heading = $routeParams.q ? gettextCatalog.getString('Search Results') : gettextCatalog.getString('Humanitarian contacts');
+    thisScope.searchTerm = $routeParams.q;
 
-    $scope.$on('user-service-ready', function() {
-      $scope.$broadcast('populate-list');
+    thisScope.showLists = $routeParams.view === 'lists' ? true : false;
+
+    thisScope.$on('user-service-ready', function() {
+      thisScope.$broadcast('populate-list');
     });
   }
 
