@@ -8,9 +8,9 @@
   UsersPageController.$inject = ['$scope', '$location', 'UserDataService'];
 
   function UsersPageController($scope, $location, UserDataService) {
-
-    $scope.$on('user-service-ready', function() {
-      $scope.$broadcast('populate-list');
+    var thisScope = $scope;
+    thisScope.$on('user-service-ready', function() {
+      thisScope.$broadcast('populate-list');
     });
   }
 
