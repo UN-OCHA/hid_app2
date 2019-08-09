@@ -8,24 +8,25 @@
   CheckinController.$inject = ['$exceptionHandler', '$scope', '$routeParams', '$filter', '$q', '$location', '$uibModal', 'gettextCatalog', 'config', 'alertService', 'User', 'UserDataService', 'UserCheckInService', 'List', 'Service'];
 
   function CheckinController ($exceptionHandler, $scope, $routeParams, $filter, $q, $location, $uibModal, gettextCatalog, config, alertService, User, UserDataService, UserCheckInService, List, Service) {
-    $scope.modifications = {};
-    $scope.datePicker = {
+    var thisScope = $scope;
+    thisScope.modifications = {};
+    thisScope.datePicker = {
       opened: false
     };
-    $scope.dateOptions = {
+    thisScope.dateOptions = {
       maxDate: moment().add(5, 'year')._d,
       minDate: new Date(),
       showWeeks: false,
       startingDay: 1
     };
-    $scope.isCurrentUser = true;
-    $scope.lists = [];
-    $scope.associatedLists = [];
-    $scope.showAllAssociated = false;
-    $scope.saving = false;
-    $scope.selectedLists = []; // used by nested select lists controller
-    $scope.filterListsMember = true; // used by nested select lists controller
-    $scope.checkInOnly = true; // used by nested select lists controller
+    thisScope.isCurrentUser = true;
+    thisScope.lists = [];
+    thisScope.associatedLists = [];
+    thisScope.showAllAssociated = false;
+    thisScope.saving = false;
+    thisScope.selectedLists = []; // used by nested select lists controller
+    thisScope.filterListsMember = true; // used by nested select lists controller
+    thisScope.checkInOnly = true; // used by nested select lists controller
 
     function isListMember (list, user) {
       var inList = false;
@@ -78,7 +79,7 @@
       //Use the search term to get associated lists if an organisation
       if (list.type === 'organization') {
         List.query({name: searchTerm, limit: 20}, function (lists) {
-          $scope.associatedLists = filterLists(lists, $scope.selectedLists, $scope.user);
+          thisScope.associatedLists = filterLists(lists, thisScope.selectedLists, thisScope.user);
         });
         return;
       }
@@ -86,73 +87,73 @@
       //Otherwise user the associated operations
       getAssociatedLists(list.associatedOperations()).then(function (listsArray) {
         var mergedLists = Array.prototype.concat.apply([], listsArray);
-        $scope.associatedLists = filterLists(mergedLists, $scope.selectedLists, $scope.user);
+        thisScope.associatedLists = filterLists(mergedLists, thisScope.selectedLists, thisScope.user);
       });
     }
 
     function getUser () {
-      var userId = $routeParams.userId ? $routeParams.userId : $scope.currentUser._id;
+      var userId = $routeParams.userId ? $routeParams.userId : thisScope.currentUser._id;
       UserDataService.getUserFromServer(userId).then(function (user) {
-        $scope.user = user;
-        $scope.isCurrentUser = $scope.currentUser._id === $scope.user._id;
-        $scope.$broadcast('userLoaded');
+        thisScope.user = user;
+        thisScope.isCurrentUser = thisScope.currentUser._id === thisScope.user._id;
+        thisScope.$broadcast('userLoaded');
       })
       .catch(function (error) {
         $exceptionHandler(error, 'getUser');
       });
     }
 
-    $scope.addList = function (list) {
-      $scope.selectedLists.push(list);
-      $scope.associatedLists.splice($scope.associatedLists.indexOf(list), 1);
+    thisScope.addList = function (list) {
+      thisScope.selectedLists.push(list);
+      thisScope.associatedLists.splice(thisScope.associatedLists.indexOf(list), 1);
     };
 
-    $scope.$on('selectList', function (evt, data) {
+    thisScope.$on('selectList', function (evt, data) {
       showAssociatedLists(data.list, data.searchTerm);
     });
 
-    $scope.checkin = function () {
+    thisScope.checkin = function () {
       var defer = $q.defer();
       var promises = [];
-      $scope.saving = true;
+      thisScope.saving = true;
 
       function lastTask(){
-        $scope.user = User.get({userId: $scope.user._id}, function () {
-          if ($scope.currentUser._id === $scope.user._id) {
-            $scope.setCurrentUser($scope.user);
+        thisScope.user = User.get({userId: thisScope.user._id}, function () {
+          if (thisScope.currentUser._id === thisScope.user._id) {
+            thisScope.setCurrentUser(thisScope.user);
           }
           defer.resolve();
           var moderatedLists = false;
-          var listIds = $scope.selectedLists.map(function (list) {
+          var listIds = thisScope.selectedLists.map(function (list) {
             if (list.joinability === 'moderated') {
               moderatedLists = true;
             }
             return list._id.toString();
           });
 
-          Service.getSuggestions(listIds.join(','), $scope.user).$promise.then(function () {
+          Service.getSuggestions(listIds.join(','), thisScope.user).$promise.then(function () {
             if (Service.suggestedServices.length) {
-              if ($scope.currentUser._id === $scope.user._id) {
+              if (thisScope.currentUser._id === thisScope.user._id) {
                 $location.path('services/suggestions').search({lists: listIds.join(',') });
               }
               else {
-                $location.path('services/suggestions/' + $scope.user._id).search({lists: listIds.join(',')});
+                $location.path('services/suggestions/' + thisScope.user._id).search({lists: listIds.join(',')});
               }
               return;
             }
 
-            if ($scope.currentUser._id === $scope.user._id) {
+            if (thisScope.currentUser._id === thisScope.user._id) {
               var message = gettextCatalog.getString('You were successfully checked in.');
               if (moderatedLists) {
                 message += ' ' + gettextCatalog.getString('Some of you check-ins are pending, we will get back to you soon.');
               }
               alertService.add('success', message);
-              $scope.saving = false;
+              thisScope.saving = false;
               $location.path('/dashboard');
             }
             else {
-              alertService.add('success', $scope.user.name + gettextCatalog.getString(' was successfully checked in'));
-              $scope.saving = false;
+              alertService.add('success', thisScope.user.name + gettextCatalog.getString(' was successfully checked in'));
+              thisScope.saving = false;
               defer.resolve();
             }
           });
@@ -162,12 +163,12 @@
       function checkinOneList (list) {
         var checkinUser = {
           list: list._id,
-          checkoutDate: $scope.departureDate
+          checkoutDate: thisScope.departureDate
         };
-        return UserCheckInService.save({userId: $scope.user._id, listType: list.type + 's'}, checkinUser).$promise;
+        return UserCheckInService.save({userId: thisScope.user._id, listType: list.type + 's'}, checkinUser).$promise;
       }
 
-      angular.forEach($scope.selectedLists, function(value){
+      angular.forEach(thisScope.selectedLists, function(value){
           promises.push(checkinOneList(value));
       });
 
@@ -176,11 +177,11 @@
       });
     };
 
-    $scope.showDatePicker = function() {
-      $scope.datePicker.opened = true;
+    thisScope.showDatePicker = function() {
+      thisScope.datePicker.opened = true;
     };
 
-    $scope.$on('editUser', function (event, data) {
+    thisScope.$on('editUser', function (event, data) {
 
       if (data.status === 'fail') {
         alertService.add('danger', data.message);
@@ -192,23 +193,23 @@
         UserDataService.formatUserLocations();
 
         if (data.type === 'primaryOrganization') {
-          $scope.modifications.organization = gettextCatalog.getString('Changed primary organization to: ') + $scope.user.organization.name;
+          thisScope.modifications.organization = gettextCatalog.getString('Changed primary organization to: ') + thisScope.user.organization.name;
         }
 
         if (data.type === 'primaryPhone') {
-          $scope.modifications.phone = gettextCatalog.getString('Changed primary phone number to: ') + $scope.user.phone_number;
+          thisScope.modifications.phone = gettextCatalog.getString('Changed primary phone number to: ') + thisScope.user.phone_number;
         }
 
         if (data.type === 'primaryEmail') {
-          $scope.modifications.email = gettextCatalog.getString('Changed primary email to: ') + $scope.user.email;
+          thisScope.modifications.email = gettextCatalog.getString('Changed primary email to: ') + thisScope.user.email;
         }
 
         if (data.type === 'primaryLocation') {
-          $scope.modifications.location = gettextCatalog.getString('Changed primary location to: ') + $scope.user.location.country.name;
+          thisScope.modifications.location = gettextCatalog.getString('Changed primary location to: ') + thisScope.user.location.country.name;
         }
 
         if (data.type === 'primaryJobTitle') {
-          $scope.modifications.job_title = gettextCatalog.getString('Changed primary job title to: ') + $scope.user.job_title;
+          thisScope.modifications.job_title = gettextCatalog.getString('Changed primary job title to: ') + thisScope.user.job_title;
         }
 
         return;
@@ -218,7 +219,7 @@
     var listTypesModal;
 
 
-    $scope.openListTypesModal = function () {
+    thisScope.openListTypesModal = function () {
      listTypesModal = $uibModal.open({
         animation: false,
         size: 'lg',
@@ -233,7 +234,7 @@
       });
     };
 
-    $scope.closeListTypesModal = function () {
+    thisScope.closeListTypesModal = function () {
       listTypesModal.close();
     };
 
