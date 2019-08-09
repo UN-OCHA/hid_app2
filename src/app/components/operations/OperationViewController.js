@@ -8,25 +8,26 @@
   OperationViewController.$inject = ['$scope', '$rootScope', '$routeParams', 'ListDataService', 'Operation'];
 
   function OperationViewController($scope, $rootScope, $routeParams, ListDataService, Operation) {
+    var thisScope = $scope;
 
-    $scope.groups = [];
-    $scope.groupsLimit = 4;
-    $scope.officesLimit = 4;
-    $scope.disastersLimit = 4;
-    $scope.offices = [];
-    $scope.disasters = [];
-    $scope.operation = {};
-    $scope.operationList = {};
-    $scope.isManager = false;
+    thisScope.groups = [];
+    thisScope.groupsLimit = 4;
+    thisScope.officesLimit = 4;
+    thisScope.disastersLimit = 4;
+    thisScope.offices = [];
+    thisScope.disasters = [];
+    thisScope.operation = {};
+    thisScope.operationList = {};
+    thisScope.isManager = false;
 
     var params = {
       url: $routeParams.operationUrl
     };
 
     Operation.query(params, function (operations, headers) {
-      $scope.operation = operations[0];
-      $scope.isManager = $scope.operation.isManager($scope.currentUser);
-      $scope.operation.setListTypes();
+      thisScope.operation = operations[0];
+      thisScope.isManager = thisScope.operation.isManager(thisScope.currentUser);
+      thisScope.operation.setListTypes();
       initOperationList();
       initGroups();
       initOffices();
@@ -36,34 +37,34 @@
 
     function initGroups() {
       var groupsRequest = { type: 'bundle', sort: '-count' };
-      groupsRequest['metadata.operation.id'] = $scope.operation.remote_id;
+      groupsRequest['metadata.operation.id'] = thisScope.operation.remote_id;
       ListDataService.queryLists(groupsRequest, function (lists, number) {
-        $scope.groups = lists;
+        thisScope.groups = lists;
       });
     }
 
     function initOffices() {
       var officesRequest = { type: 'office', sort: '-count' };
-      officesRequest['metadata.operation.id'] = $scope.operation.remote_id;
+      officesRequest['metadata.operation.id'] = thisScope.operation.remote_id;
       ListDataService.queryLists(officesRequest, function (lists, number) {
-        $scope.offices = lists;
+        thisScope.offices = lists;
       });
     }
 
     function initDisasters() {
       var disastersRequest = { type: 'disaster', sort: '-metadata.created' };
       disastersRequest['metadata.status[ne]'] = 'past';
-      disastersRequest['metadata.operation.id'] = $scope.operation.remote_id;
+      disastersRequest['metadata.operation.id'] = thisScope.operation.remote_id;
       ListDataService.queryLists(disastersRequest, function (lists, number) {
-        $scope.disasters = lists;
+        thisScope.disasters = lists;
       });
     }
 
     function initOperationList() {
-      var operationRequest = { type: 'operation', remote_id: $scope.operation.remote_id };
+      var operationRequest = { type: 'operation', remote_id: thisScope.operation.remote_id };
       ListDataService.queryLists(operationRequest, function (lists, number) {
-        $scope.operationList = lists[0];
-        $rootScope.title = $scope.operationList.name;
+        thisScope.operationList = lists[0];
+        $rootScope.title = thisScope.operationList.name;
       });
     }
 
