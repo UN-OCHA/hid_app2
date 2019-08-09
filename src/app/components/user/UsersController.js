@@ -6,30 +6,32 @@
     .controller('UsersController', UsersController);
 
   UsersController.$inject = ['$exceptionHandler', '$location', '$q', '$rootScope', '$routeParams', '$scope', '$window', 'gettextCatalog', 'alertService', 'hrinfoService', 'List', 'SearchService', 'SidebarService', 'User', 'UserDataService'];
+
   function UsersController($exceptionHandler, $location, $q, $rootScope, $routeParams, $scope, $window, gettextCatalog, alertService, hrinfoService, List, SearchService, SidebarService, User, UserDataService) {
-    $scope.usersLoaded = false;
-    $scope.pageChanged = pageChanged;
-    $scope.setLimit = setLimit;
-    $scope.operations = [];
-    $scope.disasters = [];
-    $scope.offices = [];
-    $scope.roles = [];
-    $scope.bundles = [];
-    $scope.organizations = [];
-    $scope.countries = [];
-    $scope.selectedFilters = {};
-    $scope.getBundles = getBundles;
-    $scope.getCountries = getCountries;
-    $scope.getDisasters = getDisasters;
-    $scope.getOffices = getOffices;
-    $scope.getOperations = getOperations;
-    $scope.getOrganizations = getOrganizations;
-    $scope.applyFilters = applyFilters;
-    $scope.resetFilters = resetFilters;
-    $scope.saveSearch = saveSearch;
+    var thisScope = $scope;
+    thisScope.usersLoaded = false;
+    thisScope.pageChanged = pageChanged;
+    thisScope.setLimit = setLimit;
+    thisScope.operations = [];
+    thisScope.disasters = [];
+    thisScope.offices = [];
+    thisScope.roles = [];
+    thisScope.bundles = [];
+    thisScope.organizations = [];
+    thisScope.countries = [];
+    thisScope.selectedFilters = {};
+    thisScope.getBundles = getBundles;
+    thisScope.getCountries = getCountries;
+    thisScope.getDisasters = getDisasters;
+    thisScope.getOffices = getOffices;
+    thisScope.getOperations = getOperations;
+    thisScope.getOrganizations = getOrganizations;
+    thisScope.applyFilters = applyFilters;
+    thisScope.resetFilters = resetFilters;
+    thisScope.saveSearch = saveSearch;
     var activeFilters = {};
 
-    $scope.sortBy = [
+    thisScope.sortBy = [
       {
         value: 'name',
         name: gettextCatalog.getString('Name')
@@ -51,7 +53,7 @@
         name: gettextCatalog.getString('Creation date')
       }
     ];
-    $scope.userTypes = [
+    thisScope.userTypes = [
       {
         value: 'is_orphan',
         label: gettextCatalog.getString('Orphan')
@@ -85,7 +87,7 @@
         label: gettextCatalog.getString('Profile users')
       }
     ];
-    $scope.orgTypes = [
+    thisScope.orgTypes = [
       {
         label: gettextCatalog.getString('Academic / Research'),
         value: 431
@@ -147,19 +149,19 @@
         value: 54593
       }
     ];
-    $scope.roles = List.roles;
+    thisScope.roles = List.roles;
 
-    $scope.pagination = {
+    thisScope.pagination = {
       currentPage: 1,
       itemsPerPage: 50
     };
-    $scope.currentFilters = {
+    thisScope.currentFilters = {
       all: [],
       remove: removeFilter
     };
 
     var defaultRequest = {
-      limit: $scope.pagination.itemsPerPage,
+      limit: thisScope.pagination.itemsPerPage,
       offset: 0,
       sort: 'name'
     };
@@ -167,45 +169,45 @@
     var currentRequest = angular.copy(defaultRequest);
 
     function getUsers(params) {
-      if (!$scope.currentUser.is_admin && !$scope.currentUser.isManager) {
+      if (!thisScope.currentUser.is_admin && !thisScope.currentUser.isManager) {
         params.authOnly = false;
       }
 
       // Get users from API first
       if ($rootScope.isOnline) {
-        UserDataService.getUsersFromServer(params, $scope.list, function (nbUsers, users) {
-          $scope.users = users;
-          $scope.totalItems = nbUsers;
-          $scope.usersLoaded = true;
+        UserDataService.getUsersFromServer(params, thisScope.list, function (nbUsers, users) {
+          thisScope.users = users;
+          thisScope.totalItems = nbUsers;
+          thisScope.usersLoaded = true;
         });
       }
       else {
-        UserDataService.getUsersFromCache(params, $scope.list, function (nbUsers, users) {
-          $scope.users = users;
-          $scope.totalItems = nbUsers;
-          $scope.usersLoaded = true;
+        UserDataService.getUsersFromCache(params, thisScope.list, function (nbUsers, users) {
+          thisScope.users = users;
+          thisScope.totalItems = nbUsers;
+          thisScope.usersLoaded = true;
         });
       }
     }
 
     function pageChanged () {
-      $scope.usersLoaded = false;
-      currentRequest.offset = ($scope.pagination.currentPage - 1) * $scope.pagination.itemsPerPage;
+      thisScope.usersLoaded = false;
+      currentRequest.offset = (thisScope.pagination.currentPage - 1) * thisScope.pagination.itemsPerPage;
       getUsers(currentRequest);
     }
 
     function setLimit (limit) {
-      $scope.usersLoaded = false;
-      $scope.pagination.itemsPerPage = limit;
+      thisScope.usersLoaded = false;
+      thisScope.pagination.itemsPerPage = limit;
       currentRequest.limit = limit;
       getUsers(currentRequest);
     }
 
-    $scope.$on('populate-list', function (event, listType) {
+    thisScope.$on('populate-list', function (event, listType) {
 
-      if ($scope.list) {
+      if (thisScope.list) {
         defaultRequest = angular.extend(defaultRequest, listType);
-        $scope.operationIds = $scope.list.fromCache ? [] : $scope.list.associatedOperations();
+        thisScope.operationIds = thisScope.list.fromCache ? [] : thisScope.list.associatedOperations();
       }
 
       currentRequest = angular.copy(defaultRequest);
@@ -217,15 +219,15 @@
       }
 
       if (qs && Object.keys(qs).length) {
-        $scope.selectedFilters = angular.copy(qs);
+        thisScope.selectedFilters = angular.copy(qs);
 
-        if ($scope.selectedFilters.sort) {
-          $scope.selectedFilters.sort = unFormatSortType($scope.selectedFilters.sort);
+        if (thisScope.selectedFilters.sort) {
+          thisScope.selectedFilters.sort = unFormatSortType(thisScope.selectedFilters.sort);
         }
 
-        unFormatUserTypes($scope.selectedFilters);
-        populateFilters($scope.selectedFilters);
-        activeFilters = angular.copy($scope.selectedFilters);
+        unFormatUserTypes(thisScope.selectedFilters);
+        populateFilters(thisScope.selectedFilters);
+        activeFilters = angular.copy(thisScope.selectedFilters);
         currentRequest = angular.extend(currentRequest, qs);
       }
       getUsers(currentRequest);
@@ -261,19 +263,19 @@
     }
 
     function getBundles (search) {
-      if ($scope.operationIds && $scope.operationIds.length) {
-        getMultipleLists($scope.operationIds, search, 'bundle').then(function(listsArray) {
+      if (thisScope.operationIds && thisScope.operationIds.length) {
+        getMultipleLists(thisScope.operationIds, search, 'bundle').then(function(listsArray) {
           var mergedArray =  Array.prototype.concat.apply([], listsArray);
-          $scope.bundles = removeDuplicateLists(mergedArray);
+          thisScope.bundles = removeDuplicateLists(mergedArray);
         });
         return;
       }
-      $scope.bundles = List.query({type: 'bundle', name: search});
+      thisScope.bundles = List.query({type: 'bundle', name: search});
     }
 
     function getCountries (search, callback) {
       hrinfoService.getCountries({name: search}).then(function (countries) {
-        $scope.countries = countries;
+        thisScope.countries = countries;
         if (callback) {
           return callback();
         }
@@ -281,33 +283,33 @@
     }
 
     function getDisasters(search) {
-      if ($scope.operationIds && $scope.operationIds.length) {
-        getMultipleLists($scope.operationIds, search, 'disaster').then(function(listsArray) {
+      if (thisScope.operationIds && thisScope.operationIds.length) {
+        getMultipleLists(thisScope.operationIds, search, 'disaster').then(function(listsArray) {
           var mergedArray =  Array.prototype.concat.apply([], listsArray);
-          $scope.disasters = removeDuplicateLists(mergedArray);
+          thisScope.disasters = removeDuplicateLists(mergedArray);
         });
         return;
       }
-      $scope.disasters = List.query({type: 'disaster', name: search});
+      thisScope.disasters = List.query({type: 'disaster', name: search});
     }
 
     function getOffices (search) {
-      if ($scope.operationIds && $scope.operationIds.length) {
-        getMultipleLists($scope.operationIds, search, 'office').then(function(listsArray) {
+      if (thisScope.operationIds && thisScope.operationIds.length) {
+        getMultipleLists(thisScope.operationIds, search, 'office').then(function(listsArray) {
           var mergedArray =  Array.prototype.concat.apply([], listsArray);
-          $scope.offices = removeDuplicateLists(mergedArray);
+          thisScope.offices = removeDuplicateLists(mergedArray);
         });
         return;
       }
-      $scope.offices = List.query({type: 'office', name: search});
+      thisScope.offices = List.query({type: 'office', name: search});
     }
 
     function getOperations (search) {
-      $scope.operations = List.query({type: 'operation', name: search});
+      thisScope.operations = List.query({type: 'operation', name: search});
     }
 
     function getOrganizations (search) {
-      $scope.organizations = List.query({type: 'organization', name: search});
+      thisScope.organizations = List.query({type: 'organization', name: search});
     }
 
     function formatUserTypes (filters) {
@@ -343,7 +345,7 @@
         return;
       }
 
-      angular.forEach($scope.userTypes, function (userType) {
+      angular.forEach(thisScope.userTypes, function (userType) {
         if (filters[userType.value]) {
           delete filters[userType.value];
           filters.user_type = userType.value;
@@ -365,29 +367,29 @@
 
           List.get({'listId': value}, function (list) {
             if (typeLabel === 'functional_roles') {
-              $scope.roles.push(list);
-              populateCurrentFilter(value, type, $scope.currentFilters.all);
+              thisScope.roles.push(list);
+              populateCurrentFilter(value, type, thisScope.currentFilters.all);
               return;
             }
             $scope[typeLabel].push(list);
-            populateCurrentFilter(value, type, $scope.currentFilters.all);
+            populateCurrentFilter(value, type, thisScope.currentFilters.all);
           });
           return;
         }
 
         if (type === 'country') {
           getCountries('', function () {
-            populateCurrentFilter(value, type, $scope.currentFilters.all);
+            populateCurrentFilter(value, type, thisScope.currentFilters.all);
           });
         }
 
         if (type === 'organizations.orgTypeId') {
           filters[type] = parseInt(value, 10);
-          populateCurrentFilter(value, type, $scope.currentFilters.all);
+          populateCurrentFilter(value, type, thisScope.currentFilters.all);
         }
 
         if (type === 'user_type' || type === 'name' || type === 'q') {
-          populateCurrentFilter(value, type, $scope.currentFilters.all);
+          populateCurrentFilter(value, type, thisScope.currentFilters.all);
         }
       });
     }
@@ -417,7 +419,7 @@
       }
 
       if (type === 'country') {
-        selected = $scope.countries.filter(function(item) {
+        selected = thisScope.countries.filter(function(item) {
           return item.id === value;
         })[0];
         if (!selected) {
@@ -427,7 +429,7 @@
       }
 
       if (type === 'organizations.orgTypeId') {
-        selected = $scope.orgTypes.filter(function(item) {
+        selected = thisScope.orgTypes.filter(function(item) {
           return item.value === value ||  item.value === parseInt(value, 10);
         })[0];
         if (!selected) {
@@ -437,7 +439,7 @@
       }
 
       if (type === 'user_type') {
-        selected = $scope.userTypes.filter(function(item) {
+        selected = thisScope.userTypes.filter(function(item) {
           return item.value === value;
         })[0];
         if (!selected) {
@@ -457,19 +459,19 @@
         type: type
       };
 
-      $scope.currentFilters.all.push(item);
+      thisScope.currentFilters.all.push(item);
     }
 
     function populateCurrentFilters (filters) {
-      $scope.currentFilters.all = [];
+      thisScope.currentFilters.all = [];
       angular.forEach(filters, function (value, type) {
-        populateCurrentFilter(value, type, $scope.currentFilters.all);
+        populateCurrentFilter(value, type, thisScope.currentFilters.all);
       });
     }
 
     function filterUsers () {
-      activeFilters = angular.copy($scope.selectedFilters);
-      var formattedFilters = angular.copy($scope.selectedFilters);
+      activeFilters = angular.copy(thisScope.selectedFilters);
+      var formattedFilters = angular.copy(thisScope.selectedFilters);
       if (formattedFilters.user_type || formattedFilters.user_type === undefined) {
         formatUserTypes(formattedFilters);
       }
@@ -478,9 +480,9 @@
         formattedFilters.sort += ' name';
       }
 
-      populateCurrentFilters($scope.selectedFilters);
-      $scope.usersLoaded = false;
-      $scope.pagination.currentPage = 1;
+      populateCurrentFilters(thisScope.selectedFilters);
+      thisScope.usersLoaded = false;
+      thisScope.pagination.currentPage = 1;
       currentRequest = angular.copy(defaultRequest);
       currentRequest = angular.extend(currentRequest, formattedFilters);
       currentRequest.offset = 0;
@@ -496,38 +498,38 @@
     }
 
     function resetFilters () {
-      $scope.selectedFilters = {};
+      thisScope.selectedFilters = {};
       activeFilters = {};
       filterUsers();
-      $scope.currentFilters.all = [];
+      thisScope.currentFilters.all = [];
     }
 
     function removeFilter (filter) {
-      $scope.currentFilters.all = $scope.currentFilters.all.filter(function (item) {
+      thisScope.currentFilters.all = thisScope.currentFilters.all.filter(function (item) {
         return item._id !== filter._id;
       });
 
-      if (filter.type === 'name' && $scope.selectedFilters.q) {
-        delete $scope.selectedFilters.q;
+      if (filter.type === 'name' && thisScope.selectedFilters.q) {
+        delete thisScope.selectedFilters.q;
       }
 
-      if ($scope.selectedFilters[filter.type]) {
+      if (thisScope.selectedFilters[filter.type]) {
         if (filter.type === 'user_type') {
 
           if (filter._id === 'unverified') {
-            delete $scope.selectedFilters.verified;
+            delete thisScope.selectedFilters.verified;
           }
 
-          if ($scope.selectedFilters[filter._id]) {
-            delete $scope.selectedFilters[filter._id];
+          if (thisScope.selectedFilters[filter._id]) {
+            delete thisScope.selectedFilters[filter._id];
           }
         }
 
-        delete $scope.selectedFilters[filter.type];
+        delete thisScope.selectedFilters[filter.type];
       }
       filterUsers();
-      // activeFilters = angular.copy($scope.selectedFilters);
-      // $location.search($scope.selectedFilters);
+      // activeFilters = angular.copy(thisScope.selectedFilters);
+      // $location.search(thisScope.selectedFilters);
     }
 
     function unFormatSortType (sortType) {
@@ -538,11 +540,11 @@
     }
 
     function saveSearch (searchUser) {
-      if ($scope.list || !$routeParams.q && !$routeParams.name) {
+      if (thisScope.list || !$routeParams.q && !$routeParams.name) {
         return;
       }
-      SearchService.saveSearch($scope.currentUser, searchUser, 'user', function (user) {
-        $scope.setCurrentUser(user);
+      SearchService.saveSearch(thisScope.currentUser, searchUser, 'user', function (user) {
+        thisScope.setCurrentUser(user);
       });
     }
 
@@ -580,18 +582,18 @@
     }
 
     $rootScope.$on('sidebar-closed', function () {
-      $scope.selectedFilters = angular.copy(activeFilters);
+      thisScope.selectedFilters = angular.copy(activeFilters);
     });
 
-    $scope.$on('users-export-csv', function () {
+    thisScope.$on('users-export-csv', function () {
       User.getCSVUrl(currentRequest, function (url) {
         var eventLabel = '';
-        if ($scope.list) {
-          eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
+        if (thisScope.list) {
+          eventLabel = thisScope.list.name + '(' + thisScope.list._id + ')';
         }
         else {
-          if ($scope.currentFilters && $scope.currentFilters.all) {
-            $scope.currentFilters.all.forEach(function (filter) {
+          if (thisScope.currentFilters && thisScope.currentFilters.all) {
+            thisScope.currentFilters.all.forEach(function (filter) {
               eventLabel += filter.label + ' ';
             });
           }
@@ -606,19 +608,19 @@
       });
     });
 
-    $scope.$on('users-export-txt', function (evt, success, error) {
+    thisScope.$on('users-export-txt', function (evt, success, error) {
       User.exportTXT(currentRequest, success, error);
     });
 
-    $scope.$on('users-export-pdf', function (evt, format) {
+    thisScope.$on('users-export-pdf', function (evt, format) {
       User.getPDFUrl(currentRequest, format, function (url) {
         var eventLabel = '';
-        if ($scope.list) {
-          eventLabel = $scope.list.name + '(' + $scope.list._id + ')';
+        if (thisScope.list) {
+          eventLabel = thisScope.list.name + '(' + thisScope.list._id + ')';
         }
         else {
-          if ($scope.currentFilters && $scope.currentFilters.all) {
-            $scope.currentFilters.all.forEach(function (filter) {
+          if (thisScope.currentFilters && thisScope.currentFilters.all) {
+            thisScope.currentFilters.all.forEach(function (filter) {
               eventLabel += filter.label + ' ';
             });
           }
@@ -633,7 +635,7 @@
       });
     });
 
-    $scope.$on('users-export-gss', function (evt) {
+    thisScope.$on('users-export-gss', function (evt) {
       var body = {};
       body.list = getList();
       if (body.list) {
@@ -652,7 +654,7 @@
       }
     });
 
-    $scope.$on('users-export-outlook', function (evt) {
+    thisScope.$on('users-export-outlook', function (evt) {
       var list = getList();
       if (list) {
         User.createOutlookGroup(list)
