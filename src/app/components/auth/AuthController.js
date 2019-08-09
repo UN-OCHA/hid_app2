@@ -8,35 +8,36 @@
   AuthController.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$location', '$timeout', '$window', 'alertService', 'AuthService', 'gettextCatalog', 'TwoFactorAuthService'];
 
   function AuthController ($exceptionHandler, $rootScope, $scope, $location, $timeout, $window, alertService, AuthService, gettextCatalog, TwoFactorAuthService) {
-    $scope.email = '';
-    $scope.saving = false;
+    var thisScope = $scope;
+    thisScope.email = '';
+    thisScope.saving = false;
     var twoFAModal;
 
     function onFirstLogin () {
-      $scope.currentUser.setAppMetaData({login: true});
-      $scope.currentUser.authOnly = false;
-      $scope.currentUser.$update(function () {
-        $scope.setCurrentUser($scope.currentUser);
+      thisScope.currentUser.setAppMetaData({login: true});
+      thisScope.currentUser.authOnly = false;
+      thisScope.currentUser.$update(function () {
+        thisScope.setCurrentUser(thisScope.currentUser);
         $location.path('/start');
       });
     }
 
     function successfullLogin () {
-      $scope.initCurrentUser();
-      $scope.saving = false;
+      thisScope.initCurrentUser();
+      thisScope.saving = false;
       $window.localStorage.setItem('hidResetPassword', true);
 
-      if ($scope.currentUser.appMetadata && $scope.currentUser.appMetadata.hid) {
+      if (thisScope.currentUser.appMetadata && thisScope.currentUser.appMetadata.hid) {
 
         // New user first login (login is set to false in registration)
-        if (!$scope.currentUser.appMetadata.hid.login) {
+        if (!thisScope.currentUser.appMetadata.hid.login) {
           onFirstLogin();
           //$location.path('/start');
           return;
         }
 
         //HIDv1 user first login (login is already set to true)
-        if ($scope.currentUser.appMetadata.hid.login && !$scope.currentUser.appMetadata.hid.viewedTutorial) {
+        if (thisScope.currentUser.appMetadata.hid.login && !thisScope.currentUser.appMetadata.hid.viewedTutorial) {
           $location.path('/tutorial');
           return;
         }
@@ -58,12 +59,12 @@
       //$location.path('/start');
     }
 
-    $scope.login = function(tfaCode, trustDevice) {
+    thisScope.login = function(tfaCode, trustDevice) {
       if (twoFAModal) {
         twoFAModal.close();
       }
-      $scope.saving = true;
-      AuthService.login($scope.email, $scope.password, tfaCode).then(function (response) {
+      thisScope.saving = true;
+      AuthService.login(thisScope.email, thisScope.password, tfaCode).then(function (response) {
 
         if (trustDevice) {
           TwoFactorAuthService.trustDevice(tfaCode, function () {
@@ -78,9 +79,9 @@
         // 2FA required
         if (response && response.data.statusCode === 401 && response.data.message === 'No TOTP token') {
           TwoFactorAuthService.requestToken(function (token, trustDevice) {
-            $scope.login(token, trustDevice);
+            thisScope.login(token, trustDevice);
           }, function () {
-            $scope.saving = false;
+            thisScope.saving = false;
           }, true);
           return;
         }
@@ -88,26 +89,26 @@
         successfullLogin();
 
       }, function (error) {
-        $scope.saving = false;
+        thisScope.saving = false;
         $exceptionHandler(error, 'Log in fail');
       });
     };
 
-    $scope.logout = function() {
+    thisScope.logout = function() {
       AuthService.logout();
-      $scope.removeCurrentUser();
+      thisScope.removeCurrentUser();
       $location.path('/');
       alertService.add('success', gettextCatalog.getString('You were successfully logged out.'));
     };
 
     $rootScope.$on('tokenExpired', function (event) {
-      $scope.logout();
+      thisScope.logout();
     });
 
     if ($location.path() == '/logout') {
-      $scope.logout();
+      thisScope.logout();
     }
-    else if ($location.path() == '/' && $scope.currentUser) {
+    else if ($location.path() == '/' && thisScope.currentUser) {
       var redirectUri = $location.search();
       if (!redirectUri.redirect) {
         $location.path('/landing');
