@@ -8,22 +8,23 @@
   AllCheckInsController.$inject = ['$exceptionHandler', '$scope', '$uibModal', 'alertService', 'config', 'UserCheckInService', 'UserDataService', 'gettextCatalog'];
 
   function AllCheckInsController ($exceptionHandler, $scope, $uibModal, alertService, config, UserCheckInService, UserDataService, gettextCatalog) {
-    $scope.listsMember = [];
-    $scope.leaveList = leaveList;
-    $scope.editCheckIn = editCheckIn;
-    $scope.showDatePicker = showDatePicker;
-    $scope.updateCheckIn = updateCheckIn;
-    $scope.closeEditModal = closeEditModal;
-    $scope.removeCheckOutDate = removeCheckOutDate;
-    $scope.page = 1;
-    $scope.itemsPerPage = 10;
-    $scope.listSearchTerm = {
+    var thisScope = $scope;
+    thisScope.listsMember = [];
+    thisScope.leaveList = leaveList;
+    thisScope.editCheckIn = editCheckIn;
+    thisScope.showDatePicker = showDatePicker;
+    thisScope.updateCheckIn = updateCheckIn;
+    thisScope.closeEditModal = closeEditModal;
+    thisScope.removeCheckOutDate = removeCheckOutDate;
+    thisScope.page = 1;
+    thisScope.itemsPerPage = 10;
+    thisScope.listSearchTerm = {
       name: ''
     };
-    $scope.datePicker = {
+    thisScope.datePicker = {
       opened: false
     };
-    $scope.dateOptions = {
+    thisScope.dateOptions = {
       maxDate: moment().add(5, 'year')._d,
       minDate: new Date(),
       showWeeks: false,
@@ -32,13 +33,13 @@
     var editModal;
 
     function showDatePicker () {
-      $scope.datePicker.opened = true;
+      thisScope.datePicker.opened = true;
     }
 
     function saveCheckIn (checkIn, checkInUser) {
-      UserCheckInService.update({userId: $scope.currentUser._id, listType: checkIn.type + 's', checkInId: checkIn._id}, checkInUser, function (user) {
-        $scope.setCurrentUser(user);
-        angular.forEach($scope.listsMember, function (list) {
+      UserCheckInService.update({userId: thisScope.currentUser._id, listType: checkIn.type + 's', checkInId: checkIn._id}, checkInUser, function (user) {
+        thisScope.setCurrentUser(user);
+        angular.forEach(thisScope.listsMember, function (list) {
           if (list._id === checkInUser.list) {
             list.checkoutDate = checkInUser.checkoutDate;
           }
@@ -72,8 +73,8 @@
     }
 
     function editCheckIn (checkIn) {
-      $scope.editingCheckIn = checkIn;
-      $scope.currentCheckoutDate = checkIn.checkoutDate ? moment(checkIn.checkoutDate).format('DD MMMM YYYY') : '';
+      thisScope.editingCheckIn = checkIn;
+      thisScope.currentCheckoutDate = checkIn.checkoutDate ? moment(checkIn.checkoutDate).format('DD MMMM YYYY') : '';
       openEditModal();
     }
 
@@ -97,13 +98,13 @@
 
     function leaveList (checkIn) {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        UserCheckInService.delete({userId: $scope.currentUser._id, listType: checkIn.type + 's', checkInId: checkIn._id}, {}, function (user) {
+        UserCheckInService.delete({userId: thisScope.currentUser._id, listType: checkIn.type + 's', checkInId: checkIn._id}, {}, function (user) {
           alertService.add('success', gettextCatalog.getString('Successfully removed from list'), false, function(){});
-          $scope.listsMember = $scope.listsMember.filter(function(list) {
+          thisScope.listsMember = thisScope.listsMember.filter(function(list) {
             return list._id !== checkIn._id;
           });
           UserDataService.notify();
-          $scope.setCurrentUser(user);
+          thisScope.setCurrentUser(user);
         }, function (error) {
           $exceptionHandler(error, 'Leaving list');
         });
@@ -112,9 +113,9 @@
 
     function getUserLists () {
       angular.forEach(config.listTypes, function (listType) {
-        angular.forEach($scope.currentUser[listType + 's'], function (val) {
+        angular.forEach(thisScope.currentUser[listType + 's'], function (val) {
           val.type = listType;
-          $scope.listsMember.push(val);
+          thisScope.listsMember.push(val);
         });
       });
     }
