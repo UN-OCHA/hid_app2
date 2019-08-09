@@ -8,59 +8,61 @@
   TrustedDomainsController.$inject = ['$scope', '$routeParams', 'gettextCatalog', 'alertService', 'TrustedDomain', 'List'];
 
   function TrustedDomainsController ($scope, $routeParams, gettextCatalog, alertService, TrustedDomain, List) {
-    $scope.pagination = {
+    var thisScope = $scope;
+
+    thisScope.pagination = {
       currentPage: 1,
       itemsPerPage: 100,
       totalItems: 0
     };
 
     var setTotalDomains = function (domains, headers) {
-      $scope.pagination.totalItems = headers()["x-total-count"];
+      thisScope.pagination.totalItems = headers()["x-total-count"];
     };
 
     function getTrustedDomains (offset) {
       var params = {
-        limit: $scope.pagination.itemsPerPage
+        limit: thisScope.pagination.itemsPerPage
       };
       params.offset = offset || 0;
 
       TrustedDomain.query(params, function (domains, headers) {
         setTotalDomains(domains, headers);
-        $scope.domains = domains;
+        thisScope.domains = domains;
       });
     }
 
     getTrustedDomains();
 
-    $scope.pageChanged = function () {
-      var offset = $scope.pagination.itemsPerPage * ($scope.pagination.currentPage - 1);
+    thisScope.pageChanged = function () {
+      var offset = thisScope.pagination.itemsPerPage * (thisScope.pagination.currentPage - 1);
       getTrustedDomains(offset);
     };
 
-    $scope.addedDomain = new TrustedDomain();
+    thisScope.addedDomain = new TrustedDomain();
 
-    $scope.newDomain = function() {
+    thisScope.newDomain = function() {
       var success = function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Domain saved successfully'));
-        $scope.addedDomain = new TrustedDomain();
-        $scope.pageChanged();
+        thisScope.addedDomain = new TrustedDomain();
+        thisScope.pageChanged();
       };
       var error = function (err) {
         $exceptionHandler(error, 'Save domain');
       };
-      $scope.addedDomain.$save(success, error);
+      thisScope.addedDomain.$save(success, error);
     };
 
-    $scope.deleteDomain = function (domain) {
+    thisScope.deleteDomain = function (domain) {
       domain.$delete(function (resp, headers) {
         alertService.add('success', gettextCatalog.getString('Domain deleted successfully'));
-        $scope.pageChanged();
+        thisScope.pageChanged();
       });
     };
 
-    $scope.getOrganizations = function (search) {
+    thisScope.getOrganizations = function (search) {
       List.query({'name': search, 'type': 'organization'}, function (orgs) {
-        $scope.organizations = orgs;
+        thisScope.organizations = orgs;
       });
     };
 
