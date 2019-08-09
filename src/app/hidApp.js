@@ -36,92 +36,11 @@ var app = angular.module('hidApp', [
     'app.operations',
     'app.trustedDomain'
   ])
-  // Configure Offlinejs
-  .run(function ($rootScope) {
-    $rootScope.isOnline = Offline.state == 'up';
-    Offline.on('up', function() {
-      $rootScope.isOnline = true;
-      $rootScope.$digest();
-    });
-    Offline.on('down', function() {
-      $rootScope.isOnline = false;
-      $rootScope.$digest();
-    });
-  })
-  // Check if user is authenticated for paths which require it
-  .run(function ($rootScope, $window, $location, AuthService, alertService) {
-    $rootScope.isAuthenticated = false;
-    $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
-      var user = JSON.parse($window.localStorage.getItem('currentUser'));
-      var isAuthenticated;
-      AuthService.isAuthenticated(function (resp) {
-        isAuthenticated = resp;
-
-        if (nextRoute && nextRoute.authenticate && !isAuthenticated){
-          // User isn’t authenticated
-          var oldPath = $location.path();
-          $location.search('redirect', oldPath);
-          $location.path('/');
-          event.preventDefault();
-          return;
-        }
-
-        if (nextRoute && nextRoute.authenticate && nextRoute.adminOrManagerOnly) {
-          if (!user.is_admin && !user.isManager) {
-            $location.path('/');
-            event.preventDefault();
-          }
-        }
-
-        if (nextRoute && nextRoute.authenticate && nextRoute.adminOnly) {
-          if (!user.is_admin) {
-            $location.path('/');
-            event.preventDefault();
-          }
-        }
-        $rootScope.isAuthenticated = isAuthenticated;
-      });
-    });
-  })
-  // Configure languages
-  .run(function (gettextCatalog, $window) {
-    var lang = $window.navigator.language || $window.navigator.userLanguage;
-    if (lang != 'fr' && lang != 'en') {
-      gettextCatalog.setCurrentLanguage('en');
-    }
-    else {
-      gettextCatalog.setCurrentLanguage(lang);
-    }
-  })
-  // Accessibility features - focus h1 on route change, page titles
-  .run(function ($rootScope, $document) {
-    var hasPrevious = false;
-    var siteTitle = ' | Humanitarian ID';
-
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-      hasPrevious = previous ? true : false;
-      $rootScope.title = current.$$route.title + siteTitle;
-    });
-
-    $rootScope.$on('$viewContentLoaded', function () {
-      if (hasPrevious) {
-        var h1 = $document[0].querySelector('h1');
-        if (h1) {
-          h1.setAttribute('tabIndex', -1);
-          h1.focus();
-        }
-      }
-    });
-
-  })
-  .run(function ($rootScope, $window, $location, config) {
-    if ($window.ga) {
-      $window.ga('create', config.gaTrackingId, 'auto');
-      $rootScope.$on('$routeChangeSuccess', function () {
-        $window.ga('send', 'pageview', { page: $location.url() });
-      });
-    }
-  })
+  .run(configureOffline)
+  .run(configureAuthCheck)
+  .run(configureLanguages)
+  .run(configureAccessibility)
+  .run(configureAnalytics)
   .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
       $routeProvider.
@@ -457,20 +376,8 @@ var app = angular.module('hidApp', [
   .config(['$compileProvider', function ($compileProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|data):/);
   }])
-  .run(function ($localForage) {
-    $localForage.createInstance({
-      name: 'lists',
-      storeName: 'lists'
-    });
-    $localForage.createInstance({
-      name: 'cacheInfo',
-      storeName: 'cacheInfo'
-    });
-  })
-  // Configure xeditable
-  .run(function (editableOptions) {
-    editableOptions.theme = 'bs3';
-  });
+  .run(configureLocalForage)
+  .run(configureEditableOptions);
 
 
 // Load config
@@ -480,10 +387,137 @@ if (window) {
 }
 app.constant('config', env) // eslint-disable-line angular/file-name,angular/module-getter
 
+
+//
+// Configure Offlinejs
+//
 // TODO: do the offline checks on something other than favicon
-Offline.options = {
-  checkOnLoad: true,
-  interceptRequests: true,
-  reconnect: false,
-  requests: false //record ajax requests and re-make on connection restore
-};
+//
+function configureOffline($rootScope) {
+  Offline.options = {
+    checkOnLoad: true,
+    interceptRequests: true,
+    reconnect: false,
+    requests: false // record ajax requests and re-send on connection restore
+  };
+
+  $rootScope.isOnline = Offline.state == 'up';
+  Offline.on('up', function() {
+    $rootScope.isOnline = true;
+    $rootScope.$digest();
+  });
+  Offline.on('down', function() {
+    $rootScope.isOnline = false;
+    $rootScope.$digest();
+  });
+}
+
+
+//
+// Check Authentication
+//
+function configureAuthCheck($rootScope, $window, $location, AuthService, alertService) {
+  $rootScope.isAuthenticated = false;
+  $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute){
+    var user = JSON.parse($window.localStorage.getItem('currentUser'));
+    var isAuthenticated;
+    AuthService.isAuthenticated(function (resp) {
+      isAuthenticated = resp;
+
+      if (nextRoute && nextRoute.authenticate && !isAuthenticated){
+        // User isn’t authenticated
+        var oldPath = $location.path();
+        $location.search('redirect', oldPath);
+        $location.path('/');
+        event.preventDefault();
+        return;
+      }
+
+      if (nextRoute && nextRoute.authenticate && nextRoute.adminOrManagerOnly) {
+        if (!user.is_admin && !user.isManager) {
+          $location.path('/');
+          event.preventDefault();
+        }
+      }
+
+      if (nextRoute && nextRoute.authenticate && nextRoute.adminOnly) {
+        if (!user.is_admin) {
+          $location.path('/');
+          event.preventDefault();
+        }
+      }
+      $rootScope.isAuthenticated = isAuthenticated;
+    });
+  });
+}
+
+//
+// Configure Languages
+//
+function configureLanguages(gettextCatalog, $window) {
+  var lang = $window.navigator.language || $window.navigator.userLanguage;
+  if (lang != 'fr' && lang != 'en') {
+    gettextCatalog.setCurrentLanguage('en');
+  }
+  else {
+    gettextCatalog.setCurrentLanguage(lang);
+  }
+}
+
+//
+// Accessibility features
+//
+// Focus h1 on route change, page titles
+//
+function configureAccessibility($rootScope, $document) {
+  var hasPrevious = false;
+  var siteTitle = ' | Humanitarian ID';
+
+  $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+    hasPrevious = previous ? true : false;
+    $rootScope.title = current.$$route.title + siteTitle;
+  });
+
+  $rootScope.$on('$viewContentLoaded', function () {
+    if (hasPrevious) {
+      var h1 = $document[0].querySelector('h1');
+      if (h1) {
+        h1.setAttribute('tabIndex', -1);
+        h1.focus();
+      }
+    }
+  });
+}
+
+//
+// Configure GA
+//
+function configureAnalytics($rootScope, $window, $location, config) {
+  if ($window.ga) {
+    $window.ga('create', config.gaTrackingId, 'auto');
+    $rootScope.$on('$routeChangeSuccess', function () {
+      $window.ga('send', 'pageview', { page: $location.url() });
+    });
+  }
+}
+
+//
+// Configure localForage
+//
+function configureLocalForage($localForage) {
+  $localForage.createInstance({
+    name: 'lists',
+    storeName: 'lists'
+  });
+  $localForage.createInstance({
+    name: 'cacheInfo',
+    storeName: 'cacheInfo'
+  });
+}
+
+//
+// Configure editableOptions
+//
+function configureEditableOptions(editableOptions) {
+  editableOptions.theme = 'bs3';
+}
