@@ -69,8 +69,7 @@ describe('Filtering a List', function () {
 
 			expect(listPage.currentFilters.getText()).toContain('United Kingdom');
 			expect(listPage.listUsers.getText()).not.toContain('Andrej Verity');
-			expect(listPage.listUsers.getText()).toContain('Emma Hogbin Westby');
-
+			expect(listPage.listUsers.getText()).toContain('Emma HOGBIN WESTBY');
 		});
 
 		it('should filter users by disaster', function () {
@@ -120,5 +119,4 @@ describe('Filtering a List', function () {
 	afterAll(function () {
 		navObject.logOut();
 	});
-
 });

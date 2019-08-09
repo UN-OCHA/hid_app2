@@ -12,7 +12,7 @@ describe('List members', function () {
 
 	beforeAll(function () {
 		loginPage.get();
-	  loginPage.login();
+	  loginPage.loginAdmin();
 	  newListPage.createList();
 	});
 
