@@ -8,22 +8,23 @@
   ListController.$inject = ['$exceptionHandler', '$rootScope', '$scope', '$routeParams', '$location', '$localForage', 'config', 'List', 'ListDataService', 'User', 'UserCheckInService', 'UserDataService', 'Service', 'alertService', 'gettextCatalog'];
 
   function ListController ($exceptionHandler, $rootScope, $scope, $routeParams, $location, $localForage, config, List, ListDataService, User, UserCheckInService, UserDataService, Service, alertService, gettextCatalog) {
-    $scope.isMember = false;
-    $scope.isManager = false;
-    $scope.isOwner = false;
-    $scope.isFavorite = false;
-    $scope.isPending = false;
-    $scope.listLoaded = false;
-    $scope.savingCheckin = false;
-    $scope.savingMembers = false;
-    $scope.listUnavailable = false;
-    $scope.offline = false;
-    $scope.favSaving = false;
-    $scope.usersAdded = {};
-    $scope.datePicker = {
+    var thisScope = $scope;
+    thisScope.isMember = false;
+    thisScope.isManager = false;
+    thisScope.isOwner = false;
+    thisScope.isFavorite = false;
+    thisScope.isPending = false;
+    thisScope.listLoaded = false;
+    thisScope.savingCheckin = false;
+    thisScope.savingMembers = false;
+    thisScope.listUnavailable = false;
+    thisScope.offline = false;
+    thisScope.favSaving = false;
+    thisScope.usersAdded = {};
+    thisScope.datePicker = {
       opened: false
     };
-    $scope.dateOptions = {
+    thisScope.dateOptions = {
       maxDate: moment().add(5, 'year')._d,
       minDate: new Date(),
       showWeeks: false,
@@ -32,15 +33,15 @@
 
     function populateList () {
       var listType = [];
-      listType[$scope.list.type + 's.list'] = $scope.list._id;
-      $scope.$broadcast('populate-list', listType);
+      listType[thisScope.list.type + 's.list'] = thisScope.list._id;
+      thisScope.$broadcast('populate-list', listType);
     }
 
     function checkInStatus () {
-      var pending = $scope.currentUser.lists.filter(function(list) {
-        return list.pending && (list.list === $scope.list._id);
+      var pending = thisScope.currentUser.lists.filter(function(list) {
+        return list.pending && (list.list === thisScope.list._id);
       })[0];
-      $scope.isPending = pending ? true : false;
+      thisScope.isPending = pending ? true : false;
     }
 
     function isMember (user, list) {
@@ -65,32 +66,32 @@
     }
 
     var setUpList = function () {
-      $scope.listLoaded = true;
+      thisScope.listLoaded = true;
 
-      if (!$scope.list.visible) {
+      if (!thisScope.list.visible) {
         return;
       }
-      ListDataService.setListTypeLabel($scope.list);
+      ListDataService.setListTypeLabel(thisScope.list);
       populateList();
       checkInStatus();
-      $scope.isMember = isMember($scope.currentUser, $scope.list);
-      $scope.isManager = $scope.list.fromCache ? false : $scope.list.isManager($scope.currentUser);
-      $scope.isOwner = $scope.list.owner ? $scope.list.owner._id == $scope.currentUser._id : false;
-      $scope.isFavorite = isFavorite($scope.currentUser, $scope.list);
-      $scope.checkinUser = {
-        list: $scope.list._id
+      thisScope.isMember = isMember(thisScope.currentUser, thisScope.list);
+      thisScope.isManager = thisScope.list.fromCache ? false : thisScope.list.isManager(thisScope.currentUser);
+      thisScope.isOwner = thisScope.list.owner ? thisScope.list.owner._id == thisScope.currentUser._id : false;
+      thisScope.isFavorite = isFavorite(thisScope.currentUser, thisScope.list);
+      thisScope.checkinUser = {
+        list: thisScope.list._id
       };
     };
 
-    $scope.$on('user-service-ready', function() {
+    thisScope.$on('user-service-ready', function() {
       var listId = $routeParams.list;
       var lflists = $localForage.instance('lists');
       // Try to load from cache first
       lflists.getItem(listId)
       .then(function (list) {
         if (list) {
-          $scope.list = list;
-          $scope.list.fromCache = true;
+          thisScope.list = list;
+          thisScope.list.fromCache = true;
           setUpList();
         }
         if ($rootScope.isOnline) {
@@ -101,16 +102,16 @@
         // Then load from server
         if ($rootScope.isOnline) {
           lflists.setItem(listId, list);
-          $scope.list = list;
-          $scope.list.fromCache = false;
+          thisScope.list = list;
+          thisScope.list.fromCache = false;
           $rootScope.title = list.name;
           setUpList();
         }
       })
       .catch(function (err) {
-        $scope.listLoaded = true;
-        $scope.listUnavailable = true;
-        $scope.offline = Offline.state === 'up' ? false : true;
+        thisScope.listLoaded = true;
+        thisScope.listUnavailable = true;
+        thisScope.offline = Offline.state === 'up' ? false : true;
       });
     });
 
@@ -140,51 +141,51 @@
 
     function filterUsers (users, selectedUsers) {
       var filteredUsers = users.filter(function (user) {
-        return !isListMember($scope.list._id, user) && !isSelected(selectedUsers, user);
+        return !isListMember(thisScope.list._id, user) && !isSelected(selectedUsers, user);
       });
       return filteredUsers;
     }
 
     // Retrieve users
-    $scope.getUsers = function(search) {
+    thisScope.getUsers = function(search) {
       if (search) {
         User.query({'q': search, authOnly: false}, function (users) {
           if (users) {
-            $scope.newMembers = filterUsers(users, $scope.usersAdded.users);
+            thisScope.newMembers = filterUsers(users, thisScope.usersAdded.users);
           }
         });
       }
     };
 
     // Add users to a list
-    $scope.addMemberToList = function() {
-      $scope.savingMembers = true;
-      angular.forEach($scope.usersAdded.users, function (value) {
-        UserCheckInService.save({userId: value, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function () {
+    thisScope.addMemberToList = function() {
+      thisScope.savingMembers = true;
+      angular.forEach(thisScope.usersAdded.users, function (value) {
+        UserCheckInService.save({userId: value, listType: thisScope.list.type + 's'}, {list: thisScope.list._id}, function () {
           UserDataService.notify();
           alertService.add('success', gettextCatalog.getString('Successfully added to list'));
-          $scope.usersAdded.users = [];
-          $scope.savingMembers = false;
+          thisScope.usersAdded.users = [];
+          thisScope.savingMembers = false;
         }, function (error) {
           $exceptionHandler(error, 'Removing duplicate');
-          $scope.savingMembers = false;
+          thisScope.savingMembers = false;
         });
       });
     };
 
     // Check current user in list
-    $scope.checkIn = function () {
-      UserCheckInService.save({userId: $scope.currentUser._id, listType: $scope.list.type + 's'}, {list: $scope.list._id}, function (user) {
-        Service.getSuggestions($scope.list._id, $scope.currentUser).$promise.then(function () {
+    thisScope.checkIn = function () {
+      UserCheckInService.save({userId: thisScope.currentUser._id, listType: thisScope.list.type + 's'}, {list: thisScope.list._id}, function (user) {
+        Service.getSuggestions(thisScope.list._id, thisScope.currentUser).$promise.then(function () {
           if (Service.suggestedServices.length) {
-            $location.path('services/suggestions').search({lists: $scope.list._id });
+            $location.path('services/suggestions').search({lists: thisScope.list._id });
             return;
           }
 
           alertService.add('success', gettextCatalog.getString('You were successfully checked into the list'));
-          $scope.setCurrentUser(user);
+          thisScope.setCurrentUser(user);
           UserDataService.notify();
-          $scope.isMember = true;
+          thisScope.isMember = true;
         });
       }, function (error) {
         $exceptionHandler(error, 'Removing duplicate');
@@ -192,20 +193,20 @@
     };
 
     // Check current user out of the list
-    $scope.checkOut = function () {
+    thisScope.checkOut = function () {
       var checkIn = null;
-      angular.forEach($scope.currentUser[$scope.list.type + 's'], function (val) {
+      angular.forEach(thisScope.currentUser[thisScope.list.type + 's'], function (val) {
         var listId = typeof val.list === 'object' ? val.list._id : val.list;
-        if (listId === $scope.list._id) {
+        if (listId === thisScope.list._id) {
           checkIn = val;
         }
       });
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        UserCheckInService.delete({userId: $scope.currentUser._id, listType: $scope.list.type + 's', checkInId: checkIn._id}, {}, function (user) {
+        UserCheckInService.delete({userId: thisScope.currentUser._id, listType: thisScope.list.type + 's', checkInId: checkIn._id}, {}, function (user) {
           alertService.add('success', gettextCatalog.getString('Successfully removed from list'), false, function(){});
-          $scope.setCurrentUser(user);
+          thisScope.setCurrentUser(user);
           UserDataService.notify();
-          $scope.isMember = false;
+          thisScope.isMember = false;
         }, function (error) {
           $exceptionHandler(error, 'Leaving list');
         });
@@ -213,9 +214,9 @@
     };
 
     // Delete list
-    $scope.deleteList = function() {
+    thisScope.deleteList = function() {
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        $scope.list.$delete(function () {
+        thisScope.list.$delete(function () {
           alertService.add('success', gettextCatalog.getString('The list was successfully deleted.'));
           $location.path('/lists');
         });
@@ -223,75 +224,75 @@
     };
 
     function favoriteList () {
-      if (!$scope.currentUser.favoriteLists) {
-        $scope.currentUser.favoriteLists = [];
+      if (!thisScope.currentUser.favoriteLists) {
+        thisScope.currentUser.favoriteLists = [];
       }
-      $scope.currentUser.favoriteLists.push($scope.list);
-      User.update($scope.currentUser, function () {
+      thisScope.currentUser.favoriteLists.push(thisScope.list);
+      User.update(thisScope.currentUser, function () {
         alertService.add('success', gettextCatalog.getString('This list was successfully added to your favourites.'));
-        $scope.isFavorite = true;
-        $scope.setCurrentUser($scope.currentUser);
-        $scope.favSaving = false;
+        thisScope.isFavorite = true;
+        thisScope.setCurrentUser(thisScope.currentUser);
+        thisScope.favSaving = false;
       }, function (error) {
-        $scope.favSaving = false;
+        thisScope.favSaving = false;
         $exceptionHandler(error, 'Favourite list - update user');
       });
     }
 
     function unfavoriteList () {
-      $scope.currentUser.favoriteLists = $scope.currentUser.favoriteLists.filter(function (elt) {
-        return elt._id != $scope.list._id;
+      thisScope.currentUser.favoriteLists = thisScope.currentUser.favoriteLists.filter(function (elt) {
+        return elt._id != thisScope.list._id;
       });
-      User.update($scope.currentUser, function () {
+      User.update(thisScope.currentUser, function () {
         alertService.add('success', gettextCatalog.getString('This list was successfully removed from your favourites.'));
-        $scope.isFavorite = false;
-        $scope.setCurrentUser($scope.currentUser);
-        $scope.favSaving = false;
+        thisScope.isFavorite = false;
+        thisScope.setCurrentUser(thisScope.currentUser);
+        thisScope.favSaving = false;
       }, function (error) {
-        $scope.favSaving = false;
+        thisScope.favSaving = false;
         $exceptionHandler(error, 'Unfavourite list - update user');
       });
     }
 
     // Star a list as favorite
-    $scope.star = function() {
-      $scope.favSaving = true;
-      User.get({userId: $scope.currentUser._id}, function (user) {
-        $scope.currentUser = user;
-        $scope.setCurrentUser($scope.currentUser);
+    thisScope.star = function() {
+      thisScope.favSaving = true;
+      User.get({userId: thisScope.currentUser._id}, function (user) {
+        thisScope.currentUser = user;
+        thisScope.setCurrentUser(thisScope.currentUser);
         favoriteList();
       }, function (error) {
-        $scope.favSaving = false;
+        thisScope.favSaving = false;
         $exceptionHandler(error, 'Favourite list - get user');
       });
     };
 
     // Remove a list from favorites
-    $scope.unstar = function() {
-      $scope.favSaving = true;
-      User.get({userId: $scope.currentUser._id}, function (user) {
-        $scope.currentUser = user;
-        $scope.setCurrentUser($scope.currentUser);
+    thisScope.unstar = function() {
+      thisScope.favSaving = true;
+      User.get({userId: thisScope.currentUser._id}, function (user) {
+        thisScope.currentUser = user;
+        thisScope.setCurrentUser(thisScope.currentUser);
         unfavoriteList();
       }, function (error) {
-        $scope.favSaving = false;
+        thisScope.favSaving = false;
         $exceptionHandler(error, 'Unfavourite list - get user');
       });
     };
 
     // Approve a user and remove their pending status
-    $scope.approveUser = function (user) {
+    thisScope.approveUser = function (user) {
       var checkInId;
 
       alertService.add('warning', gettextCatalog.getString('Are you sure?'), true, function() {
-        angular.forEach(user[$scope.list.type + 's'], function (list) {
-          if ($scope.list._id === list.list) {
+        angular.forEach(user[thisScope.list.type + 's'], function (list) {
+          if (thisScope.list._id === list.list) {
             checkInId = list._id;
           }
         });
 
         if (checkInId) {
-          UserCheckInService.update({userId: user._id, listType: $scope.list.type + 's', checkInId: checkInId}, {pending: false}, function () {
+          UserCheckInService.update({userId: user._id, listType: thisScope.list.type + 's', checkInId: checkInId}, {pending: false}, function () {
             alertService.add('success', gettextCatalog.getString('The user was successfully approved.'));
             user.pending = false;
           });
@@ -299,8 +300,8 @@
       });
     };
 
-    $scope.showDatePicker = function() {
-      $scope.datePicker.opened = true;
+    thisScope.showDatePicker = function() {
+      thisScope.datePicker.opened = true;
     };
 
   }
