@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="" ng-app="hidApp" manifest="/offline.appcache">
     <head>
         <meta charset="utf-8">
@@ -27,7 +27,7 @@
         <link href="assets/css/main.css" rel="stylesheet">
         <!-- endbuild -->
     </head>
-    <body ng-controller="AppCtrl" ng-class="{&apos;toggled&apos; : sidebar.open, &apos;prevent-mobile-scroll&apos;: sidebar.underlay}" class="lang-{{language}}" ng-keyup="keyupEvent($event)">
+    <body ng-controller="AppController" ng-class="{&apos;toggled&apos; : sidebar.open, &apos;prevent-mobile-scroll&apos;: sidebar.underlay}" class="lang-{{language}}" ng-keyup="keyupEvent($event)">
 
         <ng-include src="&apos;app/components/header/header.html&apos;"></ng-include>
 
@@ -46,7 +46,7 @@
           <div class="sidebar-overlay" ng-class="{&apos;in&apos; : sidebar.open}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
           <ng-include ng-if="!hideHeaderFooter" src="&apos;app/components/footer/footer.html&apos;"></ng-include>
         </div>
-        <div ng-controller="ErrorsCtrl"></div>
+        <div ng-controller="ErrorsController"></div>
 
         <offline-status></offline-status>
 
@@ -83,101 +83,102 @@
         <script src="bower_components/microsoft-graph-client/lib/graph-js-sdk-web.js"></script>
         <script src="bower_components/angular-recaptcha/release/angular-recaptcha.min.js"></script>
         <script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
-        <script src="app/app.js"></script>
-        <script src="app/common/common.module.js"></script>
-        <script src="app/common/app.controller.js"></script>
-        <script src="app/common/errors.controller.js"></script>
-        <script src="app/common/hrInfo.service.js"></script>
-        <script src="app/common/hrInfoTypeahead.directive.js"></script>
-        <script src="app/common/backButton.directive.js"></script>
-        <script src="app/common/icon.directive.js"></script>
+        <script src="app/hidApp.js"></script>
+        <script src="app/common/app.common.js"></script>
+        <script src="app/common/AppController.js"></script>
+        <script src="app/common/ErrorsController.js"></script>
+        <script src="app/common/hrinfoService.js"></script>
+        <script src="app/common/hrinfoTypeahead.js"></script>
+        <script src="app/common/backButton.js"></script>
+        <script src="app/common/icon.js"></script>
         <script src="app/common/translations.js"></script>
-        <script src="app/common/sticky.directive.js"></script>
-        <script src="app/common/validators.directive.js"></script>
-        <script src="app/components/loader/loader.directive.js"></script>
-        <script src="app/components/alerts/alert.service.js"></script>
-        <script src="app/components/alerts/pageAlert.directive.js"></script>
-        <script src="app/components/tabs/tabs.directive.js"></script>
-        <script src="app/components/start/start.module.js"></script>
-        <script src="app/components/start/start.controller.js"></script>
-        <script src="app/components/start/tutorial.controller.js"></script>
-        <script src="app/components/user/user.module.js"></script>
-        <script src="app/components/user/user.service.js"></script>
-        <script src="app/components/user/userCheckIn.service.js"></script>
-        <script src="app/components/user/userData.service.js"></script>
-        <script src="app/components/user/user.controller.js"></script>
-        <script src="app/components/user/users.controller.js"></script>
-        <script src="app/components/user/kiosk.controller.js"></script>
-        <script src="app/components/user/userNew.controller.js"></script>
-        <script src="app/components/user/userPrefs.controller.js"></script>
-        <script src="app/components/user/usersPage.controller.js"></script>
-        <script src="app/components/user/userEdit.controller.js"></script>
-        <script src="app/components/user/usersList.directive.js"></script>
-        <script src="app/components/user/userOptions.controller.js"></script>
-        <script src="app/components/user/usersExport.controller.js"></script>
-        <script src="app/components/user/userLists.service.js"></script>
-        <script src="app/components/user/twoFactorAuth.service.js"></script>
-        <script src="app/components/checkin/checkin.module.js"></script>
-        <script src="app/components/checkin/checkin.controller.js"></script>
-        <script src="app/components/checkin/allCheckIns.controller.js"></script>
-        <script src="app/components/auth/auth.module.js"></script>
-        <script src="app/components/auth/apiInterceptor.service.js"></script>
-        <script src="app/components/auth/auth.service.js"></script>
-        <script src="app/components/auth/auth.controller.js"></script>
-        <script src="app/components/auth/resetPassword.controller.js"></script>
-        <script src="app/components/auth/verify.controller.js"></script>
-        <script src="app/components/list/list.module.js"></script>
-        <script src="app/components/list/list.service.js"></script>
-        <script src="app/components/list/listData.service.js"></script>
-        <script src="app/components/list/lists.controller.js"></script>
-        <script src="app/components/list/listEdit.controller.js"></script>
-        <script src="app/components/list/list.controller.js"></script>
-        <script src="app/components/selectLists/selectLists.module.js"></script>
-        <script src="app/components/selectLists/selectLists.directive.js"></script>
-        <script src="app/components/selectLists/selectLists.controller.js"></script>
-        <script src="app/components/client/client.module.js"></script>
-        <script src="app/components/client/client.controller.js"></script>
-        <script src="app/components/client/clients.controller.js"></script>
-        <script src="app/components/client/client.service.js"></script>
-        <script src="app/components/duplicate/duplicate.module.js"></script>
-        <script src="app/components/duplicate/duplicates.controller.js"></script>
-        <script src="app/components/duplicate/duplicate.service.js"></script>
-        <script src="app/components/dashboard/dashboard.module.js"></script>
-        <script src="app/components/dashboard/dashboard.controller.js"></script>
-        <script src="app/components/search/search.module.js"></script>
-        <script src="app/components/search/search.service.js"></script>
-        <script src="app/components/search/search.controller.js"></script>
-        <script src="app/components/search/searchForm.controller.js"></script>
-        <script src="app/components/notifications/notifications.module.js"></script>
-        <script src="app/components/notifications/notifications.service.js"></script>
-        <script src="app/components/notifications/notifications.controller.js"></script>
-        <script src="app/components/notifications/notificationsCount.directive.js"></script>
-        <script src="app/components/service/service.module.js"></script>
-        <script src="app/components/service/service.controller.js"></script>
-        <script src="app/components/service/serviceEdit.controller.js"></script>
-        <script src="app/components/service/services.controller.js"></script>
-        <script src="app/components/service/service.service.js"></script>
-        <script src="app/components/service/serviceCredentials.service.js"></script>
-        <script src="app/components/service/suggestions.controller.js"></script>
-        <script src="app/components/service/servicesList.directive.js"></script>
-        <script src="app/components/service/servicesPage.controller.js"></script>
-        <script src="app/components/service/allSubscriptions.controller.js"></script>
-        <script src="app/components/landing/landing.controller.js"></script>
-        <script src="app/components/sidebar/sidebar.module.js"></script>
-        <script src="app/components/sidebar/sidebar.service.js"></script>
-        <script src="app/components/sidebar/sidebar.directive.js"></script>
-        <script src="app/components/offlineStatus/offline.directive.js"></script>
-        <script src="app/components/video/videoPlayer.directive.js"></script>
-        <script src="app/components/outlook/outlook.module.js"></script>
-        <script src="app/components/outlook/outlook.controller.js"></script>
-        <script src="app/components/operations/operations.module.js"></script>
-        <script src="app/components/operations/operation.controller.js"></script>
-        <script src="app/components/operations/operation.service.js"></script>
-        <script src="app/components/operations/operations.controller.js"></script>
-        <script src="app/components/operations/operationView.controller.js"></script>
-        <script src="app/components/trustedDomain/trustedDomain.module.js"></script>
-        <script src="app/components/trustedDomain/trustedDomains.controller.js"></script>
-        <script src="app/components/trustedDomain/trustedDomain.service.js"></script>
+        <script src="app/common/sticky.js"></script>
+        <script src="app/common/validatePassword.js"></script>
+        <script src="app/components/loader/loader.js"></script>
+        <script src="app/components/alerts/alertService.js"></script>
+        <script src="app/components/alerts/pageAlert.js"></script>
+        <script src="app/components/tabs/tab.js"></script>
+        <script src="app/components/tabs/tabset.js"></script>
+        <script src="app/components/start/app.start.js"></script>
+        <script src="app/components/start/StartController.js"></script>
+        <script src="app/components/start/TutorialController.js"></script>
+        <script src="app/components/user/app.user.js"></script>
+        <script src="app/components/user/User.js"></script>
+        <script src="app/components/user/UserCheckInService.js"></script>
+        <script src="app/components/user/UserDataService.js"></script>
+        <script src="app/components/user/UserController.js"></script>
+        <script src="app/components/user/UsersController.js"></script>
+        <script src="app/components/user/KioskController.js"></script>
+        <script src="app/components/user/UserNewController.js"></script>
+        <script src="app/components/user/UserPrefsController.js"></script>
+        <script src="app/components/user/UsersPageController.js"></script>
+        <script src="app/components/user/UserEditController.js"></script>
+        <script src="app/components/user/usersList.js"></script>
+        <script src="app/components/user/UserOptionsController.js"></script>
+        <script src="app/components/user/UsersExportController.js"></script>
+        <script src="app/components/user/UserListsService.js"></script>
+        <script src="app/components/user/TwoFactorAuthService.js"></script>
+        <script src="app/components/checkin/app.checkin.js"></script>
+        <script src="app/components/checkin/CheckinController.js"></script>
+        <script src="app/components/checkin/AllCheckInsController.js"></script>
+        <script src="app/components/auth/app.auth.js"></script>
+        <script src="app/components/auth/APIInterceptor.js"></script>
+        <script src="app/components/auth/AuthService.js"></script>
+        <script src="app/components/auth/AuthController.js"></script>
+        <script src="app/components/auth/ResetPasswordController.js"></script>
+        <script src="app/components/auth/VerifyController.js"></script>
+        <script src="app/components/list/app.list.js"></script>
+        <script src="app/components/list/List.js"></script>
+        <script src="app/components/list/ListDataService.js"></script>
+        <script src="app/components/list/ListsController.js"></script>
+        <script src="app/components/list/ListEditController.js"></script>
+        <script src="app/components/list/ListController.js"></script>
+        <script src="app/components/selectLists/app.selectLists.js"></script>
+        <script src="app/components/selectLists/selectLists.js"></script>
+        <script src="app/components/selectLists/SelectListsController.js"></script>
+        <script src="app/components/client/app.client.js"></script>
+        <script src="app/components/client/ClientController.js"></script>
+        <script src="app/components/client/ClientsController.js"></script>
+        <script src="app/components/client/Client.js"></script>
+        <script src="app/components/duplicate/app.duplicate.js"></script>
+        <script src="app/components/duplicate/DuplicatesController.js"></script>
+        <script src="app/components/duplicate/Duplicate.js"></script>
+        <script src="app/components/dashboard/app.dashboard.js"></script>
+        <script src="app/components/dashboard/DashboardController.js"></script>
+        <script src="app/components/search/app.search.js"></script>
+        <script src="app/components/search/SearchService.js"></script>
+        <script src="app/components/search/SearchController.js"></script>
+        <script src="app/components/search/SearchFormController.js"></script>
+        <script src="app/components/notifications/app.notifications.js"></script>
+        <script src="app/components/notifications/notificationsService.js"></script>
+        <script src="app/components/notifications/NotificationsController.js"></script>
+        <script src="app/components/notifications/notificationsCount.js"></script>
+        <script src="app/components/service/app.service.js"></script>
+        <script src="app/components/service/ServiceController.js"></script>
+        <script src="app/components/service/ServiceEditController.js"></script>
+        <script src="app/components/service/ServicesController.js"></script>
+        <script src="app/components/service/Service.js"></script>
+        <script src="app/components/service/ServiceCredentials.js"></script>
+        <script src="app/components/service/SuggestionsController.js"></script>
+        <script src="app/components/service/servicesList.js"></script>
+        <script src="app/components/service/ServicesPageController.js"></script>
+        <script src="app/components/service/AllSubscriptionsController.js"></script>
+        <script src="app/components/landing/LandingController.js"></script>
+        <script src="app/components/sidebar/app.sidebar.js"></script>
+        <script src="app/components/sidebar/SidebarService.js"></script>
+        <script src="app/components/sidebar/sidebar.js"></script>
+        <script src="app/components/offlineStatus/offlineStatus.js"></script>
+        <script src="app/components/video/videoPlayer.js"></script>
+        <script src="app/components/outlook/app.outlook.js"></script>
+        <script src="app/components/outlook/OutlookController.js"></script>
+        <script src="app/components/operations/app.operations.js"></script>
+        <script src="app/components/operations/OperationController.js"></script>
+        <script src="app/components/operations/Operation.js"></script>
+        <script src="app/components/operations/OperationsController.js"></script>
+        <script src="app/components/operations/OperationViewController.js"></script>
+        <script src="app/components/trustedDomain/app.trustedDomain.js"></script>
+        <script src="app/components/trustedDomain/TrustedDomainsController.js"></script>
+        <script src="app/components/trustedDomain/TrustedDomain.js"></script>
         <!-- endbuild -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

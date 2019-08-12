@@ -36,9 +36,15 @@
 See https://github.com/UN-OCHA/hid-stack/blob/master/README.md
 
 
-## Code style guide
+## Coding standards
 
-This project aims to follow the [John Papa Angular 1 style guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1)
+This project follows the [John Papa Angular 1 style guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1). You can lint the codebase by running the following command (look at the [ESLint plugin README](https://www.npmjs.com/package/eslint-plugin-angular) to interpret the rule names, which link to the styleguide in the format `y123`)
+
+```sh
+yarn run lint
+```
+
+The linting is run on every PR via Travis integration. To help keep track of exceptions, the `.eslintrc` has explicitly set a few rules to `error` to indicate that there are known cases of `eslint-disable-line` being used to suppress what would otherwise be an error. If you are able to resolve all violations of a particular rule, you should victoriously remove it from the .`eslintrc` file! ✊
 
 
 ## Unit tests
@@ -47,7 +53,7 @@ Unit tests are written using [Jasmine](https://jasmine.github.io/) and run with 
 
 ```sh
 # install Karma CLI
-npm install -g karma-cli
+yarn global add karma-cli
 
 # Run tests once
 grunt test
