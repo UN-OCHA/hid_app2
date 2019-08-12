@@ -13,7 +13,7 @@ $flagsImagePath: "/img/";
 }
 
 html, body {
-  height: 100%;
+  // height: 100%;
 }
 
 html, input {
@@ -30,6 +30,11 @@ body {
   color: $text-dark;
   line-height: 1.5;
   background: white;
+
+  // CD: limit body to 1400px to transition us partially while retaining the
+  // dimensions currently expected of the HID website.
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 body.toggled {
