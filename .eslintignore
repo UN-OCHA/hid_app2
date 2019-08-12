@@ -1,3 +1,4 @@
 src/**/*.tests.js
 src/app/config/config.*.js
 src/app/common/translations.js
+Gruntfile.js
