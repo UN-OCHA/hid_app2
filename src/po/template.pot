@@ -46,7 +46,7 @@ msgstr ""
 msgid "API key deleted"
 msgstr ""
 
-#: src/app/components/footer/footer.html:8
+#: src/app/components/footer/footer.html:6
 msgid "About"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgstr ""
 msgid "Authorized applications"
 msgstr ""
 
-#: src/app/components/footer/footer.html:14
+#: src/app/components/footer/footer.html:12
 msgid "Blog"
 msgstr ""
 
@@ -422,7 +422,7 @@ msgstr ""
 msgid "Co-ordination hub"
 msgstr ""
 
-#: src/app/components/footer/footer.html:20
+#: src/app/components/footer/footer.html:18
 #: src/app/components/user/users-export.html:9
 msgid "Code of conduct"
 msgstr ""
@@ -449,7 +449,7 @@ msgstr ""
 msgid "Connection request sent"
 msgstr ""
 
-#: src/app/components/footer/footer.html:23
+#: src/app/components/footer/footer.html:21
 msgid "Contact"
 msgstr ""
 
@@ -625,7 +625,7 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: src/app/components/footer/footer.html:17
+#: src/app/components/footer/footer.html:15
 msgid "Developers"
 msgstr ""
 
@@ -1720,10 +1720,6 @@ msgstr ""
 msgid "Secret"
 msgstr ""
 
-#: src/app/components/footer/footer.html:44
-msgid "See <a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\" style=\"color: #fff;\">here</a> platforms using Humanitarian ID login."
-msgstr ""
-
 #: src/app/components/checkin/checkin.html:23
 #: src/app/components/search/search-form.html:17
 #: src/app/components/search/search-form.html:28
@@ -1974,7 +1970,7 @@ msgstr ""
 msgid "Suggested services"
 msgstr ""
 
-#: src/app/components/footer/footer.html:11
+#: src/app/components/footer/footer.html:9
 msgid "Support"
 msgstr ""
 
