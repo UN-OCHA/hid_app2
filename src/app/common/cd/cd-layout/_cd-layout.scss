@@ -3,7 +3,6 @@
 //——————————————————————————————————————————————————————————————————————————————
 
 html {
-  background: $cd-site-bg-color;
   height: 100%;
   margin: 0;
 
@@ -13,16 +12,25 @@ html {
 }
 
 body {
-  background: $cd-white-bg-color;
-  margin: 0 auto;
+  background: $cd-site-bg-color;
+  min-height: 100%;
+}
+
+.cd-wrapper {
+  // The width of the website must be driven by .cd-wrapper instead of <body>
+  // like a normal CD website. This is because we have the off-canvas .sidebar
+  // which we're docking to the side of the window. So the <body> must also be
+  // the full size of the window instead of being restricted to a specific width.
   max-width: $cd-max-body-width;
   min-height: 100%;
+  margin: 0 auto;
   padding: 0;
+  background: $cd-white-bg-color;
 
   // Grid is used to fix the footer to the bottom of the screen, regardless of page min-height.
   // Just for CSS grid supporting browsers as IE fallback causes weirdness here.
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto; // HID: @see https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Sticky_footers
 }
 
 .cd-container {

@@ -103,7 +103,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
 .page-header-mobile {
   display: none;
-  
+
   &.sticky {
     opacity: 0;
     display: flex;
@@ -178,7 +178,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
     svg {
       width: $base-unit*11;
-      height: $base-unit*11;   
+      height: $base-unit*11;
     }
   }
 
@@ -210,7 +210,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 @include media-query(lg) {
 
   .page {
-    height: calc(100% - #{$header-height-md});
+    // height: calc(100% - #{$header-height-md});
     transition: $sidebar-transition;
 
     .toggled & {
@@ -248,9 +248,9 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
 @include media-query(xl) {
 
-  .page {
-    height: calc(100% - #{$header-height-md});
-  }
+  // .page {
+  //   height: calc(100% - #{$header-height-md});
+  // }
 
   .page-header__heading {
     .col-xl-4 & {
