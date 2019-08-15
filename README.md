@@ -79,9 +79,9 @@ Manually install [Java Development Kit (JDK)](https://www.oracle.com/technetwork
 
 You will need to add the environment variables to run the tests locally.
 
-* Ask Ops to share 'HID E2E test environment vars' with you on LastPass.
+* Ask Marina to share 'Test Accounts on FIS Platforms' Trello card with you.
 * Copy `e2e-tests/enviroment.example.js` to `environment.js`
-* Replace the file's content with the variables from LastPass
+* Manually copy the info from the Trello card into the environment file. This is a one-time setup.
 
 Finally, make sure you're running both containers (API/App) and they're both properly configured for local development.
 
