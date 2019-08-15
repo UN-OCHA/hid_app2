@@ -44,6 +44,7 @@ exports.config = {
     checkin: 'specs/checkin-spec.js',
     services: 'specs/service-spec.js',
     dashboard: 'specs/dashboard-spec.js',
+    footer: 'specs/footer-spec.js',
   }
 };
 
