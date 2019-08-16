@@ -67,12 +67,14 @@ describe('Connections', function () {
       expect(preferencesPage.approvedConnections.getText()).toContain(browser.params.userName);
     });
 
+    afterAll(function () {
+      navObject.logOut();
+    });
   });
 
   describe('Seeing the connection info after approval', function () {
 
     beforeAll(function () {
-      navObject.logOut();
       loginPage.get();
       loginPage.login();
       navObject.searchInput.sendKeys(browser.params.adminUserName);
@@ -86,12 +88,14 @@ describe('Connections', function () {
       expect(profilePage.phoneNumbers.getText()).toContain(browser.params.adminUserPhoneNumber);
     });
 
+    afterAll(function () {
+      navObject.logOut();
+    });
   });
 
   describe('Removing connections', function () {
 
     beforeAll(function () {
-      navObject.logOut();
       loginPage.get();
       loginPage.loginAdmin();
       navObject.openUserDropdown();
@@ -106,12 +110,10 @@ describe('Connections', function () {
       expect(preferencesPage.removeConnectionModalText.isPresent()).toBeTruthy();
       preferencesPage.modalOverlay.click();
     });
-
   });
 
   afterAll(function () {
     browser.sleep(3000);
     navObject.logOut();
   });
-
 });
