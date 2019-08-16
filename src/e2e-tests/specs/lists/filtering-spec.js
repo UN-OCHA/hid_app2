@@ -30,7 +30,7 @@ describe('Filtering a List', function () {
     });
 
     it('should update the current filters list', function () {
-      expect(listPage.currentFilters.getText()).toContain('Andrej');
+      expect(listPage.filterByName.getText()).toContain('Andrej');
     });
 
     afterAll(function () {

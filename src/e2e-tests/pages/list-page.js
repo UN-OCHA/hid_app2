@@ -41,7 +41,7 @@ var ListPage = function() {
 	this.applyFiltersButton = element(by.css('.t-apply-filters'));
 	this.clearFiltersButton = element(by.css('.t-clear-filters'));
 	this.closeFiltersButton = element(by.css('.t-close-user-filters'));
-	this.currentFilters = element.all(by.css('.t-current-user-filters')).first();
+	this.filterByName = element.all(by.css('.t-current-user-filters .tag-list__item')).get(0);
 	this.locationFiltersButton = element(by.css('.t-toggle-location-filters'));
 	this.occupationFiltersButton = element(by.css('.t-toggle-occupation-filters'));
 
@@ -172,7 +172,9 @@ var ListPage = function() {
 
 	this.clearFilters = function () {
 		this.openListFilters();
+    browser.sleep(500);
 		this.clearFiltersButton.click();
+    browser.sleep(500);
 		this.closeFiltersButton.click();
 		browser.wait(this.listTitle.isDisplayed(), 10000);
 	};
