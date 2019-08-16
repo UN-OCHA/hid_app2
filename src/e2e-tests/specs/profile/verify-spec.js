@@ -22,18 +22,21 @@ describe('User verification', function () {
 
     beforeAll(function () {
       browser.wait(profilePage.adminButton.isDisplayed, 10000);
+      browser.sleep(500);
       profilePage.adminButton.click();
       browser.wait(profilePage.adminSidebar.isDisplayed, 10000);
+      browser.sleep(500);
       profilePage.verifyButton.click();
     });
 
     it('should show the success message', function () {
       browser.wait(profilePage.modalOverlay.isDisplayed, 10000);
-      expect(profilePage.verifyModalText.isPresent()).toBeTruthy();
-      profilePage.modalOverlay.click();
+      expect(profilePage.verifyModalText.getText()).toContain('User updated');
     });
 
     it('should change the button to "un-verify"', function () {
+      profilePage.modalOverlay.click();
+      browser.sleep(500)
       profilePage.verifyButton.getText().then(function(str) {
         expect(str.toLowerCase()).toBe('un-verify user');
       });
@@ -41,6 +44,7 @@ describe('User verification', function () {
 
     it('should show verified tick on their profile', function () {
       profilePage.adminButton.click();
+      browser.sleep(500);
       expect(profilePage.verifiedTick.isDisplayed()).toBeTruthy();
     });
 
@@ -51,24 +55,27 @@ describe('User verification', function () {
     beforeAll(function () {
       profilePage.adminButton.click();
       browser.wait(profilePage.adminSidebar.isDisplayed, 10000);
+      browser.sleep(500);
       profilePage.verifyButton.click();
     });
 
     it('should show the success message', function () {
       browser.wait(profilePage.modalOverlay.isDisplayed, 10000);
+      browser.sleep(500);
       expect(profilePage.verifyModalText.isPresent()).toBeTruthy();
-      profilePage.modalOverlay.click();
     });
 
     it('should change the button to "verify"', function () {
+      profilePage.modalOverlay.click();
+      browser.sleep(500);
       profilePage.verifyButton.getText().then(function(str) {
         expect(str.toLowerCase()).toBe('verify user');
       });
     });
 
     it('should not show verified tick on their profile', function () {
-      profilePage.modalOverlay.click();
       profilePage.adminButton.click();
+      browser.sleep(500);
       expect(profilePage.verifiedTick.isDisplayed()).toBeFalsy();
     });
 

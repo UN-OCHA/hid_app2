@@ -18,7 +18,7 @@ var ProfilePage = function() {
   this.adminButton = element(by.css('.t-toggle-admin'));
   this.adminSidebar = element(by.css('.t-user-admin'));
   this.verifyButton = element(by.css('.t-verify-btn'));
-  this.verifyModalText = element(by.cssContainingText('div .modal-body', 'User updated'));
+  this.verifyModalText = element(by.css('.modal-body'));
   this.verifiedTick = element(by.css('.t-verified-tick'));
 };
 
