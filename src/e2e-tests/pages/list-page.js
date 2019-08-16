@@ -41,7 +41,7 @@ var ListPage = function() {
   this.applyFiltersButton = element(by.css('.t-apply-filters'));
   this.clearFiltersButton = element(by.css('.t-clear-filters'));
   this.closeFiltersButton = element(by.css('.t-close-user-filters'));
-  this.filterByName = element.all(by.css('.t-current-user-filters .tag-list__item')).get(0);
+  this.currentFilters = element.all(by.css('.t-current-user-filters .tag-list__item')).get(0);
   this.locationFiltersButton = element(by.css('.t-toggle-location-filters'));
   this.occupationFiltersButton = element(by.css('.t-toggle-occupation-filters'));
 

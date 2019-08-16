@@ -30,7 +30,7 @@ describe('Filtering a List', function () {
     });
 
     it('should update the current filters list', function () {
-      expect(listPage.filterByName.getText()).toContain('Andrej');
+      expect(listPage.currentFilters.getText()).toContain('Andrej');
     });
 
     afterAll(function () {
@@ -48,7 +48,7 @@ describe('Filtering a List', function () {
       listPage.filtersButton.click();
       browser.wait(listPage.filtersSidebar.isDisplayed, 5000);
 
-      //open locations filters
+      // open locations filters
       listPage.locationFiltersButton.click();
       browser.wait(listPage.countryFilter.isDisplayed, 5000);
 
