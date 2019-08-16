@@ -6,13 +6,13 @@ if (!process.env.TRAVIS) {
 }
 
 exports.config = {
-	baseUrl:  process.env.TRAVIS ? process.env.baseUrl : env.baseUrl,
-	directConnect: true,
-	jasmineNodeOpts: {
-		print: function() {},
+  baseUrl:  process.env.TRAVIS ? process.env.baseUrl : env.baseUrl,
+  directConnect: true,
+  jasmineNodeOpts: {
+    print: function() {},
     defaultTimeoutInterval: 150000
-	},
-	onPrepare: function () {
+  },
+  onPrepare: function () {
     jasmine.getEnv().addReporter(new SpecReporter({
       spec: {
         displayStacktrace: false
@@ -34,13 +34,13 @@ exports.config = {
       ]
     },
   },
-	specs: ['specs/**/*-spec.js'],
+  specs: ['specs/**/*-spec.js'],
   suites: {
-  	login: 'specs/login-spec.js',
-  	nav: 'specs/navigation-spec.js',
-  	profile: 'specs/profile/*-spec.js',
+    login: 'specs/login-spec.js',
+    nav: 'specs/navigation-spec.js',
+    profile: 'specs/profile/*-spec.js',
     list: 'specs/lists/*-spec.js',
-  	search: 'specs/search-spec.js',
+    search: 'specs/search-spec.js',
     checkin: 'specs/checkin-spec.js',
     services: 'specs/service-spec.js',
     dashboard: 'specs/dashboard-spec.js',

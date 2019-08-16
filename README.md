@@ -91,7 +91,7 @@ Now you can run the E2E tests:
 # Run all E2E tests in series
 yarn run protractor
 
-# Run a single E2E test suite
+# Run a single E2E test suite. Look in conf.js for suite names.
 protractor --suite="my-suite-name" src/e2e-tests/conf.js
 ```
 
