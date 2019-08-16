@@ -67,6 +67,7 @@ describe('User verification', function () {
     });
 
     it('should not show verified tick on their profile', function () {
+      profilePage.modalOverlay.click();
       profilePage.adminButton.click();
       expect(profilePage.verifiedTick.isDisplayed()).toBeFalsy();
     });

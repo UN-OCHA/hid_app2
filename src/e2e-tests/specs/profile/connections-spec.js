@@ -24,7 +24,7 @@ describe('Connections', function () {
 
 		it('should show connection required message', function () {
 			browser.wait(profilePage.phonePermissionButton.isDisplayed, 10000);
-			expect(profilePage.phonePermissionButton.getText()).toContain('Request Test Admin E2E\'s phone number');
+			expect(profilePage.phonePermissionButton.getText()).toContain('Request Test\'s phone number');
 		});
 
 		it('should send the connection request', function () {
