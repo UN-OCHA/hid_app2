@@ -48,7 +48,7 @@ var ListPage = function() {
   this.countryFilter = element(by.css('.t-country-filter'));
   this.countryFilterToggle = element(by.css('.t-country-filter .ui-select-toggle'));
   this.countryFilterInput = element(by.css('.t-country-filter .ui-select-search'));
-  this.countryFilterOption = element(by.cssContainingText('.t-country-filter .ui-select-choices-row-inner', 'United Kingdom'));
+  this.countryFilterOption = element.all(by.css('.t-country-filter .ui-select-choices-row-inner')).get(0);
 
   this.selectDisaster = element(by.css('.t-disaster-filter'));
   this.selectDisasterToggle = this.selectDisaster.element(by.css('.ui-select-toggle'));
@@ -175,6 +175,9 @@ var ListPage = function() {
     browser.sleep(500);
     this.clearFiltersButton.click();
     browser.sleep(500);
+  }
+
+  this.closeFilters = function () {
     this.closeFiltersButton.click();
     browser.wait(this.listTitle.isDisplayed(), 10000);
   };

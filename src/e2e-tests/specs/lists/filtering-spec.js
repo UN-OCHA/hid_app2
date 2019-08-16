@@ -15,7 +15,6 @@ describe('Filtering a List', function () {
   });
 
   describe('Filtering by name', function () {
-
     beforeAll(function () {
       listPage.openListFilters();
       browser.wait(listPage.nameFilterInput.isDisplayed(), 10000);
@@ -35,64 +34,71 @@ describe('Filtering a List', function () {
 
     afterAll(function () {
       listPage.clearFilters();
+      listPage.closeFilters();
     });
-
   });
 
   describe('Filtering by location', function () {
+    beforeEach(function () {
+      browser.sleep(1000);
+    });
 
     it('should filter by country', function () {
-      browser.sleep(3000);
-      // open filters side bar
-      browser.wait(listPage.filtersButton.isDisplayed, 5000);
-      listPage.filtersButton.click();
-      browser.wait(listPage.filtersSidebar.isDisplayed, 5000);
+      // Open filters side bar
+      listPage.openListFilters();
+      browser.sleep(500);
 
-      // open locations filters
+      // Open locations filters
       listPage.locationFiltersButton.click();
       browser.wait(listPage.countryFilter.isDisplayed, 5000);
 
-      // focus country filter
+      // Focus country filter
       listPage.countryFilterToggle.click();
       browser.wait(listPage.countryFilterInput.isDisplayed, 5000);
 
-      // type in filter
+      // Type into country filter
       listPage.countryFilterInput.sendKeys('United Kingdom');
 
-      // select option
+      // Select a country
       browser.wait(listPage.countryFilterOption.isDisplayed, 5000);
       expect(listPage.countryFilterOption.getText()).toContain('United Kingdom');
       listPage.countryFilterOption.click();
 
-      // click apply button
+      // Click apply button
       listPage.applyFiltersButton.click();
+      browser.sleep(500);
 
+      // Check filtered results
       expect(listPage.currentFilters.getText()).toContain('United Kingdom');
       expect(listPage.listUsers.getText()).not.toContain('Andrej Verity');
       expect(listPage.listUsers.getText()).toContain('Emma HOGBIN WESTBY');
+
+      // Clear location
+      listPage.clearFilters();
     });
 
     it('should filter users by disaster', function () {
-      browser.sleep(3000);
       listPage.openListFilters();
       listPage.filterByDisaster('Haiti: Earthquakes - Jan 2010');
       expect(listPage.currentFilters.getText()).toContain('Haiti: Earthquakes - Jan 2010');
     });
 
     it('should filter users by Coordination Hub', function () {
-      browser.sleep(3000);
       listPage.openListFilters();
       listPage.filterByOffice('Haiti: Jeremie');
       expect(listPage.currentFilters.getText()).toContain('Haiti: Jeremie');
     });
 
     it('should filter users by Operation', function () {
-      browser.sleep(3000);
       listPage.openListFilters();
       listPage.filterByOperation('Haiti');
       expect(listPage.currentFilters.getText()).toContain('Haiti');
     });
 
+    afterEach(function () {
+      browser.sleep(500);
+      listPage.closeFilters();
+    });
   });
 
   describe('Filtering by occupation', function () {
