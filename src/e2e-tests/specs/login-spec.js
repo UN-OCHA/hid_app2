@@ -10,7 +10,7 @@ describe('Login', function () {
 
 		it('should show an error message', function () {
 			loginPage.get();
-	    loginPage.badLogin();
+	    loginPage.loginInvalid();
 
 	    browser.wait(loginPage.errorModal.isDisplayed(), 1000);
 

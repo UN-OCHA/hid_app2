@@ -20,7 +20,7 @@ var LoginPage = function() {
     loginButton.click();
   };
 
-  this.badLogin = function () {
+  this.loginInvalid = function () {
   	emailInput.sendKeys('testuser@example.com');
     passwordInput.sendKeys('notthepassword');
     loginButton.click();
