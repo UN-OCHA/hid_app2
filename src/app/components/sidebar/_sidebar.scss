@@ -1,6 +1,6 @@
 .sidebar {
   position: absolute;
-  top: -$base-unit*1.5;
+  top: 0;
   transform: translate3d(-($sidebar-width-xs + $base-unit*1.5), 0, 0);
   height: 100%;
   width: $sidebar-width-xs;
@@ -171,6 +171,7 @@
 
     &.in {
       transform: translate3d(-$base-unit*2, 0, 0);
+      box-shadow: -22px 0 30px black;
     }
   }
 
@@ -204,7 +205,7 @@
     transform: none;
 
     &.in {
-      transform: none;
+      transform: translateX($sidebar-width-md);
     }
   }
 
@@ -219,6 +220,10 @@
   .sidebar {
     width: $sidebar-width-xxl;
     left: -$sidebar-width-xxl;
+
+    &.in {
+      transform: translateX($sidebar-width-xxl);
+    }
   }
 
 }

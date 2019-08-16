@@ -20,7 +20,6 @@ var ProfilePage = function() {
   this.verifyButton = element(by.css('.t-verify-btn'));
   this.verifyModalText = element(by.cssContainingText('div .modal-body', 'User updated'));
   this.verifiedTick = element(by.css('.t-verified-tick'));
-
 };
 
 module.exports = ProfilePage;
