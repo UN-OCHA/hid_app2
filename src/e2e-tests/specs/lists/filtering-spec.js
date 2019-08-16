@@ -19,18 +19,18 @@ describe('Filtering a List', function () {
 		beforeAll(function () {
 			listPage.openListFilters();
 			browser.wait(listPage.nameFilterInput.isDisplayed(), 10000);
-			listPage.nameFilterInput.sendKeys('Yaelle');
+			listPage.nameFilterInput.sendKeys('Andrej');
 			listPage.applyFiltersButton.click();
 			browser.wait(listPage.listTitle.isDisplayed(), 10000);
 		});
 
 		it('should filter users by the name given', function () {
-			expect(listPage.listUsers.getText()).toContain('Yaelle Link');
-			expect(listPage.listUsers.getText()).not.toContain('Andrej Verity');
+			expect(listPage.listUsers.getText()).toContain('Andrej Verity');
+			expect(listPage.listUsers.getText()).not.toContain('Yaelle Link');
 		});
 
 		it('should update the current filters list', function () {
-			expect(listPage.currentFilters.getText()).toContain('Yaelle');
+			expect(listPage.currentFilters.getText()).toContain('Andrej');
 		});
 
 		afterAll(function () {
