@@ -30,7 +30,7 @@ describe('Connections', function () {
     it('should send the connection request', function () {
       profilePage.connectButton.click();
       browser.wait(profilePage.modalOverlay.isDisplayed, 10000);
-      expect(profilePage.connectModalText.isPresent()).toBeTruthy();
+      expect(profilePage.connectModal.getText()).toContain('Connection request sent');
       profilePage.modalOverlay.click();
       browser.wait(profilePage.phonePermissionMessage.isDisplayed, 10000);
       expect(profilePage.phonePermissionMessage.getText()).toContain('Your connection request is pending');
