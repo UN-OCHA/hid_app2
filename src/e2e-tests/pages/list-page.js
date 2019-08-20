@@ -41,7 +41,7 @@ var ListPage = function() {
   this.applyFiltersButton = element(by.css('.t-apply-filters'));
   this.clearFiltersButton = element(by.css('.t-clear-filters'));
   this.closeFiltersButton = element(by.css('.t-close-user-filters'));
-  this.currentFilters = element.all(by.css('.t-current-user-filters .tag-list__item')).get(0);
+  this.currentFilters = element.all(by.css('.t-current-user-filters .tag-list__item .tag-list__text'));
   this.locationFiltersButton = element(by.css('.t-toggle-location-filters'));
   this.occupationFiltersButton = element(by.css('.t-toggle-occupation-filters'));
 
@@ -85,21 +85,19 @@ var ListPage = function() {
 
   this.openLocationFilters = function () {
     this.openListFilters();
-    browser.wait(this.locationFiltersButton.isDisplayed(), 10000);
     this.locationFiltersButton.click();
     browser.wait(this.selectCountryToggle.isDisplayed(), 10000);
   };
 
   this.openOccupationFilters = function () {
     this.openListFilters();
-    browser.wait(this.occupationFiltersButton.isDisplayed(), 10000);
     this.occupationFiltersButton.click();
     browser.wait(this.selectGroupToggle.isDisplayed(), 10000);
   };
 
   this.filterByDisaster = function (disaster) {
     this.selectDisasterToggle.click();
-    browser.wait(this.selectDisasterInput.isDisplayed(), 10000);
+    browser.sleep(1000);
     this.selectDisasterInput.sendKeys(disaster);
     browser.wait(this.selectDisasterResults.isDisplayed(), 10000);
     var selectDisasterResult = element.all(by.cssContainingText('a.ui-select-choices-row-inner', disaster)).first();
@@ -111,14 +109,13 @@ var ListPage = function() {
 
   this.filterByOffice = function (office) {
     this.selectOfficeToggle.click();
-    browser.wait(this.selectOfficeInput.isDisplayed(), 10000);
     this.selectOfficeInput.sendKeys(office);
     browser.wait(this.selectOfficeResults.isDisplayed(), 10000);
     var selectOfficeResult = element.all(by.cssContainingText('a.ui-select-choices-row-inner', office)).first();
     browser.wait(selectOfficeResult.isDisplayed(), 10000);
     selectOfficeResult.click();
     this.applyFiltersButton.click();
-    browser.wait(this.listTitle.isDisplayed(), 10000);
+    browser.wait(this.listTitle.isDisplayed(), 5000);
   };
 
   this.filterByOperation = function (operation) {
@@ -130,7 +127,7 @@ var ListPage = function() {
     browser.wait(selectOperationResult.isDisplayed(), 10000);
     selectOperationResult.click();
     this.applyFiltersButton.click();
-    browser.wait(this.listTitle.isDisplayed(), 10000);
+    browser.wait(this.listTitle.isDisplayed(), 5000);
   };
 
   this.filterByGroup = function (group) {
@@ -142,7 +139,7 @@ var ListPage = function() {
     browser.wait(selectGroupResult.isDisplayed(), 10000);
     selectGroupResult.click();
     this.applyFiltersButton.click();
-    browser.wait(this.listTitle.isDisplayed(), 10000);
+    browser.wait(this.listTitle.isDisplayed(), 5000);
   };
 
   this.filterByRole = function (role) {
@@ -154,7 +151,7 @@ var ListPage = function() {
     browser.wait(selectRoleResult.isDisplayed(), 10000);
     selectRoleResult.click();
     this.applyFiltersButton.click();
-    browser.wait(this.listTitle.isDisplayed(), 10000);
+    browser.wait(this.listTitle.isDisplayed(), 5000);
   };
 
   this.goToList = function (listName) {
@@ -165,21 +162,19 @@ var ListPage = function() {
   };
 
   this.openListFilters = function () {
-    browser.wait(this.filtersButton.isDisplayed(), 10000);
     this.filtersButton.click();
-    browser.wait(this.filtersSidebar.isDisplayed(), 10000);
+    browser.sleep(500);
   };
 
   this.clearFilters = function () {
     this.openListFilters();
-    browser.sleep(500);
     this.clearFiltersButton.click();
     browser.sleep(500);
   }
 
   this.closeFilters = function () {
     this.closeFiltersButton.click();
-    browser.wait(this.listTitle.isDisplayed(), 10000);
+    browser.sleep(1000);
   };
 
   this.openListAdmin = function () {

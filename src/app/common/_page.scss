@@ -1,13 +1,14 @@
-// necessary as can't have sum in calc
-$footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
+//——————————————————————————————————————————————————————————————————————————————
+// Pages and Containers
+//——————————————————————————————————————————————————————————————————————————————
 
 .container[role="main"] {
-  min-height: 300px;
+  min-height: 500px;
   padding-bottom: $base-unit*4;
 
-  @include media-query(lg) {
-    min-height: calc(100% - #{$footer-plus-breadcrumbs-lg});
-  }
+  // @include media-query(lg) {
+  //   min-height: calc(100% - #{$footer-height-lg} - #{$breadcrumbs-height});
+  // }
 }
 
 .page {

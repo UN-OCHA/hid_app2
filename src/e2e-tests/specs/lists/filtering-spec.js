@@ -75,29 +75,29 @@ describe('Filtering a List', function () {
 
       // Clear location
       listPage.clearFilters();
+      listPage.closeFilters();
     });
+
 
     it('should filter users by disaster', function () {
+      const disasterName = 'Haiti: Haiti: Earthquakes - Jan 2010';
       listPage.openListFilters();
-      listPage.filterByDisaster('Haiti: Earthquakes - Jan 2010');
-      expect(listPage.currentFilters.getText()).toContain('Haiti: Earthquakes - Jan 2010');
-    });
-
-    it('should filter users by Coordination Hub', function () {
-      listPage.openListFilters();
-      listPage.filterByOffice('Haiti: Jeremie');
-      expect(listPage.currentFilters.getText()).toContain('Haiti: Jeremie');
+      listPage.filterByDisaster(disasterName);
+      expect(listPage.currentFilters.getText()).toContain(disasterName);
     });
 
     it('should filter users by Operation', function () {
+      const operationName = 'Haiti';
       listPage.openListFilters();
-      listPage.filterByOperation('Haiti');
-      expect(listPage.currentFilters.getText()).toContain('Haiti');
+      listPage.filterByOperation(operationName);
+      expect(listPage.currentFilters.getText()).toContain(operationName);
     });
 
-    afterEach(function () {
-      browser.sleep(500);
-      listPage.closeFilters();
+    it('should filter users by Coordination Hub', function () {
+      const officeName = 'Haiti: Jeremie';
+      listPage.openListFilters();
+      listPage.filterByOffice(officeName);
+      expect(listPage.currentFilters.getText()).toContain(officeName);
     });
   });
 
@@ -120,7 +120,6 @@ describe('Filtering a List', function () {
       expect(listPage.currentFilters.getText()).toContain('Administrative Officer');
     });
   });
-
 
   afterAll(function () {
     navObject.logOut();
