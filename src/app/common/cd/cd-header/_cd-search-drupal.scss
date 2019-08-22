@@ -1,5 +1,10 @@
 //——————————————————————————————————————————————————————————————————————————————
-// Common Design: Footer
-//
-// @see src/app/common/cd
+// Common Design: Drupal Search
 //——————————————————————————————————————————————————————————————————————————————
+
+.cd-search {
+  .form-item,
+  .form-actions {
+    margin: 0;
+  }
+}

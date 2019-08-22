@@ -1,5 +1,13 @@
 //——————————————————————————————————————————————————————————————————————————————
-// Common Design: Footer
-//
-// @see src/app/common/cd
+// Common Design: Global Header
 //——————————————————————————————————————————————————————————————————————————————
+
+.cd-global-header {
+  &__language-switcher {
+    float: right;
+  }
+
+  &__user-menu {
+    float: right;
+  }
+}

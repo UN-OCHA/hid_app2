@@ -53,7 +53,7 @@ module.exports = function(grunt) {
       options: {},
       dist: {
         files: {
-          'src/assets/css/main.scss': ['src/app/common/variables/*.scss', 'src/app/common/mixins/*.scss', 'src/app/common/base/*.scss', 'src/app/common/forms/*.scss', 'src/app/common/*.scss', 'src/app/components/**/*'],
+          'src/assets/css/main.scss': ['src/app/common/cd/_cd.scss', 'src/app/common/variables/*.scss', 'src/app/common/mixins/*.scss', 'src/app/common/base/*.scss', 'src/app/common/forms/*.scss', 'src/app/common/*.scss', 'src/app/components/**/*'],
         }
       }
     },
