@@ -25,6 +25,7 @@ describe('Favourite Lists', function () {
 
       beforeAll(function () {
         listPage.openListAdmin();
+        browser.sleep(500);
         listPage.favButton.click();
       });
 
@@ -48,6 +49,7 @@ describe('Favourite Lists', function () {
       beforeAll(function () {
         listPage.goToList(browser.params.standardTestList);
         listPage.openListAdmin();
+        browser.sleep(500);
         listPage.unFavButton.click();
       });
 
