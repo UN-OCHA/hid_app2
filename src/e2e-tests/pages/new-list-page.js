@@ -19,6 +19,7 @@ var NewListPage = function() {
     visibilityAllCheckbox.click();
     joinabilityPublicCheckbox.click();
     saveButton.click();
+    browser.sleep(500);
   };
 
   this.createList = function (name) {

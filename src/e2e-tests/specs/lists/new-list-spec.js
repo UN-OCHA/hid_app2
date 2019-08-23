@@ -34,6 +34,7 @@ describe('New Lists', function () {
 
       it('should save and go to the new list', function () {
         newListPage.populateNewListForm();
+        browser.wait(listPage.listTitle.isDisplayed(), 10000);
         expect(listPage.listTitle.getText()).toBe(browser.params.tempList);
       });
 
@@ -68,14 +69,13 @@ describe('New Lists', function () {
       it('should show the success message', function () {
         browser.wait(listPage.deleteSuccessModalText.isDisplayed(), 10000);
         expect(listPage.deleteSuccessModalText.isPresent()).toBeTruthy();
+        listPage.successModalClose.click();
       });
     });
 
   });
 
   afterAll(function () {
-    browser.sleep(3000); //wait for modals to close
     navObject.logOut();
   });
-
 });
