@@ -1,18 +1,22 @@
-// necessary as can't have sum in calc
-$footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
+//——————————————————————————————————————————————————————————————————————————————
+// Pages and Containers
+//——————————————————————————————————————————————————————————————————————————————
 
 .container[role="main"] {
-  min-height: 300px;
+  min-height: 500px;
   padding-bottom: $base-unit*4;
 
-  @include media-query(lg) {
-    min-height: calc(100% - #{$footer-plus-breadcrumbs-lg});
-  }
+  // @include media-query(lg) {
+  //   min-height: calc(100% - #{$footer-height-lg} - #{$breadcrumbs-height});
+  // }
 }
 
 .page {
   position: relative;
   width: 100%;
+
+  // Hide sidebar when inactive
+  overflow-x: hidden;
 }
 
 .page-header {
@@ -214,8 +218,8 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
     transition: $sidebar-transition;
 
     .toggled & {
-      transform: translate3d($sidebar-width-md, 0, 0);
-      position: fixed;
+      // transform: translate3d($sidebar-width-md, 0, 0);
+      // position: fixed;
     }
 
     .no-calc & {
@@ -239,7 +243,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
     transition: $sidebar-transition;
 
     .toggled & {
-      transform: translateX(-$sidebar-width-md);
+      // transform: translateX(-$sidebar-width-md);
     }
   }
 
@@ -264,7 +268,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
   .page {
     .toggled & {
-      transform: translate3d($sidebar-width-xxl, 0 ,0);
+      // transform: translate3d($sidebar-width-xxl, 0 ,0);
     }
     .no-csstransforms & {
       .toggled & {
@@ -284,7 +288,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
   .page-header__buttons {
     .toggled & {
-      transform: translateX(-$sidebar-width-xxl);
+      // transform: translateX(-$sidebar-width-xxl);
     }
   }
 }

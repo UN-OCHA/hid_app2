@@ -20,15 +20,14 @@ var LoginPage = function() {
     loginButton.click();
   };
 
-  this.badLogin = function () {
+  this.loginInvalid = function () {
   	emailInput.sendKeys('testuser@example.com');
     passwordInput.sendKeys('notthepassword');
     loginButton.click();
   };
 
   this.errorModal = element(by.css('.modal-dialog'));
-  this.errorModalText = element(by.cssContainingText('div .modal-body', 'We could not log you in. Please verify your email and password.'));
-
+  this.errorModalText = element(by.cssContainingText('div .modal-body', 'We could not log you in. The username or password you have entered are incorrect. Kindly try again.'));
 };
 
 module.exports = LoginPage;

@@ -65,7 +65,7 @@ grunt test-watch
 
 ## E2E tests
 
-E2E is implemented with Protractor, an end-to-end testing tool for Angular.
+E2E is implemented with Jasmine with the help of Protractor, an end-to-end testing tool for Angular.
 
 Installation on **host machine**:
 
@@ -91,18 +91,22 @@ Now you can run the E2E tests:
 # Run all E2E tests in series
 yarn run protractor
 
-# Run a single E2E test suite
+# Run a single E2E test suite. Look in conf.js for suite names.
 protractor --suite="my-suite-name" src/e2e-tests/conf.js
 ```
+
+### What to do if it fails during local testing
+
+* Your DB might not have the right content, so check the test logs for specific strings that aren't matching (e.g. "Test Admin" vs "Test E2E Admin" or minor differences like that). In general, taking a snapshot of Staging will get you the correct content.
 
 
 ### What to do if it fails on TravisCI
 
 The tests are prone to random failures on Travis. If this happens:
 
-* manually check on staging to see if you can recreate the problem
-* if you can, fix your code!
-* if you can't, try re-running the tests in Travis and if possible alter the failing test to make it more robust
+* Manually check on staging to see if you can recreate the problem
+* If you can, fix your code!
+* If you can't, try re-running the tests in Travis and if possible alter the failing test to make it more robust
 
 ### Issues
 
