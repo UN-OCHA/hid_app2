@@ -19,13 +19,6 @@ msgstr ""
 msgid "2. Enter the code given:"
 msgstr ""
 
-#: src/app/components/header/header.html:8
-msgid ""
-"<button type=\"button\" class=\"btn-transparent\">\n"
-"          <icon name=\"arrow-left\" text=\"back\"></icon>\n"
-"        </button>"
-msgstr ""
-
 #: src/app/components/user/preferences.html:198
 msgid "<strong>1. Scan the QR Code:</strong>"
 msgstr ""
@@ -301,7 +294,6 @@ msgid "Changed primary phone number to:"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:409
-#: src/app/components/header/header.html:107
 msgid "Check in"
 msgstr ""
 
@@ -327,7 +319,6 @@ msgid "Check me in"
 msgstr ""
 
 #: src/app/components/checkin/checkout-page.html:4
-#: src/app/components/header/header.html:108
 msgid "Check out"
 msgstr ""
 
@@ -567,7 +558,6 @@ msgid "Current phone number"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.html:4
-#: src/app/components/header/header.html:105
 msgid "Dashboard"
 msgstr ""
 
@@ -760,10 +750,6 @@ msgstr ""
 msgid "Family name"
 msgstr ""
 
-#: src/app/components/header/header.html:81
-msgid "Feedback"
-msgstr ""
-
 #: src/app/components/start/tutorial.html:63
 msgid "Feel free to export your contact list into PDF or other available formats."
 msgstr ""
@@ -917,7 +903,6 @@ msgstr ""
 msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
 msgstr ""
 
-#: src/app/components/header/header.html:106
 #: src/app/components/search/SearchController.js:13
 msgid "Humanitarian contacts"
 msgstr ""
@@ -1085,11 +1070,6 @@ msgstr ""
 
 #: src/app/components/auth/login.html:4
 msgid "Log in to Humanitarian ID."
-msgstr ""
-
-#: src/app/components/header/header.html:37
-#: src/app/components/header/header.html:82
-msgid "Log out"
 msgstr ""
 
 #: src/app/components/auth/login.html:19
@@ -1487,10 +1467,6 @@ msgstr ""
 msgid "Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking 'Connect'."
 msgstr ""
 
-#: src/app/components/header/header.html:79
-msgid "Preferences"
-msgstr ""
-
 #: src/app/components/user/UserEditController.js:486
 msgid "Primary email updated"
 msgstr ""
@@ -1509,10 +1485,6 @@ msgstr ""
 
 #: src/app/components/list/List.js:226
 msgid "ProCap Officer"
-msgstr ""
-
-#: src/app/components/header/header.html:78
-msgid "Profile"
 msgstr ""
 
 #: src/app/components/user/UserEditController.js:183
@@ -1563,10 +1535,6 @@ msgstr ""
 
 #: src/app/components/auth/login.html:22
 msgid "Register a new Humanitarian ID Account"
-msgstr ""
-
-#: src/app/components/header/header.html:16
-msgid "Related platforms"
 msgstr ""
 
 #: src/app/components/user/UsersController.js:140
@@ -1888,10 +1856,6 @@ msgstr ""
 msgid "Skip"
 msgstr ""
 
-#: src/app/components/header/header.html:1
-msgid "Skip to main content"
-msgstr ""
-
 #: src/app/components/user/user.html:389
 msgid "Social Networks"
 msgstr ""
@@ -2126,10 +2090,6 @@ msgstr ""
 
 #: src/app/components/user/preferences.html:261
 msgid "Trusted devices"
-msgstr ""
-
-#: src/app/components/header/header.html:80
-msgid "Tutorial"
 msgstr ""
 
 #: src/app/components/user/preferences.html:154

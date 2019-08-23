@@ -1,5 +1,154 @@
-<header role="banner">
+<header class="cd-header" role="banner">
+  <div class="cd-global-header">
+    <div class="cd-container cd-global-header__inner">
+      <div class="cd-ocha">
+        <button type="button" class="cd-ocha-btn cd-global-header__dropdown-btn" data-toggle="dropdown" id="cd-ocha-dropdown-toggle" aria-expanded="false" aria-label="OCHA Services">
+          <span class="cd-ocha-btn__logo" aria-hidden="true"></span>
+          <span class="cd-ocha-btn__label">OCHA Services</span>
+          <svg class="icon icon--arrow-down">
+            <use xlink:href="#arrow-down"></use>
+          </svg>
+        </button>
+        <div class="cd-global-header__dropdown cd-ocha-dropdown cd-dropdown" role="menu" id="cd-ocha-dropdown" aria-labelledby="cd-ocha-dropdown-toggle">
+          <div class="cd-ocha-dropdown__inner">
+            <div class="cd-ocha-dropdown__section">
+              <p class="cd-ocha-dropdown__heading">Related Platforms</p>
+              <ul class="cd-ocha-dropdown__list">
+                <li class="cd-ocha-dropdown__link"><a href="https://example.com">Customizable</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://example.com">Customizable</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://example.com">Customizable</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://example.com">Customizable</a></li>
+              </ul>
+            </div>
+            <div class="cd-ocha-dropdown__section">
+              <p class="cd-ocha-dropdown__heading">Other OCHA Services</p>
+              <ul class="cd-ocha-dropdown__list">
+                <li class="cd-ocha-dropdown__link"><a href="https://fts.unocha.org/">Financial Tracking Service</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://data.humdata.org/">Humanitarian Data Exchange</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://humanitarian.id/">Humanitarian ID</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://humanitarianresponse.info/">Humanitarian Response</a></li>
+              </ul>
+            </div>
+            <div class="cd-ocha-dropdown__section">
+              <p class="cd-ocha-dropdown__heading" aria-hidden="true">&nbsp;</p>
+              <ul class="cd-ocha-dropdown__list">
+                <li class="cd-ocha-dropdown__link"><a href="https://interagencystandingcommittee.org">Inter-Agency Standing Committee</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://unocha.org/">OCHA website</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://reliefweb.int/">ReliefWeb</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://vosocc.unocha.org/">Virtual OSOCC</a></li>
+              </ul>
+            </div>
+            <div class="cd-ocha-dropdown__section">
+              <a class="cd-ocha-dropdown__see-all" href="https://www.unocha.org/ocha-digital-services" target="_blank" rel="noopener">See all</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cd-global-header__language-switcher">
+        <div class="cd-language-switcher"><button type="button" class="cd-user-menu__item cd-user-menu__item--small cd-global-header__dropdown-btn" data-toggle="dropdown" id="cd-language-toggle" aria-label="Language" aria-expanded="false">en<svg class="icon icon--arrow-down">
+              <use xlink:href="#arrow-down"></use>
+            </svg></button>
+          <ul class="cd-global-header__dropdown cd-dropdown cd-user-menu__dropdown" role="menu" id="cd-language" aria-labelledby="cd-language-toggle">
+            <li class="ar first"><a href="/ar" class="language-link" xml:lang="ar">العربية</a></li>
+            <li class="en active"><a href="/" class="language-link active" xml:lang="en">English</a></li>
+            <li class="ru"><a href="/ru" class="language-link" xml:lang="ru">Русский</a></li>
+            <li class="es last"><a href="/es" class="language-link" xml:lang="es">Español</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="cd-global-header__user-menu">
+        <div class="region region-header-top">
+          <div id="block-system-user-menu" class="block block-system block-menu">
+            <h2>User menu</h2>
+            <div class="content">
+              <ul class="menu">
+                <li class="first last leaf"><a href="/user/login" title="">Login</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cd-site-header">
+    <div class="cd-container cd-site-header__inner">
+      <h1>
+        <a href="/" class="cd-site-logo">
+          <span class="element-invisible">Humanitarian ID</span>
+        </a>
+      </h1>
+      <div class="cd-site-header__actions">
+        <div class="cd-search">
+          <button type="button" id="cd-search-btn" class="cd-search_btn" data-toggle="dropdown" aria-expanded="false" aria-label="Search">
+            <svg class="icon icon--search">
+              <use xlink:href="#search"></use>
+            </svg>
+            <span class="cd-search_btn-text">Search</span>
+          </button>
+          <form role="search" class="cd-search__form" aria-labelledby="cd-search-btn" action="/" method="post" id="search-block-form" accept-charset="UTF-8">
+            <div>
+              <div class="cd-search__form-inner">
+                <h2 class="element-invisible">Search form</h2>
+                <div class="form-item form-type-textfield form-item-search-block-form">
+                  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+                  <input title="Enter the terms you wish to search for." placeholder="What are you looking for?" autocomplete="off" class="cd-search__input form-text" id="cd-search" type="search" name="search_block_form" value="" size="15" maxlength="128" />
+                </div>
+                <div class="form-actions form-wrapper" id="edit-actions">
+                  <button type="submit" name="op" class="cd-search__submit form-submit">
+                    <svg class="icon icon--search">
+                      <use xlink:href="#search"></use>
+                    </svg>
+                    <input class="element-invisible form-submit" value="Search" type="submit" id="edit-submit" name="op" />
+                  </button>
+                </div>
+                <input type="hidden" name="form_build_id" value="form-ECheN_9Jf9Ys7Hz0jV3hm50VCtLzDOwqaEauh3Sowpo" />
+                <input type="hidden" name="form_id" value="search_block_form" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="cd-site-header__nav-holder">
+          <button type="button" id="cd-nav-toggle" class="cd-site-header__nav-toggle" aria-expanded="false">
+            <span class="cd-site-header__nav-label">Menu</span>
+            <svg class="icon icon--arrow-down">
+              <use xlink:href="#arrow-down"></use>
+            </svg>
+          </button>
+          <nav role="navigation" id="cd-nav" class="cd-nav" aria-labelledby="cd-nav-toggle">
+            <ul class="menu">
+              <li class="first leaf"><a href="/" title="" class="active">Common design</a></li>
+              <li class="expanded"><a href="/inline-search" data-target="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Variants
+                <svg class="icon icon--arrow-down">
+                  <use xlink:href="#arrow-down"></use>
+                </svg></a>
+                <ul class="menu">
+                  <li class="first leaf"><a href="/inline-search">Inline search</a></li>
+                  <li class="leaf"><a href="/soft-footer">Soft footer</a></li>
+                  <li class="last expanded"><a href="/about">Child option one</a></li>
+                </ul>
+              </li>
+              <li class="expanded"><a href="/admin/appearance/styleguide/ocha_basic" title="" data-target="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Styles
+                <svg class="icon icon--arrow-down">
+                  <use xlink:href="#arrow-down"></use>
+                </svg></a>
+                <ul class="menu">
+                  <li class="first leaf"><a href="/layout">Layout</a></li>
+                  <li class="leaf"><a href="/admin/config/user-interface/styleguide-palette" title="">Colours</a></li>
+                  <li class="last leaf"><a href="/typography">Typography</a></li>
+                </ul>
+              </li>
+              <li class="leaf"><a href="/assets">Assets</a></li>
+              <li class="last leaf"><a href="/icon-library">Icon library</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
+<!--
+<header role="banner">
   <div class="global-header">
     <div class="container global-header__inner">
 
@@ -115,3 +264,4 @@
     </div>
   </div>
 </header>
+-->
