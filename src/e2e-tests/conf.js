@@ -36,15 +36,15 @@ exports.config = {
   },
   specs: ['specs/**/*-spec.js'],
   suites: {
-    login: 'specs/login-spec.js',
-    nav: 'specs/navigation-spec.js',
-    profile: 'specs/profile/*-spec.js',
     list: 'specs/lists/*-spec.js',
-    search: 'specs/search-spec.js',
+    profile: 'specs/profile/*-spec.js',
     checkin: 'specs/checkin-spec.js',
-    services: 'specs/service-spec.js',
     dashboard: 'specs/dashboard-spec.js',
     footer: 'specs/footer-spec.js',
+    login: 'specs/login-spec.js',
+    nav: 'specs/navigation-spec.js',
+    search: 'specs/search-spec.js',
+    services: 'specs/service-spec.js',
   }
 };
 
