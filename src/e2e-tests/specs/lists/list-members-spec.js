@@ -21,7 +21,9 @@ describe('List members', function () {
     describe('Add a person to the list', function () {
 
       beforeAll(function() {
+        browser.sleep(500);
         listPage.openListAdmin();
+        browser.sleep(500);
       });
 
       it('should search for the user', function () {
@@ -39,9 +41,9 @@ describe('List members', function () {
         expect(listPage.addMemberSuccessModalText.isPresent()).toBeTruthy();
         listPage.modalOverlay.click();
         listPage.adminButton.click();
+        browser.sleep(500);
         expect(listPage.listUsers.getText()).toContain(browser.params.adminUserName);
       });
-
     });
 
     describe('Remove a person from the list', function () {
@@ -68,14 +70,12 @@ describe('List members', function () {
         listPage.modalOverlay.click();
         expect(listPage.listUsers.getText()).not.toContain(browser.params.adminUserName);
       });
-
     });
   });
 
   afterAll(function () {
     listPage.deleteList();
-    browser.sleep(3000); //wait for modals to close
+    browser.sleep(3000); // Wait for modal to close
     navObject.logOut();
   });
-
 });

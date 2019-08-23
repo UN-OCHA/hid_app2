@@ -8,6 +8,7 @@ var ListPage = function() {
   this.confirmModalText = element(by.cssContainingText('div .modal-body', 'Are you sure?'));
   this.confirmModalButton = element(by.css('.t-confirm-btn'));
   this.successModal = element(by.css('.modal-success'));
+  this.successModalClose = element(by.css('.modal-success .btn-primary'));
   this.modalOverlay = element(by.css('.modal'));
 
   this.listTitle = element(by.css('.page-header__heading'));
@@ -180,18 +181,20 @@ var ListPage = function() {
   this.openListAdmin = function () {
     browser.wait(this.adminButton.isDisplayed(), 10000);
     this.adminButton.click();
+    browser.sleep(500);
     browser.wait(this.adminSidebar.isDisplayed(), 10000);
   };
 
   this.deleteList = function () {
     browser.wait(this.adminButton.isDisplayed(), 10000);
     this.adminButton.click();
-    browser.wait(this.adminSidebar.isDisplayed(), 10000);
+    browser.sleep(500);
     this.deleteButton.click();
 
     browser.wait(this.confirmModal.isDisplayed(), 10000);
     this.confirmModalButton.click();
     browser.wait(this.deleteSuccessModalText.isDisplayed(), 10000);
+    this.successModalClose.click();
   };
 
 };
