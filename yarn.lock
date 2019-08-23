@@ -229,9 +229,9 @@
   version "0.0.0"
   resolved "https://codeload.github.com/Teleborder/FileSaver.js/tar.gz/b7cf622909258086bc63ad764d08fcaed780ab42"
 
-"@bower_components/google-libphonenumber@ruimarinho/google-libphonenumber#~3.1.6":
-  version "3.1.16"
-  resolved "https://codeload.github.com/ruimarinho/google-libphonenumber/tar.gz/2193074522232b1b5af18efb030682e9a7cc5ca5"
+"@bower_components/google-libphonenumber@ruimarinho/google-libphonenumber#~3.2.3":
+  version "3.2.3"
+  resolved "https://codeload.github.com/ruimarinho/google-libphonenumber/tar.gz/0d044672157144325f13cf537fadb8bef5a7f7af"
 
 "@bower_components/karma-read-json@pizzapanther/Karma-Read-JSON#^1.1.0":
   version "1.1.0"
