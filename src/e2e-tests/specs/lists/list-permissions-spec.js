@@ -8,29 +8,31 @@ describe('List permissions', function () {
   var listPage = new ListPage();
   var navObject = new NavObject();
 
-  beforeAll(function () {
-    loginPage.get();
-    loginPage.login();
-
-    // TODO: reconfigure these tests to match current website behavior.
-    //
-    // These tests fail because a user without perms to view a list cannot find
-    // it using the search box. If they knew the exact ID they could load it
-    // directly and see the "locked" message but in the real world that's impossible.
-    listPage.goToList(browser.params.lockedTestList);
-  });
-
   describe('List is viewable by verified users only', function () {
 
+    beforeAll(function () {
+      loginPage.get();
+      loginPage.login();
+    });
+
     describe('Un-verfied user', function () {
-
-      it('should see the verified only message', function () {
-        expect(listPage.lockedListMessage.isPresent()).toBeTruthy();
+      it('should not see verified-only lists in autocomplete', function () {
+        navObject.searchInput.sendKeys(browser.params.lockedTestList);
+        var autocompleteResult = element(by.css('.search-autocomplete__item'));
+        expect(autocompleteResult.getText()).toBe('No results found');
       });
 
-      it('should not see the list users', function () {
-        expect(listPage.usersTable.isDisplayed()).toBeFalsy();
-      });
+      // If we directly load a list by knowing its ID in advance, these tests
+      // can be used. But in August 2019, the `goToList` function cannot load
+      // a list that the user is prevented from viewing, because it doesn't
+      // appear in the autocomplete at all.
+      // it('should see the verified only message', function () {
+      //   expect(listPage.lockedListMessage.isPresent()).toBeTruthy();
+      // });
+
+      // it('should not see the list users', function () {
+      //   expect(listPage.usersTable.isDisplayed()).toBeFalsy();
+      // });
 
       afterAll(function () {
         navObject.logOut();
