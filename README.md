@@ -97,7 +97,7 @@ protractor --suite="my-suite-name" src/e2e-tests/conf.js
 
 ### What to do if it fails during local testing
 
-* Sometimes the permission prompt for notifications can physically obscure parts of the website UI and cause false negatives. Be sure to close it by pressing `Allow`/`Block` shortly after it opens. Do not close without choosing an action or it will re-prompt repeatedly after each login.
+* Your DB might not have the right content, so check the test logs for specific strings that aren't matching (e.g. "Test Admin" vs "Test E2E Admin" or minor differences like that). In general, taking a snapshot of Staging will get you the correct content.
 
 
 ### What to do if it fails on TravisCI
