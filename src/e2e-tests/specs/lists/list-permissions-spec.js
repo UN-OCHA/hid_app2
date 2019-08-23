@@ -11,12 +11,18 @@ describe('List permissions', function () {
   beforeAll(function () {
     loginPage.get();
     loginPage.login();
+
+    // TODO: reconfigure these tests to match current website behavior.
+    //
+    // These tests fail because a user without perms to view a list cannot find
+    // it using the search box. If they knew the exact ID they could load it
+    // directly and see the "locked" message but in the real world that's impossible.
     listPage.goToList(browser.params.lockedTestList);
   });
 
   describe('List is viewable by verified users only', function () {
 
-    describe('Un-verfied user should not be able to view the list', function () {
+    describe('Un-verfied user', function () {
 
       it('should see the verified only message', function () {
         expect(listPage.lockedListMessage.isPresent()).toBeTruthy();
@@ -32,7 +38,7 @@ describe('List permissions', function () {
 
     });
 
-    describe('Verfied user should be able to view the list', function () {
+    describe('Verfied user', function () {
 
       beforeAll(function () {
         loginPage.get();
