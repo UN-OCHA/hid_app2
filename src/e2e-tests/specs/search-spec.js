@@ -12,7 +12,7 @@ describe('Search', function () {
 
   beforeAll(function () {
 		loginPage.get();
-	  loginPage.login();
+	  loginPage.loginAdmin();
 	});
 
 	describe('Searching for a user', function () {
@@ -113,7 +113,7 @@ describe('Search', function () {
 				var result = element.all(by.cssContainingText('.search-autocomplete__item a', listSearchResult)).first();
 				result.click();
 				// browser.waitForAngular();
-				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'lists/58b44a703d0ba000db414766');
+				expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'lists/58e39c41ab77c100ae461980');
 			});
 
 			afterAll(function () {
