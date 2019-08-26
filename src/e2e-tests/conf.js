@@ -41,6 +41,7 @@ exports.config = {
     checkin: 'specs/checkin-spec.js',
     dashboard: 'specs/dashboard-spec.js',
     footer: 'specs/footer-spec.js',
+    language: 'specs/language-spec.js',
     login: 'specs/login-spec.js',
     nav: 'specs/navigation-spec.js',
     search: 'specs/search-spec.js',
