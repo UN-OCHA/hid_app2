@@ -1,6 +1,6 @@
 /* jshint module: true */
 var NavObject = function() {
-	this.openUserDropdown = function () {
+  this.openUserDropdown = function () {
     element(by.css('.t-user-dropdown-btn')).click();
   };
 
@@ -25,8 +25,8 @@ var NavObject = function() {
   this.langFR = element(by.css('.t-lang-fr'));
 
   this.logOut = function () {
-  	this.openUserDropdown();
-  	this.logoutLink.click();
+    this.openUserDropdown();
+    this.logoutLink.click();
     browser.sleep(3000);
   };
 };
