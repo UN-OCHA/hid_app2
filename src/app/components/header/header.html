@@ -45,14 +45,18 @@
         </div>
       </div>
       <div class="cd-global-header__language-switcher">
-        <div class="cd-language-switcher"><button type="button" class="cd-user-menu__item cd-user-menu__item--small cd-global-header__dropdown-btn" data-toggle="dropdown" id="cd-language-toggle" aria-label="Language" aria-expanded="false">en<svg class="icon icon--arrow-down">
+        <div class="cd-language-switcher" uib-dropdown>
+          <button type="button" class="cd-user-menu__item cd-user-menu__item--small cd-global-header__dropdown-btn" id="cd-language-toggle" aria-label="Language" aria-expanded="false" uib-dropdown-toggle>
+            {{ getCurrentLanguage() }}
+            <svg class="icon icon--arrow-down">
               <use xlink:href="#arrow-down"></use>
-            </svg></button>
-          <ul class="cd-global-header__dropdown cd-dropdown cd-user-menu__dropdown" role="menu" id="cd-language" aria-labelledby="cd-language-toggle">
-            <li class="ar first"><a href="/ar" class="language-link" xml:lang="ar">العربية</a></li>
-            <li class="en active"><a href="/" class="language-link active" xml:lang="en">English</a></li>
-            <li class="ru"><a href="/ru" class="language-link" xml:lang="ru">Русский</a></li>
-            <li class="es last"><a href="/es" class="language-link" xml:lang="es">Español</a></li>
+            </svg>
+          </button>
+          <ul class="cd-global-header__dropdown cd-dropdown cd-user-menu__dropdown" role="menu" id="cd-language" aria-labelledby="cd-language-toggle" uib-dropdown-menu>
+            <li class="ar first"><a href="/ar" class="language-link t-lang-ar" ng-class="{'active': getCurrentLanguage() === 'AR'}" ng-click="changeLanguage('ar')" lang="ar">العربية</a></li>
+            <li class="en"><a href="/" class="language-link t-lang-en" ng-class="{'active': getCurrentLanguage() === 'EN'}" ng-click="changeLanguage('en')" lang="en">English</a></li>
+            <li class="fr"><a href="/" class="language-link t-lang-fr" ng-class="{'active': getCurrentLanguage() === 'FR'}" ng-click="changeLanguage('fr')" lang="fr">Français</a></li>
+            <li class="es last"><a href="/es" class="language-link t-lang-fr" ng-class="{'active': getCurrentLanguage() === 'ES'}" ng-click="changeLanguage('es')" lang="es">Español</a></li>
           </ul>
         </div>
       </div>
@@ -208,8 +212,8 @@
             <ul class="dropdown-menu dropdown-menu--lang" role="menu" uib-dropdown-menu>
               <li><a href="#" ng-click="changeLanguage('en')" class="t-lang-en">EN</a></li>
               <li><a href="#" ng-click="changeLanguage('fr')" class="t-lang-fr">FR</a></li>
-              <li><a href="#" ng-click="changeLanguage('es')">ES</a></li>
-              <li><a href="#" ng-click="changeLanguage('ar')">AR</a></li>
+              <li><a href="#" ng-click="changeLanguage('es')" class="t-lang-es">ES</a></li>
+              <li><a href="#" ng-click="changeLanguage('ar')" class="t-lang-ar">AR</a></li>
             </ul>
           </li>
 

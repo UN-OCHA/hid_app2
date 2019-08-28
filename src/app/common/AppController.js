@@ -100,6 +100,8 @@
       $document.ready(function () {
         var ochaDropDown = $document[0].getElementById('cd-ocha-dropdown');
         ochaDropDown.classList.remove('dropdown-menu');
+        var langSwitcherDropDown = $document[0].getElementById('cd-language');
+        langSwitcherDropDown.classList.remove('dropdown-menu');
       });
     }
     thisScope.initGlobalHeader();

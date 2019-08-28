@@ -10,27 +10,28 @@ describe('Language switcher', function () {
 
   beforeAll(function () {
     loginPage.get();
-    loginPage.login();
   });
 
   it('should change the language to French', function () {
     navObject.openLanguageDropdown();
     navObject.langFR.click();
-    navObject.dashboardLink.click();
-    var frHeading = element(by.cssContainingText('.page-header__heading', 'Tableau de bord'))
-    browser.wait(frHeading.isDisplayed, 10000);
-    expect(frHeading.isDisplayed()).toBeTruthy();
+    var frHeading = element(by.css('label[for="email"]'));
+    browser.wait(frHeading.isDisplayed, 1000);
+    expect(frHeading.getText()).toBe('Courriel');
+  });
+
+  it('should change the active language in the Switcher to French', function () {
+    expect(navObject.languageButton.getText()).toBe('FR');
+    navObject.openLanguageDropdown();
+    var activeLanguage = element(by.css('.language-link.active'));
+    browser.wait(activeLanguage.isDisplayed, 1000);
+    expect(activeLanguage.getText()).toBe('Français');
   });
 
   it('should change the language back to English', function () {
-    navObject.openLanguageDropdown();
     navObject.langEN.click();
-    var enHeading = element(by.cssContainingText('.page-header__heading', 'Dashboard'))
-    browser.wait(enHeading.isDisplayed, 10000);
-    expect(enHeading.isDisplayed()).toBeTruthy();
-  });
-
-  afterAll(function () {
-    navObject.logOut();
+    var enHeading = element(by.css('label[for="email"]'));
+    browser.wait(enHeading.isDisplayed, 1000);
+    expect(enHeading.getText()).toBe('Email');
   });
 });
