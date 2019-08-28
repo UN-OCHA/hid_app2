@@ -4,6 +4,7 @@
 
 .cd-ocha {
   float: left;
+  position: static; // HID: override the .dropdown class
 }
 
 .cd-ocha-btn {

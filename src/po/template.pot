@@ -1318,6 +1318,10 @@ msgstr ""
 msgid "Number of contacts"
 msgstr ""
 
+#: src/app/components/header/header.html:7
+msgid "OCHA Services"
+msgstr ""
+
 #: src/app/components/user/user-filters.html:78
 msgid "Occupation filters"
 msgstr ""
@@ -1387,6 +1391,10 @@ msgstr ""
 
 #: src/app/components/user/UsersController.js:128
 msgid "Other"
+msgstr ""
+
+#: src/app/components/header/header.html:24
+msgid "Other OCHA Services"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:21
@@ -1535,6 +1543,10 @@ msgstr ""
 
 #: src/app/components/auth/login.html:22
 msgid "Register a new Humanitarian ID Account"
+msgstr ""
+
+#: src/app/components/header/header.html:15
+msgid "Related platforms"
 msgstr ""
 
 #: src/app/components/user/UsersController.js:140

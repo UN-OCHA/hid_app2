@@ -1,18 +1,18 @@
 <header class="cd-header" role="banner">
   <div class="cd-global-header">
     <div class="cd-container cd-global-header__inner">
-      <div class="cd-ocha">
-        <button type="button" class="cd-ocha-btn cd-global-header__dropdown-btn" data-toggle="dropdown" id="cd-ocha-dropdown-toggle" aria-expanded="false" aria-label="OCHA Services">
+      <div class="cd-ocha" uib-dropdown>
+        <button type="button" class="cd-ocha-btn cd-global-header__dropdown-btn" id="cd-ocha-dropdown-toggle" aria-expanded="false" aria-label="OCHA Services" uib-dropdown-toggle>
           <span class="cd-ocha-btn__logo" aria-hidden="true"></span>
-          <span class="cd-ocha-btn__label">OCHA Services</span>
+          <span class="cd-ocha-btn__label" translate>OCHA Services</span>
           <svg class="icon icon--arrow-down">
             <use xlink:href="#arrow-down"></use>
           </svg>
         </button>
-        <div class="cd-global-header__dropdown cd-ocha-dropdown cd-dropdown" role="menu" id="cd-ocha-dropdown" aria-labelledby="cd-ocha-dropdown-toggle">
+        <div class="cd-global-header__dropdown cd-ocha-dropdown cd-dropdown" role="menu" id="cd-ocha-dropdown" aria-labelledby="cd-ocha-dropdown-toggle" uib-dropdown-menu>
           <div class="cd-ocha-dropdown__inner">
             <div class="cd-ocha-dropdown__section">
-              <p class="cd-ocha-dropdown__heading">Related Platforms</p>
+              <p class="cd-ocha-dropdown__heading" translate>Related platforms</p>
               <ul class="cd-ocha-dropdown__list">
                 <li class="cd-ocha-dropdown__link"><a href="https://example.com">Customizable</a></li>
                 <li class="cd-ocha-dropdown__link"><a href="https://example.com">Customizable</a></li>
@@ -21,7 +21,7 @@
               </ul>
             </div>
             <div class="cd-ocha-dropdown__section">
-              <p class="cd-ocha-dropdown__heading">Other OCHA Services</p>
+              <p class="cd-ocha-dropdown__heading" translate>Other OCHA Services</p>
               <ul class="cd-ocha-dropdown__list">
                 <li class="cd-ocha-dropdown__link"><a href="https://fts.unocha.org/">Financial Tracking Service</a></li>
                 <li class="cd-ocha-dropdown__link"><a href="https://data.humdata.org/">Humanitarian Data Exchange</a></li>

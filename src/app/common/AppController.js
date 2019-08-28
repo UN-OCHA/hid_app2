@@ -91,6 +91,19 @@
 
     thisScope.hideHeaderFooter = hideHeaderFooter();
 
+    thisScope.initGlobalHeader = function () {
+      // CD does not need the ui.bootstrap.dropdown classes and in fact they
+      // hinder its function. Forcibly remove since docs don't make it clear how
+      // one can configure them to avoid injecting this class
+      //
+      // @see https://github.com/angular-ui/bootstrap/tree/master/src/dropdown
+      $document.ready(function () {
+        var ochaDropDown = $document[0].getElementById('cd-ocha-dropdown');
+        ochaDropDown.classList.remove('dropdown-menu');
+      });
+    }
+    thisScope.initGlobalHeader();
+
     thisScope.initLanguage = function () {
       if (!thisScope.currentUser) {
         return;
