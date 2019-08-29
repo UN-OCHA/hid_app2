@@ -82,7 +82,7 @@
         </a>
       </h1>
       <div class="cd-site-header__actions">
-        <div class="cd-search">
+        <div ng-if="isAuthenticated" class="cd-search">
           <button type="button" id="cd-search-btn" class="cd-search_btn" data-toggle="dropdown" aria-expanded="false" aria-label="Search">
             <svg class="icon icon--search">
               <use xlink:href="#search"></use>
@@ -119,7 +119,7 @@
             </svg>
           </button>
           <nav role="navigation" id="cd-nav" class="cd-nav" aria-labelledby="cd-nav-toggle" uib-dropdown-menu>
-            <ul class="menu">
+            <ul ng-if="isAuthenticated" class="menu">
               <li class="leaf first"><a href="/dashboard" class="nav__link t-dashboard-link"  ng-class="{'active' : activeNav('/dashboard')}" translate>Dashboard</a></li>
               <li class="leaf"><a href="/search" class="nav__link t-hc-link" ng-class="{'active' : activeNav('/search')}" translate>Humanitarian contacts</a></li>
               <li class="leaf" ng-if="isOnline"><a href="/checkin/{{currentUser.id}}" class="nav__link t-checkin-link" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}" translate>Check in</a></li>
