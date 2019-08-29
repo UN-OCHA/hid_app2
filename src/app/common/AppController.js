@@ -91,7 +91,7 @@
 
     thisScope.hideHeaderFooter = hideHeaderFooter();
 
-    thisScope.initGlobalHeader = function () {
+    thisScope.initCDHeader = function () {
       // CD does not need the ui.bootstrap.dropdown classes and in fact they
       // hinder its function. Forcibly remove since docs don't make it clear how
       // one can configure them to avoid injecting this class
@@ -102,9 +102,13 @@
         ochaDropDown.classList.remove('dropdown-menu');
         var langSwitcherDropDown = $document[0].getElementById('cd-language');
         langSwitcherDropDown.classList.remove('dropdown-menu');
+        var navDropDown = $document[0].querySelector('.cd-site-header__nav-holder');
+        navDropDown.classList.remove('dropdown');
+        var navDropDownContents = $document[0].getElementById('cd-nav');
+        navDropDownContents.classList.remove('dropdown-menu');
       });
     }
-    thisScope.initGlobalHeader();
+    thisScope.initCDHeader();
 
     thisScope.initLanguage = function () {
       if (!thisScope.currentUser) {

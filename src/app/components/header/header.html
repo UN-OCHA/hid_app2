@@ -111,38 +111,19 @@
             </div>
           </form>
         </div>
-        <div class="cd-site-header__nav-holder">
-          <button type="button" id="cd-nav-toggle" class="cd-site-header__nav-toggle" aria-expanded="false">
+        <div class="cd-site-header__nav-holder" uib-dropdown>
+          <button type="button" id="cd-nav-toggle" class="cd-site-header__nav-toggle" aria-expanded="false" uib-dropdown-toggle>
             <span class="cd-site-header__nav-label">Menu</span>
             <svg class="icon icon--arrow-down">
               <use xlink:href="#arrow-down"></use>
             </svg>
           </button>
-          <nav role="navigation" id="cd-nav" class="cd-nav" aria-labelledby="cd-nav-toggle">
+          <nav role="navigation" id="cd-nav" class="cd-nav" aria-labelledby="cd-nav-toggle" uib-dropdown-menu>
             <ul class="menu">
-              <li class="first leaf"><a href="/" title="" class="active">Common design</a></li>
-              <li class="expanded"><a href="/inline-search" data-target="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Variants
-                <svg class="icon icon--arrow-down">
-                  <use xlink:href="#arrow-down"></use>
-                </svg></a>
-                <ul class="menu">
-                  <li class="first leaf"><a href="/inline-search">Inline search</a></li>
-                  <li class="leaf"><a href="/soft-footer">Soft footer</a></li>
-                  <li class="last expanded"><a href="/about">Child option one</a></li>
-                </ul>
-              </li>
-              <li class="expanded"><a href="/admin/appearance/styleguide/ocha_basic" title="" data-target="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Styles
-                <svg class="icon icon--arrow-down">
-                  <use xlink:href="#arrow-down"></use>
-                </svg></a>
-                <ul class="menu">
-                  <li class="first leaf"><a href="/layout">Layout</a></li>
-                  <li class="leaf"><a href="/admin/config/user-interface/styleguide-palette" title="">Colours</a></li>
-                  <li class="last leaf"><a href="/typography">Typography</a></li>
-                </ul>
-              </li>
-              <li class="leaf"><a href="/assets">Assets</a></li>
-              <li class="last leaf"><a href="/icon-library">Icon library</a></li>
+              <li class="leaf first"><a href="/dashboard" class="nav__link t-dashboard-link"  ng-class="{'active' : activeNav('/dashboard')}" translate>Dashboard</a></li>
+              <li class="leaf"><a href="/search" class="nav__link t-hc-link" ng-class="{'active' : activeNav('/search')}" translate>Humanitarian contacts</a></li>
+              <li class="leaf" ng-if="isOnline"><a href="/checkin/{{currentUser.id}}" class="nav__link t-checkin-link" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}" translate>Check in</a></li>
+              <li class="leaf last"><a href="/checkout" class="nav__link t-checkout-link" ng-class="{'active' : activeNav('/checkout')}" translate>Check out</a></li>
             </ul>
           </nav>
         </div>
