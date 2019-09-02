@@ -368,12 +368,8 @@ msgstr ""
 msgid "Client admin"
 msgstr ""
 
-#: src/app/components/client/client.controller.js:35
+#: src/app/components/client/client.controller.js:37
 msgid "Client deleted successfully"
-msgstr ""
-
-#: src/app/components/client/new-client.html:36
-msgid "Client redirect URL"
 msgstr ""
 
 #: src/app/components/client/client.controller.js:20
@@ -1548,7 +1544,7 @@ msgstr ""
 
 #: src/app/components/client/client.html:41
 #: src/app/components/client/new-client.html:35
-msgid "Redirect URL"
+msgid "Redirect URLs"
 msgstr ""
 
 #: src/app/components/user/kiosk.html:84

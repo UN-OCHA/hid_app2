@@ -31,11 +31,11 @@
         <label for="url" translate>URL</label>
         <input type="text" class="form-control" id="url" placeholder="{{'Client URL'|translate}}" ng-model="client.url">
       </div>
-      <div class="form-field" ng-class="{'has-error': editClient.redirect_url.$touched && editClient.redirect_url.$invalid}">
-        <label for="redirect_url" translate>Redirect URL</label>
-        <input type="text" name="redirect_url" class="form-control" id="redirect_url" placeholder="{{'Client redirect URL'|translate}}" ng-model="client.redirectUri" required>
+      <div class="form-field" ng-class="{'has-error': editClient.redirectUrls.$touched && editClient.redirectUrls.$invalid}">
+        <label for="redirectUrls" translate>Redirect URLs</label>
+        <textarea ng-model="client.redirectUrls" class="form-control" name="redirectUrls" rows="5" cols="20" required></textarea>
         <div class="clearfix">
-          <div ng-messages="editClient.redirect_url.$error" ng-show="editClient.redirect_url.$touched" ng-messages-multiple="ng-messages-multiple">
+          <div ng-messages="editClient.redirectUrls.$error" ng-show="editClient.redirectUrls.$touched" ng-messages-multiple="ng-messages-multiple">
             <div ng-messages-include="app/common/messages.html"></div>
           </div>
         </div>
