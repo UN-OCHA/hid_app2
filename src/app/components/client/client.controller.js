@@ -22,6 +22,8 @@
       var error = function (err) {
         $exceptionHandler(error, 'Save client');
       };
+      $scope.client.redirectUrls = $scope.client.redirectUrls.split("\n");
+      $scope.client.redirectUrls = $scope.client.redirectUrls.map(function (url) { return url.trim(); });
       if ($scope.client._id) {
         $scope.client.$update(success, error);
       }

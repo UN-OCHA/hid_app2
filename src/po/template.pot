@@ -368,19 +368,15 @@ msgstr ""
 msgid "Client admin"
 msgstr ""
 
-#: src/app/components/client/client.controller.js:35
+#: src/app/components/client/client.controller.js:37
 msgid "Client deleted successfully"
-msgstr ""
-
-#: src/app/components/client/new-client.html:36
-msgid "Client redirect URL"
 msgstr ""
 
 #: src/app/components/client/client.controller.js:20
 msgid "Client saved successfully"
 msgstr ""
 
-#: src/app/components/client/new-client.html:58
+#: src/app/components/client/new-client.html:59
 msgid "Client secret"
 msgstr ""
 
@@ -614,7 +610,7 @@ msgid "Deny"
 msgstr ""
 
 #: src/app/components/client/client.html:44
-#: src/app/components/client/new-client.html:53
+#: src/app/components/client/new-client.html:54
 #: src/app/components/service/new-service.html:25
 #: src/app/components/trustedDomain/trustedDomains.html:19
 #: src/app/components/trustedDomain/trustedDomains.html:43
@@ -1097,8 +1093,8 @@ msgid "Login"
 msgstr ""
 
 #: src/app/components/client/client.html:42
-#: src/app/components/client/new-client.html:44
 #: src/app/components/client/new-client.html:45
+#: src/app/components/client/new-client.html:46
 msgid "Login URL"
 msgstr ""
 
@@ -1548,7 +1544,7 @@ msgstr ""
 
 #: src/app/components/client/client.html:41
 #: src/app/components/client/new-client.html:35
-msgid "Redirect URL"
+msgid "Redirect URLs"
 msgstr ""
 
 #: src/app/components/user/kiosk.html:84
@@ -1623,7 +1619,7 @@ msgstr ""
 msgid "Satellite Phone"
 msgstr ""
 
-#: src/app/components/client/new-client.html:65
+#: src/app/components/client/new-client.html:66
 #: src/app/components/list/new-list.html:52
 #: src/app/components/operations/new-operation.html:50
 #: src/app/components/service/new-service.html:87
@@ -1716,7 +1712,7 @@ msgid "Search services"
 msgstr ""
 
 #: src/app/components/client/client.html:43
-#: src/app/components/client/new-client.html:57
+#: src/app/components/client/new-client.html:58
 msgid "Secret"
 msgstr ""
 
@@ -1810,6 +1806,10 @@ msgstr ""
 
 #: src/app/components/user/user.html:43
 msgid "Send Claim Email"
+msgstr ""
+
+#: src/app/components/client/new-client.html:37
+msgid "Separated by new lines"
 msgstr ""
 
 #: src/app/components/service/new-service.html:29
