@@ -34,6 +34,7 @@
       <div class="form-field" ng-class="{'has-error': editClient.redirectUrls.$touched && editClient.redirectUrls.$invalid}">
         <label for="redirectUrls" translate>Redirect URLs</label>
         <textarea ng-model="client.redirectUrls" class="form-control" name="redirectUrls" rows="5" cols="20" required></textarea>
+        <span translate>Separated by new lines</span>
         <div class="clearfix">
           <div ng-messages="editClient.redirectUrls.$error" ng-show="editClient.redirectUrls.$touched" ng-messages-multiple="ng-messages-multiple">
             <div ng-messages-include="app/common/messages.html"></div>
