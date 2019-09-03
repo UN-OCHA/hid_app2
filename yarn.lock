@@ -101,7 +101,7 @@
   version "1.3.3"
   resolved "https://codeload.github.com/angular-ui/bootstrap-bower/tar.gz/5d53287668135dbc1acfc3a0d453cd94b5311c3c"
 
-"@bower_components/angular-clipboard@omichelsen/angular-clipboard#^1.6.2":
+"@bower_components/angular-clipboard@omichelsen/angular-clipboard#^1.7.0":
   version "1.7.0"
   resolved "https://codeload.github.com/omichelsen/angular-clipboard/tar.gz/76a6146967c3eb92ec2a70c3e303d44c94ba8eb5"
 
@@ -2308,6 +2308,13 @@ get-value@^2.0.3, get-value@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
+
+get-value@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/get-value/-/get-value-3.0.1.tgz#5efd2a157f1d6a516d7524e124ac52d0a39ef5a8"
+  integrity sha512-mKZj9JLQrwMBtj5wxi6MH8Z5eSKaERpAwjg43dPtlGI1ZVEgH/qC7T8/6R2OBSUA+zzHBZgICsVJaEIV2tKTDA==
+  dependencies:
+    isobject "^3.0.1"
 
 getobject@~0.1.0:
   version "0.1.0"
@@ -5008,6 +5015,13 @@ set-value@^2.0.0:
     is-plain-object "^2.0.3"
     split-string "^3.0.1"
 
+set-value@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/set-value/-/set-value-3.0.1.tgz#52c82af7653ba69eb1db92e81f5cdb32739b9e95"
+  integrity sha512-w6n3GUPYAWQj4ZyHWzD7K2FnFXHx9OTwJYbWg+6nXjG8sCLfs9DGv+KlqglKIIJx+ks7MlFuwFW2RBPb+8V+xg==
+  dependencies:
+    is-plain-object "^2.0.4"
+
 setprototypeof@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
@@ -5675,6 +5689,14 @@ underscore@~1.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.4.4.tgz#61a6a32010622afa07963bf325203cf12239d604"
   integrity sha1-YaajIBBiKvoHljvzJSA88SI51gQ=
+
+union-value@>=2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/union-value/-/union-value-2.0.1.tgz#4e1ab0f99ab52c52a53e14d8039b5130fef682b8"
+  integrity sha512-NmcRHHhUy1qWmp6yYWsaURV2qwfS24TmTtO9S9x0L41wCNNVBQFD3toOzO0cd8SsNrFhbw/O0iYO5uffXGYocw==
+  dependencies:
+    get-value "^3.0.1"
+    set-value "^3.0.0"
 
 union-value@^1.0.0:
   version "1.0.0"
