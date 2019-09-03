@@ -60,7 +60,18 @@
 
     function skipSuggestions () {
       Service.suggestions = [];
-      $location.url('/dashboard');
+      // If user is checking himself in, make sure the currentUser variable is
+      // updated.
+      if ($scope.currentUser._id === $scope.user._id) {
+        User.get({userId: $scope.user._id}, function (user) {
+          $scope.setCurentUser(user);
+          $location.url('/dashboard');
+          return;
+        });
+      }
+      else {
+        $location.url('/dashboard');
+      }
     }
 
     getServices();
