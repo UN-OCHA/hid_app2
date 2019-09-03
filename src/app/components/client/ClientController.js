@@ -23,6 +23,7 @@
       var error = function (err) {
         $exceptionHandler(error, 'Save client');
       };
+      thisScope.client.redirectUrls = thisScope.client.redirectUrls.split("\n").map(function (url) { return url.trim(); });
       if (thisScope.client._id) {
         thisScope.client.$update(success, error);
       }
