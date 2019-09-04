@@ -41,10 +41,10 @@
           </a>
         </div>
         <div class="container" id="main" role="main" ng-view=""></div>
-        <div class="sidebar-underlay" ng-class="{&apos;in&apos; : sidebar.underlay}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
-        <div class="sidebar-overlay" ng-class="{&apos;in&apos; : sidebar.open}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
       </div>
 
+      <div class="sidebar-underlay" ng-class="{&apos;in&apos; : sidebar.underlay}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
+      <div class="sidebar-overlay" ng-class="{&apos;in&apos; : sidebar.open}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
       <ng-include ng-if="!hideHeaderFooter" src="&apos;app/components/footer/footer.html&apos;"></ng-include>
     </div><!-- .cd-wrapper -->
 
