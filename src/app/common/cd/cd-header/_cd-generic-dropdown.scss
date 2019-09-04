@@ -1,0 +1,47 @@
+//——————————————————————————————————————————————————————————————————————————————
+// Common Design: Generic Dropdown
+//
+// For HID we needed a generic dropdown mechanism since the user menu is best
+// rendered as a dropdown instead of CD's horizontal list of links that normally
+// appear on Drupal sites. We've kind of Frankensteined both Language Switcher
+// and the "User Menu" that appears on a Drupal site — the user menu styles the
+// button that toggles the dropdown, and the lang-switcher styles the dropdown
+// contents, containing all the personalized links.
+//
+// This setup, while weird, will allow us to accept upstream updates more easily
+// while maintaining a simpler structure for our overrides (since this file
+// doesn't exist in CD).
+//
+// The generic classes/IDs mimic the uib-dropdown-* classes that are used all
+// across HID App:
+//
+//  * cd-user-dropdown (container)
+//  * cd-user-dropdown-toggle (button to toggle state)
+//  * cd-user-dropdown-menu (dropdown content)
+//——————————————————————————————————————————————————————————————————————————————
+
+.cd-user-dropdown {
+  @extend .cd-language-switcher;
+}
+
+#cd-user-dropdown-toggle {
+  @extend #cd-language-toggle;
+  font-weight: 400;
+  text-decoration: none;
+  padding-left: 28px;
+}
+
+// Selector formats of this entire block of code overrides other defaults.
+.open > .cd-user-dropdown-menu {
+  @extend .cd-user-menu__dropdown;
+  @extend #cd-language-dropdown;
+  background: $primary-color;
+
+  li {
+    border-bottom: 0;
+  }
+
+  a {
+    color: white;
+  }
+}

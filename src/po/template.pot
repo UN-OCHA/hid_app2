@@ -294,7 +294,7 @@ msgid "Changed primary phone number to:"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:409
-#: src/app/components/header/header.html:110
+#: src/app/components/header/header.html:118
 msgid "Check in"
 msgstr ""
 
@@ -320,7 +320,7 @@ msgid "Check me in"
 msgstr ""
 
 #: src/app/components/checkin/checkout-page.html:4
-#: src/app/components/header/header.html:111
+#: src/app/components/header/header.html:119
 msgid "Check out"
 msgstr ""
 
@@ -556,7 +556,7 @@ msgid "Current phone number"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.html:4
-#: src/app/components/header/header.html:108
+#: src/app/components/header/header.html:116
 msgid "Dashboard"
 msgstr ""
 
@@ -749,7 +749,7 @@ msgstr ""
 msgid "Family name"
 msgstr ""
 
-#: src/app/components/header/header.html:79
+#: src/app/components/header/header.html:87
 msgid "Feedback"
 msgstr ""
 
@@ -906,7 +906,7 @@ msgstr ""
 msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
 msgstr ""
 
-#: src/app/components/header/header.html:109
+#: src/app/components/header/header.html:117
 #: src/app/components/search/SearchController.js:13
 msgid "Humanitarian contacts"
 msgstr ""
@@ -1076,12 +1076,12 @@ msgstr ""
 msgid "Log in to Humanitarian ID."
 msgstr ""
 
-#: src/app/components/header/header.html:80
+#: src/app/components/header/header.html:88
 msgid "Log out"
 msgstr ""
 
 #: src/app/components/auth/login.html:19
-#: src/app/components/header/header.html:70
+#: src/app/components/header/header.html:71
 msgid "Login"
 msgstr ""
 
@@ -1484,7 +1484,7 @@ msgstr ""
 msgid "Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking 'Connect'."
 msgstr ""
 
-#: src/app/components/header/header.html:77
+#: src/app/components/header/header.html:85
 msgid "Preferences"
 msgstr ""
 
@@ -1508,7 +1508,7 @@ msgstr ""
 msgid "ProCap Officer"
 msgstr ""
 
-#: src/app/components/header/header.html:76
+#: src/app/components/header/header.html:84
 msgid "Profile"
 msgstr ""
 
@@ -2126,7 +2126,7 @@ msgstr ""
 msgid "Trusted devices"
 msgstr ""
 
-#: src/app/components/header/header.html:78
+#: src/app/components/header/header.html:86
 msgid "Tutorial"
 msgstr ""
 
@@ -2231,7 +2231,7 @@ msgstr ""
 msgid "User admin"
 msgstr ""
 
-#: src/app/components/header/header.html:66
+#: src/app/components/header/header.html:65
 msgid "User menu"
 msgstr ""
 

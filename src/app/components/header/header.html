@@ -61,26 +61,34 @@
         </div>
       </div>
       <div class="cd-global-header__user-menu">
-        <div class="region region-header-top">
-          <div id="block-system-user-menu" data-drupal-class="block block-system block-menu" uib-dropdown>
-            <h2 class="element-invisible" translate>User menu</h2>
-            <div ng-if="!isAuthenticated" class="content">
-              <ul class="menu" role="menu">
-                <li class="first last leaf active-trail cd-user-menu__icon-login">
-                  <a href="/" class="active-trail active" translate>Login</a>
-                </li>
-              </ul>
-            </div>
-            <div ng-if="isAuthenticated" class="content" uib-dropdown-menu>
-              <ul class="menu" role="menu" uib-dropdown-menu>
-                <li><a href="/users/{{currentUser.id}}" class="first leaf t-profile-link" translate>Profile</a></li>
-                <li><a href="/settings" class="leaf t-preferences-link" translate>Preferences</a></li>
-                <li><a href="/tutorial" class="leaf" translate>Tutorial</a></li>
-                <li><a href="mailto:info@humanitarian.id" class="leaf btn-link" translate>Feedback</a></li>
-                <li><a href="/logout" class="last leaf t-logout-link" translate>Log out</a></li>
-              </ul>
-            </div>
+        <div uib-dropdown>
+          <h2 class="element-invisible" translate>User menu</h2>
+
+          <!-- anonymous user-login link -->
+          <div ng-if="!isAuthenticated" class="content">
+            <ul class="menu" role="menu">
+              <li class="first last leaf active-trail cd-user-menu__icon-login">
+                <a href="/" class="active-trail active" translate>Login</a>
+              </li>
+            </ul>
           </div>
+
+          <!-- logged-in user menu dropdown -->
+          <button ng-if="isAuthenticated" class="cd-global-header__dropdown-btn cd-user-menu__item t-user-dropdown-btn" id="cd-user-dropdown-toggle" uib-dropdown-toggle>
+            <span class="cd-user-menu__icon-login">
+              {{currentUser.name}}
+            </span>
+          </button>
+          <div ng-if="isAuthenticated" class="content cd-user-dropdown-menu" uib-dropdown-menu>
+            <ul class="menu" role="menu">
+              <li><a href="/users/{{currentUser.id}}" class="first leaf t-profile-link" translate>Profile</a></li>
+              <li><a href="/settings" class="leaf t-preferences-link" translate>Preferences</a></li>
+              <li><a href="/tutorial" class="leaf" translate>Tutorial</a></li>
+              <li><a href="mailto:info@humanitarian.id" class="leaf btn-link" translate>Feedback</a></li>
+              <li><a href="/logout" class="last leaf t-logout-link" translate>Log out</a></li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
@@ -88,7 +96,7 @@
   <div class="cd-site-header">
     <div class="cd-container cd-site-header__inner">
       <h1>
-        <a href="/" class="cd-site-logo">
+        <a href="/" class="cd-site-logo t-logo-link">
           <span class="element-invisible">Humanitarian ID</span>
         </a>
       </h1>
