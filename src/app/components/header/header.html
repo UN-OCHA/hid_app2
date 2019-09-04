@@ -62,11 +62,22 @@
       </div>
       <div class="cd-global-header__user-menu">
         <div class="region region-header-top">
-          <div id="block-system-user-menu" class="block block-system block-menu">
-            <h2>User menu</h2>
-            <div class="content">
-              <ul class="menu">
-                <li class="first last leaf"><a href="/user/login" title="">Login</a></li>
+          <div id="block-system-user-menu" data-drupal-class="block block-system block-menu" uib-dropdown>
+            <h2 class="element-invisible" translate>User menu</h2>
+            <div ng-if="!isAuthenticated" class="content">
+              <ul class="menu" role="menu">
+                <li class="first last leaf active-trail cd-user-menu__icon-login">
+                  <a href="/" class="active-trail active" translate>Login</a>
+                </li>
+              </ul>
+            </div>
+            <div ng-if="isAuthenticated" class="content" uib-dropdown-menu>
+              <ul class="menu" role="menu" uib-dropdown-menu>
+                <li><a href="/users/{{currentUser.id}}" class="first leaf t-profile-link" translate>Profile</a></li>
+                <li><a href="/settings" class="leaf t-preferences-link" translate>Preferences</a></li>
+                <li><a href="/tutorial" class="leaf" translate>Tutorial</a></li>
+                <li><a href="mailto:info@humanitarian.id" class="leaf btn-link" translate>Feedback</a></li>
+                <li><a href="/logout" class="last leaf t-logout-link" translate>Log out</a></li>
               </ul>
             </div>
           </div>
@@ -82,34 +93,8 @@
         </a>
       </h1>
       <div class="cd-site-header__actions">
-        <div ng-if="isAuthenticated" class="cd-search">
-          <button type="button" id="cd-search-btn" class="cd-search_btn" data-toggle="dropdown" aria-expanded="false" aria-label="Search">
-            <svg class="icon icon--search">
-              <use xlink:href="#search"></use>
-            </svg>
-            <span class="cd-search_btn-text">Search</span>
-          </button>
-          <form role="search" class="cd-search__form" aria-labelledby="cd-search-btn" action="/" method="post" id="search-block-form" accept-charset="UTF-8">
-            <div>
-              <div class="cd-search__form-inner">
-                <h2 class="element-invisible">Search form</h2>
-                <div class="form-item form-type-textfield form-item-search-block-form">
-                  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
-                  <input title="Enter the terms you wish to search for." placeholder="What are you looking for?" autocomplete="off" class="cd-search__input form-text" id="cd-search" type="search" name="search_block_form" value="" size="15" maxlength="128" />
-                </div>
-                <div class="form-actions form-wrapper" id="edit-actions">
-                  <button type="submit" name="op" class="cd-search__submit form-submit">
-                    <svg class="icon icon--search">
-                      <use xlink:href="#search"></use>
-                    </svg>
-                    <input class="element-invisible form-submit" value="Search" type="submit" id="edit-submit" name="op" />
-                  </button>
-                </div>
-                <input type="hidden" name="form_build_id" value="form-ECheN_9Jf9Ys7Hz0jV3hm50VCtLzDOwqaEauh3Sowpo" />
-                <input type="hidden" name="form_id" value="search_block_form" />
-              </div>
-            </div>
-          </form>
+        <div ng-if="isAuthenticated" class="cd-search--inline" uib-dropdown auto-close="disabled">
+          <ng-include src="'app/components/search/search-form.html'"></ng-include>
         </div>
         <div class="cd-site-header__nav-holder" uib-dropdown>
           <button type="button" id="cd-nav-toggle" class="cd-site-header__nav-toggle" aria-expanded="false" uib-dropdown-toggle>

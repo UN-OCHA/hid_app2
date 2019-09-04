@@ -78,15 +78,15 @@ module.exports = function(grunt) {
     },
     modernizr: {
       dist: {
-        'crawl': false,
+        'crawl': true,
         'customTests': [],
         'dest': 'src/assets/js/modernizr-output.js',
         'tests': [
-          'svg',
-          'flexbox',
+          'appearance',
           'csscalc',
           'csstransforms',
-          'appearance'
+          'flexbox',
+          'svg',
         ],
         'options': [
           'setClasses'

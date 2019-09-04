@@ -294,7 +294,7 @@ msgid "Changed primary phone number to:"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:409
-#: src/app/components/header/header.html:125
+#: src/app/components/header/header.html:110
 msgid "Check in"
 msgstr ""
 
@@ -320,7 +320,7 @@ msgid "Check me in"
 msgstr ""
 
 #: src/app/components/checkin/checkout-page.html:4
-#: src/app/components/header/header.html:126
+#: src/app/components/header/header.html:111
 msgid "Check out"
 msgstr ""
 
@@ -446,7 +446,7 @@ msgstr ""
 msgid "Contact Information"
 msgstr ""
 
-#: src/app/components/search/search-form.html:16
+#: src/app/components/search/search-form.html:27
 msgid "Contacts"
 msgstr ""
 
@@ -556,7 +556,7 @@ msgid "Current phone number"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.html:4
-#: src/app/components/header/header.html:123
+#: src/app/components/header/header.html:108
 msgid "Dashboard"
 msgstr ""
 
@@ -749,6 +749,10 @@ msgstr ""
 msgid "Family name"
 msgstr ""
 
+#: src/app/components/header/header.html:79
+msgid "Feedback"
+msgstr ""
+
 #: src/app/components/start/tutorial.html:63
 msgid "Feel free to export your contact list into PDF or other available formats."
 msgstr ""
@@ -902,7 +906,7 @@ msgstr ""
 msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
 msgstr ""
 
-#: src/app/components/header/header.html:124
+#: src/app/components/header/header.html:109
 #: src/app/components/search/SearchController.js:13
 msgid "Humanitarian contacts"
 msgstr ""
@@ -1038,7 +1042,7 @@ msgid "List not found, try"
 msgstr ""
 
 #: src/app/components/list/lists.html:4
-#: src/app/components/search/search-form.html:27
+#: src/app/components/search/search-form.html:38
 msgid "Lists"
 msgstr ""
 
@@ -1072,7 +1076,12 @@ msgstr ""
 msgid "Log in to Humanitarian ID."
 msgstr ""
 
+#: src/app/components/header/header.html:80
+msgid "Log out"
+msgstr ""
+
 #: src/app/components/auth/login.html:19
+#: src/app/components/header/header.html:70
 msgid "Login"
 msgstr ""
 
@@ -1273,7 +1282,7 @@ msgstr ""
 msgid "No phone numbers"
 msgstr ""
 
-#: src/app/components/search/search-form.html:39
+#: src/app/components/search/search-form.html:50
 msgid "No results found"
 msgstr ""
 
@@ -1475,6 +1484,10 @@ msgstr ""
 msgid "Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking 'Connect'."
 msgstr ""
 
+#: src/app/components/header/header.html:77
+msgid "Preferences"
+msgstr ""
+
 #: src/app/components/user/UserEditController.js:486
 msgid "Primary email updated"
 msgstr ""
@@ -1493,6 +1506,10 @@ msgstr ""
 
 #: src/app/components/list/List.js:226
 msgid "ProCap Officer"
+msgstr ""
+
+#: src/app/components/header/header.html:76
+msgid "Profile"
 msgstr ""
 
 #: src/app/components/user/UserEditController.js:183
@@ -1675,7 +1692,8 @@ msgstr ""
 msgid "Search for contacts"
 msgstr ""
 
-#: src/app/components/search/search-form.html:7
+#: src/app/components/search/search-form.html:10
+#: src/app/components/search/search-form.html:18
 msgid "Search for contacts or contact lists"
 msgstr ""
 
@@ -1701,8 +1719,8 @@ msgid "Secret"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:23
-#: src/app/components/search/search-form.html:17
 #: src/app/components/search/search-form.html:28
+#: src/app/components/search/search-form.html:39
 msgid "See all"
 msgstr ""
 
@@ -2108,6 +2126,10 @@ msgstr ""
 msgid "Trusted devices"
 msgstr ""
 
+#: src/app/components/header/header.html:78
+msgid "Tutorial"
+msgstr ""
+
 #: src/app/components/user/preferences.html:154
 msgid "Two-factor authentication"
 msgstr ""
@@ -2207,6 +2229,10 @@ msgstr ""
 
 #: src/app/components/user/user.html:17
 msgid "User admin"
+msgstr ""
+
+#: src/app/components/header/header.html:66
+msgid "User menu"
 msgstr ""
 
 #: src/app/components/user/user.html:74

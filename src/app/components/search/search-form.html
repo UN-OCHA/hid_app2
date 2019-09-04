@@ -2,9 +2,20 @@
 
   <form ng-submit="fullSearch(searchTerm)" role="search" >
     <div class="search-form" uib-dropdown is-open="showAutocomplete">
-
-      <input type="search" class="input-no-border search-form__input" name="search" id="main-search" autocomplete="off" ng-model="searchTerm" ng-value="searchTerm" ng-model-options="{debounce: 600}" ng-change="searchAutocomplete()" ng-trim="false" ng-disabled="!isOnline">
-      <label for="search" class="search-form__label">{{'Search for contacts or contact lists'|translate}}</label>
+      <input
+        type="search"
+        class="input-no-border search-form__input"
+        name="search"
+        id="main-search"
+        placeholder="{{ 'Search for contacts or contact lists' | translate }}"
+        autocomplete="off"
+        ng-model="searchTerm"
+        ng-value="searchTerm"
+        ng-model-options="{debounce: 600}"
+        ng-change="searchAutocomplete()"
+        ng-trim="false"
+        ng-disabled="!isOnline">
+      <label for="search" class="element-invisible search-form__label">{{ 'Search for contacts or contact lists' | translate }}</label>
       <button type="submit" class="btn-transparent search-form__button" ng-disabled="!isOnline">
         <icon name="search" text="Search"></icon>
       </button>
@@ -45,3 +56,26 @@
   </form>
 
 </div>
+
+<!--
+  <button type="button" id="cd-search-btn" class="cd-search--inline_btn" data-toggle="dropdown" aria-expanded="false" aria-label="Search" uib-dropdown-toggle>
+    <svg class="icon icon--search">
+      <use xlink:href="#search"></use>
+    </svg>
+    <span class="cd-search_btn-text">Search</span>
+  </button>
+  <form role="search" class="cd-search--inline__form" aria-labelledby="cd-search-btn" action="/search" method="get" id="views-exposed-form-search-inline" accept-charset="UTF-8" uib-dropdown-menu>
+    <div>
+      <div id="edit-search-api-views-fulltext-wrapper" class="cd-search--inline__form-inner">
+        <label for="edit-search-api-views-fulltext" class="element-invisible">Search for contacts or lists.</label>
+        <input type="search" placeholder="Search for contacts or lists." name="search" id="edit-search-api-views-fulltext" class="cd-search--inline__input" autocomplete="off">
+        <button type="submit" class="cd-search--inline__submit">
+          <svg class="icon icon--search">
+            <use xlink:href="#search"></use>
+          </svg>
+          <span class="element-invisible">Search</span>
+        </button>
+      </div>
+    </div>
+  </form>
+-->

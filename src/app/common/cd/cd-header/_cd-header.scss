@@ -37,7 +37,7 @@
     grid-column-gap: 1em;
 
     @include tablet {
-      grid-template-columns: 186px 1fr;
+      grid-template-columns: 256px 1fr; // HID override
     }
   }
 }
@@ -87,11 +87,11 @@
 
       @include desktop {
         flex: 1 1 auto;
-        max-width: 112px;
+        max-width: 124px; // HID override
       }
       @include xlarge {
         flex: 1 1 auto;
-        max-width: 160px;
+        max-width: 200px; // HID override
       }
     }
   }
