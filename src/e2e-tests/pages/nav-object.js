@@ -1,7 +1,7 @@
 /* jshint module: true */
 var NavObject = function() {
 
-  this.landingLink = element(by.css('.site-header__logo'));
+  this.landingLink = element(by.css('.t-logo-link'));
   this.dashboardLink = element(by.css('.t-dashboard-link'));
   this.humanitarianContactsLink = element(by.css('.t-hc-link'));
   this.checkinLink = element(by.css('.t-checkin-link'));
@@ -14,7 +14,7 @@ var NavObject = function() {
   this.searchAutocomplete = element(by.css('.search-autocomplete'));
   this.searchSeeAllUsers = element(by.css('.t-see-all-users'));
   this.searchSeeAllLists = element(by.css('.t-see-all-lists'));
-  this.languageButton = element(by.css('#cd-language-toggle'));
+  this.languageButton = element(by.css('.t-lang-btn'));
   this.langEN = element(by.css('.t-lang-en'));
   this.langFR = element(by.css('.t-lang-fr'));
 
