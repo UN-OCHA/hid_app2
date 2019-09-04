@@ -64,7 +64,7 @@
       // updated.
       if ($scope.currentUser._id === $scope.user._id) {
         User.get({userId: $scope.user._id}, function (user) {
-          $scope.setCurentUser(user);
+          $scope.setCurrentUser(user);
           $location.url('/dashboard');
           return;
         });
