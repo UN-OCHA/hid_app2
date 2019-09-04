@@ -1,15 +1,15 @@
 /* jshint module: true */
 var LoginPage = function() {
-	var emailInput = element(by.id('email'));
-	var passwordInput = element(by.id('password'));
-	var loginButton = element(by.css('.t-login-btn'));
+  var emailInput = element(by.id('email'));
+  var passwordInput = element(by.id('password'));
+  var loginButton = element(by.css('.t-login-btn'));
 
-	this.get = function () {
+  this.get = function () {
     browser.get(browser.baseUrl);
   };
 
   this.login = function () {
-  	emailInput.sendKeys(browser.params.email);
+    emailInput.sendKeys(browser.params.email);
     passwordInput.sendKeys(browser.params.password);
     loginButton.click();
   };
@@ -21,7 +21,7 @@ var LoginPage = function() {
   };
 
   this.loginInvalid = function () {
-  	emailInput.sendKeys('testuser@example.com');
+    emailInput.sendKeys('testuser@example.com');
     passwordInput.sendKeys('notthepassword');
     loginButton.click();
   };
