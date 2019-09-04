@@ -19,12 +19,16 @@
   }
 }
 
+#main-search {
+  padding: 21px 8px 22px 28px; // ✨ all magic, all the time ✨
+}
+
 .search-form__button {
   position: absolute;
   padding: 0;
   left: $base-unit/2;
   top: 50%;
-  margin-top: -13px;
+  margin-top: -16px;
   width: $base-unit*3;
   height: $base-unit*3;
   line-height: $base-unit*3;
@@ -68,7 +72,7 @@
   bottom: -2px;
   left: 0;
   width: 100%;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   transition: border-color 0.3s ease;
 }
 
@@ -99,7 +103,7 @@ input[type="search"].search-form__input {
     }
 
     &+ * + * + .search-form__active {
-      border-color: $medium-blue;
+      border-color: $cd-highlight-red;
     }
 
     &+ .search-form__label {
