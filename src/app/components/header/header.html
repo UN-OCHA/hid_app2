@@ -91,6 +91,11 @@
 
         </div>
       </div>
+      <div ng-if="isAuthenticated && !hideHeaderFooter" class="cd-global-header__notifications cd-notifications">
+        <a href="/notifications" class="cd-notifications__link t-notifications-link">
+          <notifications-count></notifications-count>
+        </a>
+      </div>
     </div>
   </div>
   <div class="cd-site-header">
@@ -195,7 +200,6 @@
             <button type="button" class="nav__link t-user-dropdown-btn btn btn-transparent" uib-dropdown-toggle ng-if="isAuthenticated && !hideHeaderFooter">
               <icon name="user"></icon>
               <span class="nav__label">{{currentUser.name}}</span>
-
               <icon name="arrow-down" text="Open user menu"></icon>
             </button>
 

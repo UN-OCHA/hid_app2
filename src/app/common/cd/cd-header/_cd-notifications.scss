@@ -1,0 +1,42 @@
+//——————————————————————————————————————————————————————————————————————————————
+// Common Design: Notifications
+//
+// HID addition to the CD to incorporate their existing Notifications indicator.
+//——————————————————————————————————————————————————————————————————————————————
+
+.cd-notifications {
+  position: relative;
+  padding-left: 16px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 11px;
+    left: 8px;
+    background-image: url('../img/icons/notification--white.svg');
+    background-size: 12px 12px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 50%;
+    width: 1px;
+    background: rgba(255,255,255,0.25);
+    top: 25%;
+  }
+}
+
+.cd-notifications__link {
+  display: inline-block;
+  padding: 0 12px;
+  height: 35px;
+  line-height: 35px;
+  color: white;
+  font-size: 100%;
+  text-decoration: none;
+}
