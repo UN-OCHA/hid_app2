@@ -1,6 +1,5 @@
 /* jshint module: true */
 var NavObject = function() {
-
   this.landingLink = element(by.css('.t-logo-link'));
   this.dashboardLink = element(by.css('.t-dashboard-link'));
   this.humanitarianContactsLink = element(by.css('.t-hc-link'));
@@ -10,6 +9,7 @@ var NavObject = function() {
   this.profileLink = element(by.css('.t-profile-link'));
   this.preferencesLink = element(by.css('.t-preferences-link'));
   this.logoutLink = element(by.css('.t-logout-link'));
+  this.logoutModalButton = element(by.css('.modal-success .btn-primary'));
   this.searchInput = element(by.id('main-search'));
   this.searchAutocomplete = element(by.css('.search-autocomplete'));
   this.searchSeeAllUsers = element(by.css('.t-see-all-users'));
@@ -29,7 +29,8 @@ var NavObject = function() {
   this.logOut = function () {
     this.openUserDropdown();
     this.logoutLink.click();
-    browser.sleep(3000);
+    browser.sleep(1000);
+    this.logoutModalButton.click();
   };
 };
 

@@ -18,6 +18,9 @@
 //  * cd-user-dropdown (container)
 //  * cd-user-dropdown-toggle (button to toggle state)
 //  * cd-user-dropdown-menu (dropdown content)
+//
+// Note: the `_cd-dropdowns.scss` file provides nested Navigation, which is not
+//       not the pattern that this file attempts to create. Just a naming clash.
 //——————————————————————————————————————————————————————————————————————————————
 
 .cd-user-dropdown {
@@ -31,7 +34,7 @@
   padding-left: 28px;
 }
 
-// Selector formats of this entire block of code overrides other defaults.
+// ".open >" selector format overrides other defaults elsewhere.
 .open > .cd-user-dropdown-menu {
   @extend .cd-user-menu__dropdown;
   @extend #cd-language-dropdown;

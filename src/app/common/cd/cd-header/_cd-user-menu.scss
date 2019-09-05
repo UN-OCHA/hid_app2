@@ -64,10 +64,12 @@
 // Menu list item with icon
 .cd-user-menu__icon {
   a {
-    padding-left: 26px;
+    padding-left: 6px; // HID override
+    color: white; // HID override
+    text-decoration: none; // HID override
 
     @include tablet {
-      padding-left: 34px;
+      // padding-left: 34px; // HID override
     }
   }
 
@@ -82,7 +84,7 @@
     background-size: 14px 14px;
 
     @include tablet {
-      left: 11px;
+      // left: 11px; // HID override
     }
   }
 }
