@@ -21,7 +21,6 @@ describe('Check in and out of a list', function () {
   });
 
   describe('Checking in to a list', function () {
-
     it('should find the list', function () {
       browser.wait(checkinPage.pageHeading.isDisplayed(), 10000);
       checkinPage.selectListToggle.click();
@@ -45,18 +44,15 @@ describe('Check in and out of a list', function () {
   });
 
   describe('Viewing lists I\'m a member of on the dashboard', function () {
-
     it('should show the list in Lists I\'m part of', function () {
       checkoutPage.modalOverlay.click();
       browser.wait(dashboardPage.pageHeading.isDisplayed(), 10000);
       expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'dashboard');
       expect(dashboardPage.listsMember.getText()).toContain(browser.params.standardTestList);
     });
-
   });
 
   describe('Viewing the list', function () {
-
     beforeAll(function () {
       dashboardPage.listMemberLink.click();
     });
@@ -65,7 +61,6 @@ describe('Check in and out of a list', function () {
       browser.wait(listPage.listUsers.isDisplayed(), 10000);
       expect(listPage.listUsers.getText()).toContain(browser.params.userName);
     });
-
   });
 
   describe('Checking out of a list', function () {
@@ -75,13 +70,11 @@ describe('Check in and out of a list', function () {
     });
 
     describe('On the Check out page', function () {
-
       it('should show the list', function () {
         expect(checkoutPage.lists.getText()).toContain(browser.params.standardTestList);
       });
 
       describe('Checking out of the list', function () {
-
         it('should ask to confirm check out of the list', function () {
           checkoutPage.checkoutButton.click();
           browser.wait(checkoutPage.confirmModal.isDisplayed(), 5000);
@@ -98,16 +91,12 @@ describe('Check in and out of a list', function () {
         it('should not show the list', function () {
           expect(checkoutPage.lists.getText()).not.toContain(browser.params.standardTestList);
         });
-
       });
-
     });
-
   });
 
   afterAll(function () {
     browser.sleep(3000); //wait for modals to close
     navObject.logOut();
   });
-
 });
