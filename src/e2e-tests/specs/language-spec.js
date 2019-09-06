@@ -13,6 +13,8 @@ describe('Language switcher', function () {
     loginPage.login();
     navObject.dashboardLink.click();
     browser.sleep(500);
+    var dashboardHeading = element(by.cssContainingText('.page-header__heading', 'Dashboard'));
+    browser.wait(dashboardHeading.isDisplayed, 10000);
   });
 
   it('should change the language to French', function () {
