@@ -15,6 +15,7 @@ var ListPage = function() {
   this.listActions = element(by.css('.list-actions'));
   this.adminButton = element(by.css('.t-list-admin-btn'));
   this.adminSidebar = element(by.css('.t-list-admin'));
+  this.adminSideBarCloseButton = element(by.css('.t-sidebar-close-btn'));
   this.favButton = element(by.css('.t-fav-btn'));
   this.unFavButton = element(by.css('.t-unfav-btn'));
   this.deleteButton = element(by.css('.t-delete-list-btn'));
