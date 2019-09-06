@@ -16,6 +16,12 @@ var LoginPage = function() {
     this.loginButton.click();
   };
 
+  this.loginVerified = function () {
+    this.emailInput.sendKeys(browser.params.verifiedEmail);
+    this.passwordInput.sendKeys(browser.params.verifiedPassword);
+    this.loginButton.click();
+  };
+
   this.loginAdmin = function () {
     this.emailInput.sendKeys(browser.params.adminEmail);
     this.passwordInput.sendKeys(browser.params.adminPassword);

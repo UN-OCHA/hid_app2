@@ -16,7 +16,7 @@ describe('Check in and out of a list', function () {
 
   beforeAll(function () {
     loginPage.get();
-    loginPage.login();
+    loginPage.loginVerified();
     navObject.checkinLink.click();
   });
 
@@ -48,6 +48,8 @@ describe('Check in and out of a list', function () {
       checkoutPage.modalOverlay.click();
       browser.wait(dashboardPage.pageHeading.isDisplayed(), 10000);
       expect(browser.getCurrentUrl()).toBe(browser.baseUrl + 'dashboard');
+      dashboardPage.listsMemberTabButton.click();
+      browser.sleep(500);
       expect(dashboardPage.listsMember.getText()).toContain(browser.params.standardTestList);
     });
   });
@@ -55,11 +57,12 @@ describe('Check in and out of a list', function () {
   describe('Viewing the list', function () {
     beforeAll(function () {
       dashboardPage.listMemberLink.click();
+      browser.sleep(500);
     });
 
     it('should show me in the list', function () {
       browser.wait(listPage.listUsers.isDisplayed(), 10000);
-      expect(listPage.listUsers.getText()).toContain(browser.params.userName);
+      expect(listPage.listUsers.getText()).toContain(browser.params.verifiedUserName);
     });
   });
 
