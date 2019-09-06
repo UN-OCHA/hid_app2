@@ -1,5 +1,5 @@
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   transform: translate3d(-($sidebar-width-xs + $base-unit*1.5), 0, 0);
   height: 100%;
