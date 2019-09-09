@@ -139,7 +139,6 @@ input[type="search"].search-form__input {
 
 .search-autocomplete {
   font-family: $heading-font-light;
-  margin-top: $base-unit;
 }
 
 .search-autocomplete__heading {
@@ -203,10 +202,6 @@ input[type="search"].search-form__input {
     .site-header__search & {
       height: $site-header-height-md;
     }
-  }
-
-  .search-autocomplete {
-    margin-top: $base-unit*2;
   }
 
   .search-actions {
