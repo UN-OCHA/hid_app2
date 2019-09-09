@@ -4,7 +4,10 @@
 
 .cd-search {
   float: left;
-  @include z-index(search);
+  // There was a Grunt error related to missing index `search` in the $zindex map
+  // but everything was double-checked and no obvious error could be found.
+  // Workaround is to hard-code the zindex. Could be worse.
+  z-index: 100; // HID override.
 
   .cssgrid.flexbox & {
     float: none;
