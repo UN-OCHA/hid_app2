@@ -725,6 +725,10 @@ msgstr ""
 msgid "Embassy"
 msgstr ""
 
+#: src/app/components/client/new-client.html:37
+msgid "Enter one URL per line"
+msgstr ""
+
 #: src/app/components/user/kiosk.html:39
 msgid "Enter your personal details"
 msgstr ""
@@ -1804,10 +1808,6 @@ msgstr ""
 
 #: src/app/components/user/user.html:43
 msgid "Send Claim Email"
-msgstr ""
-
-#: src/app/components/client/new-client.html:37
-msgid "Separated by new lines"
 msgstr ""
 
 #: src/app/components/service/new-service.html:29
