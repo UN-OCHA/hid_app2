@@ -14,24 +14,28 @@ var LoginPage = function() {
     this.emailInput.sendKeys(browser.params.email);
     this.passwordInput.sendKeys(browser.params.password);
     this.loginButton.click();
+    browser.sleep(500);
   };
 
   this.loginVerified = function () {
     this.emailInput.sendKeys(browser.params.verifiedEmail);
     this.passwordInput.sendKeys(browser.params.verifiedPassword);
     this.loginButton.click();
+    browser.sleep(500);
   };
 
   this.loginAdmin = function () {
     this.emailInput.sendKeys(browser.params.adminEmail);
     this.passwordInput.sendKeys(browser.params.adminPassword);
     this.loginButton.click();
+    browser.sleep(500);
   };
 
   this.loginInvalid = function () {
     this.emailInput.sendKeys('testuser@example.com');
     this.passwordInput.sendKeys('notthepassword');
     this.loginButton.click();
+    browser.sleep(500);
   };
 };
 
