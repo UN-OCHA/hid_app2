@@ -39,4 +39,8 @@ describe('Language switcher', function () {
     browser.wait(enHeading.isDisplayed, 1000);
     expect(enHeading.getText()).toBe('Dashboard');
   });
+
+  afterAll(function () {
+    navObject.logOut();
+  });
 });
