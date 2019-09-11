@@ -91,6 +91,11 @@ $cd-dark-text-color: #000;
 $cd-blue-text-color: $cd-ocha-blue;
 $cd-bright-blue-text-color: $cd-bright-blue;
 
+// HID-specific + Override CD
+$hid-ocha-services-see-all: #bddfea;
+$hid-highlight: #60b2c9;
+$cd-highlight-red: $hid-highlight;
+
 
 //——————————————————————————————————————————————————————————————————————————————
 // Fonts

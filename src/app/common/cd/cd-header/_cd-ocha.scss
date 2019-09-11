@@ -167,7 +167,7 @@ a.cd-ocha-dropdown__see-all {
   @include font-size($cd-font-size-small);
   font-weight: 700;
   padding: 12px;
-  background: $cd-bright-blue;
+  background: $hid-ocha-services-see-all; // HID override
   color: $cd-dark-blue;
   text-align: center;
   text-decoration: none;
