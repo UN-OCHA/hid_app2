@@ -33,6 +33,10 @@
   text-decoration: none;
   padding-left: 28px;
 
+  &:hover {
+    text-decoration: underline;
+  }
+
   &::after {
     content: '';
     position: absolute;
