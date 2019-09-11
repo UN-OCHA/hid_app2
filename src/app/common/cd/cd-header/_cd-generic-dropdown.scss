@@ -33,6 +33,11 @@
   text-decoration: none;
   text-transform: none;
   padding-left: 28px;
+  padding-right: 28px;
+
+  .icon--arrow-down {
+    right: 12px;
+  }
 
   &:hover {
     text-decoration: underline;

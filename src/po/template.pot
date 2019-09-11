@@ -294,7 +294,7 @@ msgid "Changed primary phone number to:"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:409
-#: src/app/components/header/header.html:123
+#: src/app/components/header/header.html:126
 msgid "Check in"
 msgstr ""
 
@@ -320,7 +320,7 @@ msgid "Check me in"
 msgstr ""
 
 #: src/app/components/checkin/checkout-page.html:4
-#: src/app/components/header/header.html:124
+#: src/app/components/header/header.html:127
 msgid "Check out"
 msgstr ""
 
@@ -556,7 +556,7 @@ msgid "Current phone number"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.html:4
-#: src/app/components/header/header.html:121
+#: src/app/components/header/header.html:124
 msgid "Dashboard"
 msgstr ""
 
@@ -753,7 +753,7 @@ msgstr ""
 msgid "Family name"
 msgstr ""
 
-#: src/app/components/header/header.html:87
+#: src/app/components/header/header.html:90
 msgid "Feedback"
 msgstr ""
 
@@ -910,7 +910,7 @@ msgstr ""
 msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
 msgstr ""
 
-#: src/app/components/header/header.html:122
+#: src/app/components/header/header.html:125
 #: src/app/components/search/SearchController.js:13
 msgid "Humanitarian contacts"
 msgstr ""
@@ -1080,7 +1080,7 @@ msgstr ""
 msgid "Log in to Humanitarian ID."
 msgstr ""
 
-#: src/app/components/header/header.html:88
+#: src/app/components/header/header.html:91
 msgid "Log out"
 msgstr ""
 
@@ -1488,7 +1488,7 @@ msgstr ""
 msgid "Please note that some of the information made available by this user is private. You can contact them with a request to see their whole profile by clicking 'Connect'."
 msgstr ""
 
-#: src/app/components/header/header.html:85
+#: src/app/components/header/header.html:88
 msgid "Preferences"
 msgstr ""
 
@@ -1512,7 +1512,7 @@ msgstr ""
 msgid "ProCap Officer"
 msgstr ""
 
-#: src/app/components/header/header.html:84
+#: src/app/components/header/header.html:87
 msgid "Profile"
 msgstr ""
 
@@ -2126,7 +2126,7 @@ msgstr ""
 msgid "Trusted devices"
 msgstr ""
 
-#: src/app/components/header/header.html:86
+#: src/app/components/header/header.html:89
 msgid "Tutorial"
 msgstr ""
 

@@ -2,7 +2,7 @@
   <div class="cd-global-header">
     <div class="cd-container cd-global-header__inner">
       <div class="cd-ocha" uib-dropdown>
-        <button type="button" class="cd-ocha-btn cd-global-header__dropdown-btn" id="cd-ocha-dropdown-toggle" aria-expanded="false" aria-label="OCHA Services" uib-dropdown-toggle>
+        <button type="button" class="cd-ocha-btn cd-global-header__dropdown-btn" id="cd-ocha-dropdown-toggle" aria-expanded="false" aria-label="OCHA Services" data-toggle="dropdown" uib-dropdown-toggle>
           <span class="cd-ocha-btn__logo" aria-hidden="true"></span>
           <span class="cd-ocha-btn__label" translate>OCHA Services</span>
           <svg class="icon icon--arrow-down">
@@ -46,7 +46,7 @@
       </div>
       <div class="cd-global-header__language-switcher">
         <div class="cd-language-switcher" uib-dropdown>
-          <button type="button" class="cd-user-menu__item cd-user-menu__item--small cd-global-header__dropdown-btn t-lang-btn" id="cd-language-toggle" aria-label="Language" aria-expanded="false" uib-dropdown-toggle>
+          <button type="button" class="cd-user-menu__item cd-user-menu__item--small cd-global-header__dropdown-btn t-lang-btn" id="cd-language-toggle" aria-label="Language" aria-expanded="false" data-toggle="dropdown" uib-dropdown-toggle>
             {{ getCurrentLanguage() }}
             <svg class="icon icon--arrow-down">
               <use xlink:href="#arrow-down"></use>
@@ -74,10 +74,13 @@
           </div>
 
           <!-- logged-in user menu dropdown -->
-          <button ng-if="isAuthenticated" class="cd-global-header__dropdown-btn cd-user-menu__item t-user-dropdown-btn" id="cd-user-dropdown-toggle" uib-dropdown-toggle>
+          <button ng-if="isAuthenticated" class="cd-global-header__dropdown-btn cd-user-menu__item t-user-dropdown-btn" id="cd-user-dropdown-toggle" data-toggle="dropdown" uib-dropdown-toggle>
             <span class="cd-user-menu__icon-login">
               {{currentUser.name}}
             </span>
+            <svg class="icon icon--arrow-down">
+              <use xlink:href="#arrow-down"></use>
+            </svg>
           </button>
           <div ng-if="isAuthenticated" class="content cd-user-dropdown-menu" uib-dropdown-menu>
             <ul class="menu" role="menu">
