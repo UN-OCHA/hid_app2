@@ -68,13 +68,6 @@
       return thisScope.currentUserResource;
     };
 
-    thisScope.initCurrentUser = function () {
-      if ($window.localStorage.getItem('currentUser')) {
-        thisScope.setCurrentUser(JSON.parse($window.localStorage.getItem('currentUser')));
-      }
-      thisScope.initLanguage();
-    };
-
     $rootScope.$on('updateCurrentUser', function () {
       User.get({userId: thisScope.currentUser.id}, function (user) {
         thisScope.setCurrentUser(user);
@@ -110,19 +103,6 @@
     }
     thisScope.initCDHeader();
 
-    thisScope.initLanguage = function () {
-      if (!thisScope.currentUser) {
-        return;
-      }
-
-      var locale = thisScope.currentUser.locale ? thisScope.currentUser.locale : 'en';
-      var lang = gettextCatalog.getCurrentLanguage();
-
-      if (lang !== locale) {
-        gettextCatalog.setCurrentLanguage(locale);
-        thisScope.language = locale;
-      }
-    };
 
     thisScope.changeLanguage = function (lang) {
       gettextCatalog.setCurrentLanguage(lang);
@@ -138,14 +118,33 @@
       return lang.toUpperCase();
     };
 
+    thisScope.initLanguage = function () {
+      if (!thisScope.currentUser) {
+        return;
+      }
+
+      var locale = thisScope.currentUser.locale ? thisScope.currentUser.locale : 'en';
+      var lang = gettextCatalog.getCurrentLanguage();
+
+      if (lang !== locale) {
+        gettextCatalog.setCurrentLanguage(locale);
+        thisScope.language = locale;
+      }
+    };
+
+    thisScope.initCurrentUser = function () {
+      if ($window.localStorage.getItem('currentUser')) {
+        thisScope.setCurrentUser(JSON.parse($window.localStorage.getItem('currentUser')));
+      }
+      thisScope.initLanguage();
+    };
+    thisScope.initCurrentUser();
+
     var initView = function () {
       alertService.resetPageAlert();
       thisScope.sidebar.close();
       thisScope.hideHeaderFooter = hideHeaderFooter();
     };
-
-    thisScope.initCurrentUser();
-
     thisScope.$on('$routeChangeSuccess', initView);
   }
 })();
