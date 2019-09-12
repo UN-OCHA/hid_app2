@@ -26,7 +26,7 @@ describe('Language switcher', function () {
   });
 
   it('should change the active language in the Switcher to French', function () {
-    expect(navObject.languageButton.getText()).toBe('FR');
+    expect(navObject.languageButton.getText()).toBe('fr');
     navObject.openLanguageDropdown();
     var activeLanguage = element(by.css('.language-link.active'));
     browser.wait(activeLanguage.isDisplayed, 10000);
@@ -37,6 +37,7 @@ describe('Language switcher', function () {
     navObject.langEN.click();
     var enHeading = element(by.css('.page-header__heading'));
     browser.wait(enHeading.isDisplayed, 1000);
+    expect(navObject.languageButton.getText()).toBe('en');
     expect(enHeading.getText()).toBe('Dashboard');
   });
 
