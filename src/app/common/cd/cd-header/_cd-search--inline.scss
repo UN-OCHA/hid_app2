@@ -8,6 +8,7 @@
 
   .cssgrid.flexbox & {
     float: none;
+    flex: 1 1 190px; // HID override
   }
 }
 

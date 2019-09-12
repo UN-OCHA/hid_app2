@@ -1696,9 +1696,12 @@ msgstr ""
 msgid "Search for contacts"
 msgstr ""
 
-#: src/app/components/search/search-form.html:10
 #: src/app/components/search/search-form.html:18
 msgid "Search for contacts or contact lists"
+msgstr ""
+
+#: src/app/components/search/search-form.html:10
+msgid "Search for contacts or lists"
 msgstr ""
 
 #: src/app/components/landing/landing.html:61

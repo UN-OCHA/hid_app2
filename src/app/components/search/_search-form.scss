@@ -21,6 +21,11 @@
 
 #main-search {
   padding: 21px 8px 22px 28px; // ✨ all magic, all the time ✨
+  font-size: .9rem;
+
+  @include md {
+    font-size: 1rem;
+  }
 }
 
 .search-form__button {
