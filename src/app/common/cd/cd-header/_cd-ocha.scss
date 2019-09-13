@@ -153,6 +153,11 @@
       color: $cd-white-text-color;
       text-decoration: underline;
     }
+
+    &:focus { // HID override
+      outline: 3px solid $hid-highlight; // HID override
+      outline-offset: 8px; // HID override
+    }
   }
 
   @include xlarge {
@@ -172,6 +177,10 @@ a.cd-ocha-dropdown__see-all {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+
+  &:focus { // HID override
+    outline: 3px white solid; // HID override
+  }
 
   @include tablet {
     position: absolute;

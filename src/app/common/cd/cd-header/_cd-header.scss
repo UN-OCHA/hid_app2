@@ -2,6 +2,11 @@
 // Common Design: Header
 //——————————————————————————————————————————————————————————————————————————————
 
+// We want uniform focus styles on the whole Header
+.cd-header button:focus { // HID override
+  outline: 3px solid $hid-highlight; // HID override
+}
+
 //
 // Global Header.
 // Top header bar, contains Sites Menu ('OCHA Services') and User Menu.

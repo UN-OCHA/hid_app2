@@ -39,10 +39,6 @@
     right: 12px;
   }
 
-  &:hover {
-    text-decoration: underline;
-  }
-
   &::after {
     content: '';
     position: absolute;
@@ -51,6 +47,10 @@
     width: 1px;
     background: rgba(255, 255, 255, 0.25);
     top: 25%;
+  }
+
+  &:hover {
+    text-decoration: underline;
   }
 }
 
@@ -66,5 +66,9 @@
 
   a {
     color: white;
+
+    &:focus {
+      outline: 3px solid $hid-highlight;
+    }
   }
 }

@@ -15,7 +15,7 @@
     height: 12px;
     position: absolute;
     top: 11px;
-    left: 8px;
+    left: 24px;
     background-image: url('../img/icons/notification--white.svg');
     background-size: 12px 12px;
   }
@@ -33,7 +33,7 @@
 
 .cd-notifications__link {
   display: inline-block;
-  padding: 0 12px;
+  padding: 0 12px 0 28px;
   height: 35px;
   line-height: 35px;
   color: white;
@@ -42,5 +42,9 @@
 
   &:hover {
     text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 3px solid $hid-highlight;
   }
 }

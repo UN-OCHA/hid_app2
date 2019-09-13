@@ -33,6 +33,10 @@
     top: -1px;
     min-height: 100%; // IE11 fix.
   }
+
+  &:focus { // HID override
+    outline: 3px solid $hid-highlight; // HID override
+  }
 }
 
 // Language switcher dropdown
@@ -60,13 +64,26 @@
 #cd-language {
   right: 0;
 
-  li a {
+  li button { // HID override
     @extend .cd-user-menu__dropdown-link;
+    background: transparent; // HID override
     color: $cd-white;
+    padding-left: 4px; // HID override
+    padding-right: 4px; // HID override
+
+    &.active { // HID override
+      padding-right: 20px; // HID override
+    }
 
     &:hover,
     &:focus {
       color: $cd-bright-blue;
+    }
+
+    &:focus { // HID override
+      color: $cd-white; // HID override
+      text-decoration: underline; // HID override
+      outline: 3px solid $hid-highlight; // HID override
     }
   }
 }

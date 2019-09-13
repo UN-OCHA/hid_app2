@@ -57,7 +57,7 @@
   &:hover,
   &:focus {
     text-decoration: underline;
-    outline: 0; // outline is replaced by text-decoration
+    // outline: 0; // HID override
   }
 }
 
