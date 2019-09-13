@@ -179,7 +179,7 @@ a.cd-ocha-dropdown__see-all {
   text-transform: uppercase;
 
   &:focus { // HID override
-    outline: 3px white solid; // HID override
+    outline: 3px black solid; // HID override
   }
 
   @include tablet {
