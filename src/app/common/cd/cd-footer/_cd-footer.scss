@@ -19,6 +19,11 @@
       color: $cd-white;
       text-decoration: underline;
     }
+
+    &:focus { // HID override
+      outline: 3px solid $hid-highlight; // HID override
+      outline-offset: 8px;
+    }
   }
 }
 
