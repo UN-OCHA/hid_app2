@@ -1,5 +1,16 @@
 //——————————————————————————————————————————————————————————————————————————————
 // Common Design: utilities
+//
+// HID override
+//
+// These includes normally appear in _cd.scss but we've extracted them in order
+// to accommodate the existing HID grunt-based build process which concatenates
+// Sass files before compiling them.
+//
+// By doing this, we expose these Sass tools for CD to all the HID Sass files so
+// that variables, breakpoints, and other utilities can be shared across the
+// codebase, while still adding the CD last in the concat process so that any
+// equal-specificity regarding the Header/Footer is overruled by CD.
 //——————————————————————————————————————————————————————————————————————————————
 
 @import 'cd-variables';

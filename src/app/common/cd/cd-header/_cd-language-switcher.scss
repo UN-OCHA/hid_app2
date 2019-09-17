@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   box-sizing: content-box;
-  text-transform: lowercase;
+  text-transform: lowercase; // HID override
 
   // Lanaguage switcher is always on the far edge of the global header.
   // Cancel the border that we render for other elements.

@@ -22,7 +22,7 @@
 
     &:focus { // HID override
       outline: 3px solid $hid-highlight; // HID override
-      outline-offset: 8px;
+      outline-offset: 8px; // HID override
     }
   }
 }

@@ -3,12 +3,14 @@
 //——————————————————————————————————————————————————————————————————————————————
 
 // HID override:
-// We have moved all variables and mixins to a separate include that appears
-// first in our concatenated Sass file, so that the tools can be used within
-// the HID Sass as well.
+// We have moved all variables and mixins to a separate include _cd-tools.scss
+// that appears first in our concatenated Sass file, so that the tools can be
+// used within the HID Sass as well.
 //
 // We still want CD last so that it overrides any pre-existing styles that
 // might apply to the header (such as uib-dropdown styles or similar tools).
+//
+// @see _cd-tools.scss
 
 // Layout
 @import 'cd-layout/cd-layout';
@@ -27,8 +29,6 @@
 @import 'cd-header/cd-search--inline';
 // @import 'cd-header/cd-search-drupal'; // HID override
 @import 'cd-header/cd-language-switcher';
-@import 'cd-header/cd-generic-dropdown'; // HID override
-@import 'cd-header/cd-notifications'; // HID override
 
 // Footer
 @import 'cd-footer/cd-footer';
@@ -37,3 +37,7 @@
 @import 'cd-footer/cd-mandate';
 @import 'cd-footer/cd-footer-social';
 @import 'cd-footer/cd-soft-footer';
+
+// HID overrides
+@import 'cd-header/cd-generic-dropdown'; // HID override
+@import 'cd-header/cd-notifications'; // HID override
