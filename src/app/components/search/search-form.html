@@ -1,5 +1,4 @@
 <div ng-controller="SearchFormController">
-
   <form ng-submit="fullSearch(searchTerm)" role="search" >
     <div class="search-form" uib-dropdown is-open="showAutocomplete">
       <input
@@ -54,28 +53,4 @@
       </ul>
     </div>
   </form>
-
 </div>
-
-<!--
-  <button type="button" id="cd-search-btn" class="cd-search--inline_btn" data-toggle="dropdown" aria-expanded="false" aria-label="Search" uib-dropdown-toggle>
-    <svg class="icon icon--search">
-      <use xlink:href="#search"></use>
-    </svg>
-    <span class="cd-search_btn-text">Search</span>
-  </button>
-  <form role="search" class="cd-search--inline__form" aria-labelledby="cd-search-btn" action="/search" method="get" id="views-exposed-form-search-inline" accept-charset="UTF-8" uib-dropdown-menu>
-    <div>
-      <div id="edit-search-api-views-fulltext-wrapper" class="cd-search--inline__form-inner">
-        <label for="edit-search-api-views-fulltext" class="element-invisible">Search for contacts or lists.</label>
-        <input type="search" placeholder="Search for contacts or lists." name="search" id="edit-search-api-views-fulltext" class="cd-search--inline__input" autocomplete="off">
-        <button type="submit" class="cd-search--inline__submit">
-          <svg class="icon icon--search">
-            <use xlink:href="#search"></use>
-          </svg>
-          <span class="element-invisible">Search</span>
-        </button>
-      </div>
-    </div>
-  </form>
--->
