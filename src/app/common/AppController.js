@@ -68,13 +68,6 @@
       return thisScope.currentUserResource;
     };
 
-    thisScope.initCurrentUser = function () {
-      if ($window.localStorage.getItem('currentUser')) {
-        thisScope.setCurrentUser(JSON.parse($window.localStorage.getItem('currentUser')));
-      }
-      thisScope.initLanguage();
-    };
-
     $rootScope.$on('updateCurrentUser', function () {
       User.get({userId: thisScope.currentUser.id}, function (user) {
         thisScope.setCurrentUser(user);
@@ -91,19 +84,25 @@
 
     thisScope.hideHeaderFooter = hideHeaderFooter();
 
-    thisScope.initLanguage = function () {
-      if (!thisScope.currentUser) {
-        return;
-      }
+    thisScope.initCDHeader = function () {
+      // CD does not need the ui.bootstrap.dropdown classes and in fact they
+      // hinder its function. Forcibly remove since docs don't make it clear how
+      // one can configure them to avoid injecting this class
+      //
+      // @see https://github.com/angular-ui/bootstrap/tree/master/src/dropdown
+      $document.ready(function () {
+        var ochaDropDown = $document[0].getElementById('cd-ocha-dropdown');
+        ochaDropDown.classList.remove('dropdown-menu');
+        var langSwitcherDropDown = $document[0].getElementById('cd-language');
+        langSwitcherDropDown.classList.remove('dropdown-menu');
+        var navDropDown = $document[0].querySelector('.cd-site-header__nav-holder');
+        navDropDown.classList.remove('dropdown');
+        var navDropDownContents = $document[0].getElementById('cd-nav');
+        navDropDownContents.classList.remove('dropdown-menu');
+      });
+    }
+    thisScope.initCDHeader();
 
-      var locale = thisScope.currentUser.locale ? thisScope.currentUser.locale : 'en';
-      var lang = gettextCatalog.getCurrentLanguage();
-
-      if (lang !== locale) {
-        gettextCatalog.setCurrentLanguage(locale);
-        thisScope.language = locale;
-      }
-    };
 
     thisScope.changeLanguage = function (lang) {
       gettextCatalog.setCurrentLanguage(lang);
@@ -119,14 +118,33 @@
       return lang.toUpperCase();
     };
 
+    thisScope.initLanguage = function () {
+      if (!thisScope.currentUser) {
+        return;
+      }
+
+      var locale = thisScope.currentUser.locale ? thisScope.currentUser.locale : 'en';
+      var lang = gettextCatalog.getCurrentLanguage();
+
+      if (lang !== locale) {
+        gettextCatalog.setCurrentLanguage(locale);
+        thisScope.language = locale;
+      }
+    };
+
+    thisScope.initCurrentUser = function () {
+      if ($window.localStorage.getItem('currentUser')) {
+        thisScope.setCurrentUser(JSON.parse($window.localStorage.getItem('currentUser')));
+      }
+      thisScope.initLanguage();
+    };
+    thisScope.initCurrentUser();
+
     var initView = function () {
       alertService.resetPageAlert();
       thisScope.sidebar.close();
       thisScope.hideHeaderFooter = hideHeaderFooter();
     };
-
-    thisScope.initCurrentUser();
-
     thisScope.$on('$routeChangeSuccess', initView);
   }
 })();

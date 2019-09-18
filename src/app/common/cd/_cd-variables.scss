@@ -50,7 +50,7 @@ $cd-site-header-height: 60px;
 //——————————————————————————————————————————————————————————————————————————————
 
 // Colour palette
-$cd-ocha-blue: #007faa; // HID: $primary-color
+$cd-ocha-blue: #007faa; // HID override: $primary-color
 $cd-dark-blue: #025995;
 $cd-bright-blue: #80cbff;
 $cd-light-blue: #9ec5e2;
@@ -90,6 +90,11 @@ $cd-default-text-color: $cd-dark-grey;
 $cd-dark-text-color: #000;
 $cd-blue-text-color: $cd-ocha-blue;
 $cd-bright-blue-text-color: $cd-bright-blue;
+
+// HID-specific + Override CD
+$hid-ocha-services-see-all: #bddfea; // HID override
+$hid-highlight: #60b2c9; // HID override
+$cd-highlight-red: $hid-highlight; // HID override
 
 
 //——————————————————————————————————————————————————————————————————————————————

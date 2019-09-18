@@ -1,5 +1,5 @@
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
   transform: translate3d(-($sidebar-width-xs + $base-unit*1.5), 0, 0);
   height: 100%;
@@ -25,7 +25,7 @@
 
 .sidebar__inner {
   background: $light-grey;
-  padding: $base-unit*2 $base-unit*3;
+  padding: $base-unit*4 $base-unit*3;
   height: 100%;
   overflow-y: scroll;
   position: relative;
@@ -188,13 +188,12 @@
   }
 
   .sidebar__inner {
-    padding: $base-unit*3 $base-unit*5;
+    padding: $base-unit*5 $base-unit*5;
   }
 
   .sidebar__heading {
     margin-bottom: $base-unit*4;
   }
-
 }
 
 @include media-query(lg) {

@@ -1,33 +1,42 @@
 /* jshint module: true */
 var LoginPage = function() {
-	var emailInput = element(by.id('email'));
-	var passwordInput = element(by.id('password'));
-	var loginButton = element(by.css('.t-login-btn'));
+  this.emailInput = element(by.id('email'));
+  this.passwordInput = element(by.id('password'));
+  this.loginButton = element(by.css('.t-login-btn'));
+  this.errorModal = element(by.css('.modal-dialog'));
+  this.errorModalText = element(by.css('.modal-body'));
 
-	this.get = function () {
+  this.get = function () {
     browser.get(browser.baseUrl);
   };
 
   this.login = function () {
-  	emailInput.sendKeys(browser.params.email);
-    passwordInput.sendKeys(browser.params.password);
-    loginButton.click();
+    this.emailInput.sendKeys(browser.params.email);
+    this.passwordInput.sendKeys(browser.params.password);
+    this.loginButton.click();
+    browser.sleep(500);
+  };
+
+  this.loginVerified = function () {
+    this.emailInput.sendKeys(browser.params.verifiedEmail);
+    this.passwordInput.sendKeys(browser.params.verifiedPassword);
+    this.loginButton.click();
+    browser.sleep(500);
   };
 
   this.loginAdmin = function () {
-    emailInput.sendKeys(browser.params.adminEmail);
-    passwordInput.sendKeys(browser.params.adminPassword);
-    loginButton.click();
+    this.emailInput.sendKeys(browser.params.adminEmail);
+    this.passwordInput.sendKeys(browser.params.adminPassword);
+    this.loginButton.click();
+    browser.sleep(500);
   };
 
   this.loginInvalid = function () {
-  	emailInput.sendKeys('testuser@example.com');
-    passwordInput.sendKeys('notthepassword');
-    loginButton.click();
+    this.emailInput.sendKeys('testuser@example.com');
+    this.passwordInput.sendKeys('notthepassword');
+    this.loginButton.click();
+    browser.sleep(500);
   };
-
-  this.errorModal = element(by.css('.modal-dialog'));
-  this.errorModalText = element(by.cssContainingText('div .modal-body', 'We could not log you in. The username or password you have entered are incorrect. Kindly try again.'));
 };
 
 module.exports = LoginPage;

@@ -1,8 +1,8 @@
 //——————————————————————————————————————————————————————————————————————————————
-// SVG icon styles
+// Common Design: SVG icon styles
 //——————————————————————————————————————————————————————————————————————————————
 
-// SVG sprite palced before end of body in html.tpl.php
+// SVG sprite placed before end of footer in `footer.html` // HID override
 svg.icons-sprite {
   @extend .element-hidden;
   overflow: hidden;

@@ -15,7 +15,6 @@
     <script src="https://apis.google.com/js/client.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
 
-
     <title ng-bind="title" translate="">Humanitarian ID</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +27,8 @@
     <!-- endbuild -->
   </head>
   <body ng-controller="AppController" ng-class="{&apos;toggled&apos; : sidebar.open, &apos;prevent-mobile-scroll&apos;: sidebar.underlay}" class="lang-{{language}}" ng-keyup="keyupEvent($event)">
+    <a id="skip-to-content" href="#main" class="skip-link element-invisible element-focusable" translate="">Skip to main content</a>
+
     <div class="cd-wrapper">
       <ng-include src="&apos;app/components/header/header.html&apos;"></ng-include>
 
@@ -40,10 +41,10 @@
           </a>
         </div>
         <div class="container" id="main" role="main" ng-view=""></div>
-        <div class="sidebar-underlay" ng-class="{&apos;in&apos; : sidebar.underlay}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
-        <div class="sidebar-overlay" ng-class="{&apos;in&apos; : sidebar.open}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
       </div>
 
+      <div class="sidebar-underlay" ng-class="{&apos;in&apos; : sidebar.underlay}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
+      <div class="sidebar-overlay" ng-class="{&apos;in&apos; : sidebar.open}" ng-click="sidebar.close()" ng-swipe-left="sidebar.close()"></div>
       <ng-include ng-if="!hideHeaderFooter" src="&apos;app/components/footer/footer.html&apos;"></ng-include>
     </div><!-- .cd-wrapper -->
 

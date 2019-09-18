@@ -4,9 +4,11 @@
 
 .cd-search--inline {
   float: left;
+  font-size: 1rem; // HID override
 
   .cssgrid.flexbox & {
     float: none;
+    flex: 1 1 190px; // HID override
   }
 }
 
@@ -116,6 +118,7 @@
   padding: 0 45px 0 25px;
   width: 100%;
 
+
   &:focus {
     outline: 0;
     box-shadow: 0 0 4px rgba($cd-mid-grey,  0.7);
@@ -195,9 +198,14 @@
     float: left;
     border-left: 1px solid $cd-border-color;
     //border-right: 1px solid $cd-border-color;
-    flex: 0 1 400px;
+    flex: 0 1 270px; // HID override
     margin-left: 30px;
+
+    @include xl {
+      flex: 0 1 340px; // HID override
+    }
   }
+
 
   .cd-search--inline__form {
     background: $cd-white-bg-color;
@@ -236,7 +244,7 @@
     color: $cd-default-text-color;
     @include font-size($cd-font-size-small);
     height: $cd-site-header-height;
-    padding: 0 72px 0 16px;
+    padding: 1.4rem 2rem; // HID override
     width: 100%;
     min-width: 230px;
 

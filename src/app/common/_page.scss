@@ -12,11 +12,9 @@
 }
 
 .page {
-  position: relative;
   width: 100%;
-
-  // Hide sidebar when inactive
-  overflow-x: hidden;
+  max-width: 1210px; // CD max-width
+  margin: 0 auto;
 }
 
 .page-header {

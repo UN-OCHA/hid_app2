@@ -2,6 +2,11 @@
 // Common Design: Header
 //——————————————————————————————————————————————————————————————————————————————
 
+// We want uniform focus styles on the whole Header
+.cd-header button:focus { // HID override
+  outline: 3px solid $hid-highlight; // HID override
+}
+
 //
 // Global Header.
 // Top header bar, contains Sites Menu ('OCHA Services') and User Menu.
@@ -37,7 +42,7 @@
     grid-column-gap: 1em;
 
     @include tablet {
-      grid-template-columns: 186px 1fr;
+      grid-template-columns: 256px 1fr; // HID override
     }
   }
 }
@@ -87,11 +92,11 @@
 
       @include desktop {
         flex: 1 1 auto;
-        max-width: 112px;
+        max-width: 124px; // HID override
       }
       @include xlarge {
         flex: 1 1 auto;
-        max-width: 160px;
+        max-width: 200px; // HID override
       }
     }
   }

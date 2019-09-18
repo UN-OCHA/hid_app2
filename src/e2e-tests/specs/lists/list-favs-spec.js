@@ -16,26 +16,22 @@ describe('Favourite Lists', function () {
   });
 
   describe('Favouriting and unfavouriting a list', function () {
-
-    beforeAll(function () {
-      listPage.goToList(browser.params.standardTestList);
-    });
-
     describe('Favouriting', function () {
-
       beforeAll(function () {
+        listPage.goToList(browser.params.standardTestList);
         listPage.openListAdmin();
         browser.sleep(500);
         listPage.favButton.click();
       });
 
-      it('should show the success modal when favourite it', function () {
+      it('should show the success modal when marking list as favourite', function () {
         browser.wait(listPage.favSuccessModal.isDisplayed(), 10000);
         expect(listPage.favSuccessModalText.isPresent()).toBeTruthy();
       });
 
       it('should show in my favourite lists on the dashboard', function () {
         listPage.modalOverlay.click();
+        listPage.adminSideBarCloseButton.click();
         browser.wait(navObject.dashboardLink.isDisplayed(), 10000);
         navObject.dashboardLink.click();
         browser.wait(dashboardPage.favouritesTabBtn.isDisplayed(), 10000);
@@ -45,7 +41,6 @@ describe('Favourite Lists', function () {
     });
 
     describe('Unfavouriting', function () {
-
       beforeAll(function () {
         listPage.goToList(browser.params.standardTestList);
         listPage.openListAdmin();
@@ -53,21 +48,20 @@ describe('Favourite Lists', function () {
         listPage.unFavButton.click();
       });
 
-      it('should show the success modal when unfavourite it', function () {
+      it('should show the success modal when un-marking list as favourite', function () {
         browser.wait(listPage.favSuccessModal.isDisplayed(), 10000);
         expect(listPage.unFavSuccessModalText.isPresent()).toBeTruthy();
       });
 
       it('should not show in my favourite lists on the dashboard', function () {
         listPage.modalOverlay.click();
+        listPage.adminSideBarCloseButton.click();
         browser.wait(navObject.dashboardLink.isDisplayed(), 10000);
         navObject.dashboardLink.click();
         dashboardPage.favouritesTabBtn.click();
         expect(dashboardPage.favourites.getText()).not.toContain(browser.params.standardTestList);
       });
-
     });
-
   });
 
   afterAll(function () {

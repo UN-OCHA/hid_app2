@@ -1,10 +1,20 @@
 <div ng-controller="SearchFormController">
-
   <form ng-submit="fullSearch(searchTerm)" role="search" >
     <div class="search-form" uib-dropdown is-open="showAutocomplete">
-
-      <input type="search" class="input-no-border search-form__input" name="search" id="main-search" autocomplete="off" ng-model="searchTerm" ng-value="searchTerm" ng-model-options="{debounce: 600}" ng-change="searchAutocomplete()" ng-trim="false" ng-disabled="!isOnline">
-      <label for="search" class="search-form__label">{{'Search for contacts or contact lists'|translate}}</label>
+      <input
+        type="search"
+        class="input-no-border search-form__input"
+        name="search"
+        id="main-search"
+        placeholder="{{ 'Search for contacts or lists' | translate }}"
+        autocomplete="off"
+        ng-model="searchTerm"
+        ng-value="searchTerm"
+        ng-model-options="{debounce: 600}"
+        ng-change="searchAutocomplete()"
+        ng-trim="false"
+        ng-disabled="!isOnline">
+      <label for="search" class="element-invisible search-form__label">{{ 'Search for contacts or contact lists' | translate }}</label>
       <button type="submit" class="btn-transparent search-form__button" ng-disabled="!isOnline">
         <icon name="search" text="Search"></icon>
       </button>
@@ -43,5 +53,4 @@
       </ul>
     </div>
   </form>
-
 </div>

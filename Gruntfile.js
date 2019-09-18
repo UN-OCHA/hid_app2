@@ -53,7 +53,7 @@ module.exports = function(grunt) {
       options: {},
       dist: {
         files: {
-          'src/assets/css/main.scss': ['src/app/common/cd/_cd.scss', 'src/app/common/variables/*.scss', 'src/app/common/mixins/*.scss', 'src/app/common/base/*.scss', 'src/app/common/forms/*.scss', 'src/app/common/*.scss', 'src/app/components/**/*'],
+          'src/assets/css/main.scss': ['src/app/common/cd/_cd-tools.scss', 'src/app/common/variables/*.scss', 'src/app/common/mixins/*.scss', 'src/app/common/base/*.scss', 'src/app/common/forms/*.scss', 'src/app/common/*.scss', 'src/app/components/**/*', 'src/app/common/cd/_cd.scss'],
         }
       }
     },
@@ -78,15 +78,15 @@ module.exports = function(grunt) {
     },
     modernizr: {
       dist: {
-        'crawl': false,
+        'crawl': true,
         'customTests': [],
         'dest': 'src/assets/js/modernizr-output.js',
         'tests': [
-          'svg',
-          'flexbox',
+          'appearance',
           'csscalc',
           'csstransforms',
-          'appearance'
+          'flexbox',
+          'svg',
         ],
         'options': [
           'setClasses'

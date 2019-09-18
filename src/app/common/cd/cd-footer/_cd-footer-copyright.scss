@@ -19,6 +19,12 @@
 }
 
 .cd-footer-copyright__text {
+  a { // HID override
+    &:focus { // HID override
+      outline-offset: 1px; // HID override
+    }
+  }
+
   @include desktop {
     // Force the text to wrap in IE10.
     display: inline-block;
@@ -43,5 +49,9 @@ a.cd-footer-copyright__link {
   &:hover {
     opacity: .8;
     transition: opacity .1666s ease-in-out;
+  }
+
+  &:focus { // HID override
+    outline-offset: 0px; // HID override
   }
 }

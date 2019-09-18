@@ -4,6 +4,7 @@
 
 .cd-ocha {
   float: left;
+  position: static; // HID: override the .dropdown class
 }
 
 .cd-ocha-btn {
@@ -152,6 +153,11 @@
       color: $cd-white-text-color;
       text-decoration: underline;
     }
+
+    &:focus { // HID override
+      outline: 3px solid $hid-highlight; // HID override
+      outline-offset: 8px; // HID override
+    }
   }
 
   @include xlarge {
@@ -166,11 +172,15 @@ a.cd-ocha-dropdown__see-all {
   @include font-size($cd-font-size-small);
   font-weight: 700;
   padding: 12px;
-  background: $cd-bright-blue;
+  background: $hid-ocha-services-see-all; // HID override
   color: $cd-dark-blue;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+
+  &:focus { // HID override
+    outline: 3px black solid; // HID override
+  }
 
   @include tablet {
     position: absolute;

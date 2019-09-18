@@ -17,6 +17,8 @@ body {
 }
 
 .cd-wrapper {
+  // HID override
+  //
   // The width of the website must be driven by .cd-wrapper instead of <body>
   // like a normal CD website. This is because we have the off-canvas .sidebar
   // which we're docking to the side of the window. So the <body> must also be
@@ -30,7 +32,7 @@ body {
   // Grid is used to fix the footer to the bottom of the screen, regardless of page min-height.
   // Just for CSS grid supporting browsers as IE fallback causes weirdness here.
   display: grid;
-  grid-template-rows: auto 1fr auto; // HID: @see https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Sticky_footers
+  grid-template-rows: auto 1fr auto; // HID override: @see https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Sticky_footers
 }
 
 .cd-container {

@@ -10,4 +10,9 @@
   &__user-menu {
     float: right;
   }
+
+  // HID override
+  &__notifications { // HID override
+    float: right; // HID override
+  }
 }

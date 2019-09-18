@@ -1,118 +1,133 @@
-<a id="skip-to-content" href="#main" class="skip-link" translate>Skip to main content</a>
-
-<header role="banner">
-
-  <div class="global-header">
-    <div class="container global-header__inner">
-
-      <div class="global-header__back" back-button translate ng-if="isAuthenticated && !hideHeaderFooter">
-        <button type="button" class="btn-transparent">
-          <icon name="arrow-left" text="back"></icon>
+<header class="cd-header" role="banner">
+  <div class="cd-global-header">
+    <div class="cd-container cd-global-header__inner">
+      <div class="cd-ocha" uib-dropdown keyboard-nav="true">
+        <button type="button" class="cd-ocha-btn cd-global-header__dropdown-btn" id="cd-ocha-dropdown-toggle" aria-expanded="false" aria-label="OCHA Services" data-toggle="dropdown" uib-dropdown-toggle>
+          <span class="cd-ocha-btn__logo" aria-hidden="true"></span>
+          <span class="cd-ocha-btn__label" translate>OCHA Services</span>
+          <svg class="icon icon--arrow-down">
+            <use xlink:href="#arrow-down"></use>
+          </svg>
         </button>
+        <div class="cd-global-header__dropdown cd-ocha-dropdown cd-dropdown" role="menu" id="cd-ocha-dropdown" aria-labelledby="cd-ocha-dropdown-toggle" uib-dropdown-menu>
+          <div class="cd-ocha-dropdown__inner">
+            <div class="cd-ocha-dropdown__section">
+              <p class="cd-ocha-dropdown__heading" translate>Related platforms</p>
+              <ul class="cd-ocha-dropdown__list">
+                <li class="cd-ocha-dropdown__link"><a href="https://fts.unocha.org/">Financial Tracking Service</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://humanitarianresponse.info/">Humanitarian Response</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://ops.unocha.org/Home.aspx">Online Projects System</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://reliefweb.int/">ReliefWeb</a></li>
+              </ul>
+            </div>
+            <div class="cd-ocha-dropdown__section">
+              <p class="cd-ocha-dropdown__heading" translate>Other OCHA Services</p>
+              <ul class="cd-ocha-dropdown__list">
+                <li class="cd-ocha-dropdown__link"><a href="https://fts.unocha.org/">Financial Tracking Service</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://data.humdata.org/">Humanitarian Data Exchange</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://humanitarian.id/">Humanitarian ID</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://humanitarianresponse.info/">Humanitarian Response</a></li>
+              </ul>
+            </div>
+            <div class="cd-ocha-dropdown__section">
+              <p class="cd-ocha-dropdown__heading" aria-hidden="true">&nbsp;</p>
+              <ul class="cd-ocha-dropdown__list">
+                <li class="cd-ocha-dropdown__link"><a href="https://interagencystandingcommittee.org">Inter-Agency Standing Committee</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://unocha.org/">OCHA website</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://reliefweb.int/">ReliefWeb</a></li>
+                <li class="cd-ocha-dropdown__link"><a href="https://vosocc.unocha.org/">Virtual OSOCC</a></li>
+              </ul>
+            </div>
+            <div class="cd-ocha-dropdown__section">
+              <a class="cd-ocha-dropdown__see-all" href="https://www.unocha.org/ocha-digital-services" target="_blank" rel="noopener">See all</a>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="global-header__sites" ng-class="{'global-header__sites--full': !isAuthenticated || hideHeaderFooter}" uib-dropdown>
-        <button type="button" class="global-header__sites-btn btn-transparent" uib-dropdown-toggle>
-          <span class="global-header__sites-label" translate>Related platforms</span>
-          <icon name="arrow-down" text="Change platform" class="global-header__sites-arrow"></icon>
-        </button>
-        <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-          <li><a href="https://fts.unocha.org">Financial Tracking Service</a></li>
-          <li><a href="https://humanitarianresponse.info">HumanitarianResponse.info</a></li>
-          <li><a href="https://ops.unocha.org">Online Projects System</a></li>
-          <li><a href="https://reliefweb.int">ReliefWeb</a></li>
-        </ul>
+      <div class="cd-global-header__language-switcher">
+        <div class="cd-language-switcher" uib-dropdown keyboard-nav="true">
+          <button type="button" class="cd-user-menu__item cd-user-menu__item--small cd-global-header__dropdown-btn t-lang-btn" id="cd-language-toggle" aria-label="Language" aria-expanded="false" data-toggle="dropdown" uib-dropdown-toggle>
+            {{ getCurrentLanguage() }}
+            <svg class="icon icon--arrow-down">
+              <use xlink:href="#arrow-down"></use>
+            </svg>
+          </button>
+          <ul class="cd-global-header__dropdown cd-dropdown cd-user-menu__dropdown" role="menu" id="cd-language" aria-labelledby="cd-language-toggle" uib-dropdown-menu>
+            <li class="ar first"><button class="language-link t-lang-ar" ng-class="{'active': getCurrentLanguage() === 'AR'}" ng-click="changeLanguage('ar')" lang="ar">العربية</button></li>
+            <li class="en"><button class="language-link t-lang-en" ng-class="{'active': getCurrentLanguage() === 'EN'}" ng-click="changeLanguage('en')" lang="en">English</button></li>
+            <li class="fr"><button class="language-link t-lang-fr" ng-class="{'active': getCurrentLanguage() === 'FR'}" ng-click="changeLanguage('fr')" lang="fr">Français</button></li>
+            <li class="es last"><button class="language-link t-lang-es" ng-class="{'active': getCurrentLanguage() === 'ES'}" ng-click="changeLanguage('es')" lang="es">Español</button></li>
+          </ul>
+        </div>
       </div>
+      <div class="cd-global-header__user-menu">
+        <div uib-dropdown keyboard-nav="true">
+          <h2 class="element-invisible" translate>User menu</h2>
 
-      <div class="global-header__nav" ng-if="isAuthenticated && hideHeaderFooter">
-        <ul class="nav nav--secondary">
-          <li class="nav__item" uib-dropdown>
-            <button type="button" class="nav__link nav__link--solo t-user-dropdown-btn btn btn-transparent" uib-dropdown-toggle>
-              <icon name="user"></icon>
-              <span class="nav__label">{{currentUser.name}}</span>
-              <icon name="arrow-down" text="Open user menu"></icon>
-            </button>
-
-            <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-              <li><a href="/logout" class="t-logout-link" translate>Log out</a></li>
+          <!-- anonymous user-login link -->
+          <div ng-if="!isAuthenticated" class="content">
+            <ul class="menu cd-global-header__dropdown-btn cd-user-menu__item" role="menu">
+              <li class="cd-user-menu__icon-login">
+                <a href="/" class="login-link" translate>Login</a>
+              </li>
             </ul>
-          </li>
-        </ul>
+          </div>
+
+          <!-- logged-in user menu dropdown -->
+          <button ng-if="isAuthenticated" class="cd-global-header__dropdown-btn cd-user-menu__item t-user-dropdown-btn" id="cd-user-dropdown-toggle" data-toggle="dropdown" uib-dropdown-toggle>
+            <span class="cd-user-menu__icon-login">
+              {{currentUser.name}}
+            </span>
+            <svg class="icon icon--arrow-down">
+              <use xlink:href="#arrow-down"></use>
+            </svg>
+          </button>
+          <div ng-if="isAuthenticated" class="content cd-user-dropdown-menu" uib-dropdown-menu>
+            <ul class="menu" role="menu">
+              <li><a href="/users/{{currentUser.id}}" class="first leaf t-profile-link" translate>Profile</a></li>
+              <li><a href="/settings" class="leaf t-preferences-link" translate>Preferences</a></li>
+              <li><a href="/tutorial" class="leaf" translate>Tutorial</a></li>
+              <li><a href="mailto:info@humanitarian.id" class="leaf btn-link" translate>Feedback</a></li>
+              <li><a href="/logout" class="last leaf t-logout-link" translate>Log out</a></li>
+            </ul>
+          </div>
+
+        </div>
       </div>
-
-      <div class="global-header__nav" ng-show="isAuthenticated && !hideHeaderFooter">
-
-        <ul class="nav nav--secondary">
-          <li class="nav__item nav-item__notifications" ng-if="isAuthenticated && !hideHeaderFooter">
-            <a href="/notifications" class="nav__link t-notifications-link">
-              <icon name="notifications" text="Notifications"></icon>
-              <span class="nav__label nav__label--mobile">
-                <notifications-count></notifications-count>
-              </span>
-            </a>
-          </li>
-
-          <li class="nav__item" uib-dropdown ng-if="isAuthenticated && !hideHeaderFooter">
-            <button type="button" class="nav__link btn btn-transparent t-lang-dropdown-btn" uib-dropdown-toggle>
-              <span class="nav__label nav__label--mobile">{{getCurrentLanguage()}}</span>
-              <icon name="arrow-down" text="Change language"></icon>
-            </button>
-
-            <ul class="dropdown-menu dropdown-menu--lang" role="menu" uib-dropdown-menu>
-              <li><a href="#" ng-click="changeLanguage('en')" class="t-lang-en">EN</a></li>
-              <li><a href="#" ng-click="changeLanguage('fr')" class="t-lang-fr">FR</a></li>
-              <li><a href="#" ng-click="changeLanguage('es')">ES</a></li>
-              <li><a href="#" ng-click="changeLanguage('ar')">AR</a></li>
-            </ul>
-          </li>
-
-          <li class="nav__item" uib-dropdown>
-            <button type="button" class="nav__link t-user-dropdown-btn btn btn-transparent" uib-dropdown-toggle ng-if="isAuthenticated && !hideHeaderFooter">
-              <icon name="user"></icon>
-              <span class="nav__label">{{currentUser.name}}</span>
-
-              <icon name="arrow-down" text="Open user menu"></icon>
-            </button>
-
-            <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
-              <li><a href="/users/{{currentUser.id}}" class="t-profile-link" translate>Profile</a></li>
-              <li><a href="/settings" class="t-preferences-link" translate>Preferences</a></li>
-              <li><a href="/tutorial" translate>Tutorial</a></li>
-              <li><a href="mailto:info@humanitarian.id" class="btn-link" translate>Feedback</a></li>
-              <li><a href="/logout" class="t-logout-link" translate>Log out</a></li>
-            </ul>
-          </li>
-        </ul>
+      <div ng-if="isAuthenticated && !hideHeaderFooter" class="cd-global-header__notifications cd-notifications">
+        <a href="/notifications" class="cd-notifications__link t-notifications-link">
+          <notifications-count></notifications-count>
+        </a>
       </div>
     </div>
   </div>
-
-  <div class="site-header" ng-show="!hideHeaderFooter">
-    <div class="container site-header__inner">
-
-      <a href="/" class="site-header__logo" ng-class="{'site-header__logo--loggedout': !isAuthenticated, 'active' : activeNav('/landing')}">
-        <span class="sr-only">Humanitarian ID</span>
-      </a>
-
-      <div class="site-header__search" ng-if="isAuthenticated">
-        <ng-include src="'app/components/search/search-form.html'"></ng-include>
-      </div>
-
-      <div uib-dropdown on-toggle="toggled(open)" ng-if="isAuthenticated">
-
-        <nav role="navigation" id="nav" class="site-header__nav dropdown-menu" uib-dropdown-menu aria-labelledby="navToggle" >
-          <ul class="nav nav--primary">
-            <li class="nav__item" ng-class="{'active' : activeNav('/dashboard')}"><a href="/dashboard" class="nav__link t-dashboard-link" translate>Dashboard</a></li>
-            <li class="nav__item" ng-class="{'active' : activeNav('/search')}"><a href="/search" class="nav__link t-hc-link" translate>Humanitarian contacts</a></li>
-            <li class="nav__item" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}" ng-if="isOnline"><a href="/checkin/{{currentUser.id}}" class="nav__link t-checkin-link" translate>Check in</a></li>
-            <li class="nav__item" ng-class="{'active' : activeNav('/checkout')}"><a href="/checkout" class="nav__link t-checkout-link" translate>Check out</a></li>
-          </ul>
-        </nav>
-
-        <button type="button" id="navToggle" class="site-header__nav-toggle btn btn-transparent" uib-dropdown-toggle>
-          <i class="burger-icon"></i>
-        </button>
-
+  <div class="cd-site-header">
+    <div class="cd-container cd-site-header__inner">
+      <h1>
+        <a href="/" class="cd-site-logo t-logo-link">
+          <span class="element-invisible">Humanitarian ID</span>
+        </a>
+      </h1>
+      <div class="cd-site-header__actions">
+        <div ng-if="isAuthenticated" class="cd-search--inline" uib-dropdown auto-close="disabled">
+          <ng-include src="'app/components/search/search-form.html'"></ng-include>
+        </div>
+        <div class="cd-site-header__nav-holder" uib-dropdown keyboard-nav="true">
+          <button type="button" id="cd-nav-toggle" class="cd-site-header__nav-toggle" aria-expanded="false" uib-dropdown-toggle>
+            <span class="cd-site-header__nav-label">Menu</span>
+            <svg class="icon icon--arrow-down">
+              <use xlink:href="#arrow-down"></use>
+            </svg>
+          </button>
+          <nav role="navigation" id="cd-nav" class="cd-nav" aria-labelledby="cd-nav-toggle" uib-dropdown-menu>
+            <ul ng-if="isAuthenticated" class="menu">
+              <li class="leaf first"><a href="/dashboard" class="nav__link t-dashboard-link"  ng-class="{'active' : activeNav('/dashboard')}" translate>Dashboard</a></li>
+              <li class="leaf"><a href="/search" class="nav__link t-hc-link" ng-class="{'active' : activeNav('/search')}" translate>Humanitarian contacts</a></li>
+              <li class="leaf" ng-if="isOnline"><a href="/checkin/{{currentUser.id}}" class="nav__link t-checkin-link" ng-class="{'active' : activeNav('/checkin/{{currentUser.id}}')}" translate>Check in</a></li>
+              <li class="leaf last"><a href="/checkout" class="nav__link t-checkout-link" ng-class="{'active' : activeNav('/checkout')}" translate>Check out</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
