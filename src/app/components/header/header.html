@@ -74,7 +74,7 @@
           </div>
 
           <!-- logged-in user menu dropdown -->
-          <button ng-if="isAuthenticated" class="cd-global-header__dropdown-btn cd-user-menu__item t-user-dropdown-btn" id="cd-user-dropdown-toggle" data-toggle="dropdown" uib-dropdown-toggle>
+          <button ng-if="isAuthenticated" class="cd-global-header__dropdown-btn cd-user-menu__item t-user-dropdown-btn" ng-class="{'is--authenticated': isAuthenticated}" id="cd-user-dropdown-toggle" data-toggle="dropdown" uib-dropdown-toggle>
             <span class="cd-user-menu__icon-login">
               {{currentUser.name}}
             </span>

@@ -107,6 +107,21 @@
 
   &::before {
     background-image: url('../img/icons/user--white.svg');
+    left: 18px; // HID override
+
+    .is--authenticated & { // HID override
+      left: 10px; // HID override
+    }
+  }
+
+  & a { // HID override
+    height: 35px; // HID override
+    padding-left: 18px; // HID override
+  }
+
+  & a:focus { // HID override
+    outline: 3px solid $hid-highlight; // HID override
+    outline-offset: 12px; // HID override
   }
 }
 
