@@ -1567,7 +1567,7 @@ msgid "Register a new Humanitarian ID Account"
 msgstr ""
 
 #: src/app/components/header/header.html:15
-msgid "Related platforms"
+msgid "Related Platforms"
 msgstr ""
 
 #: src/app/components/user/UsersController.js:140
