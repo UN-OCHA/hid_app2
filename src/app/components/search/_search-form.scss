@@ -11,16 +11,8 @@
 
 }
 
-.site-header__search {
-  .search-form.open {
-    & > .dropdown-menu {
-      top: $base-unit*5;
-    }
-  }
-}
-
 #main-search {
-  padding: 21px 8px 22px 28px; // ✨ all magic, all the time ✨
+  padding: 24px 8px 19px 36px; // ✨ all magic, all the time ✨
   font-size: .9rem;
 
   @include md {
@@ -31,9 +23,9 @@
 .search-form__button {
   position: absolute;
   padding: 0;
-  left: $base-unit/2;
+  left: $base-unit;
   top: 50%;
-  margin-top: -16px;
+  margin-top: -12px;
   width: $base-unit*3;
   height: $base-unit*3;
   line-height: $base-unit*3;
@@ -43,6 +35,7 @@
     width: $base-unit*2.25;
     height: $base-unit*2.25;
     margin: 1px 0 0 0;
+    padding-bottom: $base-unit/2; // make the outline more symmetrical
   }
 
   &:focus {
