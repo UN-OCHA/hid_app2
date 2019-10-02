@@ -5,15 +5,11 @@
 .container[role="main"] {
   min-height: 500px;
   padding-bottom: $base-unit*4;
-
-  // @include media-query(lg) {
-  //   min-height: calc(100% - #{$footer-height-lg} - #{$breadcrumbs-height});
-  // }
 }
 
 .page {
   width: 100%;
-  max-width: 1210px; // CD max-width
+  max-width: 1220px; // CD max-width
   margin: 0 auto;
 }
 

@@ -182,6 +182,11 @@ a.cd-ocha-dropdown__see-all {
     outline: 3px black solid; // HID override
   }
 
+  &:hover { // HID override
+    background: rgba($hid-ocha-services-see-all, .8); // HID override
+    color: #28546e; // HID override
+  }
+
   @include tablet {
     position: absolute;
     bottom: 0;
