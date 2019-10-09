@@ -52,7 +52,7 @@
 
       // List not found — the template shows a good error message so we will
       // suppress the modal from displaying.
-      if (rejection.config.method === 'GET' && rejection.config.url.indexOf('/list/')) {
+      if (rejection.config.method === 'GET' && rejection.config.url.indexOf('/list/') && rejection.status === 400) {
         return NO_MODAL_DISPLAY;
       }
 
