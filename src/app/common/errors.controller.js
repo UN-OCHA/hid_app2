@@ -51,8 +51,9 @@
       }
 
       // List not found — the template shows a good error message so we will
-      // suppress the modal from displaying.
-      if (rejection.config.method === 'GET' && rejection.config.url.indexOf('/list/') && rejection.status === 400) {
+      // suppress the modal from displaying if the ID is non-existent or invalid.
+      var listNotFoundStatuses = [400, 404];
+      if (rejection.config.method === 'GET' && rejection.config.url.indexOf('/list/') && listNotFoundStatuses.indexOf(rejection.status) !== -1) {
         return NO_MODAL_DISPLAY;
       }
 
