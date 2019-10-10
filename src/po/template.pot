@@ -1901,7 +1901,7 @@ msgstr ""
 msgid "Some of you check-ins are pending, we will get back to you soon."
 msgstr ""
 
-#: src/app/common/ErrorsController.js:56
+#: src/app/common/ErrorsController.js:67
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
@@ -2063,11 +2063,11 @@ msgstr ""
 msgid "The user was successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/common/ErrorsController.js:46
+#: src/app/common/ErrorsController.js:50
 msgid "There is an error in your registration. You may have already registered. If so, simply <a href=\"/password_reset\" target=\"_top\">reset your password</a>."
 msgstr ""
 
-#: src/app/common/ErrorsController.js:41
+#: src/app/common/ErrorsController.js:45
 msgid "There was an error logging in."
 msgstr ""
 
@@ -2317,19 +2317,19 @@ msgstr ""
 msgid "View as PDF"
 msgstr ""
 
-#: src/app/common/ErrorsController.js:22
+#: src/app/common/ErrorsController.js:26
 msgid "We could not log you in because your email address is not verified yet."
 msgstr ""
 
-#: src/app/common/ErrorsController.js:34
+#: src/app/common/ErrorsController.js:38
 msgid "We could not log you in because your password is expired. Following UN regulations, as a security measure passwords must be updated every six months. Kindly reset your password by clicking on the \"Forgot/Reset password\" link below."
 msgstr ""
 
-#: src/app/common/ErrorsController.js:30
+#: src/app/common/ErrorsController.js:34
 msgid "We could not log you in, the email address does not exist."
 msgstr ""
 
-#: src/app/common/ErrorsController.js:26
+#: src/app/common/ErrorsController.js:30
 msgid "We could not log you in. The username or password you have entered are incorrect. Kindly try again."
 msgstr ""
 
@@ -2465,7 +2465,7 @@ msgstr ""
 msgid "You were successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/common/ErrorsController.js:16
+#: src/app/common/ErrorsController.js:20
 msgid "You've reached the API request limit, please try again in 10 minutes"
 msgstr ""
 
@@ -2473,7 +2473,7 @@ msgstr ""
 msgid "Your API keys"
 msgstr ""
 
-#: src/app/common/ErrorsController.js:38
+#: src/app/common/ErrorsController.js:42
 msgid "Your account has been locked for 5 minutes due to too many unsuccessful login attempts"
 msgstr ""
 
