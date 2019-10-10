@@ -1,4 +1,4 @@
-FROM unocha/nodejs-builder:8.11.3 AS builder
+FROM unocha/nodejs-builder:10.14.2 AS builder
 
 WORKDIR /src
 
