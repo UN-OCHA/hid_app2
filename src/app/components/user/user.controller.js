@@ -172,6 +172,7 @@
         setConnectionInfo($scope.user, $scope.currentUser._id);
         authUserAlert($scope.user, $scope.currentUser);
         setVcardUrl($scope.user);
+        dedupeAuthorizedClients($scope.user.authorizedClients);
         if (!$scope.currentUser.verified && $scope.user.is_orphan) {
           $scope.canViewInfo = false;
           alertService.pageAlert('warning', gettextCatalog.getString('In order to view this person’s profile, please contact info@humanitarian.id'));
@@ -205,6 +206,15 @@
         });
     }
     getUser();
+
+    function dedupeAuthorizedClients(clients) {
+      $scope.user.authorizedClients = clients.filter(function dedupe(client, index, self) {
+        var dupeIndex = self.findIndex(function (c) {
+          return c._id === client._id && c.name === client.name;
+        });
+        return dupeIndex === index;
+      });
+    }
 
     //Listen for user edited event
     $scope.$on('editUser', function (event, data) {
