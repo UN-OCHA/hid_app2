@@ -209,10 +209,10 @@
 
     function dedupeAuthorizedClients(clients) {
       $scope.user.authorizedClients = clients.filter(function dedupe(client, index, self) {
-        var dupeIndex = self.findIndex(function (c) {
+        var firstIndexFound = self.findIndex(function (c) {
           return c._id === client._id && c.name === client.name;
         });
-        return dupeIndex === index;
+        return firstIndexFound === index;
       });
     }
 
