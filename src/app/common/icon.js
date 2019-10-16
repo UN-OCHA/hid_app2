@@ -38,7 +38,7 @@
     };
 
     function iconUrl (name) {
-      return $window.location.href + '#icon-' + name;
+      return $window.location.origin + $window.location.pathname + '#icon-' + name;
     }
 
     return directive;
