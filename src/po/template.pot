@@ -207,7 +207,7 @@ msgstr ""
 msgid "Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore."
 msgstr ""
 
-#: src/app/components/user/UserController.js:323
+#: src/app/components/user/UserController.js:333
 #: src/app/components/user/UserOptionsController.js:25
 msgid "Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore."
 msgstr ""
@@ -349,7 +349,7 @@ msgstr ""
 msgid "Civil-Military Officer"
 msgstr ""
 
-#: src/app/components/user/UserController.js:249
+#: src/app/components/user/UserController.js:259
 msgid "Claim email sent successfully"
 msgstr ""
 
@@ -434,7 +434,7 @@ msgstr ""
 msgid "Connection removed"
 msgstr ""
 
-#: src/app/components/user/UserController.js:336
+#: src/app/components/user/UserController.js:346
 msgid "Connection request sent"
 msgstr ""
 
@@ -946,7 +946,7 @@ msgstr ""
 msgid "If your organization is not listed, click <a href=\"https://docs.google.com/a/humanitarianresponse.info/forms/d/e/1FAIpQLSdpkMue4gFydSm1PwhSIQonpWRGG50ouJJdo8NbcvaMv_pcDw/viewform?c=0&w=1\" target=\"_blank\">here</a> to request adding it."
 msgstr ""
 
-#: src/app/components/user/UserController.js:179
+#: src/app/components/user/UserController.js:180
 msgid "In order to view this person’s profile, please contact info@humanitarian.id"
 msgstr ""
 
@@ -2048,7 +2048,7 @@ msgstr ""
 msgid "The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information."
 msgstr ""
 
-#: src/app/components/user/UserController.js:316
+#: src/app/components/user/UserController.js:326
 #: src/app/components/user/UserOptionsController.js:19
 msgid "The user was successfully deleted."
 msgstr ""
@@ -2242,14 +2242,14 @@ msgstr ""
 msgid "User not found"
 msgstr ""
 
-#: src/app/components/user/UserController.js:265
-#: src/app/components/user/UserController.js:280
-#: src/app/components/user/UserController.js:302
+#: src/app/components/user/UserController.js:275
+#: src/app/components/user/UserController.js:290
+#: src/app/components/user/UserController.js:312
 #: src/app/components/user/UserOptionsController.js:39
 msgid "User updated"
 msgstr ""
 
-#: src/app/components/user/UserController.js:240
+#: src/app/components/user/UserController.js:250
 msgid "User was successfully notified"
 msgstr ""
 
