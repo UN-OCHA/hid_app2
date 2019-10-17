@@ -174,6 +174,7 @@
         setConnectionInfo(thisScope.user, thisScope.currentUser._id);
         authUserAlert(thisScope.user, thisScope.currentUser);
         setVcardUrl(thisScope.user);
+        dedupeAuthorizedClients(thisScope.user.authorizedClients);
         if (!thisScope.currentUser.verified && thisScope.user.is_orphan) {
           thisScope.canViewInfo = false;
           alertService.pageAlert('warning', gettextCatalog.getString('In order to view this person’s profile, please contact info@humanitarian.id'));
@@ -207,6 +208,15 @@
         });
     }
     getUser();
+
+    function dedupeAuthorizedClients(clients) {
+      thisScope.user.authorizedClients = clients.filter(function dedupe(client, index, self) {
+        var firstIndexFound = self.findIndex(function (c) {
+          return c._id === client._id && c.name === client.name;
+        });
+        return firstIndexFound === index;
+      });
+    }
 
     //Listen for user edited event
     thisScope.$on('editUser', function (event, data) {
