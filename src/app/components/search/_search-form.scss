@@ -34,14 +34,15 @@
     fill: $medium-blue;
     width: $base-unit*2.25;
     height: $base-unit*2.25;
-    margin: 1px 0 0 0;
-    padding-bottom: $base-unit/2; // make the outline more symmetrical
+    margin: 0;
+    padding: $base-unit/4 0; // make the outline more symmetrical
   }
 
   &:focus {
     background: $light-grey;
     box-shadow: none;
     border: none;
+    outline: 3px solid $primary-color;
 
     .icon {
       fill: $dark-blue;
@@ -90,7 +91,7 @@
 }
 
 input[type="search"].search-form__input {
-  padding-left: $base-unit*3.5;
+  padding-left: $base-unit*4.5;
   text-overflow: ellipsis;
 
   &:focus {
