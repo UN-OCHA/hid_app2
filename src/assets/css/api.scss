@@ -20,87 +20,87 @@
 @import '../../app/common/_alerts';
 
 .api-page {
-	padding-top: $base-unit*2;
-	padding-bottom: $base-unit*2;
+  padding-top: $base-unit*2;
+  padding-bottom: $base-unit*2;
 }
 
 .global-header {
-	height: $base-unit*4;
+  height: $base-unit*4;
 }
 
 .pdf {
-	.col-xs-8 {
-		float: left;
+  .col-xs-8 {
+    float: left;
     width: 66.66667%;
-	}
+  }
 
-	.col-xs-4 {
-		float: left;
+  .col-xs-4 {
+    float: left;
     width: 33.33333%;
-	}
+  }
 
-	.page-header {
-		padding-top: $base-unit*3;
-		margin-bottom: $base-unit*2;
+  .page-header {
+    padding-top: $base-unit*3;
+    margin-bottom: $base-unit*2;
 
-		img {
-			height: auto;
-		}
-	}
+    img {
+      height: auto;
+    }
+  }
 }
 
 .table {
-	@include font-size($small-font-size);
+  @include font-size($small-font-size);
 }
 
 .table-compact {
-	@include font-size(13);
-	td {
-		padding: 0 $base-unit;
-	}
+  @include font-size(13);
+  td {
+    padding: 0 $base-unit;
+  }
 }
 
 .filters-param-list {
-	@include font-size($small-font-size);
-	background: $primary-color;
-	color: $text-light;
-	margin-bottom: $base-unit*2;
-	padding: $base-unit;
+  @include font-size($small-font-size);
+  background: $primary-color;
+  color: $text-light;
+  margin-bottom: $base-unit*2;
+  padding: $base-unit;
 }
 
 .filters-param, .filters-param-label {
-	display: inline-block;
-	padding: $base-unit/2 $base-unit;
-	margin: 0 $base-unit 0 0;
+  display: inline-block;
+  padding: $base-unit/2 $base-unit;
+  margin: 0 $base-unit 0 0;
 }
 
 .filters-param {
-	background: white;
-	color: $primary-color;
+  background: white;
+  color: $primary-color;
 }
 
 .print-footer {
-	font-weight: bold;
-	@include font-size($small-font-size);
-	width: 100%;
-	text-align: right;
-	padding-bottom: $base-unit/2;
+  font-weight: bold;
+  @include font-size($small-font-size);
+  width: 100%;
+  text-align: right;
+  padding-bottom: $base-unit/2;
 }
 
 .title-humanitarian {
-	font-family: $heading-font;
-	text-transform: uppercase;
-	color: $dark-blue;
+  font-family: $heading-font;
+  text-transform: uppercase;
+  color: $dark-blue;
 }
 
 .title-id {
-	font-family: $heading-font;
-	text-transform: uppercase;
-	color: $primary-color;
+  font-family: $heading-font;
+  text-transform: uppercase;
+  color: $primary-color;
 }
 
 @include media-query(sm) {
-	.api-page {
-		padding-bottom: $base-unit*5;
-	}
+  .api-page {
+    padding-bottom: $base-unit*5;
+  }
 }
