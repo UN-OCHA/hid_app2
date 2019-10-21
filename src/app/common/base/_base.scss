@@ -1,6 +1,10 @@
 /**
  * Base styles
  */
+
+// HID-1864: split this out into a file or at least somewhere better than in our
+//   base CSS file. This definitely needs to go into a "authenticated" CSS bundle
+//   that we avoid serving until someone is logged in.
 $flagsImagePath: "/img/";
 @import "../../../bower_components/bc-css-flags/dist/css/bc-css-flags.scss";
 
