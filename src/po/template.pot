@@ -445,7 +445,7 @@ msgstr ""
 msgid "Connection request sent"
 msgstr ""
 
-#: src/app/components/footer/footer.html:23
+#: src/app/components/footer/footer.html:26
 msgid "Contact"
 msgstr ""
 
@@ -1720,7 +1720,7 @@ msgstr ""
 msgid "Secret"
 msgstr ""
 
-#: src/app/components/footer/footer.html:44
+#: src/app/components/footer/footer.html:46
 msgid "See <a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\" style=\"color: #fff;\">here</a> platforms using Humanitarian ID login."
 msgstr ""
 
@@ -1980,6 +1980,10 @@ msgstr ""
 
 #: src/app/components/user/users-export.html:42
 msgid "Synchronize with Google Spreadsheet"
+msgstr ""
+
+#: src/app/components/footer/footer.html:23
+msgid "Terms of Service"
 msgstr ""
 
 #: src/app/components/user/kiosk.controller.js:88
