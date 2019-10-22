@@ -45,6 +45,13 @@ describe('Footer', function () {
     expect(browser.getCurrentUrl()).toBe(conductUrl);
   });
 
+  it('should externally link to Terms of Service', function () {
+    var termsUrl = 'https://about.humanitarian.id/terms-of-service/';
+    footerObj.termsLink.click();
+    browser.waitForAngularEnabled(false);
+    expect(browser.getCurrentUrl()).toBe(termsUrl);
+  });
+
   it('should link to mailto:info@humanitarian.id', function () {
     expect(footerObj.contactLink.getAttribute('href')).toBe('mailto:info@humanitarian.id');
   });

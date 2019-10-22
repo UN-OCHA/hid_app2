@@ -5,7 +5,8 @@ var FooterObject = function() {
   this.blogLink = element(by.css('.cd-footer .footer-links__item:nth-child(3)'));
   this.developersLink = element(by.css('.cd-footer .footer-links__item:nth-child(4)'));
   this.conductLink = element(by.css('.cd-footer .footer-links__item:nth-child(5)'));
-  this.contactLink = element(by.css('.cd-footer .footer-links__item:nth-child(6) a'));
+  this.termsLink = element(by.css('.cd-footer .footer-links__item:nth-child(6)'));
+  this.contactLink = element(by.css('.cd-footer .footer-links__item:nth-child(7) a'));
 };
 
 module.exports = FooterObject;
