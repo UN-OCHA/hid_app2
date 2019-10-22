@@ -438,7 +438,7 @@ msgstr ""
 msgid "Connection request sent"
 msgstr ""
 
-#: src/app/components/footer/footer.html:21
+#: src/app/components/footer/footer.html:24
 msgid "Contact"
 msgstr ""
 
@@ -1977,6 +1977,10 @@ msgstr ""
 
 #: src/app/components/user/users-export.html:42
 msgid "Synchronize with Google Spreadsheet"
+msgstr ""
+
+#: src/app/components/footer/footer.html:21
+msgid "Terms of Service"
 msgstr ""
 
 #: src/app/components/user/KioskController.js:89
