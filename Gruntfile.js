@@ -258,6 +258,11 @@ module.exports = function(grunt) {
     'copy:config'
   ]);
 
+  grunt.registerTask('sass-api', [
+    'sass:api',
+    'postcss',
+  ]);
+
   // Default task
   grunt.registerTask('default', [
     'svgmin',
