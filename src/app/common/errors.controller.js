@@ -8,6 +8,10 @@
   ErrorsCtrl.$inject = ['$rootScope', 'alertService', 'config', 'gettextCatalog'];
 
   function ErrorsCtrl($rootScope, alertService, config, gettextCatalog) {
+    // Some errors are better handled by other parts of the app (e.g. a template
+    // or other custom handling of errors). This variable lets us suppress the
+    // modal when such specific cases are caught.
+    var NO_MODAL_DISPLAY = 'no-modal-display';
 
     function getErrorMessage (rejection) {
 
@@ -46,6 +50,13 @@
         return gettextCatalog.getString('There is an error in your registration. You may have already registered. If so, simply <a href="/password_reset" target="_top">reset your password</a>.');
       }
 
+      // List not found — the template shows a good error message so we will
+      // suppress the modal from displaying if the ID is non-existent or invalid.
+      var listNotFoundStatuses = [400, 404];
+      if (rejection.config.method === 'GET' && rejection.config.url.indexOf('/list/') && listNotFoundStatuses.indexOf(rejection.status) !== -1) {
+        return NO_MODAL_DISPLAY;
+      }
+
       // Return error message from API
       if (rejection.data && rejection.data.message) {
         return rejection.data.message;
@@ -62,7 +73,8 @@
 
     $rootScope.$on('apiRejection', function (event, rejection) {
       var errorMessage = getErrorMessage(rejection);
-      if (errorMessage) {
+
+      if (errorMessage && errorMessage !== NO_MODAL_DISPLAY) {
         alertService.add('danger', errorMessage, false, null, 0);
       }
     });

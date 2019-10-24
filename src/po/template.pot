@@ -214,7 +214,7 @@ msgstr ""
 msgid "Are you sure you want to do this ? You will not be able to access Humanitarian ID anymore."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:321
+#: src/app/components/user/user.controller.js:331
 #: src/app/components/user/userOptions.controller.js:23
 msgid "Are you sure you want to do this? This user will not be able to access Humanitarian ID anymore."
 msgstr ""
@@ -356,7 +356,7 @@ msgstr ""
 msgid "Civil-Military Officer"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:247
+#: src/app/components/user/user.controller.js:257
 msgid "Claim email sent successfully"
 msgstr ""
 
@@ -441,11 +441,11 @@ msgstr ""
 msgid "Connection removed"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:334
+#: src/app/components/user/user.controller.js:344
 msgid "Connection request sent"
 msgstr ""
 
-#: src/app/components/footer/footer.html:23
+#: src/app/components/footer/footer.html:26
 msgid "Contact"
 msgstr ""
 
@@ -732,6 +732,10 @@ msgstr ""
 msgid "Embassy"
 msgstr ""
 
+#: src/app/components/client/new-client.html:37
+msgid "Enter one URL per line"
+msgstr ""
+
 #: src/app/components/user/kiosk.html:39
 msgid "Enter your personal details"
 msgstr ""
@@ -949,7 +953,7 @@ msgstr ""
 msgid "If your organization is not listed, click <a href=\"https://docs.google.com/a/humanitarianresponse.info/forms/d/e/1FAIpQLSdpkMue4gFydSm1PwhSIQonpWRGG50ouJJdo8NbcvaMv_pcDw/viewform?c=0&w=1\" target=\"_blank\">here</a> to request adding it."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:177
+#: src/app/components/user/user.controller.js:178
 msgid "In order to view this person’s profile, please contact info@humanitarian.id"
 msgstr ""
 
@@ -1716,7 +1720,7 @@ msgstr ""
 msgid "Secret"
 msgstr ""
 
-#: src/app/components/footer/footer.html:44
+#: src/app/components/footer/footer.html:46
 msgid "See <a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\" style=\"color: #fff;\">here</a> platforms using Humanitarian ID login."
 msgstr ""
 
@@ -1806,10 +1810,6 @@ msgstr ""
 
 #: src/app/components/user/user.html:43
 msgid "Send Claim Email"
-msgstr ""
-
-#: src/app/components/client/new-client.html:37
-msgid "Separated by new lines"
 msgstr ""
 
 #: src/app/components/service/new-service.html:29
@@ -1904,7 +1904,7 @@ msgstr ""
 msgid "Some of you check-ins are pending, we will get back to you soon."
 msgstr ""
 
-#: src/app/common/errors.controller.js:56
+#: src/app/common/errors.controller.js:67
 msgid "Sorry there was an problem making this request, please try again"
 msgstr ""
 
@@ -1982,6 +1982,10 @@ msgstr ""
 msgid "Synchronize with Google Spreadsheet"
 msgstr ""
 
+#: src/app/components/footer/footer.html:23
+msgid "Terms of Service"
+msgstr ""
+
 #: src/app/components/user/kiosk.controller.js:88
 msgid "Thank you for checking in"
 msgstr ""
@@ -2051,7 +2055,7 @@ msgstr ""
 msgid "The user was successfully created. If you inserted an email address, they will receive an email to claim their account. You can now edit the user profile to add more information."
 msgstr ""
 
-#: src/app/components/user/user.controller.js:314
+#: src/app/components/user/user.controller.js:324
 #: src/app/components/user/userOptions.controller.js:17
 msgid "The user was successfully deleted."
 msgstr ""
@@ -2066,11 +2070,11 @@ msgstr ""
 msgid "The user was successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/common/errors.controller.js:46
+#: src/app/common/errors.controller.js:50
 msgid "There is an error in your registration. You may have already registered. If so, simply <a href=\"/password_reset\" target=\"_top\">reset your password</a>."
 msgstr ""
 
-#: src/app/common/errors.controller.js:41
+#: src/app/common/errors.controller.js:45
 msgid "There was an error logging in."
 msgstr ""
 
@@ -2241,14 +2245,14 @@ msgstr ""
 msgid "User not found"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:263
-#: src/app/components/user/user.controller.js:278
-#: src/app/components/user/user.controller.js:300
+#: src/app/components/user/user.controller.js:273
+#: src/app/components/user/user.controller.js:288
+#: src/app/components/user/user.controller.js:310
 #: src/app/components/user/userOptions.controller.js:37
 msgid "User updated"
 msgstr ""
 
-#: src/app/components/user/user.controller.js:238
+#: src/app/components/user/user.controller.js:248
 msgid "User was successfully notified"
 msgstr ""
 
@@ -2316,19 +2320,19 @@ msgstr ""
 msgid "View as PDF"
 msgstr ""
 
-#: src/app/common/errors.controller.js:22
+#: src/app/common/errors.controller.js:26
 msgid "We could not log you in because your email address is not verified yet."
 msgstr ""
 
-#: src/app/common/errors.controller.js:34
+#: src/app/common/errors.controller.js:38
 msgid "We could not log you in because your password is expired. Following UN regulations, as a security measure passwords must be updated every six months. Kindly reset your password by clicking on the \"Forgot/Reset password\" link below."
 msgstr ""
 
-#: src/app/common/errors.controller.js:30
+#: src/app/common/errors.controller.js:34
 msgid "We could not log you in, the email address does not exist."
 msgstr ""
 
-#: src/app/common/errors.controller.js:26
+#: src/app/common/errors.controller.js:30
 msgid "We could not log you in. The username or password you have entered are incorrect. Kindly try again."
 msgstr ""
 
@@ -2464,7 +2468,7 @@ msgstr ""
 msgid "You were successfully unsubscribed from this service"
 msgstr ""
 
-#: src/app/common/errors.controller.js:16
+#: src/app/common/errors.controller.js:20
 msgid "You've reached the API request limit, please try again in 10 minutes"
 msgstr ""
 
@@ -2472,7 +2476,7 @@ msgstr ""
 msgid "Your API keys"
 msgstr ""
 
-#: src/app/common/errors.controller.js:38
+#: src/app/common/errors.controller.js:42
 msgid "Your account has been locked for 5 minutes due to too many unsuccessful login attempts"
 msgstr ""
 
