@@ -494,7 +494,7 @@
 
     function setPrimaryEmail (email) {
       thisScope.$emit('editUser', {status: 'saving'});
-      if (thisScope.user.totp) {
+      if (thisScope.currentUser.totp) {
         TwoFactorAuthService.requestToken(function (token) {
           setUserPrimaryEmail(email, token);
         }, function () {
