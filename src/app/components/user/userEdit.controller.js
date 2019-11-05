@@ -492,7 +492,7 @@
 
     function setPrimaryEmail (email) {
       $scope.$emit('editUser', {status: 'saving'});
-      if ($scope.user.totp) {
+      if ($scope.currentUser.totp) {
         TwoFactorAuthService.requestToken(function (token) {
           setUserPrimaryEmail(email, token);
         }, function () {
