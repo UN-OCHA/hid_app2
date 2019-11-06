@@ -1,18 +1,16 @@
-// necessary as can't have sum in calc
-$footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
+//——————————————————————————————————————————————————————————————————————————————
+// Pages and Containers
+//——————————————————————————————————————————————————————————————————————————————
 
 .container[role="main"] {
-  min-height: 300px;
+  min-height: 500px;
   padding-bottom: $base-unit*4;
-
-  @include media-query(lg) {
-    min-height: calc(100% - #{$footer-plus-breadcrumbs-lg});
-  }
 }
 
 .page {
-  position: relative;
   width: 100%;
+  max-width: 1220px; // CD max-width
+  margin: 0 auto;
 }
 
 .page-header {
@@ -103,7 +101,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
 .page-header-mobile {
   display: none;
-  
+
   &.sticky {
     opacity: 0;
     display: flex;
@@ -178,7 +176,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
     svg {
       width: $base-unit*11;
-      height: $base-unit*11;   
+      height: $base-unit*11;
     }
   }
 
@@ -210,12 +208,12 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 @include media-query(lg) {
 
   .page {
-    height: calc(100% - #{$header-height-md});
+    // height: calc(100% - #{$header-height-md});
     transition: $sidebar-transition;
 
     .toggled & {
-      transform: translate3d($sidebar-width-md, 0, 0);
-      position: fixed;
+      // transform: translate3d($sidebar-width-md, 0, 0);
+      // position: fixed;
     }
 
     .no-calc & {
@@ -239,7 +237,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
     transition: $sidebar-transition;
 
     .toggled & {
-      transform: translateX(-$sidebar-width-md);
+      // transform: translateX(-$sidebar-width-md);
     }
   }
 
@@ -248,9 +246,9 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
 @include media-query(xl) {
 
-  .page {
-    height: calc(100% - #{$header-height-md});
-  }
+  // .page {
+  //   height: calc(100% - #{$header-height-md});
+  // }
 
   .page-header__heading {
     .col-xl-4 & {
@@ -264,7 +262,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
   .page {
     .toggled & {
-      transform: translate3d($sidebar-width-xxl, 0 ,0);
+      // transform: translate3d($sidebar-width-xxl, 0 ,0);
     }
     .no-csstransforms & {
       .toggled & {
@@ -284,7 +282,7 @@ $footer-plus-breadcrumbs-lg: $footer-height-lg + $breadcrumbs-height;
 
   .page-header__buttons {
     .toggled & {
-      transform: translateX(-$sidebar-width-xxl);
+      // transform: translateX(-$sidebar-width-xxl);
     }
   }
 }

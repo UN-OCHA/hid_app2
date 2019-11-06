@@ -1,0 +1,60 @@
+//——————————————————————————————————————————————————————————————————————————————
+// Common Design: Layout
+//——————————————————————————————————————————————————————————————————————————————
+
+html {
+  height: 100%;
+  margin: 0;
+
+  @include desktop {
+    padding: 0 $cd-site-padding;
+  }
+}
+
+body {
+  background: $cd-site-bg-color;
+  min-height: 100%;
+}
+
+.cd-wrapper {
+  // HID override
+  //
+  // The width of the website must be driven by .cd-wrapper instead of <body>
+  // like a normal CD website. This is because we have the off-canvas .sidebar
+  // which we're docking to the side of the window. So the <body> must also be
+  // the full size of the window instead of being restricted to a specific width.
+  max-width: $cd-max-body-width;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background: $cd-white-bg-color;
+
+  // Grid is used to fix the footer to the bottom of the screen, regardless of page min-height.
+  // Just for CSS grid supporting browsers as IE fallback causes weirdness here.
+  display: grid;
+  grid-template-rows: auto 1fr auto; // HID override: @see https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Sticky_footers
+}
+
+.cd-container {
+  @include clearfix;
+  box-sizing: border-box;
+  padding: 0 $cd-container-padding;
+  margin: 0 auto;
+  max-width: $cd-max-width;
+
+  @include tablet {
+    padding: 0 $cd-container-padding-tablet;
+  }
+
+  @include xlarge {
+    padding: 0 $cd-container-padding-xlarge;
+  }
+}
+
+.cd-container[role='main'] {
+  padding-bottom: 2rem;
+
+  @include desktop {
+    padding-bottom: 4rem;
+  }
+}

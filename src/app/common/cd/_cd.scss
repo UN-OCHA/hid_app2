@@ -1,0 +1,43 @@
+//——————————————————————————————————————————————————————————————————————————————
+// Common Design: root file
+//——————————————————————————————————————————————————————————————————————————————
+
+// HID override:
+// We have moved all variables and mixins to a separate include _cd-tools.scss
+// that appears first in our concatenated Sass file, so that the tools can be
+// used within the HID Sass as well.
+//
+// We still want CD last so that it overrides any pre-existing styles that
+// might apply to the header (such as uib-dropdown styles or similar tools).
+//
+// @see _cd-tools.scss
+
+// Layout
+@import 'cd-layout/cd-layout';
+@import 'cd-layout/cd-skip-link';
+
+// Header
+@import 'cd-header/cd-header';
+@import 'cd-header/cd-dropdowns';
+// @import 'cd-header/cd-dropdowns-drupal'; // HID override
+@import 'cd-header/cd-global-header';
+@import 'cd-header/cd-user-menu';
+@import 'cd-header/cd-ocha';
+@import 'cd-header/cd-logo';
+@import 'cd-header/cd-nav';
+@import 'cd-header/cd-search';
+@import 'cd-header/cd-search--inline';
+// @import 'cd-header/cd-search-drupal'; // HID override
+@import 'cd-header/cd-language-switcher';
+
+// Footer
+@import 'cd-footer/cd-footer';
+@import 'cd-footer/cd-footer-copyright';
+@import 'cd-footer/cd-footer-menu';
+@import 'cd-footer/cd-mandate';
+@import 'cd-footer/cd-footer-social';
+@import 'cd-footer/cd-soft-footer';
+
+// HID overrides
+@import 'cd-header/cd-generic-dropdown'; // HID override
+@import 'cd-header/cd-notifications'; // HID override

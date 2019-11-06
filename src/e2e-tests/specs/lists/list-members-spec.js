@@ -5,77 +5,77 @@ var NewListPage = require('../../pages/new-list-page');
 var ListPage = require('../../pages/list-page');
 
 describe('List members', function () {
-	var loginPage = new LoginPage();
-	var newListPage = new NewListPage();
-	var listPage = new ListPage();
-	var navObject = new NavObject();
+  var loginPage = new LoginPage();
+  var newListPage = new NewListPage();
+  var listPage = new ListPage();
+  var navObject = new NavObject();
 
-	beforeAll(function () {
-		loginPage.get();
-	  loginPage.login();
-	  newListPage.createList();
-	});
+  beforeAll(function () {
+    loginPage.get();
+    loginPage.loginAdmin();
+    newListPage.createList();
+  });
 
-	describe('Adding and removing people to list', function () {
+  describe('Adding and removing people to list', function () {
 
-		describe('Add a person to the list', function () {
+    describe('Add a person to the list', function () {
 
-			beforeAll(function() {
-				listPage.openListAdmin();
-			});
+      beforeAll(function() {
+        browser.sleep(500);
+        listPage.openListAdmin();
+        browser.sleep(500);
+      });
 
-			it('should search for the user', function () {
-				browser.wait(listPage.addMemberInput.isDisplayed(), 10000);
-				listPage.addMemberInput.sendKeys(browser.params.adminUserName);
-				var results = element(by.css('.ui-select-choices'));
-				browser.wait(results.isDisplayed(), 10000);
-				expect(results.getText()).toContain(browser.params.adminUserName);
-			});
+      it('should search for the user', function () {
+        browser.wait(listPage.addMemberInput.isDisplayed(), 10000);
+        listPage.addMemberInput.sendKeys(browser.params.adminUserName);
+        var results = element(by.css('.ui-select-choices'));
+        browser.wait(results.isDisplayed(), 10000);
+        expect(results.getText()).toContain(browser.params.adminUserName);
+      });
 
-			it('should add the user to the list', function () {
-				listPage.addMemberResult.click();
-				listPage.addMemberButton.click();
-				browser.wait(listPage.successModal.isDisplayed(), 10000);
-				expect(listPage.addMemberSuccessModalText.isPresent()).toBeTruthy();
-				listPage.modalOverlay.click();
-				listPage.adminButton.click();
-				expect(listPage.listUsers.getText()).toContain(browser.params.adminUserName);
-			});
+      it('should add the user to the list', function () {
+        listPage.addMemberResult.click();
+        listPage.addMemberButton.click();
+        browser.wait(listPage.successModal.isDisplayed(), 10000);
+        expect(listPage.addMemberSuccessModalText.isPresent()).toBeTruthy();
+        listPage.modalOverlay.click();
+        listPage.adminButton.click();
+        browser.sleep(500);
+        expect(listPage.listUsers.getText()).toContain(browser.params.adminUserName);
+      });
+    });
 
-		});
+    describe('Remove a person from the list', function () {
 
-		describe('Remove a person from the list', function () {
+      beforeAll(function() {
+        browser.wait(listPage.userOptionsButton.isDisplayed(), 10000);
+        listPage.userOptionsButton.click();
+        browser.wait(listPage.removeFromListButton.isDisplayed(), 10000);
+        listPage.removeFromListButton.click();
+      });
 
-			beforeAll(function() {
-				browser.wait(listPage.userOptionsButton.isDisplayed(), 10000);
-				listPage.userOptionsButton.click();
-				browser.wait(listPage.removeFromListButton.isDisplayed(), 10000);
-				listPage.removeFromListButton.click();
-			});
+      it('should ask for confirmation', function () {
+        browser.wait(listPage.confirmModal.isDisplayed(), 10000);
+        expect(listPage.confirmModal.isPresent()).toBeTruthy();
+        listPage.confirmModalButton.click();
+      });
 
-			it('should ask for confirmation', function () {
-				browser.wait(listPage.confirmModal.isDisplayed(), 10000);
-				expect(listPage.confirmModal.isPresent()).toBeTruthy();
-				listPage.confirmModalButton.click();
-			});
+      it('should show the success message', function () {
+        browser.wait(listPage.successModal.isDisplayed(), 10000);
+        expect(listPage.removeSuccessModalText.isPresent()).toBeTruthy();
+      });
 
-			it('should show the success message', function () {
-				browser.wait(listPage.successModal.isDisplayed(), 10000);
-				expect(listPage.removeSuccessModalText.isPresent()).toBeTruthy();
-			});
+      it('should remove the user from the list users', function () {
+        listPage.modalOverlay.click();
+        expect(listPage.listUsers.getText()).not.toContain(browser.params.adminUserName);
+      });
+    });
+  });
 
-			it('should remove the user from the list users', function () {
-				listPage.modalOverlay.click();
-				expect(listPage.listUsers.getText()).not.toContain(browser.params.adminUserName);
-			});
-
-		});
-	});
-
-	afterAll(function () {
-		listPage.deleteList();
-		browser.sleep(3000); //wait for modals to close
-		navObject.logOut();
-	});
-
+  afterAll(function () {
+    listPage.deleteList();
+    browser.sleep(3000); // Wait for modal to close
+    navObject.logOut();
+  });
 });

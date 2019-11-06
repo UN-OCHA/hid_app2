@@ -1,31 +1,24 @@
 .breadcrumbs {
-  display: none;
-}
+  display: block;
+  @include font-size($small-font-size);
+  height: $base-unit*3 +4;
+  padding-right: $base-unit*14;
+  padding-top: $base-unit;
+  padding-bottom: $base-unit;
+  text-transform: uppercase;
 
-@include media-query(sm) {
+    a {
+    text-decoration: none;
 
-  .breadcrumbs {
-    display: block;
-    @include font-size($small-font-size);
-    height: $base-unit*3 +4;
-    padding-right: $base-unit*14;
-    padding-top: $base-unit;
-    padding-bottom: $base-unit;
-    text-transform: uppercase;
+    &:hover, &:focus {
 
-      a {
-      text-decoration: none;
-
-      &:hover, &:focus {
-
-        span {
-          text-decoration: underline;
-        }
+      span {
+        text-decoration: underline;
       }
     }
+  }
 
-    .icon {
-      fill: $primary-color;
-    }
+  .icon {
+    fill: $primary-color;
   }
 }

@@ -1,0 +1,5 @@
+src/**/*.tests.js
+src/e2e-tests/**/*.js
+src/app/config/config.*.js
+src/app/common/translations.js
+Gruntfile.js

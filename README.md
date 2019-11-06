@@ -9,9 +9,7 @@
 * [Docker for Mac](https://docs.docker.com/docker-for-mac/) / Docker for your OS of choice
 * [Node](https://nodejs.org/en/)
 * [Yarn](https://yarnpkg.com/lang/en/docs/install/)
-* [Bower](https://bower.io/#install-bower)
 * [Grunt](http://gruntjs.com/getting-started)
-* [Ruby](https://www.ruby-lang.org/en/)
 * [Sass](http://sass-lang.com/install)
 
 
@@ -38,9 +36,15 @@
 See https://github.com/UN-OCHA/hid-stack/blob/master/README.md
 
 
-## Code style guide
+## Coding standards
 
-This project aims to follow the [John Papa Angular 1 style guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1)
+This project follows the [John Papa Angular 1 style guide](https://github.com/johnpapa/angular-styleguide/tree/master/a1). You can lint the codebase by running the following command (look at the [ESLint plugin README](https://www.npmjs.com/package/eslint-plugin-angular) to interpret the rule names, which link to the styleguide in the format `y123`)
+
+```sh
+yarn run lint
+```
+
+The linting is run on every PR via Travis integration. To help keep track of exceptions, the `.eslintrc` has explicitly set a few rules to `error` to indicate that there are known cases of `eslint-disable-line` being used to suppress what would otherwise be an error. If you are able to resolve all violations of a particular rule, you should victoriously remove it from the .`eslintrc` file! ✊
 
 
 ## Unit tests
@@ -49,7 +53,7 @@ Unit tests are written using [Jasmine](https://jasmine.github.io/) and run with 
 
 ```sh
 # install Karma CLI
-npm install -g karma-cli
+yarn global add karma-cli
 
 # Run tests once
 grunt test
@@ -61,7 +65,7 @@ grunt test-watch
 
 ## E2E tests
 
-E2E is implemented with Protractor, an end-to-end testing tool for Angular.
+E2E is implemented with Jasmine with the help of Protractor, an end-to-end testing tool for Angular.
 
 Installation on **host machine**:
 
@@ -75,9 +79,9 @@ Manually install [Java Development Kit (JDK)](https://www.oracle.com/technetwork
 
 You will need to add the environment variables to run the tests locally.
 
-* Ask Ops to share 'HID E2E test environment vars' with you on LastPass.
+* Ask Marina to share 'Test Accounts on FIS Platforms' Trello card with you.
 * Copy `e2e-tests/enviroment.example.js` to `environment.js`
-* Replace the file's content with the variables from LastPass
+* Manually copy the info from the Trello card into the environment file. This is a one-time setup.
 
 Finally, make sure you're running both containers (API/App) and they're both properly configured for local development.
 
@@ -87,18 +91,22 @@ Now you can run the E2E tests:
 # Run all E2E tests in series
 yarn run protractor
 
-# Run a single E2E test suite
+# Run a single E2E test suite. Look in conf.js for suite names.
 protractor --suite="my-suite-name" src/e2e-tests/conf.js
 ```
+
+### What to do if it fails during local testing
+
+* Your DB might not have the right content, so check the test logs for specific strings that aren't matching (e.g. "Test Admin" vs "Test E2E Admin" or minor differences like that). In general, taking a snapshot of Staging will get you the correct content.
 
 
 ### What to do if it fails on TravisCI
 
 The tests are prone to random failures on Travis. If this happens:
 
-* manually check on staging to see if you can recreate the problem
-* if you can, fix your code!
-* if you can't, try re-running the tests in Travis and if possible alter the failing test to make it more robust
+* Manually check on staging to see if you can recreate the problem
+* If you can, fix your code!
+* If you can't, try re-running the tests in Travis and if possible alter the failing test to make it more robust
 
 ### Issues
 
