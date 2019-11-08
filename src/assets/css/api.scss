@@ -29,7 +29,7 @@
 // @import '../../app/common/forms/_ui-select';
 @import '../../app/common/_animations';
 // @import '../../app/common/_block-lists';
-// @import '../../app/common/_blocks';
+@import '../../app/common/_blocks';
 // @import '../../app/common/_breadcrumbs';
 @import '../../app/common/_buttons';
 // @import '../../app/common/_carousel';
@@ -43,7 +43,7 @@
 // @import '../../app/common/_pagination';
 // @import '../../app/common/_skip-link';
 // @import '../../app/common/_styleguide';
-// @import '../../app/common/_tables';
+@import '../../app/common/_tables';
 // @import '../../app/common/_tags';
 // @import '../../app/components/alerts/_alerts';
 @import '../../app/components/auth/_login';
@@ -73,6 +73,8 @@
 }
 
 .pdf {
+  background-color: white;
+
   .col-xs-8 {
     float: left;
     width: 66.66667%;
