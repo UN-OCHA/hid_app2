@@ -4,6 +4,7 @@ var DashboardPage = function() {
   this.createListButton = element(by.css('.t-new-list-btn'));
   this.favouritesTabBtn = element.all(by.css('.tabs-nav__button')).first();
   this.favourites = element.all(by.repeater('list in userLists.favoriteLists').column('list.name'));
+  this.listsMemberTabButton = element(by.cssContainingText('.tabs-nav__button', 'Lists I\'m part of'));
   this.listsMember = element.all(by.repeater('list in userLists.listsMember').column('list.name'));
   this.listMemberLink = element(by.cssContainingText('.list__item a', browser.params.standardTestList));
   this.listsManage = element.all(by.repeater('list in userLists.listsOwnedAndManaged').column('list.name'));

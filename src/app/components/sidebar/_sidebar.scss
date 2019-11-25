@@ -1,6 +1,6 @@
 .sidebar {
-  position: absolute;
-  top: -$base-unit*1.5;
+  position: fixed;
+  top: 0;
   transform: translate3d(-($sidebar-width-xs + $base-unit*1.5), 0, 0);
   height: 100%;
   width: $sidebar-width-xs;
@@ -25,7 +25,7 @@
 
 .sidebar__inner {
   background: $light-grey;
-  padding: $base-unit*2 $base-unit*3;
+  padding: $base-unit*4 $base-unit*3;
   height: 100%;
   overflow-y: scroll;
   position: relative;
@@ -171,6 +171,7 @@
 
     &.in {
       transform: translate3d(-$base-unit*2, 0, 0);
+      box-shadow: -22px 0 30px black;
     }
   }
 
@@ -187,13 +188,12 @@
   }
 
   .sidebar__inner {
-    padding: $base-unit*3 $base-unit*5;
+    padding: $base-unit*5 $base-unit*5;
   }
 
   .sidebar__heading {
     margin-bottom: $base-unit*4;
   }
-
 }
 
 @include media-query(lg) {
@@ -204,7 +204,7 @@
     transform: none;
 
     &.in {
-      transform: none;
+      transform: translateX($sidebar-width-md);
     }
   }
 
@@ -219,6 +219,10 @@
   .sidebar {
     width: $sidebar-width-xxl;
     left: -$sidebar-width-xxl;
+
+    &.in {
+      transform: translateX($sidebar-width-xxl);
+    }
   }
 
 }

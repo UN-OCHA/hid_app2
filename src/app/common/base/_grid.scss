@@ -27,9 +27,9 @@ $grid-columns: 12 !default;
   padding-right: $base-unit*1.5;
   padding-left:  $base-unit*1.5;
 
-  @include media-query(sm) {
-    padding-left: $base-unit*2;
-    padding-right: $base-unit*2;
+  @include media-query(md) {
+    padding-left: $base-unit*3;
+    padding-right: $base-unit*3;
   }
 }
 

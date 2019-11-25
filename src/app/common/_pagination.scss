@@ -72,13 +72,3 @@
     }
   }
 }
-
-@include media-query(md) {
-
-  .list-actions__pagination {
-    .toggled & {
-      display: none;
-    }
-  }
-
-}
