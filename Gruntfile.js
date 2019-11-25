@@ -283,7 +283,7 @@ module.exports = function(grunt) {
     'uglify:generated',
     'usemin',
     'cacheBust',
-    'manifest-gen',
+    // 'manifest-gen',
     'clean:tmp'
   ]);
 };
