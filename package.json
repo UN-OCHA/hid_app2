@@ -43,7 +43,7 @@
     "grunt-sass-import": "^0.2.2",
     "grunt-svgmin": "^6.0.0",
     "grunt-usemin": "^3.1.1",
-    "http-server": "^0.11.1",
+    "http-server": "^0.12.0",
     "jasmine": "^3.3.1",
     "jasmine-core": "^3.3.0",
     "jasmine-spec-reporter": "^4.1.0",
