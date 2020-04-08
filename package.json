@@ -1,6 +1,6 @@
 {
   "name": "hid_app2",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "HID Client application",
   "main": "index.js",
   "scripts": {
@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/un-ocha/hid_app2#readme",
   "devDependencies": {
-    "eslint": "^6.1.0",
+    "eslint": "^6.8.0",
     "eslint-plugin-angular": "^4.0.1",
-    "grunt": "^1.0.3",
+    "grunt": "^1.1.0",
     "grunt-angular-gettext": "^2.2.3",
     "grunt-angular-templates": "^1.1.0",
     "grunt-cache-bust": "^1.4.1",
@@ -43,17 +43,19 @@
     "grunt-sass-import": "^0.2.2",
     "grunt-svgmin": "^6.0.0",
     "grunt-usemin": "^3.1.1",
-    "http-server": "^0.11.1",
+    "http-server": "^0.12.1",
     "jasmine": "^3.3.1",
     "jasmine-core": "^3.3.0",
     "jasmine-spec-reporter": "^4.1.0",
-    "karma": "^4.0.1",
+    "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.0.0",
-    "karma-coverage": "^2.0.0",
+    "karma-coverage": "^2.0.1",
     "karma-jasmine": "^2.0.1",
     "karma-ng-html2js-preprocessor": "^1.0.0",
     "lodash": ">=4.17.15",
     "minimatch": ">=3.0.2",
+    "minimist": ">=1.2.5",
+    "mkdirp": "^1.0.4",
     "phantomjs-polyfill-object-assign": "0.0.2",
     "shelljs": ">=0.8.3"
   },
@@ -94,8 +96,8 @@
     "@bower_components/offline": "HubSpot/offline#~0.7.18",
     "@bower_components/ua-parser-js": "faisalman/ua-parser-js#^0.7.17",
     "autoprefixer": "^9.6.0",
-    "union-value": ">=2.0.1",
-    "grunt-postcss": "^0.9.0"
+    "grunt-postcss": "^0.9.0",
+    "union-value": ">=2.0.1"
   },
   "engines": {
     "node": "10.14.2",
