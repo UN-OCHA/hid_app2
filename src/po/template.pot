@@ -236,7 +236,7 @@ msgstr ""
 
 #: src/app/components/landing/landing.html:145
 #: src/app/components/notifications/notifications.html:11
-msgid "As of January 2021 the Humanitarian ID contact management features will be decommissioned. More information about this update is available on the HID Blog."
+msgid "As of January 2021 the Humanitarian ID contact management features will be decommissioned. More information about this update is available in HID FAQs section."
 msgstr ""
 
 #: src/app/components/service/new-service.html:65
