@@ -8,7 +8,7 @@ RUN yarn --ignore-engines
 
 RUN grunt --target=production
 
-FROM unocha/nginx:1.14
+FROM unocha/nginx:1.16
 
 RUN mkdir -p /srv/www/html
 
