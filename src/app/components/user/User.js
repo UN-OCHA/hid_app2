@@ -259,7 +259,7 @@
     User.prototype.changePassword = function (user, success, error, token) {
       var req = {
         method: 'PUT',
-        url: config.apiUrl + 'user/' + user._id,
+        url: config.apiUrl + 'user/' + user._id + '/password',
         data: user,
         headers: {
           'X-HID-TOTP': token
