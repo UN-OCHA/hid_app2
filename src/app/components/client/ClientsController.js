@@ -11,7 +11,7 @@
     var thisScope = $scope;
     thisScope.pagination = {
       currentPage: 1,
-      itemsPerPage: 10,
+      itemsPerPage: 0,
       totalItems: 0
     };
 

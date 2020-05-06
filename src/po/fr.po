@@ -241,6 +241,11 @@ msgstr "Etes-vous sur de vouloir faire ca? "
 msgid "Are you sure?"
 msgstr "Etes-vous sur? "
 
+#: src/app/components/landing/landing.html:145
+#: src/app/components/notifications/notifications.html:11
+msgid "As of January 2021 the Humanitarian ID contact management features will be decommissioned. More information about this update is available in HID FAQs section."
+msgstr "En janvier 2021, le service de gestion des contacts de Humanitarian ID sera mis hors service. Plus d'informations sur cette mise à jour sont disponibles dans la section FAQ de HID."
+
 #: src/app/components/service/new-service.html:65
 msgid "Associated lists"
 msgstr "Listes associées "
@@ -2549,7 +2554,7 @@ msgstr ""
 msgid "Your passwords do not match"
 msgstr "Vos mots de passe ne correspondent pas "
 
-#: src/app/components/landing/landing.html:155
+#: src/app/components/landing/landing.html:161
 msgid "Your profile has been verified."
 msgstr "Votre compte est vérifié "
 
