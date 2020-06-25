@@ -1022,10 +1022,6 @@ msgstr ""
 msgid "Last update of your profile"
 msgstr ""
 
-#: src/app/components/landing/landing.html:163
-msgid "Learn how to verify it"
-msgstr ""
-
 #: src/app/components/trustedDomain/trustedDomains.html:44
 msgid "List"
 msgstr ""
@@ -2564,14 +2560,6 @@ msgstr ""
 
 #: src/app/common/messages.html:2
 msgid "Your passwords do not match"
-msgstr ""
-
-#: src/app/components/landing/landing.html:161
-msgid "Your profile has been verified."
-msgstr ""
-
-#: src/app/components/landing/landing.html:162
-msgid "Your profile is not verified."
 msgstr ""
 
 #: src/app/components/list/list.html:97
