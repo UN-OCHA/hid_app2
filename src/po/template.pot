@@ -1318,6 +1318,14 @@ msgstr ""
 msgid "Note: Allow some time for the email to get to your inbox (especially if using @un.org domain). If you do not receive it, get in touch with us at <a href=\"mailto:info@humanitarian.id\">info@humanitarian.id</a>"
 msgstr ""
 
+#: src/app/components/auth/register.html:6
+msgid ""
+"Note: As of January 2021 the Humanitarian ID contact management features\n"
+"      on this platform will be decommissioned. However, your account will remain\n"
+"      valid to access all <a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\" rel=\"noopener\">websites integrated</a>\n"
+"      with HID Authentication service. More info available on the <a href=\"https://about.humanitarian.id/faqs#contacts-decommissioning\" target=\"_blank\" rel=\"noopener\">FAQs page</a>."
+msgstr ""
+
 #: src/app/components/landing/landing.html:136
 #: src/app/components/notifications/notifications.html:5
 msgid "Notifications"
@@ -1552,10 +1560,13 @@ msgstr ""
 msgid "Region"
 msgstr ""
 
-#: src/app/components/auth/register.html:4
 #: src/app/components/user/kiosk.html:131
 #: src/app/components/user/new-user.html:41
 msgid "Register"
+msgstr ""
+
+#: src/app/components/auth/register.html:4
+msgid "Register a Humanitarian ID account"
 msgstr ""
 
 #: src/app/components/auth/login.html:22
@@ -1877,12 +1888,6 @@ msgstr ""
 
 #: src/app/components/search/search-results.html:42
 msgid "Showing lists"
-msgstr ""
-
-#: src/app/components/auth/register.html:6
-msgid ""
-"Sign up for a Humanitarian ID account. Doing so will give you access to Humanitarian ID as well as a growing number of\n"
-"\t\t\t<a href=\"https://about.humanitarian.id/partners-using-our-authentication-service\" target=\"_blank\">related humanitarian community sites</a>."
 msgstr ""
 
 #: src/app/components/service/suggestions.html:27
