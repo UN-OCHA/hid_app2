@@ -259,10 +259,6 @@ msgstr ""
 msgid "Authorized applications"
 msgstr ""
 
-#: src/app/components/footer/footer.html:12
-msgid "Blog"
-msgstr ""
-
 #: src/app/components/alerts/alertService.js:32
 #: src/app/components/checkin/editCheckinModal.html:34
 #: src/app/components/user/preferences.html:32
@@ -416,7 +412,7 @@ msgstr ""
 msgid "Co-ordination hub"
 msgstr ""
 
-#: src/app/components/footer/footer.html:18
+#: src/app/components/footer/footer.html:12
 #: src/app/components/user/users-export.html:9
 msgid "Code of conduct"
 msgstr ""
@@ -443,7 +439,7 @@ msgstr ""
 msgid "Connection request sent"
 msgstr ""
 
-#: src/app/components/footer/footer.html:24
+#: src/app/components/footer/footer.html:18
 msgid "Contact"
 msgstr ""
 
@@ -619,7 +615,7 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: src/app/components/footer/footer.html:15
+#: src/app/components/footer/footer.html:9
 msgid "Developers"
 msgstr ""
 
@@ -1972,15 +1968,11 @@ msgstr ""
 msgid "Suggested services"
 msgstr ""
 
-#: src/app/components/footer/footer.html:9
-msgid "Support"
-msgstr ""
-
 #: src/app/components/user/users-export.html:42
 msgid "Synchronize with Google Spreadsheet"
 msgstr ""
 
-#: src/app/components/footer/footer.html:21
+#: src/app/components/footer/footer.html:15
 msgid "Terms of Service"
 msgstr ""
 
