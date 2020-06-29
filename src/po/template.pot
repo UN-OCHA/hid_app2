@@ -299,7 +299,7 @@ msgid "Changed primary phone number to:"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:409
-#: src/app/components/header/header.html:126
+#: src/app/components/header/header.html:125
 msgid "Check in"
 msgstr ""
 
@@ -325,7 +325,7 @@ msgid "Check me in"
 msgstr ""
 
 #: src/app/components/checkin/checkout-page.html:4
-#: src/app/components/header/header.html:127
+#: src/app/components/header/header.html:126
 msgid "Check out"
 msgstr ""
 
@@ -561,7 +561,7 @@ msgid "Current phone number"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.html:4
-#: src/app/components/header/header.html:124
+#: src/app/components/header/header.html:123
 msgid "Dashboard"
 msgstr ""
 
@@ -758,7 +758,7 @@ msgstr ""
 msgid "Family name"
 msgstr ""
 
-#: src/app/components/header/header.html:90
+#: src/app/components/header/header.html:89
 msgid "Feedback"
 msgstr ""
 
@@ -915,7 +915,7 @@ msgstr ""
 msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
 msgstr ""
 
-#: src/app/components/header/header.html:125
+#: src/app/components/header/header.html:124
 #: src/app/components/search/SearchController.js:13
 msgid "Humanitarian contacts"
 msgstr ""
@@ -1076,7 +1076,7 @@ msgstr ""
 msgid "Log in to Humanitarian ID."
 msgstr ""
 
-#: src/app/components/header/header.html:91
+#: src/app/components/header/header.html:90
 msgid "Log out"
 msgstr ""
 
@@ -2132,10 +2132,6 @@ msgstr ""
 
 #: src/app/components/user/preferences.html:261
 msgid "Trusted devices"
-msgstr ""
-
-#: src/app/components/header/header.html:89
-msgid "Tutorial"
 msgstr ""
 
 #: src/app/components/user/preferences.html:154
