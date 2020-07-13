@@ -698,7 +698,7 @@ msgstr ""
 msgid "Edit service"
 msgstr ""
 
-#: src/app/components/auth/login.html:9
+#: src/app/components/auth/login.html:15
 #: src/app/components/auth/password_reset.html:10
 #: src/app/components/user/kiosk.html:127
 #: src/app/components/user/kiosk.html:27
@@ -824,7 +824,7 @@ msgstr ""
 msgid "Flag suspicious user"
 msgstr ""
 
-#: src/app/components/auth/login.html:23
+#: src/app/components/auth/login.html:29
 msgid "Forgot/Reset password"
 msgstr ""
 
@@ -942,6 +942,7 @@ msgstr ""
 msgid "If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically at the date you specified."
 msgstr ""
 
+#: src/app/components/auth/login.html:3
 #: src/app/components/landing/landing.html:3
 msgid "In January 2021, the Humanitarian ID website and app will be decommissioned. Your HID account will remain valid as part of the stand-alone HID Authentication service which can be used to login to any of the partner platforms. More information about this decommissioning is available in the <a href=\"https://about.humanitarian.id/faqs#contacts-decommissioning\">FAQs section</a>."
 msgstr ""
@@ -1072,7 +1073,7 @@ msgstr ""
 msgid "Locations"
 msgstr ""
 
-#: src/app/components/auth/login.html:4
+#: src/app/components/auth/login.html:10
 msgid "Log in to Humanitarian ID."
 msgstr ""
 
@@ -1080,7 +1081,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: src/app/components/auth/login.html:19
+#: src/app/components/auth/login.html:25
 #: src/app/components/header/header.html:71
 msgid "Login"
 msgstr ""
@@ -1418,7 +1419,7 @@ msgstr ""
 msgid "Other lists you might be interested in"
 msgstr ""
 
-#: src/app/components/auth/login.html:13
+#: src/app/components/auth/login.html:19
 #: src/app/components/auth/reset_password.html:15
 #: src/app/components/user/new-user.html:24
 msgid "Password"
@@ -1569,7 +1570,7 @@ msgstr ""
 msgid "Register a Humanitarian ID account"
 msgstr ""
 
-#: src/app/components/auth/login.html:22
+#: src/app/components/auth/login.html:28
 msgid "Register a new Humanitarian ID Account"
 msgstr ""
 
@@ -2442,7 +2443,7 @@ msgstr ""
 msgid "You were successfully checked into the list"
 msgstr ""
 
-#: src/app/components/auth/AuthController.js:101
+#: src/app/components/auth/AuthController.js:107
 msgid "You were successfully logged out."
 msgstr ""
 
@@ -2509,7 +2510,7 @@ msgstr ""
 msgid "Your device lost its internet connection."
 msgstr ""
 
-#: src/app/components/auth/login.html:10
+#: src/app/components/auth/login.html:16
 #: src/app/components/auth/password_reset.html:11
 #: src/app/components/user/kiosk.html:28
 msgid "Your email address"
@@ -2532,7 +2533,7 @@ msgstr ""
 msgid "Your new password"
 msgstr ""
 
-#: src/app/components/auth/login.html:14
+#: src/app/components/auth/login.html:20
 #: src/app/components/user/new-user.html:26
 #: src/app/components/user/new-user.html:33
 msgid "Your password"
