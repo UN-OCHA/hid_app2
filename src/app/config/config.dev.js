@@ -2,7 +2,7 @@
   window.__env = window.__env || {};
 
   // API url
-  window.__env.apiUrl = 'https://api.dev.humanitarian.id/api/v2/';
+  window.__env.apiUrl = 'https://dev.api-humanitarian-id.ahconu.org/api/v2/';
 
   // Hrinfo url
   window.__env.hrinfoUrl = 'https://www.humanitarianresponse.info/en/api/v1.0/';
@@ -11,7 +11,7 @@
   window.__env.listTypes = ['operation', 'bundle', 'disaster', 'organization', 'list', 'functional_role', 'office'];
 
   //Google Analytics tracking ID
-  window.__env.gaTrackingId = 'UA-60189654-1'
+  window.__env.gaTrackingId = 'UA-XXXXXXXX-X'
 
 }(this));
 
