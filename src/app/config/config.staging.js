@@ -2,7 +2,7 @@
   window.__env = window.__env || {};
 
   // API url
-  window.__env.apiUrl = 'https://api.staging.humanitarian.id/api/v2/';
+  window.__env.apiUrl = 'https://stage.api-humanitarian-id.ahconu.org/api/v2/';
 
   // Hrinfo url
   window.__env.hrinfoUrl = 'https://www.humanitarianresponse.info/en/api/v1.0/';

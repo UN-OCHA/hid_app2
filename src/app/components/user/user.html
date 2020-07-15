@@ -133,8 +133,6 @@
           </ul>
 
           <p class="profile-header__status">{{user.status}}</p>
-          <p class="profile-header__verified-text" ng-show="user.verified"><icon name="check-circle"></icon>This user has been verified.</p>
-          <p class="profile-header__unverified" ng-show="!user.verified"><icon name="cancel-circle"></icon>This user has not been verified. Learn how to verify a profile <a href="https://about.humanitarian.id/faqs/" target="_blank">here</a></p>
           <p class="profile-header__hidden-text" ng-show="user.hidden && (currentUser.is_admin || currentUser._id == user._id)"><icon name="eye-hidden"></icon>This user is hidden.</p>
         </div>
 
@@ -463,7 +461,6 @@
                 <icon name="plus" text="Add"></icon>
               </button>
             </div>
-            <p translate>If your organization is not listed, click <a href="https://docs.google.com/a/humanitarianresponse.info/forms/d/e/1FAIpQLSdpkMue4gFydSm1PwhSIQonpWRGG50ouJJdo8NbcvaMv_pcDw/viewform?c=0&w=1" target="_blank">here</a> to request adding it.</p>
           </form>
 
           <form ng-if="user.organizations.length" class="form-section__edit">

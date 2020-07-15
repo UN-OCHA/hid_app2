@@ -1,3 +1,9 @@
+<div class="row" ng-if="nativeApp">
+  <div class="col-xs-12">
+    <p class="alert alert--inline alert--danger" translate>In January 2021, the Humanitarian ID website and app will be decommissioned. Your HID account will remain valid as part of the stand-alone HID Authentication service which can be used to login to any of the partner platforms. More information about this decommissioning is available in the <a href="https://about.humanitarian.id/faqs#contacts-decommissioning">FAQs section</a>.</p>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-xs-12">
     <div class="page-header page-header--no-actions">
@@ -156,16 +162,9 @@
           <icon name="arrow-right"></icon>
           <span translate>Last update of your profile</span>: <span ng-bind="currentUser.lastModified | date:'longDate'"></span>
         </li>
-          <li class="secondary-block__item secondary-block__item--has-icon">
-            <icon name="arrow-right"></icon>
-            <span ng-if="currentUser.verified" translate>Your profile has been verified.</span>
-            <span ng-if="!currentUser.verified" translate>Your profile is not verified.</span>
-            <a href="https://about.humanitarian.id/faqs#verification" ng-if="!currentUser.verified" target="_blank" translate>Learn how to verify it</a>
-          </li>
-        </ul>
-
-      </div>
-
+      </ul>
     </div>
   </div>
+</div>
+
 </div>

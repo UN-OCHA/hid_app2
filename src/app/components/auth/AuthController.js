@@ -13,6 +13,12 @@
     thisScope.saving = false;
     var twoFAModal;
 
+    if ($window.navigator.userAgent.indexOf('Cordova') !== -1) {
+      thisScope.nativeApp = true;
+    } else {
+      thisScope.nativeApp = false;
+    }
+
     function onFirstLogin () {
       thisScope.currentUser.setAppMetaData({login: true});
       thisScope.currentUser.authOnly = false;
