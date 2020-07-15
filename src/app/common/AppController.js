@@ -79,7 +79,7 @@
     };
 
     function hideHeaderFooter () {
-      return ($location.path() === '/start' || $location.path() === '/tutorial' || $location.path() === '/kiosk') ? true : false;
+      return ($location.path() === '/start' || $location.path() === '/kiosk') ? true : false;
     }
 
     thisScope.hideHeaderFooter = hideHeaderFooter();

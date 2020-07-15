@@ -569,10 +569,7 @@
         updateCurrentUser();
         saveUser('login');
       }
-      if (thisScope.currentStep === lastStep) {
-        $location.path('/tutorial');
-        return;
-      }
+
       thisScope.currentStep = thisScope.currentStep + 1;
     }
 

@@ -185,18 +185,6 @@ msgstr "تم إلغاء الطلب بنجاح"
 msgid "Approve"
 msgstr "الموافقة"
 
-#: src/app/components/start/tutorial.html:31
-msgid ""
-"Are you about to deploy to a new operation, join the response to a specific "
-"disaster or start working with a different sector or cluster? If so, check "
-"in to the relevant contact lists and don’t forget to check out when you "
-"leave the country."
-msgstr ""
-"هل أنت على وشك توزيع عملية جديدة، الانضمام إلى خطة استجابة لكارثة معينة أو "
-"البدء بالعمل مع قطاع استجابة مختلف  أو مجموعة قطاعية جديدة؟ إذا كان الأمر "
-"كذلك، قم بتسجيل الوصول في قائمة التواصل المناسبة ولا تنسَ تسجيل الخروج منها "
-"عند مغادرتك الدولة."
-
 #: src/app/components/user/userEdit.controller.js:340
 msgid "Are you sure you want to check out of this list?"
 msgstr "هل أنت متأكد أنك تريد أن تسجل المغادرة من هذه القائمة؟"
@@ -294,10 +282,6 @@ msgstr "تغيير رقم الهاتف الرئيسي إلى"
 #: src/app/components/header/header.html:90
 msgid "Check in"
 msgstr "تسجيل الوصول"
-
-#: src/app/components/start/tutorial.html:30
-msgid "Check in and out"
-msgstr "تسجيل الوصول وتسجيل المغادرة"
 
 #: src/app/components/checkin/checkin.html:375
 msgid "Check in modifications"
@@ -472,14 +456,6 @@ msgstr "إدخال قائمة جديدة"
 #: src/app/components/auth/reset_password.html:29
 msgid "Create password"
 msgstr "إدخال كلمة سر جديدة"
-
-#: src/app/components/start/tutorial.html:52
-msgid ""
-"Create your own contact lists and share them with others. Let others check "
-"in to your lists or decide for yourself who can join."
-msgstr ""
-"أدخل قوائم الإتصال الخاصة بك وشاركها مع الآخرين. دع الآخرين يسجلون الدخول "
-"إلى قوائمك ويقرروا بأنفسهم إن كانوا يريدون الانضمام."
 
 #: src/app/components/user/user.html:800
 msgid "Created"
@@ -683,11 +659,6 @@ msgstr "اسم العائلة"
 msgid "Feedback"
 msgstr "تعليقات وآراء"
 
-#: src/app/components/start/tutorial.html:63
-msgid ""
-"Feel free to export your contact list into PDF or other available formats."
-msgstr "يمكن تصدير معلومات جهة الاتصال الخاصة بك إلى صيغة PDF أو أي صيغ أخرى."
-
 #: src/app/components/user/user-filters.html:64
 msgid "Filter by co-ordination hub"
 msgstr "تصفية حسب مركز التنسيق"
@@ -729,10 +700,6 @@ msgstr "تصفية حسب النوع"
 msgid "Filters applied:"
 msgstr "التصفيات المطبقة:"
 
-#: src/app/components/start/tutorial.html:9
-msgid "Find others"
-msgstr "ابحث عن غيرها"
-
 #: src/app/components/user/kiosk.html:41
 #: src/app/components/user/new-user.html:10
 msgid "First Name"
@@ -749,14 +716,6 @@ msgstr "هل نسيت كلمة المرور؟"
 #: src/app/components/user/user.html:645
 msgid "Functional roles"
 msgstr "أدوار وظيفية"
-
-#: src/app/components/start/tutorial.html:88
-msgid "Get started"
-msgstr "للبدء"
-
-#: src/app/components/start/tutorial.html:72
-msgid "Get the app"
-msgstr "جد التطبيق"
 
 #: src/app/components/user/users.controller.js:58
 msgid "Ghost"
@@ -793,10 +752,6 @@ msgstr "إخفاء "
 msgid "Hide the service - HID users will not be able to search for it"
 msgstr "إخفاء الخدمة- لن يتمكن مستخدمو HID من البحث عنها."
 
-#: src/app/components/start/tutorial.html:73
-msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
-msgstr "Humanitarian ID موجودة كتطبيق على الهاتف كذلك لأجهزة IOS و Android."
-
 #: src/app/components/auth/auth.controller.js:18
 msgid ""
 "Humanitarian ID version 2.0 is live! To log in for the first time, please "
@@ -831,33 +786,10 @@ msgstr ""
 "مرور جديدة من خلال إدخال عنوان بريدك الإلكتروني هنا وضغط \" استعادة كلمة "
 "المرور\"."
 
-#: src/app/components/start/tutorial.html:21
-msgid "If you get a lot of results, use this filter to fine-tune your search."
-msgstr "لو واجهت الكثير من النتائج، استعمل هذه التصفية لتحسين عملية بحثك."
-
-#: src/app/components/start/tutorial.html:42
-#: src/app/components/start/tutorial.html:65
-msgid ""
-"If you want to join a list temporarily, add a check-out date. We’ll send you "
-"a reminder shortly before the given date and we’ll check you out "
-"automatically two weeks after the end-date."
-msgstr ""
-"لو أردت الانضمام إلى قائمة مؤقتا، أضف موعدا لتسجيل الخروج. سوف نرسل لك "
-"تذكيرا قبيل الموعد المختار وسنسجل خروجك تلقائيا بعد أسبوعين من التاريخ "
-"المحدد."
-
 #: src/app/components/user/user.controller.js:133
 msgid ""
 "In order to view this person’s profile, please contact info@humanitarian.id"
 msgstr "لاستعراض ملف هذا الشخص، الرجاء التواصل مع info@humanitarian.id"
-
-#: src/app/components/start/tutorial.html:19
-msgid ""
-"In the navigation bar you will find a search box. Start typing your search "
-"item in the box and contacts and lists will immediately appear."
-msgstr ""
-"في شريط التنقل هذا ستجد مكانا للبحث. ابدأ بكتابة ما تود البحث عنه في المساحة "
-"المعطاة وستظهر جهات الاتصال والقوائم فوراً."
 
 #: src/app/components/user/users.html:42
 msgid "Info / actions"
@@ -993,10 +925,6 @@ msgstr "Mailchimp list"
 msgid "Manage services"
 msgstr "إدارة الخدمات"
 
-#: src/app/components/start/tutorial.html:51
-msgid "Manage your own lists"
-msgstr "إدارة قوائمك"
-
 #: src/app/components/user/user.html:773 src/app/components/user/user.html:792
 msgid "Manager"
 msgstr "مدير"
@@ -1074,7 +1002,6 @@ msgstr "كلمة مرور جديدة"
 #: src/app/components/start/start.html:33
 #: src/app/components/start/start.html:71
 #: src/app/components/start/start.html:83
-#: src/app/components/start/tutorial.html:87
 #: src/app/components/user/kiosk.html:22 src/app/components/user/kiosk.html:34
 msgid "Next"
 msgstr "التالي"
@@ -1118,14 +1045,6 @@ msgstr "لا يوجد موقع"
 #: src/app/components/user/user.html:550
 msgid "No locations"
 msgstr "لا توجد مواقع"
-
-#: src/app/components/start/tutorial.html:10
-msgid ""
-"No matter whether you are looking for an individual, a contact list or a "
-"specific role – all contacts are at your finger tips."
-msgstr ""
-"لا يهم إن كنتَ تبحث عن شخص، جهة اتصال او دور محدد- كل معلومات الاتصال بين "
-"يديك."
 
 #: src/app/components/checkin/checkin.html:380
 msgid "No modifications"
@@ -1336,12 +1255,6 @@ msgstr "ملف"
 #: src/app/components/user/userEdit.controller.js:173
 msgid "Profile updated"
 msgstr "تم تعديل الملف"
-
-#: src/app/components/start/tutorial.html:13
-#: src/app/components/start/tutorial.html:34
-#: src/app/components/start/tutorial.html:55
-msgid "Read more"
-msgstr "اقرأ المزيد"
 
 #: src/app/components/landing/landing.html:121
 #: src/app/components/landing/landing.html:43
@@ -1983,10 +1896,6 @@ msgstr "توقيت"
 msgid "To get started, please give us some information about yourself."
 msgstr "للبدء، فضلا أعطنا بعض المعلومات عنك."
 
-#: src/app/components/header/header.html:63
-msgid "Tutorial"
-msgstr "درس تدريبي"
-
 #: src/app/components/list/all-lists.html:45
 #: src/app/components/list/lists-filters.html:31
 #: src/app/components/service/service.html:8
@@ -2236,27 +2145,6 @@ msgstr ""
 "تستطيع أن تسجل الوصول في أنواع مختلفة من قوائم التواصل. أولا: اختر أي قائمة "
 "أو أي قوائم تناسبك. هنا الأنواع المختلفة:"
 
-#: src/app/components/start/tutorial.html:61
-msgid ""
-"You can create your own contact lists from the dashboard in the menu at the "
-"top of your screen. Once you’ve given your list a name and decided who can "
-"view and join it, you can start adding and removing contacts from your list."
-msgstr ""
-"تستطيع انشاء قوام التواصل الخاصة بك من لوحة المعلومات في القائمة على أعلى "
-"شاشتك. بعد أن تعطي هذه القائمة اسما وتحدد من يستطيع أن يراها ومن يستطيع "
-"الانضمام إليها, يمكن أن تبدأ بإضافة وحذف جهات الاتصال من القائمة الخاصة بك."
-
-#: src/app/components/start/tutorial.html:40
-msgid ""
-"You can find the Check-in and Check-out buttons on the top-right of your "
-"screen. To get started, click on Check-in, then start typing the name of the "
-"country, disaster, or group in the box. Select your list and then look at "
-"the options for other suitable lists."
-msgstr ""
-"تستطيع أن ترى مفتاحي تسجيل الوصول وتسجيل المغادرة في يمين وأعلى الشاشة. "
-"للبدء، اختر تسجيل الوصول، ثم ابدأ بكتابة اسم الدولة، الكارثة، أو المجموعة في "
-"صندوق البحث. اختر قائمتك ثم انظر الخيارات لتجد قوائم أخرى مناسبة."
-
 #: src/app/components/dashboard/dashboard.html:19
 msgid "You don't have any favourite lists"
 msgstr "لا تملك أي قوائم مفضلة"
@@ -2409,18 +2297,6 @@ msgstr "طلبك بتسجيل الوصول ما زال في الانتظار. س
 #: src/app/components/user/userPrefs.controller.js:42
 msgid "Your settings were successfully changed."
 msgstr "تم تغيير إعداداتك بنجاح."
-
-#: src/app/components/start/tutorial.html:35
-msgid "about checking in"
-msgstr "عن تسجيل الوصول"
-
-#: src/app/components/start/tutorial.html:14
-msgid "about finding others"
-msgstr "عن إيجاد الآخرين"
-
-#: src/app/components/start/tutorial.html:56
-msgid "about managing lists"
-msgstr "عن إدارة القوائم"
 
 #: src/app/components/user/userEdit.controller.js:147
 msgid "added"
