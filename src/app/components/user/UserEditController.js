@@ -571,6 +571,10 @@
       }
 
       thisScope.currentStep = thisScope.currentStep + 1;
+
+      if (thisScope.currentStep === 5) {
+        $location.path('/landing');
+      }
     }
 
     thisScope.changePermission = function (key) {
