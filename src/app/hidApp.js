@@ -272,12 +272,6 @@ var app = angular.module('hidApp', [
           authenticate: true,
           title: 'Getting started'
         })
-        .when('/tutorial', {
-          templateUrl: 'app/components/start/tutorial.html',
-          controller: 'TutorialController',
-          authenticate: true,
-          title: 'Tutorial'
-        })
         .when('/outlook', {
           template: '',
           controller: 'OutlookController',
