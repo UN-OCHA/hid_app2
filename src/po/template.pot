@@ -730,7 +730,7 @@ msgstr ""
 msgid "Export Contact Info"
 msgstr ""
 
-#: src/app/components/user/users-export.html:37
+#: src/app/components/user/users-export.html:36
 msgid "Export into CSV"
 msgstr ""
 
@@ -1090,11 +1090,11 @@ msgstr ""
 msgid "Media"
 msgstr ""
 
-#: src/app/components/user/users-export.html:32
+#: src/app/components/user/users-export.html:31
 msgid "Meeting attendance (comfortable View)"
 msgstr ""
 
-#: src/app/components/user/users-export.html:27
+#: src/app/components/user/users-export.html:26
 msgid "Meeting attendance (compact View)"
 msgstr ""
 
@@ -1913,7 +1913,7 @@ msgstr ""
 msgid "Suggested services"
 msgstr ""
 
-#: src/app/components/user/users-export.html:42
+#: src/app/components/user/users-export.html:41
 msgid "Synchronize with Google Spreadsheet"
 msgstr ""
 
@@ -2251,7 +2251,7 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-#: src/app/components/user/users-export.html:22
+#: src/app/components/user/users-export.html:21
 msgid "View as PDF"
 msgstr ""
 
