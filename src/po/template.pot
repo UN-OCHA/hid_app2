@@ -195,10 +195,6 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
-#: src/app/components/start/tutorial.html:31
-msgid "Are you about to deploy to a new operation, join the response to a specific disaster or start working with a different sector or cluster? If so, check in to the relevant contact lists and don’t forget to check out when you leave the country."
-msgstr ""
-
 #: src/app/components/user/UserEditController.js:394
 msgid "Are you sure you want to check out of this list?"
 msgstr ""
@@ -297,10 +293,6 @@ msgstr ""
 #: src/app/components/checkin/checkin.html:409
 #: src/app/components/header/header.html:125
 msgid "Check in"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:30
-msgid "Check in and out"
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:373
@@ -505,10 +497,6 @@ msgstr ""
 
 #: src/app/components/auth/reset_password.html:33
 msgid "Create password"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:52
-msgid "Create your own contact lists and share them with others. Let others check in to your lists or decide for yourself who can join."
 msgstr ""
 
 #: src/app/components/user/user.html:827
@@ -742,7 +730,7 @@ msgstr ""
 msgid "Export Contact Info"
 msgstr ""
 
-#: src/app/components/user/users-export.html:37
+#: src/app/components/user/users-export.html:36
 msgid "Export into CSV"
 msgstr ""
 
@@ -756,10 +744,6 @@ msgstr ""
 
 #: src/app/components/header/header.html:89
 msgid "Feedback"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:63
-msgid "Feel free to export your contact list into PDF or other available formats."
 msgstr ""
 
 #: src/app/components/user/user-filters.html:63
@@ -803,10 +787,6 @@ msgstr ""
 msgid "Filters applied:"
 msgstr ""
 
-#: src/app/components/start/tutorial.html:9
-msgid "Find others"
-msgstr ""
-
 #: src/app/components/user/preferences.html:173
 msgid "Find out more"
 msgstr ""
@@ -838,14 +818,6 @@ msgstr ""
 
 #: src/app/components/user/preferences.html:247
 msgid "Get recovery codes"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:88
-msgid "Get started"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:72
-msgid "Get the app"
 msgstr ""
 
 #: src/app/components/user/UsersController.js:63
@@ -907,10 +879,6 @@ msgstr ""
 msgid "Humanitarian Country Team"
 msgstr ""
 
-#: src/app/components/start/tutorial.html:73
-msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
-msgstr ""
-
 #: src/app/components/header/header.html:124
 #: src/app/components/search/SearchController.js:13
 msgid "Humanitarian contacts"
@@ -933,15 +901,6 @@ msgstr ""
 msgid "If you forgot the password to your Humanitarian ID account, or your password has expired, you can request a new password by entering your email address here and clicking \"Reset Password\". You will receive an email with a temporary link."
 msgstr ""
 
-#: src/app/components/start/tutorial.html:21
-msgid "If you get a lot of results, use this filter to fine-tune your search."
-msgstr ""
-
-#: src/app/components/start/tutorial.html:42
-#: src/app/components/start/tutorial.html:65
-msgid "If you want to join a list temporarily, add a check-out date. We’ll send you a reminder shortly before the given date and we’ll check you out automatically at the date you specified."
-msgstr ""
-
 #: src/app/components/auth/login.html:3
 #: src/app/components/landing/landing.html:3
 msgid "In January 2021, the Humanitarian ID website and app will be decommissioned. Your HID account will remain valid as part of the stand-alone HID Authentication service which can be used to login to any of the partner platforms. More information about this decommissioning is available in the <a href=\"https://about.humanitarian.id/faqs#contacts-decommissioning\">FAQs section</a>."
@@ -949,10 +908,6 @@ msgstr ""
 
 #: src/app/components/user/UserController.js:180
 msgid "In order to view this person’s profile, please contact info@humanitarian.id"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:19
-msgid "In the navigation bar you will find a search box. Start typing your search item in the box and contacts and lists will immediately appear."
 msgstr ""
 
 #: src/app/components/user/users.html:42
@@ -1116,10 +1071,6 @@ msgstr ""
 msgid "Manage services"
 msgstr ""
 
-#: src/app/components/start/tutorial.html:51
-msgid "Manage your own lists"
-msgstr ""
-
 #: src/app/components/user/UsersController.js:75
 #: src/app/components/user/user.html:788
 #: src/app/components/user/user.html:807
@@ -1139,11 +1090,11 @@ msgstr ""
 msgid "Media"
 msgstr ""
 
-#: src/app/components/user/users-export.html:32
+#: src/app/components/user/users-export.html:31
 msgid "Meeting attendance (comfortable View)"
 msgstr ""
 
-#: src/app/components/user/users-export.html:27
+#: src/app/components/user/users-export.html:26
 msgid "Meeting attendance (compact View)"
 msgstr ""
 
@@ -1205,7 +1156,6 @@ msgstr ""
 #: src/app/components/start/start.html:47
 #: src/app/components/start/start.html:85
 #: src/app/components/start/start.html:97
-#: src/app/components/start/tutorial.html:87
 #: src/app/components/user/kiosk.html:22
 #: src/app/components/user/kiosk.html:34
 msgid "Next"
@@ -1253,10 +1203,6 @@ msgstr ""
 
 #: src/app/components/user/user.html:565
 msgid "No locations"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:10
-msgid "No matter whether you are looking for an individual, a contact list or a specific role – all contacts are at your finger tips."
 msgstr ""
 
 #: src/app/components/checkin/checkin.html:378
@@ -1530,12 +1476,6 @@ msgstr ""
 
 #: src/app/components/user/UsersController.js:87
 msgid "Profile users"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:13
-#: src/app/components/start/tutorial.html:34
-#: src/app/components/start/tutorial.html:55
-msgid "Read more"
 msgstr ""
 
 #: src/app/components/landing/landing.html:127
@@ -1973,7 +1913,7 @@ msgstr ""
 msgid "Suggested services"
 msgstr ""
 
-#: src/app/components/user/users-export.html:42
+#: src/app/components/user/users-export.html:41
 msgid "Synchronize with Google Spreadsheet"
 msgstr ""
 
@@ -2311,7 +2251,7 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-#: src/app/components/user/users-export.html:22
+#: src/app/components/user/users-export.html:21
 msgid "View as PDF"
 msgstr ""
 
@@ -2400,14 +2340,6 @@ msgstr ""
 msgid "You can check into different types of contact list. First, choose which list or lists are most appropriate for you. Here are the different types:"
 msgstr ""
 
-#: src/app/components/start/tutorial.html:61
-msgid "You can create your own contact lists from the dashboard in the menu at the top of your screen. Once you’ve given your list a name and decided who can view and join it, you can start adding and removing contacts from your list."
-msgstr ""
-
-#: src/app/components/start/tutorial.html:40
-msgid "You can find the Check-in and Check-out buttons on the top-right of your screen. To get started, click on Check-in, then start typing the name of the country, disaster, or group in the box. Select your list and then look at the options for other suitable lists."
-msgstr ""
-
 #: src/app/components/dashboard/dashboard.html:19
 msgid "You don't have any favourite lists"
 msgstr ""
@@ -2443,7 +2375,7 @@ msgstr ""
 msgid "You were successfully checked into the list"
 msgstr ""
 
-#: src/app/components/auth/AuthController.js:107
+#: src/app/components/auth/AuthController.js:99
 msgid "You were successfully logged out."
 msgstr ""
 
@@ -2561,18 +2493,6 @@ msgstr ""
 
 #: src/app/components/user/UserPrefsController.js:61
 msgid "Your settings were successfully changed."
-msgstr ""
-
-#: src/app/components/start/tutorial.html:35
-msgid "about checking in"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:14
-msgid "about finding others"
-msgstr ""
-
-#: src/app/components/start/tutorial.html:56
-msgid "about managing lists"
 msgstr ""
 
 #: src/app/components/user/UserEditController.js:157

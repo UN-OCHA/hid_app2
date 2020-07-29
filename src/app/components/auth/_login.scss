@@ -3,10 +3,6 @@
 	max-width: 200px;
 }
 
-.login__video {
-	display: none;
-}
-
 .t-login-btn {
 	max-width: 50%;
 	margin-left: 1em;
@@ -35,8 +31,4 @@
 		margin-bottom: $base-unit*10;
 	}
 
-	.login__video {
-		display: block;
-		padding-top: $base-unit*3;
-	}
 }

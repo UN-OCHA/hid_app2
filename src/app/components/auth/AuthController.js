@@ -38,13 +38,6 @@
         // New user first login (login is set to false in registration)
         if (!thisScope.currentUser.appMetadata.hid.login) {
           onFirstLogin();
-          //$location.path('/start');
-          return;
-        }
-
-        //HIDv1 user first login (login is already set to true)
-        if (thisScope.currentUser.appMetadata.hid.login && !thisScope.currentUser.appMetadata.hid.viewedTutorial) {
-          $location.path('/tutorial');
           return;
         }
 
@@ -62,7 +55,6 @@
 
       // Users registering via auth dont have metadata set until first login
       onFirstLogin();
-      //$location.path('/start');
     }
 
     thisScope.login = function(tfaCode, trustDevice) {

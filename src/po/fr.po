@@ -189,19 +189,6 @@ msgstr "Demande révoquée "
 msgid "Approve"
 msgstr "Accepter "
 
-#: src/app/components/start/tutorial.html:31
-msgid ""
-"Are you about to deploy to a new operation, join the response to a specific "
-"disaster or start working with a different sector or cluster? If so, check "
-"in to the relevant contact lists and don’t forget to check out when you "
-"leave the country."
-msgstr ""
-"Etes-vous sur le point d'être déployé vers une nouvelle opération, joindre "
-"l'action de réponse à un désastre spécifique ou commencer à travailler dans "
-"un nouveau secteur ou groupe sectoriel? Si tel est le cas, veuillez joindre "
-"les listes de contact adéquates et n'oubliez pas de faire le check out quand "
-"vous quittez le pays. "
-
 #: src/app/components/user/userEdit.controller.js:343
 msgid "Are you sure you want to check out of this list?"
 msgstr "Etes-vous sur de vouloir quitter cette liste?"
@@ -305,10 +292,6 @@ msgstr "Modifier le numéro de téléphone principal comme "
 #: src/app/components/header/header.html:107
 msgid "Check in"
 msgstr "Check in"
-
-#: src/app/components/start/tutorial.html:30
-msgid "Check in and out"
-msgstr "Check in et out"
 
 #: src/app/components/checkin/checkin.html:373
 msgid "Check in modifications"
@@ -486,14 +469,6 @@ msgstr "Créer une nouvelle liste "
 #: src/app/components/auth/reset_password.html:32
 msgid "Create password"
 msgstr "Créer un mot de passe"
-
-#: src/app/components/start/tutorial.html:52
-msgid ""
-"Create your own contact lists and share them with others. Let others check "
-"in to your lists or decide for yourself who can join."
-msgstr ""
-"Créer votre propre liste de contacts et partagez la avec d'autres. Permettez "
-"aux autres joindre votre liste ou décidez vous-même qui peut joindre."
 
 #: src/app/components/user/user.html:799
 msgid "Created"
@@ -705,13 +680,6 @@ msgstr "Nom de famille "
 msgid "Feedback"
 msgstr "Renseignements "
 
-#: src/app/components/start/tutorial.html:63
-msgid ""
-"Feel free to export your contact list into PDF or other available formats."
-msgstr ""
-"Vous pouvez transposer votre liste des contacts en document PDF ou en autres "
-"types des formats disponibles. "
-
 #: src/app/components/user/user-filters.html:63
 msgid "Filter by co-ordination hub"
 msgstr "Filtrer par bureau de coordination "
@@ -754,10 +722,6 @@ msgstr "Filtrer par type "
 msgid "Filters applied:"
 msgstr "Filtrer par role "
 
-#: src/app/components/start/tutorial.html:9
-msgid "Find others"
-msgstr "Trouver d'autres "
-
 #: src/app/components/user/kiosk.html:41
 #: src/app/components/user/new-user.html:10
 msgid "First Name"
@@ -774,14 +738,6 @@ msgstr "Mot de passe oublié?"
 #: src/app/components/user/user.html:644
 msgid "Functional roles"
 msgstr "Utilisations "
-
-#: src/app/components/start/tutorial.html:88
-msgid "Get started"
-msgstr "Commencer "
-
-#: src/app/components/start/tutorial.html:72
-msgid "Get the app"
-msgstr "Téléchargez l'application"
 
 #: src/app/components/user/users.controller.js:58
 msgid "Ghost"
@@ -819,10 +775,6 @@ msgstr "Cacher "
 msgid "Hide the service - HID users will not be able to search for it"
 msgstr "Cacher le service- Les utilisateurs HID ne pourront pas le chercher "
 
-#: src/app/components/start/tutorial.html:73
-msgid "Humanitarian ID is also available as a mobile app for iOS and Android."
-msgstr "Humanitarian ID est aussi une application mobile pour iOS et Android."
-
 #: src/app/components/header/header.html:106
 #: src/app/components/search/search.controller.js:11
 msgid "Humanitarian contacts"
@@ -849,39 +801,12 @@ msgstr ""
 "pouvez demander un nouveau mot de passe en écrivant ici votre adresse "
 "d'email et appuyer sur 'Modifier mot de passe'."
 
-#: src/app/components/start/tutorial.html:21
-msgid "If you get a lot of results, use this filter to fine-tune your search."
-msgstr ""
-"S'il y a plusieurs résultats, vous pouvez utiliser ce filtre pour focaliser "
-"votre recherche. "
-
-#: src/app/components/start/tutorial.html:42
-#: src/app/components/start/tutorial.html:65
-msgid ""
-"If you want to join a list temporarily, add a check-out date. We’ll send you "
-"a reminder shortly before the given date and we’ll check you out "
-"automatically two weeks after the end-date."
-msgstr ""
-"Si vous souhaitez joindre une liste pour une période déterminée, mettez une "
-"date de check-out. Nous allons vous envoyer un rappel avant la date donnée "
-"et nous allons faire votre check-out automatiquement deux semaines après la "
-"date finale. "
-
 #: src/app/components/user/user.controller.js:142
 msgid ""
 "In order to view this person’s profile, please contact info@humanitarian.id"
 msgstr ""
 "Afin de voire le compte de cette personne, veuillez contacter "
 "info@humanitarian.id"
-
-#: src/app/components/start/tutorial.html:19
-msgid ""
-"In the navigation bar you will find a search box. Start typing your search "
-"item in the box and contacts and lists will immediately appear."
-msgstr ""
-"Dans la barre de navigation vous allez trouver la barre de recherche. "
-"Commencez par écrire ce que vous cherchez dans la barre et les listes de "
-"contacts vont apparaître toute suite. "
 
 #: src/app/components/user/users.html:42
 #, fuzzy
@@ -1025,10 +950,6 @@ msgstr "Liste du Mailchimp "
 msgid "Manage services"
 msgstr "Gérer les services "
 
-#: src/app/components/start/tutorial.html:51
-msgid "Manage your own lists"
-msgstr "Gérer vos listes "
-
 #: src/app/components/user/user.html:772 src/app/components/user/user.html:791
 msgid "Manager"
 msgstr "Administrateur "
@@ -1108,7 +1029,6 @@ msgstr "Nouvel mot de passe "
 #: src/app/components/start/start.html:33
 #: src/app/components/start/start.html:71
 #: src/app/components/start/start.html:83
-#: src/app/components/start/tutorial.html:87
 #: src/app/components/user/kiosk.html:22 src/app/components/user/kiosk.html:34
 msgid "Next"
 msgstr "Suivant "
@@ -1157,15 +1077,6 @@ msgstr "Aucunes locations "
 #: src/app/components/user/user.html:549
 msgid "No locations"
 msgstr "Aucunes locations "
-
-#: src/app/components/start/tutorial.html:10
-msgid ""
-"No matter whether you are looking for an individual, a contact list or a "
-"specific role – all contacts are at your finger tips."
-msgstr ""
-"Peu importe si vous cherchez une personne physique, une liste des contacts "
-"ou une fonction spécifique: tous les contacts se trouvent à votre "
-"disposition. "
 
 #: src/app/components/checkin/checkin.html:378
 msgid "No modifications"
@@ -1398,12 +1309,6 @@ msgstr "Compte "
 #: src/app/components/user/userEdit.controller.js:176
 msgid "Profile updated"
 msgstr "Compte mis à jour "
-
-#: src/app/components/start/tutorial.html:13
-#: src/app/components/start/tutorial.html:34
-#: src/app/components/start/tutorial.html:55
-msgid "Read more"
-msgstr "Lire plus "
 
 #: src/app/components/landing/landing.html:121
 #: src/app/components/landing/landing.html:43
@@ -2091,10 +1996,6 @@ msgstr "Le fuseau horaire "
 msgid "To get started, please give us some information about yourself."
 msgstr "Afin de commencer, on vous prie de nous renseigner sur vous. "
 
-#: src/app/components/header/header.html:80
-msgid "Tutorial"
-msgstr "Didacticiel "
-
 #: src/app/components/list/all-lists.html:45
 #: src/app/components/list/lists-filters.html:31
 #: src/app/components/service/service.html:8
@@ -2357,29 +2258,6 @@ msgstr ""
 "veuillez choisir quelle(s) liste(s) sont adéquates pour vous. Voici-ici les "
 "différents types. "
 
-#: src/app/components/start/tutorial.html:61
-msgid ""
-"You can create your own contact lists from the dashboard in the menu at the "
-"top of your screen. Once you’ve given your list a name and decided who can "
-"view and join it, you can start adding and removing contacts from your list."
-msgstr ""
-"Vous pouvez créer votre liste de contact avec l'aide du votre tableau de "
-"bord qui se trouve en haut de votre écran. Une fois que vous avez donné un "
-"nom à votre liste, et que vous avez décidé qui peut la voire et la joindre, "
-"vous pouvez commencer à ajouter et supprimer les contacts de votre liste. "
-
-#: src/app/components/start/tutorial.html:40
-msgid ""
-"You can find the Check-in and Check-out buttons on the top-right of your "
-"screen. To get started, click on Check-in, then start typing the name of the "
-"country, disaster, or group in the box. Select your list and then look at "
-"the options for other suitable lists."
-msgstr ""
-"Vous pouvez trouver les boutons de check-in et check-out en haut à droite de "
-"votre écran. Pour commencer, appuyez sur 'Connexion' et puis écrire le nom "
-"du pays, du désastre, ou du groupe. Choisir votre liste et puis regarder les "
-"options pout d'autres listes adéquates. "
-
 #: src/app/components/dashboard/dashboard.html:19
 msgid "You don't have any favourite lists"
 msgstr "Vous n'avez pas des listes favories"
@@ -2567,18 +2445,6 @@ msgstr ""
 #: src/app/components/user/userPrefs.controller.js:42
 msgid "Your settings were successfully changed."
 msgstr "Vos réglages ont été changés avec succès "
-
-#: src/app/components/start/tutorial.html:35
-msgid "about checking in"
-msgstr "A propos du check-in"
-
-#: src/app/components/start/tutorial.html:14
-msgid "about finding others"
-msgstr "Comment trouver d'autres "
-
-#: src/app/components/start/tutorial.html:56
-msgid "about managing lists"
-msgstr "A propos de listes à gérer "
 
 #: src/app/components/user/userEdit.controller.js:150
 msgid "added"

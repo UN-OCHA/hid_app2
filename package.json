@@ -1,6 +1,6 @@
 {
   "name": "hid_app2",
-  "version": "2.2.9",
+  "version": "2.2.11",
   "description": "HID Client application",
   "main": "index.js",
   "scripts": {
@@ -52,7 +52,7 @@
     "karma-coverage": "^2.0.1",
     "karma-jasmine": "^2.0.1",
     "karma-ng-html2js-preprocessor": "^1.0.0",
-    "lodash": ">=4.17.15",
+    "lodash": ">=4.17.19",
     "minimatch": ">=3.0.2",
     "minimist": ">=1.2.5",
     "mkdirp": "^1.0.4",

@@ -29,7 +29,6 @@
       appMetadata: {
         hid: {
           login: true,
-          viewedTutorial: true
         }
       }
     };
@@ -154,18 +153,6 @@
 
           it('should go to the start page', function () {
             expect($location.path).toHaveBeenCalledWith('/start');
-          });
-        });
-
-        describe('A HID v1 user on their first login', function () {
-          beforeEach(function () {
-            setUpController(hidV1FirstLoginUser);
-            scope.login();
-            scope.$digest();
-          });
-
-          it('should go to the tutorial', function () {
-            expect($location.path).toHaveBeenCalledWith('/tutorial');
           });
         });
 
