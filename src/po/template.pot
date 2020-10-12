@@ -799,7 +799,7 @@ msgstr ""
 msgid "Flag suspicious user"
 msgstr ""
 
-#: src/app/components/auth/login.html:29
+#: src/app/components/auth/login.html:28
 msgid "Forgot/Reset password"
 msgstr ""
 
@@ -1510,10 +1510,6 @@ msgstr ""
 
 #: src/app/components/auth/register.html:4
 msgid "Register a Humanitarian ID account"
-msgstr ""
-
-#: src/app/components/auth/login.html:28
-msgid "Register a new Humanitarian ID Account"
 msgstr ""
 
 #: src/app/components/header/header.html:15
