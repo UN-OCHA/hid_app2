@@ -229,79 +229,74 @@ var app = angular.module('hidApp', [
           adminOnly: false,
           title: 'Edit service'
         }).
-        when('/register', {
-          templateUrl: 'app/components/auth/register.html',
-          controller: 'UserNewController',
-          title: 'Register'
-        })
-        .when('/password_reset', {
+        when('/password_reset', {
           templateUrl: 'app/components/auth/password_reset.html',
           controller: 'ResetPasswordController',
           title: 'Reset password'
-        })
-        .when('/reset_password', {
+        }).
+        when('/reset_password', {
           templateUrl: 'app/components/auth/reset_password.html',
           controller: 'ResetPasswordController',
           title: 'Reset password'
-        })
-        .when('/verify', {
+        }).
+        when('/verify', {
           template: '',
           controller: 'VerifyController'
-        })
-        .when('/logout', {
+        }).
+        when('/logout', {
           template: '',
           controller: 'AuthController',
           authenticate: true
-        })
-        .when('/search', {
+        }).
+        when('/search', {
           templateUrl: 'app/components/search/search-results.html',
           controller: 'SearchController',
           authenticate: true,
           title: 'Search results',
           reloadOnSearch: false
-        })
-        .when('/notifications', {
+        }).
+        when('/notifications', {
           templateUrl: 'app/components/notifications/notifications.html',
           controller: 'NotificationsController',
           authenticate: true,
           title: 'Notifications'
-        })
-        .when('/start', {
+        }).
+        when('/start', {
           templateUrl: 'app/components/start/start.html',
           controller: 'StartController',
           authenticate: true,
           title: 'Getting started'
-        })
-        .when('/outlook', {
+        }).
+        when('/outlook', {
           template: '',
           controller: 'OutlookController',
           authenticate: true
-        })
-        .when('/main/:operationUrl', {
+        }).
+        when('/main/:operationUrl', {
           templateUrl: 'app/components/operations/operation.html',
           controller: 'OperationViewController',
           authenticate: true,
           title: 'Operation'
-        })
-        .when('/operations', {
+        }).
+        when('/operations', {
           templateUrl: 'app/components/operations/operations.html',
           controller: 'OperationsController',
           authenticate: true,
           title: 'Operations'
-        })
-        .when('/operations/new', {
+        }).
+        when('/operations/new', {
           templateUrl: 'app/components/operations/new-operation.html',
           controller: 'OperationController',
           authenticate: true,
           title: 'New operation'
-        })
-        .when('/operations/:operationId', {
+        }).
+        when('/operations/:operationId', {
           templateUrl: 'app/components/operations/new-operation.html',
           controller: 'OperationController',
           authenticate: true,
           title: 'New operation'
-        })
-        .otherwise({
+        }).
+        otherwise({
           redirectTo: '/'
         });
       // use the HTML5 History API
