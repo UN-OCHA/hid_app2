@@ -229,12 +229,7 @@ var app = angular.module('hidApp', [
           adminOnly: false,
           title: 'Edit service'
         }).
-        when('/register', {
-          templateUrl: 'app/components/auth/register.html',
-          controller: 'UserNewController',
-          title: 'Register'
-        })
-        .when('/password_reset', {
+        when('/password_reset', {
           templateUrl: 'app/components/auth/password_reset.html',
           controller: 'ResetPasswordController',
           title: 'Reset password'
