@@ -71,7 +71,7 @@ msgstr ""
 msgid "Add Operation"
 msgstr ""
 
-#: src/app/components/service/services-page.html:8
+#: src/app/components/service/services-page.html:14
 msgid "Add Service"
 msgstr ""
 
@@ -230,7 +230,7 @@ msgstr ""
 msgid "Area Coordinator"
 msgstr ""
 
-#: src/app/components/service/new-service.html:65
+#: src/app/components/service/new-service.html:71
 msgid "Associated lists"
 msgstr ""
 
@@ -470,7 +470,7 @@ msgstr ""
 msgid "Create a new client"
 msgstr ""
 
-#: src/app/components/list/new-list.html:4
+#: src/app/components/list/new-list.html:10
 msgid "Create a new list"
 msgstr ""
 
@@ -478,7 +478,7 @@ msgstr ""
 msgid "Create a new operation"
 msgstr ""
 
-#: src/app/components/service/new-service.html:6
+#: src/app/components/service/new-service.html:12
 msgid "Create a new service"
 msgstr ""
 
@@ -499,11 +499,11 @@ msgid "Created"
 msgstr ""
 
 #: src/app/components/list/all-lists.html:46
-#: src/app/components/list/new-list.html:45
+#: src/app/components/list/new-list.html:51
 msgid "Created by"
 msgstr ""
 
-#: src/app/components/list/new-list.html:40
+#: src/app/components/list/new-list.html:46
 msgid "Created on"
 msgstr ""
 
@@ -588,7 +588,7 @@ msgstr ""
 
 #: src/app/components/client/client.html:44
 #: src/app/components/client/new-client.html:54
-#: src/app/components/service/new-service.html:25
+#: src/app/components/service/new-service.html:31
 #: src/app/components/trustedDomain/trustedDomains.html:19
 #: src/app/components/trustedDomain/trustedDomains.html:43
 msgid "Description"
@@ -620,7 +620,7 @@ msgstr ""
 msgid "Disasters usually refer to sudden-onset emergencies in a country or region. The Nepal Earthquake, Hurricane Matthew in Haiti or the floods in the Balkans are just a few examples."
 msgstr ""
 
-#: src/app/components/service/new-service.html:47
+#: src/app/components/service/new-service.html:53
 msgid "Domain"
 msgstr ""
 
@@ -660,7 +660,7 @@ msgstr ""
 msgid "Duplicates"
 msgstr ""
 
-#: src/app/components/service/services.html:25
+#: src/app/components/service/services.html:26
 #: src/app/components/user/userOptions.html:9
 msgid "Edit"
 msgstr ""
@@ -833,7 +833,7 @@ msgstr ""
 
 #: src/app/components/checkin/listTypesModal.html:17
 #: src/app/components/selectLists/SelectListsController.js:33
-#: src/app/components/service/new-service.html:55
+#: src/app/components/service/new-service.html:61
 #: src/app/components/user/user-filters.html:88
 msgid "Group"
 msgstr ""
@@ -862,7 +862,7 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
-#: src/app/components/service/new-service.html:61
+#: src/app/components/service/new-service.html:67
 msgid "Hide the service - HID users will not be able to search for it"
 msgstr ""
 
@@ -879,8 +879,13 @@ msgstr ""
 #: src/app/components/checkin/checkout-page.html:3
 #: src/app/components/dashboard/dashboard.html:3
 #: src/app/components/landing/landing.html:3
+#: src/app/components/list/new-list.html:3
 #: src/app/components/notifications/notifications.html:5
 #: src/app/components/search/search-results.html:3
+#: src/app/components/service/new-service.html:3
+#: src/app/components/service/service.html:3
+#: src/app/components/service/services-page.html:3
+#: src/app/components/user/new-user-page.html:3
 #: src/app/components/user/preferences.html:3
 #: src/app/components/user/user.html:5
 msgid "Humanitarian ID platform and its contacts management features will be decommissioned on 1 Jan 2021. Note that this will not affect the HID Authentication service, your HID account will remain active  to access integrated platforms. More info available in the <a href=\"https://about.humanitarian.id/faqs#contacts-decommissioning\">FAQs section</a>."
@@ -983,7 +988,7 @@ msgstr ""
 msgid "List Settings"
 msgstr ""
 
-#: src/app/components/list/new-list.html:10
+#: src/app/components/list/new-list.html:16
 msgid "List name"
 msgstr ""
 
@@ -1049,15 +1054,15 @@ msgstr ""
 msgid "Login URL"
 msgstr ""
 
-#: src/app/components/service/new-service.html:37
+#: src/app/components/service/new-service.html:43
 msgid "Mailchimp API Key"
 msgstr ""
 
-#: src/app/components/service/new-service.html:36
+#: src/app/components/service/new-service.html:42
 msgid "Mailchimp API key"
 msgstr ""
 
-#: src/app/components/service/new-service.html:40
+#: src/app/components/service/new-service.html:46
 msgid "Mailchimp list"
 msgstr ""
 
@@ -1079,7 +1084,7 @@ msgstr ""
 msgid "Manager"
 msgstr ""
 
-#: src/app/components/list/new-list.html:30
+#: src/app/components/list/new-list.html:36
 #: src/app/components/operations/new-operation.html:42
 msgid "Managers"
 msgstr ""
@@ -1131,9 +1136,9 @@ msgstr ""
 #: src/app/components/client/clients.html:16
 #: src/app/components/client/new-client.html:22
 #: src/app/components/list/all-lists.html:44
-#: src/app/components/list/new-list.html:9
-#: src/app/components/service/new-service.html:16
-#: src/app/components/service/services.html:10
+#: src/app/components/list/new-list.html:15
+#: src/app/components/service/new-service.html:22
+#: src/app/components/service/services.html:11
 #: src/app/components/user/UsersController.js:37
 #: src/app/components/user/users.html:37
 msgid "Name"
@@ -1243,7 +1248,7 @@ msgstr ""
 msgid "No social networks"
 msgstr ""
 
-#: src/app/components/service/service.html:22
+#: src/app/components/service/service.html:28
 msgid "No subscribers"
 msgstr ""
 
@@ -1571,9 +1576,9 @@ msgid "Satellite Phone"
 msgstr ""
 
 #: src/app/components/client/new-client.html:66
-#: src/app/components/list/new-list.html:52
+#: src/app/components/list/new-list.html:58
 #: src/app/components/operations/new-operation.html:50
-#: src/app/components/service/new-service.html:87
+#: src/app/components/service/new-service.html:93
 #: src/app/components/trustedDomain/trustedDomains.html:33
 msgid "Save"
 msgstr ""
@@ -1588,7 +1593,7 @@ msgstr ""
 
 #: src/app/components/checkin/all-check-ins.html:4
 #: src/app/components/service/all-subscriptions.html:4
-#: src/app/components/service/services.html:3
+#: src/app/components/service/services.html:4
 msgid "Search"
 msgstr ""
 
@@ -1662,7 +1667,7 @@ msgstr ""
 msgid "Search lists"
 msgstr ""
 
-#: src/app/components/service/services.html:4
+#: src/app/components/service/services.html:5
 msgid "Search services"
 msgstr ""
 
@@ -1725,7 +1730,7 @@ msgstr ""
 msgid "Select email type"
 msgstr ""
 
-#: src/app/components/service/new-service.html:72
+#: src/app/components/service/new-service.html:78
 msgid "Select managers"
 msgstr ""
 
@@ -1742,7 +1747,7 @@ msgid "Select some lists"
 msgstr ""
 
 #: src/app/components/list/list-admin.html:13
-#: src/app/components/list/new-list.html:32
+#: src/app/components/list/new-list.html:38
 #: src/app/components/operations/new-operation.html:44
 msgid "Select some people"
 msgstr ""
@@ -1759,7 +1764,7 @@ msgstr ""
 msgid "Send Claim Email"
 msgstr ""
 
-#: src/app/components/service/new-service.html:29
+#: src/app/components/service/new-service.html:35
 msgid "Service Type"
 msgstr ""
 
@@ -1773,7 +1778,7 @@ msgstr ""
 msgid "Service deleted successfully"
 msgstr ""
 
-#: src/app/components/service/new-service.html:70
+#: src/app/components/service/new-service.html:76
 msgid "Service manager"
 msgstr ""
 
@@ -1785,7 +1790,7 @@ msgstr ""
 msgid "Service settings"
 msgstr ""
 
-#: src/app/components/service/services-page.html:3
+#: src/app/components/service/services-page.html:9
 msgid "Services"
 msgstr ""
 
@@ -1968,7 +1973,7 @@ msgstr ""
 msgid "The operation ID"
 msgstr ""
 
-#: src/app/components/service/new-service.html:17
+#: src/app/components/service/new-service.html:23
 msgid "The service name"
 msgstr ""
 
@@ -2079,8 +2084,8 @@ msgstr ""
 
 #: src/app/components/list/all-lists.html:45
 #: src/app/components/list/lists-filters.html:31
-#: src/app/components/service/service.html:8
-#: src/app/components/service/services.html:11
+#: src/app/components/service/service.html:14
+#: src/app/components/service/services.html:12
 msgid "Type"
 msgstr ""
 
@@ -2142,7 +2147,7 @@ msgid "Unknown"
 msgstr ""
 
 #: src/app/components/dashboard/dashboard.html:121
-#: src/app/components/service/service.html:32
+#: src/app/components/service/service.html:38
 msgid "Unsubscribe"
 msgstr ""
 
@@ -2298,11 +2303,11 @@ msgstr ""
 msgid "Where are you currently ?"
 msgstr ""
 
-#: src/app/components/list/new-list.html:22
+#: src/app/components/list/new-list.html:28
 msgid "Who can join this list?"
 msgstr ""
 
-#: src/app/components/list/new-list.html:14
+#: src/app/components/list/new-list.html:20
 msgid "Who can view this list?"
 msgstr ""
 
@@ -2564,7 +2569,7 @@ msgstr ""
 msgid "searching for the list"
 msgstr ""
 
-#: src/app/components/service/service.html:19
+#: src/app/components/service/service.html:25
 msgid "subscribers"
 msgstr ""
 

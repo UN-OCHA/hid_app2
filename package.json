@@ -1,6 +1,6 @@
 {
   "name": "hid_app2",
-  "version": "2.2.11",
+  "version": "2.2.12",
   "description": "HID Client application",
   "main": "index.js",
   "scripts": {

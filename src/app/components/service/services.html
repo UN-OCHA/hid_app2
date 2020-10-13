@@ -1,4 +1,5 @@
 <loader ng-if="!servicesLoaded"></loader>
+
 <div class="filters-group filter__search">
   <label for="query" class="sr-only" translate>Search</label>
   <input type="text" class="filter__search__input t-filter-name" ng-model="query" ng-model-options="{debounce: 600}" name="search" id="query" placeholder="{{'Search services'| translate}}" ng-change="search()">
