@@ -14,15 +14,15 @@
 }
 
 .alert--danger {
-  color: #474747;
-  background-color: #F4AEB0;
+  color: #fee;
+  background-color: #d71e20;
 
   .icon {
     fill: #A42834;
   }
 
   a {
-    color: #474747;
+    color: #fff;
   }
 }
 
@@ -53,7 +53,7 @@
   position: absolute;
   right: 0;
   top: -$base-unit;
-  
+
   &.btn-transparent {
     padding: $base-unit;
   }
