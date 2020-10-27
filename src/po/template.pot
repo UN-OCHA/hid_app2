@@ -799,7 +799,7 @@ msgstr ""
 msgid "Flag suspicious user"
 msgstr ""
 
-#: src/app/components/auth/login.html:28
+#: src/app/components/auth/login.html:29
 msgid "Forgot/Reset password"
 msgstr ""
 
